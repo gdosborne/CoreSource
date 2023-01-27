@@ -60,8 +60,11 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <controls:ToggleSwitch IsOn="{Binding IsEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                <controls:ToggleSwitch Width="140"
+                                    IsOn="{Binding IsEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                <controls:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="10,0,0,0"
+                                           Style="{DynamicResource WindowLabel}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -71,7 +74,7 @@
                             Command="{Binding AddExtensionCommand}" />
                     <Button Style="{DynamicResource StandardButton}" Content="Delete" 
                             Command="{Binding DeleteExtensionCommand}"/>
-                    <Button Style="{DynamicResource StandardButton}" Content="Cancel"
+                    <Button Style="{DynamicResource StandardButton}" Content="Done"
                             Command="{Binding CloseWindowCommand}" />
                 </StackPanel>
             </Grid>

@@ -31,12 +31,14 @@
 
     <SolidColorBrush x:Key="ControlBackground" Color="#FFBB0000" />
     <SolidColorBrush x:Key="ControlForeground" Color="#FFEEEEEE" />
-    <SolidColorBrush x:Key="MouseOverBackground" Color="#FF991010" />
-    <SolidColorBrush x:Key="MouseOverForeground" Color="#FFEDEDED" />
+    <SolidColorBrush x:Key="MouseOverBackground" Color="#FFDF7D7D" />
+    <SolidColorBrush x:Key="MouseOverForeground" Color="#FF000000" />
     <SolidColorBrush x:Key="WindowBorderBrush" Color="#FF111111" />
     <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="CaptionBackground" Color="#FF009999" />
     <SolidColorBrush x:Key="CaptionForeground" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="WindowTextForeground" Color="#FF222222" />
+    <SolidColorBrush x:Key="ToggleSwitchBackground" Color="#200000FF" />
 
     <FontFamily x:Key="StandardFont">Calibri</FontFamily>
     <FontFamily x:Key="GlyphFontFamily">Segoe Fluent Icons</FontFamily>    
@@ -151,6 +153,7 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="WindowHeaderText">
@@ -248,9 +251,9 @@
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FillBrush" Value="Transparent" />
-        <Setter Property="OnFillBrush" Value="LightBlue" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
-        <Setter Property="OnThumbBrush" Value="{DynamicResource ControlForeground}" />
+        <Setter Property="OnFillBrush" Value="{DynamicResource ToggleSwitchBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+        <Setter Property="OnThumbBrush" Value="{DynamicResource WindowTextForeground}" />
         <Setter Property="OffContent" Value="Disabled" />
         <Setter Property="OnContent" Value="Enabled" />
         <Setter Property="VerticalContentAlignment" Value="Center" />

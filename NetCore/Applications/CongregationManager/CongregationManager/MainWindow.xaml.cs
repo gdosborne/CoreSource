@@ -38,7 +38,7 @@ namespace CongregationManager {
         }
 
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
-            var action = (MainWindowViewModel.Actions)Enum.Parse(typeof(MainWindowViewModel), e.CommandToExecute);
+            var action = (MainWindowViewModel.Actions)Enum.Parse(typeof(MainWindowViewModel.Actions), e.CommandToExecute);
             switch (action) {
                 case MainWindowViewModel.Actions.CloseWindow:
                     Close();
@@ -52,12 +52,16 @@ namespace CongregationManager {
                 case MainWindowViewModel.Actions.ManageExtensions:
                     var win = new ExtensionManagerWindow {
                         Owner = this
-                    };
+                    };                    
                     win.ShowDialog();
                     break;
                 default:
                     break;
             }
+        }
+
+        public void SaveExtensionData(object sender, SaveExtensionDataEventArgs e) {
+            
         }
 
         public MainWindowViewModel View => DataContext.As<MainWindowViewModel>();
@@ -130,6 +134,10 @@ namespace CongregationManager {
                         break;
                     }
             }
+        }
+
+        private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            DragMove();
         }
     }
 }

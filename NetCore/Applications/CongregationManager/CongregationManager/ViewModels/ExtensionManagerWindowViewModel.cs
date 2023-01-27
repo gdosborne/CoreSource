@@ -17,6 +17,7 @@ namespace CongregationManager.ViewModels {
             base.Initialize();
 
             Title = "Extension Manager";
+
             Extensions = new ObservableCollection<ExtensionBase>(ApplicationData.Extensions);
         }
 

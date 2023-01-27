@@ -1,13 +1,12 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
+using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
-using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Path = System.IO.Path;
 
 namespace CongregationManager {
@@ -18,6 +17,58 @@ namespace CongregationManager {
             Closing += ExtensionManagerWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
+
+            View.Extensions.CollectionChanged += Extensions_CollectionChanged;
+        }
+
+        private void Extensions_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
+            switch (e.Action) {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add: {
+                        if (e.NewItems.Count > 0) {
+                            foreach (var item in e.NewItems) {
+                                var ext = item.As<ExtensionBase>();
+                                ext.SaveExtensionData += this.Owner.As<MainWindow>().SaveExtensionData;
+                                ext.AddControlItem += this.Owner.As<MainWindow>().AddControlItem;
+                                ext.RemoveControlItem += this.Owner.As<MainWindow>().RemoveControlItem;
+
+                                var win = Owner.As<MainWindow>();                                
+                                ApplicationData.Extensions.Remove(ext);
+                                win.View.Panels.Add(ext.Panel);
+                                ext.Initialize(App.DataFolder, App.TempFolder,
+                                    App.ApplicationSession.ApplicationSettings,
+                                    App.ApplicationSession.Logger, App.DataManager);
+
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove: {
+                        if (e.OldItems.Count > 0) {
+                            foreach (var item in e.OldItems) {
+                                var ext = item.As<ExtensionBase>();
+                                ext.SaveExtensionData -= this.Owner.As<MainWindow>().SaveExtensionData;
+                                ext.AddControlItem -= this.Owner.As<MainWindow>().AddControlItem;
+                                ext.RemoveControlItem -= this.Owner.As<MainWindow>().RemoveControlItem;
+
+                                var win = Owner.As<MainWindow>();
+                                win.View.Panels.Remove(ext.Panel);
+                                ext.Destroy();
+                                ApplicationData.Extensions.Remove(ext);
+                                View.Extensions.Remove(ext);
+                                GC.Collect();
+                                if (File.Exists(ext.Filename))
+                                    File.Delete(ext.Filename);
+                            }
+                        }
+                        break;
+                    }
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                default:
+                    break;
+            }
         }
 
         protected override void OnSourceInitialized(EventArgs e) {
@@ -38,32 +89,26 @@ namespace CongregationManager {
                         break;
                     }
                 case ExtensionManagerWindowViewModel.Actions.AddNewExtension: {
-                        var lastDir = App.ApplicationSession.ApplicationSettings.GetValue("Application", "LastExtensionDir",
+                        var lastDir = App.ApplicationSession.ApplicationSettings.GetValue(
+                            "Application", "LastExtensionDir",
                             Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+                        if (!Directory.Exists(lastDir))
+                            lastDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                        var ofd = new VistaOpenFileDialog {
-                            Title = "Select extension file",
-                            CheckFileExists = true,
-                            CheckPathExists = true,
-                            DefaultExt = ".cmextension",
-                            Filter = "Congregation Manager Extension (*.dll)|*.dll",
-                            InitialDirectory = lastDir,
-                            Multiselect = true,
-                            RestoreDirectory = true
-                        };
-                        var result = ofd.ShowDialog(this);
-                        if (!result.HasValue || !result.Value)
+                        var filenames = App.SelectFileDialog(this, "Select extension file(s)", ".cmextension",
+                            App.FileFilters, lastDir, true);
+                        if (!filenames.Any())
                             return;
-                        App.AddExtensions(ofd.FileNames);
-                        ofd.FileNames.ToList().ForEach(x => {
-                            var fname = Path.GetFileName(x);
-                            File.Copy(x, Path.Combine(App.ExtensionsFolder, fname), true);
+
+                         App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("Application", "LastExtensionDir",
+                            Path.GetDirectoryName(filenames[0]));
+
+                        var extensions = App.AddExtensions(filenames);
+                        extensions.ForEach(x => {
+                            var fname = Path.GetFileName(x.Filename);
+                            File.Copy(x.Filename, Path.Combine(App.ExtensionsFolder, fname), true);
+                            View.Extensions.Add(x);
                         });
-                        var dt = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
-                        dt.Tick += Dt_Tick;
-                        App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("Application", "LastExtensionDir",
-                            Path.GetDirectoryName(ofd.FileNames[0]));
-                        dt.Start();
                         break;
                     }
                 case ExtensionManagerWindowViewModel.Actions.DeleteExtension: {
@@ -75,40 +120,20 @@ namespace CongregationManager {
                         if (result) {
                             var filename = View.SelectedExtension.Filename;
                             var name = View.SelectedExtension.Name;
-                            View.SelectedExtension.Destroy();
-                            ApplicationData.Extensions.Remove(View.SelectedExtension);
+
+                            var ctrl = View.SelectedExtension.Panel.Control;
+                            if (ctrl != null && ctrl.Parent != null) {
+                                ctrl.Parent.RemoveChild(ctrl);
+                            }
+
                             View.Extensions.Remove(View.SelectedExtension);
                             View.SelectedExtension = null;
-                            GC.Collect();
-                            if (File.Exists(filename)) {
-                                File.Delete(filename);
-                            }
                         }
                         break;
                     }
                 default:
                     break;
             }
-        }
-
-        private void Dt_Tick(object? sender, EventArgs e) {
-            sender.As<DispatcherTimer>().Stop();
-            var rdSource = "/CongregationManager;component/Resources/MainTheme.xaml";
-            var myResourceDictionary = new ResourceDictionary {
-                Source = new Uri(rdSource, UriKind.RelativeOrAbsolute)
-            };
-
-            View.Extensions.Clear();
-            ApplicationData.Extensions.ForEach(x => {
-                x.SaveExtensionData += this.Owner.As<MainWindow>().SaveExtensionData;
-                x.AddControlItem += this.Owner.As<MainWindow>().AddControlItem;
-                x.RemoveControlItem += this.Owner.As<MainWindow>().RemoveControlItem;
-                x.Initialize(App.DataFolder, App.TempFolder,
-                    App.ApplicationSession.ApplicationSettings,
-                    App.ApplicationSession.Logger, App.DataManager);
-                View.Extensions.Add(x);
-            });
-
         }
 
         public ExtensionManagerWindowViewModel View => DataContext.As<ExtensionManagerWindowViewModel>();

@@ -25,7 +25,11 @@ namespace CongregationManager {
         public static string TempFolder => Path.Combine(ApplicationFolder, "Temp");
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
         public static Session ApplicationSession { get; private set; }
-        
+
+        public static Dictionary<string, string> FileFilters { get; private set; } = 
+            new Dictionary<string, string> {
+                { "Congregation Manager Extension (*.dll)","*.dll" }
+            };
         public static DataManager DataManager { get; private set; }
 
         public App() {
@@ -49,6 +53,38 @@ namespace CongregationManager {
             td.Buttons.Add(new TaskDialogButton(ButtonType.No));
             var result = td.ShowDialog();
             return result.ButtonType == ButtonType.Yes;
+        }
+
+        public static void ShowOKDialog(string main, string content, string title, TaskDialogIcon icon) {
+            var td = new TaskDialog {
+                Width = 250,
+                MainIcon = icon,
+                MainInstruction = main,
+                Content = content,
+                AllowDialogCancellation = true,
+                ButtonStyle = TaskDialogButtonStyle.Standard,
+                WindowTitle = title
+            };
+            td.Buttons.Add(new TaskDialogButton(ButtonType.Ok));
+            td.ShowDialog();
+        }
+
+        public static string[] SelectFileDialog(Window win, string title, string defaultExtension,
+            Dictionary<string, string> filters, string lastDirectory, bool returnMultiple = false) {
+            var ofd = new VistaOpenFileDialog {
+                Title = title,
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = defaultExtension,
+                Filter = string.Join('|', filters.Select(x => x.Key + "|" + x.Value)),
+                InitialDirectory = lastDirectory,
+                Multiselect = returnMultiple,
+                RestoreDirectory = true
+            };
+            var result = ofd.ShowDialog(win);
+            if (!result.HasValue || !result.Value)
+                return new List<string>().ToArray();
+            return ofd.FileNames;
         }
 
         private bool IsContinueAfterInvalid() {
@@ -150,7 +186,7 @@ namespace CongregationManager {
                     main = $"Login to {ApplicationName}";
                     content = $"Use this to provide the user credentials for " +
                         $"{ApplicationName},";
-                    title = "Login"; 
+                    title = "Login";
                     var result = IsYesInDialogSelected(main, content, title, TaskDialogIcon.Warning);
                     if (!result)
                         Environment.Exit(-1);
@@ -193,7 +229,8 @@ namespace CongregationManager {
             }
         }
 
-        public static void AddExtensions(string[] filenames) {
+        public static List<ExtensionBase> AddExtensions(params string[] filenames) {
+            var result = new List<ExtensionBase>();
             foreach (var extFile in filenames) {
                 var assy = Assembly.Load(File.ReadAllBytes(extFile));
                 if (assy != null) {
@@ -201,12 +238,24 @@ namespace CongregationManager {
                     foreach (var type in types) {
                         var instance = Activator.CreateInstance(type);
                         if (instance != null) {
-                            ApplicationData.Extensions.Add(instance.As<ExtensionBase>());
-                            instance.As<ExtensionBase>().Filename = extFile;
+                            var ext = instance.As<ExtensionBase>();
+                            if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
+                                var existsMsg = $"The {ext.Name} extension already exists in the extensions folder.\n\n" +
+                                    "Wwould you like to replace it?";
+                                if (!IsYesInDialogSelected($"{ext.Name} extension already exists!",
+                                    existsMsg, "Replace extension", TaskDialogIcon.Shield)) {
+                                    break;
+                                }
+                                ApplicationData.Extensions.Remove(ApplicationData.Extensions.First(x => x.Name == ext.Name));
+                            }
+                            result.Add(ext);
+                            ApplicationData.Extensions.Add(ext);
+                            ext.Filename = extFile;
                         }
                     }
                 }
             }
+            return result;
         }
 
         public static Dictionary<string, AppDomain> Domains = default;
