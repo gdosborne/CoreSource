@@ -1,0 +1,93 @@
+﻿<Window x:Class="CongregationManager.CongregationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationExtension"
+        xmlns:views="clr-namespace:CongregationExtension.ViewModels"
+        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
+        WindowStyle="None" FocusManager.FocusedElement="{Binding ElementName=NameTextBox}"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        MinHeight="275" Height="275" MinWidth="472" Width="472">
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
+    </Window.Resources>
+    <Window.DataContext>
+        <views:CongregationWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" >
+            <Grid Margin="10" Style="{DynamicResource MainWindowGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="99" Style="{DynamicResource WindowTextField}" 
+                         Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                         Name="NameTextBox"/>
+
+                <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource WindowTextField}" Height="60" />
+
+                <TextBlock Text="City" Grid.Row="1" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="1" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+
+                <TextBlock Text="State/Province" Grid.Row="2" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="2" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+
+                <TextBlock Text="Zip/Postal Code" Grid.Row="3" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource WindowTextField}" />
+
+                <TextBlock Text="Telephone" Grid.Row="3" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
+                <TextBox Grid.Row="3" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+
+                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
+                            Command="{Binding AcceptDataCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 
+                            Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+        
+    </Grid>
+</Window>
