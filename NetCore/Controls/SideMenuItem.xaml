@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Controls.SideMenuItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Controls"
+             mc:Ignorable="d" MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControl_MouseLeave" Background="Transparent"
+             d:DesignHeight="46.04" d:DesignWidth="528.218">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <local:FontIcon x:Name="TheIcon" Grid.Column="0" VerticalAlignment="Center" Glyph="&#xE10F;"
+                        HorizontalAlignment="Left" Margin="5,5,5,5" Clicked="TheIcon_Clicked" />
+        <TextBlock Name="TheText" Grid.Column="1" VerticalAlignment="Center" 
+                   HorizontalAlignment="Stretch" Margin="5,5,5,5" MouseDown="TheText_MouseDown" MouseUp="TheText_MouseUp" />
+    </Grid>
+</UserControl>

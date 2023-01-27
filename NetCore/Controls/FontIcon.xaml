@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Controls.FontIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Controls"
+             mc:Ignorable="d" PreviewMouseDown="UserControl_PreviewMouseDown" PreviewMouseUp="UserControl_PreviewMouseUp"
+             d:DesignHeight="166.337" d:DesignWidth="171.782">
+    <Grid Name="MainGrid">
+        <TextBlock Name="TheIcon" FontFamily="Segoe Fluent Icons" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Generation\**" />
+	  <EmbeddedResource Remove="Generation\**" />
+	  <None Remove="Generation\**" />
+	  <Page Remove="Generation\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CredentialManagement" Version="1.0.2" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+	  <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.2.1" />
+	  <PackageReference Include="System.DirectoryServices" Version="7.0.0" />
+	  <PackageReference Include="System.DirectoryServices.AccountManagement" Version="7.0.0" />
+	  <PackageReference Include="System.Management" Version="7.0.0" />
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="if $(ConfigurationName) == Release &quot;C:\Program Files\Update Version\UpdateVersionSharp.exe&quot; -p=&quot;$(ProjectPath)&quot;" />
+	</Target>
+
+</Project>
