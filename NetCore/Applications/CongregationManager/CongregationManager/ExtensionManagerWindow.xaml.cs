@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 using Path = System.IO.Path;
 
 namespace CongregationManager {
@@ -50,15 +51,6 @@ namespace CongregationManager {
                                 ext.SaveExtensionData -= this.Owner.As<MainWindow>().SaveExtensionData;
                                 ext.AddControlItem -= this.Owner.As<MainWindow>().AddControlItem;
                                 ext.RemoveControlItem -= this.Owner.As<MainWindow>().RemoveControlItem;
-
-                                var win = Owner.As<MainWindow>();
-                                win.View.Panels.Remove(ext.Panel);
-                                ext.Destroy();
-                                ApplicationData.Extensions.Remove(ext);
-                                View.Extensions.Remove(ext);
-                                GC.Collect();
-                                if (File.Exists(ext.Filename))
-                                    File.Delete(ext.Filename);
                             }
                         }
                         break;
@@ -126,6 +118,15 @@ namespace CongregationManager {
                                 ctrl.Parent.RemoveChild(ctrl);
                             }
 
+                            if (File.Exists(View.SelectedExtension.Filename))
+                                File.Delete(View.SelectedExtension.Filename);
+
+                            var win = Owner.As<MainWindow>();
+                            win.View.Panels.Remove(View.SelectedExtension.Panel);
+                            View.SelectedExtension.Destroy();
+                            ApplicationData.Extensions.Remove(View.SelectedExtension);
+                            View.Extensions.Remove(View.SelectedExtension);
+                            GC.Collect();
                             View.Extensions.Remove(View.SelectedExtension);
                             View.SelectedExtension = null;
                         }

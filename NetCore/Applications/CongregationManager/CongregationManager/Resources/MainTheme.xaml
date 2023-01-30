@@ -120,9 +120,17 @@
         <Setter Property="Margin" Value="5,0,5,0" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="ToolbarLabel">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,2,12,2" />
+    </Style>
+
     <Style TargetType="controls:FontIcon" x:Key="ToolbarIcon" BasedOn="{StaticResource MenuItemIcon}">
-        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
-        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}" />
+        <Setter Property="Margin" Value="2" />
     </Style>
 
     <Style TargetType="ToolBarTray">
@@ -197,6 +205,13 @@
         <Setter Property="Width" Value="90" />
         <Setter Property="Padding" Value="4" />
         <Setter Property="Margin" Value="10,5,0,5" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ToolbarButton">
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Margin" Value="2" />
     </Style>
 
     <Style TargetType="Border" x:Key="ControlBorder">

@@ -1,12 +1,10 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
-using Common.Applicationn.Windows.Controls;
 using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace CongregationManager {
     public partial class MainWindow : Window {
@@ -52,7 +50,7 @@ namespace CongregationManager {
                 case MainWindowViewModel.Actions.ManageExtensions:
                     var win = new ExtensionManagerWindow {
                         Owner = this
-                    };                    
+                    };
                     win.ShowDialog();
                     break;
                 default:
@@ -61,7 +59,7 @@ namespace CongregationManager {
         }
 
         public void SaveExtensionData(object sender, SaveExtensionDataEventArgs e) {
-            
+
         }
 
         public MainWindowViewModel View => DataContext.As<MainWindowViewModel>();
@@ -100,7 +98,7 @@ namespace CongregationManager {
                             Header = e.Text
                         };
                         TopMenu.Items.Add(item);
-                        e.ResultantItem = item;
+                        e.ManagableItem = item;
                         break;
                     }
                 case AddControlItemEventArgs.ControlTypes.MenuItem: {
@@ -115,22 +113,40 @@ namespace CongregationManager {
                             Command = e.Command
                         };
                         parent.Items.Add(item);
-                        //e.ResultantItem = item;
+                        e.ManagableItem = item;
                         break;
                     }
                 case AddControlItemEventArgs.ControlTypes.ToolbarSeparator: {
-                        var sep = new Separator();
-                        MainPageToolbar.Items.Add(sep);
-                        e.ResultantItem = sep;
+                        var item = new Separator();
+                        MainPageToolbar.Items.Add(item);
+                        e.ManagableItem = item;
                         break;
                     }
                 case AddControlItemEventArgs.ControlTypes.MenuSeparator: {
-                        var sep = new Separator();
-                        TopMenu.Items.Add(sep);
-                        //e.ResultantItem = sep;
+                        var item = new Separator();
+                        TopMenu.Items.Add(item);
+                        e.ManagableItem = item;
+                        break;
+                    }
+
+                case AddControlItemEventArgs.ControlTypes.ToolbarLabel: {
+                        var item = new TextBlock {
+                            Text = e.Text,
+                            Style = ApplicationData.GetStyle(myResourceDictionary, "ToolbarLabel")
+                        };
+                        MainPageToolbar.Items.Add(item);
+                        e.ManagableItem = item;
                         break;
                     }
                 case AddControlItemEventArgs.ControlTypes.ToolbarButton: {
+                        var fontIcon = ApplicationData.GetIcon(myResourceDictionary, e.ItemGlyph, "ToolbarIcon");
+                        var item = new Button {
+                            Content = fontIcon,
+                            Command = e.Command,
+                            ToolTip = e.Text
+                        };
+                        MainPageToolbar.Items.Add(item);
+                        e.ManagableItem = item;
                         break;
                     }
             }
@@ -141,4 +157,3 @@ namespace CongregationManager {
         }
     }
 }
-                

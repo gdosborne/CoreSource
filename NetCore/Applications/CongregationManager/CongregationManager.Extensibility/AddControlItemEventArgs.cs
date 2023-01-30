@@ -9,6 +9,7 @@ namespace CongregationManager.Extensibility {
             MenuItem = 2,
             MenuSeparator = 99,
             ToolbarButton = 100,
+            ToolbarLabel = 101,
             ToolbarSeparator = 199
         }
 
@@ -31,7 +32,7 @@ namespace CongregationManager.Extensibility {
         public string Text { get; private set; }
         public ICommand Command { get; private set; }
         public object Parent { get; private set; }
-        public object ResultantItem { get; set; }
+        public object ManagableItem { get; set; }
         public string ItemGlyph { get; private set; }
     }
 }

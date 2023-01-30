@@ -35,7 +35,6 @@ namespace CongregationExtension {
 
             LoadInterfaceItems();
 
-            IsEnabled = Settings.GetValue($"{Name} Extension", "IsEnabled", true);
             Panel = new ExtensionPanel(Name, Glyph, control);
 
             var e = new RetrieveResourcesEventArgs();
@@ -43,6 +42,7 @@ namespace CongregationExtension {
             if (e.Dictionary != null) {
                 control.Resources = e.Dictionary;
             }
+            IsEnabled = Settings.GetValue($"{Name} Extension", "IsEnabled", true);
         }
 
         private List<object> addedControls { get; set; }
@@ -53,43 +53,47 @@ namespace CongregationExtension {
             var e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.TopLevelMenuItem,
                 "_Congregations", null, null, null);
             AddControlItem?.Invoke(this, e);
-            if(e.ResultantItem != null) 
-                addedControls?.Add(e.ResultantItem);
-            
-            var topMenuItem = e.ResultantItem.As<MenuItem>();
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
+
+            var topMenuItem = e.ManagableItem.As<MenuItem>();
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.MenuItem,
                 "Add", AddCongregationCommand, topMenuItem, "");
             AddControlItem?.Invoke(this, e);
-            if (e.ResultantItem != null)
-                addedControls?.Add(e.ResultantItem);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
 
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.MenuItem,
                 "Delete", DeleteCongregationCommand, topMenuItem, "");
             AddControlItem?.Invoke(this, e);
-            if (e.ResultantItem != null)
-                addedControls?.Add(e.ResultantItem);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
 
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarSeparator);
             AddControlItem?.Invoke(this, e);
-            if (e.ResultantItem != null)
-                addedControls?.Add(e.ResultantItem);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
+
+            e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarLabel,
+              "Congregation", null, null, null);
+            AddControlItem?.Invoke(this, e);
 
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarButton,
                "Add Congregation", AddCongregationCommand, null, "");
             AddControlItem?.Invoke(this, e);
-            if (e.ResultantItem != null)
-                addedControls?.Add(e.ResultantItem);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
 
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarButton,
                "Delete Congregation", DeleteCongregationCommand, null, "");
             AddControlItem?.Invoke(this, e);
-            if (e.ResultantItem != null)
-                addedControls?.Add(e.ResultantItem);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
 
         }
 
         public override void Destroy() {
-            if(addedControls!=null && addedControls.Any()) {
+            if (addedControls != null && addedControls.Any()) {
                 RemoveControlItem?.Invoke(this, new RemoveControlItemEventArgs(addedControls.ToArray()));
             }
         }
@@ -101,6 +105,9 @@ namespace CongregationExtension {
                         item.GetType().GetProperty("IsEnabled")?.SetValue(item, value);
                     }
                 }
+            }
+            if (Panel != null && Panel.Control != null) {
+                Panel.Control.IsEnabled = value;
             }
         }
 
@@ -118,7 +125,7 @@ namespace CongregationExtension {
         private void AddCongregation(object state) {
             if (congWindow != null) {
                 congWindow = null;
-            }                
+            }
             congWindow = new CongregationWindow {
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
@@ -136,7 +143,7 @@ namespace CongregationExtension {
         public DelegateCommand DeleteCongregationCommand => _DeleteCongregationCommand ?? (_DeleteCongregationCommand = new DelegateCommand(DeleteCongregation, ValidateDeleteCongregationState));
         private bool ValidateDeleteCongregationState(object state) => true;
         private void DeleteCongregation(object state) {
-            
+
         }
         #endregion
 
