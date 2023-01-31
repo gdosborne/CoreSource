@@ -77,6 +77,8 @@ namespace CongregationExtension {
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarLabel,
               "Congregation", null, null, null);
             AddControlItem?.Invoke(this, e);
+            if (e.ManagableItem != null)
+                addedControls?.Add(e.ManagableItem);
 
             e = new AddControlItemEventArgs(AddControlItemEventArgs.ControlTypes.ToolbarButton,
                "Add Congregation", AddCongregationCommand, null, "");

@@ -198,7 +198,7 @@ namespace CongregationManager {
             }
             else
                 Environment.Exit(-1);
-            return new DataManager(DataFolder, newCreds.Password);
+            return new DataManager(DataFolder, ExtensionsFolder, newCreds.Password);
         }
 
         protected override void OnStartup(StartupEventArgs e) {
@@ -241,7 +241,7 @@ namespace CongregationManager {
                             var ext = instance.As<ExtensionBase>();
                             if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
                                 var existsMsg = $"The {ext.Name} extension already exists in the extensions folder.\n\n" +
-                                    "Wwould you like to replace it?";
+                                    "Would you like to replace it?";
                                 if (!IsYesInDialogSelected($"{ext.Name} extension already exists!",
                                     existsMsg, "Replace extension", TaskDialogIcon.Shield)) {
                                     break;

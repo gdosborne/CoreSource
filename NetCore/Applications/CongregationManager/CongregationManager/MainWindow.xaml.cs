@@ -62,27 +62,35 @@ namespace CongregationManager {
 
         }
 
-        public MainWindowViewModel View => DataContext.As<MainWindowViewModel>();
+        public MainWindowViewModel View => 
+            DataContext.As<MainWindowViewModel>();
 
-        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) =>
             this.SaveBounds(App.ApplicationSession.ApplicationSettings);
-        }
 
-        private void RetrieveResources(object sender, RetrieveResourcesEventArgs e) {
+        private void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
             e.Dictionary = myResourceDictionary;
-        }
 
         internal void RemoveControlItem(object sender, RemoveControlItemEventArgs e) {
             foreach (var item in e.Controls) {
-                if (item.Is<MenuItem>()) {
+                if (item.Is<MenuItem>()) 
                     TopMenu.Items.Remove(item.As<MenuItem>());
-                }
-                else if (item.Is<Button>()) {
+                else if (item.Is<Button>()) 
                     MainPageToolbar.Items.Remove(item);
-                }
                 else if (item.Is<Separator>()) {
-                    MainPageToolbar.Items.Remove(item);
+                    if (item.As<Separator>().Parent == MainPageToolbar)
+                        MainPageToolbar.Items.Remove(item);
+                    else
+                        TopMenu.Items.Remove(item.As<Separator>());
                 }
+                else if (item.Is<TextBlock>()) 
+                    MainPageToolbar.Items.Remove(item);
+            }
+
+            if (sender.As<ExtensionBase>().Panel != null
+                    && sender.As<ExtensionBase>().Panel.Control != null
+                    && sender.As<ExtensionBase>().Panel.Control.Parent != null) {
+                sender.As<ExtensionBase>().Panel.Control.Parent.RemoveChild(sender.As<ExtensionBase>().Panel.Control);
             }
         }
 
@@ -152,8 +160,7 @@ namespace CongregationManager {
             }
         }
 
-        private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) =>
             DragMove();
-        }
     }
 }

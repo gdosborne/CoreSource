@@ -7,16 +7,38 @@ using System.Security;
 
 namespace CongregationManager.Data {
     public class DataManager : IDisposable {
-        public DataManager(string dataFolder, string password) {
+        public DataManager(string dataFolder, string extensionsFolder, string password) {
             this.password = password;
             DataFolder = dataFolder;
             Congregations = new ObservableCollection<Congregation>();
-            folderMonitor = new FolderMonitor(dataFolder, "*.congregation");
-            folderMonitor.FilesUpdated += FolderMonitor_FilesUpdated;
+            dataFolderMonitor = new FolderMonitor(dataFolder, "*.congregation");
+            extensionsFolderMonitor = new FolderMonitor(extensionsFolder, "*.dll");
+            dataFolderMonitor.FilesUpdated += DataFolderMonitor_FilesUpdated;
+            extensionsFolderMonitor.FilesUpdated += ExtensionsFolderMonitor_FilesUpdated;
         }
 
-        private void FolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
-            if (folderMonitor != null) {
+        private void ExtensionsFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
+            if(extensionsFolderMonitor != null) {
+                if (e.FilesRemoved.Any()) {
+                    e.FilesRemoved.ForEach(x => {
+
+                    });
+                }
+                if (e.FilesChanged.Any()) {
+                    e.FilesChanged.ForEach(x => {
+
+                    });
+                }
+                if (e.FilesAdded.Any()) {
+                    e.FilesAdded.ForEach(x => {
+
+                    });
+                }
+            }
+        }
+
+        private void DataFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
+            if (dataFolderMonitor != null) {
                 if (e.FilesRemoved.Any()) {
                     e.FilesRemoved.ForEach(x => {
                         var cName = x.ShortenedName();
@@ -51,7 +73,9 @@ namespace CongregationManager.Data {
             }
         }
 
-        private FolderMonitor folderMonitor { get; set; }
+        private FolderMonitor dataFolderMonitor { get; set; }
+        private FolderMonitor extensionsFolderMonitor { get; set; }
+
         private string password = default;
         private string _DataFolder = default;
         public string DataFolder {

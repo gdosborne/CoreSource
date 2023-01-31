@@ -19,7 +19,7 @@ namespace CongregationManager.Data {
             files = new List<FileInfo>();
             dInfo = new DirectoryInfo(Path);
             dt = new DispatcherTimer {
-                Interval = TimeSpan.FromMilliseconds(250)
+                Interval = TimeSpan.FromMilliseconds(500)
             };
             dt.Tick += Dt_Tick;
             dt.Start();

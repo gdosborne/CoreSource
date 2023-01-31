@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Height="450" Width="800" Icon="/Resources/Watchtower.ico">
+        Height="450" Width="800" Icon="/Resources/OzSoft-Icon.ico">
     <Window.DataContext>
         <views:MainWindowViewModel />
     </Window.DataContext>
@@ -83,7 +83,7 @@
             </Grid>
         </Border>
         <Border Grid.Row="2" Style="{DynamicResource StandardWindowBorder}">
-            <TabControl ItemsSource="{Binding Panels}">
+            <TabControl Name="MainTabControl" ItemsSource="{Binding Panels}">
                 <TabControl.ItemContainerStyle>
                     <Style TargetType="TabItem">
                         <Setter Property="Header">

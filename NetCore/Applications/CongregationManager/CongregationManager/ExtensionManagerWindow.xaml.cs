@@ -28,16 +28,16 @@ namespace CongregationManager {
                         if (e.NewItems.Count > 0) {
                             foreach (var item in e.NewItems) {
                                 var ext = item.As<ExtensionBase>();
+
                                 ext.SaveExtensionData += this.Owner.As<MainWindow>().SaveExtensionData;
                                 ext.AddControlItem += this.Owner.As<MainWindow>().AddControlItem;
                                 ext.RemoveControlItem += this.Owner.As<MainWindow>().RemoveControlItem;
-
-                                var win = Owner.As<MainWindow>();                                
-                                ApplicationData.Extensions.Remove(ext);
-                                win.View.Panels.Add(ext.Panel);
                                 ext.Initialize(App.DataFolder, App.TempFolder,
                                     App.ApplicationSession.ApplicationSettings,
                                     App.ApplicationSession.Logger, App.DataManager);
+
+                                var win = Owner.As<MainWindow>();
+                                win.View.Panels.Add(ext.Panel);
 
                                 break;
                             }
@@ -51,6 +51,8 @@ namespace CongregationManager {
                                 ext.SaveExtensionData -= this.Owner.As<MainWindow>().SaveExtensionData;
                                 ext.AddControlItem -= this.Owner.As<MainWindow>().AddControlItem;
                                 ext.RemoveControlItem -= this.Owner.As<MainWindow>().RemoveControlItem;
+                                if(ext.Panel.Control.Parent != null)
+                                    ext.Panel.Control.Parent.RemoveChild(ext.Panel.Control);
                             }
                         }
                         break;
@@ -92,8 +94,8 @@ namespace CongregationManager {
                         if (!filenames.Any())
                             return;
 
-                         App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("Application", "LastExtensionDir",
-                            Path.GetDirectoryName(filenames[0]));
+                        App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("Application", "LastExtensionDir",
+                           Path.GetDirectoryName(filenames[0]));
 
                         var extensions = App.AddExtensions(filenames);
                         extensions.ForEach(x => {

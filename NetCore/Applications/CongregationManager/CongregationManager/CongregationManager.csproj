@@ -27,12 +27,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\OzSoft-Icon.ico" />
+    <None Remove="Resources\OzSoft-Logo.png" />
     <None Remove="Resources\Watchtower.ico" />
     <None Remove="Resources\Watchtower.png" />
     <None Remove="ViewModels\ExtensionManagerWindowViewModel.cs~RFaa6b644.TMP" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\OzSoft-Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\OzSoft-Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Watchtower.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
