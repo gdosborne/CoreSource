@@ -9,22 +9,27 @@ namespace CongregationManager.Data {
         public FolderMonitor(string path) 
             : this(path, "*.*") { }
 
-        public FolderMonitor(string path, string filespec) {
+        public FolderMonitor(string path, string filespec)
+            : this(path, filespec, TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(500)) { }
+
+        public FolderMonitor(string path, string filespec, TimeSpan startInterval, TimeSpan subsequentInterval) {
             Path = path;
             Filespec = filespec;
-            
+            subInterval = subsequentInterval;
+
             if (!Directory.Exists(Path)) {
                 throw new DirectoryNotFoundException(Path);
             }
             files = new List<FileInfo>();
             dInfo = new DirectoryInfo(Path);
             dt = new DispatcherTimer {
-                Interval = TimeSpan.FromMilliseconds(500)
+                Interval = startInterval
             };
             dt.Tick += Dt_Tick;
             dt.Start();
         }
 
+        private TimeSpan subInterval = default;
         private void Dt_Tick(object? sender, EventArgs e) {
             dt.Stop();
             var temp = dInfo.GetFiles(Filespec).ToList();
@@ -57,6 +62,8 @@ namespace CongregationManager.Data {
             }
 
             files = temp;
+            if (dt.Interval != subInterval)
+                dt.Interval = subInterval;
             dt.Start();
         }
 

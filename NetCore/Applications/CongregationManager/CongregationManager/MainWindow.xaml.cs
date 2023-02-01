@@ -17,22 +17,6 @@ namespace CongregationManager {
             View.ExecuteUiAction += View_ExecuteUiAction; ;
             View.Initialize();
 
-            ApplicationData.Extensions.ForEach(x => {
-                x.SaveExtensionData += X_SaveExtensionData; ;
-                x.AddControlItem += AddControlItem;
-                x.RemoveControlItem += RemoveControlItem;
-                x.RetrieveResources += RetrieveResources;
-
-                x.Initialize(App.DataFolder, App.TempFolder,
-                    App.ApplicationSession.ApplicationSettings,
-                    App.ApplicationSession.Logger,
-                    App.DataManager);
-                View.Panels.Add(x.Panel);
-            });
-        }
-
-        private void X_SaveExtensionData(object sender, SaveExtensionDataEventArgs e) {
-            throw new NotImplementedException();
         }
 
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
@@ -68,7 +52,7 @@ namespace CongregationManager {
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) =>
             this.SaveBounds(App.ApplicationSession.ApplicationSettings);
 
-        private void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
+        internal void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
             e.Dictionary = myResourceDictionary;
 
         internal void RemoveControlItem(object sender, RemoveControlItemEventArgs e) {

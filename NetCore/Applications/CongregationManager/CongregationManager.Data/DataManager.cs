@@ -21,21 +21,26 @@ namespace CongregationManager.Data {
             if(extensionsFolderMonitor != null) {
                 if (e.FilesRemoved.Any()) {
                     e.FilesRemoved.ForEach(x => {
-
+                        MakeExtensionChange(x.FullName, ChangeTypes.Remove);
                     });
                 }
                 if (e.FilesChanged.Any()) {
                     e.FilesChanged.ForEach(x => {
-
+                        MakeExtensionChange(x.FullName, ChangeTypes.Change);
                     });
                 }
                 if (e.FilesAdded.Any()) {
                     e.FilesAdded.ForEach(x => {
-
+                        MakeExtensionChange(x.FullName, ChangeTypes.Add);
                     });
                 }
             }
         }
+
+        public event FileChangedDetectedHandler FileChangedDetected;
+
+        private void MakeExtensionChange(string filename, ChangeTypes changeType) =>
+            FileChangedDetected?.Invoke(this, new FileChangeDetectedEventArgs(filename, changeType, FileTypes.Extension));
 
         private void DataFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
             if (dataFolderMonitor != null) {

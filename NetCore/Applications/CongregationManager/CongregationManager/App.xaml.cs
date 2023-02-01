@@ -2,6 +2,7 @@
 using Common.Applicationn;
 using Common.Applicationn.Primitives;
 using Common.Applicationn.Security;
+using Common.Applicationn.Windows;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
 using CredentialManagement;
@@ -26,7 +27,7 @@ namespace CongregationManager {
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
         public static Session ApplicationSession { get; private set; }
 
-        public static Dictionary<string, string> FileFilters { get; private set; } = 
+        public static Dictionary<string, string> FileFilters { get; private set; } =
             new Dictionary<string, string> {
                 { "Congregation Manager Extension (*.dll)","*.dll" }
             };
@@ -206,6 +207,76 @@ namespace CongregationManager {
             ApplicationData.Extensions = new List<ExtensionBase>();
             LoadExtensions();
             DataManager = Login();
+            DataManager.FileChangedDetected += DataManager_FileChangedDetected;
+        }
+
+        private void DataManager_FileChangedDetected(object sender, FileChangeDetectedEventArgs e) {
+            var win = MainWindow.As<MainWindow>();
+            if (e.FileType == FileTypes.Extension) {
+                switch (e.ChangeType) {
+                    case ChangeTypes.Add: {
+                            var assy = Assembly.Load(File.ReadAllBytes(e.Filename));
+                            if (assy != null) {
+                                var types = assy.GetTypes().Where(x => x.BaseType == typeof(ExtensionBase));
+                                foreach (var type in types) {
+                                    var instance = Activator.CreateInstance(type);
+                                    if (instance != null) {
+                                        var ext = instance.As<ExtensionBase>();
+                                        if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
+                                            continue;
+                                        }
+
+                                        ApplicationData.Extensions.Add(ext);
+                                        ext.Filename = e.Filename;
+                                        ext.SaveExtensionData += win.SaveExtensionData;
+                                        ext.AddControlItem += win.AddControlItem;
+                                        ext.RemoveControlItem += win.RemoveControlItem;
+                                        ext.RetrieveResources += win.RetrieveResources;
+                                        ext.Initialize(App.DataFolder, 
+                                            App.TempFolder,
+                                            App.ApplicationSession.ApplicationSettings,
+                                            App.ApplicationSession.Logger, 
+                                            App.DataManager);
+                                        win.View.Panels.Add(ext.Panel);
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                    case ChangeTypes.Remove: {
+                            var ext = ApplicationData.Extensions.FirstOrDefault(x => x.Filename == e.Filename);
+                            var name = ext.Name;
+
+                            var ctrl = ext.Panel.Control;
+                            if (ctrl != null && ctrl.Parent != null) {
+                                ctrl.Parent.RemoveChild(ctrl);
+                            }
+
+                            var win = MainWindow.As<MainWindow>();
+                            win.View.Panels.Remove(ext.Panel);
+                            ext.Destroy();
+
+                            ext.SaveExtensionData -= win.SaveExtensionData;
+                            ext.AddControlItem -= win.AddControlItem;
+                            ext.RemoveControlItem -= win.RemoveControlItem;
+
+                            win.View.Panels.Remove(ext.Panel);
+                            ext.Panel.Control = null;
+                            ApplicationData.Extensions.Remove(ext);
+
+                            if (ext.Panel != null && ext.Panel.Control != null && ext.Panel.Control.Parent != null) {
+                                ext.Panel.Control.Parent.RemoveChild(ext.Panel.Control);
+                            }
+
+                            break;
+                        }
+                    case ChangeTypes.Change:
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         protected override void OnExit(ExitEventArgs e) {
@@ -231,30 +302,30 @@ namespace CongregationManager {
 
         public static List<ExtensionBase> AddExtensions(params string[] filenames) {
             var result = new List<ExtensionBase>();
-            foreach (var extFile in filenames) {
-                var assy = Assembly.Load(File.ReadAllBytes(extFile));
-                if (assy != null) {
-                    var types = assy.GetTypes().Where(x => x.BaseType == typeof(ExtensionBase));
-                    foreach (var type in types) {
-                        var instance = Activator.CreateInstance(type);
-                        if (instance != null) {
-                            var ext = instance.As<ExtensionBase>();
-                            if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
-                                var existsMsg = $"The {ext.Name} extension already exists in the extensions folder.\n\n" +
-                                    "Would you like to replace it?";
-                                if (!IsYesInDialogSelected($"{ext.Name} extension already exists!",
-                                    existsMsg, "Replace extension", TaskDialogIcon.Shield)) {
-                                    break;
-                                }
-                                ApplicationData.Extensions.Remove(ApplicationData.Extensions.First(x => x.Name == ext.Name));
-                            }
-                            result.Add(ext);
-                            ApplicationData.Extensions.Add(ext);
-                            ext.Filename = extFile;
-                        }
-                    }
-                }
-            }
+            //foreach (var extFile in filenames) {
+            //    var assy = Assembly.Load(File.ReadAllBytes(extFile));
+            //    if (assy != null) {
+            //        var types = assy.GetTypes().Where(x => x.BaseType == typeof(ExtensionBase));
+            //        foreach (var type in types) {
+            //            var instance = Activator.CreateInstance(type);
+            //            if (instance != null) {
+            //                var ext = instance.As<ExtensionBase>();
+            //                if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
+            //                    var existsMsg = $"The {ext.Name} extension already exists in the extensions folder.\n\n" +
+            //                        "Would you like to replace it?";
+            //                    if (!IsYesInDialogSelected($"{ext.Name} extension already exists!",
+            //                        existsMsg, "Replace extension", TaskDialogIcon.Shield)) {
+            //                        break;
+            //                    }
+            //                    ApplicationData.Extensions.Remove(ApplicationData.Extensions.First(x => x.Name == ext.Name));
+            //                }
+            //                result.Add(ext);
+            //                ApplicationData.Extensions.Add(ext);
+            //                ext.Filename = extFile;
+            //            }
+            //        }
+            //    }
+            //}
             return result;
         }
 

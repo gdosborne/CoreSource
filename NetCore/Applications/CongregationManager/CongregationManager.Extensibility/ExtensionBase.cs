@@ -1,3 +1,4 @@
+using Azure.Core.Pipeline;
 using Common.Applicationn;
 using Common.Applicationn.Logging;
 using CongregationManager.Data;
@@ -56,17 +57,45 @@ namespace CongregationManager.Extensibility {
         protected void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        /// <summary>Gets the Name.</summary>
+
+        #region Name Property
+        private string _Name = default;
+        /// <summary>Gets/sets the Name.</summary>
         /// <value>The Name.</value>
-        public string? Name { get; protected set; } = default;
+        public string Name {
+            get => _Name;
+            set {
+                _Name = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>Gets the Glyph.</summary>
+        #region Glyph Property
+        private string _Glyph = default;
+        /// <summary>Gets/sets the Glyph.</summary>
         /// <value>The Glyph.</value>
-        public string? Glyph { get; protected set; } = default;
+        public string Glyph {
+            get => _Glyph;
+            set {
+                _Glyph = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>Gets the UserControl.</summary>
-        /// <value>The UserControl.</value>
-        public IExtensionPanel? Panel { get; protected set; } = default;
+        #region Panel Property
+        private IExtensionPanel _Panel = default;
+        /// <summary>Gets/sets the Panel.</summary>
+        /// <value>The Panel.</value>
+        public IExtensionPanel Panel {
+            get => _Panel;
+            set {
+                _Panel = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         #region IsEnabled Property
         private bool? _IsEnabled = default;
@@ -88,35 +117,83 @@ namespace CongregationManager.Extensibility {
         /// <summary>Saves the data</summary>
         public abstract void Save();
 
-        /// <summary>
-        /// The data directory
-        /// </summary>
-        public string? DataDirectory { get; protected set; }
+        #region DataDirectory Property
+        private string _DataDirectory = default;
+        /// <summary>Gets/sets the DataDirectory.</summary>
+        /// <value>The DataDirectory.</value>
+        public string DataDirectory {
+            get => _DataDirectory;
+            set {
+                _DataDirectory = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>
-        /// The temp directory
-        /// </summary>
-        public string? TempDirectory { get; protected set; }
+        #region TempDirectory Property
+        private string _TempDirectory = default;
+        /// <summary>Gets/sets the TempDirectory.</summary>
+        /// <value>The TempDirectory.</value>
+        public string TempDirectory {
+            get => _TempDirectory;
+            set {
+                _TempDirectory = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>
-        /// The settings
-        /// </summary>
-        public Settings? Settings { get; protected set; }
+        #region Settings Property
+        private Settings _Settings = default;
+        /// <summary>Gets/sets the Settings.</summary>
+        /// <value>The Settings.</value>
+        public Settings Settings {
+            get => _Settings;
+            set {
+                _Settings = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>
-        /// The logger
-        /// </summary>
-        public ApplicationLogger? Logger { get; protected set; }
+        #region Logger Property
+        private ApplicationLogger _Logger = default;
+        /// <summary>Gets/sets the Logger.</summary>
+        /// <value>The Logger.</value>
+        public ApplicationLogger Logger {
+            get => _Logger;
+            set {
+                _Logger = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>
-        /// The data manager
-        /// </summary>
-        public DataManager? DataManager { get; set; }
+        #region DataManager Property
+        private DataManager _DataManager = default;
+        /// <summary>Gets/sets the DataManager.</summary>
+        /// <value>The DataManager.</value>
+        public DataManager DataManager {
+            get => _DataManager;
+            set {
+                _DataManager = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
-        /// <summary>
-        /// The file name
-        /// </summary>
-        public string? Filename { get; set; }
+        #region Filename Property
+        private string _Filename = default;
+        /// <summary>Gets/sets the Filename.</summary>
+        /// <value>The Filename.</value>
+        public string Filename {
+            get => _Filename;
+            set {
+                _Filename = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
     }
 }

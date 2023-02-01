@@ -8,7 +8,7 @@ using System.Windows.Controls;
 namespace CongregationManager.Extensibility {
     public interface IExtensionPanel {
         string Glyph { get; set; }
-        string ExtensionName { get; set; }
+        string Title { get; set; }
         UserControl Control { get; set; }
     }
 }
