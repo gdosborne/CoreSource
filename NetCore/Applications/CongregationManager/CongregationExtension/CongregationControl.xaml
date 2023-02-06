@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="CongregationExtension.CongregationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CongregationExtension"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="Resources/MainTheme.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <Border Style="{DynamicResource ControlBorder}">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Congregation Name" Grid.Row="0" Grid.Column="0" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="CongregationNameTextBox" Grid.Row="0" Grid.Column="1" 
+                         Style="{DynamicResource WindowTextField}" Grid.ColumnSpan="4"
+                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged"/>
+
+                <StackPanel Name="ButtonPanel" Orientation="Vertical" Grid.Row="0" Grid.Column="5" Grid.RowSpan="99"
+                            VerticalAlignment="Top">
+                    <Button Name="UpdateButton" Content="Update" Style="{DynamicResource StandardButton}"
+                            Margin="10,0,0,5" ToolTip="Click to update the congregation"/>
+                    <Button Name="RevertButton" Content="Revert" Style="{DynamicResource StandardButton}" 
+                            Margin="10,0,0,5" ToolTip="Reverts the data back to the last save values"/>
+                    <CheckBox Name="IsLocalCheckBox" Content="Local" Margin="10,0,0,0" 
+                              Checked="IsLocalCheckBox_Checked" Unchecked="IsLocalCheckBox_Unchecked" 
+                              ToolTip="A local congregation is the congregation you are managing"/>
+                </StackPanel>
+
+                <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="AddressTextBox" Grid.Row="1" Grid.Column="1" 
+                         Style="{DynamicResource MultilineWindowTextField}"
+                         Height="60" Grid.RowSpan="2" TextChanged="TextBoxTextChanged" />
+
+                <TextBlock Text="City" Grid.Row="1" Grid.Column="3" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="CityTextBox" Grid.Row="1" Grid.Column="4" 
+                         Style="{DynamicResource WindowTextField}" 
+                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
+
+                <TextBlock Text="State/Provence" Grid.Row="2" Grid.Column="3" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="StateProvenceTextBox" Grid.Row="2" Grid.Column="4" 
+                         Style="{DynamicResource WindowTextField}"
+                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
+
+                <TextBlock Text="Postal Code" Grid.Row="3" Grid.Column="0" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="PostalCodeTextBox" Grid.Row="3" Grid.Column="1" 
+                         Style="{DynamicResource WindowTextField}"
+                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
+
+                <TextBlock Text="Telephone" Grid.Row="3" Grid.Column="3" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="TelephoneTextBox" Grid.Row="3" Grid.Column="4" 
+                         Style="{DynamicResource WindowTextField}"
+                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

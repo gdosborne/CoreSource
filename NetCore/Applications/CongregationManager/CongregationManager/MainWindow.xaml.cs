@@ -4,7 +4,7 @@ using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using System;
 using System.Windows;
-using System.Windows.Controls;
+using static Common.Applicationn.Logging.ApplicationLogger;
 
 namespace CongregationManager {
     public partial class MainWindow : Window {
@@ -12,9 +12,11 @@ namespace CongregationManager {
             InitializeComponent();
 
             this.SetBounds(App.ApplicationSession.ApplicationSettings);
+            App.LogMessage("Opening main window", EntryTypes.Information);
 
-            Closing += MainWindow_Closing; ;
-            View.ExecuteUiAction += View_ExecuteUiAction; ;
+
+            Closing += MainWindow_Closing;
+            View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
         }
@@ -22,6 +24,20 @@ namespace CongregationManager {
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             var action = (MainWindowViewModel.Actions)Enum.Parse(typeof(MainWindowViewModel.Actions), e.CommandToExecute);
             switch (action) {
+                case MainWindowViewModel.Actions.ViewLogs: {
+                        var win = new LogReaderWindow {
+                            Owner = this
+                        };
+                        win.ShowDialog();
+                        break;
+                    }
+                case MainWindowViewModel.Actions.PanelAdded: {
+                        if (MainTabControl.Items.Count > 0) {
+                            MainTabControl.SelectedItem = MainTabControl.Items[MainTabControl.Items.Count - 1];
+                            MainTabControl.Focus();
+                        }
+                        break;
+                    }
                 case MainWindowViewModel.Actions.CloseWindow:
                     Close();
                     break;
@@ -31,12 +47,13 @@ namespace CongregationManager {
                 case MainWindowViewModel.Actions.Maximize:
                     WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
                     break;
-                case MainWindowViewModel.Actions.ManageExtensions:
-                    var win = new ExtensionManagerWindow {
-                        Owner = this
-                    };
-                    win.ShowDialog();
-                    break;
+                case MainWindowViewModel.Actions.ManageExtensions: {
+                        var win = new ExtensionManagerWindow {
+                            Owner = this
+                        };
+                        win.ShowDialog();
+                        break;
+                    }
                 default:
                     break;
             }
@@ -46,102 +63,33 @@ namespace CongregationManager {
 
         }
 
-        public MainWindowViewModel View => 
+        public MainWindowViewModel View =>
             DataContext.As<MainWindowViewModel>();
 
-        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) =>
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
             this.SaveBounds(App.ApplicationSession.ApplicationSettings);
+            App.LogMessage("Closing main window", EntryTypes.Information);
+        }
 
         internal void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
             e.Dictionary = myResourceDictionary;
 
-        internal void RemoveControlItem(object sender, RemoveControlItemEventArgs e) {
-            foreach (var item in e.Controls) {
-                if (item.Is<MenuItem>()) 
-                    TopMenu.Items.Remove(item.As<MenuItem>());
-                else if (item.Is<Button>()) 
-                    MainPageToolbar.Items.Remove(item);
-                else if (item.Is<Separator>()) {
-                    if (item.As<Separator>().Parent == MainPageToolbar)
-                        MainPageToolbar.Items.Remove(item);
-                    else
-                        TopMenu.Items.Remove(item.As<Separator>());
-                }
-                else if (item.Is<TextBlock>()) 
-                    MainPageToolbar.Items.Remove(item);
-            }
+        //private ResourceDictionary myResourceDictionary => new ResourceDictionary {
+        //    Source = new Uri("/CongregationManager;component/Resources/MainTheme.xaml", UriKind.RelativeOrAbsolute)
+        //};
 
-            if (sender.As<ExtensionBase>().Panel != null
-                    && sender.As<ExtensionBase>().Panel.Control != null
-                    && sender.As<ExtensionBase>().Panel.Control.Parent != null) {
-                sender.As<ExtensionBase>().Panel.Control.Parent.RemoveChild(sender.As<ExtensionBase>().Panel.Control);
-            }
-        }
+        private ResourceDictionary myResourceDictionary => App.Current.Resources;
 
-        private ResourceDictionary myResourceDictionary => new ResourceDictionary {
-            Source = new Uri("/CongregationManager;component/Resources/MainTheme.xaml", UriKind.RelativeOrAbsolute)
-        };
+        public void InitializeExtension(ExtensionBase ext) {
+            ext.SetUICOntrols(MainPageToolbar, TopMenu, App.Current.Resources);
 
-        internal void AddControlItem(object sender, Extensibility.AddControlItemEventArgs e) {
-            var ext = sender.As<ExtensionBase>();
-            switch (e.ControlType) {
-                case AddControlItemEventArgs.ControlTypes.TopLevelMenuItem: {
-                        var item = new MenuItem {
-                            Header = e.Text
-                        };
-                        TopMenu.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-                case AddControlItemEventArgs.ControlTypes.MenuItem: {
-                        if (e.Parent == null || !e.Parent.Is<MenuItem>())
-                            return;
+            ext.RetrieveResources += RetrieveResources;
+            ext.Initialize(App.DataFolder, App.TempFolder,
+                App.ApplicationSession.ApplicationSettings,
+                App.ApplicationSession.Logger,
+                App.DataManager);
 
-                        var parent = e.Parent.As<MenuItem>();
-                        var fontIcon = ApplicationData.GetIcon(myResourceDictionary, e.ItemGlyph);
-                        var item = new MenuItem {
-                            Header = e.Text,
-                            Icon = fontIcon,
-                            Command = e.Command
-                        };
-                        parent.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-                case AddControlItemEventArgs.ControlTypes.ToolbarSeparator: {
-                        var item = new Separator();
-                        MainPageToolbar.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-                case AddControlItemEventArgs.ControlTypes.MenuSeparator: {
-                        var item = new Separator();
-                        TopMenu.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-
-                case AddControlItemEventArgs.ControlTypes.ToolbarLabel: {
-                        var item = new TextBlock {
-                            Text = e.Text,
-                            Style = ApplicationData.GetStyle(myResourceDictionary, "ToolbarLabel")
-                        };
-                        MainPageToolbar.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-                case AddControlItemEventArgs.ControlTypes.ToolbarButton: {
-                        var fontIcon = ApplicationData.GetIcon(myResourceDictionary, e.ItemGlyph, "ToolbarIcon");
-                        var item = new Button {
-                            Content = fontIcon,
-                            Command = e.Command,
-                            ToolTip = e.Text
-                        };
-                        MainPageToolbar.Items.Add(item);
-                        e.ManagableItem = item;
-                        break;
-                    }
-            }
+            View.Panels.Add(ext.Panel);
         }
 
         private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) =>

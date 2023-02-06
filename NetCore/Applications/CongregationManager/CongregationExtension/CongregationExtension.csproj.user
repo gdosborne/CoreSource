@@ -2,13 +2,27 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="CongregationControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MemberWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="..\CongregationManager\Resources\MainTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CongregationControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="CongregationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ExtensionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MemberWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

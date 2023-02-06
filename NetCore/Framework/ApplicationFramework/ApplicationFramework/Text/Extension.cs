@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Common.Applicationn.Primitives;
+using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -21,6 +23,17 @@ namespace Common.Applicationn.Text {
             return result;
         }
 
+        public static string SplitAtCaps(this string value) {
+            var result = new StringBuilder();
+            var chars = value.ToCharArray();
+            for (int i = 0; i < chars.Length; i++) {
+                if (char.IsLetter(chars[i]) && char.IsUpper(chars[i]) && i > 0)
+                    result.Append(' ');
+                result.Append(chars[i]);
+            }
+            return result.ToString();
+        }
+
         public static void AppendLineFormat(this StringBuilder value, string format, object arg1) => value.AppendLineFormat(format, new[] { arg1 });
 
         public static void AppendLineFormat(this StringBuilder value, string format, object arg1, object arg2) => value.AppendLineFormat(format, new[] { arg1, arg2 });
@@ -35,6 +48,7 @@ namespace Common.Applicationn.Text {
         }
 
         public static string ToPhoneNumber(this string value) {
+            value = value.RemoveNonNumbers(false);
             switch (value.Length) {
                 case 7:
                     return $"{value.Substring(0, 3)}-{value.Substring(3, 4)}";

@@ -1,4 +1,6 @@
 ﻿using Common.Applicationn;
+using Common.Applicationn.Primitives;
+using Common.Applicationn.Text;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 
@@ -22,16 +24,25 @@ namespace CongregationExtension.ViewModels {
         public Settings AppSettings { get; set; }
         public DataManager DataManager { get; set; }
 
-        #region Name Property
-        private string _Name = default;
-        /// <summary>Gets/sets the Name.</summary>
-        /// <value>The Name.</value>
-        public string Name {
-            get => _Name;
+        #region Congregation Property
+        private Congregation _Congregation = default;
+        /// <summary>Gets/sets the Congregation.</summary>
+        /// <value>The Congregation.</value>
+        public Congregation Congregation {
+            get => _Congregation;
             set {
-                _Name = value;
+                _Congregation = value;
+                if(Congregation != null) {
+                    Congregation.PropertyChanged += Congregation_PropertyChanged;
+                }
                 OnPropertyChanged();
             }
+        }
+
+        private void Congregation_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+            if (Congregation != null && Congregation.IsNew && e.PropertyName == "Name")
+                Congregation.Filename = $"{Congregation.Name}.congregation";
+            UpdateInterface();
         }
         #endregion
 
@@ -53,7 +64,7 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand AcceptDataCommand => _AcceptDataCommand ?? (_AcceptDataCommand = new DelegateCommand(AcceptData, ValidateAcceptDataState));
         private bool ValidateAcceptDataState(object state) {
             var result = true;
-            result &= !string.IsNullOrEmpty(Name);
+            result &= Congregation != null && !string.IsNullOrEmpty(Congregation.Name);
             return result;
         }
         private void AcceptData(object state) {

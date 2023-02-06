@@ -34,6 +34,7 @@
     <SolidColorBrush x:Key="MouseOverBackground" Color="#FFDF7D7D" />
     <SolidColorBrush x:Key="MouseOverForeground" Color="#FF000000" />
     <SolidColorBrush x:Key="WindowBorderBrush" Color="#FF111111" />
+    <SolidColorBrush x:Key="LightBorderBrush" Color="#FF777777" />
     <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="CaptionBackground" Color="#FF009999" />
     <SolidColorBrush x:Key="CaptionForeground" Color="#FFDDDDDD" />
@@ -46,7 +47,6 @@
     <Style TargetType="Window" x:Key="StandardWindow">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
-        <Setter Property="Icon" Value="/Resources/WatchTower.ico" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="AllowsTransparency" Value="true" />
         <Setter Property="WindowStyle" Value="None" />        
@@ -105,9 +105,33 @@
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
     </Style>
 
+    <Style TargetType="Border" x:Key="ErrorBorder">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="CornerRadius" Value="0,0,10,10" />
+        <Setter Property="Padding" Value="5,5,5,5" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+
+    <Style TargetType="controls:FontIcon" x:Key="ErrorIcon">
+        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource XLargeFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="Margin" Value="10,0" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="ErrorTextBlock">
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
+    </Style>
+
     <Style TargetType="controls:FontIcon" x:Key="TabIcon">
         <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -118,6 +142,10 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="5,0,5,0" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="CongregationTabHeader" BasedOn="{StaticResource TabHeader}">
+        <Setter Property="Foreground" Value="Blue" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="ToolbarLabel">
@@ -141,7 +169,13 @@
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
     </Style>
 
-    <Style TargetType="StackPanel" x:Key="ToolbarButtonStackPanel">
+    <Style TargetType="StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="Margin" Value="0,5,0,10" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="StackPanel" x:Key="ToolbarButtonStackPanel" BasedOn="{x:Null}">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="Margin" Value="5" />
     </Style>
@@ -215,12 +249,25 @@
     </Style>
 
     <Style TargetType="Border" x:Key="ControlBorder">
-        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="{DynamicResource ControlHeight}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="BorderBrush" Value="Black" />
-        <Setter Property="Margin" Value="0,-1,0,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowTextForeground}" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="WrapBorder">
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="BorderBrush" Value="{DynamicResource LightBorderBrush}" />
+        <Setter Property="Margin" Value="10,10,0,10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="2" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="ControlTextBlock">
@@ -261,6 +308,23 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
+
+    <Style TargetType="RadioButton">
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,3,10,0" />
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,3,0,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
     <Style TargetType="controls:ToggleSwitch">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
@@ -273,6 +337,17 @@
         <Setter Property="OnContent" Value="Enabled" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,0,10,0" />
+    </Style>
+
+    <Style TargetType="WrapPanel" x:Key="PrivilegeWrapPanel">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+    </Style>
+
+    <Style TargetType="ItemsControl" x:Key="PriviledgeItems">
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
 </ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Windows.Threading;
 
 namespace CongregationManager.Data {
     public class FolderMonitor : IDisposable {
-        public FolderMonitor(string path) 
+        public FolderMonitor(string path)
             : this(path, "*.*") { }
 
         public FolderMonitor(string path, string filespec)
@@ -20,8 +21,9 @@ namespace CongregationManager.Data {
             if (!Directory.Exists(Path)) {
                 throw new DirectoryNotFoundException(Path);
             }
-            files = new List<FileInfo>();
+            files = new List<FileStatus>();
             dInfo = new DirectoryInfo(Path);
+            areTimeSpansMatching = startInterval.TotalMilliseconds == subsequentInterval.TotalMilliseconds;
             dt = new DispatcherTimer {
                 Interval = startInterval
             };
@@ -29,47 +31,67 @@ namespace CongregationManager.Data {
             dt.Start();
         }
 
+        private class FileStatus {
+            public string FullName;
+            public bool IsNew;
+            public bool IsDeleted;
+            public bool IsModified;
+            public DateTime LastWrite;
+            public FileInfo FileInfo => new(FullName);
+        }
+
+        private bool areTimeSpansMatching = false;
         private TimeSpan subInterval = default;
+        private List<FileStatus> files = default;
+
         private void Dt_Tick(object? sender, EventArgs e) {
             dt.Stop();
-            var temp = dInfo.GetFiles(Filespec).ToList();
-            var newFiles = new List<FileInfo>();
-            var removedFiles = new List<FileInfo>();
-            var changedFiles = new List<FileInfo>();
-            if (temp.Any()) {
-                temp.ForEach(x => {
-                    if (!files.Any(y => y.Name == x.Name)) {
-                        newFiles.Add(x);
-                    }
-                });
-            }
-            files.ForEach(x => {
-                if (!temp.Any(y => y.Name == x.Name)) {
-                    removedFiles.Add(x);
+            var currentFiles = dInfo.GetFiles(Filespec).ToList();
+
+            currentFiles.ForEach(current => {
+                var earlierStatus = files.FirstOrDefault(x => x.FullName.Equals(current.FullName, StringComparison.OrdinalIgnoreCase));
+                if (earlierStatus == null) {
+                    files.Add(new FileStatus { FullName = current.FullName, IsNew = true, LastWrite = current.LastWriteTime });
+                    return;
                 }
-                else if (temp.Any(y => y.Name == x.Name)) {
-                    var orig = files.First(y => y.Name == x.Name);
-                    var changed = temp.First(y => y.Name == x.Name);
-                    if (orig.LastWriteTime != changed.LastWriteTime) {
-                        changedFiles.Add(changed);
-                    }
+                earlierStatus.IsNew = false;
+                earlierStatus.IsModified = earlierStatus.LastWrite != current.LastWriteTime;
+            });
+            files.ForEach(earlierStatus => {
+                if (!currentFiles.Any(x => x.FullName.Equals(earlierStatus.FullName, StringComparison.OrdinalIgnoreCase))) {
+                    earlierStatus.IsDeleted = true;
                 }
             });
-            if (changedFiles.Any() || removedFiles.Any() || newFiles.Any()) {
+            if (files.Any(x => x.IsNew || x.IsDeleted || x.IsModified)) {
+                var changedFiles = new List<FileInfo>();
+                var removedFiles = new List<FileInfo>();
+                var newFiles = new List<FileInfo>();
+                files.ForEach(file => {
+                    if (file.IsNew)
+                        newFiles.Add(file.FileInfo);
+                    else if (file.IsDeleted)
+                        removedFiles.Add(file.FileInfo);
+                    else if (file.IsModified)
+                        changedFiles.Add(file.FileInfo);
+                });
                 var ea = new FilesUpdatedEventArgs(newFiles, removedFiles, changedFiles);
                 FilesUpdated?.Invoke(this, ea);
-
             }
+            files = currentFiles.Select(x => new FileStatus {
+                FullName = x.FullName,
+                LastWrite = x.LastWriteTime,
+                IsNew = false,
+                IsDeleted = false,
+                IsModified = false
+            }).ToList();
 
-            files = temp;
-            if (dt.Interval != subInterval)
+            if (!areTimeSpansMatching && dt.Interval != subInterval)
                 dt.Interval = subInterval;
             dt.Start();
         }
 
         public event FilesUpdatedHandler FilesUpdated;
 
-        private List<FileInfo> files = default;
         private DispatcherTimer dt = default;
         private bool isDisposed;
 

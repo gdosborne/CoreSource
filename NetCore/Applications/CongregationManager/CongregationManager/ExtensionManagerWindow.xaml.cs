@@ -1,13 +1,15 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Applicationn.Linq;
+using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
-using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using static System.Net.Mime.MediaTypeNames;
+using static Common.Applicationn.Logging.ApplicationLogger;
 using Path = System.IO.Path;
 
 namespace CongregationManager {
@@ -15,55 +17,13 @@ namespace CongregationManager {
         public ExtensionManagerWindow() {
             InitializeComponent();
 
+            App.LogMessage("Opening extension manager", EntryTypes.Information);
             Closing += ExtensionManagerWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
             //View.Extensions.CollectionChanged += Extensions_CollectionChanged;
         }
-
-        //private void Extensions_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
-        //    switch (e.Action) {
-        //        case System.Collections.Specialized.NotifyCollectionChangedAction.Add: {
-        //                //if (e.NewItems.Count > 0) {
-        //                //    foreach (var item in e.NewItems) {
-        //                //        var ext = item.As<ExtensionBase>();
-
-        //                //        ext.SaveExtensionData += this.Owner.As<MainWindow>().SaveExtensionData;
-        //                //        ext.AddControlItem += this.Owner.As<MainWindow>().AddControlItem;
-        //                //        ext.RemoveControlItem += this.Owner.As<MainWindow>().RemoveControlItem;
-        //                //        ext.Initialize(App.DataFolder, App.TempFolder,
-        //                //            App.ApplicationSession.ApplicationSettings,
-        //                //            App.ApplicationSession.Logger, App.DataManager);
-
-        //                //        var win = Owner.As<MainWindow>();
-        //                //        win.View.Panels.Add(ext.Panel);
-
-        //                //        break;
-        //                //    }
-        //                //}
-        //                break;
-        //            }
-        //        case System.Collections.Specialized.NotifyCollectionChangedAction.Remove: {
-        //                //if (e.OldItems.Count > 0) {
-        //                //    foreach (var item in e.OldItems) {
-        //                //        var ext = item.As<ExtensionBase>();
-        //                //        ext.SaveExtensionData -= this.Owner.As<MainWindow>().SaveExtensionData;
-        //                //        ext.AddControlItem -= this.Owner.As<MainWindow>().AddControlItem;
-        //                //        ext.RemoveControlItem -= this.Owner.As<MainWindow>().RemoveControlItem;
-        //                //        if(ext.Panel.Control.Parent != null)
-        //                //            ext.Panel.Control.Parent.RemoveChild(ext.Panel.Control);
-        //                //    }
-        //                //}
-        //                break;
-        //            }
-        //        case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
-        //        case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-        //        case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
-        //        default:
-        //            break;
-        //    }
-        //}
 
         protected override void OnSourceInitialized(EventArgs e) {
             base.OnSourceInitialized(e);
@@ -73,6 +33,7 @@ namespace CongregationManager {
 
         private void ExtensionManagerWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
             this.SaveBounds(App.ApplicationSession.ApplicationSettings);
+            App.LogMessage("Closing extension manager", EntryTypes.Information);
         }
 
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
@@ -89,7 +50,7 @@ namespace CongregationManager {
                         if (!Directory.Exists(lastDir))
                             lastDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                        var filenames = App.SelectFileDialog(this, "Select extension file(s)", ".cmextension",
+                        var filenames = App.SelectFileDialog(this, "Select extension file(s)", ".dll",
                             App.FileFilters, lastDir, true);
                         if (!filenames.Any())
                             return;
@@ -99,8 +60,17 @@ namespace CongregationManager {
 
                         filenames.ToList().ForEach(x => {
                             var fname = Path.GetFileName(x);
+                            App.LogMessage($"  Adding extension {fname}", EntryTypes.Information);
                             File.Copy(x, Path.Combine(App.ExtensionsFolder, fname), true);
                         });
+                        //var extCount = ApplicationData.Extensions.Count;
+                        //var sw = new Stopwatch();
+                        //sw.Start();
+                        //while(sw.ElapsedMilliseconds < 10000 || ApplicationData.Extensions.Count > extCount) {
+                        //    Task.Delay(100);
+                        //}
+                        //View.Extensions.Clear();
+                        //View.Extensions.AddRange(ApplicationData.Extensions);
                         break;
                     }
                 case ExtensionManagerWindowViewModel.Actions.DeleteExtension: {
@@ -111,6 +81,7 @@ namespace CongregationManager {
                             "Delete Extension", Ookii.Dialogs.Wpf.TaskDialogIcon.Warning);
                         if (result) {
                             var filename = View.SelectedExtension.Filename;
+                            App.LogMessage($"Removing extension {filename}", EntryTypes.Information);
                             if (File.Exists(View.SelectedExtension.Filename)) {
                                 File.Delete(View.SelectedExtension.Filename);
                                 View.Extensions.Remove(View.SelectedExtension);

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore.Update.Internal;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CongregationManager.Extensibility {
     public interface IExtensionPanel {
-        string Glyph { get; set; }
+        char Glyph { get; set; }
         string Title { get; set; }
         UserControl Control { get; set; }
+        ICommand SaveCommand { get; }
+        ICommand RevertCommand { get; }
     }
 }

@@ -1,3 +1,5 @@
+using Common.Applicationn.Primitives;
+using Common.Applicationn.Security;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
@@ -7,7 +9,7 @@ using System.Security;
 
 namespace CongregationManager.Data {
     public class DataManager : IDisposable {
-        public DataManager(string dataFolder, string extensionsFolder, string password) {
+        public DataManager(string dataFolder, string extensionsFolder, SecureString password) {
             this.password = password;
             DataFolder = dataFolder;
             Congregations = new ObservableCollection<Congregation>();
@@ -18,7 +20,7 @@ namespace CongregationManager.Data {
         }
 
         private void ExtensionsFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
-            if(extensionsFolderMonitor != null) {
+            if (extensionsFolderMonitor != null) {
                 if (e.FilesRemoved.Any()) {
                     e.FilesRemoved.ForEach(x => {
                         MakeExtensionChange(x.FullName, ChangeTypes.Remove);
@@ -68,20 +70,33 @@ namespace CongregationManager.Data {
                         if (item != null) {
                             throw new ApplicationException($"Congregation {item.Name} already exists");
                         }
-                        var cName = x.ShortenedName();
-                        Congregations.Add(new Congregation {
-                            Name = cName,
-                            Filename = x.FullName
-                        });
+
+                        var cong = Congregation.OpenFromFile(x.FullName, password.ToStandardString());
+                        cong.Filename = x.Name;
+                        cong.SaveThisItem += Cong_SaveThisItem;
+                        cong.Original = cong.Clone().As<Congregation>();
+                        Congregations.Add(cong);
                     });
                 }
+            }
+        }
+
+        private void Cong_SaveThisItem(object? sender, EventArgs e) {
+            var congregation = sender.As<Congregation>();
+            try {
+                SaveCongregation(congregation);
+                congregation.IsNew = false;
+                congregation.Original = congregation.Clone().As<Congregation>();
+            }
+            catch (Exception ex) {
+
             }
         }
 
         private FolderMonitor dataFolderMonitor { get; set; }
         private FolderMonitor extensionsFolderMonitor { get; set; }
 
-        private string password = default;
+        private SecureString password = default;
         private string _DataFolder = default;
         public string DataFolder {
             get => _DataFolder;
@@ -106,18 +121,22 @@ namespace CongregationManager.Data {
         #endregion
 
         internal void Delete(Congregation cong) {
-            if(File.Exists(cong.Filename)) {
+            if (File.Exists(cong.Filename)) {
                 File.Delete(cong.Filename);
             }
         }
 
         public void SaveCongregation(Congregation cong) {
             cong.DataPath = DataFolder;
+            var isNewCong = cong.ID == 0;
             if (cong != null) {
-                if (cong.ID == 0)
+                if (isNewCong)
                     cong.ID = !Congregations.Any() ? 1 : Congregations.Max(x => x.ID) + 1;
-                cong.Save(password);
+                cong.Save(password.ToStandardString());
+                //if (isNewCong)
+                //    Congregations.Add(cong);
             }
+            GC.Collect();
         }
 
         public void Refresh(Congregation cong) {
@@ -134,9 +153,11 @@ namespace CongregationManager.Data {
                 return;
             var files = dir.GetFiles("*.congregation");
             foreach (var file in files) {
-                var cong = Congregation.OpenFromFile(file.FullName, password);
+                var cong = Congregation.OpenFromFile(file.FullName, password.ToStandardString());
+                cong.Filename = file.Name;
                 Congregations.Add(cong);
             }
+            GC.Collect();
         }
 
         protected virtual void Dispose(bool isDisposing) {

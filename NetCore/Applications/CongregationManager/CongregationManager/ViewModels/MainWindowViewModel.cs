@@ -13,14 +13,32 @@ namespace CongregationManager.ViewModels {
 
             Title = App.ApplicationName;
             Panels = new ObservableCollection<IExtensionPanel>();
+            Panels.CollectionChanged += Panels_CollectionChanged;
+        }
+
+        private void Panels_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
+            ExecuteAction(nameof(Actions.PanelAdded));
         }
 
         public enum Actions {
             CloseWindow,
             Minimize,
             Maximize,
-            ManageExtensions
+            ManageExtensions,
+            PanelAdded,
+            ViewLogs
         }
+
+        #region ViewLogsCommand
+        private DelegateCommand _ViewLogsCommand = default;
+        /// <summary>Gets the ViewLogs command.</summary>
+        /// <value>The ViewLogs command.</value>
+        public DelegateCommand ViewLogsCommand => _ViewLogsCommand ?? (_ViewLogsCommand = new DelegateCommand(ViewLogs, ValidateViewLogsState));
+        private bool ValidateViewLogsState(object state) => true;
+        private void ViewLogs(object state) {
+            ExecuteAction(nameof(Actions.ViewLogs));
+        }
+        #endregion
 
         #region CloseWindowCommand
         private DelegateCommand _CloseWindowCommand = default;
@@ -74,7 +92,7 @@ namespace CongregationManager.ViewModels {
             get => _Panels;
             set {
                 _Panels = value;
-                OnPropertyChanged();
+                OnPropertyChanged();                
             }
         }
         #endregion

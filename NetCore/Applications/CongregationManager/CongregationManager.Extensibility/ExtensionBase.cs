@@ -1,17 +1,26 @@
-using Azure.Core.Pipeline;
 using Common.Applicationn;
 using Common.Applicationn.Logging;
+using Common.Applicationn.Primitives;
 using CongregationManager.Data;
+using Controls;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CongregationManager.Extensibility {
     public abstract class ExtensionBase : INotifyPropertyChanged {
         public ExtensionBase() { }
 
-        protected ExtensionBase(string name, string glyph) {
+        protected ExtensionBase(string name, char glyph) {
             Name = name;
             Glyph = glyph;
+            if (addedControls == null)
+                addedControls = new Dictionary<ExtensionBase, List<object>>();
+            if (!addedControls.ContainsKey(this))
+                addedControls.Add(this, new List<object>());
         }
 
         /// <summary>
@@ -36,27 +45,79 @@ namespace CongregationManager.Extensibility {
         public virtual event RetrieveResourcesHandler RetrieveResources;
 
         /// <summary>
-        /// SaveExtensionData event
-        /// </summary>
-        public virtual event SaveExtensionDataHandler? SaveExtensionData;
-
-        /// <summary>
-        /// AddControlItem event
-        /// </summary>
-        public virtual event AddControlItemHandler? AddControlItem;
-
-        /// <summary>
-        /// RemoveControlItem event
-        /// </summary>
-        public virtual event RemoveControlItemHandler? RemoveControlItem;
-
-        /// <summary>
         /// PropertyChanged event
         /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        protected static Dictionary<ExtensionBase, List<object>> addedControls { get; set; }
+
+        public void SetUICOntrols(ToolBar toolbar, Menu menu, ResourceDictionary resources) {
+            Toolbar = toolbar;
+            Menu = menu;
+            Resources = resources;
+        }
+
+        protected ToolBar Toolbar { get; private set; }
+        protected Menu Menu { get; private set; }
+        protected ResourceDictionary Resources { get; private set; }
+
+        protected MenuItem AddTopLevelMenuItem(string text) {
+            var result = new MenuItem { Header = text };
+            Menu.Items.Add(result);
+            addedControls[this].Add(result);
+            return result;
+        }
+
+        protected void AddMenuItem(string text, MenuItem parent, char glyph, ICommand command) {
+            var result = new MenuItem {
+                Header = text,
+                Icon = new FontIcon {
+                    Glyph = glyph.ToString(),
+                    Style = Resources["MenuItemIcon"].As<Style>()
+                },
+                Command = command
+            };
+            if (parent != null)
+                parent.Items.Add(result);
+            addedControls[this].Add(result);
+        }
+
+        protected void AddToolbarLabel(string text) {
+            var result = new TextBlock {
+                Text = text,
+                Style = Resources["ToolbarLabel"].As<Style>()
+            };
+            Toolbar.Items.Add(result);
+            addedControls[this].Add(result);
+        }
+
+        protected void AddToolbarButton(string text, char glyph, ICommand command) {
+            var result = new Button {
+                ToolTip = text,
+                Content = new FontIcon {
+                    Glyph = glyph.ToString(),
+                    Style = Resources["ToolbarIcon"].As<Style>()
+                },
+                Command = command
+            };
+            Toolbar.Items.Add(result);
+            addedControls[this].Add(result);
+        }
+
+        protected void AddMenuSeparator(MenuItem parent) {
+            var result = new Separator();
+            if (parent != null)
+                parent.Items.Add(result);
+            addedControls[this].Add(result);
+        }
+
+        protected void AddToolbarSeparator() {
+            var result = new Separator();
+            Toolbar.Items.Add(result);
+            addedControls[this].Add(result);
+        }
 
         #region Name Property
         private string _Name = default;
@@ -72,10 +133,10 @@ namespace CongregationManager.Extensibility {
         #endregion
 
         #region Glyph Property
-        private string _Glyph = default;
+        private char _Glyph = default;
         /// <summary>Gets/sets the Glyph.</summary>
         /// <value>The Glyph.</value>
-        public string Glyph {
+        public char Glyph {
             get => _Glyph;
             set {
                 _Glyph = value;

@@ -1,6 +1,12 @@
-﻿using Common.MVVMFramework;
+﻿using Common.Applicationn.Linq;
+using Common.Applicationn.Primitives;
+using Common.MVVMFramework;
+using CongregationManager.Data;
 using CongregationManager.Extensibility;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Threading;
 
 namespace CongregationManager.ViewModels {
     public class ExtensionManagerWindowViewModel : ViewModelBase {
@@ -14,7 +20,19 @@ namespace CongregationManager.ViewModels {
             Title = "Extension Manager";
 
             Extensions = new ObservableCollection<ExtensionBase>(ApplicationData.Extensions);
+            fm = new FolderMonitor(App.ExtensionsFolder, "*.dll");
+            fm.FilesUpdated += Fm_FilesUpdated;
         }
+
+        private void Fm_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
+            if (e.FilesAdded != null && e.FilesAdded.Any()) {
+                Extensions.Clear();
+                Extensions.AddRange(ApplicationData.Extensions);
+            }
+        }
+
+        private FolderMonitor fm = default;
+
 
         public enum Actions {
             CloseWindow,

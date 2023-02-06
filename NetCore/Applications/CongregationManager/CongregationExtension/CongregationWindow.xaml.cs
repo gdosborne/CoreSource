@@ -28,11 +28,17 @@ namespace CongregationManager {
                     }
                 case CongregationWindowViewModel.Actions.AcceptData:
                 default: {
-                        var cong = new Congregation {
-                            Name = View.Name,
-                            Filename = $"{View.Name}.congregation"
-                        };
-                        View.DataManager.SaveCongregation(cong);
+                        //var cong = new Congregation {
+                        //    Name = View.Name,
+                        //    Filename = $"{View.Name}.congregation",
+                        //    Address = View.Address,
+                        //    City = View.City,
+                        //    StateProvence = View.StateProvence,
+                        //    PostalCode = View.PostalCode,
+                        //    Telephone = View.Telephone,
+                        //};
+                        View.DataManager.SaveCongregation(View.Congregation);
+                        Close();
                         break;
                     }
             }

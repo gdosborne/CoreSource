@@ -14,14 +14,21 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using static Common.Applicationn.Logging.ApplicationLogger;
 using static Common.Applicationn.Security.Extensions;
 using Credential = CredentialManagement.Credential;
 
 namespace CongregationManager {
     public partial class App : System.Windows.Application {
         public static string ApplicationName => "Congregation Manager";
-        public static string ApplicationFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
+        private static string _ApplicationFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
+        public static string ApplicationFolder {
+            get => _ApplicationFolder;
+            private set => _ApplicationFolder = value;
+        }
         public static string ExtensionsFolder => Path.Combine(ApplicationFolder, "Extensions");
         public static string TempFolder => Path.Combine(ApplicationFolder, "Temp");
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
@@ -36,8 +43,15 @@ namespace CongregationManager {
         public App() {
             SetupFolders();
             ApplicationSession = new Session(ApplicationFolder, ApplicationName,
-                Common.Applicationn.Logging.ApplicationLogger.StorageTypes.Xml,
-                Common.Applicationn.Logging.ApplicationLogger.StorageOptions.CreateFolderForEachDay);
+                StorageTypes.Xml, StorageOptions.CreateFolderForEachDay);
+        }
+
+        public static void LogMessage(StringBuilder message, EntryTypes type) {
+            ApplicationSession.Logger.LogMessage(message, type);
+        }
+
+        public static void LogMessage(string message, EntryTypes type) {
+            LogMessage(new StringBuilder(message), type);
         }
 
         public static bool IsYesInDialogSelected(string main, string content, string title, TaskDialogIcon icon) {
@@ -106,14 +120,21 @@ namespace CongregationManager {
             //currentCreds => will be populated with the login credentials entered in 
             //                CredentialDialog
 
+            LogMessage("starting login", EntryTypes.Information);
             var isNewUser = privateCreds.AreNewCredentials;
             var cd = new CredentialDialog {
                 Target = ApplicationName,
                 MainInstruction = main,
                 Content = content,
-                WindowTitle = title,
-                ShowUIForSavedCredentials = true
+                WindowTitle = title
             };
+#if DEBUG            
+            cd.ShowUIForSavedCredentials = false;
+            cd.ShowSaveCheckBox = true;
+#else
+            cd.ShowUIForSavedCredentials = true;
+            cd.ShowSaveCheckBox = false;
+#endif
             if (isNewUser) {
                 cd.Credentials.UserName = privateCreds.UserName;
                 cd.Credentials.Password = privateCreds.Password;
@@ -123,11 +144,18 @@ namespace CongregationManager {
             }
             var result = default(bool?);
             while (!result.HasValue) {
+
                 result = cd.ShowDialog();
                 if (!result.Value)
                     break;
+#if DEBUG
+                if (cd.IsSaveChecked)
+                    cd.ConfirmCredentials(true);
+                result = true;
+#else
                 result = string.IsNullOrEmpty(cd.UserName) || string.IsNullOrEmpty(cd.Password)
                     ? null : result;
+#endif
             }
             if (result.Value) {
                 currentCreds = new ApplicationCredentials(cd.Credentials.UserName, cd.Credentials.SecurePassword, false);
@@ -182,6 +210,9 @@ namespace CongregationManager {
             var newCreds = default(ApplicationCredentials);
             if (IsLoginAccepted(main, content, title, ref privateCreds, ref newCreds)) {
                 var isValid = privateCreds.Equals(newCreds);
+#if DEBUG
+                isValid = true;
+#endif
 
                 while (!isValid && !privateCreds.AreNewCredentials) {
                     main = $"Login to {ApplicationName}";
@@ -199,13 +230,14 @@ namespace CongregationManager {
             }
             else
                 Environment.Exit(-1);
-            return new DataManager(DataFolder, ExtensionsFolder, newCreds.Password);
+            newCreds.SecurePassword.IsReadOnly();
+            return new DataManager(DataFolder, ExtensionsFolder, newCreds.SecurePassword);
         }
 
         protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
             ApplicationData.Extensions = new List<ExtensionBase>();
-            LoadExtensions();
+            LogMessage("Application Starting", EntryTypes.Information);
             DataManager = Login();
             DataManager.FileChangedDetected += DataManager_FileChangedDetected;
         }
@@ -213,8 +245,10 @@ namespace CongregationManager {
         private void DataManager_FileChangedDetected(object sender, FileChangeDetectedEventArgs e) {
             var win = MainWindow.As<MainWindow>();
             if (e.FileType == FileTypes.Extension) {
+                LogMessage($"Extension ({Path.GetFileName(e.Filename)}) found", EntryTypes.Information);
                 switch (e.ChangeType) {
                     case ChangeTypes.Add: {
+                            LogMessage($"  Adding extension", EntryTypes.Information);
                             var assy = Assembly.Load(File.ReadAllBytes(e.Filename));
                             if (assy != null) {
                                 var types = assy.GetTypes().Where(x => x.BaseType == typeof(ExtensionBase));
@@ -228,16 +262,7 @@ namespace CongregationManager {
 
                                         ApplicationData.Extensions.Add(ext);
                                         ext.Filename = e.Filename;
-                                        ext.SaveExtensionData += win.SaveExtensionData;
-                                        ext.AddControlItem += win.AddControlItem;
-                                        ext.RemoveControlItem += win.RemoveControlItem;
-                                        ext.RetrieveResources += win.RetrieveResources;
-                                        ext.Initialize(App.DataFolder, 
-                                            App.TempFolder,
-                                            App.ApplicationSession.ApplicationSettings,
-                                            App.ApplicationSession.Logger, 
-                                            App.DataManager);
-                                        win.View.Panels.Add(ext.Panel);
+                                        win.InitializeExtension(ext);
                                     }
                                 }
                             }
@@ -245,6 +270,7 @@ namespace CongregationManager {
                             break;
                         }
                     case ChangeTypes.Remove: {
+                            LogMessage($"  Removing extension", EntryTypes.Information);
                             var ext = ApplicationData.Extensions.FirstOrDefault(x => x.Filename == e.Filename);
                             var name = ext.Name;
 
@@ -253,13 +279,12 @@ namespace CongregationManager {
                                 ctrl.Parent.RemoveChild(ctrl);
                             }
 
-                            var win = MainWindow.As<MainWindow>();
                             win.View.Panels.Remove(ext.Panel);
                             ext.Destroy();
 
-                            ext.SaveExtensionData -= win.SaveExtensionData;
-                            ext.AddControlItem -= win.AddControlItem;
-                            ext.RemoveControlItem -= win.RemoveControlItem;
+                            //ext.SaveExtensionData -= win.SaveExtensionData;
+                            //ext.AddControlItem -= win.AddControlItemAsync;
+                            //ext.RemoveControlItem -= win.RemoveControlItemAsync;
 
                             win.View.Panels.Remove(ext.Panel);
                             ext.Panel.Control = null;
@@ -281,11 +306,22 @@ namespace CongregationManager {
 
         protected override void OnExit(ExitEventArgs e) {
             base.OnExit(e);
+            LogMessage("Cleaning up temp directory", EntryTypes.Information);
+            if (Directory.Exists(TempFolder)) {
+                var files = Directory.GetFiles(TempFolder, "*.*");
+                foreach (var file in files) {
+                    File.Delete(file);
+                }
+            }
             if (DataManager != null)
                 DataManager.Dispose();
+            LogMessage("Application Ending", EntryTypes.Information);
         }
 
         private void SetupFolders() {
+#if DEBUG
+            ApplicationFolder += " (Debug)";
+#endif
             if (!Directory.Exists(ApplicationFolder)) {
                 Directory.CreateDirectory(ApplicationFolder);
             }
@@ -298,46 +334,6 @@ namespace CongregationManager {
             if (!Directory.Exists(DataFolder)) {
                 Directory.CreateDirectory(DataFolder);
             }
-        }
-
-        public static List<ExtensionBase> AddExtensions(params string[] filenames) {
-            var result = new List<ExtensionBase>();
-            //foreach (var extFile in filenames) {
-            //    var assy = Assembly.Load(File.ReadAllBytes(extFile));
-            //    if (assy != null) {
-            //        var types = assy.GetTypes().Where(x => x.BaseType == typeof(ExtensionBase));
-            //        foreach (var type in types) {
-            //            var instance = Activator.CreateInstance(type);
-            //            if (instance != null) {
-            //                var ext = instance.As<ExtensionBase>();
-            //                if (ApplicationData.Extensions.Any(x => x.Name == ext.Name)) {
-            //                    var existsMsg = $"The {ext.Name} extension already exists in the extensions folder.\n\n" +
-            //                        "Would you like to replace it?";
-            //                    if (!IsYesInDialogSelected($"{ext.Name} extension already exists!",
-            //                        existsMsg, "Replace extension", TaskDialogIcon.Shield)) {
-            //                        break;
-            //                    }
-            //                    ApplicationData.Extensions.Remove(ApplicationData.Extensions.First(x => x.Name == ext.Name));
-            //                }
-            //                result.Add(ext);
-            //                ApplicationData.Extensions.Add(ext);
-            //                ext.Filename = extFile;
-            //            }
-            //        }
-            //    }
-            //}
-            return result;
-        }
-
-        public static Dictionary<string, AppDomain> Domains = default;
-
-        private void LoadExtensions() {
-            //ApplicationData.Extensions.Add(new CongregationExtension.Extension());
-            Domains = new Dictionary<string, AppDomain>();
-            var extDir = new DirectoryInfo(ExtensionsFolder);
-            var extensions = extDir.GetFiles("*.dll");
-            var fileNames = extensions.Select(x => x.FullName).ToArray();
-            AddExtensions(fileNames);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Common.Applicationn.Logging {
 
         public static void LogMessage(string message, bool isException) {
             if (string.IsNullOrEmpty(LogDirectory) || !Directory.Exists(LogDirectory)) {
-                throw new LogDirectoryMissingException($"The log directory {LogDirectory} is missing.");
+                return;
             }
 
             var sb = new StringBuilder();

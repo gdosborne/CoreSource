@@ -70,15 +70,18 @@
                                 <controls:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE2AC;" />
                             </MenuItem.Icon>
                         </MenuItem>
+                        <MenuItem Header="View Logs" Command="{Binding ViewLogsCommand}">
+                            <MenuItem.Icon>
+                                <controls:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE736;" />
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
                     <MenuItem Header="_Help">
 
                     </MenuItem>
                 </Menu>
                 <ToolBarTray Grid.Row="2">
-                    <ToolBar Name="MainPageToolbar">
-                        
-                    </ToolBar>
+                    <ToolBar Name="MainPageToolbar" />
                 </ToolBarTray>
             </Grid>
         </Border>
@@ -90,7 +93,7 @@
                             <Setter.Value>
                                 <StackPanel Orientation="Horizontal">
                                     <controls:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />
-                                    <TextBlock Text="{Binding ExtensionName}" Style="{DynamicResource TabHeader}" />
+                                    <TextBlock Text="{Binding Title}" Style="{DynamicResource TabHeader}" />
                                 </StackPanel>
                             </Setter.Value>
                         </Setter>

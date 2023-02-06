@@ -1,0 +1,78 @@
+﻿<Window x:Class="CongregationManager.LogReaderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationManager"
+        xmlns:views="clr-namespace:CongregationManager.ViewModels"
+        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{StaticResource StandardWindow}" 
+        ResizeMode="CanResizeWithGrip" Height="450" Width="800"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Icon="/Resources/OzSoft-Icon.ico">
+    <Window.DataContext>
+        <views:LogReaderWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+
+                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <DataGrid Grid.Column="0" ItemsSource="{Binding LogEntries}" AutoGenerateColumns="False" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" 
+                          CanUserResizeRows="False" GridLinesVisibility="Vertical" SelectionMode="Extended">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Time" Width="auto" Binding="{Binding Time}" />
+                        <DataGridTextColumn Header="Type" Width="auto" Binding="{Binding LogItemType}" />
+                        <DataGridTextColumn Header="Message" Width="*" Binding="{Binding Message}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Top">
+                    <TextBlock Text="Date" Style="{DynamicResource WindowLabel}" 
+                               HorizontalAlignment="Left" Margin="10,0" />
+                    <ComboBox Margin="10,0,0,10" ItemsSource="{Binding LogDates}" Width="110"
+                              SelectedItem="{Binding SelectedLogDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Style="{DynamicResource StandardButton}" Content="Clear" 
+                            Command="{Binding ClearDayCommand}" />
+                    <Button Style="{DynamicResource StandardButton}" Content="Clear All" 
+                            Command="{Binding ClearAllDaysCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Done"
+                            Command="{Binding CloseWindowCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

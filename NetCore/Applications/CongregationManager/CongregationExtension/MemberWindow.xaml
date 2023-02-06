@@ -1,0 +1,153 @@
+﻿<Window x:Class="CongregationExtension.MemberWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationExtension"
+        xmlns:views="clr-namespace:CongregationExtension.ViewModels"
+        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Width="766" SizeToContent="Height">
+    <Window.DataContext>
+        <views:MemberWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
+            <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Style="{DynamicResource MainWindowGrid}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Last Name" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="0" Grid.Column="0" />
+                    <TextBox Style="{DynamicResource WindowTextField}"
+                             Grid.Row="0" Grid.Column="1" 
+                             Text="{Binding Member.LastName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                    <TextBlock Text="First Name" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="0" Grid.Column="3" />
+                    <TextBox Style="{DynamicResource WindowTextField}"
+                             Grid.Row="0" Grid.Column="4" 
+                             Text="{Binding Member.FirstName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                    <TextBlock Text="Baptism Date" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="1" Grid.Column="0" />
+                    <DatePicker 
+                             Grid.Row="1" Grid.Column="1" 
+                             Text="{Binding Member.BaptismDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                    <TextBlock Text="Gender" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="1" Grid.Column="3" />
+                    <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal">
+                        <RadioButton Content="Unknown" GroupName="gender"
+                                     IsChecked="{Binding IsGenderUnknown,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Male" GroupName="gender" 
+                                     IsChecked="{Binding IsGenderMale,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Female" GroupName="gender" 
+                                     IsChecked="{Binding IsGenderFemale,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Status" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="2" Grid.Column="0" />
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
+                        <RadioButton Content="Exemplary" GroupName="status" 
+                                     IsChecked="{Binding IsStatusExemplary,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Good" GroupName="status" 
+                                     IsChecked="{Binding IsStatusGood,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Restricted" GroupName="status" 
+                                     IsChecked="{Binding IsStatusRestricted,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Disfellowshipped" GroupName="status" 
+                                     IsChecked="{Binding IsStatusDisfellowshipped,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Privileges" Style="{DynamicResource WindowLabel}" 
+                                Grid.Row="3" Grid.Column="0" VerticalAlignment="Top"/>
+                    <Border Style="{DynamicResource WrapBorder}"  Grid.Row="3" Grid.Column="1"
+                            Grid.ColumnSpan="4" Padding="0" >
+                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" 
+                                      Height="200">
+                            <ItemsControl Name="myitems" ItemsSource="{Binding Privileges}" Style="{DynamicResource PriviledgeItems}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="280">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Width="120" Grid.Column="0" Margin="5"
+                                                      IsChecked="{Binding IsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                            <TextBlock Grid.Column="1">
+                                                <Run Text="{Binding Text}" />
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Style="{DynamicResource PrivilegeWrapPanel}" Width="600" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Border>
+                    <TextBlock Text="{Binding Member.PrivelegeValue}" Style="{DynamicResource WindowLabel}" 
+                               FontSize="{DynamicResource XSmallFontSize}" Grid.Row="4" Grid.Column="4"
+                               Margin="0"/>
+
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
+                            Command="{Binding AcceptDataCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 
+                            Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

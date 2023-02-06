@@ -57,5 +57,18 @@ namespace Common.Applicationn.Security {
 
         public static bool HasValidCredentials(this CredentialManagement.Credential cred) =>
             !string.IsNullOrEmpty(cred.Username) && !string.IsNullOrEmpty(cred.Password);
+
+        public static string ToStandardString(this SecureString value) {
+            if (value == null)
+                return default(String);
+            IntPtr valuePtr = IntPtr.Zero;
+            try {
+                valuePtr = Marshal.SecureStringToGlobalAllocUnicode(value);
+                return Marshal.PtrToStringUni(valuePtr);
+            }
+            finally {
+                Marshal.ZeroFreeGlobalAllocUnicode(valuePtr);
+            }
+        }
     }
 }

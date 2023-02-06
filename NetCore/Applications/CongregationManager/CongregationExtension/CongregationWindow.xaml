@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:CongregationExtension"
         xmlns:views="clr-namespace:CongregationExtension.ViewModels"
         xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
-        mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
-        WindowStyle="None" FocusManager.FocusedElement="{Binding ElementName=NameTextBox}"
-        ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        MinHeight="275" Height="275" MinWidth="472" Width="472">
+        Width="671" SizeToContent="Height">
     <Window.Resources>
         <ResourceDictionary Source="/Resources/MainTheme.xaml" />
     </Window.Resources>
@@ -41,9 +40,16 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" >
-            <Grid Margin="10" Style="{DynamicResource MainWindowGrid}">
-                <Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
+            <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <local:CongregationControl Grid.Row="0" ButtonVisibility="Collapsed" 
+                                           Congregation="{Binding Congregation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
                     <ColumnDefinition Width="10" />
@@ -65,19 +71,24 @@
                          Name="NameTextBox"/>
 
                 <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource WindowTextField}" Height="60" />
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource WindowTextField}" Height="60" 
+                         Text="{Binding Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
                 <TextBlock Text="City" Grid.Row="1" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+                <TextBox Grid.Row="1" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
+                         Text="{Binding City,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
                 <TextBlock Text="State/Province" Grid.Row="2" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="2" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+                <TextBox Grid.Row="2" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
+                         Text="{Binding StateProvence,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Text="Zip/Postal Code" Grid.Row="3" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource WindowTextField}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource WindowTextField}" 
+                         Text="{Binding PostalCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
                 <TextBlock Text="Telephone" Grid.Row="3" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="3" Grid.Column="4" Style="{DynamicResource WindowTextField}" />
+                <TextBox Grid.Row="3" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
+                         Text="{Binding Telephone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>-->
 
                 <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
