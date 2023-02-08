@@ -37,7 +37,8 @@
                 <DataTemplate DataType="{x:Type data:Congregation}">
                     <local:CongregationControl Congregation="{Binding}" 
                                                UpdateCommand="{Binding SaveCommand}" 
-                                               RevertCommand="{Binding RevertCommand}"/>
+                                               RevertCommand="{Binding RevertCommand}"
+                                               EditCommand="{Binding EditCommand}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
             
@@ -45,7 +46,7 @@
         <Border Grid.Row="1" Style="{DynamicResource ErrorBorder}" 
                 Visibility="{Binding ErrorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <controls:FontIcon Style="{DynamicResource ErrorIcon}" Glyph="&#xEB90;" />
+                <controls:FontIcon Style="{DynamicResource ErrorIcon}" Glyph="{DynamicResource warning-shield}" />
                 <TextBlock Style="{DynamicResource ErrorTextBlock}" 
                            Text="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
             </StackPanel>

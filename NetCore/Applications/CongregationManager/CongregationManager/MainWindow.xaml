@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Height="450" Width="800" Icon="/Resources/OzSoft-Icon.ico">
+        Height="450" Width="800" Icon="/Resources/CM.ico">
     <Window.DataContext>
         <views:MainWindowViewModel />
     </Window.DataContext>

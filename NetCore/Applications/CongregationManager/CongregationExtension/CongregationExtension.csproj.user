@@ -5,6 +5,9 @@
     <Compile Update="CongregationControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MemberMoverWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MemberWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -20,6 +23,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ExtensionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MemberMoverWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MemberWindow.xaml">

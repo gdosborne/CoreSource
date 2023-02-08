@@ -119,6 +119,9 @@ namespace Common.Applicationn.Logging {
         public StorageOptions Options { get; private set; }
         public bool CreateNewFolderEachDay { get; private set; }
 
+        public ApplicationLogger LogMessage(string text, EntryTypes type) =>
+            LogMessage(new StringBuilder(text), type);
+        
         public ApplicationLogger LogMessage(StringBuilder text, EntryTypes type) {
             LogMessageAsync(text.ToString(), type).GetAwaiter();
             return this;

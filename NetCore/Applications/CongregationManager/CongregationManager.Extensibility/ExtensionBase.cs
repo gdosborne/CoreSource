@@ -1,4 +1,4 @@
-using Common.Applicationn;
+﻿using Common.Applicationn;
 using Common.Applicationn.Logging;
 using Common.Applicationn.Primitives;
 using CongregationManager.Data;
@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace CongregationManager.Extensibility {
     public abstract class ExtensionBase : INotifyPropertyChanged {
@@ -17,8 +18,7 @@ namespace CongregationManager.Extensibility {
         protected ExtensionBase(string name, char glyph) {
             Name = name;
             Glyph = glyph;
-            if (addedControls == null)
-                addedControls = new Dictionary<ExtensionBase, List<object>>();
+            addedControls ??= new Dictionary<ExtensionBase, List<object>>();
             if (!addedControls.ContainsKey(this))
                 addedControls.Add(this, new List<object>());
         }
@@ -53,7 +53,7 @@ namespace CongregationManager.Extensibility {
 
         protected static Dictionary<ExtensionBase, List<object>> addedControls { get; set; }
 
-        public void SetUICOntrols(ToolBar toolbar, Menu menu, ResourceDictionary resources) {
+        public void SetUIControls(ToolBar toolbar, Menu menu, ResourceDictionary resources) {
             Toolbar = toolbar;
             Menu = menu;
             Resources = resources;
@@ -70,14 +70,15 @@ namespace CongregationManager.Extensibility {
             return result;
         }
 
-        protected void AddMenuItem(string text, MenuItem parent, char glyph, ICommand command) {
+        protected void AddMenuItem(string text, MenuItem parent, string iconName, ICommand command) {
             var result = new MenuItem {
                 Header = text,
                 Icon = new FontIcon {
-                    Glyph = glyph.ToString(),
-                    Style = Resources["MenuItemIcon"].As<Style>()
+                    FontFamily = Resources["GenderFontFamily"].As<FontFamily>(),
+                    FontSize = Resources["StandardFontSize"].CastTo<double>(),
+                    Glyph = Resources[iconName].CastTo<string>()
                 },
-                Command = command
+                Command = command,
             };
             if (parent != null)
                 parent.Items.Add(result);
@@ -93,12 +94,13 @@ namespace CongregationManager.Extensibility {
             addedControls[this].Add(result);
         }
 
-        protected void AddToolbarButton(string text, char glyph, ICommand command) {
+        protected void AddToolbarButton(string text, string iconName, ICommand command) {
             var result = new Button {
                 ToolTip = text,
                 Content = new FontIcon {
-                    Glyph = glyph.ToString(),
-                    Style = Resources["ToolbarIcon"].As<Style>()
+                    FontFamily = Resources["GenderFontFamily"].As<FontFamily>(),
+                    FontSize = Resources["StandardFontSize"].CastTo<double>(),
+                    Glyph = Resources[iconName].CastTo<string>()
                 },
                 Command = command
             };

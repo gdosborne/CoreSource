@@ -9,7 +9,8 @@
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="766" SizeToContent="Height">
+        Width="766" SizeToContent="Height" Icon="\Resources\CM.ico"
+        FocusManager.FocusedElement="{Binding ElementName=LastNameField}">
     <Window.DataContext>
         <views:MemberWindowViewModel />
     </Window.DataContext>
@@ -65,21 +66,22 @@
 
                     <TextBlock Text="Last Name" Style="{DynamicResource WindowLabel}"
                                Grid.Row="0" Grid.Column="0" />
-                    <TextBox Style="{DynamicResource WindowTextField}"
+                    <TextBox Name="LastNameField" Style="{DynamicResource WindowTextField}"
                              Grid.Row="0" Grid.Column="1" 
-                             Text="{Binding Member.LastName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                             Text="{Binding Member.LastName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             GotFocus="ItemGotFocus"/>
 
                     <TextBlock Text="First Name" Style="{DynamicResource WindowLabel}"
                                Grid.Row="0" Grid.Column="3" />
                     <TextBox Style="{DynamicResource WindowTextField}"
                              Grid.Row="0" Grid.Column="4" 
-                             Text="{Binding Member.FirstName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                             Text="{Binding Member.FirstName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                             GotFocus="ItemGotFocus"/>
 
                     <TextBlock Text="Baptism Date" Style="{DynamicResource WindowLabel}"
-                               Grid.Row="1" Grid.Column="0" />
-                    <DatePicker 
-                             Grid.Row="1" Grid.Column="1" 
-                             Text="{Binding Member.BaptismDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                               Grid.Row="1" Grid.Column="0" Margin="0,10,10,0" />
+                    <DatePicker Grid.Row="1" Grid.Column="1" Validation.ErrorTemplate="{x:Null}"
+                                Text="{Binding Member.BaptismDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
 
                     <TextBlock Text="Gender" Style="{DynamicResource WindowLabel}"
                                Grid.Row="1" Grid.Column="3" />
@@ -103,10 +105,15 @@
                                      IsChecked="{Binding IsStatusRestricted,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         <RadioButton Content="Disfellowshipped" GroupName="status" 
                                      IsChecked="{Binding IsStatusDisfellowshipped,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <RadioButton Content="Inactive" GroupName="status" 
+                                     IsChecked="{Binding IsStatusInactive,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                     </StackPanel>
 
-                    <TextBlock Text="Privileges" Style="{DynamicResource WindowLabel}" 
-                                Grid.Row="3" Grid.Column="0" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Vertical"  Grid.Row="3" Grid.Column="0" VerticalAlignment="Top">
+                        <TextBlock Text="Privileges" Style="{DynamicResource WindowLabel}" />
+                        <TextBlock Text="Check all that apply" TextWrapping="Wrap" 
+                                   FontSize="{DynamicResource SmallFontSize}" Margin="0,5,0,0" />
+                    </StackPanel>
                     <Border Style="{DynamicResource WrapBorder}"  Grid.Row="3" Grid.Column="1"
                             Grid.ColumnSpan="4" Padding="0" >
                         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" 

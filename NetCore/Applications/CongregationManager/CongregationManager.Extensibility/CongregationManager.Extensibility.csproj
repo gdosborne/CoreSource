@@ -29,6 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fonts\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

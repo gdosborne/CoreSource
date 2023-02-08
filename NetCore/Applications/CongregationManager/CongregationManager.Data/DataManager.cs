@@ -2,14 +2,16 @@ using Common.Applicationn.Primitives;
 using Common.Applicationn.Security;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Security;
+using System.Windows;
+using System.Windows.Media;
 
 namespace CongregationManager.Data {
     public class DataManager : IDisposable {
-        public DataManager(string dataFolder, string extensionsFolder, SecureString password) {
+        public DataManager(string dataFolder, string extensionsFolder, SecureString password,
+                ResourceDictionary resources) {
             this.password = password;
             DataFolder = dataFolder;
             Congregations = new ObservableCollection<Congregation>();
@@ -17,6 +19,7 @@ namespace CongregationManager.Data {
             extensionsFolderMonitor = new FolderMonitor(extensionsFolder, "*.dll");
             dataFolderMonitor.FilesUpdated += DataFolderMonitor_FilesUpdated;
             extensionsFolderMonitor.FilesUpdated += ExtensionsFolderMonitor_FilesUpdated;
+            Resources = resources;
         }
 
         private void ExtensionsFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
@@ -70,16 +73,23 @@ namespace CongregationManager.Data {
                         if (item != null) {
                             throw new ApplicationException($"Congregation {item.Name} already exists");
                         }
-
                         var cong = Congregation.OpenFromFile(x.FullName, password.ToStandardString());
+                        cong.Members = cong.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+
+                        cong.Members.ForEach(x => {
+                            x.Resources = Resources;
+                        });
                         cong.Filename = x.Name;
                         cong.SaveThisItem += Cong_SaveThisItem;
+                        //cong.EditThisItem += Cong_EditThisItem;
                         cong.Original = cong.Clone().As<Congregation>();
                         Congregations.Add(cong);
                     });
                 }
             }
         }
+
+        public ResourceDictionary Resources { get; private set; }
 
         private void Cong_SaveThisItem(object? sender, EventArgs e) {
             var congregation = sender.As<Congregation>();
@@ -133,8 +143,7 @@ namespace CongregationManager.Data {
                 if (isNewCong)
                     cong.ID = !Congregations.Any() ? 1 : Congregations.Max(x => x.ID) + 1;
                 cong.Save(password.ToStandardString());
-                //if (isNewCong)
-                //    Congregations.Add(cong);
+                cong.Members = cong.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
             }
             GC.Collect();
         }

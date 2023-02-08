@@ -17,6 +17,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using static Common.Applicationn.Logging.ApplicationLogger;
 using static Common.Applicationn.Security.Extensions;
 using Credential = CredentialManagement.Credential;
@@ -231,7 +232,10 @@ namespace CongregationManager {
             else
                 Environment.Exit(-1);
             newCreds.SecurePassword.IsReadOnly();
-            return new DataManager(DataFolder, ExtensionsFolder, newCreds.SecurePassword);
+            var iconFontFamily = Resources["GlyphFontFamily"].As<FontFamily>();
+            var genderFontFamily = Resources["GenderFontFamily"].As<FontFamily>();
+            return new DataManager(DataFolder, ExtensionsFolder, newCreds.SecurePassword,
+                Resources);
         }
 
         protected override void OnStartup(StartupEventArgs e) {

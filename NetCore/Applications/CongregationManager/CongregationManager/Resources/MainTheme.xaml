@@ -42,7 +42,56 @@
     <SolidColorBrush x:Key="ToggleSwitchBackground" Color="#200000FF" />
 
     <FontFamily x:Key="StandardFont">Calibri</FontFamily>
-    <FontFamily x:Key="GlyphFontFamily">Segoe Fluent Icons</FontFamily>    
+    <FontFamily x:Key="GenderFontFamily">pack://application:,,,/Fonts/#People</FontFamily>
+    <FontFamily x:Key="GlyphFontFamily">Segoe Fluent Icons</FontFamily>
+
+    <sys:String x:Key="female-03-wf"></sys:String>
+    <sys:String x:Key="business-man"></sys:String>
+    <sys:String x:Key="business-man-01-wf"></sys:String>
+    <sys:String x:Key="business-woman"></sys:String>
+    <sys:String x:Key="businessman"></sys:String>
+    <sys:String x:Key="employee"></sys:String>
+    <sys:String x:Key="employee-wf"></sys:String>
+    <sys:String x:Key="female-03"></sys:String>
+    <sys:String x:Key="girl-01"></sys:String>
+    <sys:String x:Key="male 01"></sys:String>
+    <sys:String x:Key="man-02"></sys:String>
+    <sys:String x:Key="principal-01"></sys:String>
+    <sys:String x:Key="professional---01"></sys:String>
+    <sys:String x:Key="student-01"></sys:String>
+    <sys:String x:Key="student-02"></sys:String>
+    <sys:String x:Key="teacher-04"></sys:String>
+    <sys:String x:Key="user"></sys:String>
+    <sys:String x:Key="woman"></sys:String>
+    <sys:String x:Key="woman-01"></sys:String>
+    <sys:String x:Key="woman-02"></sys:String>
+    <sys:String x:Key="woman-03"></sys:String>
+    <sys:String x:Key="woman-04"></sys:String>
+    <sys:String x:Key="woman-05"></sys:String>
+    <sys:String x:Key="woman-07"></sys:String>
+    <sys:String x:Key="woman-08"></sys:String>
+    <sys:String x:Key="woman-09"></sys:String>
+    <sys:String x:Key="group-wf"></sys:String>
+    <sys:String x:Key="people"></sys:String>
+    <sys:String x:Key="team-01"></sys:String>
+    <sys:String x:Key="team-01-wf"></sys:String>
+    <sys:String x:Key="team-02"></sys:String>
+    <sys:String x:Key="team-02-wf"></sys:String>
+    <sys:String x:Key="user-group"></sys:String>
+    <sys:String x:Key="user1"></sys:String>
+    <sys:String x:Key="user-wf"></sys:String>
+    <sys:String x:Key="trash-can-wf"></sys:String>
+    <sys:String x:Key="business-delete-01-wf"></sys:String>
+    <sys:String x:Key="business-man-add-01-wf"></sys:String>
+    <sys:String x:Key="business-search-01-wf"></sys:String>
+    <sys:String x:Key="business-setting-01-wf"></sys:String>
+    <sys:String x:Key="user-delete-01-wf"></sys:String>
+    <sys:String x:Key="move-item"></sys:String>
+    <sys:String x:Key="group-delete"></sys:String>
+    <sys:String x:Key="warning-shield"></sys:String>
+    <sys:String x:Key="warning-message"></sys:String>
+    <sys:String x:Key="warning-wf"></sys:String>
+    <sys:String x:Key="warning--wf"></sys:String>
 
     <Style TargetType="Window" x:Key="StandardWindow">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
@@ -70,6 +119,7 @@
         <Setter Property="BorderThickness" Value="1,1,1,0" />
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}" />
         <Setter Property="Margin" Value="0,3,0,0" />
+        <Setter Property="CornerRadius" Value="5,5,0,0" />
     </Style>
 
     <Style TargetType="Border" x:Key="WindowBodyBorder">
@@ -101,7 +151,7 @@
     </Style>
 
     <Style TargetType="controls:FontIcon" x:Key="MenuItemIcon">
-        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
     </Style>
 
@@ -113,7 +163,7 @@
     </Style>
 
     <Style TargetType="controls:FontIcon" x:Key="ErrorIcon">
-        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource XLargeFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Margin" Value="10,0" />
@@ -130,7 +180,7 @@
     </Style>
 
     <Style TargetType="controls:FontIcon" x:Key="TabIcon">
-        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -195,6 +245,18 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="SectionHeader">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
@@ -348,6 +410,14 @@
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="PrimaryComboBox">
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
 </ResourceDictionary>

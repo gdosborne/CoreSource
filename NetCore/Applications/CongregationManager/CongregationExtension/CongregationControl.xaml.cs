@@ -1,6 +1,7 @@
 ﻿using Common.Applicationn.Logging;
 using Common.Applicationn.Primitives;
 using CongregationManager.Data;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,30 @@ namespace CongregationExtension {
     public partial class CongregationControl : UserControl {
         public CongregationControl() {
             InitializeComponent();
+
+            MeetingDayComboBox.Items.Add(DayOfWeek.Sunday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Monday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Tuesday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Wednesday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Thursday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Friday);
+            MeetingDayComboBox.Items.Add(DayOfWeek.Saturday);
+            MeetingDayComboBox.SelectedItem = DayOfWeek.Sunday;
+
+            var actualHr = 0;
+            var actualAP = "AM";
+            for (int i = 0; i < 24; i++) {
+                actualHr = i;
+                if (actualHr > 12) {
+                    actualHr -= 12;
+                    actualAP = "PM";
+                }
+                MeetingTimeComboBox.Items.Add($"{actualHr}:00 {actualAP}");
+                MeetingTimeComboBox.Items.Add($"{actualHr}:15 {actualAP}");
+                MeetingTimeComboBox.Items.Add($"{actualHr}:30 {actualAP}");
+                MeetingTimeComboBox.Items.Add($"{actualHr}:45 {actualAP}");
+            }
+            MeetingTimeComboBox.SelectedItem = $"10:00 AM";
         }
 
         #region CongregationProperty
@@ -33,6 +58,8 @@ namespace CongregationExtension {
                 obj.PostalCodeTextBox.Text = val.PostalCode;
                 obj.TelephoneTextBox.Text = val.Telephone;
                 obj.IsLocalCheckBox.IsChecked = val.IsLocal;
+                obj.MeetingDayComboBox.SelectedItem = val.MeetingDay;
+                obj.MeetingTimeComboBox.SelectedItem = val.MeetingTime;
             }
         }
         #endregion
@@ -54,7 +81,6 @@ namespace CongregationExtension {
         private static void OnUpdateCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var obj = (CongregationControl)d;
             var val = (ICommand)e.NewValue;
-            App.LogMessage($"Updating the {obj.Name} congregation", ApplicationLogger.EntryTypes.Information);
             obj.UpdateButton.Command = val;
         }
         #endregion
@@ -75,6 +101,25 @@ namespace CongregationExtension {
             obj.RevertButton.Command = val;
         }
         #endregion
+
+
+        #region EditCommandProperty
+        /// <summary>Gets the EditCommand dependency property.</summary>
+        /// <value>The EditCommand dependency property.</value>
+        public static readonly DependencyProperty EditCommandProperty = DependencyProperty.Register("EditCommand", typeof(ICommand), typeof(CongregationControl), new PropertyMetadata(default(ICommand), OnEditCommandPropertyChanged));
+        /// <summary>Gets/sets the EditCommand.</summary>
+        /// <value>The EditCommand.</value>
+        public ICommand EditCommand {
+            get => (ICommand)GetValue(EditCommandProperty);
+            set => SetValue(EditCommandProperty, value);
+        }
+        private static void OnEditCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+            var obj = (CongregationControl)d;
+            var val = (ICommand)e.NewValue;
+            obj.EditButton.Command = val;
+        }
+        #endregion
+
 
         private void TextBoxTextChanged(object sender, TextChangedEventArgs e) {
             if (sender == CongregationNameTextBox) {
@@ -115,11 +160,35 @@ namespace CongregationExtension {
         #endregion
 
         private void IsLocalCheckBox_Checked(object sender, RoutedEventArgs e) {
-            Congregation.IsLocal = true;
+            if (Congregation != null) {
+                Congregation.IsLocal = true;
+            }
         }
 
         private void IsLocalCheckBox_Unchecked(object sender, RoutedEventArgs e) {
-            Congregation.IsLocal = false;
+            if (Congregation != null) {
+                Congregation.IsLocal = false;
+            }
+        }
+
+        private void MeetingDayComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (Congregation != null) {
+                Congregation.MeetingDay = (DayOfWeek)sender.As<ComboBox>().SelectedItem;
+            }
+        }
+
+        private void MeetingTimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (Congregation != null) {
+                Congregation.MeetingTime = ConvertToTimeSpan(sender.As<ComboBox>().SelectedItem.CastTo<string>());
+            }
+        }
+
+        private TimeSpan ConvertToTimeSpan(string value) {
+            if (value == null) {
+                return TimeSpan.Zero;
+            }
+            var val = DateTime.Parse(value);
+            return val.TimeOfDay;
         }
     }
 }

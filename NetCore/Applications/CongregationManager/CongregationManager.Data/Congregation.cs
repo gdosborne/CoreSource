@@ -3,32 +3,22 @@ using Common.MVVMFramework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace CongregationManager.Data {
+    /// <summary>
+    /// Congregation object
+    /// </summary>
     [JsonObject("congregation")]
-    public class Congregation : ICloneable, INotifyPropertyChanged {
+    public class Congregation : ItemBase, ICloneable {
+        /// <summary>
+        /// Initializes an instance of the Congregation object
+        /// </summary>
         public Congregation() {
             Groups = new List<Group>();
             Members = new List<Member>();
         }
-
-        #region ID Property
-        private int _ID = default;
-        /// <summary>Gets/sets the ID.</summary>
-        /// <value>The ID.</value>
-        [JsonProperty("id")]
-        public int ID {
-            get => _ID;
-            set {
-                _ID = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
 
         #region Name Property
         private string _Name = default;
@@ -170,6 +160,34 @@ namespace CongregationManager.Data {
         }
         #endregion
 
+        #region MeetingTime Property
+        private TimeSpan _MeetingTime = default;
+        /// <summary>Gets/sets the MeetingTime.</summary>
+        /// <value>The MeetingTime.</value>
+        [JsonProperty("meetingtime")]
+        public TimeSpan MeetingTime {
+            get => _MeetingTime;
+            set {
+                _MeetingTime = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region MeetingDay Property
+        private DayOfWeek _MeetingDay = default;
+        /// <summary>Gets/sets the MeetingDay.</summary>
+        /// <value>The MeetingDay.</value>
+        [JsonProperty("meetingday")]
+        public DayOfWeek MeetingDay {
+            get => _MeetingDay;
+            set {
+                _MeetingDay = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #region IsLocal Property
         private bool _IsLocal = default;
         /// <summary>Gets/sets the IsLocal.</summary>
@@ -198,7 +216,11 @@ namespace CongregationManager.Data {
         }
         #endregion
 
-        public void Save(string password) {            
+        /// <summary>
+        /// Saves the congregation
+        /// </summary>
+        /// <param name="password">The password for data encryption</param>
+        public void Save(string password) {
             var settings = new JsonSerializerSettings {
                 Formatting = Formatting.Indented
             };
@@ -216,6 +238,12 @@ namespace CongregationManager.Data {
 #endif
         }
 
+        /// <summary>
+        /// Opens the congregation data file
+        /// </summary>
+        /// <param name="filename">The filename</param>
+        /// <param name="password">The password for data encryption</param>
+        /// <returns>Congregation if successful, null otherwise</returns>
         public static Congregation? OpenFromFile(string filename, string password) {
             var json = default(string);
             using (var crypto = new Crypto(password)) {
@@ -226,7 +254,7 @@ namespace CongregationManager.Data {
                 json = data;
 #else
                 json = crypto.Decrypt<string>(data);
-#endif
+#endif                
             }
 
             var settings = new JsonSerializerSettings {
@@ -235,12 +263,14 @@ namespace CongregationManager.Data {
             return JsonConvert.DeserializeObject<Congregation>(json, settings);
         }
 
+        /// <summary>
+        /// Informs parent that the congregation is to be saved
+        /// </summary>
         public event EventHandler SaveThisItem;
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        /// <summary>
+        /// Informs the parent that the congregation is to be edited
+        /// </summary>
+        public event EventHandler EditThisItem;
 
         #region SaveCommand
         private DelegateCommand _SaveCommand = default;
@@ -270,6 +300,18 @@ namespace CongregationManager.Data {
         }
         #endregion
 
+        #region EditCommand
+        private DelegateCommand _EditCommand = default;
+        /// <summary>Gets the Edit command.</summary>
+        /// <value>The Edit command.</value>
+        [JsonIgnore]
+        public DelegateCommand EditCommand => _EditCommand ?? (_EditCommand = new DelegateCommand(Edit, ValidateEditState));
+        private bool ValidateEditState(object state) => true;
+        private void Edit(object state) {
+            this.EditThisItem?.Invoke(this, EventArgs.Empty);
+        }
+        #endregion
+
         private void RevertField(string name) {
             var prop = this.GetType().GetProperty(name);
             if (prop == null)
@@ -279,9 +321,17 @@ namespace CongregationManager.Data {
 
         internal Congregation Original { get; set; }
 
+        /// <summary>
+        /// ToString
+        /// </summary>
+        /// <returns></returns>
         override public string ToString() =>
             Name;
 
+        /// <summary>
+        /// Clones the congregation
+        /// </summary>
+        /// <returns>Clone of the Congregation</returns>
         public object Clone() {
             var result = this.MemberwiseClone();
             return result;

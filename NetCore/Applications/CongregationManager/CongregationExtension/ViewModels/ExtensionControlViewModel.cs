@@ -1,5 +1,8 @@
-﻿using Common.MVVMFramework;
+﻿using Common.Applicationn.Primitives;
+using Common.MVVMFramework;
+using CongregationManager;
 using CongregationManager.Data;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -28,10 +31,19 @@ namespace CongregationExtension.ViewModels {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 foreach (Congregation item in e.NewItems) {
                     item.PropertyChanged += X_PropertyChanged;
+                    item.EditThisItem += Item_EditThisItem;
                 }
             }
             ProcessLocalItems();
 
+        }
+
+        private void Item_EditThisItem(object? sender, EventArgs e) {
+            var cong = sender.As<Congregation>();
+
+            var win = new CongregationWindow();
+            win.View.Congregation = cong;
+            var result = win.ShowDialog();
         }
 
         private void ProcessLocalItems() {

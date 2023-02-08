@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -53,7 +52,8 @@ namespace Controls {
         private static void OnFontFamilyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var obj = (FontIcon)d;
             var val = (FontFamily)e.NewValue;
-            obj.TheIcon.FontFamily = val;
+            if (val != null)
+                obj.TheIcon.FontFamily = val;
         }
         #endregion
 

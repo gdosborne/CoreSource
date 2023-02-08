@@ -81,7 +81,7 @@ namespace CongregationManager {
         private ResourceDictionary myResourceDictionary => App.Current.Resources;
 
         public void InitializeExtension(ExtensionBase ext) {
-            ext.SetUICOntrols(MainPageToolbar, TopMenu, App.Current.Resources);
+            ext.SetUIControls(MainPageToolbar, TopMenu, App.Current.Resources);
 
             ext.RetrieveResources += RetrieveResources;
             ext.Initialize(App.DataFolder, App.TempFolder,

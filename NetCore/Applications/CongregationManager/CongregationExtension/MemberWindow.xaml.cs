@@ -3,6 +3,7 @@ using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CongregationExtension {
@@ -20,10 +21,13 @@ namespace CongregationExtension {
         }
 
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
-            var action = (MemberWindowViewModel.Actions)Enum.Parse(typeof(MemberWindowViewModel.Actions), e.CommandToExecute);
+            var action = (LocalBase.Actions)Enum.Parse(typeof(LocalBase.Actions), e.CommandToExecute);
             switch (action) {
-                case MemberWindowViewModel.Actions.CloseWindow:
-                    Close();
+                case LocalBase.Actions.CloseWindow:
+                    DialogResult = false;
+                    break;
+                case LocalBase.Actions.AddMember:
+                    DialogResult = true;
                     break;
                 default:
                     break;
@@ -38,6 +42,10 @@ namespace CongregationExtension {
 
         private void TitlebarBorder_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
             DragMove();
+        }
+
+        private void ItemGotFocus(object sender, RoutedEventArgs e) {
+            sender.As<TextBox>().SelectAll();
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using Common.Applicationn.Primitives;
-using System;
+﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,7 +7,7 @@ namespace Common.Applicationn.Text {
     public static class Extension {
         public static string PrecededByDateTime(this string value, int tabIndex = 0) =>
             $"{DateTime.Now:yyyy-MM-dd hh:mm:ss.fffff tt} => {new string(' ', tabIndex * 4)}{value}";
-        
+
         public static void AppendLineFormat(this StringBuilder value, string format, object[] args) {
             value.AppendFormat(format, args);
             value.AppendLine();
@@ -23,11 +21,15 @@ namespace Common.Applicationn.Text {
             return result;
         }
 
-        public static string SplitAtCaps(this string value) {
+        public static string SplitAtCaps(this string value, bool keepConsecutiveCaps = true) {
             var result = new StringBuilder();
             var chars = value.ToCharArray();
             for (int i = 0; i < chars.Length; i++) {
-                if (char.IsLetter(chars[i]) && char.IsUpper(chars[i]) && i > 0)
+                var shouldAddSpace = i > 0
+                    && char.IsLetter(chars[i])
+                    && char.IsUpper(chars[i])
+                    && (!keepConsecutiveCaps && !char.IsUpper(chars[i - 1]));
+                if (shouldAddSpace)
                     result.Append(' ');
                 result.Append(chars[i]);
             }

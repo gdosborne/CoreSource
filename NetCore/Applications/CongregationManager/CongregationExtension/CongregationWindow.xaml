@@ -9,7 +9,7 @@
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="671" SizeToContent="Height">
+        Width="800" SizeToContent="Height" Icon="\Resources\CM.ico">
     <Window.Resources>
         <ResourceDictionary Source="/Resources/MainTheme.xaml" />
     </Window.Resources>
@@ -43,53 +43,84 @@
         <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
             <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
                     <RowDefinition />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <local:CongregationControl Grid.Row="0" ButtonVisibility="Collapsed" 
                                            Congregation="{Binding Congregation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                
-                <!--<Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Name="LowerGrid" Height="250">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Column="0" Margin="10,0"
+                            Height="{Binding ElementName=LowerGrid,Path=ActualHeight}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Groups" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
+                            <ListBox Grid.Row="1">
+                                
+                            </ListBox>
+                        </Grid>
+                    </Border>
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Column="2" Margin="10,0"
+                            Height="{Binding ElementName=LowerGrid,Path=ActualHeight}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Members" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
 
-                <TextBlock Text="Name" Grid.Row="0" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="99" Style="{DynamicResource WindowTextField}" 
-                         Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                         Name="NameTextBox"/>
-
-                <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Style="{DynamicResource WindowTextField}" Height="60" 
-                         Text="{Binding Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-
-                <TextBlock Text="City" Grid.Row="1" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="1" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
-                         Text="{Binding City,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-
-                <TextBlock Text="State/Province" Grid.Row="2" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="2" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
-                         Text="{Binding StateProvence,UpdateSourceTrigger=PropertyChanged}"/>
-
-                <TextBlock Text="Zip/Postal Code" Grid.Row="3" Grid.Column="0" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource WindowTextField}" 
-                         Text="{Binding PostalCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-
-                <TextBlock Text="Telephone" Grid.Row="3" Grid.Column="3" Style="{DynamicResource WindowLabel}"/>
-                <TextBox Grid.Row="3" Grid.Column="4" Style="{DynamicResource WindowTextField}" 
-                         Text="{Binding Telephone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>-->
-
+                            <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Members}"
+                                     MouseDoubleClick="MembersListBox_MouseDoubleClick" 
+                                     SelectionMode="Extended" SelectionChanged="MemberListBox_SelectionChanged">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add Member" Command="{Binding AddMemberCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource business-man-01-wf}" Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Delete Member(s)" Command="{Binding DeleteMemberCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource business-delete-01-wf}" Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Move Member(s)" Command="{Binding MoveMemberCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource move-item}" Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="40" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <controls:FontIcon Glyph="{Binding Icon}"
+                                                               FontFamily="{DynamicResource GenderFontFamily}" 
+                                                               FontSize="{DynamicResource LargeFontSize}"/>
+                                            <TextBlock Grid.Column="1">
+                                                <Run Text="{Binding LastName}" /><Run Text="," />
+                                                <Run Text="{Binding FirstName}" />
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </Border>
+                </Grid>
                 <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
                             Command="{Binding AcceptDataCommand}"/>

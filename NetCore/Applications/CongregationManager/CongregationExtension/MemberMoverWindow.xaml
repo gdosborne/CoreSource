@@ -1,0 +1,82 @@
+﻿<Window x:Class="CongregationExtension.MemberMoverWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationExtension"
+        xmlns:views="clr-namespace:CongregationExtension.ViewModels"
+        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Width="500" Icon="\Resources\CM.ico" Closing="Window_Closing"
+        SizeToContent="Height">
+    <Window.DataContext>
+        <views:MemberMoverWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
+            <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Style="{DynamicResource WindowHeaderText}">
+                        <Run>
+                            Use this dialog to move congregation members to another congregation. Note when a congregation 
+                            member moves, only the member information is moved. Congregation privileges and/or other data 
+                            must be reestablished in the new congregation.
+                        </Run>
+                        <LineBreak /><LineBreak />
+                        <Run>Select the new congregation</Run>
+                    </TextBlock>
+
+                    <ListBox Grid.Row="1" Height="150" ItemsSource="{Binding Congregations}"
+                             SelectedItem="{Binding SelectedCongregation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" 
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
+                            Command="{Binding AcceptCongregationCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 
+                            Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

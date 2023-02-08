@@ -1,5 +1,4 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Primitives;
+﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Text;
 using Common.MVVMFramework;
 using CongregationManager.Data;
@@ -9,8 +8,10 @@ using System.Linq;
 using static CongregationManager.Data.Member;
 
 namespace CongregationExtension.ViewModels {
-    public class MemberWindowViewModel : ViewModelBase {
-        public MemberWindowViewModel() {
+    public class MemberWindowViewModel : LocalBase {
+        public MemberWindowViewModel()
+            : base() {
+
             Title = "Member [design]";
             Member = new Member();
         }
@@ -19,21 +20,11 @@ namespace CongregationExtension.ViewModels {
             base.Initialize();
 
             Title = "Member";
-            var actual = Enum.GetNames(typeof(PrivilegeFlags)).ToList();
-            var privs = actual.Select(x => new PrivValue {
-                Text = x.SplitAtCaps(),
-                Privilege = (PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x),
-                ActualValue = (long)(PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x)
-            }).OrderBy(x => x.Privilege).ToList();
-            privs.ForEach(x => {
-                x.PropertyChanged += X_PropertyChanged;
-            });
-            Privileges = new ObservableCollection<PrivValue>(privs);
 
         }
 
         private void X_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
-            if(e.PropertyName == "IsChecked") {
+            if (e.PropertyName == "IsChecked") {
                 var p = sender.As<PrivValue>();
                 if (p.IsChecked) {
                     Member.Priveleges = Member.Priveleges | p.Privilege;
@@ -44,32 +35,15 @@ namespace CongregationExtension.ViewModels {
             }
         }
 
-        public enum Actions {
-            CloseWindow
-        }
-
-        public Settings AppSettings { get; set; }
-        public DataManager DataManager { get; set; }
-
         #region AcceptDataCommand
         private DelegateCommand _AcceptDataCommand = default;
         /// <summary>Gets the AcceptData command.</summary>
         /// <value>The AcceptData command.</value>
         public DelegateCommand AcceptDataCommand => _AcceptDataCommand ?? (_AcceptDataCommand = new DelegateCommand(AcceptData, ValidateAcceptDataState));
-        private bool ValidateAcceptDataState(object state) => true;
+        private bool ValidateAcceptDataState(object state) => !string.IsNullOrEmpty(Member.LastName)
+            && !string.IsNullOrEmpty(Member.FirstName);
         private void AcceptData(object state) {
-
-        }
-        #endregion
-
-        #region CloseWindowCommand
-        private DelegateCommand _CloseWindowCommand = default;
-        /// <summary>Gets the CloseWindow command.</summary>
-        /// <value>The CloseWindow command.</value>
-        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ?? (_CloseWindowCommand = new DelegateCommand(CloseWindow, ValidateCloseWindowState));
-        private bool ValidateCloseWindowState(object state) => true;
-        private void CloseWindow(object state) {
-            ExecuteAction(nameof(Actions.CloseWindow));
+            ExecuteAction(nameof(Actions.AddMember));
         }
         #endregion
 
@@ -81,15 +55,34 @@ namespace CongregationExtension.ViewModels {
             get => _Member;
             set {
                 _Member = value;
-                IsGenderUnknown = Member.Gender == Genders.Unknown;
-                IsGenderMale = Member.Gender == Genders.Male;
-                IsGenderFemale = Member.Gender == Genders.Female;
-                IsStatusGood = Member.Status == Statuses.Good;
-                IsStatusExemplary = Member.Status == Statuses.Exemplary;
-                IsStatusRestricted = Member.Status == Statuses.Restricted;
-                IsStatusDisfellowshipped = Member.Status == Statuses.Disfellowshipped;
+                if (Member != null) {
+                    IsGenderUnknown = Member.Gender == Genders.Unknown;
+                    IsGenderMale = Member.Gender == Genders.Male;
+                    IsGenderFemale = Member.Gender == Genders.Female;
+                    IsStatusGood = Member.Status == Statuses.Good;
+                    IsStatusExemplary = Member.Status == Statuses.Exemplary;
+                    IsStatusRestricted = Member.Status == Statuses.Restricted;
+                    IsStatusDisfellowshipped = Member.Status == Statuses.Disfellowshipped;
+                    Member.PropertyChanged += Member_PropertyChanged;
+
+                    var actual = Enum.GetNames(typeof(PrivilegeFlags)).ToList();
+                    var privs = actual.Select(x => new PrivValue {
+                        Text = x.SplitAtCaps(true),
+                        Privilege = (PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x),
+                        ActualValue = (long)(PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x)
+                    }).OrderBy(x => x.Privilege).ToList();
+                    privs.ForEach(x => {
+                        x.IsChecked = Member.Priveleges.HasFlag((PrivilegeFlags)x.ActualValue);
+                        x.PropertyChanged += X_PropertyChanged;
+                    });
+                    Privileges = new ObservableCollection<PrivValue>(privs);
+                }
                 OnPropertyChanged();
             }
+        }
+
+        private void Member_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+            UpdateInterface();
         }
         #endregion
 
@@ -193,6 +186,21 @@ namespace CongregationExtension.ViewModels {
                 _IsStatusDisfellowshipped = value;
                 if (IsStatusDisfellowshipped)
                     Member.Status = Statuses.Disfellowshipped;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsStatusInactive Property
+        private bool _IsStatusInactive = default;
+        /// <summary>Gets/sets the IsStatusInactive.</summary>
+        /// <value>The IsStatusInactive.</value>
+        public bool IsStatusInactive {
+            get => _IsStatusInactive;
+            set {
+                _IsStatusInactive = value;
+                if (IsStatusInactive)
+                    Member.Status = Statuses.Inactive;
                 OnPropertyChanged();
             }
         }
