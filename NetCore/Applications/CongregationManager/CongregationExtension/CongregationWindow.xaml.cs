@@ -74,5 +74,9 @@ namespace CongregationManager {
             }
             e.Handled = false;
         }
+
+        private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+
+        }
     }
 }

@@ -61,6 +61,7 @@ namespace CongregationManager.Data {
             Inactive
         }
 
+        [JsonIgnore]
         public string FullName => $"{FirstName} {LastName}";
 
         #region IsNew Property
@@ -86,6 +87,20 @@ namespace CongregationManager.Data {
             get => _LastName;
             set {
                 _LastName = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsSelected Property
+        private bool _IsSelected = default;
+        /// <summary>Gets/sets the IsSelected.</summary>
+        /// <value>The IsSelected.</value>
+        [JsonIgnore]
+        public bool IsSelected {
+            get => _IsSelected;
+            set {
+                _IsSelected = value;
                 OnPropertyChanged();
             }
         }

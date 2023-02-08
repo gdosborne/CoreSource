@@ -1,10 +1,10 @@
 ﻿using Common.Applicationn;
 using Common.Applicationn.Linq;
 using Common.Applicationn.Logging;
+using CongregationManager;
 using CongregationManager.Data;
 using Ookii.Dialogs.Wpf;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -52,6 +52,42 @@ namespace CongregationExtension {
             td.ShowDialog();
         }
 
+        internal static void AddEditGroup(Congregation congregation, Group group) {
+            var win = new GroupWindow();
+            win.View.Congregation = congregation;
+            win.View.Group = group;
+            var result = win.ShowDialog();
+            if(!result.HasValue || !result.Value) {
+                return;
+            }
+            if (win.View.Group == null) {
+                group = new Group {
+                    ID = !congregation.Groups.Any()
+                        ? 1 : congregation.Groups.Max(x => x.ID) + 1,
+                    Name = win.View.GroupName,
+                    OverseerMemberID = win.View.SelectedOverseer.ID,
+                    MemberIDs = win.View.GroupMemberIDs
+                };
+                congregation.Groups.Add(group);
+            }
+            else {
+                win.View.Group.MemberIDs = win.View.GroupMemberIDs;
+            }
+            DataManager.SaveCongregation(congregation);
+        }
+
+        internal static void AddCongregation() {
+            var win = new CongregationWindow {
+                WindowStartupLocation = WindowStartupLocation.Manual
+            };
+            win.View.Congregation = new Congregation {
+                IsNew = true,
+                MeetingDay = System.DayOfWeek.Sunday,
+                MeetingTime = new System.TimeSpan(10, 0, 0)
+            };
+            win.ShowDialog();
+        }
+
         internal static bool DeleteMember(List<Member> members, Congregation congregation) {
             var msg = default(string);
             var mainAndTitle = "Delete Member";
@@ -71,7 +107,7 @@ namespace CongregationExtension {
                 mainAndTitle += "s";
             }
 
-            if (IsYesInDialogSelected(mainAndTitle, msg, mainAndTitle, TaskDialogIcon.Shield)) {               
+            if (IsYesInDialogSelected(mainAndTitle, msg, mainAndTitle, TaskDialogIcon.Shield)) {
                 members.ForEach(x => {
                     App.logger.LogMessage($"Deleting {x.FullName} from {congregation.Name}",
                         EntryTypes.Information);
@@ -116,10 +152,10 @@ namespace CongregationExtension {
 
             if (IsYesInDialogSelected(mainAndTitle, msg, mainAndTitle, TaskDialogIcon.Shield)) {
                 members.ForEach(x => {
-                    App.logger.LogMessage($"Moving {x.FullName} from {congregation.Name} to {win.View.SelectedCongregation.Name}", 
+                    App.logger.LogMessage($"Moving {x.FullName} from {congregation.Name} to {win.View.SelectedCongregation.Name}",
                         EntryTypes.Information);
                     congregation.Members.Remove(x);
-                    x.ID = !win.View.SelectedCongregation.Members.Any() 
+                    x.ID = !win.View.SelectedCongregation.Members.Any()
                         ? 1 : win.View.SelectedCongregation.Members.Max(x => x.ID) + 1;
                     win.View.SelectedCongregation.Members.Add(x);
                 });

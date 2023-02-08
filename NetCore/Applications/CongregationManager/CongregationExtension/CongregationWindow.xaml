@@ -63,8 +63,13 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Groups" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
-                            <ListBox Grid.Row="1">
-                                
+                            <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Groups}"
+                                     MouseDoubleClick="ListBox_MouseDoubleClick" SelectionMode="Single">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
                             </ListBox>
                         </Grid>
                     </Border>
@@ -105,15 +110,12 @@
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition />
-                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <controls:FontIcon Glyph="{Binding Icon}"
+                                            <controls:FontIcon Grid.Column="0" Glyph="{Binding Icon}"
                                                                FontFamily="{DynamicResource GenderFontFamily}" 
                                                                FontSize="{DynamicResource LargeFontSize}"/>
-                                            <TextBlock Grid.Column="1">
-                                                <Run Text="{Binding LastName}" /><Run Text="," />
-                                                <Run Text="{Binding FirstName}" />
-                                            </TextBlock>
+                                            <CheckBox Grid.Column="1" Content="{Binding FullName}" 
+                                                      IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
