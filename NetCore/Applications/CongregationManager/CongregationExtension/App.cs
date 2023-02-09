@@ -4,6 +4,7 @@ using Common.Applicationn.Logging;
 using CongregationManager;
 using CongregationManager.Data;
 using Ookii.Dialogs.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,17 @@ namespace CongregationExtension {
             logger.LogMessage(new StringBuilder(message), type);
         }
 
-        internal static bool IsYesInDialogSelected(string main, string content, string title, TaskDialogIcon icon) {
+        internal static IEnumerable<Member> MembersInOtherGroups(Congregation congregation, Group currentGroup) {
+            var otherGroups = congregation.Groups
+                .Where(x => x.ID != currentGroup.ID).ToList();
+            var idsInOtherGroups = otherGroups
+                .SelectMany(x => x.MemberIDs);
+            var membershipInOtherGroups = idsInOtherGroups.Intersect(currentGroup.MemberIDs);
+            return congregation.Members.Where(x => membershipInOtherGroups.Contains(x.ID));
+        }
+
+        internal static bool IsYesInDialogSelected(string main, string content, string title, TaskDialogIcon icon, int? width = null) {
             var td = new TaskDialog {
-                Width = 250,
                 MainIcon = icon,
                 MainInstruction = main,
                 Content = content,
@@ -32,6 +41,8 @@ namespace CongregationExtension {
                 ButtonStyle = TaskDialogButtonStyle.Standard,
                 WindowTitle = title
             };
+            if(width.HasValue)
+                td.Width = width.Value;
             td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
             td.Buttons.Add(new TaskDialogButton(ButtonType.No));
             var result = td.ShowDialog();
@@ -57,23 +68,16 @@ namespace CongregationExtension {
             win.View.Congregation = congregation;
             win.View.Group = group;
             var result = win.ShowDialog();
-            if(!result.HasValue || !result.Value) {
+            if (!result.HasValue || !result.Value) {
                 return;
             }
-            if (win.View.Group == null) {
-                group = new Group {
-                    ID = !congregation.Groups.Any()
-                        ? 1 : congregation.Groups.Max(x => x.ID) + 1,
-                    Name = win.View.GroupName,
-                    OverseerMemberID = win.View.SelectedOverseer.ID,
-                    MemberIDs = win.View.GroupMemberIDs
-                };
-                congregation.Groups.Add(group);
+            
+            try {
+                DataManager.SaveCongregation(congregation);
             }
-            else {
-                win.View.Group.MemberIDs = win.View.GroupMemberIDs;
+            catch (Exception ex) {
+                logger.LogMessage(ex.Message, EntryTypes.Error);
             }
-            DataManager.SaveCongregation(congregation);
         }
 
         internal static void AddCongregation() {
@@ -86,40 +90,41 @@ namespace CongregationExtension {
                 MeetingTime = new System.TimeSpan(10, 0, 0)
             };
             win.ShowDialog();
+            try {
+                DataManager.SaveCongregation(win.View.Congregation);
+            }
+            catch(Exception ex) {
+                logger.LogMessage(ex.Message, EntryTypes.Error);
+            }
         }
 
-        internal static bool DeleteMember(List<Member> members, Congregation congregation) {
-            var msg = default(string);
-            var mainAndTitle = "Delete Member";
-            if (members == null || members.Count == 0)
+        internal static bool DeleteMember(Member member, Congregation congregation) {
+            if (member == null || congregation == null)
                 return false;
-            if (members.Count == 1) {
-                msg = $"You are about to delete {members[0].FullName}. Doing so will make any data " +
-                    $"attached to this member invalid.\n\nAre you sure you want to delete {members[0].FullName}?";
-            }
-            else {
-                msg = $"You are about to delete {members.Count} members.\n\n";
-                foreach (var member in members) {
-                    msg += $"    {member.FullName}\n";
-                }
-                msg += $"\nDoing so will make any data attached to these members invalid.\n\nAre you " +
-                    $"sure you want to delete these members?";
-                mainAndTitle += "s";
-            }
+            var mainAndTitle = "Delete Member";
+            var msg = $"You are about to delete {member.FullName}. Doing so will make any data " +
+                $"attached to this member invalid.\n\nAre you sure you want to delete {member.FullName}?";
 
             if (IsYesInDialogSelected(mainAndTitle, msg, mainAndTitle, TaskDialogIcon.Shield)) {
-                members.ForEach(x => {
-                    App.logger.LogMessage($"Deleting {x.FullName} from {congregation.Name}",
-                        EntryTypes.Information);
-                    congregation.Members.Remove(x);
-                });
-                DataManager.SaveCongregation(congregation);
+                App.logger.LogMessage($"Deleting {member.FullName} from {congregation.Name}",
+                    EntryTypes.Information);
+                congregation.Members.Remove(member);
+                try {
+                    DataManager.SaveCongregation(congregation);
+                }
+                catch (Exception ex) {
+                    logger.LogMessage(ex.Message, EntryTypes.Error);
+                    return false;
+                }
                 return true;
             }
             return false;
         }
 
-        internal static bool MoveMember(List<Member> members, Congregation congregation, List<Congregation> otherCongregations) {
+        internal static bool MoveMember(Member member, Congregation congregation, List<Congregation> otherCongregations) {
+            if (member == null || congregation == null)
+                return false;
+
             var win = new MemberMoverWindow {
                 WindowStartupLocation = WindowStartupLocation.Manual
             };
@@ -130,37 +135,27 @@ namespace CongregationExtension {
 
             var msg = default(string);
             var mainAndTitle = "Move Member";
-            if (members == null || members.Count == 0)
-                return false;
-            if (members.Count == 1) {
-                msg = $"You are about to move {members[0].FullName} to the {win.View.SelectedCongregation.Name} " +
-                    $"Congregation. Only the member information itself is moved. You or the new congregation manager " +
-                    $"will be responsible to reestablish the member priveleges.\n\nAre you sure you want to move " +
-                    $"{members[0].FullName}?";
-            }
-            else {
-                msg = $"You are about to move {members.Count} members to the {win.View.SelectedCongregation.Name} " +
-                    $"Congregation.\n\n";
-                foreach (var member in members) {
-                    msg += $"    {member.FullName}\n";
-                }
-                msg += $"\nOnly the member information itself is moved. You or the new congregation manager " +
-                    $"will be responsible to reestablish the member priveleges.\n\nAre you sure you want to move these " +
-                    $"members?";
-                mainAndTitle += "s";
-            }
+            msg = $"You are about to move {member.FullName} to the {win.View.SelectedCongregation.Name} " +
+                $"Congregation. Only the member information itself is moved. You or the new congregation manager " +
+                $"will be responsible to reestablish the member priveleges.\n\nAre you sure you want to move " +
+                $"{member.FullName}?";
 
             if (IsYesInDialogSelected(mainAndTitle, msg, mainAndTitle, TaskDialogIcon.Shield)) {
-                members.ForEach(x => {
-                    App.logger.LogMessage($"Moving {x.FullName} from {congregation.Name} to {win.View.SelectedCongregation.Name}",
-                        EntryTypes.Information);
-                    congregation.Members.Remove(x);
-                    x.ID = !win.View.SelectedCongregation.Members.Any()
-                        ? 1 : win.View.SelectedCongregation.Members.Max(x => x.ID) + 1;
-                    win.View.SelectedCongregation.Members.Add(x);
-                });
-                DataManager.SaveCongregation(congregation);
-                DataManager.SaveCongregation(win.View.SelectedCongregation);
+
+                App.logger.LogMessage($"Moving {member.FullName} from {congregation.Name} to {win.View.SelectedCongregation.Name}",
+                    EntryTypes.Information);
+                congregation.Members.Remove(member);
+                member.ID = !win.View.SelectedCongregation.Members.Any()
+                    ? 1 : win.View.SelectedCongregation.Members.Max(x => x.ID) + 1;
+                win.View.SelectedCongregation.Members.Add(member);
+                try {
+                    DataManager.SaveCongregation(congregation);
+                    DataManager.SaveCongregation(win.View.SelectedCongregation);
+                }
+                catch (Exception ex) {
+                    logger.LogMessage(ex.Message, EntryTypes.Error);
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -182,14 +177,43 @@ namespace CongregationExtension {
             if (mbr.IsNew) {
                 mbr.ID = newId;
             }
-            congregation.Members.Add(mbr);
-            congregation.Members = congregation.Members
-                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+            congregation.Members.Clear();
+            congregation.Members.AddRange(congregation.Members
+                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
 
-            DataManager.SaveCongregation(congregation);
-            App.LogMessage($"New member ({mbr.FirstName} {mbr.LastName}) added" +
-                $" to {congregation.Name}",
-                ApplicationLogger.EntryTypes.Information);
+            try {
+                DataManager.SaveCongregation(congregation);
+                App.LogMessage($"New member ({mbr.FirstName} {mbr.LastName}) added" +
+                    $" to {congregation.Name}",
+                    ApplicationLogger.EntryTypes.Information);
+            }
+            catch (Exception ex) {
+                logger.LogMessage(ex.Message, EntryTypes.Error);
+            }
+        }
+
+        internal static void EditMember(Member member, Congregation congregation) {
+            if (member == null || congregation == null)
+                return;
+
+            var win = new MemberWindow {
+                WindowStartupLocation = WindowStartupLocation.Manual
+            };
+            win.View.Member = member;
+            var result = win.ShowDialog();
+            if (!result.HasValue || !result.Value || win.View.Member == null)
+                return;
+
+            member.Resources = App.DataManager.Resources;
+            try { 
+                DataManager.SaveCongregation(congregation);
+                App.LogMessage($"New member ({member.FullName}) added" +
+                    $" to {congregation.Name}",
+                    ApplicationLogger.EntryTypes.Information);
+            }
+            catch (Exception ex) {
+                logger.LogMessage(ex.Message, EntryTypes.Error);
+            }
         }
     }
 }

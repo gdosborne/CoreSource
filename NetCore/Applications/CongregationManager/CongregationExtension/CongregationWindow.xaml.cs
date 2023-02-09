@@ -2,11 +2,9 @@
 using Common.Applicationn.Windows;
 using CongregationExtension;
 using CongregationExtension.ViewModels;
-using CongregationManager.Data;
 using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 
 namespace CongregationManager {
     public partial class CongregationWindow : Window {
@@ -30,6 +28,30 @@ namespace CongregationManager {
                     }
                 case LocalBase.Actions.AcceptData:
                 default: {
+                        if (View.SelectedGroup != null) {
+                            var memberIDs = View.Congregation.Members
+                                .Where(x => x.IsSelected)
+                                .Select(x => x.ID)
+                                .ToList();
+                            View.SelectedGroup.MemberIDs = memberIDs;
+                            var otherGroupMembers = App.MembersInOtherGroups(View.Congregation, View.SelectedGroup);
+                            if (otherGroupMembers.Any()) {
+                                foreach (var member in otherGroupMembers) {
+                                    var group = View.Congregation.Groups.FirstOrDefault(x => x.ID != View.SelectedGroup.ID && x.MemberIDs.Contains(member.ID));
+                                    if (group == null)
+                                        continue;
+                                    var msg = $"{member.FullName} is already in {group.Name}.\n\nMove {member.FullName} " +
+                                        $"to {View.SelectedGroup.Name}?";
+                                    if (App.IsYesInDialogSelected("Switch Groups", msg, "Switch Groups",
+                                            Ookii.Dialogs.Wpf.TaskDialogIcon.Shield)) {
+                                        group.MemberIDs.Remove(member.ID);
+                                    }
+                                    else {
+                                        View.SelectedGroup.MemberIDs.Remove(member.ID);
+                                    }
+                                }
+                            }
+                        }
                         View.DataManager.SaveCongregation(View.Congregation);
                         Close();
                         break;
@@ -49,15 +71,9 @@ namespace CongregationManager {
         }
 
         private void MembersListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            if (View.SelectedMembers.Any()) {
-                if(View.SelectedMembers.Count > 1) {
-                    App.OkDialog("Single edit only", "You have multiple members selected in the list. You may " +
-                        "only edit one member at a time.", "Single edit only", 
-                        Ookii.Dialogs.Wpf.TaskDialogIcon.Information);
-                    return;
-                }
+            if (View.SelectedMember != null) {
                 var win = new MemberWindow();
-                win.View.Member = View.SelectedMembers[0]; ;
+                win.View.Member = View.SelectedMember;
                 var result = win.ShowDialog();
                 if (!result.HasValue || !result.Value)
                     return;
@@ -65,18 +81,8 @@ namespace CongregationManager {
             }
         }
 
-        private void MemberListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
-            foreach (var item in e.AddedItems) {
-                View.SelectedMembers.Add(item.As<Member>());
-            }
-            foreach (var item in e.RemovedItems) {
-                View.SelectedMembers.Remove(item.As<Member>());
-            }
-            e.Handled = false;
-        }
-
         private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-
+            App.AddEditGroup(View.Congregation, View.SelectedGroup);
         }
     }
 }

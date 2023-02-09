@@ -4,7 +4,7 @@
                     xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:Double x:Key="StandardFontSize">18</sys:Double>
+    <sys:Double x:Key="StandardFontSize">20</sys:Double>
 
     <expr:Calculator x:Key="XLargeFontSize">
         <expr:Product Operand1="{expr:Value {StaticResource StandardFontSize}}" Operand2="1.5" />

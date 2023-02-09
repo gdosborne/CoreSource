@@ -1,3 +1,4 @@
+using Common.Applicationn.Linq;
 using Common.Applicationn.Primitives;
 using Common.Applicationn.Security;
 using System;
@@ -76,7 +77,7 @@ namespace CongregationManager.Data {
                         var cong = Congregation.OpenFromFile(x.FullName, password.ToStandardString());
                         cong.Members = cong.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
 
-                        cong.Members.ForEach(x => {
+                        cong.Members.ToList().ForEach(x => {
                             x.Resources = Resources;
                         });
                         cong.Filename = x.Name;
@@ -143,7 +144,8 @@ namespace CongregationManager.Data {
                 if (isNewCong)
                     cong.ID = !Congregations.Any() ? 1 : Congregations.Max(x => x.ID) + 1;
                 cong.Save(password.ToStandardString());
-                cong.Members = cong.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+                cong.Members.Clear();
+                cong.Members.AddRange(cong.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
             }
             GC.Collect();
         }

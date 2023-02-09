@@ -84,7 +84,7 @@
                                Text="Assistant Overseer" />
                     <ComboBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource PrimaryComboBox}"
                               ItemsSource="{Binding Assistants}" 
-                              SelectedItem="{Binding SelectedOverseer,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                              SelectedItem="{Binding SelectedAssistant,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FullName}" />
@@ -93,7 +93,7 @@
                     </ComboBox>
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource WindowLabel}"
-                               Text="Unassigned Members" HorizontalAlignment="Left" />
+                               Text="Members" HorizontalAlignment="Left" />
 
                     <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Height="150"
                              ItemsSource="{Binding Members}">

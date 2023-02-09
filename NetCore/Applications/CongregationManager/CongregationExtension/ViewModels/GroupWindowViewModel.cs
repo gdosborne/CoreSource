@@ -4,7 +4,6 @@ using CongregationManager.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Documents;
 
 namespace CongregationExtension.ViewModels {
     public class GroupWindowViewModel : LocalBase {
@@ -82,23 +81,18 @@ namespace CongregationExtension.ViewModels {
                     var currentAOsIds = Congregation.Groups
                         .Where(x => x.AssistantMemberID > 0)
                         .Select(x => x.AssistantMemberID).ToList();
-                    
-                    var os = Congregation.Members.Where(x => x.Priveleges.HasFlag(Member.PrivilegeFlags.GroupOverseer)
-                        && !currentOsIds.Contains(x.ID));
+
+                    var os = Congregation.Members.Where(x => x.Priveleges.HasFlag(Member.PrivilegeFlags.GroupOverseer))
+                        .ToList();
                     Overseers.AddRange(os);
-                    
-                    //var aos = Congregation.Members.Where(x => x.Priveleges.HasFlag(Member.PrivilegeFlags.GroupAssistant)
-                    //    && !currentAOsIds.Contains(x.ID)).ToList();
+
                     var aos = Congregation.Members.Where(x => x.Priveleges.HasFlag(Member.PrivilegeFlags.GroupAssistant))
                         .ToList();
                     aos.AddRange(os);
                     var joined = aos.OrderBy(x => x.LastName).ThenBy(x => x.FirstName);
                     Assistants.AddRange(joined);
-                    
-                    var mbrs = Congregation.Members.Where(x => !currentOsIds.Contains(x.ID) 
-                        && !currentAOsIds.Contains(x.ID) 
-                        && !x.Priveleges.HasFlag(Member.PrivilegeFlags.GroupOverseer));
-                    Members.AddRange(mbrs);
+
+                    Members.AddRange(Congregation.Members);
                 }
                 OnPropertyChanged();
             }
@@ -126,7 +120,8 @@ namespace CongregationExtension.ViewModels {
             get => _SelectedOverseer;
             set {
                 _SelectedOverseer = value;
-                OnPropertyChanged();
+                if (Group != null && SelectedOverseer != null)
+                    OnPropertyChanged();
             }
         }
         #endregion
@@ -138,12 +133,20 @@ namespace CongregationExtension.ViewModels {
         public Member SelectedAssistant {
             get => _SelectedAssistant;
             set {
+                if (Group != null && SelectedAssistant != null) {
+                    Congregation.Members.First(x => x.ID == Group.AssistantMemberID).IsSelected = false;
+                    Group.AssistantMemberID = 0;
+                }
                 _SelectedAssistant = value;
+                if (Group != null && SelectedAssistant != null) {
+                    Group.AssistantMemberID = SelectedAssistant.ID;
+                    Congregation.Members.First(x => x.ID == Group.AssistantMemberID).IsSelected = true;
+                }
                 OnPropertyChanged();
             }
         }
         #endregion
-        
+
         #region Group Property
         private Group _Group = default;
         /// <summary>Gets/sets the Group.</summary>
@@ -154,8 +157,14 @@ namespace CongregationExtension.ViewModels {
                 _Group = value;
                 if (Group != null) {
                     GroupName = Group.Name;
-                    SelectedOverseer = Overseers.FirstOrDefault(x => x.ID == Group.OverseerMemberID);
-                    SelectedAssistant = Assistants.FirstOrDefault(x => x.ID == Group.AssistantMemberID);
+                    SelectedOverseer = null;
+                    SelectedAssistant = null;
+                    if (Group.OverseerMemberID > 0)
+                        SelectedOverseer = Overseers.FirstOrDefault(x => x.ID == Group.OverseerMemberID);
+                    if (Group.AssistantMemberID > 0)
+                        SelectedAssistant = Assistants.FirstOrDefault(x => x.ID == Group.AssistantMemberID);
+                    if (Congregation != null)
+                        Group.MemberIDs.ForEach(x => Congregation.Members.FirstOrDefault(y => y.ID == x).IsSelected = true);
                 }
                 OnPropertyChanged();
             }

@@ -15,4 +15,21 @@
     <ProjectReference Include="..\Framework\ApplicationFramework\ApplicationFramework\ApplicationFramework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\Applications\CongregationManager\CongregationManager\Resources\MainTheme.xaml" Link="Resources\MainTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\Applications\CongregationManager\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

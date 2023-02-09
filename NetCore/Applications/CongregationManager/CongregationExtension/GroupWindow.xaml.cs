@@ -2,6 +2,7 @@
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +24,38 @@ namespace CongregationExtension {
                         break;
                     }
                 case LocalBase.Actions.AcceptData: {
+                        if(View.Group == null) {
+                            View.Group = new CongregationManager.Data.Group {
+                                Name = View.GroupName,
+                                OverseerMemberID = View.SelectedOverseer.ID,
+                                AssistantMemberID = View.SelectedAssistant.ID,
+                                ID = !View.Congregation.Groups.Any()
+                                    ? 1 : View.Congregation.Groups.Max(x => x.ID) + 1
+                            };
+                            View.Congregation.Groups.Add(View.Group);
+                        }
+                        View.Group.MemberIDs = View.Congregation.Members
+                            .Where(x => x.IsSelected)
+                            .Select(x => x.ID)
+                            .ToList();
+
+                        var otherGroupMembers = App.MembersInOtherGroups(View.Congregation, View.Group);
+                        if (otherGroupMembers.Any()) {
+                            foreach (var member in otherGroupMembers) {
+                                var group = View.Congregation.Groups.FirstOrDefault(x => x.ID != View.Group.ID && x.MemberIDs.Contains(member.ID));
+                                if (group == null)
+                                    continue;
+                                var msg = $"{member.FullName} is already in {group.Name}.\n\nMove {member.FullName} " +
+                                    $"to {View.Group.Name}?";
+                                if (App.IsYesInDialogSelected("Switch Groups", msg, "Switch Groups",
+                                        Ookii.Dialogs.Wpf.TaskDialogIcon.Shield)) {
+                                    group.MemberIDs.Remove(member.ID);
+                                }
+                                else {
+                                    View.Group.MemberIDs.Remove(member.ID);
+                                }
+                            }
+                        }
                         DialogResult = true;
                         break;
                     }

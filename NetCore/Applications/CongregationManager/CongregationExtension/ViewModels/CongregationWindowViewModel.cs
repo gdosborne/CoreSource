@@ -1,6 +1,6 @@
 ﻿using Common.MVVMFramework;
 using CongregationManager.Data;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CongregationExtension.ViewModels {
@@ -14,7 +14,7 @@ namespace CongregationExtension.ViewModels {
             base.Initialize();
 
             Title = "Congregation";
-            SelectedMembers = new ObservableCollection<Member>();
+            //SelectedMembers = new ObservableCollection<Member>();
         }
 
         #region Congregation Property
@@ -26,16 +26,56 @@ namespace CongregationExtension.ViewModels {
             set {
                 _Congregation = value;
                 if (Congregation != null) {
+                    SetGroupMembership();
                     Congregation.PropertyChanged += Congregation_PropertyChanged;
                 }
                 OnPropertyChanged();
             }
         }
 
+        private void SetGroupMembership(List<int> ids = default) {
+            Congregation.Members.ToList().ForEach(x => x.IsSelected = false);
+            if (ids != null)
+                Congregation.Members.ToList().ForEach(x => x.IsSelected = ids.Contains(x.ID));
+        }
+
         private void Congregation_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
             if (Congregation != null && Congregation.IsNew && e.PropertyName == "Name")
                 Congregation.Filename = $"{Congregation.Name}.congregation";
             UpdateInterface();
+        }
+        #endregion
+
+        #region AddGroupCommand
+        private DelegateCommand _AddGroupCommand = default;
+        /// <summary>Gets the AddGroup command.</summary>
+        /// <value>The AddGroup command.</value>
+        public DelegateCommand AddGroupCommand => _AddGroupCommand ?? (_AddGroupCommand = new DelegateCommand(AddGroup, ValidateAddGroupState));
+        private bool ValidateAddGroupState(object state) => true;
+        private void AddGroup(object state) {
+            App.AddEditGroup(Congregation, default);
+        }
+        #endregion
+
+        #region EditGroupCommand
+        private DelegateCommand _EditGroupCommand = default;
+        /// <summary>Gets the EditGroup command.</summary>
+        /// <value>The EditGroup command.</value>
+        public DelegateCommand EditGroupCommand => _EditGroupCommand ?? (_EditGroupCommand = new DelegateCommand(EditGroup, ValidateEditGroupState));
+        private bool ValidateEditGroupState(object state) => true;
+        private void EditGroup(object state) {
+            App.AddEditGroup(Congregation, SelectedGroup);
+        }
+        #endregion
+
+        #region DeleteGroupCommand
+        private DelegateCommand _DeleteGroupCommand = default;
+        /// <summary>Gets the DeleteGroup command.</summary>
+        /// <value>The DeleteGroup command.</value>
+        public DelegateCommand DeleteGroupCommand => _DeleteGroupCommand ?? (_DeleteGroupCommand = new DelegateCommand(DeleteGroup, ValidateDeleteGroupState));
+        private bool ValidateDeleteGroupState(object state) => true;
+        private void DeleteGroup(object state) {
+            
         }
         #endregion
 
@@ -70,11 +110,9 @@ namespace CongregationExtension.ViewModels {
         /// <summary>Gets the DeleteMember command.</summary>
         /// <value>The DeleteMember command.</value>
         public DelegateCommand DeleteMemberCommand => _DeleteMemberCommand ?? (_DeleteMemberCommand = new DelegateCommand(DeleteMember, ValidateDeleteMemberState));
-        private bool ValidateDeleteMemberState(object state) => SelectedMembers.Any();
+        private bool ValidateDeleteMemberState(object state) => SelectedMember != null;
         private void DeleteMember(object state) {
-            if(App.DeleteMember(SelectedMembers.ToList(), Congregation)) {
-                //App.DataManager.SaveCongregation(Congregation);
-            }
+            App.DeleteMember(SelectedMember, Congregation);
         }
         #endregion
 
@@ -83,26 +121,56 @@ namespace CongregationExtension.ViewModels {
         /// <summary>Gets the MoveMember command.</summary>
         /// <value>The MoveMember command.</value>
         public DelegateCommand MoveMemberCommand => _MoveMemberCommand ?? (_MoveMemberCommand = new DelegateCommand(MoveMember, ValidateMoveMemberState));
-        private bool ValidateMoveMemberState(object state) => SelectedMembers.Any();
+        private bool ValidateMoveMemberState(object state) => true;
         private void MoveMember(object state) {
             var others = DataManager.Congregations
                 .Where(x => x.ID != Congregation.ID)
                 .OrderBy(x => x.Name)
                 .ToList();
-            if(App.MoveMember(SelectedMembers.ToList(), Congregation, others)) {
-                //App.DataManager.SaveCongregation(Congregation);
+            App.MoveMember(SelectedMember, Congregation, others);
+        }
+        #endregion
+
+        #region EditMemberCommand
+        private DelegateCommand _EditMemberCommand = default;
+        /// <summary>Gets the EditMember command.</summary>
+        /// <value>The EditMember command.</value>
+        public DelegateCommand EditMemberCommand => _EditMemberCommand ?? (_EditMemberCommand = new DelegateCommand(EditMember, ValidateEditMemberState));
+        private bool ValidateEditMemberState(object state) => true;
+        private void EditMember(object state) {
+            App.EditMember(SelectedMember, Congregation);
+        }
+        #endregion
+
+        #region SelectedMember Property
+        private Member _SelectedMember = default;
+        /// <summary>Gets/sets the SelectedMember.</summary>
+        /// <value>The SelectedMember.</value>
+        public Member SelectedMember {
+            get => _SelectedMember;
+            set {
+                _SelectedMember = value;
+                OnPropertyChanged();
             }
         }
         #endregion
 
-        #region SelectedMembers Property
-        private ObservableCollection<Member> _SelectedMembers = default;
-        /// <summary>Gets/sets the SelectedMembers.</summary>
-        /// <value>The SelectedMembers.</value>
-        public ObservableCollection<Member> SelectedMembers {
-            get => _SelectedMembers;
+        #region SelectedGroup Property
+        private Group _SelectedGroup = default;
+        /// <summary>Gets/sets the SelectedGroup.</summary>
+        /// <value>The SelectedGroup.</value>
+        public Group SelectedGroup {
+            get => _SelectedGroup;
             set {
-                _SelectedMembers = value;
+                _SelectedGroup = value;
+                if (SelectedGroup != null) {
+                    var ids = SelectedGroup.MemberIDs;
+                    if (SelectedGroup.OverseerMemberID > 0)
+                        ids.Add(SelectedGroup.OverseerMemberID);
+                    if (SelectedGroup.AssistantMemberID > 0)
+                        ids.Add(SelectedGroup.AssistantMemberID);
+                    SetGroupMembership(ids);
+                }
                 OnPropertyChanged();
             }
         }

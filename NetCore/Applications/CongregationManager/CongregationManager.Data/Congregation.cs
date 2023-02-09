@@ -225,17 +225,22 @@ namespace CongregationManager.Data {
                 Formatting = Formatting.Indented
             };
             var json = JsonConvert.SerializeObject(this, settings);
+            try {
 #if DEBUG
-            File.WriteAllText(Path.Combine(DataPath, Filename), json);
+                File.WriteAllText(Path.Combine(DataPath, Filename), json);
 #else
 
-            var enc = default(string);
-            using (var crypto = new Crypto(password)) {
-                password = null;
-                enc = crypto.Encrypt<string>(json);
-            }
-            File.WriteAllText(Path.Combine(DataPath, Filename), enc);
+                var enc = default(string);
+                using (var crypto = new Crypto(password)) {
+                    password = null;
+                    enc = crypto.Encrypt<string>(json);
+                }
+                File.WriteAllText(Path.Combine(DataPath, Filename), enc);
 #endif
+            }
+            catch (Exception) {
+                throw;
+            }
         }
 
         /// <summary>

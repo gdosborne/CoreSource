@@ -7,9 +7,10 @@
         xmlns:views="clr-namespace:CongregationExtension.ViewModels"
         xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="800" SizeToContent="Height" Icon="\Resources\CM.ico">
+        Width="800" SizeToContent="Height" MinHeight="680" MinWidth="800"
+        Icon="\Resources\CM.ico">
     <Window.Resources>
         <ResourceDictionary Source="/Resources/MainTheme.xaml" />
     </Window.Resources>
@@ -49,14 +50,23 @@
                 </Grid.RowDefinitions>
                 <local:CongregationControl Grid.Row="0" ButtonVisibility="Collapsed" 
                                            Congregation="{Binding Congregation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                <Grid Grid.Row="1" Name="LowerGrid" Height="250">
+                <Grid Grid.Row="1" Name="LowerGrid" Height="290">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Border Style="{DynamicResource ControlBorder}" Grid.Column="0" Margin="10,0"
-                            Height="{Binding ElementName=LowerGrid,Path=ActualHeight}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource WindowHeaderText}">
+                        To add members to a group, select the group and then place checkmarks next to the member to add. 
+                        To add/edit/delete members and groups, double-click or right-click the relevant list item.
+                    </TextBlock>
+                               
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="0" Margin="10,0"
+                            Height="230">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -64,7 +74,30 @@
                             </Grid.RowDefinitions>
                             <TextBlock Text="Groups" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
                             <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Groups}"
-                                     MouseDoubleClick="ListBox_MouseDoubleClick" SelectionMode="Single">
+                                     MouseDoubleClick="ListBox_MouseDoubleClick" SelectionMode="Single"
+                                     SelectedItem="{Binding SelectedGroup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add Group" Command="{Binding AddGroupCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource user-group}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Edit Group" Command="{Binding EditGroupCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource user-group}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Delete Group" Command="{Binding DeleteGroupCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource group-delete}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
@@ -73,8 +106,8 @@
                             </ListBox>
                         </Grid>
                     </Border>
-                    <Border Style="{DynamicResource ControlBorder}" Grid.Column="2" Margin="10,0"
-                            Height="{Binding ElementName=LowerGrid,Path=ActualHeight}">
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="2" Margin="10,0"
+                            Height="230">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -83,23 +116,31 @@
                             <TextBlock Text="Members" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
 
                             <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Members}"
-                                     MouseDoubleClick="MembersListBox_MouseDoubleClick" 
-                                     SelectionMode="Extended" SelectionChanged="MemberListBox_SelectionChanged">
+                                     SelectedItem="{Binding SelectedMember,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                 <ListBox.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Add Member" Command="{Binding AddMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource business-man-01-wf}" Style="{DynamicResource MenuItemIcon}" />
+                                                <controls:FontIcon Glyph="{DynamicResource business-man-add-01-wf}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Delete Member(s)" Command="{Binding DeleteMemberCommand}">
+                                        <MenuItem Header="Edit Member" Command="{Binding EditMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource business-delete-01-wf}" Style="{DynamicResource MenuItemIcon}" />
+                                                <controls:FontIcon Glyph="{DynamicResource business-setting-01-wf}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Move Member(s)" Command="{Binding MoveMemberCommand}">
+                                        <MenuItem Header="Delete Member" Command="{Binding DeleteMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource move-item}" Style="{DynamicResource MenuItemIcon}" />
+                                                <controls:FontIcon Glyph="{DynamicResource business-delete-01-wf}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Move Member" Command="{Binding MoveMemberCommand}">
+                                            <MenuItem.Icon>
+                                                <controls:FontIcon Glyph="{DynamicResource move-item}" 
+                                                                   Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                     </ContextMenu>
