@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongregationManager"
         xmlns:views="clr-namespace:CongregationManager.ViewModels"
-        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
         Height="450" Width="800" Icon="/Resources/CM.ico">
@@ -32,12 +32,12 @@
                                Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
                 </Border>
 
-                <controls:ControlButton Grid.Column="1" Glyph="&#xE921;" Command="{Binding MinimizeCommand}"
+                <mycontrols:ControlButton Grid.Column="1" Glyph="&#xE921;" Command="{Binding MinimizeCommand}"
                                         Margin="0,-1,0,0" CornerRadius="0,0,0,5" BorderThickness="1,0,1,1"
                                         Padding="0,5,0,0" Height="21"/>
-                <controls:ControlButton Grid.Column="2" Glyph="&#xE922;" Command="{Binding MaximizeCommand}"
+                <mycontrols:ControlButton Grid.Column="2" Glyph="&#xE922;" Command="{Binding MaximizeCommand}"
                                         Margin="0,-1,0,0" CornerRadius="0,0,0,0" BorderThickness="0,0,0,1"/>
-                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
                                         Margin="0,-1,10,0" CornerRadius="0,0,5,0" BorderThickness="1,0,1,1"/>
 
             </Grid>
@@ -56,7 +56,7 @@
                     <MenuItem Header="_File">
                         <MenuItem Header="E_xit" Command="{Binding CloseWindowCommand}">
                             <MenuItem.Icon>
-                                <controls:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE10A;" />
+                                <mycontrols:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE10A;" />
                             </MenuItem.Icon>
                         </MenuItem>
 
@@ -67,12 +67,12 @@
                     <MenuItem Header="_Tools">
                         <MenuItem Header="Extension Manager" Command="{Binding ExtensionManagerCommand}">
                             <MenuItem.Icon>
-                                <controls:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE2AC;" />
+                                <mycontrols:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE2AC;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="View Logs" Command="{Binding ViewLogsCommand}">
                             <MenuItem.Icon>
-                                <controls:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE736;" />
+                                <mycontrols:FontIcon Style="{StaticResource MenuItemIcon}" Glyph="&#xE736;" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -92,7 +92,7 @@
                         <Setter Property="Header">
                             <Setter.Value>
                                 <StackPanel Orientation="Horizontal">
-                                    <controls:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />
+                                    <mycontrols:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />
                                     <TextBlock Text="{Binding Title}" Style="{DynamicResource TabHeader}" />
                                 </StackPanel>
                             </Setter.Value>

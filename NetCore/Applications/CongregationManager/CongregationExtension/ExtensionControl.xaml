@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CongregationExtension"
              xmlns:views="clr-namespace:CongregationExtension.ViewModels"
-             xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+             xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
              xmlns:data="clr-namespace:CongregationManager.Data;assembly=CongregationManager.Data"
              mc:Ignorable="d"  
              d:DesignHeight="450" d:DesignWidth="800">
@@ -46,7 +46,7 @@
         <Border Grid.Row="1" Style="{DynamicResource ErrorBorder}" 
                 Visibility="{Binding ErrorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <controls:FontIcon Style="{DynamicResource ErrorIcon}" Glyph="{DynamicResource warning-shield}" />
+                <mycontrols:FontIcon Style="{DynamicResource ErrorIcon}" Glyph="{DynamicResource warning-shield}" />
                 <TextBlock Style="{DynamicResource ErrorTextBlock}" 
                            Text="{Binding ErrorMessage,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
             </StackPanel>

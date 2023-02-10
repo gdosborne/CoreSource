@@ -2,7 +2,7 @@
 using Common.Applicationn.Logging;
 using Common.Applicationn.Primitives;
 using CongregationManager.Data;
-using Controls;
+using Controls.Core;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

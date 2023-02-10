@@ -1,6 +1,6 @@
 ﻿using Common.Applicationn.Primitives;
 using CongregationManager.Extensibility;
-using Controls;
+using Controls.Core;
 using System.Collections.Generic;
 using System.Windows;
 

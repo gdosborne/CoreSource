@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongregationExtension"
         xmlns:views="clr-namespace:CongregationExtension.ViewModels"
-        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
         WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
@@ -35,7 +35,7 @@
                     <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
                                Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
                 </Border>
-                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
                                         Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
 
             </Grid>
@@ -80,19 +80,19 @@
                                     <ContextMenu>
                                         <MenuItem Header="Add Group" Command="{Binding AddGroupCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource user-group}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource user-group}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Edit Group" Command="{Binding EditGroupCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource user-group}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource user-group}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Delete Group" Command="{Binding DeleteGroupCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource group-delete}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource group-delete}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
@@ -121,25 +121,25 @@
                                     <ContextMenu>
                                         <MenuItem Header="Add Member" Command="{Binding AddMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource business-man-add-01-wf}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource business-man-add-01-wf}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Edit Member" Command="{Binding EditMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource business-setting-01-wf}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource business-setting-01-wf}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Delete Member" Command="{Binding DeleteMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource business-delete-01-wf}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource business-delete-01-wf}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Move Member" Command="{Binding MoveMemberCommand}">
                                             <MenuItem.Icon>
-                                                <controls:FontIcon Glyph="{DynamicResource move-item}" 
+                                                <mycontrols:FontIcon Glyph="{DynamicResource move-item}" 
                                                                    Style="{DynamicResource MenuItemIcon}" />
                                             </MenuItem.Icon>
                                         </MenuItem>
@@ -152,7 +152,7 @@
                                                 <ColumnDefinition Width="40" />
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <controls:FontIcon Grid.Column="0" Glyph="{Binding Icon}"
+                                            <mycontrols:FontIcon Grid.Column="0" Glyph="{Binding Icon}"
                                                                FontFamily="{DynamicResource GenderFontFamily}" 
                                                                FontSize="{DynamicResource LargeFontSize}"/>
                                             <CheckBox Grid.Column="1" Content="{Binding FullName}" 

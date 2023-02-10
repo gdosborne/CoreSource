@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:expr="clr-namespace:Common.Applicationn.Windows.Expressions;assembly=ApplicationFramework"
-                    xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+                    xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:Double x:Key="StandardFontSize">20</sys:Double>
@@ -150,7 +150,7 @@
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
     </Style>
 
-    <Style TargetType="controls:FontIcon" x:Key="MenuItemIcon">
+    <Style TargetType="mycontrols:FontIcon" x:Key="MenuItemIcon">
         <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
     </Style>
@@ -162,7 +162,7 @@
         <Setter Property="Margin" Value="0" />
     </Style>
 
-    <Style TargetType="controls:FontIcon" x:Key="ErrorIcon">
+    <Style TargetType="mycontrols:FontIcon" x:Key="ErrorIcon">
         <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource XLargeFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
@@ -179,7 +179,7 @@
         <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
     </Style>
 
-    <Style TargetType="controls:FontIcon" x:Key="TabIcon">
+    <Style TargetType="mycontrols:FontIcon" x:Key="TabIcon">
         <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Margin" Value="0,0,5,0" />
@@ -206,7 +206,7 @@
         <Setter Property="Margin" Value="2,2,12,2" />
     </Style>
 
-    <Style TargetType="controls:FontIcon" x:Key="ToolbarIcon" BasedOn="{StaticResource MenuItemIcon}">
+    <Style TargetType="mycontrols:FontIcon" x:Key="ToolbarIcon" BasedOn="{StaticResource MenuItemIcon}">
         <Setter Property="FontSize" Value="{DynamicResource LargeFontSize}" />
         <Setter Property="Margin" Value="2" />
     </Style>
@@ -341,12 +341,12 @@
         <Setter Property="TextDecorations" Value="None" />
     </Style>
 
-    <Style TargetType="controls:FontIcon" x:Key="ControlIcon" BasedOn="{StaticResource MenuItemIcon}">
+    <Style TargetType="mycontrols:FontIcon" x:Key="ControlIcon" BasedOn="{StaticResource MenuItemIcon}">
         <Setter Property="FontSize" Value="{DynamicResource XXSmallFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
     </Style>
 
-    <Style TargetType="controls:ControlButton">
+    <Style TargetType="mycontrols:ControlButton">
         <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource ControlForeground}" />
         <Setter Property="GlyphFontFamily" Value="{DynamicResource GlyphFontFamily}" />
@@ -387,7 +387,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="controls:ToggleSwitch">
+    <Style TargetType="mycontrols:ToggleSwitch">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Background" Value="Transparent" />

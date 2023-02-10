@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Controls {
+namespace Controls.Core {
     public partial class FontIcon : UserControl {
         public FontIcon() {
             InitializeComponent();

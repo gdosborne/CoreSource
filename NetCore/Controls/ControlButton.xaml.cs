@@ -1,15 +1,12 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows.Expressions;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace Controls {
+namespace Controls.Core {
     public partial class ControlButton : UserControl {
         public ControlButton() {
             InitializeComponent();

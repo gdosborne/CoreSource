@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CongregationManager"
         xmlns:views="clr-namespace:CongregationManager.ViewModels"
-        xmlns:controls="clr-namespace:Controls;assembly=Controls.Core"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" 
         ResizeMode="CanResizeWithGrip" Height="450" Width="800"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
@@ -32,7 +32,7 @@
                                Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
                 </Border>
 
-                <controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
                                         Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
             </Grid>
         </Border>
