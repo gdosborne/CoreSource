@@ -65,9 +65,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
@@ -140,25 +138,25 @@
                     <TextBlock Name="AddressTextBlock" Text="Address" Grid.Row="5" Grid.Column="0" 
                                Style="{DynamicResource WindowLabel}"/>
                     <TextBox Name="AddressTextBox" Grid.Row="5" Grid.Column="1" Height="60" Grid.RowSpan="2" 
-                             TextWrapping="Wrap" 
+                             TextWrapping="Wrap" Style="{DynamicResource WindowTextField}"
                              Text="{Binding Member.Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                             GotFocus="ItemGotFocus" Style="{DynamicResource WindowTextField}"/>
+                             GotFocus="ItemGotFocus" />
 
-                    <TextBlock Name="CityTextBlock" Text="City" Grid.Row="6" Grid.Column="3" 
+                    <TextBlock Name="CityTextBlock" Text="City" Grid.Row="5" Grid.Column="3" 
                                Style="{DynamicResource WindowLabel}"/>
-                    <TextBox Name="CityTextBox" Grid.Row="6" Grid.Column="4"  GotFocus="ItemGotFocus"
+                    <TextBox Name="CityTextBox" Grid.Row="5" Grid.Column="4"  GotFocus="ItemGotFocus"
                              Text="{Binding Member.City,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                              Style="{DynamicResource WindowTextField}"/>
 
-                    <TextBlock Name="StateProvenceTextBlock" Text="State/Provence" Grid.Row="5" Grid.Column="3" 
+                    <TextBlock Name="StateProvenceTextBlock" Text="State/Provence" Grid.Row="6" Grid.Column="3" 
                                Style="{DynamicResource WindowLabel}"/>
-                    <TextBox Name="StateProvenceTextBox" Grid.Row="5" Grid.Column="4" GotFocus="ItemGotFocus"
+                    <TextBox Name="StateProvenceTextBox" Grid.Row="6" Grid.Column="4" GotFocus="ItemGotFocus"
                              Text="{Binding Member.StateProvence,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                              Style="{DynamicResource WindowTextField}"/>
 
-                    <TextBlock Name="PostalCodeTextBlock" Text="Postal Code" Grid.Row="6" Grid.Column="0" 
+                    <TextBlock Name="PostalCodeTextBlock" Text="Postal Code" Grid.Row="7" Grid.Column="0" 
                                Style="{DynamicResource WindowLabel}"/>
-                    <TextBox Name="PostalCodeTextBox" Grid.Row="6" Grid.Column="1" GotFocus="ItemGotFocus"
+                    <TextBox Name="PostalCodeTextBox" Grid.Row="7" Grid.Column="1" GotFocus="ItemGotFocus"
                              Text="{Binding Member.PostalCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                              Style="{DynamicResource WindowTextField}"/>
 
@@ -187,13 +185,9 @@
                             </ItemsControl>
                         </ScrollViewer>
                     </Border>
-                    <TextBlock Text="{Binding Member.PrivelegeValue}" Style="{DynamicResource WindowLabel}" 
-                               FontSize="{DynamicResource XSmallFontSize}" Grid.Row="4" Grid.Column="4"
-                               Margin="0" Visibility="Hidden"/>
-
                 </Grid>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="9" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
                             Command="{Binding AcceptDataCommand}"/>
                     <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 

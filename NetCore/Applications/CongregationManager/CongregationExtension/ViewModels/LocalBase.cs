@@ -15,7 +15,8 @@ namespace CongregationExtension.ViewModels {
         public enum Actions {
             CloseWindow,
             AcceptData,
-            AddMember
+            AddMember,
+            GroupSelected
         }
 
         #region CloseWindowCommand

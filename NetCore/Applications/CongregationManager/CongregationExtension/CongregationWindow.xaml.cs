@@ -22,6 +22,10 @@ namespace CongregationManager {
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             var action = (LocalBase.Actions)Enum.Parse(typeof(LocalBase.Actions), e.CommandToExecute);
             switch (action) {
+                case LocalBase.Actions.GroupSelected: {
+                        View.Members.ToList().ForEach(x => x.IsEnabled = View.SelectedGroup != null);
+                        break;
+                    }
                 case LocalBase.Actions.CloseWindow: {
                         Close();
                         break;

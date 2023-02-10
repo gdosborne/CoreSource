@@ -151,6 +151,7 @@ namespace CongregationExtension {
                 member.ID = !win.View.SelectedCongregation.Members.Any()
                     ? 1 : win.View.SelectedCongregation.Members.Max(x => x.ID) + 1;
                 win.View.SelectedCongregation.Members.Add(member);
+
                 try {
                     DataManager.SaveCongregation(congregation);
                     DataManager.SaveCongregation(win.View.SelectedCongregation);

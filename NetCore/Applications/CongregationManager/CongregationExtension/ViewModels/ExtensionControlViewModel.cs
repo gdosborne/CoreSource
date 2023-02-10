@@ -44,6 +44,16 @@ namespace CongregationExtension.ViewModels {
             var win = new CongregationWindow();
             win.View.Congregation = cong;
             var result = win.ShowDialog();
+
+            App.DataManager.Congregations.ToList().ForEach(item => {
+                var thisCong = Congregations.FirstOrDefault(x => x.ID == item.ID);
+                if(thisCong != null && item.Members.Any()) {                   
+                    thisCong.Members = item.Members;
+                    thisCong.Members.ForEach(mbr => {
+                        mbr.Resources = App.DataManager.Resources;
+                    });
+                }
+            });
         }
 
         private void ProcessLocalItems() {

@@ -156,6 +156,7 @@
                                                                FontFamily="{DynamicResource GenderFontFamily}" 
                                                                FontSize="{DynamicResource LargeFontSize}"/>
                                             <CheckBox Grid.Column="1" Content="{Binding FullName}" 
+                                                      IsEnabled="{Binding IsEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                       IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                                         </Grid>
                                     </DataTemplate>

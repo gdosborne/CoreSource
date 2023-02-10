@@ -31,6 +31,7 @@ namespace CongregationExtension.ViewModels {
                 _Congregation = value;
                 if (Congregation != null) {
                     Members.AddRange(Congregation.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
+                    Members.ToList().ForEach(x => x.IsEnabled = false);
                     Groups.AddRange(Congregation.Groups.OrderBy(x => x.Name));
                     SetGroupMembership();
                     Congregation.PropertyChanged += Congregation_PropertyChanged;
@@ -140,6 +141,7 @@ namespace CongregationExtension.ViewModels {
         private void AddMember(object state) {
             var mbr = App.AddNewMember(Congregation);
             if (mbr != null) {
+                mbr.IsEnabled = SelectedGroup != null;
                 Members.Add(mbr);
                 var ordered = Members
                     .OrderBy(x => x.LastName)
@@ -157,7 +159,8 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand DeleteMemberCommand => _DeleteMemberCommand ?? (_DeleteMemberCommand = new DelegateCommand(DeleteMember, ValidateDeleteMemberState));
         private bool ValidateDeleteMemberState(object state) => SelectedMember != null;
         private void DeleteMember(object state) {
-            App.DeleteMember(SelectedMember, Congregation);
+            if (App.DeleteMember(SelectedMember, Congregation))
+                Members.Remove(SelectedMember);
         }
         #endregion
 
@@ -172,7 +175,9 @@ namespace CongregationExtension.ViewModels {
                 .Where(x => x.ID != Congregation.ID)
                 .OrderBy(x => x.Name)
                 .ToList();
-            App.MoveMember(SelectedMember, Congregation, others);
+            if(App.MoveMember(SelectedMember, Congregation, others)) {
+                Members.Remove(SelectedMember);
+            }
         }
         #endregion
 
@@ -216,6 +221,7 @@ namespace CongregationExtension.ViewModels {
                         ids.Add(SelectedGroup.AssistantMemberID);
                     SetGroupMembership(ids);
                 }
+                ExecuteAction(nameof(Actions.GroupSelected));
                 OnPropertyChanged();
             }
         }

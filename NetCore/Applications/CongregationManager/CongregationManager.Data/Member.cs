@@ -290,6 +290,20 @@ namespace CongregationManager.Data {
         }
         #endregion
 
+        #region IsEnabled Property
+        private bool _IsEnabled = default;
+        /// <summary>Gets/sets the IsEnabled.</summary>
+        /// <value>The IsEnabled.</value>
+        [JsonIgnore]
+        public bool IsEnabled {
+            get => _IsEnabled;
+            set {
+                _IsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         [JsonIgnore]
         public ResourceDictionary Resources { get; set; }
 
