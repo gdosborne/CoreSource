@@ -1,12 +1,16 @@
-﻿using System.Windows;
+﻿using Common.Applicationn.Primitives;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using static Controls.Core.AddressItemChangedEventArgs;
 
 namespace Controls.Core {
     public partial class AddressData : UserControl {
         public AddressData() {
             InitializeComponent();
         }
+
+        public event AddressItemChangedHandler AddressItemChanged;
 
         #region AddressProperty
         /// <summary>Gets the Address dependency property.</summary>
@@ -184,5 +188,25 @@ namespace Controls.Core {
         }
         #endregion
 
+        private void AddressItemTextChanged(object sender, TextChangedEventArgs e) {
+            if (sender == AddressTextBox)
+                AddressItemChanged?.Invoke(this,
+                    new AddressItemChangedEventArgs(e.RoutedEvent, e.UndoAction, AddressParts.Address));
+            else if(sender == CityTextBox)
+                AddressItemChanged?.Invoke(this,
+                    new AddressItemChangedEventArgs(e.RoutedEvent, e.UndoAction, AddressParts.City));
+            else if (sender == StateProvenceTextBox)
+                AddressItemChanged?.Invoke(this,
+                    new AddressItemChangedEventArgs(e.RoutedEvent, e.UndoAction, AddressParts.StateProvence));
+            else if (sender == PostalCodeTextBox)
+                AddressItemChanged?.Invoke(this,
+                    new AddressItemChangedEventArgs(e.RoutedEvent, e.UndoAction, AddressParts.PostalCode));
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) {
+            if (sender == AddressTextBox)
+                return;
+            sender.As<TextBox>().SelectAll();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
+using CongregationManager.Data;
 using System;
 using System.Linq;
 using System.Windows;
@@ -24,35 +25,39 @@ namespace CongregationExtension {
                         break;
                     }
                 case LocalBase.Actions.AcceptData: {
-                        if(View.Group == null) {
-                            View.Group = new CongregationManager.Data.Group {
+                        var createdGroup = default(Group);
+                        if (View.Group == null) {
+                            createdGroup = new Group {
                                 Name = View.GroupName,
                                 OverseerMemberID = View.SelectedOverseer.ID,
                                 AssistantMemberID = View.SelectedAssistant.ID,
                                 ID = !View.Congregation.Groups.Any()
                                     ? 1 : View.Congregation.Groups.Max(x => x.ID) + 1
                             };
-                            View.Congregation.Groups.Add(View.Group);
+                            View.Congregation.Groups.Add(createdGroup);
                         }
-                        View.Group.MemberIDs = View.Congregation.Members
+                        else
+                            createdGroup = View.Group;
+                        
+                        createdGroup.MemberIDs = View.Members
                             .Where(x => x.IsSelected)
                             .Select(x => x.ID)
                             .ToList();
 
-                        var otherGroupMembers = App.MembersInOtherGroups(View.Congregation, View.Group);
+                        var otherGroupMembers = App.MembersInOtherGroups(View.Congregation, createdGroup);
                         if (otherGroupMembers.Any()) {
                             foreach (var member in otherGroupMembers) {
-                                var group = View.Congregation.Groups.FirstOrDefault(x => x.ID != View.Group.ID && x.MemberIDs.Contains(member.ID));
-                                if (group == null)
+                                var otherGroup = View.Congregation.Groups.FirstOrDefault(x => x.ID != createdGroup.ID && x.MemberIDs.Contains(member.ID));
+                                if (otherGroup == null)
                                     continue;
-                                var msg = $"{member.FullName} is already in {group.Name}.\n\nMove {member.FullName} " +
-                                    $"to {View.Group.Name}?";
+                                var msg = $"{member.FullName} is already in {otherGroup.Name}.\n\nMove {member.FullName} " +
+                                    $"to {createdGroup.Name}?";
                                 if (App.IsYesInDialogSelected("Switch Groups", msg, "Switch Groups",
                                         Ookii.Dialogs.Wpf.TaskDialogIcon.Shield)) {
-                                    group.MemberIDs.Remove(member.ID);
+                                    otherGroup.MemberIDs.Remove(member.ID);
                                 }
                                 else {
-                                    View.Group.MemberIDs.Remove(member.ID);
+                                    createdGroup.MemberIDs.Remove(member.ID);
                                 }
                             }
                         }

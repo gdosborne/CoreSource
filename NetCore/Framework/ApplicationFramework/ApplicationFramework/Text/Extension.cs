@@ -21,14 +21,19 @@ namespace Common.Applicationn.Text {
             return result;
         }
 
-        public static string SplitAtCaps(this string value, bool keepConsecutiveCaps = true) {
+        public static string SplitAtCaps(this string value, bool isReplaceUndersore = true) {
             var result = new StringBuilder();
             var chars = value.ToCharArray();
             for (int i = 0; i < chars.Length; i++) {
+                if (chars[i] == '_' && isReplaceUndersore) {
+                    result.Append(' ');
+                    continue;
+                }
+                    
                 var shouldAddSpace = i > 0
                     && char.IsLetter(chars[i])
                     && char.IsUpper(chars[i])
-                    && (!keepConsecutiveCaps && !char.IsUpper(chars[i - 1]));
+                    && !char.IsUpper(chars[i - 1]);
                 if (shouldAddSpace)
                     result.Append(' ');
                 result.Append(chars[i]);

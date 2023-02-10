@@ -366,7 +366,7 @@ namespace Common.Applicationn.Windows {
             timerWindow.Left = left < 0 ? 0 : left;
         }
 
-        public static void SetBounds(this Window win, Settings appSettings) {
+        public static void SetBounds(this Window win, Settings appSettings, bool includeState = false) {
             if (win == null) {
                 throw new ArgumentNullException("Window is missing");
             }
@@ -398,16 +398,18 @@ namespace Common.Applicationn.Windows {
                 double.IsNaN(height)
                     || height == double.PositiveInfinity
                     || height == double.NegativeInfinity ? 600 : height;
-            win.WindowState = winState;
+            if (includeState)
+                win.WindowState = winState;
         }
 
-        public static void SaveBounds(this Window win, Settings appSettings) {
+        public static void SaveBounds(this Window win, Settings appSettings, bool includeState = false) {
             var name = win.GetType().Name;
             appSettings.AddOrUpdateSetting(name, "Left", win.RestoreBounds.Left);
             appSettings.AddOrUpdateSetting(name, "Top", win.RestoreBounds.Top);
             appSettings.AddOrUpdateSetting(name, "Width", win.RestoreBounds.Width);
             appSettings.AddOrUpdateSetting(name, "Height", win.RestoreBounds.Height);
-            appSettings.AddOrUpdateSetting(name, "WindowState", win.WindowState);
+            if (includeState)
+                appSettings.AddOrUpdateSetting(name, "WindowState", win.WindowState);
         }
     }
 }

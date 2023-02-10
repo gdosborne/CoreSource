@@ -63,21 +63,24 @@ namespace CongregationExtension {
             td.ShowDialog();
         }
 
-        internal static void AddEditGroup(Congregation congregation, Group group) {
+        internal static Group AddEditGroup(Congregation congregation, Group group) {
             var win = new GroupWindow();
             win.View.Congregation = congregation;
             win.View.Group = group;
             var result = win.ShowDialog();
             if (!result.HasValue || !result.Value) {
-                return;
+                return null;
             }
             
             try {
+                group = win.View.Group;
                 DataManager.SaveCongregation(congregation);
             }
             catch (Exception ex) {
                 logger.LogMessage(ex.Message, EntryTypes.Error);
+                return null;
             }
+            return group;
         }
 
         internal static void AddCongregation() {
@@ -161,7 +164,7 @@ namespace CongregationExtension {
             return false;
         }
 
-        internal static void AddNewMember(Congregation congregation) {
+        internal static Member AddNewMember(Congregation congregation) {
             var newId = congregation.Members.Count() == 0
                     ? 1 : congregation.Members.Max(x => x.ID) + 1;
             var win = new MemberWindow {
@@ -171,15 +174,16 @@ namespace CongregationExtension {
             win.View.Member = mbr;
             var result = win.ShowDialog();
             if (!result.HasValue || !result.Value || win.View.Member == null)
-                return;
+                return null;
 
             mbr.Resources = App.DataManager.Resources;
             if (mbr.IsNew) {
                 mbr.ID = newId;
             }
-            congregation.Members.Clear();
-            congregation.Members.AddRange(congregation.Members
-                .OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
+            congregation.Members.Add(mbr);
+            //var sorted = congregation.Members.OrderBy(x=>x.LastName).ThenBy(x=>x.FirstName).ToList();
+            //if (sorted != null && sorted.Any())
+            //    congregation.Members = sorted;
 
             try {
                 DataManager.SaveCongregation(congregation);
@@ -189,7 +193,9 @@ namespace CongregationExtension {
             }
             catch (Exception ex) {
                 logger.LogMessage(ex.Message, EntryTypes.Error);
+                return null;
             }
+            return mbr;
         }
 
         internal static void EditMember(Member member, Congregation congregation) {

@@ -1,4 +1,5 @@
 ﻿using Common.Applicationn;
+using Common.Applicationn.Text;
 using Common.MVVMFramework;
 using Newtonsoft.Json;
 using System;
@@ -152,7 +153,7 @@ namespace CongregationManager.Data {
         /// <value>The Telephone.</value>
         [JsonProperty("telephone")]
         public string Telephone {
-            get => _Telephone;
+            get => _Telephone.ToPhoneNumber();
             set {
                 _Telephone = value;
                 OnPropertyChanged();

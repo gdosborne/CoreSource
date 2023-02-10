@@ -9,7 +9,7 @@
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
         WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="800" SizeToContent="Height" MinHeight="680" MinWidth="800"
+        Width="800" Height="600" MaxHeight="900" MinHeight="720" MinWidth="800"
         Icon="\Resources\CM.ico">
     <Window.Resources>
         <ResourceDictionary Source="/Resources/MainTheme.xaml" />
@@ -48,9 +48,9 @@
                     <RowDefinition />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <local:CongregationControl Grid.Row="0" ButtonVisibility="Collapsed" 
+                <local:CongregationControl Grid.Row="0" ButtonVisibility="Collapsed"
                                            Congregation="{Binding Congregation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                <Grid Grid.Row="1" Name="LowerGrid" Height="290">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="10" />
@@ -58,24 +58,24 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource WindowHeaderText}">
                         To add members to a group, select the group and then place checkmarks next to the member to add. 
                         To add/edit/delete members and groups, double-click or right-click the relevant list item.
                     </TextBlock>
                                
-                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="0" Margin="10,0"
-                            Height="230">
-                        <Grid>
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch">
+                        <Grid VerticalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Groups" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
-                            <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Groups}"
+                            <ListBox Grid.Row="1" ItemsSource="{Binding Groups}"
                                      MouseDoubleClick="ListBox_MouseDoubleClick" SelectionMode="Single"
-                                     SelectedItem="{Binding SelectedGroup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                     SelectedItem="{Binding SelectedGroup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                     VerticalAlignment="Stretch">
                                 <ListBox.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Add Group" Command="{Binding AddGroupCommand}">
@@ -106,16 +106,16 @@
                             </ListBox>
                         </Grid>
                     </Border>
-                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="2" Margin="10,0"
-                            Height="230">
-                        <Grid>
+
+                    <Border Style="{DynamicResource ControlBorder}" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch">
+                        <Grid VerticalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Members" Grid.Row="0" Style="{DynamicResource SectionHeader}" />
 
-                            <ListBox Grid.Row="1" ItemsSource="{Binding Congregation.Members}"
+                            <ListBox Grid.Row="1" ItemsSource="{Binding Members}"
                                      SelectedItem="{Binding SelectedMember,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                 <ListBox.ContextMenu>
                                     <ContextMenu>
@@ -164,6 +164,7 @@
                         </Grid>
                     </Border>
                 </Grid>
+                
                 <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                     <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
                             Command="{Binding AcceptDataCommand}"/>

@@ -1,10 +1,8 @@
-﻿using Common.Applicationn.Logging;
-using Common.Applicationn.Primitives;
+﻿using Common.Applicationn.Primitives;
 using CongregationManager.Data;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace CongregationExtension {
@@ -29,12 +27,12 @@ namespace CongregationExtension {
                     actualHr -= 12;
                     actualAP = "PM";
                 }
-                MeetingTimeComboBox.Items.Add($"{actualHr}:00 {actualAP}");
-                MeetingTimeComboBox.Items.Add($"{actualHr}:15 {actualAP}");
-                MeetingTimeComboBox.Items.Add($"{actualHr}:30 {actualAP}");
-                MeetingTimeComboBox.Items.Add($"{actualHr}:45 {actualAP}");
+                MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 0, 0)));
+                MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 15, 0)));
+                MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 30, 0)));
+                MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 45, 0)));
             }
-            MeetingTimeComboBox.SelectedItem = $"10:00 AM";
+            MeetingTimeComboBox.SelectedItem = ActualMeetingTime(new TimeSpan(10, 0, 0));
         }
 
         #region CongregationProperty
@@ -59,10 +57,16 @@ namespace CongregationExtension {
                 obj.TelephoneTextBox.Text = val.Telephone;
                 obj.IsLocalCheckBox.IsChecked = val.IsLocal;
                 obj.MeetingDayComboBox.SelectedItem = val.MeetingDay;
-                obj.MeetingTimeComboBox.SelectedItem = val.MeetingTime;
+                obj.MeetingTimeComboBox.SelectedItem = ActualMeetingTime(val.MeetingTime);
             }
         }
         #endregion
+
+        private static string ActualMeetingTime(TimeSpan ts) {
+            var pattern = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
+            var dt = DateTime.Now.Date.Add(ts);
+            return dt.ToString(pattern);
+        }
 
         private void TextBoxGotFocus(object sender, RoutedEventArgs e) {
             sender.As<TextBox>().SelectAll();
@@ -123,7 +127,10 @@ namespace CongregationExtension {
 
         private void TextBoxTextChanged(object sender, TextChangedEventArgs e) {
             if (sender == CongregationNameTextBox) {
-                Congregation.Name = sender.As<TextBox > ().Text;
+                Congregation.Name = sender.As<TextBox>().Text;
+            }
+            else if (sender == TelephoneTextBox) {
+                Congregation.Telephone = sender.As<TextBox>().Text;
             }
             else if (sender == AddressTextBox) {
                 Congregation.Address = sender.As<TextBox>().Text;
@@ -136,9 +143,6 @@ namespace CongregationExtension {
             }
             else if (sender == PostalCodeTextBox) {
                 Congregation.PostalCode = sender.As<TextBox>().Text;
-            }
-            else if (sender == TelephoneTextBox) {
-                Congregation.Telephone = sender.As<TextBox>().Text;
             }
         }
 

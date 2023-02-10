@@ -11,7 +11,7 @@ namespace CongregationManager {
         public MainWindow() {
             InitializeComponent();
 
-            this.SetBounds(App.ApplicationSession.ApplicationSettings);
+            this.SetBounds(App.ApplicationSession.ApplicationSettings, true);
             App.LogMessage("Opening main window", EntryTypes.Information);
 
 
@@ -67,7 +67,7 @@ namespace CongregationManager {
             DataContext.As<MainWindowViewModel>();
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
-            this.SaveBounds(App.ApplicationSession.ApplicationSettings);
+            this.SaveBounds(App.ApplicationSession.ApplicationSettings, true);
             App.LogMessage("Closing main window", EntryTypes.Information);
         }
 

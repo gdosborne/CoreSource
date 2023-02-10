@@ -119,9 +119,20 @@ namespace CongregationExtension.ViewModels {
         public Member SelectedOverseer {
             get => _SelectedOverseer;
             set {
+                if (SelectedOverseer != null) {
+                    Congregation.Members.First(x => x.ID == SelectedOverseer.ID).IsSelected = false;
+                    SelectedOverseer.IsSelected = false;
+                    if (Group != null)
+                        Group.OverseerMemberID = 0;
+                }
                 _SelectedOverseer = value;
-                if (Group != null && SelectedOverseer != null)
-                    OnPropertyChanged();
+                if (SelectedOverseer != null) {
+                    Congregation.Members.First(x => x.ID == SelectedOverseer.ID).IsSelected = true;
+                    SelectedOverseer.IsSelected = true;
+                    if (Group != null)
+                        Group.OverseerMemberID = SelectedOverseer.ID;
+                }
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -133,14 +144,18 @@ namespace CongregationExtension.ViewModels {
         public Member SelectedAssistant {
             get => _SelectedAssistant;
             set {
-                if (Group != null && SelectedAssistant != null) {
-                    Congregation.Members.First(x => x.ID == Group.AssistantMemberID).IsSelected = false;
-                    Group.AssistantMemberID = 0;
+                if (SelectedAssistant != null) {
+                    Congregation.Members.First(x => x.ID == SelectedAssistant.ID).IsSelected = false;
+                    SelectedAssistant.IsSelected = false;
+                    if (Group != null)
+                        Group.AssistantMemberID = 0;
                 }
                 _SelectedAssistant = value;
-                if (Group != null && SelectedAssistant != null) {
-                    Group.AssistantMemberID = SelectedAssistant.ID;
-                    Congregation.Members.First(x => x.ID == Group.AssistantMemberID).IsSelected = true;
+                if (SelectedAssistant != null) {
+                    Congregation.Members.First(x => x.ID == SelectedAssistant.ID).IsSelected = true;
+                    SelectedAssistant.IsSelected = true;
+                    if (Group != null)
+                        Group.AssistantMemberID = SelectedAssistant.ID;
                 }
                 OnPropertyChanged();
             }
@@ -165,6 +180,7 @@ namespace CongregationExtension.ViewModels {
                         SelectedAssistant = Assistants.FirstOrDefault(x => x.ID == Group.AssistantMemberID);
                     if (Congregation != null)
                         Group.MemberIDs.ForEach(x => Congregation.Members.FirstOrDefault(y => y.ID == x).IsSelected = true);
+                    //Members = new ObservableCollection<Member>(Congregation.Members.Where(x => Group.MemberIDs.Contains(x.ID)));
                 }
                 OnPropertyChanged();
             }

@@ -34,6 +34,12 @@
     <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\CongregationManager\Resources\CM.ico" Link="Resources\CM.ico" />
+    <Content Include="..\CongregationManager\Resources\CM.png" Link="Resources\CM.png" />
+    <Content Include="..\CongregationManager\Resources\OzSoft-Icon.ico" Link="Resources\OzSoft-Icon.ico" />
+    <Content Include="..\CongregationManager\Resources\OzSoft-Logo.png" Link="Resources\OzSoft-Logo.png" />
+    <Content Include="..\CongregationManager\Resources\Watchtower.ico" Link="Resources\Watchtower.ico" />
+    <Content Include="..\CongregationManager\Resources\Watchtower.png" Link="Resources\Watchtower.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +64,10 @@
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\CongregationManager\Resources\CM.pdn" Link="Resources\CM.pdn" />
   </ItemGroup>
 
   <ItemGroup>

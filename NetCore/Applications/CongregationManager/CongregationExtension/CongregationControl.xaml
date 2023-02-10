@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CongregationExtension"
+             xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
              FocusManager.FocusedElement="{Binding ElementName=CongregationNameTextBox}"
              mc:Ignorable="d" Background="{DynamicResource WindowBackground}"
-             d:DesignHeight="240.549" d:DesignWidth="800">
+             d:DesignHeight="336.502" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary Source="Resources/MainTheme.xaml" />
     </UserControl.Resources>
@@ -31,7 +32,9 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
+                
                 <TextBlock Text="Congregation Name" Grid.Row="0" Grid.Column="0" 
                            Style="{DynamicResource WindowLabel}"/>
                 <TextBox Name="CongregationNameTextBox" Grid.Row="0" Grid.Column="1" 
@@ -51,45 +54,42 @@
                               ToolTip="A local congregation is the congregation you are managing"/>
                 </StackPanel>
 
-                <TextBlock Text="Address" Grid.Row="1" Grid.Column="0" 
+                <TextBlock Name="AddressTextBlock" Text="Address" Grid.Row="1" Grid.Column="0" 
                            Style="{DynamicResource WindowLabel}"/>
-                <TextBox Name="AddressTextBox" Grid.Row="1" Grid.Column="1" 
-                         Style="{DynamicResource MultilineWindowTextField}"
-                         Height="60" Grid.RowSpan="2" TextChanged="TextBoxTextChanged" />
+                <TextBox Name="AddressTextBox" Grid.Row="1" Grid.Column="1" Height="60" Grid.RowSpan="2" TextWrapping="Wrap"
+                         GotFocus="TextBoxGotFocus" Style="{DynamicResource WindowTextField}"/>
 
-                <TextBlock Text="City" Grid.Row="1" Grid.Column="3" 
+                <TextBlock Name="CityTextBlock" Text="City" Grid.Row="1" Grid.Column="3" 
                            Style="{DynamicResource WindowLabel}"/>
-                <TextBox Name="CityTextBox" Grid.Row="1" Grid.Column="4" 
-                         Style="{DynamicResource WindowTextField}" 
-                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
+                <TextBox Name="CityTextBox" Grid.Row="1" Grid.Column="4" GotFocus="TextBoxGotFocus"
+                         Style="{DynamicResource WindowTextField}"/>
 
-                <TextBlock Text="State/Provence" Grid.Row="2" Grid.Column="3" 
+                <TextBlock Name="StateProvenceTextBlock" Text="State/Provence" Grid.Row="2" Grid.Column="3" 
                            Style="{DynamicResource WindowLabel}"/>
-                <TextBox Name="StateProvenceTextBox" Grid.Row="2" Grid.Column="4" 
+                <TextBox Name="StateProvenceTextBox" Grid.Row="2" Grid.Column="4" GotFocus="TextBoxGotFocus"
+                         Style="{DynamicResource WindowTextField}"/>
+
+                <TextBlock Name="PostalCodeTextBlock" Text="Postal Code" Grid.Row="3" Grid.Column="0" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="PostalCodeTextBox" Grid.Row="3" Grid.Column="1" GotFocus="TextBoxGotFocus"
+                         Style="{DynamicResource WindowTextField}"/>
+
+
+                <TextBlock Text="Telephone" Grid.Row="4" Grid.Column="0" 
+                           Style="{DynamicResource WindowLabel}"/>
+                <TextBox Name="TelephoneTextBox" Grid.Row="4" Grid.Column="1" 
                          Style="{DynamicResource WindowTextField}"
                          GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
 
-                <TextBlock Text="Postal Code" Grid.Row="3" Grid.Column="0" 
+                <TextBlock Text="Meeting Day" Grid.Row="5" Grid.Column="0" 
                            Style="{DynamicResource WindowLabel}"/>
-                <TextBox Name="PostalCodeTextBox" Grid.Row="3" Grid.Column="1" 
-                         Style="{DynamicResource WindowTextField}"
-                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
-
-                <TextBlock Text="Telephone" Grid.Row="3" Grid.Column="3" 
-                           Style="{DynamicResource WindowLabel}"/>
-                <TextBox Name="TelephoneTextBox" Grid.Row="3" Grid.Column="4" 
-                         Style="{DynamicResource WindowTextField}"
-                         GotFocus="TextBoxGotFocus" TextChanged="TextBoxTextChanged" />
-
-                <TextBlock Text="Meeting Day" Grid.Row="4" Grid.Column="0" 
-                           Style="{DynamicResource WindowLabel}"/>
-                <ComboBox Name="MeetingDayComboBox" Grid.Row="4" Grid.Column="1" 
+                <ComboBox Name="MeetingDayComboBox" Grid.Row="5" Grid.Column="1" 
                           Style="{DynamicResource PrimaryComboBox}"
                           SelectionChanged="MeetingDayComboBox_SelectionChanged"/>
 
-                <TextBlock Text="Meeting Time" Grid.Row="4" Grid.Column="3" 
+                <TextBlock Text="Meeting Time" Grid.Row="5" Grid.Column="3" 
                            Style="{DynamicResource WindowLabel}"/>
-                <ComboBox Name="MeetingTimeComboBox" Grid.Row="4" Grid.Column="4" 
+                <ComboBox Name="MeetingTimeComboBox" Grid.Row="5" Grid.Column="4" 
                           Style="{DynamicResource PrimaryComboBox}" 
                           SelectionChanged="MeetingTimeComboBox_SelectionChanged"/>
             </Grid>

@@ -9,7 +9,7 @@
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="766" SizeToContent="Height" Icon="\Resources\CM.ico"
+        Width="826" SizeToContent="Height" Icon="\Resources\CM.ico"
         FocusManager.FocusedElement="{Binding ElementName=LastNameField}">
     <Window.DataContext>
         <views:MemberWindowViewModel />
@@ -62,6 +62,13 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Last Name" Style="{DynamicResource WindowLabel}"
@@ -99,7 +106,7 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
                         <RadioButton Content="Exemplary" GroupName="status" 
                                      IsChecked="{Binding IsStatusExemplary,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                        <RadioButton Content="Good" GroupName="status" 
+                        <RadioButton Content="Good Standing" GroupName="status" 
                                      IsChecked="{Binding IsStatusGood,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         <RadioButton Content="Restricted" GroupName="status" 
                                      IsChecked="{Binding IsStatusRestricted,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
@@ -109,29 +116,67 @@
                                      IsChecked="{Binding IsStatusInactive,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical"  Grid.Row="3" Grid.Column="0" VerticalAlignment="Top">
+                    <TextBlock Text="Email" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="3" Grid.Column="0" />
+                    <TextBox Name="EmailField" Style="{DynamicResource WindowTextField}"
+                             Grid.Row="3" Grid.Column="1" 
+                             Text="{Binding Member.EMailAddress,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             GotFocus="ItemGotFocus"/>
+
+                    <TextBlock Text="Home Phone" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="4" Grid.Column="0" />
+                    <TextBox Name="HomePhoneField" Style="{DynamicResource WindowTextField}"
+                             Grid.Row="4" Grid.Column="1" 
+                             Text="{Binding Member.HomePhone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             GotFocus="ItemGotFocus"/>
+
+                    <TextBlock Text="Cell Phone" Style="{DynamicResource WindowLabel}"
+                               Grid.Row="4" Grid.Column="3" />
+                    <TextBox Name="CellPhoneField" Style="{DynamicResource WindowTextField}"
+                             Grid.Row="4" Grid.Column="4" 
+                             Text="{Binding Member.CellPhone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             GotFocus="ItemGotFocus"/>
+
+                    <TextBlock Name="AddressTextBlock" Text="Address" Grid.Row="5" Grid.Column="0" 
+                               Style="{DynamicResource WindowLabel}"/>
+                    <TextBox Name="AddressTextBox" Grid.Row="5" Grid.Column="1" Height="60" Grid.RowSpan="2" 
+                             TextWrapping="Wrap" 
+                             Text="{Binding Member.Address,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             GotFocus="ItemGotFocus" Style="{DynamicResource WindowTextField}"/>
+
+                    <TextBlock Name="CityTextBlock" Text="City" Grid.Row="6" Grid.Column="3" 
+                               Style="{DynamicResource WindowLabel}"/>
+                    <TextBox Name="CityTextBox" Grid.Row="6" Grid.Column="4"  GotFocus="ItemGotFocus"
+                             Text="{Binding Member.City,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             Style="{DynamicResource WindowTextField}"/>
+
+                    <TextBlock Name="StateProvenceTextBlock" Text="State/Provence" Grid.Row="5" Grid.Column="3" 
+                               Style="{DynamicResource WindowLabel}"/>
+                    <TextBox Name="StateProvenceTextBox" Grid.Row="5" Grid.Column="4" GotFocus="ItemGotFocus"
+                             Text="{Binding Member.StateProvence,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             Style="{DynamicResource WindowTextField}"/>
+
+                    <TextBlock Name="PostalCodeTextBlock" Text="Postal Code" Grid.Row="6" Grid.Column="0" 
+                               Style="{DynamicResource WindowLabel}"/>
+                    <TextBox Name="PostalCodeTextBox" Grid.Row="6" Grid.Column="1" GotFocus="ItemGotFocus"
+                             Text="{Binding Member.PostalCode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             Style="{DynamicResource WindowTextField}"/>
+
+                    <StackPanel Orientation="Vertical"  Grid.Row="8" Grid.Column="0" VerticalAlignment="Top">
                         <TextBlock Text="Privileges" Style="{DynamicResource WindowLabel}" />
                         <TextBlock Text="Check all that apply" TextWrapping="Wrap" 
                                    FontSize="{DynamicResource SmallFontSize}" Margin="0,5,0,0" />
                     </StackPanel>
-                    <Border Style="{DynamicResource WrapBorder}"  Grid.Row="3" Grid.Column="1"
+                    <Border Style="{DynamicResource WrapBorder}" Grid.Row="8" Grid.Column="1"
                             Grid.ColumnSpan="4" Padding="0" >
                         <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" 
                                       Height="200">
                             <ItemsControl Name="myitems" ItemsSource="{Binding Privileges}" Style="{DynamicResource PriviledgeItems}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Width="280">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="30" />
-                                                <ColumnDefinition />
-                                            </Grid.ColumnDefinitions>
-                                            <CheckBox Width="120" Grid.Column="0" Margin="5"
-                                                      IsChecked="{Binding IsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                                            <TextBlock Grid.Column="1">
-                                                <Run Text="{Binding Text}" />
-                                            </TextBlock>
-                                        </Grid>
+                                        <CheckBox Style="{DynamicResource PrivilegeCheckBox}"
+                                                  Content="{Binding Text}"
+                                                  IsChecked="{Binding IsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                                 <ItemsControl.ItemsPanel>
@@ -144,7 +189,7 @@
                     </Border>
                     <TextBlock Text="{Binding Member.PrivelegeValue}" Style="{DynamicResource WindowLabel}" 
                                FontSize="{DynamicResource XSmallFontSize}" Grid.Row="4" Grid.Column="4"
-                               Margin="0"/>
+                               Margin="0" Visibility="Hidden"/>
 
                 </Grid>
 

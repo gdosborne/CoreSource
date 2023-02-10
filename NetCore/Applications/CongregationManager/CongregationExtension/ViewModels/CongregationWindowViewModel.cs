@@ -1,6 +1,8 @@
-﻿using Common.MVVMFramework;
+﻿using Common.Applicationn.Linq;
+using Common.MVVMFramework;
 using CongregationManager.Data;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CongregationExtension.ViewModels {
@@ -8,6 +10,8 @@ namespace CongregationExtension.ViewModels {
         public CongregationWindowViewModel()
             : base() {
             Title = "Congregation [design]";
+            Members = new ObservableCollection<Member>();
+            Groups = new ObservableCollection<Group>();
         }
 
         public override void Initialize() {
@@ -26,6 +30,8 @@ namespace CongregationExtension.ViewModels {
             set {
                 _Congregation = value;
                 if (Congregation != null) {
+                    Members.AddRange(Congregation.Members.OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
+                    Groups.AddRange(Congregation.Groups.OrderBy(x => x.Name));
                     SetGroupMembership();
                     Congregation.PropertyChanged += Congregation_PropertyChanged;
                 }
@@ -34,15 +40,41 @@ namespace CongregationExtension.ViewModels {
         }
 
         private void SetGroupMembership(List<int> ids = default) {
-            Congregation.Members.ToList().ForEach(x => x.IsSelected = false);
+            Members.ToList().ForEach(x => x.IsSelected = false);
             if (ids != null)
-                Congregation.Members.ToList().ForEach(x => x.IsSelected = ids.Contains(x.ID));
+                Members.ToList().ForEach(x => x.IsSelected = ids.Contains(x.ID));
         }
 
         private void Congregation_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
             if (Congregation != null && Congregation.IsNew && e.PropertyName == "Name")
                 Congregation.Filename = $"{Congregation.Name}.congregation";
             UpdateInterface();
+        }
+        #endregion
+
+        #region Members Property
+        private ObservableCollection<Member> _Members = default;
+        /// <summary>Gets/sets the Members.</summary>
+        /// <value>The Members.</value>
+        public ObservableCollection<Member> Members {
+            get => _Members;
+            set {
+                _Members = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Groups Property
+        private ObservableCollection<Group> _Groups = default;
+        /// <summary>Gets/sets the Groups.</summary>
+        /// <value>The Groups.</value>
+        public ObservableCollection<Group> Groups {
+            get => _Groups;
+            set {
+                _Groups = value;
+                OnPropertyChanged();
+            }
         }
         #endregion
 
@@ -53,7 +85,9 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand AddGroupCommand => _AddGroupCommand ?? (_AddGroupCommand = new DelegateCommand(AddGroup, ValidateAddGroupState));
         private bool ValidateAddGroupState(object state) => true;
         private void AddGroup(object state) {
-            App.AddEditGroup(Congregation, default);
+            var newGroup = App.AddEditGroup(Congregation, default);
+            if (newGroup != null)
+                Groups.Add(newGroup);
         }
         #endregion
 
@@ -64,7 +98,10 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand EditGroupCommand => _EditGroupCommand ?? (_EditGroupCommand = new DelegateCommand(EditGroup, ValidateEditGroupState));
         private bool ValidateEditGroupState(object state) => true;
         private void EditGroup(object state) {
-            App.AddEditGroup(Congregation, SelectedGroup);
+            var group = App.AddEditGroup(Congregation, SelectedGroup);
+            if (group != null && (group.ID == SelectedGroup.ID)) {
+                SelectedGroup = group;
+            }
         }
         #endregion
 
@@ -75,7 +112,7 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand DeleteGroupCommand => _DeleteGroupCommand ?? (_DeleteGroupCommand = new DelegateCommand(DeleteGroup, ValidateDeleteGroupState));
         private bool ValidateDeleteGroupState(object state) => true;
         private void DeleteGroup(object state) {
-            
+
         }
         #endregion
 
@@ -101,7 +138,15 @@ namespace CongregationExtension.ViewModels {
         public DelegateCommand AddMemberCommand => _AddMemberCommand ?? (_AddMemberCommand = new DelegateCommand(AddMember, ValidateAddMemberState));
         private bool ValidateAddMemberState(object state) => Congregation.ID > 0;
         private void AddMember(object state) {
-            App.AddNewMember(Congregation);
+            var mbr = App.AddNewMember(Congregation);
+            if (mbr != null) {
+                Members.Add(mbr);
+                var ordered = Members
+                    .OrderBy(x => x.LastName)
+                    .ThenBy(x => x.FirstName)
+                    .ToList();
+                Members = new ObservableCollection<Member>(ordered);
+            }
         }
         #endregion
 

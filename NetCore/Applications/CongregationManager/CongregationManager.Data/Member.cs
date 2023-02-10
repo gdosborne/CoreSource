@@ -1,4 +1,5 @@
 ﻿using Common.Applicationn.Primitives;
+using Common.Applicationn.Text;
 using Newtonsoft.Json;
 using System;
 using System.Windows;
@@ -26,8 +27,8 @@ namespace CongregationManager.Data {
             SecretaryAssistant = Secretary * 2,
             OperatingCommitteeMember = SecretaryAssistant * 2,
             COBE = OperatingCommitteeMember * 2,
-            COBEAssistant = COBE * 2,
-            WatchtowerConductor = COBEAssistant * 2,
+            COBE_Assistant = COBE * 2,
+            WatchtowerConductor = COBE_Assistant * 2,
             PublicTalksCoordinator = WatchtowerConductor * 2,
             AccountsServant = PublicTalksCoordinator * 2,
             SoundServant = AccountsServant * 2,
@@ -186,6 +187,104 @@ namespace CongregationManager.Data {
             get => _PrivelegeValue;
             set {
                 _PrivelegeValue = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region EMailAddress Property
+        private string _EMailAddress = default;
+        /// <summary>Gets/sets the EMailAddress.</summary>
+        /// <value>The EMailAddress.</value>
+        [JsonProperty("emailaddress")]
+        public string EMailAddress {
+            get => _EMailAddress;
+            set {
+                _EMailAddress = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region HomePhone Property
+        private string _HomePhone = default;
+        /// <summary>Gets/sets the HomePhone.</summary>
+        /// <value>The HomePhone.</value>
+        [JsonProperty("homephone")]
+        public string HomePhone {
+            get => _HomePhone.ToPhoneNumber();
+            set {
+                _HomePhone = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region CellPhone Property
+        private string _CellPhone = default;
+        /// <summary>Gets/sets the CellPhone.</summary>
+        /// <value>The CellPhone.</value>
+        [JsonProperty("cellphone")]
+        public string CellPhone {
+            get => _CellPhone.ToPhoneNumber();
+            set {
+                _CellPhone = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Address Property
+        private string _Address = default;
+        /// <summary>Gets/sets the Address.</summary>
+        /// <value>The Address.</value>
+        [JsonProperty("address")]
+        public string Address {
+            get => _Address;
+            set {
+                _Address = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region City Property
+        private string _City = default;
+        /// <summary>Gets/sets the City.</summary>
+        /// <value>The City.</value>
+        [JsonProperty("city")]
+        public string City {
+            get => _City;
+            set {
+                _City = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region StateProvence Property
+        private string _StateProvence = default;
+        /// <summary>Gets/sets the StateProvence.</summary>
+        /// <value>The StateProvence.</value>
+        [JsonProperty("stateprovence")]
+        public string StateProvence {
+            get => _StateProvence;
+            set {
+                _StateProvence = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region PostalCode Property
+        private string _PostalCode = default;
+        /// <summary>Gets/sets the PostalCode.</summary>
+        /// <value>The PostalCode.</value>
+        [JsonProperty("postalcode")]
+        public string PostalCode {
+            get => _PostalCode;
+            set {
+                _PostalCode = value;
                 OnPropertyChanged();
             }
         }

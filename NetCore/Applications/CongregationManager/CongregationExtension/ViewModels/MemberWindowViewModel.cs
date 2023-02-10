@@ -67,7 +67,7 @@ namespace CongregationExtension.ViewModels {
 
                     var actual = Enum.GetNames(typeof(PrivilegeFlags)).ToList();
                     var privs = actual.Select(x => new PrivValue {
-                        Text = x.SplitAtCaps(true),
+                        Text = x.SplitAtCaps(),
                         Privilege = (PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x),
                         ActualValue = (long)(PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x)
                     }).OrderBy(x => x.Privilege).ToList();
@@ -77,7 +77,7 @@ namespace CongregationExtension.ViewModels {
                     });
                     Privileges = new ObservableCollection<PrivValue>(privs);
                 }
-                OnPropertyChanged();
+                OnPropertyChanged();    
             }
         }
 
