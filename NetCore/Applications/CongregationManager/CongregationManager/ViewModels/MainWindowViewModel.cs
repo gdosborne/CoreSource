@@ -29,6 +29,17 @@ namespace CongregationManager.ViewModels {
             ViewLogs
         }
 
+        #region SettingsCommand
+        private DelegateCommand _SettingsCommand = default;
+        /// <summary>Gets the Settings command.</summary>
+        /// <value>The Settings command.</value>
+        public DelegateCommand SettingsCommand => _SettingsCommand ?? (_SettingsCommand = new DelegateCommand(Settings, ValidateSettingsState));
+        private bool ValidateSettingsState(object state) => true;
+        private void Settings(object state) {
+            
+        }
+        #endregion
+
         #region ViewLogsCommand
         private DelegateCommand _ViewLogsCommand = default;
         /// <summary>Gets the ViewLogs command.</summary>

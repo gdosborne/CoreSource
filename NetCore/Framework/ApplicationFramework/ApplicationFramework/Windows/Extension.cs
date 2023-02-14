@@ -404,10 +404,18 @@ namespace Common.Applicationn.Windows {
 
         public static void SaveBounds(this Window win, Settings appSettings, bool includeState = false) {
             var name = win.GetType().Name;
-            appSettings.AddOrUpdateSetting(name, "Left", win.RestoreBounds.Left);
-            appSettings.AddOrUpdateSetting(name, "Top", win.RestoreBounds.Top);
-            appSettings.AddOrUpdateSetting(name, "Width", win.RestoreBounds.Width);
-            appSettings.AddOrUpdateSetting(name, "Height", win.RestoreBounds.Height);
+            if (win.RestoreBounds != Rect.Empty) {
+                appSettings.AddOrUpdateSetting(name, "Left", win.RestoreBounds.Left);
+                appSettings.AddOrUpdateSetting(name, "Top", win.RestoreBounds.Top);
+                appSettings.AddOrUpdateSetting(name, "Width", win.RestoreBounds.Width);
+                appSettings.AddOrUpdateSetting(name, "Height", win.RestoreBounds.Height);
+            }
+            else {
+                appSettings.AddOrUpdateSetting(name, "Left", win.Left);
+                appSettings.AddOrUpdateSetting(name, "Top", win.Top);
+                appSettings.AddOrUpdateSetting(name, "Width", win.Width);
+                appSettings.AddOrUpdateSetting(name, "Height", win.Height);
+            }
             if (includeState)
                 appSettings.AddOrUpdateSetting(name, "WindowState", win.WindowState);
         }

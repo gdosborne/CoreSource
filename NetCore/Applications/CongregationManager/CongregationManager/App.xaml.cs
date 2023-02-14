@@ -33,6 +33,7 @@ namespace CongregationManager {
         public static string ExtensionsFolder => Path.Combine(ApplicationFolder, "Extensions");
         public static string TempFolder => Path.Combine(ApplicationFolder, "Temp");
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
+        public static string RecycleBinFolder => Path.Combine(DataFolder, "Recycle Bin");
         public static Session ApplicationSession { get; private set; }
 
         public static Dictionary<string, string> FileFilters { get; private set; } =
@@ -121,7 +122,7 @@ namespace CongregationManager {
             //currentCreds => will be populated with the login credentials entered in 
             //                CredentialDialog
 
-            LogMessage("starting login", EntryTypes.Information);
+            LogMessage("Starting login", EntryTypes.Information);
             var isNewUser = privateCreds.AreNewCredentials;
             var cd = new CredentialDialog {
                 Target = ApplicationName,
@@ -234,8 +235,8 @@ namespace CongregationManager {
             newCreds.SecurePassword.IsReadOnly();
             var iconFontFamily = Resources["GlyphFontFamily"].As<FontFamily>();
             var genderFontFamily = Resources["GenderFontFamily"].As<FontFamily>();
-            return new DataManager(DataFolder, ExtensionsFolder, newCreds.SecurePassword,
-                Resources);
+            return new DataManager(DataFolder, ExtensionsFolder, RecycleBinFolder, 
+                newCreds.SecurePassword, Resources);
         }
 
         protected override void OnStartup(StartupEventArgs e) {
@@ -337,6 +338,9 @@ namespace CongregationManager {
             }
             if (!Directory.Exists(DataFolder)) {
                 Directory.CreateDirectory(DataFolder);
+            }
+            if (!Directory.Exists(RecycleBinFolder)) {
+                Directory.CreateDirectory(RecycleBinFolder);
             }
         }
     }

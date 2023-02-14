@@ -1,20 +1,20 @@
-using Common.Applicationn.Linq;
 using Common.Applicationn.Primitives;
 using Common.Applicationn.Security;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Security;
 using System.Windows;
-using System.Windows.Media;
 
 namespace CongregationManager.Data {
     public class DataManager : IDisposable {
-        public DataManager(string dataFolder, string extensionsFolder, SecureString password,
-                ResourceDictionary resources) {
+        public DataManager(string dataFolder, string extensionsFolder, string recycleFolder,
+                SecureString password, ResourceDictionary resources) {
             this.password = password;
             DataFolder = dataFolder;
+            RecycleFolder = recycleFolder;
             Congregations = new ObservableCollection<Congregation>();
             dataFolderMonitor = new FolderMonitor(dataFolder, "*.congregation");
             extensionsFolderMonitor = new FolderMonitor(extensionsFolder, "*.dll");
@@ -22,6 +22,8 @@ namespace CongregationManager.Data {
             extensionsFolderMonitor.FilesUpdated += ExtensionsFolderMonitor_FilesUpdated;
             Resources = resources;
         }
+
+        public event ChangeNotificationHandler ChangeNotification;
 
         private void ExtensionsFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
             if (extensionsFolderMonitor != null) {
@@ -56,6 +58,7 @@ namespace CongregationManager.Data {
                         var item = Congregations.FirstOrDefault(y => y.Name.Equals(cName, StringComparison.OrdinalIgnoreCase));
                         if (item != null) {
                             Congregations.Remove(item);
+                            ChangeNotification?.Invoke(this, new ChangeNotificationEventArgs(item, ModificationTypes.Deleted));
                         }
                     });
                 }
@@ -65,6 +68,7 @@ namespace CongregationManager.Data {
                         var item = Congregations.FirstOrDefault(y => y.Name.Equals(cName, StringComparison.OrdinalIgnoreCase));
                         if (item != null) {
                             Refresh(item);
+                            ChangeNotification?.Invoke(this, new ChangeNotificationEventArgs(item, ModificationTypes.Modified));
                         }
                     });
                 }
@@ -85,6 +89,7 @@ namespace CongregationManager.Data {
                         //cong.EditThisItem += Cong_EditThisItem;
                         cong.Original = cong.Clone().As<Congregation>();
                         Congregations.Add(cong);
+                        ChangeNotification?.Invoke(this, new ChangeNotificationEventArgs(cong, ModificationTypes.Added));
                     });
                 }
             }
@@ -95,6 +100,13 @@ namespace CongregationManager.Data {
         private void Cong_SaveThisItem(object? sender, EventArgs e) {
             var congregation = sender.As<Congregation>();
             try {
+                var eaType = ModificationTypes.Modified;
+                if (congregation.ID == 0)
+                    eaType = ModificationTypes.Added;
+                var ea = new ChangeNotificationEventArgs(congregation, eaType);
+                ChangeNotification?.Invoke(this, ea);
+                if (ea.Cancel)
+                    return;
                 SaveCongregation(congregation);
                 congregation.IsNew = false;
                 congregation.Original = congregation.Clone().As<Congregation>();
@@ -102,6 +114,57 @@ namespace CongregationManager.Data {
             catch (Exception ex) {
 
             }
+        }
+
+        public IEnumerable<RecycleGroup> RecycleBinItems() {
+            var dInfo = new DirectoryInfo(RecycleFolder);
+            var groups = new List<RecycleGroup>();
+            if (dInfo.Exists) {
+                foreach (var d in dInfo.GetDirectories()) {
+                    var originalFileName = d.Name.Substring(1);
+                    var g = new RecycleGroup(originalFileName);
+                    var files = d.GetFiles();
+                    foreach (var file in files) {
+                        var item = new RecycleItem {
+                            RecycleFileName = file.FullName,
+                            RecycleDateTime = file.LastWriteTime
+                        };
+                        g.Items.Add(item);
+                    }
+                    g.Items = new ObservableCollection<RecycleItem>(g.Items.OrderByDescending(x => x.RecycleDateTime));
+                    groups.Add(g);
+                }
+            }
+            return groups.OrderBy(x => x.Name);
+        }
+
+        private void RecycleCongregation(Congregation cong) {
+            var dir = Path.Combine(RecycleFolder, "." + Path.GetFileName(cong.Filename));
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
+            var g = Guid.NewGuid();
+
+            var recycleFile = Path.Combine(dir, g.ToString());
+            var fullFile = Path.Combine(DataFolder, cong.Filename);
+            
+            var file = new FileInfo(fullFile);
+            file.LastWriteTime = DateTime.Now;
+            file.MoveTo(recycleFile, true);
+        }
+
+        public bool DeleteCongregation(Congregation cong) {
+            try {
+                if (string.IsNullOrEmpty(cong.Filename))
+                    return false;
+                RecycleCongregation(cong);
+                Congregations.Remove(cong);
+                ChangeNotification?.Invoke(this, new ChangeNotificationEventArgs(cong, ModificationTypes.Deleted));
+            }
+            catch (Exception ex) {
+                throw;
+            }
+            return true;
         }
 
         private FolderMonitor dataFolderMonitor { get; set; }
@@ -114,6 +177,14 @@ namespace CongregationManager.Data {
             private set {
                 _DataFolder = value;
                 Refresh();
+            }
+        }
+
+        private string _RecycleFolder = default;
+        public string RecycleFolder {
+            get => _RecycleFolder;
+            set {
+                _RecycleFolder = value;
             }
         }
 
@@ -131,21 +202,14 @@ namespace CongregationManager.Data {
         }
         #endregion
 
-        internal void Delete(Congregation cong) {
-            if (File.Exists(cong.Filename)) {
-                File.Delete(cong.Filename);
-            }
-        }
-
         public void SaveCongregation(Congregation cong) {
             cong.DataPath = DataFolder;
             var isNewCong = cong.ID == 0;
             if (cong != null) {
                 if (isNewCong)
                     cong.ID = !Congregations.Any() ? 1 : Congregations.Max(x => x.ID) + 1;
-                cong.Save(password.ToStandardString());                
+                cong.Save(password.ToStandardString());
             }
-            GC.Collect();
         }
 
         public void Refresh(Congregation cong) {

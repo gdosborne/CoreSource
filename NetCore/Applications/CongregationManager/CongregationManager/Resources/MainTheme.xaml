@@ -92,6 +92,7 @@
     <sys:String x:Key="warning-message"></sys:String>
     <sys:String x:Key="warning-wf"></sys:String>
     <sys:String x:Key="warning--wf"></sys:String>
+    <sys:String x:Key="recycle-bin"></sys:String>
 
     <Style TargetType="Window" x:Key="StandardWindow">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
@@ -155,6 +156,11 @@
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
     </Style>
 
+    <Style TargetType="mycontrols:FontIcon" x:Key="AltMenuItemIcon">
+        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
+    </Style>
+
     <Style TargetType="Border" x:Key="ErrorBorder">
         <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
         <Setter Property="CornerRadius" Value="0,0,10,10" />
@@ -184,6 +190,28 @@
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="mycontrols:FontIcon" x:Key="TreeViewIcon">
+        <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Margin" Value="10,0,5,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+    </Style>
+
+    <Style TargetType="TreeViewItem">
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="TreeViewTextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="10,4" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="TabHeader">
@@ -426,6 +454,12 @@
         <Setter Property="Width" Value="290" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="ScrollViewer" x:Key="RecycleScrollViewer">
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="Padding" Value="10" />
     </Style>
 
 </ResourceDictionary>

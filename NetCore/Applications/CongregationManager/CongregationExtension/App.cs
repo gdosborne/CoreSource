@@ -6,6 +6,7 @@ using CongregationManager.Data;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -15,9 +16,9 @@ namespace CongregationExtension {
     internal class App {
         public static void Main(string[] args) { }
 
-        internal static ApplicationLogger logger = default;
-        internal static Settings AppSettings = default;
-        internal static DataManager DataManager = default;
+        internal static ApplicationLogger logger { get; set; } = default;
+        internal static Settings AppSettings { get; set; } = default;
+        internal static DataManager DataManager { get; set; } = default;
 
         internal static void LogMessage(string message, EntryTypes type) {
             logger.LogMessage(new StringBuilder(message), type);
@@ -41,7 +42,7 @@ namespace CongregationExtension {
                 ButtonStyle = TaskDialogButtonStyle.Standard,
                 WindowTitle = title
             };
-            if(width.HasValue)
+            if (width.HasValue)
                 td.Width = width.Value;
             td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
             td.Buttons.Add(new TaskDialogButton(ButtonType.No));
@@ -63,6 +64,13 @@ namespace CongregationExtension {
             td.ShowDialog();
         }
 
+        internal static void ShowRecycleBin() {
+            var items = DataManager.RecycleBinItems();
+            var win = new RecycleBinWindow();
+            items.ToList().ForEach(x => win.View.AddGroup(x));
+            var result = win.ShowDialog();
+        }
+
         internal static Group AddEditGroup(Congregation congregation, Group group) {
             var win = new GroupWindow();
             win.View.Congregation = congregation;
@@ -71,7 +79,7 @@ namespace CongregationExtension {
             if (!result.HasValue || !result.Value) {
                 return null;
             }
-            
+
             try {
                 group = win.View.Group;
                 DataManager.SaveCongregation(congregation);
@@ -92,13 +100,32 @@ namespace CongregationExtension {
                 MeetingDay = System.DayOfWeek.Sunday,
                 MeetingTime = new System.TimeSpan(10, 0, 0)
             };
-            win.ShowDialog();
+            var result = win.ShowDialog();
+            if (!result.HasValue || !result.Value)
+                return;
             try {
                 DataManager.SaveCongregation(win.View.Congregation);
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 logger.LogMessage(ex.Message, EntryTypes.Error);
             }
+        }
+
+        internal static bool DeleteCongregation(Congregation cong) {
+            var msg = $"You are about to delete the {cong.Name} Congregation. Doing so will " +
+                $"remove it from this and all other extensions that are  using it.\n\nAre you " +
+                $"sure want to delete the {cong.Name} Congregation?";
+            var result = false;
+            try {
+                if (IsYesInDialogSelected("Delete Congregation", msg, "Delete Congregation", TaskDialogIcon.Shield, 300)) {
+                    result = DataManager.DeleteCongregation(cong);                    
+                }
+            }
+            catch (Exception ex) {
+                logger.LogMessage(ex.Message, EntryTypes.Error);
+                result = false;
+            }
+            return result;
         }
 
         internal static bool DeleteMember(Member member, Congregation congregation) {
@@ -212,7 +239,7 @@ namespace CongregationExtension {
                 return;
 
             member.Resources = App.DataManager.Resources;
-            try { 
+            try {
                 DataManager.SaveCongregation(congregation);
                 App.LogMessage($"New member ({member.FullName}) added" +
                     $" to {congregation.Name}",

@@ -4,6 +4,7 @@ using Common.MVVMFramework;
 using CongregationManager.Data;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using static CongregationManager.Data.Member;
 
@@ -76,6 +77,7 @@ namespace CongregationExtension.ViewModels {
                         x.PropertyChanged += X_PropertyChanged;
                     });
                     Privileges = new ObservableCollection<PrivValue>(privs);
+                    
                 }
                 OnPropertyChanged();    
             }

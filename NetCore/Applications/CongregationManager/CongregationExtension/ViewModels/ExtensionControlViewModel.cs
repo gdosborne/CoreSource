@@ -35,7 +35,6 @@ namespace CongregationExtension.ViewModels {
                 }
             }
             ProcessLocalItems();
-
         }
 
         private void Item_EditThisItem(object? sender, EventArgs e) {
@@ -63,6 +62,11 @@ namespace CongregationExtension.ViewModels {
                     : isLocalCount > 1 ? "You have more than one congregation marked as Local" : default;
                 SelectedCongregation ??= Congregations.FirstOrDefault(x => x.IsLocal);
             }
+        }
+
+        public void Refresh() {
+            var c = Congregations.OrderBy(x => x.Name);
+            Congregations = new ObservableCollection<Congregation>(c);
         }
 
         #region Congregations Property

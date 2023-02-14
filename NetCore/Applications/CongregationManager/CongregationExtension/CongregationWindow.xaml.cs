@@ -27,7 +27,7 @@ namespace CongregationManager {
                         break;
                     }
                 case LocalBase.Actions.CloseWindow: {
-                        Close();
+                        DialogResult = false;
                         break;
                     }
                 case LocalBase.Actions.AcceptData:
@@ -57,7 +57,7 @@ namespace CongregationManager {
                             }
                         }
                         View.DataManager.SaveCongregation(View.Congregation);
-                        Close();
+                        DialogResult = true;
                         break;
                     }
             }

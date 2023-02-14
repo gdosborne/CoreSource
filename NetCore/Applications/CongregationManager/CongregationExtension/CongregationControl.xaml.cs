@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CongregationExtension {
     public partial class CongregationControl : UserControl {
@@ -33,6 +34,16 @@ namespace CongregationExtension {
                 MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 45, 0)));
             }
             MeetingTimeComboBox.SelectedItem = ActualMeetingTime(new TimeSpan(10, 0, 0));
+            var dt = new DispatcherTimer {
+                Interval = TimeSpan.FromMilliseconds(250)
+            };
+            dt.Tick += Dt_Tick;
+            dt.Start();
+        }
+
+        private void Dt_Tick(object? sender, EventArgs e) {
+            sender.As<DispatcherTimer>().Stop();
+            CongregationNameTextBox.Focus();
         }
 
         #region CongregationProperty

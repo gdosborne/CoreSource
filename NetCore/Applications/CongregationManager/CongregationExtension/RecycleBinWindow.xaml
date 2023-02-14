@@ -1,0 +1,98 @@
+﻿<Window x:Class="CongregationExtension.RecycleBinWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationExtension"
+        xmlns:data="clr-namespace:CongregationManager.Data;assembly=CongregationManager.Data"
+        xmlns:views="clr-namespace:CongregationExtension.ViewModels"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Width="500" MinWidth="650" Height="400" MinHeight="300" MaxHeight="800" 
+        Icon="\Resources\CM.ico" Closed="Window_Closed">
+    <Window.DataContext>
+        <views:RecycleBinWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
+            <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Margin="0,0,15,0">
+                    <Button Style="{DynamicResource StandardButton}" Width="125"
+                            Command="{Binding ClearItemCommand}">
+                        <TextBlock TextAlignment="Center">
+                            <Run FontFamily="{DynamicResource GenderFontFamily}" Text="{DynamicResource trash-can-wf}" 
+                                 BaselineAlignment="Center" />
+                            <Run Text="" />
+                            <Run Text="Delete" />
+                        </TextBlock>
+                    </Button>
+                    <Button Style="{DynamicResource StandardButton}" Width="125"
+                            Command="{Binding RecycleItemCommand}">
+                        <TextBlock TextAlignment="Center">
+                            <Run FontFamily="{DynamicResource GlyphFontFamily}" Text="&#xE777;" 
+                                 BaselineAlignment="Center" />
+                            <Run Text="" />
+                            <Run Text="Restore" />
+                        </TextBlock>
+                    </Button>
+                </StackPanel>
+                
+                <Border Name="theBorder" Style="{DynamicResource ControlBorder}" Grid.Row="1" 
+                        Padding="0,0,0,0" CornerRadius="5,0,0,5">
+
+                    <TreeView ItemsSource="{Binding RecycleGroups}" VerticalAlignment="Top" BorderThickness="0"
+                              HorizontalAlignment="Stretch" SelectedItemChanged="TreeView_SelectedItemChanged">
+                        <TreeView.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type data:RecycleGroup}" ItemsSource="{Binding Items}">
+                                <TextBlock Text="{Binding Name}" Style="{DynamicResource TreeViewTextBlock}"/>
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type data:RecycleItem}">
+                                <TextBlock Text="{Binding RecycleDateTime}" Style="{DynamicResource TreeViewTextBlock}" />
+                            </DataTemplate>
+                        </TreeView.Resources>
+                    </TreeView>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" 
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0">
+                    <Button Style="{DynamicResource StandardButton}" Content="Close Recycle Bin" 
+                            Width="160" IsCancel="True" Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

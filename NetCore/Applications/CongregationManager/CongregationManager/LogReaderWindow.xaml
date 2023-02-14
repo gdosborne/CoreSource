@@ -57,7 +57,7 @@
                 <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Top">
                     <TextBlock Text="Date" Style="{DynamicResource WindowLabel}" 
                                HorizontalAlignment="Left" Margin="10,0" />
-                    <ComboBox Margin="10,0,0,10" ItemsSource="{Binding LogDates}" Width="110"
+                    <ComboBox Margin="10,0,0,10" ItemsSource="{Binding LogDates}" Width="130"
                               SelectedItem="{Binding SelectedLogDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
