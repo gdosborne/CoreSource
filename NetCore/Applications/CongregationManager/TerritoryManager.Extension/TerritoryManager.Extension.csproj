@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf" />
+    <Resource Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf" />
     <Content Include="..\CongregationManager\Resources\CM.ico" Link="Resources\CM.ico" />
     <Content Include="..\CongregationManager\Resources\CM.png" Link="Resources\CM.png" />
     <Content Include="..\CongregationManager\Resources\OzSoft-Icon.ico" Link="Resources\OzSoft-Icon.ico" />
@@ -24,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Fonts\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 

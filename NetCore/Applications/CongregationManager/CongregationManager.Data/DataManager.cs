@@ -15,11 +15,17 @@ namespace CongregationManager.Data {
             this.password = password;
             DataFolder = dataFolder;
             RecycleFolder = recycleFolder;
+
             Congregations = new ObservableCollection<Congregation>();
-            dataFolderMonitor = new FolderMonitor(dataFolder, "*.congregation");
+
             extensionsFolderMonitor = new FolderMonitor(extensionsFolder, "*.dll");
-            dataFolderMonitor.FilesUpdated += DataFolderMonitor_FilesUpdated;
             extensionsFolderMonitor.FilesUpdated += ExtensionsFolderMonitor_FilesUpdated;
+
+            //congregations must be loaded first as all other
+            // items will connection an existing congregation
+            congregationFolderMonitor = new FolderMonitor(dataFolder, "*.congregation");
+            congregationFolderMonitor.FilesUpdated += CongregationFolderMonitor_FilesUpdated;
+
             Resources = resources;
         }
 
@@ -50,8 +56,9 @@ namespace CongregationManager.Data {
         private void MakeExtensionChange(string filename, ChangeTypes changeType) =>
             FileChangedDetected?.Invoke(this, new FileChangeDetectedEventArgs(filename, changeType, FileTypes.Extension));
 
-        private void DataFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
-            if (dataFolderMonitor != null) {
+        private void CongregationFolderMonitor_FilesUpdated(object sender, FilesUpdatedEventArgs e) {
+            var fm = sender.As<FolderMonitor>();
+            if (congregationFolderMonitor != null) {
                 if (e.FilesRemoved.Any()) {
                     e.FilesRemoved.ForEach(x => {
                         var cName = x.ShortenedName();
@@ -84,6 +91,14 @@ namespace CongregationManager.Data {
                         cong.Members.ToList().ForEach(x => {
                             x.Resources = Resources;
                         });
+
+                        //var territoryFilename = Path.Combine(fm.Path, $"{item.Name}.territories");
+
+                        //var territoryFolderName = Path.Combine(fm.Path, $"{cong.Name}.Territories");
+                        //if(!Directory.Exists(territoryFolderName)) {
+                        //    Directory.CreateDirectory(territoryFolderName);
+                        //}
+
                         cong.Filename = x.Name;
                         cong.SaveThisItem += Cong_SaveThisItem;
                         //cong.EditThisItem += Cong_EditThisItem;
@@ -139,18 +154,27 @@ namespace CongregationManager.Data {
         }
 
         private void RecycleCongregation(Congregation cong) {
-            var dir = Path.Combine(RecycleFolder, "." + Path.GetFileName(cong.Filename));
-            if (!Directory.Exists(dir)) {
-                Directory.CreateDirectory(dir);
+            var newDir = Path.Combine(RecycleFolder, Path.GetFileName(cong.Filename));
+            //var territoryDir = Path.Combine(DataFolder, $"{cong.Name}.Territories");
+
+            if (!Directory.Exists(newDir)) {
+                Directory.CreateDirectory(newDir);
             }
+
             var g = Guid.NewGuid();
 
-            var recycleFile = Path.Combine(dir, g.ToString());
+            var recycleFile = Path.Combine(newDir, g.ToString());
             var fullFile = Path.Combine(DataFolder, cong.Filename);
             
             var file = new FileInfo(fullFile);
             file.LastWriteTime = DateTime.Now;
             file.MoveTo(recycleFile, true);
+
+            //var directory = new DirectoryInfo(territoryDir);
+            //if(directory.Exists) {
+            //    var newTerrDir = Path.Combine(newDir, $".{g.ToString()}");
+            //    directory.MoveTo(newTerrDir);
+            //}
         }
 
         public bool DeleteCongregation(Congregation cong) {
@@ -167,10 +191,11 @@ namespace CongregationManager.Data {
             return true;
         }
 
-        private FolderMonitor dataFolderMonitor { get; set; }
+        private FolderMonitor congregationFolderMonitor { get; set; }
         private FolderMonitor extensionsFolderMonitor { get; set; }
+        private SecureString password { get; set; } = default;
 
-        private SecureString password = default;
+        #region DataFolder Property
         private string _DataFolder = default;
         public string DataFolder {
             get => _DataFolder;
@@ -179,7 +204,9 @@ namespace CongregationManager.Data {
                 Refresh();
             }
         }
+        #endregion
 
+        #region RecycleFolder Property
         private string _RecycleFolder = default;
         public string RecycleFolder {
             get => _RecycleFolder;
@@ -187,17 +214,31 @@ namespace CongregationManager.Data {
                 _RecycleFolder = value;
             }
         }
+        #endregion
 
         #region Congregations Property
         private ObservableCollection<Congregation> _Congregations = default;
-        private bool isDisposed;
-
         /// <summary>Gets/sets the Congregations.</summary>
         /// <value>The Congregations.</value>
         public ObservableCollection<Congregation> Congregations {
             get => _Congregations;
             set {
                 _Congregations = value;
+            }
+        }
+        #endregion
+
+        public event CongregationChangedHandler CongregationChanged;
+
+        #region CurrentCongregation Property
+        private Congregation _CurrentCongregation = default;
+        /// <summary>Gets/sets the CurrentCongregation.</summary>
+        /// <value>The CurrentCongregation.</value>
+        public Congregation CurrentCongregation {
+            get => _CurrentCongregation;
+            set {
+                _CurrentCongregation = value;
+                CongregationChanged?.Invoke(this, new CongregationChangedEventArgs(CurrentCongregation));
             }
         }
         #endregion
@@ -233,6 +274,7 @@ namespace CongregationManager.Data {
             GC.Collect();
         }
 
+        private bool isDisposed;
         protected virtual void Dispose(bool isDisposing) {
             if (!isDisposed) {
                 if (isDisposing) {

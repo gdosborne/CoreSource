@@ -22,5 +22,13 @@ namespace CongregationManager.Data {
         }
         #endregion
 
+        internal ItemBase Original { get; set; }
+
+        protected void RevertField(string name) {
+            var prop = this.GetType().GetProperty(name);
+            if (prop == null)
+                return;
+            prop.SetValue(this, prop.GetValue(Original));
+        }
     }
 }

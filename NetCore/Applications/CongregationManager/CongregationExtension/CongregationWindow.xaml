@@ -154,7 +154,7 @@
                                                 <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <mycontrols:FontIcon Grid.Column="0" Glyph="{Binding Icon}"
-                                                               FontFamily="{DynamicResource GenderFontFamily}" 
+                                                               FontFamily="{DynamicResource PeopleFontFamily}" 
                                                                FontSize="{DynamicResource LargeFontSize}"/>
                                             <CheckBox Grid.Column="1" Content="{Binding FullName}" 
                                                       IsEnabled="{Binding IsEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"

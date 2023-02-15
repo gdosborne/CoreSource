@@ -19,6 +19,7 @@ namespace CongregationManager.Data {
         public Congregation() {
             Groups = new List<Group>();
             Members = new List<Member>();
+            Territories= new List<Territory>();
         }
 
         #region Name Property
@@ -86,6 +87,20 @@ namespace CongregationManager.Data {
             get => _Groups;
             set {
                 _Groups = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Territories Property
+        private List<Territory> _Territories = default;
+        /// <summary>Gets/sets the Territories.</summary>
+        /// <value>The Territories.</value>
+        [JsonProperty("territories")]
+        public List<Territory> Territories {
+            get => _Territories;
+            set {
+                _Territories = value;
                 OnPropertyChanged();
             }
         }
@@ -317,16 +332,7 @@ namespace CongregationManager.Data {
             this.EditThisItem?.Invoke(this, EventArgs.Empty);
         }
         #endregion
-
-        private void RevertField(string name) {
-            var prop = this.GetType().GetProperty(name);
-            if (prop == null)
-                return;
-            prop.SetValue(this, prop.GetValue(Original));
-        }
-
-        internal Congregation Original { get; set; }
-
+        
         /// <summary>
         /// ToString
         /// </summary>

@@ -72,11 +72,11 @@ namespace CongregationManager.Extensibility {
             return result;
         }
 
-        protected void AddMenuItem(string text, MenuItem parent, string iconName, ICommand command) {
+        protected void AddMenuItem(string text, MenuItem parent, string iconName, ICommand command, string fontFamilyResourceName) {
             var result = new MenuItem {
                 Header = text,
                 Icon = new FontIcon {
-                    FontFamily = Resources["GenderFontFamily"].As<FontFamily>(),
+                    FontFamily = Resources[fontFamilyResourceName].As<FontFamily>(),
                     FontSize = Resources["StandardFontSize"].CastTo<double>(),
                     Glyph = Resources[iconName].CastTo<string>()
                 },
@@ -96,11 +96,11 @@ namespace CongregationManager.Extensibility {
             addedControls[this].Add(result);
         }
 
-        protected void AddToolbarButton(string text, string iconName, ICommand command) {
+        protected void AddToolbarButton(string text, string iconName, ICommand command, string fontFamilyResourceName) {
             var result = new Button {
                 ToolTip = text,
                 Content = new FontIcon {
-                    FontFamily = Resources["GenderFontFamily"].As<FontFamily>(),
+                    FontFamily = Resources[fontFamilyResourceName].As<FontFamily>(),
                     FontSize = Resources["StandardFontSize"].CastTo<double>(),
                     Glyph = Resources[iconName].CastTo<string>()
                 },
@@ -185,6 +185,19 @@ namespace CongregationManager.Extensibility {
             get => _GlyphStyleName;
             set {
                 _GlyphStyleName = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region TabItem Property
+        private TabItem _TabItem = default;
+        /// <summary>Gets/sets the TabItem.</summary>
+        /// <value>The TabItem.</value>
+        public TabItem TabItem {
+            get => _TabItem;
+            set {
+                _TabItem = value;
                 OnPropertyChanged();
             }
         }

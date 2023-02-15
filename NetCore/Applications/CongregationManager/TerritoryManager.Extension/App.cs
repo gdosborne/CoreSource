@@ -16,5 +16,10 @@ namespace TerritoryManager.Extension {
         internal static void LogMessage(string message, EntryTypes type) {
             logger.LogMessage(new StringBuilder(message), type);
         }
+
+        internal static Territory? AddTerritory() {
+
+            return null;
+        }
     }
 }

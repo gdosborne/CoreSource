@@ -71,7 +71,9 @@ namespace TerritoryManager.Extension {
             Logger = logger;
             DataManager = dataManager;
 
-            //LoadInterfaceItems();
+            DataManager.CongregationChanged += DataManager_CongregationChanged;
+
+            LoadInterfaceItems();
 
             control.RemoveChild(control.MainGrid);
             Panel = new ExtensionPanel(Name, Glyph, control.MainGrid);
@@ -83,6 +85,44 @@ namespace TerritoryManager.Extension {
                 control.Resources = e.Dictionary;
             }
             IsEnabled = Settings.GetValue($"{Name} Extension", "IsEnabled", true);
+        }
+
+        private void DataManager_CongregationChanged(object sender, CongregationChangedEventArgs e) {
+            extControlView.SetCongregation(e.Congregation);
+        }
+
+        private void LoadInterfaceItems() {
+            //------------------ menu -------------------
+            Logger.LogMessage(new StringBuilder("  Adding Territories menu"), ApplicationLogger.EntryTypes.Information);
+            var topMenuItem = AddTopLevelMenuItem("T_erritories");
+
+            var fontFamResName = "TerritoryFontFamily";
+            var altFamResName = "PeopleFontFamily";
+
+            AddMenuItem("Add Territory", topMenuItem, "map", null, fontFamResName);
+            AddMenuItem("Delete Territory", topMenuItem, "trash-can-wf", null, altFamResName);
+
+            //AddMenuSeparator(topMenuItem);
+
+            //AddMenuItem("Add Member", topMenuItem, "business-man-01-wf", AddMemberCommand);
+            //AddMenuItem("Add Group", topMenuItem, "user-group", AddGroupCommand);
+
+            //AddMenuSeparator(topMenuItem);
+            //AddMenuItem("Recycle Bin", topMenuItem, "recycle-bin", RecycleBinCommand);
+
+            // ------------------ Toolbar ------------------
+            Logger.LogMessage(new StringBuilder("  Adding toolbar items"), ApplicationLogger.EntryTypes.Information);
+            AddToolbarSeparator();
+
+            AddToolbarLabel("Territory");
+            AddToolbarButton("Add Territory", "map", null, fontFamResName);
+            AddToolbarButton("Delete Territory", "trash-can-wf", null, altFamResName);
+
+            //AddToolbarSeparator();
+
+            //AddToolbarButton("Add Member", "business-man-01-wf", AddMemberCommand);
+            //AddToolbarButton("Add Group", "user-group", AddGroupCommand);
+
         }
 
         private void DataManager_ChangeNotification(object sender, ChangeNotificationEventArgs e) {

@@ -108,10 +108,12 @@ namespace CongregationManager {
             };
             sp.Children.Add(tb);
 
-            return new TabItem {
+            var result = new TabItem {
                 Header = sp,
                 Content = ext.Panel.Control
             };
+            ext.TabItem= result;
+            return result;
         }
 
         private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) =>

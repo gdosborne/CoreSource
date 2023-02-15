@@ -54,7 +54,7 @@
                     <Button Style="{DynamicResource StandardButton}" Width="125"
                             Command="{Binding ClearItemCommand}">
                         <TextBlock TextAlignment="Center">
-                            <Run FontFamily="{DynamicResource GenderFontFamily}" Text="{DynamicResource trash-can-wf}" 
+                            <Run FontFamily="{DynamicResource PeopleFontFamily}" Text="{DynamicResource trash-can-wf}" 
                                  BaselineAlignment="Center" />
                             <Run Text="" />
                             <Run Text="Delete" />

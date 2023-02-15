@@ -94,8 +94,14 @@ namespace CongregationExtension.ViewModels {
                 var file = new FileInfo(SelectedItem.RecycleFileName);
                 if (file.Exists) {
                     var dir = file.Directory;
-                    
+                    //var territoryDir = Path.Combine(dir.FullName, $".{Path.GetFileName(SelectedItem.RecycleFileName)}");
+
                     file.MoveTo(restoreFileName, true);
+                    //var tDir = new DirectoryInfo(territoryDir);
+                    //if (tDir.Exists) {
+                    //    var newDirName = Path.Combine(App.DataManager.DataFolder, $"{group.Name}.Territories");
+                    //    tDir.MoveTo(newDirName);
+                    //}
                     group.Items.Remove(SelectedItem);
                     if (group.Items.Count == 0) {
                         RecycleGroups.Remove(group);
@@ -135,7 +141,6 @@ namespace CongregationExtension.ViewModels {
             }
         }
         #endregion
-
 
     }
 }

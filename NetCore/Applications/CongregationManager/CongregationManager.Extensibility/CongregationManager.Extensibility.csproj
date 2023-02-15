@@ -32,6 +32,7 @@
     <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf" />
   </ItemGroup>
 
   <ItemGroup>

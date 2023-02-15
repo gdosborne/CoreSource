@@ -1,9 +1,7 @@
 ﻿using Common.Applicationn;
 using Common.Applicationn.Primitives;
-using Common.MVVMFramework;
 using CongregationManager;
 using CongregationManager.Data;
-using CongregationManager.Extensibility;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,13 +14,13 @@ namespace CongregationExtension.ViewModels {
 
         public override void Initialize(Settings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
-            
+
             ErrorVisibility = Visibility.Collapsed;
             Congregations = new ObservableCollection<Congregation>();
             Congregations.CollectionChanged += Congregations_CollectionChanged;
         }
 
-        private void X_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+        internal void Item_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
             if (e.PropertyName == "IsLocal") {
                 ProcessLocalItems();
             }
@@ -31,14 +29,14 @@ namespace CongregationExtension.ViewModels {
         private void Congregations_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 foreach (Congregation item in e.NewItems) {
-                    item.PropertyChanged += X_PropertyChanged;
+                    item.PropertyChanged += Item_PropertyChanged;
                     item.EditThisItem += Item_EditThisItem;
                 }
             }
             ProcessLocalItems();
         }
 
-        private void Item_EditThisItem(object? sender, EventArgs e) {
+        internal void Item_EditThisItem(object? sender, EventArgs e) {
             var cong = sender.As<Congregation>();
 
             var win = new CongregationWindow();
@@ -47,7 +45,7 @@ namespace CongregationExtension.ViewModels {
 
             App.DataManager.Congregations.ToList().ForEach(item => {
                 var thisCong = Congregations.FirstOrDefault(x => x.ID == item.ID);
-                if(thisCong != null && item.Members.Any()) {                   
+                if (thisCong != null && item.Members.Any()) {
                     thisCong.Members = item.Members;
                     thisCong.Members.ForEach(mbr => {
                         mbr.Resources = App.DataManager.Resources;
@@ -68,6 +66,7 @@ namespace CongregationExtension.ViewModels {
         public void Refresh() {
             var c = Congregations.OrderBy(x => x.Name);
             Congregations = new ObservableCollection<Congregation>(c);
+            SelectedCongregation = Congregations.FirstOrDefault(x => x.IsLocal);
         }
 
         #region Congregations Property
@@ -92,6 +91,7 @@ namespace CongregationExtension.ViewModels {
             get => _SelectedCongregation;
             set {
                 _SelectedCongregation = value;
+                App.DataManager.CurrentCongregation = SelectedCongregation;
                 OnPropertyChanged();
             }
         }

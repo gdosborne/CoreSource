@@ -292,6 +292,8 @@ namespace CongregationManager {
                             //ext.RemoveControlItem -= win.RemoveControlItemAsync;
 
                             //win.View.Panels.Remove(ext.Panel);
+
+                            win.MainTabControl.Items.Remove(ext.TabItem);
                             ext.Panel.Control = null;
                             ApplicationData.Extensions.Remove(ext);
 

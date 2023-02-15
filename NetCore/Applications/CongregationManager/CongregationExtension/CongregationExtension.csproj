@@ -34,6 +34,7 @@
     <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf" />
     <Content Include="..\CongregationManager\Resources\CM.ico" Link="Resources\CM.ico" />
     <Content Include="..\CongregationManager\Resources\CM.png" Link="Resources\CM.png" />
     <Content Include="..\CongregationManager\Resources\OzSoft-Icon.ico" Link="Resources\OzSoft-Icon.ico" />
