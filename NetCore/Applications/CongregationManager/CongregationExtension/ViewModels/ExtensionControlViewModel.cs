@@ -1,21 +1,22 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Applicationn;
+using Common.Applicationn.Primitives;
 using Common.MVVMFramework;
 using CongregationManager;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
 namespace CongregationExtension.ViewModels {
-    public class ExtensionControlViewModel : ViewModelBase {
-        public ExtensionControlViewModel() {
+    public class ExtensionControlViewModel : LocalBase {
+        public ExtensionControlViewModel()
+            : base() { }
 
-        }
-
-        public override void Initialize() {
-            base.Initialize();
-
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
+            
             ErrorVisibility = Visibility.Collapsed;
             Congregations = new ObservableCollection<Congregation>();
             Congregations.CollectionChanged += Congregations_CollectionChanged;

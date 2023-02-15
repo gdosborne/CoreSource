@@ -2,6 +2,7 @@
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -14,7 +15,7 @@ namespace CongregationExtension {
         public RecycleBinWindow() {
             InitializeComponent();
 
-            View.Initialize();
+            View.Initialize(App.AppSettings, App.DataManager);
             View.ExecuteUiAction += View_ExecuteUiAction;
         }
 

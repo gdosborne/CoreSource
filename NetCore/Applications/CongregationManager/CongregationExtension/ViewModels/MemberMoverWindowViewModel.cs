@@ -1,5 +1,7 @@
-﻿using Common.MVVMFramework;
+﻿using Common.Applicationn;
+using Common.MVVMFramework;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System.Collections.ObjectModel;
 
 namespace CongregationExtension.ViewModels {
@@ -11,8 +13,8 @@ namespace CongregationExtension.ViewModels {
             Congregations = new ObservableCollection<Congregation>();
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
 
             Title = "Member Mover";
         }

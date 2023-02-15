@@ -4,7 +4,7 @@
                     xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <sys:Double x:Key="StandardFontSize">20</sys:Double>
+    <sys:Double x:Key="StandardFontSize">16</sys:Double>
 
     <expr:Calculator x:Key="XLargeFontSize">
         <expr:Product Operand1="{expr:Value {StaticResource StandardFontSize}}" Operand2="1.5" />
@@ -186,6 +186,13 @@
     </Style>
 
     <Style TargetType="mycontrols:FontIcon" x:Key="TabIcon">
+        <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="mycontrols:FontIcon" x:Key="TabIconX">
         <Setter Property="FontFamily" Value="{DynamicResource GenderFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Margin" Value="0,0,5,0" />
@@ -220,6 +227,14 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="5,0,5,0" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="TabHeaderTop">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,-5" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="CongregationTabHeader" BasedOn="{StaticResource TabHeader}">

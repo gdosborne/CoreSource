@@ -2,12 +2,13 @@
 using CongregationManager.Extensibility;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CongregationExtension {
     public class ExtensionPanel : IExtensionPanel, INotifyPropertyChanged {
-        public ExtensionPanel(string title, char glyph, UserControl control) {
+        public ExtensionPanel(string title, char glyph, FrameworkElement control) {
             Title = title;
             Glyph = glyph;
             Control = control;
@@ -40,10 +41,10 @@ namespace CongregationExtension {
         #endregion
 
         #region Control Property
-        private UserControl _Control = default;
+        private FrameworkElement _Control = default;
         /// <summary>Gets/sets the Control.</summary>
         /// <value>The Control.</value>
-        public UserControl Control {
+        public FrameworkElement Control {
             get => _Control;
             set {
                 _Control = value;

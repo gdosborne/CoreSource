@@ -92,21 +92,7 @@
             </Grid>
         </Border>
         <Border Grid.Row="2" Style="{DynamicResource StandardWindowBorder}">
-            <TabControl Name="MainTabControl" ItemsSource="{Binding Panels}">
-                <TabControl.ItemContainerStyle>
-                    <Style TargetType="TabItem">
-                        <Setter Property="Header">
-                            <Setter.Value>
-                                <StackPanel Orientation="Horizontal">
-                                    <mycontrols:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />
-                                    <TextBlock Text="{Binding Title}" Style="{DynamicResource TabHeader}" />
-                                </StackPanel>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="Content" Value="{Binding Control}"/>
-                    </Style>
-                </TabControl.ItemContainerStyle>
-            </TabControl>
+            <TabControl Name="MainTabControl" />
         </Border>
     </Grid>
 </Window>

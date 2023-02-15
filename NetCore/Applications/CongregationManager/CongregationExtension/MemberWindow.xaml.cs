@@ -1,6 +1,7 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
+using CongregationManager.Extensibility;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,7 @@ namespace CongregationExtension {
             InitializeComponent();
             Closing += MemberWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
-            View.Initialize();
+            View.Initialize(App.AppSettings, App.DataManager);
         }
 
         protected override void OnSourceInitialized(EventArgs e) {

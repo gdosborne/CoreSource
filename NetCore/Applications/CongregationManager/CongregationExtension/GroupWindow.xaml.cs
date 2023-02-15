@@ -2,6 +2,7 @@
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System;
 using System.Linq;
 using System.Windows;
@@ -13,7 +14,7 @@ namespace CongregationExtension {
         public GroupWindow() {
             InitializeComponent();
 
-            View.Initialize();
+            View.Initialize(App.AppSettings, App.DataManager);
             View.ExecuteUiAction += View_ExecuteUiAction;
         }
 

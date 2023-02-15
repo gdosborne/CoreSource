@@ -1,21 +1,25 @@
-﻿using Common.Applicationn.Linq;
+﻿using Common.Applicationn;
+using Common.Applicationn.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CongregationExtension.ViewModels {
     public class GroupWindowViewModel : LocalBase {
-        public GroupWindowViewModel() {
+        public GroupWindowViewModel()
+            : base() {
+
             Title = "Group [design]";
             Overseers = new ObservableCollection<Member>();
             Members = new ObservableCollection<Member>();
             Assistants = new ObservableCollection<Member>();
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
 
             Title = "Group";
 

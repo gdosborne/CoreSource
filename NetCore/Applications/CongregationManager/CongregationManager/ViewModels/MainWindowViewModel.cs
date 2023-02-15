@@ -12,8 +12,6 @@ namespace CongregationManager.ViewModels {
             base.Initialize();
 
             Title = App.ApplicationName;
-            Panels = new ObservableCollection<IExtensionPanel>();
-            Panels.CollectionChanged += Panels_CollectionChanged;
         }
 
         private void Panels_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
@@ -92,19 +90,6 @@ namespace CongregationManager.ViewModels {
         private bool ValidateExtensionManagerState(object state) => true;
         private void ExtensionManager(object state) {
             ExecuteAction(nameof(Actions.ManageExtensions));
-        }
-        #endregion
-
-        #region Panels Property
-        private ObservableCollection<IExtensionPanel> _Panels = default;
-        /// <summary>Gets/sets the Panels.</summary>
-        /// <value>The Panels.</value>
-        public ObservableCollection<IExtensionPanel> Panels {
-            get => _Panels;
-            set {
-                _Panels = value;
-                OnPropertyChanged();                
-            }
         }
         #endregion
 

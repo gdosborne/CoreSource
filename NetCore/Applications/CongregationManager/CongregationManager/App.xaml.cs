@@ -284,14 +284,14 @@ namespace CongregationManager {
                                 ctrl.Parent.RemoveChild(ctrl);
                             }
 
-                            win.View.Panels.Remove(ext.Panel);
+                            //win.View.Panels.Remove(ext.Panel);
                             ext.Destroy();
 
                             //ext.SaveExtensionData -= win.SaveExtensionData;
                             //ext.AddControlItem -= win.AddControlItemAsync;
                             //ext.RemoveControlItem -= win.RemoveControlItemAsync;
 
-                            win.View.Panels.Remove(ext.Panel);
+                            //win.View.Panels.Remove(ext.Panel);
                             ext.Panel.Control = null;
                             ApplicationData.Extensions.Remove(ext);
 

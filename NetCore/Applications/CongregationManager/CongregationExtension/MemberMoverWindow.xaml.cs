@@ -1,6 +1,7 @@
 ﻿using Common.Applicationn.Primitives;
 using Common.Applicationn.Windows;
 using CongregationExtension.ViewModels;
+using CongregationManager.Extensibility;
 using System;
 using System.Windows;
 
@@ -9,7 +10,7 @@ namespace CongregationExtension {
         public MemberMoverWindow() {
             InitializeComponent();
 
-            View.Initialize();
+            View.Initialize(App.AppSettings, App.DataManager);
             View.ExecuteUiAction += View_ExecuteUiAction;
         }
 

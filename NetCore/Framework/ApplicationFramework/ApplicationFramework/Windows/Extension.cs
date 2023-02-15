@@ -89,6 +89,9 @@ namespace Common.Applicationn.Windows {
             }
 
             var parent = VisualTreeHelper.GetParent(depObj);
+            if(parent == null) {
+                return (T)null;
+            }
             if (parent.GetType() == typeof(T)) {
                 return (T)(object)parent;
             }

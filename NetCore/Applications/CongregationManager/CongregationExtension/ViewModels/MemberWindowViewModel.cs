@@ -1,7 +1,9 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Applicationn;
+using Common.Applicationn.Primitives;
 using Common.Applicationn.Text;
 using Common.MVVMFramework;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -17,8 +19,8 @@ namespace CongregationExtension.ViewModels {
             Member = new Member();
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
 
             Title = "Member";
 

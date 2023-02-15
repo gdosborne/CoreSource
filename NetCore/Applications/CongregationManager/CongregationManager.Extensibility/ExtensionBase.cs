@@ -15,9 +15,11 @@ namespace CongregationManager.Extensibility {
     public abstract class ExtensionBase : INotifyPropertyChanged {
         public ExtensionBase() { }
 
-        protected ExtensionBase(string name, char glyph) {
+        protected ExtensionBase(string name, char glyph, string glyphStyleName) {
             Name = name;
             Glyph = glyph;
+            GlyphStyleName = glyphStyleName;
+
             addedControls ??= new Dictionary<ExtensionBase, List<object>>();
             if (!addedControls.ContainsKey(this))
                 addedControls.Add(this, new List<object>());
@@ -170,6 +172,19 @@ namespace CongregationManager.Extensibility {
                 _IsEnabled = value;
                 Settings.AddOrUpdateSetting($"{Name} Extension", "IsEnabled", IsEnabled);
                 ToggleLoadedControls(IsEnabled.Value);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region GlyphStyleName Property
+        private string _GlyphStyleName = default;
+        /// <summary>Gets/sets the GlyphStyleName.</summary>
+        /// <value>The GlyphStyleName.</value>
+        public string GlyphStyleName {
+            get => _GlyphStyleName;
+            set {
+                _GlyphStyleName = value;
                 OnPropertyChanged();
             }
         }

@@ -21,12 +21,10 @@ namespace CongregationExtension {
             MeetingDayComboBox.SelectedItem = DayOfWeek.Sunday;
 
             var actualHr = 0;
-            var actualAP = "AM";
             for (int i = 0; i < 24; i++) {
                 actualHr = i;
                 if (actualHr > 12) {
                     actualHr -= 12;
-                    actualAP = "PM";
                 }
                 MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 0, 0)));
                 MeetingTimeComboBox.Items.Add(ActualMeetingTime(new TimeSpan(i, 15, 0)));
@@ -117,7 +115,6 @@ namespace CongregationExtension {
         }
         #endregion
 
-
         #region EditCommandProperty
         /// <summary>Gets the EditCommand dependency property.</summary>
         /// <value>The EditCommand dependency property.</value>
@@ -134,7 +131,6 @@ namespace CongregationExtension {
             obj.EditButton.Command = val;
         }
         #endregion
-
 
         private void TextBoxTextChanged(object sender, TextChangedEventArgs e) {
             if (sender == CongregationNameTextBox) {

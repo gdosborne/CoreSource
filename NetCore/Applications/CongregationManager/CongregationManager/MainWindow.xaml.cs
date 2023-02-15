@@ -2,8 +2,10 @@
 using Common.Applicationn.Windows;
 using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
+using Controls.Core;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using static Common.Applicationn.Logging.ApplicationLogger;
 
 namespace CongregationManager {
@@ -13,7 +15,6 @@ namespace CongregationManager {
 
             this.SetBounds(App.ApplicationSession.ApplicationSettings, true);
             App.LogMessage("Opening main window", EntryTypes.Information);
-
 
             Closing += MainWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
@@ -74,10 +75,6 @@ namespace CongregationManager {
         internal void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
             e.Dictionary = myResourceDictionary;
 
-        //private ResourceDictionary myResourceDictionary => new ResourceDictionary {
-        //    Source = new Uri("/CongregationManager;component/Resources/MainTheme.xaml", UriKind.RelativeOrAbsolute)
-        //};
-
         private ResourceDictionary myResourceDictionary => App.Current.Resources;
 
         public void InitializeExtension(ExtensionBase ext) {
@@ -89,7 +86,32 @@ namespace CongregationManager {
                 App.ApplicationSession.Logger,
                 App.DataManager);
 
-            View.Panels.Add(ext.Panel);
+
+            MainTabControl.Items.Add(CreateTabItem(ext));
+        }
+
+        private TabItem CreateTabItem(ExtensionBase ext) {
+            var sp = new StackPanel {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(3)
+            };
+
+            var fi = new FontIcon {
+                Glyph = ext.Glyph.ToString(),
+                Style = myResourceDictionary[ext.GlyphStyleName].As<Style>()
+            };
+            sp.Children.Add(fi);
+
+            var tb = new TextBlock {
+                Text = ext.Panel.Title,
+                Style = myResourceDictionary["TabHeaderTop"].As<Style>()
+            };
+            sp.Children.Add(tb);
+
+            return new TabItem {
+                Header = sp,
+                Content = ext.Panel.Control
+            };
         }
 
         private void TitlebarBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e) =>

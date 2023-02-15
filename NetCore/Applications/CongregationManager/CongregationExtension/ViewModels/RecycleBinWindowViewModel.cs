@@ -1,6 +1,8 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Applicationn;
+using Common.Applicationn.Primitives;
 using Common.MVVMFramework;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -9,13 +11,15 @@ using System.Windows.Forms;
 
 namespace CongregationExtension.ViewModels {
     public class RecycleBinWindowViewModel : LocalBase {
-        public RecycleBinWindowViewModel() {
+        public RecycleBinWindowViewModel()
+            : base() {
+
             Title = "Recycle Bin [design]";
             RecycleGroups = new ObservableCollection<RecycleGroup>();
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
 
             Title = "Recycle Bin";
         }

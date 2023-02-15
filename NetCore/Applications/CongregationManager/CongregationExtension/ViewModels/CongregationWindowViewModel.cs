@@ -1,6 +1,8 @@
-﻿using Common.Applicationn.Linq;
+﻿using Common.Applicationn;
+using Common.Applicationn.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
+using CongregationManager.Extensibility;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,16 +11,16 @@ namespace CongregationExtension.ViewModels {
     public class CongregationWindowViewModel : LocalBase {
         public CongregationWindowViewModel()
             : base() {
+
             Title = "Congregation [design]";
             Members = new ObservableCollection<Member>();
             Groups = new ObservableCollection<Group>();
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize(appSettings, dataManager);
 
             Title = "Congregation";
-            //SelectedMembers = new ObservableCollection<Member>();
         }
 
         #region Congregation Property

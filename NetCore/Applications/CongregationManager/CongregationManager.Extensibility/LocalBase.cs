@@ -1,12 +1,15 @@
 ﻿using Common.Applicationn;
 using Common.MVVMFramework;
 using CongregationManager.Data;
+using Controls.Core;
 
 namespace CongregationExtension.ViewModels {
     public abstract class LocalBase : ViewModelBase {
-        public LocalBase() {
-            AppSettings = App.AppSettings;
-            DataManager = App.DataManager;
+        public virtual void Initialize(Settings appSettings, DataManager dataManager) {
+            base.Initialize();
+
+            AppSettings = appSettings;
+            DataManager = dataManager;
         }
 
         public Settings AppSettings { get; set; }

@@ -46,6 +46,7 @@
     <ProjectReference Include="..\..\..\Controls\Controls.Core.csproj" />
     <ProjectReference Include="..\..\..\Framework\ApplicationFramework\ApplicationFramework\ApplicationFramework.csproj" />
     <ProjectReference Include="..\CongregationManager.Extensibility\CongregationManager.Extensibility.csproj" />
+    <ProjectReference Include="..\TerritoryManager.Extension\TerritoryManager.Extension.csproj" />
   </ItemGroup>
 
   <ItemGroup>

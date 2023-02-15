@@ -2,6 +2,7 @@
 using Common.Applicationn.Windows;
 using CongregationExtension;
 using CongregationExtension.ViewModels;
+using CongregationManager.Extensibility;
 using System;
 using System.Linq;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace CongregationManager {
             InitializeComponent();
             Closing += CongregationWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
-            View.Initialize();
+            View.Initialize(App.AppSettings, App.DataManager);
         }
 
         private void CongregationWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
