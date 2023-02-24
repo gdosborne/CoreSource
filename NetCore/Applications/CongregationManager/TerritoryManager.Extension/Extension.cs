@@ -60,7 +60,7 @@ namespace TerritoryManager.Extension {
             App.LogMessage($"Initializing the {Name} extension", ApplicationLogger.EntryTypes.Information);
             App.DataManager.ChangeNotification += DataManager_ChangeNotification;
 
-            appSettings.SetupColors(Resources.GetBrushNames(), Resources);
+            //appSettings.SetupColors(Resources.GetBrushNames(), Resources);
             var fontFamily = new FontFamily(appSettings.GetValue("Application", "FontFamilyName", "Calibri"));
             Resources["StandardFont"] = fontFamily;
             App.Current.Resources["StandardFontSize"] = appSettings.GetValue("Application", "FontSize", 16.0);

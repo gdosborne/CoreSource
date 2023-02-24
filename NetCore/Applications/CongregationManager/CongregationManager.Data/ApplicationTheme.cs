@@ -1,9 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Application.Media;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Media;
 
 namespace CongregationManager.Data {
     [JsonObject]
@@ -79,5 +83,14 @@ namespace CongregationManager.Data {
         private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
 
+        public void Apply(ResourceDictionary resources) {
+            Values.ToList().ForEach(x => {
+                resources.MergedDictionaries.ToList().ForEach(d => {
+                    if(d.Contains(x.Key)) {
+                        d[x.Key] = new SolidColorBrush(x.Value.ToColor());
+                    }
+                });
+            });
+        }
     }
 }

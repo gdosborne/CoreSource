@@ -12,19 +12,11 @@ namespace CongregationManager.ViewModels {
     public class ThemeEditorWindowViewModel : ViewModelBase {
         public ThemeEditorWindowViewModel() {
             Title = "Theme Editor [designer]";
-            var aliasName = App.Current.Resources.BrushAliasNames();
-            var temp = new List<SettingColor>();
-            App.CurrentTheme.Values.ToList().ForEach(x => {
-                temp.Add(new SettingColor {
-                    Name = aliasName[x.Key],
-                    ColorValue = x.Value.ToColor()
-                });
-            });
-            Colors = new ObservableCollection<SettingColor>(temp.OrderBy(x => x.Name));
-            temp.ForEach(color => {
-                color.ColorClicked += Color_ColorClicked; ;
-            });
-            Colors.AddRange(temp.OrderBy(x => x.Name));
+           
+            Themes = new ObservableCollection<ApplicationTheme>(App.AppThemes);
+            if (Themes.Any()){
+                SelectedTheme = App.CurrentTheme;
+            }
         }
 
         private void Color_ColorClicked(object? sender, System.EventArgs e) {
@@ -33,9 +25,7 @@ namespace CongregationManager.ViewModels {
                 { "Color", setColor.ColorString }
             };
             ExecuteAction(nameof(Actions.ChooseColor), p);
-            //setColor.ColorString = (string)p["Color"];
-            //App.Current.Resources[setColor.Name] = setColor.ToBrush();
-            //App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("AlternateColors", setColor.Name, setColor.ColorString);
+            setColor.ColorString = (string)p["Color"];
         }
 
         public override void Initialize() {
@@ -71,5 +61,64 @@ namespace CongregationManager.ViewModels {
             }
         }
         #endregion
+
+        #region Themes Property
+        private ObservableCollection<ApplicationTheme> _Themes = default;
+        /// <summary>Gets/sets the Themes.</summary>
+        /// <value>The Themes.</value>
+        public ObservableCollection<ApplicationTheme> Themes {
+            get => _Themes;
+            set {
+                _Themes = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SelectedTheme Property
+        private ApplicationTheme _SelectedTheme = default;
+        /// <summary>Gets/sets the SelectedTheme.</summary>
+        /// <value>The SelectedTheme.</value>
+        public ApplicationTheme SelectedTheme {
+            get => _SelectedTheme;
+            set {
+                _SelectedTheme = value;
+                if(SelectedTheme!=null) {
+                    var aliasName = App.Current.Resources.BrushAliasNames();
+                    var temp = new List<SettingColor>();
+
+                    SelectedTheme.Values.ToList().ForEach(x => {
+                        temp.Add(new SettingColor {
+                            Name = aliasName[x.Key],
+                            ColorValue = x.Value.ToColor(),
+                            Key = x.Key
+                        });
+                    });
+                    Colors = new ObservableCollection<SettingColor>(temp.OrderBy(x => x.Name));
+                    temp.ForEach(color => {
+                        color.ColorClicked += Color_ColorClicked; ;
+                    });
+                    Colors.AddRange(temp.OrderBy(x => x.Name));
+                }
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ApplyThemeCommand
+        private DelegateCommand _ApplyThemeCommand = default;
+        /// <summary>Gets the ApplyTheme command.</summary>
+        /// <value>The ApplyTheme command.</value>
+        public DelegateCommand ApplyThemeCommand => _ApplyThemeCommand ??= new DelegateCommand(ApplyTheme, ValidateApplyThemeState);
+        private bool ValidateApplyThemeState(object state) => SelectedTheme != null;
+        private void ApplyTheme(object state) {
+            Colors.ToList().ForEach(x => {
+                SelectedTheme.Values[x.Key] = x.ColorValue.ToHexValue();
+            });
+            SelectedTheme.Save();
+            SelectedTheme.Apply(App.Current.Resources);
+        }
+        #endregion
+
     }
 }

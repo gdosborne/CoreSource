@@ -24,6 +24,19 @@ namespace CongregationManager.Data {
         }
         #endregion
 
+        #region Key Property
+        private string _Key = default;
+        /// <summary>Gets/sets the Key.</summary>
+        /// <value>The Key.</value>
+        public string Key {
+            get => _Key;
+            set {
+                _Key = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #region ColorValue Property
         private bool settingColor = false;
         private Color _ColorValue = default;

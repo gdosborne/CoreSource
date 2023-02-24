@@ -23,7 +23,9 @@ namespace CongregationManager {
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
-            App.ApplicationSession.ApplicationSettings.SetupColors(App.Current.Resources.GetBrushNames(), App.Current.Resources);
+            App.ApplyTheme("Default");
+
+            //App.ApplicationSession.ApplicationSettings.SetupColors(App.Current.Resources.GetBrushNames(), App.Current.Resources);
             var fontFamily = new FontFamily(App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));
             App.Current.Resources["StandardFont"] = fontFamily;
 

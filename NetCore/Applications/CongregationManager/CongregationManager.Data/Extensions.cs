@@ -39,14 +39,6 @@ namespace CongregationManager.Data {
             else return source.ToString();
         }
 
-        public static void SetupColors(this Settings appSettings, List<string> names, ResourceDictionary resources) {            
-            //foreach (var name in names) {
-            //    var resValue = ((SolidColorBrush)resources[name]).Color;
-            //    var setValue = appSettings.GetValue("AlternateColors", name, resValue.ToHexValue());
-            //    resources[name] = new SolidColorBrush(setValue.ToColor());
-            //}
-        }
-
         public static List<string> GetBrushNames(this ResourceDictionary resources) {
             var result = new List<string>();
             foreach (var dict in resources.MergedDictionaries) {

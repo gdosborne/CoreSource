@@ -24,23 +24,6 @@ namespace CongregationManager {
                         DialogResult = false;
                         break;
                     }
-                case SettingsWindowViewModel.Actions.ChooseColor: {
-                        var color = e.Parameters["Color"].As<string>();
-                        var cd = new System.Windows.Forms.ColorDialog {
-                            AllowFullOpen = true,
-                            AnyColor = true,
-                            FullOpen = true,
-                            SolidColorOnly = true,
-                            Color = color.ToColor().ToColor()
-                        };
-                        var result = cd.ShowDialog();
-                        if (result == System.Windows.Forms.DialogResult.Cancel) {
-                            e.Parameters["Color"] = null;
-                            return;
-                        }
-                        e.Parameters["Color"] = cd.Color.ToColor().ToHexValue();
-                        break;
-                    }
                 case SettingsWindowViewModel.Actions.CreateTheme: {
                         var win = new ThemeEditorWindow {
                             Owner = this

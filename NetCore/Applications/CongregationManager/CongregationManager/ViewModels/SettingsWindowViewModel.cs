@@ -31,35 +31,10 @@ namespace CongregationManager.ViewModels {
             IsAppDefaultMode = true;
         }
 
-        private void Color_ColorClicked(object? sender, System.EventArgs e) {
-            var setColor = sender.As<SettingColor>();
-            var p = new Dictionary<string, object> {
-                { "Color", setColor.ColorString }
-            };
-            ExecuteAction(nameof(Actions.ChooseColor), p);
-            //setColor.ColorString = (string)p["Color"];
-            //App.Current.Resources[setColor.Name] = setColor.ToBrush();
-            //App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("AlternateColors", setColor.Name, setColor.ColorString);
-        }
-
         public enum Actions {
             CloseWindow,
-            ChooseColor,
             CreateTheme
         }
-
-        //#region Colors Property
-        //private ObservableCollection<SettingColor> _Colors = default;
-        ///// <summary>Gets/sets the Colors.</summary>
-        ///// <value>The Colors.</value>
-        //public ObservableCollection<SettingColor> Colors {
-        //    get => _Colors;
-        //    set {
-        //        _Colors = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        //#endregion
 
         #region CloseWindowCommand
         private DelegateCommand _CloseWindowCommand = default;

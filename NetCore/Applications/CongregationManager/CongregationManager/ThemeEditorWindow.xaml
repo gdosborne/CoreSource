@@ -8,7 +8,7 @@
         xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Height="350" MinHeight="250" Width="600" MinWidth="550"
+        Height="350" MinHeight="350" Width="600" MinWidth="550"
         Icon="/Resources/CM.ico">
     <Window.DataContext>
         <views:ThemeEditorWindowViewModel />
@@ -32,7 +32,7 @@
                                Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
                 </Border>
                 <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
-                                        Margin="0,-1,10,0" CornerRadius="0,0,5,0" BorderThickness="1,0,1,1"/>
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1"/>
 
             </Grid>
         </Border>
@@ -45,12 +45,26 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <TextBlock Text="Theme" Style="{DynamicResource WindowLabel}" />
-                    <ComboBox Style="{DynamicResource PrimaryComboBox}" Width="300">
-                        
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Theme" Style="{DynamicResource WindowLabel}" />
+                    <ComboBox Style="{DynamicResource PrimaryComboBox}" Width="300"
+                              ItemsSource="{Binding Themes}" Grid.Column="1" HorizontalAlignment="Left"
+                              SelectedItem="{Binding SelectedTheme,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Style="{DynamicResource WindowLabel}" Margin="0" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
-                </StackPanel>
+                    <Button Content="Apply Theme" Grid.Column="2" Style="{DynamicResource BaseButton}" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding ApplyThemeCommand}"/>
+                </Grid>
                 
                 <Border Grid.Row="1" Style="{DynamicResource ControlBorder}" Padding="0,0,0,0">
                 <ScrollViewer Grid.Row="0" Style="{DynamicResource StandardScrollViewer}">
@@ -88,7 +102,8 @@
                 </ScrollViewer>
                 </Border>
 
-                <StackPanel Orientation="Vertical" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <StackPanel Orientation="Vertical" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,0,0">
                     <Button Style="{DynamicResource StandardButton}" Content="Done"
                             Command="{Binding CloseWindowCommand}" />
                 </StackPanel>

@@ -61,7 +61,6 @@ namespace CongregationManager {
             ApplicationSession = new Session(ApplicationFolder, ApplicationName,
                 StorageTypes.Xml, StorageOptions.CreateFolderForEachDay);
             AppThemes = GetThemes();
-            ApplyTheme("Default");
         }
 
         private List<ApplicationTheme> GetThemes() {
@@ -79,15 +78,7 @@ namespace CongregationManager {
 
         public static void ApplyTheme(string name) {
             CurrentTheme = AppThemes.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-            if (CurrentTheme == null) {
-                var themeFile = new FileInfo(Path.Combine(ThemeFolder, $"{name}.apptheme"));
-                if (themeFile.Exists) {
-                    CurrentTheme = ApplicationTheme.FromFile(themeFile.FullName);
-                }
-            }
-            CurrentTheme?.Values.ToList().ForEach(x => {
-                    App.Current.Resources[x.Key] = new SolidColorBrush(x.Value.ToColor());
-                });
+            CurrentTheme?.Apply(App.Current.Resources);
         }
 
         private void MakeDefaultThemeFile() {
