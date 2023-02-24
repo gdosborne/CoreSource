@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 
-namespace Common.Applicationn.Windows.Expressions {
+namespace Common.Application.Windows.Expressions {
     public class Value : MarkupExtension, IExpression {
         public double? Double { get; set; }
 

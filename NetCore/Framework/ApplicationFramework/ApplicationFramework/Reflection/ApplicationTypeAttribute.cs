@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Applicationn.Reflection {
+namespace Common.Application.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly)]
     public class ApplicationTypeAttribute : Attribute {
         public enum ApplicationTypes {

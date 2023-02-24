@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Threading;
 
-namespace Common.Applicationn.Clipboard {
+namespace Common.Application.Clipboard {
     public static class ClipboardRing {
         private const string NewLineReplacer = "●";
 

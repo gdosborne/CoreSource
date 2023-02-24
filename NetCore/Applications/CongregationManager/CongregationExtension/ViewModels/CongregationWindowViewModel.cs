@@ -1,5 +1,5 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Linq;
+﻿using Common.Application;
+using Common.Application.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;

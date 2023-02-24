@@ -1,0 +1,174 @@
+﻿<Window x:Class="CongregationManager.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:local="clr-namespace:CongregationManager"
+        xmlns:views="clr-namespace:CongregationManager.ViewModels"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Height="350" MinHeight="250" Width="600" MinWidth="550"
+        Icon="/Resources/CM.ico">
+    <Window.DataContext>
+        <views:SettingsWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,0" BorderThickness="1,0,1,1"/>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TabControl>
+                    <TabItem Header="General">
+
+                    </TabItem>
+                    <TabItem Header="Personalization">
+                        <ScrollViewer BorderThickness="0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Font Size" Grid.Row="0" Grid.Column="0" 
+                                           Style="{DynamicResource WindowLabel}" />
+                                <ComboBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource PrimaryComboBox}"
+                                          ItemsSource="{Binding FontSizes}" Width="80" HorizontalAlignment="Left"
+                                          SelectedItem="{Binding SelectedFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                
+                                <TextBlock Text="Font Family" Grid.Row="1" Grid.Column="0" 
+                                           Style="{DynamicResource WindowLabel}" />
+                                <ComboBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource PrimaryComboBox}"
+                                          ItemsSource="{Binding Fonts}" 
+                                          SelectedItem="{Binding SelectedFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Source}" FontFamily="{Binding}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+
+                                <GroupBox Header="Visual Mode" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <RadioButton Content="Light" GroupName="VisualMode" Grid.Row="0" HorizontalAlignment="Left" 
+                                                     IsChecked="{Binding IsLightMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                        <RadioButton Content="Dark" GroupName="VisualMode" Grid.Row="1" HorizontalAlignment="Left"
+                                                     IsChecked="{Binding IsDarkMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                        <RadioButton Content="Application Default" GroupName="VisualMode" Grid.Row="2" 
+                                                     HorizontalAlignment="Left"
+                                                     IsChecked="{Binding IsAppDefaultMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                        <RadioButton Content="Custom" GroupName="VisualMode" Grid.Row="3" HorizontalAlignment="Left"
+                                                     IsChecked="{Binding IsCustomMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                        <TextBlock Text="File Name" Style="{DynamicResource WindowLabel}" Grid.Row="4" 
+                                                   HorizontalAlignment="Left" 
+                                                   IsEnabled="{Binding IsCustomMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Top"
+                                                    Margin="0,0,10,0" HorizontalAlignment="Right">
+                                            <Button Style="{DynamicResource BaseButton}" Content="Create Theme" />
+                                        </StackPanel>
+
+                                        <TextBox Name="fnameTextBox" Text="" Style="{DynamicResource WindowTextField}" Grid.Row="5"
+                                                 IsEnabled="{Binding IsCustomMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                                 Margin="0,0,30,0"/>
+                                        <Button Grid.Row="5" HorizontalAlignment="Right" Style="{DynamicResource EndButton}"
+                                                IsEnabled="{Binding IsCustomMode,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                Width="{Binding ElementName=fnameTextBox,Path=ActualHeight}"
+                                                Height="{Binding ElementName=fnameTextBox,Path=ActualHeight}">
+                                            <mycontrols:FontIcon Style="{DynamicResource AltMenuItemIcon}" Glyph="&#xF12B;" />
+                                        </Button>
+                                    </Grid>
+                                </GroupBox>
+                                <!--<Expander Header="Colors" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Border Style="{DynamicResource ControlBorder}">
+                                        <ItemsControl ItemsSource="{Binding Colors}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid HorizontalAlignment="Left" Margin="0,0,20,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Name}" Grid.Column="0" Width="280" Margin="20,0,0,0" />
+                                                        <TextBlock Grid.Column="1">
+                                                        <Hyperlink Command="{Binding SelectColorCommand}" TextDecorations="None">
+                                                            <Border Width="60" Height="30" VerticalAlignment="Center"
+                                                                    BorderThickness="1" Margin="0,5,0,5" CornerRadius="6"
+                                                                    BorderBrush="{DynamicResource WindowTextForeground}">
+                                                                <Border.Background>
+                                                                    <SolidColorBrush Color="{Binding ColorValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                                                </Border.Background>
+                                                            </Border>
+                                                        </Hyperlink>
+                                                        </TextBlock>
+                                                        <TextBox Text="{Binding ColorString,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                                                 Grid.Column="2" Margin="20,0,0,0" Width="120" TextAlignment="Right" 
+                                                                 VerticalAlignment="Center" GotFocus="TextBox_GotFocus"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Border>
+                                </Expander>-->
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+
+
+
+                <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Top">
+                    <Button Style="{DynamicResource StandardButton}" Content="Done"
+                            Command="{Binding CloseWindowCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

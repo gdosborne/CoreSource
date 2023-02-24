@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Common.Applicationn.Text {
+namespace Common.Application.Text {
     public static class Extension {
         public static string PrecededByDateTime(this string value, int tabIndex = 0) =>
             $"{DateTime.Now:yyyy-MM-dd hh:mm:ss.fffff tt} => {new string(' ', tabIndex * 4)}{value}";

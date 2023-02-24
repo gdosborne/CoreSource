@@ -1,28 +1,34 @@
-﻿using Common.Applicationn;
-using Common.MVVMFramework;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CongregationManager.Data {
     [JsonObject("territory")]
     public class Territory : ItemBase {
         public Territory() {
-            DoNotCalls = new ObservableCollection<DoNotCall>();
-            History = new ObservableCollection<TerritoryHistory>();
+            DoNotCalls = new List<DoNotCall>();
+            History = new List<TerritoryHistory>();
         }
 
-        #region CongregationID Property
-        private int _CongregationID = default;
-        /// <summary>Gets/sets the CongregationID.</summary>
-        /// <value>The CongregationID.</value>
-        [JsonProperty("congregationid")]
-        public int CongregationID {
-            get => _CongregationID;
+        public enum Statuses {
+            Active,
+            Suspended
+        }
+
+        #region Status Property
+        private Statuses _Status = default;
+        /// <summary>Gets/sets the Status.</summary>
+        /// <value>The Status.</value>
+        [JsonProperty("status")]
+        public Statuses Status {
+            get => _Status;
             set {
-                _CongregationID = value;
+                _Status = value;
                 OnPropertyChanged();
             }
         }
@@ -43,11 +49,11 @@ namespace CongregationManager.Data {
         #endregion
 
         #region DoNotCalls Property
-        private ObservableCollection<DoNotCall> _DoNotCalls = default;
+        private List<DoNotCall> _DoNotCalls = default;
         /// <summary>Gets/sets the DoNotCalls.</summary>
         /// <value>The DoNotCalls.</value>
         [JsonProperty("donotcalls")]
-        public ObservableCollection<DoNotCall> DoNotCalls {
+        public List<DoNotCall> DoNotCalls {
             get => _DoNotCalls;
             set {
                 _DoNotCalls = value;
@@ -71,14 +77,60 @@ namespace CongregationManager.Data {
         #endregion
 
         #region History Property
-        private ObservableCollection<TerritoryHistory> _History = default;
+        private List<TerritoryHistory> _History = default;
         /// <summary>Gets/sets the History.</summary>
         /// <value>The History.</value>
         [JsonProperty("history")]
-        public ObservableCollection<TerritoryHistory> History {
+        public List<TerritoryHistory> History {
             get => _History;
             set {
                 _History = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ImagePath Property
+        private string _ImagePath = default;
+        /// <summary>Gets/sets the ImagePath.</summary>
+        /// <value>The ImagePath.</value>
+        [JsonProperty("imagepath")]
+        public string ImagePath {
+            get => _ImagePath;
+            set {
+                _ImagePath = value;
+                if (string.IsNullOrEmpty(ImagePath))
+                    Image = null;
+                else if (File.Exists(ImagePath))
+                    Image = new BitmapImage(new Uri(ImagePath, UriKind.Absolute));
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Image Property
+        private ImageSource _Image = default;
+        /// <summary>Gets/sets the Image.</summary>
+        /// <value>The Image.</value>
+        [JsonIgnore]
+        public ImageSource Image {
+            get => _Image;
+            set {
+                _Image = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region LastHistory Property
+        private TerritoryHistory _LastHistory = default;
+        /// <summary>Gets/sets the LastHistory.</summary>
+        /// <value>The LastHistory.</value>
+        [JsonIgnore]
+        public TerritoryHistory LastHistory {
+            get => History.OrderByDescending(x => x.CheckOutDate).FirstOrDefault();
+            private set {
+                _LastHistory = value;
                 OnPropertyChanged();
             }
         }

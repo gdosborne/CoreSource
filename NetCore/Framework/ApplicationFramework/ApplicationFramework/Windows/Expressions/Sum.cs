@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Applicationn.Windows.Expressions {
+namespace Common.Application.Windows.Expressions {
     public class Sum : BinaryOperation {
         protected override double CalculateBinaryOperation() =>
             Operand1.CalculateValue() + Operand2.CalculateValue();

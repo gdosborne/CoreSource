@@ -1,5 +1,5 @@
-﻿using Common.Applicationn.IO;
-using Common.Applicationn.Text;
+﻿using Common.Application.IO;
+using Common.Application.Text;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 
-namespace Common.Applicationn.Install {
+namespace Common.Application.Install {
     public sealed class UpdateChecker {
 
         private void ProcessPath(bool isTest) {

@@ -1,4 +1,4 @@
-﻿using Common.Applicationn;
+﻿using Common.Application;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;

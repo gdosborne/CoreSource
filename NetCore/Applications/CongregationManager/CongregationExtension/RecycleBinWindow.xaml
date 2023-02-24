@@ -15,9 +15,6 @@
     <Window.DataContext>
         <views:RecycleBinWindowViewModel />
     </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

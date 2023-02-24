@@ -1,5 +1,5 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows.Expressions;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows.Expressions;
 using System;
 using System.Windows;
 using System.Windows.Controls;

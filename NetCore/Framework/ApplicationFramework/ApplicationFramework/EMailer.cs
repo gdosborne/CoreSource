@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using static Common.Applicationn.MailTracker;
-using static Common.Applicationn.Session;
+using static Common.Application.MailTracker;
+using static Common.Application.Session;
 
-namespace Common.Applicationn {
+namespace Common.Application {
     public class EMailer : IDisposable {
         public EMailer(string smtpServer, TimeSpan cacheExpire, MatchingFlags flags) {
             addresses = new Dictionary<string, MailAddress>();

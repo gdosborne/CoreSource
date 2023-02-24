@@ -13,9 +13,6 @@
         <ResourceDictionary Source="/Resources/MainTheme.xaml" />
     </UserControl.Resources>
     <Grid Name="MainGrid" Margin="10">
-        <Grid.Resources>
-            <ResourceDictionary Source="Resources/MainTheme.xaml" />
-        </Grid.Resources>
         <Grid.DataContext>
             <views:ExtensionControlViewModel />
         </Grid.DataContext>
@@ -31,40 +28,50 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource WindowHeaderText}">
             <Run Text="Territories on this Tab are from the" />
-            <Run Text="{Binding SelectedCongregation.Name}" FontWeight="Bold" />
-            <Run Text="Congregation on the Congregation Tab. To switch congregations, switch to the Congregations"/>
-            <Run Text="Tab, select the congregation to display, then return to this Tab. The territories will" />
-            <Run Text="then reflect the territories for the selected congregation."/>
+            <Run Text="{Binding SelectedCongregation.Name}" FontWeight="Bold" 
+                 Foreground="{DynamicResource HighlightForeground}" FontSize="{DynamicResource LargeFontSize}"
+                 TextDecorations="Underline"/>
+            <Run Text="Congregation . To switch congregations, go to to the Congregations Tab, select"/>
+            <Run Text="the congregation to display, then return to this Tab. The territories will then" />
+            <Run Text="reflect the territories for the selected congregation."/>
         </TextBlock>
 
         <ListView Grid.Row="1" Grid.Column="0" SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded"
-                  ItemsSource="{Binding Territories}" 
-                  SelectedItem="{Binding SelectedTerritory,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                  ItemsSource="{Binding Territories}" ItemContainerStyle="{DynamicResource ColumnStretch}"
+                  SelectedItem="{Binding SelectedTerritory,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                  MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding="{Binding Number}" Header="Number" 
                                     Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding CheckedOutDate}" Header="Checked Out" Width="120"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding CheckedInDate}" Header="Checked In" Width="120"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding CheckedBy.FullName}" Header="By" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Status}" Header="Status" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding LastHistory.CheckOutDate,StringFormat=MM/dd/yyyy}" Header="Checked Out" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding LastHistory.CheckInDate,StringFormat=MM/dd/yyyy}" Header="Checked In" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding LastHistory.CheckedOutBy.FullName}" Header="By" />
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
-            <Button Style="{DynamicResource StandardButton}" Content="New" 
-                    Command="{Binding NewTerritoryCommand}" />
-            <Button Style="{DynamicResource StandardButton}" Content="Delete" 
-                    Command="{Binding DeleteTerritoryCommand}" />
-            <Button Style="{DynamicResource StandardButton}" Content="Check out" 
-                    Command="{Binding CheckOutTerritoryCommand}" />
-            <Button Style="{DynamicResource StandardButton}" Content="Check in" 
-                    Command="{Binding CheckInTerritoryCommand}"/>
-            <Button Style="{DynamicResource StandardButton}" Content="Notes" 
-                    Command="{Binding TerritoryNotesCommand}"/>
-            <Button Style="{DynamicResource StandardButton}" Content="Do Not Call" 
-                    Command="{Binding TerritoryDoNotCallCommand}"/>
-        </StackPanel>
-       
+        <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,16,0">
+                <Button Style="{DynamicResource StandardButton}" Content="New" ToolTip="New Territory"
+                        Command="{Binding NewTerritoryCommand}" />
+                <Button Style="{DynamicResource StandardButton}" Content="Delete" ToolTip="Delete Territory"
+                        Command="{Binding DeleteTerritoryCommand}" />
+                <Button Style="{DynamicResource StandardButton}" Content="Check out" ToolTip="Check out Territory"
+                        Command="{Binding CheckOutTerritoryCommand}" />
+                <Button Style="{DynamicResource StandardButton}" Content="Reverse" ToolTip="Reverse Territory Check out"
+                        Command="{Binding ReverseCheckOutTerritoryCommand}"/>
+                <Button Style="{DynamicResource StandardButton}" Content="Check in" ToolTip="Check in Territory"
+                        Command="{Binding CheckInTerritoryCommand}"/>
+                <Button Style="{DynamicResource StandardButton}" Content="Notes" ToolTip="Territory Notes"
+                        Command="{Binding TerritoryNotesCommand}"/>
+                <Button Style="{DynamicResource StandardButton}" Content="Do Not Call" ToolTip="Update Do Not Call List"
+                        Command="{Binding TerritoryDoNotCallCommand}"/>
+                <Button Style="{DynamicResource StandardButton}" Content="Full History" ToolTip="View Territory History"
+                        Command="{Binding TerritoryHistoryCommand}"/>
+            </StackPanel>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>

@@ -1,8 +1,8 @@
 ﻿using ApplicationFramework.Security;
-using Common.Applicationn;
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Security;
-using Common.Applicationn.Windows;
+using Common.Application;
+using Common.Application.Primitives;
+using Common.Application.Security;
+using Common.Application.Windows;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
 using CredentialManagement;
@@ -18,22 +18,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using static Common.Applicationn.Logging.ApplicationLogger;
-using static Common.Applicationn.Security.Extensions;
+using static Common.Application.Logging.ApplicationLogger;
+using static Common.Application.Security.Extensions;
 using Credential = CredentialManagement.Credential;
+using static ApplicationFramework.Dialogs.Helpers;
+using Common.Application.Media;
 
 namespace CongregationManager {
     public partial class App : System.Windows.Application {
         public static string ApplicationName => "Congregation Manager";
+        
         private static string _ApplicationFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
+        
         public static string ApplicationFolder {
             get => _ApplicationFolder;
             private set => _ApplicationFolder = value;
         }
+        
         public static string ExtensionsFolder => Path.Combine(ApplicationFolder, "Extensions");
+        
         public static string TempFolder => Path.Combine(ApplicationFolder, "Temp");
+        
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
+        
         public static string RecycleBinFolder => Path.Combine(DataFolder, "Recycle Bin");
+        
+        public static string ThemeFolder => Path.Combine(ApplicationFolder, "Themes");
+
         public static Session ApplicationSession { get; private set; }
 
         public static Dictionary<string, string> FileFilters { get; private set; } =
@@ -48,43 +59,11 @@ namespace CongregationManager {
                 StorageTypes.Xml, StorageOptions.CreateFolderForEachDay);
         }
 
-        public static void LogMessage(StringBuilder message, EntryTypes type) {
+        public static void LogMessage(StringBuilder message, EntryTypes type) =>
             ApplicationSession.Logger.LogMessage(message, type);
-        }
 
-        public static void LogMessage(string message, EntryTypes type) {
+        public static void LogMessage(string message, EntryTypes type) =>
             LogMessage(new StringBuilder(message), type);
-        }
-
-        public static bool IsYesInDialogSelected(string main, string content, string title, TaskDialogIcon icon) {
-            var td = new TaskDialog {
-                Width = 250,
-                MainIcon = icon,
-                MainInstruction = main,
-                Content = content,
-                AllowDialogCancellation = true,
-                ButtonStyle = TaskDialogButtonStyle.Standard,
-                WindowTitle = title
-            };
-            td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
-            td.Buttons.Add(new TaskDialogButton(ButtonType.No));
-            var result = td.ShowDialog();
-            return result.ButtonType == ButtonType.Yes;
-        }
-
-        public static void ShowOKDialog(string main, string content, string title, TaskDialogIcon icon) {
-            var td = new TaskDialog {
-                Width = 250,
-                MainIcon = icon,
-                MainInstruction = main,
-                Content = content,
-                AllowDialogCancellation = true,
-                ButtonStyle = TaskDialogButtonStyle.Standard,
-                WindowTitle = title
-            };
-            td.Buttons.Add(new TaskDialogButton(ButtonType.Ok));
-            td.ShowDialog();
-        }
 
         public static string[] SelectFileDialog(Window win, string title, string defaultExtension,
             Dictionary<string, string> filters, string lastDirectory, bool returnMultiple = false) {
@@ -109,11 +88,11 @@ namespace CongregationManager {
             var content = $"You have entered an invalid username or password for " +
                 $"{ApplicationName}.\n\nWould you like to try again?";
             var title = "Invalid credentials";
-            return IsYesInDialogSelected(main, content, title, TaskDialogIcon.Warning);
+            return ShowYesNoDialog(main, content, TaskDialogIcon.Warning);
         }
 
-        private bool IsLoginAccepted(string main, string content, string title,
-                ref ApplicationCredentials privateCreds, ref ApplicationCredentials currentCreds) {
+        private bool IsLoginAccepted(string title, string content, 
+            ref ApplicationCredentials privateCreds, ref ApplicationCredentials currentCreds) {
 
             //privatecreds => the existing credentials pulled from the Credential Manager.
             //                the CredentialDialog values must match these
@@ -126,7 +105,7 @@ namespace CongregationManager {
             var isNewUser = privateCreds.AreNewCredentials;
             var cd = new CredentialDialog {
                 Target = ApplicationName,
-                MainInstruction = main,
+                MainInstruction = title,
                 Content = content,
                 WindowTitle = title
             };
@@ -162,13 +141,13 @@ namespace CongregationManager {
             if (result.Value) {
                 currentCreds = new ApplicationCredentials(cd.Credentials.UserName, cd.Credentials.SecurePassword, false);
                 if (isNewUser) {
-                    main = "Create username and password";
+                    title = "Create username and password";
                     content = "It seems like this is the first time you have " +
                         $"logged in to {ApplicationName}. The username and password you have " +
                         $"just entered will be saved for future use.\n\nWould you like to save " +
                         $"this information?";
                     title = "Save username and password";
-                    if (!IsYesInDialogSelected(main, content, title, TaskDialogIcon.Warning))
+                    if (!ShowYesNoDialog(title, content, TaskDialogIcon.Warning))
                         Environment.Exit(-1);
 
                     //save into CredentialManager
@@ -204,28 +183,27 @@ namespace CongregationManager {
         private DataManager Login() {
             var privateCreds = GetCurrentCredentials();
 
-            var main = $"Login to {ApplicationName}";
+            var title = $"Login to {ApplicationName}";
             var content = $"Use this to provide the user credentials for " +
                 $"{ApplicationName},";
-            var title = "Login";
             var cd = default(CredentialDialog);
             var newCreds = default(ApplicationCredentials);
-            if (IsLoginAccepted(main, content, title, ref privateCreds, ref newCreds)) {
+            if (IsLoginAccepted(title, content, ref privateCreds, ref newCreds)) {
                 var isValid = privateCreds.Equals(newCreds);
 #if DEBUG
                 isValid = true;
 #endif
 
                 while (!isValid && !privateCreds.AreNewCredentials) {
-                    main = $"Login to {ApplicationName}";
+                    title = $"Login to {ApplicationName}";
                     content = $"Use this to provide the user credentials for " +
                         $"{ApplicationName},";
                     title = "Login";
-                    var result = IsYesInDialogSelected(main, content, title, TaskDialogIcon.Warning);
+                    var result = ShowYesNoDialog(title, content, TaskDialogIcon.Warning);
                     if (!result)
                         Environment.Exit(-1);
 
-                    if (!IsLoginAccepted(main, content, title, ref privateCreds, ref newCreds))
+                    if (!IsLoginAccepted(title, content, ref privateCreds, ref newCreds))
                         Environment.Exit(-1);
                     isValid = privateCreds.Equals(newCreds);
                 }
@@ -284,14 +262,7 @@ namespace CongregationManager {
                                 ctrl.Parent.RemoveChild(ctrl);
                             }
 
-                            //win.View.Panels.Remove(ext.Panel);
                             ext.Destroy();
-
-                            //ext.SaveExtensionData -= win.SaveExtensionData;
-                            //ext.AddControlItem -= win.AddControlItemAsync;
-                            //ext.RemoveControlItem -= win.RemoveControlItemAsync;
-
-                            //win.View.Panels.Remove(ext.Panel);
 
                             win.MainTabControl.Items.Remove(ext.TabItem);
                             ext.Panel.Control = null;
@@ -320,12 +291,11 @@ namespace CongregationManager {
                     File.Delete(file);
                 }
             }
-            if (DataManager != null)
-                DataManager.Dispose();
+            DataManager?.Dispose();
             LogMessage("Application Ending", EntryTypes.Information);
         }
 
-        private void SetupFolders() {
+        private static void SetupFolders() {
 #if DEBUG
             ApplicationFolder += " (Debug)";
 #endif
@@ -343,6 +313,9 @@ namespace CongregationManager {
             }
             if (!Directory.Exists(RecycleBinFolder)) {
                 Directory.CreateDirectory(RecycleBinFolder);
+            }
+            if (!Directory.Exists(ThemeFolder)) {
+                Directory.CreateDirectory(ThemeFolder);
             }
         }
     }

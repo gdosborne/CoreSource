@@ -11,19 +11,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;8618;CA1416;8602</NoWarn>
+    <NoWarn>1701;1702;8618;CA1416;8602;8604;8625;8601</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NoWarn>1701;1702;8618;CA1416;8602</NoWarn>
+    <NoWarn>1701;1702;8618;CA1416;8602;8604;8625;8601</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;8618;CA1416;8602</NoWarn>
+    <NoWarn>1701;1702;8618;CA1416;8602;8604;8625;8601</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NoWarn>1701;1702;8618;CA1416;8602</NoWarn>
+    <NoWarn>1701;1702;8618;CA1416;8602;8604;8625;8601</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -77,6 +77,7 @@
   <ItemGroup>
     <PackageReference Include="CredentialManagement" Version="1.0.2" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+    <PackageReference Include="PropertyTools.Wpf" Version="3.1.0" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 

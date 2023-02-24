@@ -1,11 +1,12 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Logging;
-using Common.Applicationn.Primitives;
+﻿using Common.Application;
+using Common.Application.Logging;
+using Common.Application.Primitives;
 using CongregationManager.Data;
 using Controls.Core;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,9 +21,9 @@ namespace CongregationManager.Extensibility {
             Glyph = glyph;
             GlyphStyleName = glyphStyleName;
 
-            addedControls ??= new Dictionary<ExtensionBase, List<object>>();
-            if (!addedControls.ContainsKey(this))
-                addedControls.Add(this, new List<object>());
+            AddedControls ??= new Dictionary<ExtensionBase, List<object>>();
+            if (!AddedControls.ContainsKey(this))
+                AddedControls.Add(this, new List<object>());
         }
 
         /// <summary>
@@ -50,25 +51,28 @@ namespace CongregationManager.Extensibility {
         /// PropertyChanged event
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+        
         protected void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        protected static Dictionary<ExtensionBase, List<object>> addedControls { get; set; }
+        protected static Dictionary<ExtensionBase, List<object>> AddedControls { get; set; }
 
-        public void SetUIControls(ToolBar toolbar, Menu menu, ResourceDictionary resources) {
+        public void SetUIControls(ToolBar toolbar, Menu menu, ResourceDictionary resources) {            
             Toolbar = toolbar;
             Menu = menu;
             Resources = resources;
         }
 
         protected ToolBar Toolbar { get; private set; }
+        
         protected Menu Menu { get; private set; }
+        
         protected ResourceDictionary Resources { get; private set; }
 
         protected MenuItem AddTopLevelMenuItem(string text) {
             var result = new MenuItem { Header = text };
             Menu.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
             return result;
         }
 
@@ -78,13 +82,14 @@ namespace CongregationManager.Extensibility {
                 Icon = new FontIcon {
                     FontFamily = Resources[fontFamilyResourceName].As<FontFamily>(),
                     FontSize = Resources["StandardFontSize"].CastTo<double>(),
-                    Glyph = Resources[iconName].CastTo<string>()
+                    Glyph = Resources[iconName].CastTo<string>(),
+                    Background = Resources["WindowBackground"].As<SolidColorBrush>()
                 },
                 Command = command,
             };
             if (parent != null)
                 parent.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
         }
 
         protected void AddToolbarLabel(string text) {
@@ -93,34 +98,36 @@ namespace CongregationManager.Extensibility {
                 Style = Resources["ToolbarLabel"].As<Style>()
             };
             Toolbar.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
         }
 
-        protected void AddToolbarButton(string text, string iconName, ICommand command, string fontFamilyResourceName) {
+        protected void AddToolbarButton(string text, string iconName, ICommand command, 
+                string fontFamilyResourceName) {
             var result = new Button {
                 ToolTip = text,
                 Content = new FontIcon {
                     FontFamily = Resources[fontFamilyResourceName].As<FontFamily>(),
                     FontSize = Resources["StandardFontSize"].CastTo<double>(),
-                    Glyph = Resources[iconName].CastTo<string>()
+                    Glyph = Resources[iconName].CastTo<string>(),
+                    Style = Resources["ToolbarIcon"].As<Style>()
                 },
                 Command = command
             };
             Toolbar.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
         }
 
         protected void AddMenuSeparator(MenuItem parent) {
             var result = new Separator();
             if (parent != null)
                 parent.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
         }
 
         protected void AddToolbarSeparator() {
             var result = new Separator();
             Toolbar.Items.Add(result);
-            addedControls[this].Add(result);
+            AddedControls[this].Add(result);
         }
 
         #region Name Property
@@ -170,7 +177,8 @@ namespace CongregationManager.Extensibility {
             get => _IsEnabled;
             set {
                 _IsEnabled = value;
-                Settings.AddOrUpdateSetting($"{Name} Extension", "IsEnabled", IsEnabled);
+                Settings.AddOrUpdateSetting($"{Name} Extension", "IsEnabled", 
+                    IsEnabled.HasValue ? true : IsEnabled.Value);
                 ToggleLoadedControls(IsEnabled.Value);
                 OnPropertyChanged();
             }

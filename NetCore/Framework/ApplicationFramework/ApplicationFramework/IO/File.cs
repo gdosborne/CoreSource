@@ -1,5 +1,5 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Text;
+﻿using Common.Application.Primitives;
+using Common.Application.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Common.Applicationn.IO {
+namespace Common.Application.IO {
     public static class File {
         private static readonly char[] illegalCharacters = { '/', '?', '<', '>', '\\', ':', '*', '|' };
 

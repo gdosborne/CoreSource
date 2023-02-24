@@ -1,12 +1,12 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Text;
+﻿using Common.Application.Primitives;
+using Common.Application.Text;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Common.Applicationn.Exception {
+namespace Common.Application.Exception {
     public static class Extensions {
         public static StringBuilder ProcessData(this System.Diagnostics.Process proc) {
             const string t1 = "\t";

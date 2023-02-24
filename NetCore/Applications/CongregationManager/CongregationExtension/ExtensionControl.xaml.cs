@@ -1,4 +1,4 @@
-using Common.Applicationn.Primitives;
+using Common.Application.Primitives;
 using CongregationExtension.ViewModels;
 using System.Windows.Controls;
 

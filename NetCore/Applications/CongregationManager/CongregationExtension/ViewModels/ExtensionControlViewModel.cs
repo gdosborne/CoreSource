@@ -1,5 +1,5 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Primitives;
+﻿using Common.Application;
+using Common.Application.Primitives;
 using CongregationManager;
 using CongregationManager.Data;
 using System;

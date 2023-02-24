@@ -1,13 +1,15 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static ApplicationFramework.Dialogs.Helpers;
 
 namespace CongregationExtension {
     public partial class GroupWindow : Window {
@@ -53,8 +55,7 @@ namespace CongregationExtension {
                                     continue;
                                 var msg = $"{member.FullName} is already in {otherGroup.Name}.\n\nMove {member.FullName} " +
                                     $"to {createdGroup.Name}?";
-                                if (App.IsYesInDialogSelected("Switch Groups", msg, "Switch Groups",
-                                        Ookii.Dialogs.Wpf.TaskDialogIcon.Shield)) {
+                                if (ShowYesNoDialog("Switch Groups", msg, TaskDialogIcon.Shield)) {
                                     otherGroup.MemberIDs.Remove(member.ID);
                                 }
                                 else {

@@ -31,8 +31,6 @@
                     <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
                 </Border>
-                <!--<controls:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
-                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />-->
 
             </Grid>
         </Border>
@@ -50,9 +48,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
                            Style="{DynamicResource WindowHeaderText}">
                     Use this window to manage the extensions that are loaded into the 
-                    application. If you want to disable the extension controls, change 
-                    the value of the toggle switch next to the extensions name to Disabled. 
-                    If you delete an extension, this extensions will not be available 
+                    application. If you delete an extension, this extensions will not be available 
                     until you add it again.
                 </TextBlock>
                 <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Extensions}"
@@ -60,16 +56,13 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <!--<controls:ToggleSwitch Width="140"
-                                    IsOn="{Binding IsEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                                <controls:FontIcon Glyph="{Binding Glyph}" Style="{DynamicResource TabIcon}" />-->
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="10,0,0,0"
                                            Style="{DynamicResource WindowLabel}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
                     <Button Style="{DynamicResource StandardButton}" Content="Add" 
                             Command="{Binding AddExtensionCommand}" />
                     <Button Style="{DynamicResource StandardButton}" Content="Delete" 

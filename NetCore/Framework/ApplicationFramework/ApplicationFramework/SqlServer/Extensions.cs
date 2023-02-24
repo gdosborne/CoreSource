@@ -2,7 +2,7 @@
 using System.Data;
 using System.Xml;
 
-namespace Common.Applicationn.SqlServer {
+namespace Common.Application.SqlServer {
     public static class Extensions {
         public static Type ToType(this DbType type) {
             switch (type) {

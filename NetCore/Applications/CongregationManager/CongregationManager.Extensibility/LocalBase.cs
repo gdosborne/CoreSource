@@ -1,7 +1,6 @@
-﻿using Common.Applicationn;
+﻿using Common.Application;
 using Common.MVVMFramework;
 using CongregationManager.Data;
-using Controls.Core;
 
 namespace CongregationExtension.ViewModels {
     public abstract class LocalBase : ViewModelBase {
@@ -13,24 +12,33 @@ namespace CongregationExtension.ViewModels {
         }
 
         public Settings AppSettings { get; set; }
+
         public DataManager DataManager { get; set; }
 
         public enum Actions {
             CloseWindow,
             AcceptData,
             AddMember,
-            GroupSelected
+            GroupSelected,
+            ShowDoNotCall,
+            ShowHistory,
+            Generate,
+            DeleteItem,
+            CheckOutTerritory,
+            CheckInTerritory,
+            ReverseCheckoutTerritory,
+            ShowTerritoryHistory,
+            ShowNotes
         }
 
         #region CloseWindowCommand
         private DelegateCommand _CloseWindowCommand = default;
         /// <summary>Gets the CloseWindow command.</summary>
         /// <value>The CloseWindow command.</value>
-        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ?? (_CloseWindowCommand = new DelegateCommand(CloseWindow, ValidateCloseWindowState));
+        public DelegateCommand CloseWindowCommand => _CloseWindowCommand
+            ??= new DelegateCommand(CloseWindow, ValidateCloseWindowState);
         private bool ValidateCloseWindowState(object state) => true;
-        private void CloseWindow(object state) {
-            ExecuteAction(nameof(Actions.CloseWindow));
-        }
+        private void CloseWindow(object state) => ExecuteAction(nameof(Actions.CloseWindow));
         #endregion
     }
 }

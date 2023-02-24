@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

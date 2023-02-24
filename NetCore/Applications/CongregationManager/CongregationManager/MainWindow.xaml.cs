@@ -1,12 +1,15 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using Controls.Core;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using static Common.Applicationn.Logging.ApplicationLogger;
+using System.Windows.Media;
+using static Common.Application.Logging.ApplicationLogger;
+using static CongregationManager.Data.Extensions;
 
 namespace CongregationManager {
     public partial class MainWindow : Window {
@@ -20,11 +23,22 @@ namespace CongregationManager {
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
+            App.ApplicationSession.ApplicationSettings.SetupColors(App.Current.Resources.GetBrushNames(), App.Current.Resources);
+            var fontFamily = new FontFamily(App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));
+            App.Current.Resources["StandardFont"] = fontFamily;
+
         }
 
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             var action = (MainWindowViewModel.Actions)Enum.Parse(typeof(MainWindowViewModel.Actions), e.CommandToExecute);
             switch (action) {
+                case MainWindowViewModel.Actions.ShowSettings: {
+                        var win = new SettingsWindow {
+                            Owner = this
+                        };
+                        win.ShowDialog();
+                        break;
+                    }
                 case MainWindowViewModel.Actions.ViewLogs: {
                         var win = new LogReaderWindow {
                             Owner = this
@@ -75,10 +89,10 @@ namespace CongregationManager {
         internal void RetrieveResources(object sender, RetrieveResourcesEventArgs e) =>
             e.Dictionary = myResourceDictionary;
 
-        private ResourceDictionary myResourceDictionary => App.Current.Resources;
+        public ResourceDictionary myResourceDictionary => App.Current.Resources;
 
         public void InitializeExtension(ExtensionBase ext) {
-            ext.SetUIControls(MainPageToolbar, TopMenu, App.Current.Resources);
+            ext.SetUIControls(MainPageToolbar, TopMenu, myResourceDictionary);
 
             ext.RetrieveResources += RetrieveResources;
             ext.Initialize(App.DataFolder, App.TempFolder,
@@ -112,7 +126,7 @@ namespace CongregationManager {
                 Header = sp,
                 Content = ext.Panel.Control
             };
-            ext.TabItem= result;
+            ext.TabItem = result;
             return result;
         }
 

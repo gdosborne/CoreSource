@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Applicationn.Symbol {
+namespace Common.Application.Symbol {
     public enum ValueTypes {
         Symbol,
         Code,

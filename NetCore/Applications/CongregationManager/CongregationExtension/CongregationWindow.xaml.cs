@@ -1,11 +1,13 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationExtension;
 using CongregationExtension.ViewModels;
 using CongregationManager.Extensibility;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Linq;
 using System.Windows;
+using static ApplicationFramework.Dialogs.Helpers;
 
 namespace CongregationManager {
     public partial class CongregationWindow : Window {
@@ -47,8 +49,7 @@ namespace CongregationManager {
                                         continue;
                                     var msg = $"{member.FullName} is already in {group.Name}.\n\nMove {member.FullName} " +
                                         $"to {View.SelectedGroup.Name}?";
-                                    if (App.IsYesInDialogSelected("Switch Groups", msg, "Switch Groups",
-                                            Ookii.Dialogs.Wpf.TaskDialogIcon.Shield)) {
+                                    if (ShowYesNoDialog("Switch Groups", msg, TaskDialogIcon.Shield)) {
                                         group.MemberIDs.Remove(member.ID);
                                     }
                                     else {

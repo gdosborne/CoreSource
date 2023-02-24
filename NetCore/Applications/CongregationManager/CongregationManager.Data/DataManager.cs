@@ -1,5 +1,5 @@
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Security;
+using Common.Application.Primitives;
+using Common.Application.Security;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,16 +92,8 @@ namespace CongregationManager.Data {
                             x.Resources = Resources;
                         });
 
-                        //var territoryFilename = Path.Combine(fm.Path, $"{item.Name}.territories");
-
-                        //var territoryFolderName = Path.Combine(fm.Path, $"{cong.Name}.Territories");
-                        //if(!Directory.Exists(territoryFolderName)) {
-                        //    Directory.CreateDirectory(territoryFolderName);
-                        //}
-
                         cong.Filename = x.Name;
                         cong.SaveThisItem += Cong_SaveThisItem;
-                        //cong.EditThisItem += Cong_EditThisItem;
                         cong.Original = cong.Clone().As<Congregation>();
                         Congregations.Add(cong);
                         ChangeNotification?.Invoke(this, new ChangeNotificationEventArgs(cong, ModificationTypes.Added));
@@ -126,9 +118,7 @@ namespace CongregationManager.Data {
                 congregation.IsNew = false;
                 congregation.Original = congregation.Clone().As<Congregation>();
             }
-            catch (Exception ex) {
-
-            }
+            catch (Exception ex) { }
         }
 
         public IEnumerable<RecycleGroup> RecycleBinItems() {
@@ -170,11 +160,6 @@ namespace CongregationManager.Data {
             file.LastWriteTime = DateTime.Now;
             file.MoveTo(recycleFile, true);
 
-            //var directory = new DirectoryInfo(territoryDir);
-            //if(directory.Exists) {
-            //    var newTerrDir = Path.Combine(newDir, $".{g.ToString()}");
-            //    directory.MoveTo(newTerrDir);
-            //}
         }
 
         public bool DeleteCongregation(Congregation cong) {
@@ -192,7 +177,9 @@ namespace CongregationManager.Data {
         }
 
         private FolderMonitor congregationFolderMonitor { get; set; }
+        
         private FolderMonitor extensionsFolderMonitor { get; set; }
+        
         private SecureString password { get; set; } = default;
 
         #region DataFolder Property
@@ -253,9 +240,8 @@ namespace CongregationManager.Data {
             }
         }
 
-        public void Refresh(Congregation cong) {
+        public void Refresh(Congregation cong) =>
             Refresh();
-        }
 
         public void Refresh() {
             if (Congregations != null)

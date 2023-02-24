@@ -1,5 +1,5 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Security;
+﻿using Common.Application.Primitives;
+using Common.Application.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;

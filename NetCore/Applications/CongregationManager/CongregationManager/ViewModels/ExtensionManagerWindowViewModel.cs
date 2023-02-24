@@ -1,18 +1,14 @@
-﻿using Common.Applicationn.Linq;
-using Common.Applicationn.Primitives;
+﻿using Common.Application.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Threading;
 
 namespace CongregationManager.ViewModels {
     public class ExtensionManagerWindowViewModel : ViewModelBase {
-        public ExtensionManagerWindowViewModel() {
+        public ExtensionManagerWindowViewModel() =>
             Title = "Extension Manager [designer]";
-        }
 
         public override void Initialize() {
             base.Initialize();
@@ -33,7 +29,6 @@ namespace CongregationManager.ViewModels {
 
         private FolderMonitor fm = default;
 
-
         public enum Actions {
             CloseWindow,
             AddNewExtension,
@@ -44,7 +39,7 @@ namespace CongregationManager.ViewModels {
         private DelegateCommand _CloseWindowCommand = default;
         /// <summary>Gets the CloseWindow command.</summary>
         /// <value>The CloseWindow command.</value>
-        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ?? (_CloseWindowCommand = new DelegateCommand(CloseWindow, ValidateCloseWindowState));
+        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ??= new DelegateCommand(CloseWindow, ValidateCloseWindowState);
         private bool ValidateCloseWindowState(object state) => true;
         private void CloseWindow(object state) {
             ExecuteAction(nameof(Actions.CloseWindow));
@@ -81,7 +76,7 @@ namespace CongregationManager.ViewModels {
         private DelegateCommand _AddExtensionCommand = default;
         /// <summary>Gets the AddExtension command.</summary>
         /// <value>The AddExtension command.</value>
-        public DelegateCommand AddExtensionCommand => _AddExtensionCommand ?? (_AddExtensionCommand = new DelegateCommand(AddExtension, ValidateAddExtensionState));
+        public DelegateCommand AddExtensionCommand => _AddExtensionCommand ??= new DelegateCommand(AddExtension, ValidateAddExtensionState);
         private bool ValidateAddExtensionState(object state) => true;
         private void AddExtension(object state) {
             ExecuteAction(nameof(Actions.AddNewExtension));
@@ -92,7 +87,7 @@ namespace CongregationManager.ViewModels {
         private DelegateCommand _DeleteExtensionCommand = default;
         /// <summary>Gets the DeleteExtension command.</summary>
         /// <value>The DeleteExtension command.</value>
-        public DelegateCommand DeleteExtensionCommand => _DeleteExtensionCommand ?? (_DeleteExtensionCommand = new DelegateCommand(DeleteExtension, ValidateDeleteExtensionState));
+        public DelegateCommand DeleteExtensionCommand => _DeleteExtensionCommand ??= new DelegateCommand(DeleteExtension, ValidateDeleteExtensionState);
         private bool ValidateDeleteExtensionState(object state) => SelectedExtension != null;
         private void DeleteExtension(object state) {
             ExecuteAction(nameof(Actions.DeleteExtension));

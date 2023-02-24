@@ -1,8 +1,8 @@
-﻿using Common.Applicationn.Logging;
+﻿using Common.Application.Logging;
 using System;
 using System.IO;
 
-namespace Common.Applicationn {
+namespace Common.Application {
     public sealed class Session {
         private WriteStatusHandler handler = default;
 

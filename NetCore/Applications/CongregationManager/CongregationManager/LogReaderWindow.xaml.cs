@@ -1,13 +1,14 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationManager.ViewModels;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using static Common.Applicationn.Logging.ApplicationLogger;
+using static Common.Application.Logging.ApplicationLogger;
 using Path = System.IO.Path;
+using static ApplicationFramework.Dialogs.Helpers;
 
 namespace CongregationManager {
     public partial class LogReaderWindow : Window {
@@ -30,8 +31,10 @@ namespace CongregationManager {
                     Close();
                     break;
                 case LogReaderWindowViewModel.Actions.ClearDay: {
-                        if (App.IsYesInDialogSelected("Clear log entries", "You are preparing to remove the log entries for " +
-                                $"{View.SelectedLogDate}.\n\nAre you sure?", "Clear logs", TaskDialogIcon.Warning)) {
+                        var title = "Clear log entries";
+                        var msg = "You are preparing to remove the log entries for " +
+                                $"{View.SelectedLogDate}.\n\nAre you sure?";
+                        if (ShowYesNoDialog(title, msg, TaskDialogIcon.Warning)) {
                             var dir = Path.Combine(App.ApplicationFolder, "Logs", DateTime.Parse(View.SelectedLogDate).ToString("yyyy-MM-dd"));
                             var filename = Path.Combine(dir, "application.xml");
                             var logDate = View.SelectedLogDate;
@@ -45,8 +48,10 @@ namespace CongregationManager {
                         break;
                     }
                 case LogReaderWindowViewModel.Actions.ClearAllDays: {
-                        if (App.IsYesInDialogSelected("Clear log entries", "You are preparing to remove all if the log " +
-                            "entries.\n\nAre you sure?", "Clear logs", TaskDialogIcon.Warning)) {
+                        var title = "Clear log entries";
+                        var msg = "You are preparing to remove all if the log " +
+                            "entries.\n\nAre you sure?";
+                        if (ShowYesNoDialog(title, msg, TaskDialogIcon.Warning)) {
                             var dir = Path.Combine(App.ApplicationFolder, "Logs");
                             var dirs = new DirectoryInfo(dir).GetDirectories();
                             foreach (var d in dirs) {

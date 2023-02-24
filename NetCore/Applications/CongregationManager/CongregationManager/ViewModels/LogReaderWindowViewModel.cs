@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Linq;
+﻿using Common.Application.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using System;
@@ -8,9 +8,8 @@ using System.Linq;
 
 namespace CongregationManager.ViewModels {
     public class LogReaderWindowViewModel : ViewModelBase {
-        public LogReaderWindowViewModel() {
+        public LogReaderWindowViewModel() =>
             Title = "Log Viewer [design]";
-        }
 
         public override void Initialize() {
             base.Initialize();
@@ -81,33 +80,28 @@ namespace CongregationManager.ViewModels {
         private DelegateCommand _CloseWindowCommand = default;
         /// <summary>Gets the CloseWindow command.</summary>
         /// <value>The CloseWindow command.</value>
-        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ?? (_CloseWindowCommand = new DelegateCommand(CloseWindow, ValidateCloseWindowState));
+        public DelegateCommand CloseWindowCommand => _CloseWindowCommand ??= new DelegateCommand(CloseWindow, ValidateCloseWindowState);
         private bool ValidateCloseWindowState(object state) => true;
-        private void CloseWindow(object state) {
+        private void CloseWindow(object state) =>
             ExecuteAction(nameof(Actions.CloseWindow));
-        }
         #endregion
 
         #region ClearDayCommand
         private DelegateCommand _ClearDayCommand = default;
         /// <summary>Gets the ClearDay command.</summary>
         /// <value>The ClearDay command.</value>
-        public DelegateCommand ClearDayCommand => _ClearDayCommand ?? (_ClearDayCommand = new DelegateCommand(ClearDay, ValidateClearDayState));
+        public DelegateCommand ClearDayCommand => _ClearDayCommand ??= new DelegateCommand(ClearDay, ValidateClearDayState);
         private bool ValidateClearDayState(object state) => !string.IsNullOrEmpty(SelectedLogDate);
-        private void ClearDay(object state) {
-            ExecuteAction(nameof(Actions.ClearDay));
-        }
+        private void ClearDay(object state) => ExecuteAction(nameof(Actions.ClearDay));
         #endregion
 
         #region ClearAllDaysCommand
         private DelegateCommand _ClearAllDaysCommand = default;
         /// <summary>Gets the ClearAllDays command.</summary>
         /// <value>The ClearAllDays command.</value>
-        public DelegateCommand ClearAllDaysCommand => _ClearAllDaysCommand ?? (_ClearAllDaysCommand = new DelegateCommand(ClearAllDays, ValidateClearAllDaysState));
+        public DelegateCommand ClearAllDaysCommand => _ClearAllDaysCommand ??= new DelegateCommand(ClearAllDays, ValidateClearAllDaysState);
         private bool ValidateClearAllDaysState(object state) => LogDates != null && LogDates.Any();
-        private void ClearAllDays(object state) {
-            ExecuteAction(nameof(Actions.ClearAllDays));
-        }
+        private void ClearAllDays(object state) => ExecuteAction(nameof(Actions.ClearAllDays));
         #endregion
 
     }

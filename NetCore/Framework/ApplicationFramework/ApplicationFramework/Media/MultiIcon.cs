@@ -3,7 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.IO;
 
-namespace Common.Applicationn.Media {
+namespace Common.Application.Media {
     public class MultiIcon : IDisposable {
         public enum DisplayType {
             Largest = 0,

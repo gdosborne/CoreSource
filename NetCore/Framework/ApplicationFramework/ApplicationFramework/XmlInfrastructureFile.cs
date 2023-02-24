@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Common.Applicationn {
+namespace Common.Application {
     public abstract class XmlInfrastructureFile {
         public enum FileTypes {
             Settings,

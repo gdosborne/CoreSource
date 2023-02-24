@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using CongregationManager.Extensibility;
 using Controls.Core;
 using System.Collections.Generic;
@@ -19,7 +19,5 @@ namespace CongregationManager {
 
         public static Style GetStyle(ResourceDictionary resDictionary, string key) =>
             resDictionary[key].As<Style>();
-
-
     }
 }

@@ -18,9 +18,9 @@ namespace CongregationManager.Data {
             Filespec = filespec;
             subInterval = subsequentInterval;
 
-            if (!Directory.Exists(Path)) {
+            if (!Directory.Exists(Path)) 
                 throw new DirectoryNotFoundException(Path);
-            }
+            
             files = new List<FileStatus>();
             dInfo = new DirectoryInfo(Path);
             areTimeSpansMatching = startInterval.TotalMilliseconds == subsequentInterval.TotalMilliseconds;
@@ -40,8 +40,8 @@ namespace CongregationManager.Data {
             public FileInfo FileInfo => new(FullName);
         }
 
-        private bool areTimeSpansMatching = false;
-        private TimeSpan subInterval = default;
+        private readonly bool areTimeSpansMatching = false;
+        private readonly TimeSpan subInterval = default;
         private List<FileStatus> files = default;
 
         private void Dt_Tick(object? sender, EventArgs e) {

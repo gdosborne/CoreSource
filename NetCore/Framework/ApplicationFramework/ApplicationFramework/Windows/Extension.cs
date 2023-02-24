@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,9 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using static Common.Applicationn.NativeMethods;
+using static Common.Application.NativeMethods;
 
-namespace Common.Applicationn.Windows {
+namespace Common.Application.Windows {
 
     public static class Extension {
         private static Window timerWindow;

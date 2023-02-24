@@ -1,26 +1,27 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Logging;
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application;
+using Common.Application.Logging;
+using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationManager.Data;
+using static CongregationManager.Data.Extensions;
 using CongregationManager.Extensibility;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using TerritoryManager.Extension.ViewModels;
+using SysIO = System.IO;
+using System.Windows.Media;
 
 namespace TerritoryManager.Extension {
     public class Extension : ExtensionBase {
         public Extension()
             : base("Territories", '', "TabIcon") { }
+
         public override void Destroy() {
             App.LogMessage($"Destroying the {Name} extension", ApplicationLogger.EntryTypes.Information);
-            if (addedControls != null) {
-                if (addedControls.ContainsKey(this)) {
-                    foreach (var item in addedControls[this]) {
+            if (AddedControls != null) {
+                if (AddedControls.ContainsKey(this)) {
+                    foreach (var item in AddedControls[this]) {
                         if (item.Is<MenuItem>()) {
                             if (item.As<MenuItem>().Parent.Is<MenuItem>()) {
                                 item.As<MenuItem>().Parent.As<MenuItem>().Items.Remove(item);
@@ -29,22 +30,20 @@ namespace TerritoryManager.Extension {
                                 Menu.Items.Remove(item);
                             }
                         }
-                        else if (item.Is<Button>() || item.Is<TextBlock>()) {
+
+                        else if (item.Is<Button>() || item.Is<TextBlock>())
                             Toolbar.Items.Remove(item);
-                        }
+
                         else if (item.Is<Separator>()) {
-                            if (Toolbar.Items.Contains(item)) {
+                            if (Toolbar.Items.Contains(item))
                                 Toolbar.Items.Remove(item);
-                            }
-                            else if (Menu.Items.Contains(item)) {
+                            else if (Menu.Items.Contains(item))
                                 Menu.Items.Remove(item);
-                            }
-                            else if (item.As<Separator>().Parent.Is<MenuItem>()) {
+                            else if (item.As<Separator>().Parent.Is<MenuItem>())
                                 item.As<Separator>().Parent.As<MenuItem>().Items.Remove(item);
-                            }
                         }
                     }
-                    addedControls[this].Clear();
+                    AddedControls[this].Clear();
                 }
             }
         }
@@ -53,17 +52,25 @@ namespace TerritoryManager.Extension {
 
         private ExtensionControlViewModel extControlView = default;
 
-        public override void Initialize(string dataDirectory, string tempDirectory, Settings appSettings, ApplicationLogger logger, DataManager dataManager) {
+        public override void Initialize(string dataDirectory, string tempDirectory,
+                Settings appSettings, ApplicationLogger logger, DataManager dataManager) {
             App.logger = logger;
             App.AppSettings = appSettings;
             App.DataManager = dataManager;
             App.LogMessage($"Initializing the {Name} extension", ApplicationLogger.EntryTypes.Information);
             App.DataManager.ChangeNotification += DataManager_ChangeNotification;
 
+            appSettings.SetupColors(Resources.GetBrushNames(), Resources);
+            var fontFamily = new FontFamily(appSettings.GetValue("Application", "FontFamilyName", "Calibri"));
+            Resources["StandardFont"] = fontFamily;
+            App.Current.Resources["StandardFontSize"] = appSettings.GetValue("Application", "FontSize", 16.0);
+
+            var imagesDir = SysIO.Path.Combine(App.DataManager.DataFolder, "Territory Images");
+            if (!SysIO.Directory.Exists(imagesDir))
+                SysIO.Directory.CreateDirectory(imagesDir);
+
             var control = new ExtensionControl();
             extControlView = control.View;
-            //extControlView.Congregations.AddRange(dataManager.Congregations.OrderBy(x => x.Name));
-            //dataManager.Congregations.CollectionChanged += Congregations_CollectionChanged;
 
             DataDirectory = dataDirectory;
             TempDirectory = tempDirectory;
@@ -87,9 +94,8 @@ namespace TerritoryManager.Extension {
             IsEnabled = Settings.GetValue($"{Name} Extension", "IsEnabled", true);
         }
 
-        private void DataManager_CongregationChanged(object sender, CongregationChangedEventArgs e) {
+        private void DataManager_CongregationChanged(object sender, CongregationChangedEventArgs e) =>
             extControlView.SetCongregation(e.Congregation);
-        }
 
         private void LoadInterfaceItems() {
             //------------------ menu -------------------
@@ -99,12 +105,12 @@ namespace TerritoryManager.Extension {
             var fontFamResName = "TerritoryFontFamily";
             var altFamResName = "PeopleFontFamily";
 
-            AddMenuItem("Add Territory", topMenuItem, "map", null, fontFamResName);
+            AddMenuItem("Add Territory", topMenuItem, "map", extControlView.NewTerritoryCommand, fontFamResName);
             AddMenuItem("Delete Territory", topMenuItem, "trash-can-wf", null, altFamResName);
 
-            //AddMenuSeparator(topMenuItem);
+            AddMenuSeparator(topMenuItem);
 
-            //AddMenuItem("Add Member", topMenuItem, "business-man-01-wf", AddMemberCommand);
+            AddMenuItem("Territory Builder", topMenuItem, "build-map", extControlView.TerritoryBuilderCommand, fontFamResName);
             //AddMenuItem("Add Group", topMenuItem, "user-group", AddGroupCommand);
 
             //AddMenuSeparator(topMenuItem);
@@ -115,7 +121,7 @@ namespace TerritoryManager.Extension {
             AddToolbarSeparator();
 
             AddToolbarLabel("Territory");
-            AddToolbarButton("Add Territory", "map", null, fontFamResName);
+            AddToolbarButton("Add Territory", "map", extControlView.NewTerritoryCommand, fontFamResName);
             AddToolbarButton("Delete Territory", "trash-can-wf", null, altFamResName);
 
             //AddToolbarSeparator();
@@ -126,24 +132,21 @@ namespace TerritoryManager.Extension {
         }
 
         private void DataManager_ChangeNotification(object sender, ChangeNotificationEventArgs e) {
-           
+
         }
 
-        public override void Save() {
-            //throw new NotImplementedException();
-        }
+        public override void Save() { }
 
         public override void ToggleLoadedControls(bool value) {
-            if (addedControls != null && addedControls.Any()) {
-                foreach (var item in addedControls) {
+            if (AddedControls != null && AddedControls.Any()) {
+                foreach (var item in AddedControls) {
                     if (item.GetType().GetProperty("IsEnabled") != null) {
                         item.GetType().GetProperty("IsEnabled")?.SetValue(item, value);
                     }
                 }
             }
-            if (Panel != null && Panel.Control != null) {
+            if (Panel != null && Panel.Control != null)
                 Panel.Control.IsEnabled = value;
-            }
         }
     }
 }

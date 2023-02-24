@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Applicationn.Windows.Expressions {
+namespace Common.Application.Windows.Expressions {
     public abstract class BinaryOperation : IExpression {
         public IExpression Operand1 { get; set; }
         public IExpression Operand2 { get; set; }

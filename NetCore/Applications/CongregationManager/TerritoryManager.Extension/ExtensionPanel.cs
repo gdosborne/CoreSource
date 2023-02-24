@@ -3,7 +3,6 @@ using CongregationManager.Extensibility;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace TerritoryManager.Extension {
@@ -55,11 +54,9 @@ namespace TerritoryManager.Extension {
 
         #region SaveCommand
         private ICommand _SaveCommand = default;
-        public ICommand SaveCommand => _SaveCommand ?? (_SaveCommand = new DelegateCommand(Save, ValidateSaveState));
+        public ICommand SaveCommand => _SaveCommand ??= new DelegateCommand(Save, ValidateSaveState);
         private bool ValidateSaveState(object state) => true;
-        private void Save(object state) {
-
-        }
+        private void Save(object state) { }
         #endregion
 
         #region RevertCommand
@@ -72,6 +69,7 @@ namespace TerritoryManager.Extension {
         #endregion
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

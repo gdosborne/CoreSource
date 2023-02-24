@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Common.Applicationn.Media {
+namespace Common.Application.Media {
     public delegate void ConversionCompleteHandler(object sender, ConversionCompleteEventArgs e);
 
     public class ConversionCompleteEventArgs : EventArgs {

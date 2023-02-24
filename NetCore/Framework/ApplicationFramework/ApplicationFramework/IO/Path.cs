@@ -8,7 +8,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Common.Applicationn.IO {
+namespace Common.Application.IO {
     public static class Path {
         public const string UncStart = @"\\";
 

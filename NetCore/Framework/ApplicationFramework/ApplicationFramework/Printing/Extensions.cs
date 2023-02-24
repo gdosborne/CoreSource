@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Printing;
 
-namespace Common.Applicationn.Printing {
+namespace Common.Application.Printing {
     public static class Extensions {
         public static PageSettings GetPrinterPageInfo(string printerName, bool isLandscape) {
             PrinterSettings settings;

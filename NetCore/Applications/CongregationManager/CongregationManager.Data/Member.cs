@@ -1,7 +1,8 @@
-﻿using Common.Applicationn.Primitives;
-using Common.Applicationn.Text;
+﻿using Common.Application.Primitives;
+using Common.Application.Text;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 
@@ -10,42 +11,80 @@ namespace CongregationManager.Data {
     public class Member : ItemBase {
         [Flags]
         public enum PrivilegeFlags : long {
-            Publisher = 1,
-            AuxiliaryPioneer = Publisher * 2,
+            [Description("Is A Publisher (not pioneer)")]
+            Publisher                  = 1,
+            [Description("Is An Auxiliary Pioneer")]
+            AuxiliaryPioneer           = Publisher * 2,
+            [Description("Is A Continuous Auxiliary Pioneer")]
             ContinuousAuxiliaryPioneer = AuxiliaryPioneer * 2,
-            RegularPioneer = ContinuousAuxiliaryPioneer * 2,
-            SpecialPioneer = RegularPioneer * 2,
-            MinisterialServant = SpecialPioneer * 2,
-            Elder = MinisterialServant * 2,
-            GroupOverseer = Elder * 2,
-            GroupAssistant = GroupOverseer * 2,
-            ServiceOverseer = GroupAssistant * 2,
-            ServiceAssistant = ServiceOverseer * 2,
-            SchoolOverseer = ServiceAssistant * 2,
-            SchoolAssistant = SchoolOverseer * 2,
-            Secretary = SchoolOverseer * 2,
-            SecretaryAssistant = Secretary * 2,
-            OperatingCommitteeMember = SecretaryAssistant * 2,
-            COBE = OperatingCommitteeMember * 2,
-            COBE_Assistant = COBE * 2,
-            WatchtowerConductor = COBE_Assistant * 2,
-            PublicTalksCoordinator = WatchtowerConductor * 2,
-            AccountsServant = PublicTalksCoordinator * 2,
-            SoundServant = AccountsServant * 2,
-            AttendantServant = SoundServant * 2,
-            LiteratureServant = AttendantServant * 2,
-            TerritoryServant = LiteratureServant * 2,
-            SoundZoomHost = TerritoryServant * 2,
-            SoundConsole = SoundZoomHost * 2,
-            SoundStage = SoundConsole * 2,
-            SoundMicrophone = SoundStage * 2,
-            Attendant = SoundMicrophone * 2,
-            ZoomAttendant = Attendant * 2,
-            SundayChairman = ZoomAttendant * 2,
-            WatchtowerReader = SundayChairman * 2,
-            SchoolChairman = WatchtowerReader * 2,
-            PublicTalkSpeaker = SchoolChairman * 2,
-            SchoolMember = PublicTalkSpeaker * 2
+            [Description("Is A Regular Pioneer")]
+            RegularPioneer             = ContinuousAuxiliaryPioneer * 2,
+            [Description("Is A Special Fulltime Pioneer")]
+            SpecialPioneer             = RegularPioneer * 2,
+            [Description("Is A Ministerial Servant")]
+            MinisterialServant         = SpecialPioneer * 2,
+            [Description("Is An Elder")]
+            Elder                      = MinisterialServant * 2,
+            [Description("Is A Group Overseer")]
+            GroupOverseer              = Elder * 2,
+            [Description("Is A Group Assistant")]
+            GroupAssistant             = GroupOverseer * 2,
+            [Description("Is The Service Overseer")]
+            ServiceOverseer            = GroupAssistant * 2,
+            [Description("Is The Service Overseer Assistant")]
+            ServiceAssistant           = ServiceOverseer * 2,
+            [Description("Is The School Overseer")]
+            SchoolOverseer             = ServiceAssistant * 2,
+            [Description("Is The School Overseer Assistant")]
+            SchoolAssistant            = SchoolOverseer * 2,
+            [Description("Is The Secretary")]
+            Secretary                  = SchoolAssistant * 2,
+            [Description("Is The Secretary Assistant")]
+            SecretaryAssistant         = Secretary * 2,
+            [Description("Is An Operating Committee Member")]
+            OperatingCommitteeMember   = SecretaryAssistant * 2,
+            [Description("Is The Coordinator Body of Elders")]
+            COBE                       = OperatingCommitteeMember * 2,
+            [Description("Is The Coordinator Body of Elsers Assistant")]
+            COBE_Assistant             = COBE * 2,
+            [Description("Is The Watchtower Conductor")]
+            WatchtowerConductor        = COBE_Assistant * 2,
+            [Description("Is The Public Talks Coordinator")]
+            PublicTalksCoordinator     = WatchtowerConductor * 2,
+            [Description("Is The Accounts Servant")]
+            AccountsServant            = PublicTalksCoordinator * 2,
+            [Description("Is The Sound Servant")]
+            SoundServant               = AccountsServant * 2,
+            [Description("Is The Attendant Servant")]
+            AttendantServant           = SoundServant * 2,
+            [Description("Is The Literature Servant")]
+            LiteratureServant          = AttendantServant * 2,
+            [Description("Is The Territory Servant")]
+            TerritoryServant           = LiteratureServant * 2,
+            [Description("Can Be Zoom Host")]
+            SoundZoomHost              = TerritoryServant * 2,
+            [Description("Can Run Console")]
+            SoundConsole               = SoundZoomHost * 2,
+            [Description("Can Manage Stage")]
+            SoundStage                 = SoundConsole * 2,
+            [Description("Can Run Microphone")]
+            SoundMicrophone            = SoundStage * 2,
+            [Description("Can Be Attendant")]
+            Attendant                  = SoundMicrophone * 2,
+            [Description("Can Be Zoom Attendant")]
+            ZoomAttendant              = Attendant * 2,
+            [Description("Can Be Sunday Chairman")]
+            SundayChairman             = ZoomAttendant * 2,
+            [Description("Can Read Watchtower")]
+            WatchtowerReader           = SundayChairman * 2,
+            [Description("Can Be School Chairman")]
+            SchoolChairman             = WatchtowerReader * 2,
+            [Description("Can Give Public Talks")]
+            PublicTalkSpeaker          = SchoolChairman * 2,
+            [Description("Can Give External Public Talks")]
+            PublicTalkSpeakerExternal  = PublicTalkSpeaker * 2,
+            [Description("Is A School member")]
+            SchoolMember               = PublicTalkSpeakerExternal * 2
         }
 
         public enum Genders {

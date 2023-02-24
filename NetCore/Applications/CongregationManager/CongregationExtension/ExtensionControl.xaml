@@ -11,9 +11,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     
     <Grid Name="MainGrid">
-        <Grid.Resources>
-            <ResourceDictionary Source="Resources/MainTheme.xaml" />
-        </Grid.Resources>
         <Grid.DataContext>
             <views:ExtensionControlViewModel />
         </Grid.DataContext>

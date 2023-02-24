@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Common.Applicationn.Windows.Expressions {
+namespace Common.Application.Windows.Expressions {
     [ContentProperty("Expression")]
     public class Calculator : MarkupExtension {
         public IExpression Expression { get; set; }

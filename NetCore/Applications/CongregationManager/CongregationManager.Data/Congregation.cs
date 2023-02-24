@@ -1,5 +1,5 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Text;
+﻿using Common.Application;
+using Common.Application.Text;
 using Common.MVVMFramework;
 using Newtonsoft.Json;
 using System;
@@ -298,11 +298,9 @@ namespace CongregationManager.Data {
         /// <summary>Gets the Save command.</summary>
         /// <value>The Save command.</value>
         [JsonIgnore]
-        public DelegateCommand SaveCommand => _SaveCommand ?? (_SaveCommand = new DelegateCommand(Save, ValidateSaveState));
+        public DelegateCommand SaveCommand => _SaveCommand ??= new DelegateCommand(Save, ValidateSaveState);
         private bool ValidateSaveState(object state) => true;
-        private void Save(object state) {
-            this.SaveThisItem?.Invoke(this, EventArgs.Empty);
-        }
+        private void Save(object state) => this.SaveThisItem?.Invoke(this, EventArgs.Empty);
         #endregion
 
         #region RevertCommand
@@ -310,7 +308,8 @@ namespace CongregationManager.Data {
         /// <summary>Gets the Revert command.</summary>
         /// <value>The Revert command.</value>
         [JsonIgnore]
-        public DelegateCommand RevertCommand => _RevertCommand ?? (_RevertCommand = new DelegateCommand(Revert, ValidateRevertState));
+        public DelegateCommand RevertCommand => _RevertCommand 
+            ??= new DelegateCommand(Revert, ValidateRevertState);
         private bool ValidateRevertState(object state) => true;
         private void Revert(object state) {
             var props = this.GetType()

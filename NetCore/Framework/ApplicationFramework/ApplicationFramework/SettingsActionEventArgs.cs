@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Applicationn {
+namespace Common.Application {
     public delegate void SettingsActionHandler(object sender, SettingsActionEventArgs e);
 
     public enum Actions {

@@ -7,14 +7,12 @@
         xmlns:views="clr-namespace:CongregationExtension.ViewModels"
         xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
-        FocusManager.FocusedElement="{Binding ElementName=congControl}"
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
+        FocusManager.FocusedElement="{Binding ElementName=congControl}"        
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="800" Height="600" MaxHeight="900" MinHeight="720" MinWidth="800"
-        Icon="\Resources\CM.ico">
-    <Window.Resources>
-        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
-    </Window.Resources>
+        Width="800" MaxWidth="1000" MinWidth="800"
+        Height="720" MaxHeight="900" MinHeight="720" 
+        WindowStartupLocation="Manual">
+
     <Window.DataContext>
         <views:CongregationWindowViewModel />
     </Window.DataContext>

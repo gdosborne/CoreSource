@@ -1,4 +1,4 @@
-﻿namespace Common.Applicationn.OSSystem {
+﻿namespace Common.Application.OSSystem {
     using System.Collections.Generic;
     using System;
 

@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Common.Applicationn.IO {
+namespace Common.Application.IO {
     public static class Directory {
         public static FileAttributes? Attributes(string directoryName) => !System.IO.Directory.Exists(directoryName) ? (FileAttributes?)null : new DirectoryInfo(directoryName).Attributes;
         public static DateTime? CreationTime(string directoryName) => !System.IO.Directory.Exists(directoryName) ? (DateTime?)null : new DirectoryInfo(directoryName).CreationTime;

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Common.Applicationn.RecentItems {
+namespace Common.Application.RecentItems {
     /// <summary>
     /// The recent item.
     /// </summary>

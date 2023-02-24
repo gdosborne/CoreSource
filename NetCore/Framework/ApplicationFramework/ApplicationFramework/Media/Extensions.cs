@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using Color = System.Windows.Media.Color;
 using Size = System.Windows.Size;
 
-namespace Common.Applicationn.Media {
+namespace Common.Application.Media {
     public static class Extensions {
         public static Icon To16BitIcon(this ImageSource src) {
             var img = src.ImageSourceToGDIImage();
@@ -72,6 +72,13 @@ namespace Common.Applicationn.Media {
             var regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
             results.AddRange(regKey.GetValueNames().Select(x => x.Replace(" (TrueType)", string.Empty)));
             return results;
+        }
+
+        public static IList<System.Windows.Media.FontFamily> GetAllFontFamiles() {
+            var names = GetAllFontNames().ToList();
+            var result = new List<System.Windows.Media.FontFamily>();
+            names.ForEach(x => result.Add(new System.Windows.Media.FontFamily(x)));
+            return result;
         }
 
         public static BitmapImage GetBitmapImage(this string fileName) {
@@ -189,6 +196,12 @@ namespace Common.Applicationn.Media {
         }
 
         public static Color ReduceAlpha(this Color original, byte alpha) => Color.FromArgb(alpha, original.R, original.G, original.B);
+
+        public static System.Drawing.Color ToColor(this Color color) => 
+            System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+
+        public static Color ToColor(this System.Drawing.Color color) =>
+            Color.FromArgb(color.A, color.R, color.G, color.B);
 
         public static Color ToColor(this string value) {
             var result = Colors.Transparent;

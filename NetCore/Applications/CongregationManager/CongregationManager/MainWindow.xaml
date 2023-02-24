@@ -8,7 +8,8 @@
         xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Height="450" Width="800" Icon="/Resources/CM.ico">
+        Height="450" MinHeight="450" Width="800" MinWidth="450"
+        Icon="/Resources/CM.ico">
     <Window.DataContext>
         <views:MainWindowViewModel />
     </Window.DataContext>
@@ -52,7 +53,7 @@
                     <RowDefinition />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Menu Grid.Row="1" Name="TopMenu">
+                <Menu Grid.Row="1" Name="TopMenu" Foreground="{DynamicResource WindowTextForeground}">
                     <MenuItem Header="_File">
                         <MenuItem Header="E_xit" Command="{Binding CloseWindowCommand}">
                             <MenuItem.Icon>
@@ -87,12 +88,12 @@
                     </MenuItem>
                 </Menu>
                 <ToolBarTray Grid.Row="2">
-                    <ToolBar Name="MainPageToolbar" />
+                    <ToolBar Name="MainPageToolbar" Foreground="{DynamicResource WindowTextForeground}" />
                 </ToolBarTray>
             </Grid>
         </Border>
         <Border Grid.Row="2" Style="{DynamicResource StandardWindowBorder}">
-            <TabControl Name="MainTabControl" />
+            <TabControl Name="MainTabControl" Background="{DynamicResource WindowBackground}" />
         </Border>
     </Grid>
 </Window>

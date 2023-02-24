@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Applicationn.Logging {
+namespace Common.Application.Logging {
     [Serializable]
     public class LogDirectoryMissingException : System.Exception {
         #region Public Constructors

@@ -14,9 +14,6 @@
     <Window.DataContext>
         <views:MemberMoverWindowViewModel />
     </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>

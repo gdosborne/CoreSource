@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Common.Applicationn;
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Text;
-using Common.Applicationn.Xml.Linq;
+using Common.Application;
+using Common.Application.Primitives;
+using Common.Application.Text;
+using Common.Application.Xml.Linq;
 
 namespace HP.Application.Net.SMS {
     public class Messenger {

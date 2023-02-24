@@ -1,5 +1,5 @@
-﻿using Common.Applicationn.Media;
-using Common.Applicationn.Primitives;
+﻿using Common.Application.Media;
+using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Media3D;
 using System.Xml.Linq;
 
-namespace Common.Applicationn {
+namespace Common.Application {
     /// <summary>
     /// The settings.
     /// </summary>

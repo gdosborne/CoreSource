@@ -73,9 +73,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Include="..\CongregationManager\Resources\MainTheme.xaml" Link="Resources\MainTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

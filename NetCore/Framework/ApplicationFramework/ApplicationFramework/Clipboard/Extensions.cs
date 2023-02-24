@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Common.Applicationn.Clipboard {
+namespace Common.Application.Clipboard {
     public static class Extensions {
         //public static bool IsHistEnabled() => Clipboard.IsHistoryEnabled();
     }

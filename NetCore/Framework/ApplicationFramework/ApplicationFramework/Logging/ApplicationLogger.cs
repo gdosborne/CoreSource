@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Applicationn.Logging {
+namespace Common.Application.Logging {
     public sealed class ApplicationLogger {
         public class InternalStorage {
             public EntryTypes EntryType { get; set; }

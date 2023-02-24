@@ -1,15 +1,13 @@
-﻿using Common.Applicationn.Linq;
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Windows;
+﻿using Common.Application.Primitives;
+using Common.Application.Windows;
 using CongregationManager.ViewModels;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using static Common.Applicationn.Logging.ApplicationLogger;
+using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Application.Logging.ApplicationLogger;
 using Path = System.IO.Path;
 
 namespace CongregationManager {
@@ -22,7 +20,6 @@ namespace CongregationManager {
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
-            //View.Extensions.CollectionChanged += Extensions_CollectionChanged;
         }
 
         protected override void OnSourceInitialized(EventArgs e) {
@@ -63,22 +60,14 @@ namespace CongregationManager {
                             App.LogMessage($"  Adding extension {fname}", EntryTypes.Information);
                             File.Copy(x, Path.Combine(App.ExtensionsFolder, fname), true);
                         });
-                        //var extCount = ApplicationData.Extensions.Count;
-                        //var sw = new Stopwatch();
-                        //sw.Start();
-                        //while(sw.ElapsedMilliseconds < 10000 || ApplicationData.Extensions.Count > extCount) {
-                        //    Task.Delay(100);
-                        //}
-                        //View.Extensions.Clear();
-                        //View.Extensions.AddRange(ApplicationData.Extensions);
                         break;
                     }
                 case ExtensionManagerWindowViewModel.Actions.DeleteExtension: {
-                        var result = App.IsYesInDialogSelected("Delete Currently Selected Extension",
-                            $"You have selected to delete the \"{View.SelectedExtension.Name}\" Extension. " +
+                        var title = "Delete Currently Selected Extension";
+                        var msg = $"You have selected to delete the \"{View.SelectedExtension.Name}\" Extension. " +
                             $"If you continue, the extension will not be available until you add it again.\n\n" +
-                            $"Are you sure you want to continue?",
-                            "Delete Extension", Ookii.Dialogs.Wpf.TaskDialogIcon.Warning);
+                            $"Are you sure you want to continue?";
+                        var result = ShowYesNoDialog(title, msg, Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 225);
                         if (result) {
                             var filename = View.SelectedExtension.Filename;
                             App.LogMessage($"Removing extension {filename}", EntryTypes.Information);
@@ -97,8 +86,6 @@ namespace CongregationManager {
 
         public ExtensionManagerWindowViewModel View => DataContext.As<ExtensionManagerWindowViewModel>();
 
-        private void TitlebarBorder_PreviewMouseDown(object sender, MouseButtonEventArgs e) {
-            DragMove();
-        }
+        private void TitlebarBorder_PreviewMouseDown(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

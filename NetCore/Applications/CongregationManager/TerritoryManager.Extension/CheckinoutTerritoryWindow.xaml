@@ -1,0 +1,87 @@
+﻿<Window x:Class="TerritoryManager.Extension.CheckinoutTerritoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TerritoryManager.Extension"
+        xmlns:views="clr-namespace:TerritoryManager.Extension.ViewModels"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
+        FocusManager.FocusedElement="{Binding ElementName=CheckoutDatePicker}"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        SizeToContent="Height"  Width="350" WindowStartupLocation="CenterOwner" 
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <views:CheckinoutTerritoryWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,5" BorderThickness="1,0,1,1" />
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
+            <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Date" Style="{DynamicResource WindowLabel}" Grid.Row="0" Grid.Column="0" />
+                <DatePicker Name="CheckoutDatePicker" Grid.Row="0" Grid.Column="1" 
+                            SelectedDate="{Binding SelectedDate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <TextBlock Text="Check out to" Style="{DynamicResource WindowLabel}" Grid.Row="1" Grid.Column="0" />
+                <ComboBox Style="{DynamicResource PrimaryComboBox}" Grid.Row="1" Grid.Column="1"
+                          ItemsSource="{Binding Members}" 
+                          IsEnabled="{Binding IsMemberEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedMember,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBlock Text="Check out Notes" Style="{DynamicResource WindowLabel}" Grid.Row="2" Grid.Column="0" 
+                           Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource WindowTextField}"
+                         TextWrapping="Wrap" Height="60" 
+                         Text="{Binding Notes,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="99" 
+                            Style="{DynamicResource WindowButtonPanel}">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
+                            Command="{Binding AcceptDataCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 
+                            Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

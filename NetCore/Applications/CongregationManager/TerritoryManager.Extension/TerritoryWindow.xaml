@@ -7,14 +7,11 @@
         xmlns:views="clr-namespace:TerritoryManager.Extension.ViewModels"
         xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
         mc:Ignorable="d" Style="{DynamicResource StandardWindow}" 
-        FocusManager.FocusedElement="{Binding ElementName=congControl}"
-        WindowStyle="None" ResizeMode="CanResizeWithGrip" WindowStartupLocation="Manual"
+        FocusManager.FocusedElement="{Binding ElementName=NumberTextBox}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Width="800" Height="500" MaxHeight="900" MinHeight="500" MinWidth="600" 
-        MaxWidth="1100" Icon="\Resources\CM.ico">
-    <Window.Resources>
-        <ResourceDictionary Source="/Resources/MainTheme.xaml" />
-    </Window.Resources>
+        MinHeight="400" MaxHeight="1000" SizeToContent="Height"
+        Width="600" MinWidth="400" MaxWidth="1200" 
+        WindowStartupLocation="Manual">
     <Window.DataContext>
         <views:TerritoryWindowViewModel />
     </Window.DataContext>
@@ -45,10 +42,97 @@
         <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}" Margin="0">
             <Grid Style="{DynamicResource MainWindowGrid}" Margin="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
                     <RowDefinition />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="250" />
+                    <ColumnDefinition MinWidth="100" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Margin="0,0,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="Number" Grid.Row="0" Grid.Column="0" 
+                               GotFocus="TextBox_GotFocus"/>
+                    <TextBox Name="NumberTextBox" Grid.Row="0" Grid.Column="1" Width="60" 
+                             Style="{DynamicResource TerritoryNumberTextBox}"
+                             Text="{Binding Territory.Number,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="Check Out" Grid.Row="1" Grid.Column="0" />
+                    <DatePicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" />
+
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="Checked Out By" Grid.Row="2" Grid.Column="0" />
+                    <ComboBox Style="{DynamicResource PrimaryComboBox}" Grid.Row="2" Grid.Column="1"
+                          ItemsSource="{Binding Members}" 
+                          IsEnabled="{Binding IsMemberEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedMember,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FullName}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="Check In" Grid.Row="3" Grid.Column="0" />
+                    <DatePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" />
+
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="Do Not Calls" Grid.Row="4" Grid.Column="0" />
+                    <Button Grid.Row="4" Grid.Column="1" Content="Show" Style="{DynamicResource StandardButton}"
+                            HorizontalAlignment="Left"/>
+
+                    <TextBlock Style="{DynamicResource WindowLabel}" Text="History" Grid.Row="6" Grid.Column="0" />
+                    <Button Grid.Row="6" Grid.Column="1" Content="Show" Style="{DynamicResource StandardButton}"
+                            HorizontalAlignment="Left"/>
+
+                </Grid>
+
+                <GridSplitter Grid.Column="0" Grid.Row="0" Style="{DynamicResource VerticalSplitter}" />
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch">
+                    <Border Style="{DynamicResource ImageBorder}">
+                        <Image  />
+                    </Border>
+                    <Button Style="{DynamicResource StandardButton}" Width="auto">
+                        Select image...
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Style="{DynamicResource WindowLabel}" Text="Notes" Grid.Row="1" Grid.Column="0" 
+                               Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Height="125" 
+                          SizeChanged="ListView_SizeChanged" Loaded="ListView_Loaded"
+                          ItemsSource="{Binding Territories}" ItemContainerStyle="{DynamicResource ColumnStretch}"
+                          SelectedItem="{Binding SelectedTerritory,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          MouseDoubleClick="ListView_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="true">
+                            <GridViewColumn DisplayMemberBinding="{Binding LastHistory.CheckOutDate,StringFormat=MM/dd/yyyy}" Header="Date" Width="120"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding LastHistory.CheckedOutBy.FullName}" Header="Notes" Width="100" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource WindowButtonPanel}">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True"
+                            Command="{Binding AcceptValueCommand}"/>
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" 
+                            Command="{Binding CloseWindowCommand}"/>
+                </StackPanel>
             </Grid>
         </Border>        
     </Grid>

@@ -1,4 +1,4 @@
-﻿using Common.Applicationn.Primitives;
+﻿using Common.Application.Primitives;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;

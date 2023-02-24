@@ -1,4 +1,4 @@
-﻿namespace Common.Applicationn {
+﻿namespace Common.Application {
     public enum ApplicationStatus {
         WatchDogIdle = -2,
         Starting,

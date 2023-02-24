@@ -1,11 +1,11 @@
-﻿using Common.Applicationn.Windows;
+﻿using Common.Application.Windows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Common.Applicationn.Registry {
+namespace Common.Application.Registry {
     public static class Extensions {
         public static RegistryKey SettingsKey { get; } = null;
 

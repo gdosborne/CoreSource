@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Common.Applicationn.Xml.Linq {
+namespace Common.Application.Xml.Linq {
     public static class Extension {
         public static void AddOrUpdateElement(this XElement parent, string name, object value, bool isCData = false) {
             if (parent == null) {

@@ -1,6 +1,6 @@
-﻿using Common.Applicationn;
-using Common.Applicationn.Primitives;
-using Common.Applicationn.Text;
+﻿using Common.Application;
+using Common.Application.Primitives;
+using Common.Application.Text;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using static CongregationManager.Data.Member;
+using static CongregationManager.Data.Extensions;
 
 namespace CongregationExtension.ViewModels {
     public class MemberWindowViewModel : LocalBase {
@@ -68,11 +69,12 @@ namespace CongregationExtension.ViewModels {
                     IsStatusDisfellowshipped = Member.Status == Statuses.Disfellowshipped;
                     Member.PropertyChanged += Member_PropertyChanged;
 
-                    var actual = Enum.GetNames(typeof(PrivilegeFlags)).ToList();
-                    var privs = actual.Select(x => new PrivValue {
-                        Text = x.SplitAtCaps(),
-                        Privilege = (PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x),
-                        ActualValue = (long)(PrivilegeFlags)Enum.Parse(typeof(PrivilegeFlags), x)
+                    var descriptions = GetDescriptions<PrivilegeFlags>();
+                    //var actual = Enum.GetNames(typeof(PrivilegeFlags)).ToList();
+                    var privs = descriptions.Select(x => new PrivValue {
+                        Text = x.Value,
+                        Privilege = x.Key,
+                        ActualValue = (long)x.Key
                     }).OrderBy(x => x.Privilege).ToList();
                     privs.ForEach(x => {
                         x.IsChecked = Member.Priveleges.HasFlag((PrivilegeFlags)x.ActualValue);

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Common.Applicationn.Registry {
+namespace Common.Application.Registry {
     public class RegistrySection {
         public RegistrySection() {
             Values = new Dictionary<string, object>();
