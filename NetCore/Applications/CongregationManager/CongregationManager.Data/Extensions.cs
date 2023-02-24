@@ -60,5 +60,19 @@ namespace CongregationManager.Data {
             }
             return result;
         }
+
+        public static Dictionary<string, string> BrushAliasNames(this ResourceDictionary resources) {
+            var result = new Dictionary<string, string>();
+            foreach (var dict in resources.MergedDictionaries) {
+                foreach (var name in dict.Keys) {
+                    if (name.Is<string>()) {
+                        if (name.As<string>().StartsWith("AliasKey-")) {
+                            result.Add(name.As<string>().Replace("AliasKey-", string.Empty), dict[name].As<string>());
+                        }
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

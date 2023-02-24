@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <SolidColorBrush x:Key="ControlBackground" Color="{StaticResource {x:Static SystemColors.ControlColorKey}}" />
     <SolidColorBrush x:Key="ControlForeground" Color="{StaticResource {x:Static SystemColors.ControlTextColorKey}}" />
@@ -21,8 +22,30 @@
     <SolidColorBrush x:Key="MenuForeground" Color="{StaticResource {x:Static SystemColors.MenuTextColorKey}}" />
     <SolidColorBrush x:Key="MenuItemBackground" Color="{StaticResource {x:Static SystemColors.MenuColorKey}}" />
     <SolidColorBrush x:Key="MenuItemForeground" Color="{StaticResource {x:Static SystemColors.MenuTextColorKey}}" />
-
     <SolidColorBrush x:Key="ErrorBackground" Color="{StaticResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ErrorForeground" Color="{StaticResource {x:Static SystemColors.HighlightTextColorKey}}" />
+
+    <sys:String x:Key="AliasKey-ControlBackground">Control Background</sys:String>
+    <sys:String x:Key="AliasKey-ControlForeground">Control Foreground</sys:String>
+    <sys:String x:Key="AliasKey-ControlMouseOverBackground">Control Mouse Over Background</sys:String>
+    <sys:String x:Key="AliasKey-ControlMouseOverForeground">Control Mouse Over Foreground</sys:String>
+    <sys:String x:Key="AliasKey-WindowBorderBrush">Window Border</sys:String>
+    <sys:String x:Key="AliasKey-WindowBackground">Window Background</sys:String>
+    <sys:String x:Key="AliasKey-LightBorderBrush">Light Border</sys:String>
+    <sys:String x:Key="AliasKey-WindowTextForeground">Window Text Foreground</sys:String>
+    <sys:String x:Key="AliasKey-HighlightForeground">Highlight Foreground</sys:String>
+    <sys:String x:Key="AliasKey-CaptionBackground">Caption Background</sys:String>
+    <sys:String x:Key="AliasKey-CaptionForeground">Caption Foreground</sys:String>
+    <sys:String x:Key="AliasKey-ToggleSwitchBackground">Toggle Switch Background</sys:String>
+    <sys:String x:Key="AliasKey-GoForeground">Go Foreground</sys:String>
+    <sys:String x:Key="AliasKey-TabTextForeground">Tab Text Foreground</sys:String>
+    <sys:String x:Key="AliasKey-ButtonForeground">Button Foreground</sys:String>
+    <sys:String x:Key="AliasKey-ButtonBackground">Button Background</sys:String>
+    <sys:String x:Key="AliasKey-MenuBackground">Menu Background</sys:String>
+    <sys:String x:Key="AliasKey-MenuForeground">Menu Foreground</sys:String>
+    <sys:String x:Key="AliasKey-MenuItemBackground">Menu Item Background</sys:String>
+    <sys:String x:Key="AliasKey-MenuItemForeground">Menu Item Foreground</sys:String>
+    <sys:String x:Key="AliasKey-ErrorBackground">Error Background</sys:String>
+    <sys:String x:Key="AliasKey-ErrorForeground">Error Foreground</sys:String>
 
 </ResourceDictionary>

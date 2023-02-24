@@ -1,5 +1,6 @@
 ﻿using ApplicationFramework.Security;
 using Common.Application;
+using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.Application.Security;
 using Common.Application.Windows;
@@ -15,35 +16,35 @@ using System.Net;
 using System.Reflection;
 using System.Security;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using static ApplicationFramework.Dialogs.Helpers;
 using static Common.Application.Logging.ApplicationLogger;
 using static Common.Application.Security.Extensions;
 using Credential = CredentialManagement.Credential;
-using static ApplicationFramework.Dialogs.Helpers;
-using Common.Application.Media;
 
 namespace CongregationManager {
     public partial class App : System.Windows.Application {
         public static string ApplicationName => "Congregation Manager";
-        
+
         private static string _ApplicationFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
-        
+
         public static string ApplicationFolder {
             get => _ApplicationFolder;
             private set => _ApplicationFolder = value;
         }
-        
+
         public static string ExtensionsFolder => Path.Combine(ApplicationFolder, "Extensions");
-        
+
         public static string TempFolder => Path.Combine(ApplicationFolder, "Temp");
-        
+
         public static string DataFolder => Path.Combine(ApplicationFolder, "Data");
-        
+
         public static string RecycleBinFolder => Path.Combine(DataFolder, "Recycle Bin");
-        
+
         public static string ThemeFolder => Path.Combine(ApplicationFolder, "Themes");
+
+        public static List<ApplicationTheme> AppThemes { get; private set; }
 
         public static Session ApplicationSession { get; private set; }
 
@@ -53,10 +54,70 @@ namespace CongregationManager {
             };
         public static DataManager DataManager { get; private set; }
 
+        public static ApplicationTheme CurrentTheme { get; private set; }
+
         public App() {
             SetupFolders();
             ApplicationSession = new Session(ApplicationFolder, ApplicationName,
                 StorageTypes.Xml, StorageOptions.CreateFolderForEachDay);
+            AppThemes = GetThemes();
+            ApplyTheme("Default");
+        }
+
+        private List<ApplicationTheme> GetThemes() {
+            var result = new List<ApplicationTheme>();
+            var themeFiles = new DirectoryInfo(ThemeFolder).GetFiles("*.apptheme");
+            if (!themeFiles.Any()) {
+                MakeDefaultThemeFile();
+            }
+
+            themeFiles.ToList().ForEach(file => {
+                result.Add(ApplicationTheme.FromFile(file.FullName));
+            });
+            return result;
+        }
+
+        public static void ApplyTheme(string name) {
+            CurrentTheme = AppThemes.FirstOrDefault(x => x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (CurrentTheme == null) {
+                var themeFile = new FileInfo(Path.Combine(ThemeFolder, $"{name}.apptheme"));
+                if (themeFile.Exists) {
+                    CurrentTheme = ApplicationTheme.FromFile(themeFile.FullName);
+                }
+            }
+            CurrentTheme?.Values.ToList().ForEach(x => {
+                    App.Current.Resources[x.Key] = new SolidColorBrush(x.Value.ToColor());
+                });
+        }
+
+        private void MakeDefaultThemeFile() {
+            var result = new ApplicationTheme {
+                Name = "Default",
+                FullPath = Path.Combine(ThemeFolder, "Default.apptheme")
+            };
+            result.Values.Add("ControlBackground", SystemColors.ControlColor.ToHexValue());
+            result.Values.Add("ControlForeground", SystemColors.ControlTextColor.ToHexValue());
+            result.Values.Add("ControlMouseOverBackground", SystemColors.ControlDarkColor.ToHexValue());
+            result.Values.Add("ControlMouseOverForeground", SystemColors.ControlLightColor.ToHexValue());
+            result.Values.Add("WindowBorderBrush", SystemColors.ActiveBorderColor.ToHexValue());
+            result.Values.Add("WindowBackground", SystemColors.WindowColor.ToHexValue());
+            result.Values.Add("LightBorderBrush", SystemColors.ControlLightColor.ToHexValue());
+            result.Values.Add("WindowTextForeground", SystemColors.WindowTextColor.ToHexValue());
+            result.Values.Add("HighlightForeground", SystemColors.HighlightTextColor.ToHexValue());
+            result.Values.Add("CaptionBackground", SystemColors.ActiveCaptionColor.ToHexValue());
+            result.Values.Add("CaptionForeground", SystemColors.ActiveCaptionTextColor.ToHexValue());
+            result.Values.Add("ToggleSwitchBackground", SystemColors.ControlColor.ToHexValue());
+            result.Values.Add("GoForeground", SystemColors.InfoColor.ToHexValue());
+            result.Values.Add("TabTextForeground", SystemColors.WindowTextColor.ToHexValue());
+            result.Values.Add("ButtonForeground", SystemColors.ControlTextColor.ToHexValue());
+            result.Values.Add("ButtonBackground", SystemColors.ControlColor.ToHexValue());
+            result.Values.Add("MenuBackground", SystemColors.MenuColor.ToHexValue());
+            result.Values.Add("MenuForeground", SystemColors.MenuTextColor.ToHexValue());
+            result.Values.Add("MenuItemBackground", SystemColors.MenuColor.ToHexValue());
+            result.Values.Add("MenuItemForeground", SystemColors.MenuTextColor.ToHexValue());
+            result.Values.Add("ErrorBackground", SystemColors.HighlightColor.ToHexValue());
+            result.Values.Add("ErrorForeground", SystemColors.HighlightTextColor.ToHexValue());
+            result.Save();
         }
 
         public static void LogMessage(StringBuilder message, EntryTypes type) =>
@@ -91,7 +152,7 @@ namespace CongregationManager {
             return ShowYesNoDialog(main, content, TaskDialogIcon.Warning);
         }
 
-        private bool IsLoginAccepted(string title, string content, 
+        private bool IsLoginAccepted(string title, string content,
             ref ApplicationCredentials privateCreds, ref ApplicationCredentials currentCreds) {
 
             //privatecreds => the existing credentials pulled from the Credential Manager.
@@ -213,7 +274,7 @@ namespace CongregationManager {
             newCreds.SecurePassword.IsReadOnly();
             var iconFontFamily = Resources["GlyphFontFamily"].As<FontFamily>();
             var genderFontFamily = Resources["GenderFontFamily"].As<FontFamily>();
-            return new DataManager(DataFolder, ExtensionsFolder, RecycleBinFolder, 
+            return new DataManager(DataFolder, ExtensionsFolder, RecycleBinFolder,
                 newCreds.SecurePassword, Resources);
         }
 

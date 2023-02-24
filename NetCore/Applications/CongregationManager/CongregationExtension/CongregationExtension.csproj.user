@@ -24,6 +24,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="..\CongregationManager\Resources\DefaultTheme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="..\CongregationManager\Resources\MainTheme.xaml">
       <SubType>Designer</SubType>
     </Page>

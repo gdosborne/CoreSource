@@ -1,0 +1,98 @@
+﻿<Window x:Class="CongregationManager.ThemeEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CongregationManager"
+        xmlns:views="clr-namespace:CongregationManager.ViewModels"
+        xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
+        mc:Ignorable="d" Style="{StaticResource StandardWindow}" ResizeMode="CanResizeWithGrip"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Height="350" MinHeight="250" Width="600" MinWidth="550"
+        Icon="/Resources/CM.ico">
+    <Window.DataContext>
+        <views:ThemeEditorWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Name="TitlebarBorder" Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Background="Transparent" PreviewMouseDown="TitlebarBorder_PreviewMouseDown">
+                    <TextBlock Grid.Column="0" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                               Style="{DynamicResource StandardWindowCaptionTextBlock}"/>
+                </Border>
+                <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
+                                        Margin="0,-1,10,0" CornerRadius="0,0,5,0" BorderThickness="1,0,1,1"/>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Style="{DynamicResource StandardWindowBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock Text="Theme" Style="{DynamicResource WindowLabel}" />
+                    <ComboBox Style="{DynamicResource PrimaryComboBox}" Width="300">
+                        
+                    </ComboBox>
+                </StackPanel>
+                
+                <Border Grid.Row="1" Style="{DynamicResource ControlBorder}" Padding="0,0,0,0">
+                <ScrollViewer Grid.Row="0" Style="{DynamicResource StandardScrollViewer}">
+                    <ItemsControl ItemsSource="{Binding Colors}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,20,0" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="20,0,0,0" />
+                                    <TextBlock Grid.Column="1">
+                                        <Hyperlink Command="{Binding SelectColorCommand}" TextDecorations="None">
+                                            <Border Width="60" Height="30" VerticalAlignment="Center"
+                                                    BorderThickness="1" Margin="0,5,0,5" CornerRadius="6"
+                                                    BorderBrush="{DynamicResource WindowTextForeground}">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding ColorValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                                </Border.Background>
+                                            </Border>
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <TextBox Text="{Binding ColorString,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                                                 Grid.Column="2" Margin="20,0,0,0" Width="120" TextAlignment="Right" 
+                                                                 VerticalAlignment="Center" GotFocus="TextBox_GotFocus"/>
+                                </Grid>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                </Border>
+
+                <StackPanel Orientation="Vertical" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Style="{DynamicResource StandardButton}" Content="Done"
+                            Command="{Binding CloseWindowCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

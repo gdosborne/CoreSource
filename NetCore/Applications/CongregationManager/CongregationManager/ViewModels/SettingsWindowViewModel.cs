@@ -1,4 +1,5 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Application.Media;
+using Common.Application.Primitives;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using System.Collections.Generic;
@@ -17,19 +18,7 @@ namespace CongregationManager.ViewModels {
 
             Title = "Settings";
 
-            var temp = new List<SettingColor>();
-            var names = App.Current.Resources.GetBrushNames();
-            foreach (var name in names) {
-                var sc = new SettingColor {
-                    Name = name,
-                    ColorValue = ((SolidColorBrush)App.Current.Resources[name]).Color
-                };
-                temp.Add(sc);
-            }
-            temp.ForEach(color => {
-                color.ColorClicked += Color_ColorClicked;
-            });
-            Colors = new ObservableCollection<SettingColor>(temp.OrderBy(x => x.Name));
+            
             Fonts = new ObservableCollection<FontFamily>(Common.Application.Media.Extensions.GetAllFontFamiles().OrderBy(x => x.Source));
             SelectedFontFamily = Fonts.FirstOrDefault(x => x.Source == 
                 App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));
@@ -55,21 +44,22 @@ namespace CongregationManager.ViewModels {
 
         public enum Actions {
             CloseWindow,
-            ChooseColor
+            ChooseColor,
+            CreateTheme
         }
 
-        #region Colors Property
-        private ObservableCollection<SettingColor> _Colors = default;
-        /// <summary>Gets/sets the Colors.</summary>
-        /// <value>The Colors.</value>
-        public ObservableCollection<SettingColor> Colors {
-            get => _Colors;
-            set {
-                _Colors = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
+        //#region Colors Property
+        //private ObservableCollection<SettingColor> _Colors = default;
+        ///// <summary>Gets/sets the Colors.</summary>
+        ///// <value>The Colors.</value>
+        //public ObservableCollection<SettingColor> Colors {
+        //    get => _Colors;
+        //    set {
+        //        _Colors = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+        //#endregion
 
         #region CloseWindowCommand
         private DelegateCommand _CloseWindowCommand = default;
@@ -189,5 +179,17 @@ namespace CongregationManager.ViewModels {
             }
         }
         #endregion
+
+        #region CreateThemeCommand
+        private DelegateCommand _CreateThemeCommand = default;
+        /// <summary>Gets the CreateTheme command.</summary>
+        /// <value>The CreateTheme command.</value>
+        public DelegateCommand CreateThemeCommand => _CreateThemeCommand ??= new DelegateCommand(CreateTheme, ValidateCreateThemeState);
+        private bool ValidateCreateThemeState(object state) => true;
+        private void CreateTheme(object state) {
+            ExecuteAction(nameof(Actions.CreateTheme));
+        }
+        #endregion
+
     }
 }

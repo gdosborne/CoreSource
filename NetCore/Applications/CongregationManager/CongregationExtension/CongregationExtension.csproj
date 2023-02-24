@@ -82,6 +82,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="..\CongregationManager\Resources\DefaultTheme.xaml" Link="Resources\DefaultTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="..\CongregationManager\Resources\MainTheme.xaml" Link="Resources\MainTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

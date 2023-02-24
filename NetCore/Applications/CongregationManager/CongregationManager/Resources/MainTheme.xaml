@@ -559,10 +559,14 @@
 
     <!-- ScrollViewers -->
 
-    <Style TargetType="ScrollViewer" x:Key="RecycleScrollViewer">
+    <Style TargetType="ScrollViewer" x:Key="StandardScrollViewer">
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="Padding" Value="10" />
+    </Style>
+
+    <Style TargetType="ScrollViewer" x:Key="RecycleScrollViewer" BasedOn="{StaticResource StandardScrollViewer}">
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
     </Style>
 
     <!-- GridViewColumnHeaders -->
