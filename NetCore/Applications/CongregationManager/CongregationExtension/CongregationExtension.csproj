@@ -31,13 +31,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="..\CongregationManager\Fonts\Segoe Fluent Icons.ttf" Link="Fonts\Segoe Fluent Icons.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf" />
+    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Content Include="..\CongregationManager\Resources\CM.ico" Link="Resources\CM.ico" />
     <Content Include="..\CongregationManager\Resources\CM.png" Link="Resources\CM.png" />
     <Content Include="..\CongregationManager\Resources\OzSoft-Icon.ico" Link="Resources\OzSoft-Icon.ico" />
@@ -69,8 +71,6 @@
   <ItemGroup>
     <Folder Include="Fonts\" />
     <Folder Include="Fonts\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,7 +93,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(TargetPath) &quot;C:\Users\$(Username)\AppData\Roaming\Congregation Manager (Debug)\Extensions\$(TargetName)$(TargetExt)&quot;" />
+    <Exec Command="copy $(TargetPath) &quot;C:\Users\OsbornGr\AppData\Roaming\Congregation Manager (Debug)\Extensions\$(TargetName)$(TargetExt)&quot;" />
   </Target>
 
 </Project>

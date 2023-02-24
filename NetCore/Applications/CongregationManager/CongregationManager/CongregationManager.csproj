@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\People.ttf" />
+    <None Remove="Fonts\Segoe Fluent Icons.ttf" />
     <None Remove="Fonts\Territory.ttf" />
     <None Remove="Resources\CM.ico" />
     <None Remove="Resources\CM.pdn" />
@@ -85,7 +86,12 @@
     <Resource Include="Fonts\People.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Fonts\Territory.ttf" />
+    <Resource Include="Fonts\Segoe Fluent Icons.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Territory.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

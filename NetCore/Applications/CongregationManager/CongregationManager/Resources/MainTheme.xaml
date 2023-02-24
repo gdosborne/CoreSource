@@ -30,7 +30,7 @@
     </expr:Calculator>
 
     <FontFamily x:Key="StandardFont">Calibri</FontFamily>
-    <FontFamily x:Key="GlyphFontFamily">Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="GlyphFontFamily">pack://application:,,,/Fonts/#Segoe Fluent Icons</FontFamily>
 
     <FontFamily x:Key="PeopleFontFamily">pack://application:,,,/Fonts/#People</FontFamily>
     <sys:String x:Key="female-03-wf"></sys:String>

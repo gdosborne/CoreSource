@@ -29,14 +29,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf" />
+    <Resource Include="..\CongregationManager\Fonts\People.ttf" Link="Fonts\People.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="..\CongregationManager\Fonts\Segoe Fluent Icons.ttf" Link="Fonts\Segoe Fluent Icons.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="..\CongregationManager\Fonts\Territory.ttf" Link="Fonts\Territory.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fonts\" />
     <Folder Include="Resources\" />
     <Folder Include="Properties\" />
   </ItemGroup>
