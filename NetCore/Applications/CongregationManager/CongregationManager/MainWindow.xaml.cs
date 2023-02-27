@@ -4,12 +4,10 @@ using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using Controls.Core;
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using static Common.Application.Logging.ApplicationLogger;
-using static CongregationManager.Data.Extensions;
 
 namespace CongregationManager {
     public partial class MainWindow : Window {
@@ -23,7 +21,8 @@ namespace CongregationManager {
             View.ExecuteUiAction += View_ExecuteUiAction;
             View.Initialize();
 
-            App.ApplyTheme("Default");
+            var themeName = App.ApplicationSession.ApplicationSettings.GetValue("Application", "Theme", "Default");
+            App.ApplyTheme(themeName);
 
             //App.ApplicationSession.ApplicationSettings.SetupColors(App.Current.Resources.GetBrushNames(), App.Current.Resources);
             var fontFamily = new FontFamily(App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));

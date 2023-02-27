@@ -1,8 +1,11 @@
-﻿using Common.Application.Media;
+﻿using Common.Application.IO;
+using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.Application.Windows;
+using CongregationManager.Data;
 using CongregationManager.ViewModels;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -38,6 +41,26 @@ namespace CongregationManager {
                             return;
                         }
                         e.Parameters["Color"] = cd.Color.ToColor().ToHexValue();
+                        break;
+                    }
+                case ThemeEditorWindowViewModel.Actions.CreateTheme: {
+                        var win = new ThemeNameWindow {
+                            Owner = this
+                        };
+                        var result = win.ShowDialog();
+                        if (!result.HasValue || !result.Value)
+                            return;
+                        var name = win.View.ThemeName;
+                        var theme = new ApplicationTheme {
+                            Name = name
+                        };
+                        View.Colors.ToList().ForEach(x => {
+                            theme.Values.Add(x.Key, x.ColorValue.ToHexValue());
+                        });
+                        var fileName = System.IO.Path.Combine(App.ThemeFolder, $"{name}.apptheme");
+                        theme.Save(fileName);
+                        View.Themes.Add(theme);
+                        View.SelectedTheme = theme;
                         break;
                     }
             }

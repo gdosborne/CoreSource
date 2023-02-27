@@ -35,7 +35,8 @@ namespace CongregationManager.ViewModels {
 
         public enum Actions {
             CloseWindow,
-            ChooseColor
+            ChooseColor,
+            CreateTheme
         }
 
         #region CloseWindowCommand
@@ -94,11 +95,13 @@ namespace CongregationManager.ViewModels {
                             Key = x.Key
                         });
                     });
-                    Colors = new ObservableCollection<SettingColor>(temp.OrderBy(x => x.Name));
                     temp.ForEach(color => {
-                        color.ColorClicked += Color_ColorClicked; ;
+                        color.ColorClicked += Color_ColorClicked;
                     });
+                    Colors = new ObservableCollection<SettingColor>();
                     Colors.AddRange(temp.OrderBy(x => x.Name));
+
+                    App.ApplicationSession.ApplicationSettings.AddOrUpdateSetting("Application", "Theme", SelectedTheme.Name);
                 }
                 OnPropertyChanged();
             }
@@ -119,6 +122,18 @@ namespace CongregationManager.ViewModels {
             SelectedTheme.Apply(App.Current.Resources);
         }
         #endregion
+
+        #region CreateThemeCommand
+        private DelegateCommand _CreateThemeCommand = default;
+        /// <summary>Gets the CreateTheme command.</summary>
+        /// <value>The CreateTheme command.</value>
+        public DelegateCommand CreateThemeCommand => _CreateThemeCommand ??= new DelegateCommand(CreateTheme, ValidateCreateThemeState);
+        private bool ValidateCreateThemeState(object state) => true;
+        private void CreateTheme(object state) {
+            ExecuteAction(nameof(Actions.CreateTheme));
+        }
+        #endregion
+
 
     }
 }

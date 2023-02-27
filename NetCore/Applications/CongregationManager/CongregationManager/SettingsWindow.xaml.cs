@@ -28,7 +28,7 @@ namespace CongregationManager {
                         var win = new ThemeEditorWindow {
                             Owner = this
                         };
-                        var result = win.ShowDialog();
+                        win.ShowDialog();
                         break;
                     }
             }

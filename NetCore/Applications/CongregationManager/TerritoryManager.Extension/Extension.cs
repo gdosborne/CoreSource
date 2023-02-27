@@ -3,14 +3,13 @@ using Common.Application.Logging;
 using Common.Application.Primitives;
 using Common.Application.Windows;
 using CongregationManager.Data;
-using static CongregationManager.Data.Extensions;
 using CongregationManager.Extensibility;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Media;
 using TerritoryManager.Extension.ViewModels;
 using SysIO = System.IO;
-using System.Windows.Media;
 
 namespace TerritoryManager.Extension {
     public class Extension : ExtensionBase {

@@ -57,13 +57,18 @@
                               SelectedItem="{Binding SelectedTheme,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" Style="{DynamicResource WindowLabel}" Margin="0" />
+                                <TextBlock Text="{Binding Name}" Style="{DynamicResource ReverseWindowLabel}" Margin="0" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button Content="Apply Theme" Grid.Column="2" Style="{DynamicResource BaseButton}" 
-                            HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            Command="{Binding ApplyThemeCommand}"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                        <Button Content="New..." Grid.Column="2" Style="{DynamicResource BaseButton}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                Command="{Binding CreateThemeCommand}" />
+                        <Button Content="Apply" Grid.Column="2" Style="{DynamicResource BaseButton}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Center" 
+                                Command="{Binding ApplyThemeCommand}"/>
+                    </StackPanel>
                 </Grid>
                 
                 <Border Grid.Row="1" Style="{DynamicResource ControlBorder}" Padding="0,0,0,0">
@@ -79,7 +84,8 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     
-                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="20,0,0,0" />
+                                    <TextBlock Text="{Binding Name}" Grid.Column="0" Margin="20,0,0,0" 
+                                               Style="{DynamicResource WindowLabel}" HorizontalAlignment="Left"/>
                                     <TextBlock Grid.Column="1">
                                         <Hyperlink Command="{Binding SelectColorCommand}" TextDecorations="None">
                                             <Border Width="60" Height="30" VerticalAlignment="Center"

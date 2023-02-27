@@ -203,7 +203,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Foreground" Value="{DynamicResource TabTextForeground}" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="TabHeaderTop">
@@ -238,6 +238,17 @@
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="ReverseWindowLabel" BasedOn="{StaticResource WindowLabel}">
+        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0,5,10,5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowBackground}" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="SectionHeader">
@@ -424,28 +435,22 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
     <Style TargetType="TextBox" x:Key="MultilineWindowTextField" BasedOn="{StaticResource WindowTextField}">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="TextAlignment" Value="Left" />
-        <Setter Property="Margin" Value="0,5,0,5" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
-        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
     </Style>
 
     <Style TargetType="TextBox" x:Key="TerritoryNumberTextBox" BasedOn="{StaticResource WindowTextField}">
         <Setter Property="AcceptsReturn" Value="False" />
         <Setter Property="TextAlignment" Value="Right" />
-        <Setter Property="Margin" Value="0,5,0,5" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="CharacterCasing" Value="Upper" />
-        <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
-        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
     </Style>
 
     <!-- Buttons -->
@@ -456,12 +461,13 @@
         <Setter Property="Padding" Value="4" />
         <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="Margin" Value="10,5,0,5" />
+        <Setter Property="MinWidth" Value="70" />
     </Style>
     
     <Style TargetType="Button" x:Key="StandardButton" BasedOn="{StaticResource BaseButton}">
         <Setter Property="FontFamily" Value="{DynamicResource StandardFont}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
-        <Setter Property="Margin" Value="10,5,0,5" />
         <Setter Property="Width" Value="90" />
     </Style>
 
@@ -518,6 +524,7 @@
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,3,10,0" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
     <!-- DatePickers -->
@@ -615,10 +622,11 @@
     
     <!-- TabItems -->
     <Style TargetType="TabItem">
-        <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
     </Style>
 
+    
     <Style TargetType="TabControl">
         <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource WindowTextForeground}" />
