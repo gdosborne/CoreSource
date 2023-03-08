@@ -56,9 +56,9 @@ namespace Common.MVVMFramework {
                 if (e.HasAccess) {
                     CanExecuteChanged?.Invoke(this, EventArgs.Empty);
                 }
-                else {
-                    e.Dispatcher.BeginInvoke(new BlankHandler(RaiseCanExecuteChanged), null);
-                }
+                //else {
+                //    e.Dispatcher.BeginInvoke(new BlankHandler(RaiseCanExecuteChanged), null);
+                //}
             }
             else {
                 try {

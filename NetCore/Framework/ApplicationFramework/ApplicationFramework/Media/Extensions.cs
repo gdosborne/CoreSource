@@ -17,7 +17,7 @@ namespace Common.Application.Media {
     public static class Extensions {
         public static Icon To16BitIcon(this ImageSource src) {
             var img = src.ImageSourceToGDIImage();
-            var iconHandle = img.As<Bitmap>().GetHicon();
+            var iconHandle = (img as Bitmap).GetHicon();
             var icon = Icon.FromHandle(iconHandle);
             return icon;
         }
@@ -196,6 +196,10 @@ namespace Common.Application.Media {
         }
 
         public static Color ReduceAlpha(this Color original, byte alpha) => Color.FromArgb(alpha, original.R, original.G, original.B);
+
+        public static SolidColorBrush ToMediaBrush(this System.Drawing.Color value) => new(Color.FromArgb(value.A, value.R, value.G, value.B));
+
+        public static SolidColorBrush ToSolidBrush(this Color value) => new(value);
 
         public static System.Drawing.Color ToColor(this Color color) => 
             System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);

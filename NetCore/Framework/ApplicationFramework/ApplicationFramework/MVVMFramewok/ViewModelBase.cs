@@ -1,9 +1,9 @@
-﻿using Common.Application.Primitives;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Common.MVVMFramework {
     public class ViewModelBase : INotifyPropertyChanged, IViewModelBase {
@@ -27,7 +27,7 @@ namespace Common.MVVMFramework {
 
             infos.ToList().ForEach(x => {
                 SettingProperty = true;
-                x.GetValue(this).As<DelegateCommand>().RaiseCanExecuteChanged();
+                (x.GetValue(this) as DelegateCommand).RaiseCanExecuteChanged();
                 SettingProperty = false;
             });
         }
@@ -67,5 +67,16 @@ namespace Common.MVVMFramework {
             }
         }
         #endregion
+
+        public enum Actions {
+            NewItemAction,
+            ShowXaml,
+            SelectColor,
+            Save,
+            SaveAs,
+            Open,
+            Exit,
+            Close
+        }
     }
 }

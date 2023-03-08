@@ -68,18 +68,18 @@
                     <MenuItem Header="_Tools">
                         <MenuItem Header="Extension Manager" Command="{Binding ExtensionManagerCommand}">
                             <MenuItem.Icon>
-                                <mycontrols:FontIcon Style="{DynamicResource AltMenuItemIcon}" Glyph="&#xE2AC;" />
+                                <mycontrols:FontIcon Style="{DynamicResource AlternateMenuItemIcon}" Glyph="&#xE2AC;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="View Logs" Command="{Binding ViewLogsCommand}">
                             <MenuItem.Icon>
-                                <mycontrols:FontIcon Style="{DynamicResource AltMenuItemIcon}" Glyph="&#xE82D;" />
+                                <mycontrols:FontIcon Style="{DynamicResource AlternateMenuItemIcon}" Glyph="&#xE82D;" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Settings" Command="{Binding SettingsCommand}">
                             <MenuItem.Icon>
-                                <mycontrols:FontIcon Style="{DynamicResource AltMenuItemIcon}" Glyph="&#xE115;" />
+                                <mycontrols:FontIcon Style="{DynamicResource AlternateMenuItemIcon}" Glyph="&#xE115;" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
