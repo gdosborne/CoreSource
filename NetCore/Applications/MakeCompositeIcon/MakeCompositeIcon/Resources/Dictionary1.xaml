@@ -23,6 +23,11 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
+    <Style TargetType="Core:FontIcon" x:Key="DesignerSurfaceSubscriptIcon">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
     <Style TargetType="Window" x:Key="DefaultSizableWindow">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
         <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />

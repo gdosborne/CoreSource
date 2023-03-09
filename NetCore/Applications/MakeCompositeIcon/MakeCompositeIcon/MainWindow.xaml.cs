@@ -56,9 +56,11 @@ namespace MakeCompositeIcon {
                     case MainWindowView.Actions.FileOpen:
                         break;
                     case MainWindowView.Actions.FileNew: {
-                            var icon = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.Transparent,
+                            var icon = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.White,
                                 Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"), Brushes.Black,
-                                '', 200, '');
+                                '', 200, '', Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"),
+                                Brushes.Black, 200);
+                            View.SubscriptVisibility= Visibility.Collapsed;
                             View.SelectedIcon = icon;
 
                             break;
@@ -125,6 +127,13 @@ namespace MakeCompositeIcon {
         internal MainWindowView View => DataContext.As<MainWindowView>();
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
+                
+        private void SecondSlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            View.UpdateClipWithSize();
+        }
 
+        private void PrimarySlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            View.UpdateClipWithSize();
+        }
     }
 }

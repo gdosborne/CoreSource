@@ -10,7 +10,7 @@ using static ApplicationFramework.Media.CompositeIconData;
 
 namespace ApplicationFramework.Media {
     [JsonObject]
-    public class CompositeIcon : INotifyPropertyChanged {
+    public class CompositeIcon : INotifyPropertyChanged, ICloneable {
         private CompositeIcon() { }
 
         public static CompositeIcon Create(IconTypes iconType, SolidColorBrush surfaceBrush,
@@ -84,6 +84,8 @@ namespace ApplicationFramework.Media {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        public object Clone() => this.MemberwiseClone();
 
         #region Filename Property
         private string _Filename = default;

@@ -1,14 +1,15 @@
-﻿using ApplicationFramework.Media;
+﻿using ApplicationFramework.Clipboard;
+using ApplicationFramework.Media;
 using Common.Application.Linq;
 using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
+using static ApplicationFramework.Media.CompositeIconData;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView : ViewModelBase {
@@ -19,6 +20,24 @@ namespace MakeCompositeIcon {
             IsEditorEnabled = false;
             Icons = new ObservableCollection<CompositeIcon>();
             Fonts = new ObservableCollection<System.Windows.Media.FontFamily>();
+            IconTypes = new ObservableCollection<IconTypes> {
+                CompositeIconData.IconTypes.FullOverlay,
+                CompositeIconData.IconTypes.SubscriptedOverlay
+            };
+        }
+
+        public void Reset() {
+
+            IsSingleColorSelected = false;
+            IsEditorEnabled = false;
+            IsColorExpanded = false;
+            IsFontExpanded = false;
+            IsGlyphExpanded = false;
+            IsIconTypeExpanded = false;
+            IsSingleFontSelected = false;
+            IsSingleSizeSelected = false;
+            SubscriptVisibility = Visibility.Collapsed;
+            CenteredVisibility = Visibility.Collapsed;
         }
 
         public override void Initialize() {
@@ -34,6 +53,21 @@ namespace MakeCompositeIcon {
             var fonts = System.Windows.Media.Fonts.SystemFontFamilies.OrderBy(x => x.Source);
             Fonts.AddRange(fonts);
         }
+
+        internal List<ClipboardItemDoer<CompositeIcon>> clipboard = default;
+
+        #region IconTypes Property
+        private ObservableCollection<IconTypes> _IconTypes = default;
+        /// <summary>Gets/sets the IconTypes.</summary>
+        /// <value>The IconTypes.</value>
+        public ObservableCollection<IconTypes> IconTypes {
+            get => _IconTypes;
+            set {
+                _IconTypes = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         #region IsSingleColorSelected Property
         private bool _IsSingleColorSelected = default;
@@ -75,27 +109,14 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
-        #region IsOverlaySelected Property
-        private bool _IsOverlaySelected = default;
-        /// <summary>Gets/sets the IsOverlaySelected.</summary>
-        /// <value>The IsOverlaySelected.</value>
-        public bool IsOverlaySelected {
-            get => _IsOverlaySelected;
+        #region MaxOverlayIconSize Property
+        private double _MaxOverlayIconSize = default;
+        /// <summary>Gets/sets the MaxOverlayIconSize.</summary>
+        /// <value>The MaxOverlayIconSize.</value>
+        public double MaxOverlayIconSize {
+            get => _MaxOverlayIconSize;
             set {
-                _IsOverlaySelected = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region IsSubscriptSelected Property
-        private bool _IsSubscriptSelected = default;
-        /// <summary>Gets/sets the IsSubscriptSelected.</summary>
-        /// <value>The IsSubscriptSelected.</value>
-        public bool IsSubscriptSelected {
-            get => _IsSubscriptSelected;
-            set {
-                _IsSubscriptSelected = value;
+                _MaxOverlayIconSize = value;
                 OnPropertyChanged();
             }
         }
@@ -184,14 +205,33 @@ namespace MakeCompositeIcon {
                 if (SelectedIcon != null) {
                     SelectedIcon.PropertyChanged -= SelectedIcon_PropertyChanged;
                 }
+                Reset();
                 _SelectedIcon = value;
+
                 if (SelectedIcon != null) {
-                    IsOverlaySelected = SelectedIcon.IconType == CompositeIconData.IconTypes.FullOverlay;
-                    IsSubscriptSelected = SelectedIcon.IconType == CompositeIconData.IconTypes.SubscriptedOverlay;
+                    SelectedIcon.PropertyChanged += SelectedIcon_PropertyChanged;
+
+                    SelectedIcon.PrimaryGlyph = SelectedIcon.PrimaryGlyph;
+                    SelectedIcon.SecondaryGlyph = SelectedIcon.SecondaryGlyph;
+                    SelectedIcon.PrimarySize = SelectedIcon.PrimarySize;
+                    SelectedIcon.SecondarySize = SelectedIcon.SecondarySize;
+                    SelectedIcon.PrimaryBrush = SelectedIcon.PrimaryBrush;
+                    SelectedIcon.SecondaryBrush = SelectedIcon.SecondaryBrush;
+                    SelectedIcon.IconType = SelectedIcon.IconType;
+                    SelectedIcon.SurfaceBrush = SelectedIcon.SurfaceBrush;
+                    SelectedIcon.PrimaryFontFamily = SelectedIcon.PrimaryFontFamily;
+                    SelectedIcon.SecondaryFontFamily = SelectedIcon.SecondaryFontFamily;
+
                     IsSingleColorSelected = SelectedIcon.SecondaryBrush == null
                         || (SelectedIcon.PrimaryBrush.Color.ToHexValue() == SelectedIcon.SecondaryBrush.Color.ToHexValue());
                     IsSingleSizeSelected = SelectedIcon.PrimarySize == SelectedIcon.SecondarySize;
-                    SelectedIcon.PropertyChanged += SelectedIcon_PropertyChanged;
+                    if (clipboard == null) {
+                        clipboard = new List<ClipboardItemDoer<CompositeIcon>>();
+                    }
+                    else if (clipboard.Any(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename))) {
+
+                    }
+                    clipboard.Add(new ClipboardItemDoer<CompositeIcon>((CompositeIcon)SelectedIcon.Clone()));
                 }
                 IsEditorEnabled = SelectedIcon != null;
                 OnPropertyChanged();
@@ -210,6 +250,21 @@ namespace MakeCompositeIcon {
                     icon.SecondarySize = SelectedIcon.PrimarySize;
                 }
             }
+            else if (e.PropertyName == nameof(CompositeIcon.IconType)) {
+                CenteredVisibility = icon.IconType == CompositeIconData.IconTypes.FullOverlay ? Visibility.Visible : Visibility.Collapsed;
+                SubscriptVisibility = icon.IconType == CompositeIconData.IconTypes.SubscriptedOverlay ? Visibility.Visible : Visibility.Collapsed;
+                MaxOverlayIconSize = icon.IconType == CompositeIconData.IconTypes.FullOverlay ? 200 : 100;
+                if (icon.SecondarySize > MaxOverlayIconSize) {
+                    icon.SecondarySize = MaxOverlayIconSize;
+                }
+            }
+            if (e.PropertyName == nameof(CompositeIcon.SecondarySize) || e.PropertyName == nameof(CompositeIcon.PrimarySize)) {
+                return;
+            }
+            if (clipboard != null) {
+                var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+                cb?.Push((CompositeIcon)icon.Clone());
+            }
         }
         #endregion
 
@@ -225,8 +280,6 @@ namespace MakeCompositeIcon {
             }
         }
         #endregion
-
-        private bool isSettingExpanded = false;
 
         #region IsIconTypeExpanded Property
         private bool _IsIconTypeExpanded = default;
@@ -327,5 +380,38 @@ namespace MakeCompositeIcon {
             }
         }
         #endregion
+
+        #region SubscriptVisibility Property
+        private Visibility _SubscriptVisibility = default;
+        /// <summary>Gets/sets the SubscriptVisibility.</summary>
+        /// <value>The SubscriptVisibility.</value>
+        public Visibility SubscriptVisibility {
+            get => _SubscriptVisibility;
+            set {
+                _SubscriptVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region CenteredVisibility Property
+        private Visibility _CenteredVisibility = default;
+        /// <summary>Gets/sets the CenteredVisibility.</summary>
+        /// <value>The CenteredVisibility.</value>
+        public Visibility CenteredVisibility {
+            get => _CenteredVisibility;
+            set {
+                _CenteredVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        public void UpdateClipWithSize() {
+            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+            if (cb != null) {
+                cb?.Push((CompositeIcon)SelectedIcon.Clone());
+            }
+        }
     }
 }

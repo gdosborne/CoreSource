@@ -2,6 +2,7 @@
 using Common.Application.Primitives;
 using Common.MVVMFramework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView {
@@ -81,9 +82,24 @@ namespace MakeCompositeIcon {
         /// <summary>Gets the Undo command.</summary>
         /// <value>The Undo command.</value>
         public DelegateCommand UndoCommand => _UndoCommand ??= new DelegateCommand(Undo, ValidateUndoState);
-        private bool ValidateUndoState(object state) => true;
+        private bool ValidateUndoState(object state) {
+            if (clipboard == null)
+                return false;
+            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+            if (cb == null)
+                return false;
+            var pos = cb.Position;
+            return pos > 0;
+        }
         private void Undo(object state) {
-            ExecuteAction(nameof(Actions.UndoChanges));
+            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+            if (cb != null) {
+                var pos = cb.Position;
+                if (pos > 0) {
+                    cb.Position--;
+                    SelectedIcon = cb.GetValue();
+                }
+            }
         }
         #endregion
 
@@ -92,9 +108,24 @@ namespace MakeCompositeIcon {
         /// <summary>Gets the Redo command.</summary>
         /// <value>The Redo command.</value>
         public DelegateCommand RedoCommand => _RedoCommand ??= new DelegateCommand(Redo, ValidateRedoState);
-        private bool ValidateRedoState(object state) => true;
+        private bool ValidateRedoState(object state) {
+            if (clipboard == null)
+                return false;
+            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+            if (cb == null)
+                return false;
+            var pos = cb.Position;
+            return pos < cb.Count;
+        }
         private void Redo(object state) {
-            ExecuteAction(nameof(Actions.RedoChanges));
+            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
+            if (cb != null) {
+                var pos = cb.Position;
+                if (pos < cb.Count) {
+                    cb.Position++;
+                    SelectedIcon = cb.GetValue();
+                }
+            }
         }
         #endregion
 

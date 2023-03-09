@@ -185,12 +185,15 @@
                         <Expander Header="Icon Type" Style="{DynamicResource SectionExpander}" 
                                   IsExpanded="{Binding IsIconTypeExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                             <StackPanel Orientation="Vertical" Margin="5">
-                                <RadioButton Content="Full Overlay" GroupName="theType" 
-                                             Style="{DynamicResource StandardRadioButton}" 
-                                             IsChecked="{Binding IsOverlaySelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                <RadioButton Content="Subscription Overlay" GroupName="theType" 
-                                             Style="{DynamicResource StandardRadioButton}"
-                                             IsChecked="{Binding IsSubscriptSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <Label Content="Icon Type" Style="{DynamicResource StandardLabel}" Width="130" />
+                                <ComboBox Style="{StaticResource StandardComboBox}" ItemsSource="{Binding IconTypes}"
+                                          SelectedItem="{Binding SelectedIcon.IconType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" Style="{DynamicResource StandardTextBlock}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </StackPanel>
                         </Expander>
                         <Expander Header="Colors" Style="{DynamicResource SectionExpander}"
@@ -294,7 +297,8 @@
                                 <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Primary Size" />
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                                     <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
-                                            Value="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                            Value="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                            PreviewMouseUp="PrimarySlider_PreviewMouseUp"/>
                                     <Core:NumericOnlyTextBox Text="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
                                              Style="{DynamicResource NumberTextBox}"/>
                                 </StackPanel>
@@ -302,8 +306,10 @@
                                        Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 <StackPanel Orientation="Horizontal" Grid.Row="4"
                                             Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                    <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
-                                            Value="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                    <Slider Minimum="0" Maximum="{Binding MaxOverlayIconSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                            Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
+                                            Value="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                            PreviewMouseUp="SecondSlider_PreviewMouseUp"/>
                                     <Core:NumericOnlyTextBox                                                                                    Text="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
                                              Style="{DynamicResource NumberTextBox}"/>
                                 </StackPanel>
@@ -340,16 +346,40 @@
                         </Border.Effect>
 
                         <Grid>
-                            <Core:FontIcon Style="{DynamicResource DesignerSurfacePrimaryIcon}" 
-                                           FontSize="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                                           Glyph="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                           Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                           FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                            <Core:FontIcon Style="{DynamicResource DesignerSurfacePrimaryIcon}" 
-                                           FontSize="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                                           Glyph="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                           Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                           FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                       FontSize="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <TextBlock Text="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                       FontSize="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                       Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Visibility="{Binding CenteredVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            
+                            <Border Background="{Binding SelectedIcon.SurfaceBrush}" Grid.Column="1" Grid.Row="1"
+                                    Visibility="{Binding SubscriptVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Padding="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                                <TextBlock Text="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                           FontSize="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
                         </Grid>
                         
                     </Border>
