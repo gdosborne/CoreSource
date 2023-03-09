@@ -79,7 +79,7 @@ namespace Controls.Core {
         private static void OnFontSizePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var obj = (FontIcon)d;
             var val = (double)e.NewValue;
-            obj.TheIcon.FontSize = val;
+            obj.TheIcon.FontSize = val > 0 ? val : obj.TheIcon.FontSize;
         }
         #endregion
 

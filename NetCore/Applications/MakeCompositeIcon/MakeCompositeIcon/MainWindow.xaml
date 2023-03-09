@@ -154,15 +154,27 @@
             </Grid.ColumnDefinitions>
 
             <Border Grid.Row="2" Style="{DynamicResource FileListArea}">
-                <ListBox Grid.Column="0" Style="{DynamicResource FileList}">
-                    
+                <ListBox Grid.Column="0" Style="{DynamicResource FileList}" ItemsSource="{Binding Icons}"
+                         SelectedItem="{Binding SelectedIcon,UpdateSourceTrigger=Default,Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Margin="0,0,10,0">
+                                    <Core:FontIcon Glyph="&#xE132;" Foreground="#FFFFFFFF" FontSize="{DynamicResource MenuIconSize}" />
+                                    <Core:FontIcon Glyph="&#xE130;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                                </Grid>
+                                <TextBlock Text="{Binding Filename}" Style="{DynamicResource StandardTextBlock}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Border>
             
             <GridSplitter Width="5" VerticalAlignment="Stretch" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" 
                           Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}"/>
             
-            <Border Grid.Column="1" Style="{DynamicResource ImageArea}" Background="{DynamicResource VertLightBrush}">
+            <Border Grid.Column="1" Style="{DynamicResource ImageArea}" Background="{DynamicResource VertLightBrush}"
+                    IsEnabled="{Binding IsEditorEnabled,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
@@ -171,7 +183,14 @@
 
                     <StackPanel Grid.Column="0">
                         <Expander Header="Icon Type" Style="{DynamicResource SectionExpander}">
-                        
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <RadioButton Content="Full Overlay" GroupName="theType" 
+                                             Style="{DynamicResource StandardRadioButton}" 
+                                             IsChecked="{Binding IsOverlaySelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <RadioButton Content="Subscription Overlay" GroupName="theType" 
+                                             Style="{DynamicResource StandardRadioButton}"
+                                             IsChecked="{Binding IsSubscriptSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            </StackPanel>
                         </Expander>
                         <Expander Header="Colors" Style="{DynamicResource SectionExpander}">
                             <Grid Margin="5">
@@ -179,13 +198,14 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                    <Label Content="Surface" Style="{DynamicResource StandardLabel}" />
+                                    <Label Content="Surface" Style="{DynamicResource StandardLabel}" Width="130" />
                                     <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
-                                        <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectectColorCommand}"
+                                        <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
                                                    CommandParameter="Surface">
-                                            <Ellipse Fill="{Binding SurfaceBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            <Ellipse Fill="{Binding SelectedIcon.SurfaceBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                      Style="{DynamicResource ColorEllipse}" />
                                         </Hyperlink>
                                     </TextBlock>
@@ -195,11 +215,23 @@
                                           IsChecked="{Binding IsSingleColorSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                    <Label Content="Primary Color" Style="{DynamicResource StandardLabel}" />
+                                    <Label Content="Primary Color" Style="{DynamicResource StandardLabel}" Width="130" />
                                     <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
-                                        <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectectColorCommand}"
+                                        <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
                                                    CommandParameter="Primary">
-                                            <Ellipse Fill="{Binding PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            <Ellipse Fill="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                     Style="{DynamicResource ColorEllipse}" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="3" 
+                                            Visibility="{Binding SecondaryBrushVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <Label Content="Secondary Color" Style="{DynamicResource StandardLabel}" Width="130" />
+                                    <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
+                                        <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
+                                                   CommandParameter="Secondary">
+                                            <Ellipse Fill="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                      Style="{DynamicResource ColorEllipse}" />
                                         </Hyperlink>
                                     </TextBlock>
@@ -210,7 +242,35 @@
 
                         </Expander>
                         <Expander Header="Font Sizes" Style="{DynamicResource SectionExpander}">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
 
+                                <CheckBox Content="Use single size" Grid.Row="0" Style="{DynamicResource StandardCheckBox}"
+                                          IsChecked="{Binding IsSingleSizeSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Primary Size" />
+                                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                    <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
+                                            Value="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
+                                             Style="{DynamicResource NumberTextBox}"/>
+                                </StackPanel>
+                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Secondary Size" 
+                                       Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="4"
+                                            Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
+                                            Value="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                    <TextBox Text="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
+                                             Style="{DynamicResource NumberTextBox}"/>
+                                </StackPanel>
+                            </Grid>
                         </Expander>
                     </StackPanel>
 
@@ -219,6 +279,19 @@
                             <DropShadowEffect Direction="0" Opacity="0.5" BlurRadius="20" ShadowDepth="0"/>
                         </Border.Effect>
 
+                        <Grid>
+                            <Core:FontIcon Style="{DynamicResource DesignerSurfacePrimaryIcon}" 
+                                           FontSize="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                           Glyph="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            <Core:FontIcon Style="{DynamicResource DesignerSurfacePrimaryIcon}" 
+                                           FontSize="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                           Glyph="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                           FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        </Grid>
+                        
                     </Border>
                 </Grid>
             </Border>
@@ -233,7 +306,7 @@
                     </Grid.ColumnDefinitions>
                     <Core:FontIcon Grid.Column="0" Glyph="&#xE132;" Foreground="#FFFFFFFF" Style="{DynamicResource ToolbarIcon}" />
                     <Core:FontIcon Grid.Column="0" Glyph="&#xE130;" Foreground="Black" Style="{DynamicResource ToolbarIcon}" />
-                    <Label Grid.Column="1" Content="{Binding CurrentFileName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <Label Grid.Column="1" Content="{Binding SelectedIconFile.FullName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=Not set}" />
                 </Grid>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">

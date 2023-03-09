@@ -1,7 +1,10 @@
-﻿using Common.Application.Primitives;
+﻿using ApplicationFramework.Media;
+using Common.Application.Primitives;
 using Common.Application.Windows.Controls;
 using Dsafa.WpfColorPicker;
 using System;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -14,27 +17,80 @@ namespace MakeCompositeIcon {
             View.ExecuteUiAction += View_ExecuteUiAction;
         }
 
-        private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
+        private async void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.Actions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.Actions.FileSave: {
+                            if (View.SelectedIcon == null)
+                                return;
+                            if (string.IsNullOrEmpty(View.SelectedIcon.Filename)) {
+                                var lastDir = App.Current.As<App>().MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
+                                    App.Current.As<App>().FilesDirectory);
+                                var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog {
+                                    AddExtension = true,
+                                    CheckFileExists = false,
+                                    CheckPathExists = true,
+                                    CreatePrompt = false,
+                                    DefaultExt = ",compo",
+                                    Filter = "Composite Icons|.compo",
+                                    InitialDirectory = lastDir,
+                                    OverwritePrompt = true,
+                                    RestoreDirectory = true,
+                                    Title = "Save composite icon..."
+                                };
+                                var result = dialog.ShowDialog(this);
+                                if (result.HasValue && result.Value) {
+                                    if (View.SelectedIcon != null) {
+                                        await View.SelectedIcon.Save(dialog.FileName);
+                                        App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
+                                            Path.GetDirectoryName(dialog.FileName));
+                                        View.Icons.Add(CompositeIcon.FromFile(dialog.FileName));
+                                    }
+                                }
+                            }
+                            else
+                                await View.SelectedIcon.Save();
+                            break;
+                        }
                     case MainWindowView.Actions.FileOpen:
                         break;
-                    case MainWindowView.Actions.FileNew:
-                        break;
+                    case MainWindowView.Actions.FileNew: {
+                            var icon = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.Transparent,
+                                Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"), Brushes.Black,
+                                '', 200, '');
+                            View.SelectedIcon = icon;
+
+                            break;
+                        }
                     case MainWindowView.Actions.SelectColor: {
                             var isSurface = (bool)e.Parameters["IsSurface"];
                             var isPrimary = (bool)e.Parameters["IsPrimary"];
-                            var color = isSurface ? View.SurfaceBrush.Color : isPrimary ? View.PrimaryBrush.Color : Colors.Black;
-                            var dialog = new ColorPickerDialog(color);
-                            dialog.WindowStartupLocation= WindowStartupLocation.CenterOwner;
-                            dialog.Owner = this;
+                            var color = default(Color);
+                            if (isPrimary) {
+                                color = View.SelectedIcon.SurfaceBrush == null
+                                    ? Colors.Transparent
+                                    : View.SelectedIcon.SurfaceBrush.Color;
+                            }
+                            else if (isPrimary) {
+                                color = View.SelectedIcon.PrimaryBrush.Color;
+                            }
+                            else {
+                                color = View.SelectedIcon.SecondaryBrush == null
+                                    ? View.SelectedIcon.PrimaryBrush.Color
+                                    : View.SelectedIcon.SecondaryBrush.Color;
+                            }
+                            var dialog = new ColorPickerDialog(color) {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this
+                            };
                             var result = dialog.ShowDialog();
                             if (result.HasValue && result.Value) {
                                 if (isPrimary)
-                                    View.PrimaryBrush = new SolidColorBrush(dialog.Color);
+                                    View.SelectedIcon.PrimaryBrush = new SolidColorBrush(dialog.Color);
                                 else if (isSurface)
-                                    View.SurfaceBrush = new SolidColorBrush(dialog.Color);
-
+                                    View.SelectedIcon.SurfaceBrush = new SolidColorBrush(dialog.Color);
+                                else
+                                    View.SelectedIcon.SecondaryBrush = new SolidColorBrush(dialog.Color);
                             }
                             break;
                         }

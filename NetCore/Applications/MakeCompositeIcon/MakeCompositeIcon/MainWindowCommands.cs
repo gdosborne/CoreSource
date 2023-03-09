@@ -1,10 +1,7 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Application.Media;
+using Common.Application.Primitives;
 using Common.MVVMFramework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView {
@@ -51,7 +48,7 @@ namespace MakeCompositeIcon {
         /// <summary>Gets the FileSave command.</summary>
         /// <value>The FileSave command.</value>
         public DelegateCommand FileSaveCommand => _FileSaveCommand ??= new DelegateCommand(FileSave, ValidateFileSaveState);
-        private bool ValidateFileSaveState(object state) => true;
+        private bool ValidateFileSaveState(object state) => SelectedIcon != null;
         private void FileSave(object state) {
             ExecuteAction(nameof(Actions.FileSave));
         }
@@ -62,7 +59,7 @@ namespace MakeCompositeIcon {
         /// <summary>Gets the FileSaveAs command.</summary>
         /// <value>The FileSaveAs command.</value>
         public DelegateCommand FileSaveAsCommand => _FileSaveAsCommand ??= new DelegateCommand(FileSaveAs, ValidateFileSaveAsState);
-        private bool ValidateFileSaveAsState(object state) => true;
+        private bool ValidateFileSaveAsState(object state) => SelectedIcon != null;
         private void FileSaveAs(object state) {
             ExecuteAction(nameof(Actions.FileSaveAs));
         }
@@ -156,18 +153,19 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
-        #region SelectectColorCommand
-        private DelegateCommand _SelectectColorCommand = default;
-        /// <summary>Gets the SelectectColor command.</summary>
-        /// <value>The SelectectColor command.</value>
-        public DelegateCommand SelectectColorCommand => _SelectectColorCommand ??= new DelegateCommand(SelectectColor, ValidateSelectectColorState);
-        private bool ValidateSelectectColorState(object state) => true;
-        private void SelectectColor(object state) {
+        #region SelectedColorCommand
+        private DelegateCommand _SelectedColorCommand = default;
+        /// <summary>Gets the SelectedColor command.</summary>
+        /// <value>The SelectedColor command.</value>
+        public DelegateCommand SelectedColorCommand => _SelectedColorCommand ??= new DelegateCommand(SelectedColor, ValidateSelectedColorState);
+        private bool ValidateSelectedColorState(object state) => true;
+        private void SelectedColor(object state) {
             var pars = new Dictionary<string, object> {
                 { "IsPrimary", state.As<string>().Equals("Primary") },
                 { "IsSurface", state.As<string>().Equals("Surface") }
             };
             ExecuteAction(nameof(Actions.SelectColor), pars);
+            IsSingleColorSelected = SelectedIcon.PrimaryBrush.Color.ToHexValue() == SelectedIcon.SecondaryBrush.Color.ToHexValue();
         }
         #endregion
 

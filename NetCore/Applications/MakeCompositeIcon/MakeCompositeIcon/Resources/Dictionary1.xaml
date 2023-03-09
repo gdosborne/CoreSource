@@ -16,7 +16,12 @@
         <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ToolbarIconSize}" />
     </Style>
-    
+
+    <Style TargetType="Core:FontIcon" x:Key="DesignerSurfacePrimaryIcon">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
     <Style TargetType="Window" x:Key="DefaultSizableWindow">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
         <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
@@ -95,8 +100,8 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
         <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="Width" Value="200" />
-        <Setter Property="Height" Value="200" />
+        <Setter Property="Width" Value="220" />
+        <Setter Property="Height" Value="220" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
@@ -106,7 +111,7 @@
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-        <Setter Property="Width" Value="175" />
+        <Setter Property="Width" Value="200" />
     </Style>
 
     <Style TargetType="CheckBox" x:Key="StandardCheckBox">
@@ -130,6 +135,24 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="StandardTextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="NumberTextBox">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Width" Value="50" />
+    </Style>
+
     <Style TargetType="Hyperlink" x:Key="StandardHyperlink">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
@@ -143,5 +166,29 @@
         <Setter Property="Margin" Value="5" />
         <Setter Property="Stroke" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="StrokeThickness" Value="1" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="StandardButton">
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+    </Style>
+
+    <Style TargetType="RadioButton" x:Key="StandardRadioButton">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+    </Style>
+
+    <Style TargetType="Slider" x:Key="StandardSlider">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>
