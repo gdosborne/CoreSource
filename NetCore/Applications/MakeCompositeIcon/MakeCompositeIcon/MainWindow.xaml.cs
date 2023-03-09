@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace MakeCompositeIcon {
@@ -66,7 +67,7 @@ namespace MakeCompositeIcon {
                             var isSurface = (bool)e.Parameters["IsSurface"];
                             var isPrimary = (bool)e.Parameters["IsPrimary"];
                             var color = default(Color);
-                            if (isPrimary) {
+                            if (isSurface) {
                                 color = View.SelectedIcon.SurfaceBrush == null
                                     ? Colors.Transparent
                                     : View.SelectedIcon.SurfaceBrush.Color;
@@ -122,5 +123,8 @@ namespace MakeCompositeIcon {
         }
 
         internal MainWindowView View => DataContext.As<MainWindowView>();
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
+
     }
 }

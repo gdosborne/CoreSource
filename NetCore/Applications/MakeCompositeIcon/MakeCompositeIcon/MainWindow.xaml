@@ -182,7 +182,8 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <Expander Header="Icon Type" Style="{DynamicResource SectionExpander}">
+                        <Expander Header="Icon Type" Style="{DynamicResource SectionExpander}" 
+                                  IsExpanded="{Binding IsIconTypeExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                             <StackPanel Orientation="Vertical" Margin="5">
                                 <RadioButton Content="Full Overlay" GroupName="theType" 
                                              Style="{DynamicResource StandardRadioButton}" 
@@ -192,7 +193,8 @@
                                              IsChecked="{Binding IsSubscriptSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                             </StackPanel>
                         </Expander>
-                        <Expander Header="Colors" Style="{DynamicResource SectionExpander}">
+                        <Expander Header="Colors" Style="{DynamicResource SectionExpander}"
+                                  IsExpanded="{Binding IsColorExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                             <Grid Margin="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
@@ -238,10 +240,45 @@
                                 </StackPanel>
                             </Grid>
                         </Expander>
-                        <Expander Header="Fonts" Style="{DynamicResource SectionExpander}">
+                        <Expander Header="Fonts" Style="{DynamicResource SectionExpander}"
+                                  IsExpanded="{Binding IsFontExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
 
+                                <CheckBox Content="Use single font" Grid.Row="0" Style="{DynamicResource StandardCheckBox}"
+                                          IsChecked="{Binding IsSingleFontSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Primary Font" />
+                                <ComboBox Grid.Row="2" Style="{DynamicResource StandardComboBox}" ItemsSource="{Binding Fonts}"                                           
+                                          SelectedItem="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Source}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>                                
+                                
+                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Secondary Font" 
+                                       Visibility="{Binding SecondaryFontVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <ComboBox Grid.Row="4" Style="{DynamicResource StandardComboBox}" ItemsSource="{Binding Fonts}"
+                                          Visibility="{Binding SecondaryFontVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                          
+                                          SelectedItem="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Source}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
                         </Expander>
-                        <Expander Header="Font Sizes" Style="{DynamicResource SectionExpander}">
+                        <Expander Header="Font Sizes" Style="{DynamicResource SectionExpander}"
+                                  IsExpanded="{Binding IsSizeExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                             <Grid Margin="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
@@ -258,7 +295,7 @@
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                                     <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
                                             Value="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                                    <TextBox Text="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
+                                    <Core:NumericOnlyTextBox Text="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
                                              Style="{DynamicResource NumberTextBox}"/>
                                 </StackPanel>
                                 <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Secondary Size" 
@@ -267,9 +304,32 @@
                                             Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                     <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
                                             Value="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                                    <TextBox Text="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
+                                    <Core:NumericOnlyTextBox                                                                                    Text="{Binding SelectedIcon.SecondarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
                                              Style="{DynamicResource NumberTextBox}"/>
                                 </StackPanel>
+                            </Grid>
+                        </Expander>
+                        <Expander Header="Characters" Style="{DynamicResource SectionExpander}"
+                                  IsExpanded="{Binding IsGlyphExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Style="{DynamicResource StandardLabel}" Content="Primary Glyph" />
+                                <TextBox Grid.Row="1" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
+                                         Text="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                         Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                         FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                                <Label Grid.Row="2" Style="{DynamicResource StandardLabel}" Content="Secondary Glyph" />
+                                <TextBox Grid.Row="3" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
+                                         Text="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                         Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                         FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                             </Grid>
                         </Expander>
                     </StackPanel>

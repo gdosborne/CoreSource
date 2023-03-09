@@ -308,13 +308,13 @@
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
     </Style>
 
-    <Style TargetType="mycontrols:MultiFontIcon" x:Key="AltMenuItemIcon">
+    <!--<Style TargetType="mycontrols:MultiFontIcon" x:Key="AltMenuItemIcon">
         <Setter Property="FontFamily" Value="{DynamicResource GlyphFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource SmallFontSize}" />
         <Setter Property="Background" Value="{DynamicResource MenuItemBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MenuItemForeground}" />
         <Setter Property="SecondaryForeground" Value="{DynamicResource MenuItemForeground}" />
-    </Style>
+    </Style>-->
 
     <Style TargetType="mycontrols:FontIcon" x:Key="ErrorIcon">
         <Setter Property="FontFamily" Value="{DynamicResource PeopleFontFamily}" />

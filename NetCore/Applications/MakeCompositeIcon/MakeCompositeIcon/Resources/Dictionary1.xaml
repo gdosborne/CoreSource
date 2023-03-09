@@ -6,6 +6,7 @@
     <s:Double x:Key="RootFontSize">18</s:Double>
     <s:Double x:Key="MenuIconSize">15</s:Double>
     <s:Double x:Key="ToolbarIconSize">20</s:Double>
+    <s:Double x:Key="GlyphFontSize">50</s:Double>
 
     <FontFamily x:Key="AppFontFamily">Calibri</FontFamily>
     <FontFamily x:Key="IconFontFamily">Segoe Fluent Icons</FontFamily>
@@ -67,6 +68,13 @@
         <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="StandardComboBox">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
 
     <Style TargetType="ListBox" x:Key="FileList">
@@ -142,7 +150,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style TargetType="TextBox" x:Key="NumberTextBox">
+    <Style TargetType="Core:NumericOnlyTextBox" x:Key="NumberTextBox">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
@@ -151,6 +159,16 @@
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="Width" Value="50" />
+        <Setter Property="IsDecimalAllowed" Value="False" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="CharacterTextBox">
+        <Setter Property="FontSize" Value="{DynamicResource GlyphFontSize}" />
+        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="MaxLength" Value="1" />
+        <Setter Property="Width" Value="75" />
     </Style>
 
     <Style TargetType="Hyperlink" x:Key="StandardHyperlink">

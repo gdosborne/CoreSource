@@ -1,11 +1,14 @@
 ﻿using ApplicationFramework.Media;
+using Common.Application.Linq;
 using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView : ViewModelBase {
@@ -15,6 +18,7 @@ namespace MakeCompositeIcon {
             IsSingleColorSelected = true;
             IsEditorEnabled = false;
             Icons = new ObservableCollection<CompositeIcon>();
+            Fonts = new ObservableCollection<System.Windows.Media.FontFamily>();
         }
 
         public override void Initialize() {
@@ -26,6 +30,9 @@ namespace MakeCompositeIcon {
                 var icon = CompositeIcon.FromFile(file.FullName);
                 Icons.Add(icon);
             }
+
+            var fonts = System.Windows.Media.Fonts.SystemFontFamilies.OrderBy(x => x.Source);
+            Fonts.AddRange(fonts);
         }
 
         #region IsSingleColorSelected Property
@@ -140,6 +147,33 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
+        #region IsSingleFontSelected Property
+        private bool _IsSingleFontSelected = default;
+        /// <summary>Gets/sets the IsSingleFontSelected.</summary>
+        /// <value>The IsSingleFontSelected.</value>
+        public bool IsSingleFontSelected {
+            get => _IsSingleFontSelected;
+            set {
+                _IsSingleFontSelected = value;
+                SecondaryFontVisibility = IsSingleFontSelected ? Visibility.Collapsed : Visibility.Visible;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SecondaryFontVisibility Property
+        private Visibility _SecondaryFontVisibility = default;
+        /// <summary>Gets/sets the SecondaryFontVisibility.</summary>
+        /// <value>The SecondaryFontVisibility.</value>
+        public Visibility SecondaryFontVisibility {
+            get => _SecondaryFontVisibility;
+            set {
+                _SecondaryFontVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #region SelectedIcon Property
         private CompositeIcon _SelectedIcon = default;
         /// <summary>Gets/sets the SelectedIcon.</summary>
@@ -175,6 +209,121 @@ namespace MakeCompositeIcon {
                 if (IsSingleSizeSelected) {
                     icon.SecondarySize = SelectedIcon.PrimarySize;
                 }
+            }
+        }
+        #endregion
+
+        #region Fonts Property
+        private ObservableCollection<System.Windows.Media.FontFamily> _Fonts = default;
+        /// <summary>Gets/sets the Fonts.</summary>
+        /// <value>The Fonts.</value>
+        public ObservableCollection<System.Windows.Media.FontFamily> Fonts {
+            get => _Fonts;
+            set {
+                _Fonts = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        private bool isSettingExpanded = false;
+
+        #region IsIconTypeExpanded Property
+        private bool _IsIconTypeExpanded = default;
+        /// <summary>Gets/sets the IsIconTypeExpanded.</summary>
+        /// <value>The IsIconTypeExpanded.</value>
+        public bool IsIconTypeExpanded {
+            get => _IsIconTypeExpanded;
+            set {
+                _IsIconTypeExpanded = value;
+                OnPropertyChanged();
+
+                if (!value)
+                    return;
+                IsGlyphExpanded = false;
+                IsSizeExpanded = false;
+                IsColorExpanded = false;
+                IsFontExpanded = false;
+            }
+        }
+        #endregion
+
+        #region IsColorExpanded Property
+        private bool _IsColorExpanded = default;
+        /// <summary>Gets/sets the IsColorExpanded.</summary>
+        /// <value>The IsColorExpanded.</value>
+        public bool IsColorExpanded {
+            get => _IsColorExpanded;
+            set {
+                _IsColorExpanded = value;
+                OnPropertyChanged();
+
+                if (!value)
+                    return;
+                IsGlyphExpanded = false;
+                IsIconTypeExpanded = false;
+                IsSizeExpanded = false;
+                IsFontExpanded = false;
+            }
+        }
+        #endregion
+
+        #region IsFontExpanded Property
+        private bool _IsFontExpanded = default;
+        /// <summary>Gets/sets the IsFontExpanded.</summary>
+        /// <value>The IsFontExpanded.</value>
+        public bool IsFontExpanded {
+            get => _IsFontExpanded;
+            set {
+                _IsFontExpanded = value;
+                OnPropertyChanged();
+
+                if (!value)
+                    return;
+                IsGlyphExpanded = false;
+                IsIconTypeExpanded = false;
+                IsSizeExpanded = false;
+                IsColorExpanded = false;
+            }
+        }
+        #endregion
+
+        #region IsSizeExpanded Property
+        private bool _IsSizeExpanded = default;
+        /// <summary>Gets/sets the IsSizeExpanded.</summary>
+        /// <value>The IsSizeExpanded.</value>
+        public bool IsSizeExpanded {
+            get => _IsSizeExpanded;
+            set {
+                _IsSizeExpanded = value;
+                OnPropertyChanged();
+
+                if (!value)
+                    return;
+                IsGlyphExpanded = false;
+                IsIconTypeExpanded = false;
+                IsColorExpanded = false;
+                IsFontExpanded = false;
+            }
+        }
+        #endregion
+
+        #region IsGlyphExpanded Property
+        private bool _IsGlyphExpanded = default;
+        /// <summary>Gets/sets the IsGlyphExpanded.</summary>
+        /// <value>The IsGlyphExpanded.</value>
+        public bool IsGlyphExpanded {
+            get => _IsGlyphExpanded;
+            set {
+                _IsGlyphExpanded = value;
+                OnPropertyChanged();
+
+                if (!value)
+                    return;
+                IsIconTypeExpanded = false;
+                IsSizeExpanded = false;
+                IsColorExpanded = false;
+                IsFontExpanded = false;
             }
         }
         #endregion

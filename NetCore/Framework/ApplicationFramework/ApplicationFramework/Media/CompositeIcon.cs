@@ -1,5 +1,4 @@
-﻿using Common.Application.Media;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -57,6 +56,8 @@ namespace ApplicationFramework.Media {
             if (result != null) {
                 result.FullPath = filename;
                 result.Filename = Path.GetFileName(filename);
+                if (result.SecondaryFontFamily == null)
+                    result.SecondaryFontFamily = result.PrimaryFontFamily;
             }
             return result;
         }
@@ -169,69 +170,27 @@ namespace ApplicationFramework.Media {
 
         #region PrimaryFontFamily Property
         private FontFamily _PrimaryFontFamily = default;
-        private bool isLoadingPrimaryFontAsString = false;
         /// <summary>Gets/sets the PrimaryFontFamily.</summary>
         /// <value>The PrimaryFontFamily.</value>
-        [JsonIgnore]
+        [JsonProperty("primaryfontfamily")]
         public FontFamily PrimaryFontFamily {
             get => _PrimaryFontFamily;
             set {
                 _PrimaryFontFamily = value;
-                if (!isLoadingPrimaryFontAsString)
-                    PrimaryFontFamilyName = PrimaryFontFamily != null
-                        ? PrimaryFontFamily.Source : default;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region PrimaryFontFamilyName Property
-        private string _PrimaryFontFamilyName = default;
-        /// <summary>Gets/sets the PrimaryFontFamilyName.</summary>
-        /// <value>The PrimaryFontFamilyName.</value>
-        [JsonProperty("primaryfontfamily")]
-        public string PrimaryFontFamilyName {
-            get => _PrimaryFontFamilyName;
-            set {
-                _PrimaryFontFamilyName = value;
-                isLoadingPrimaryFontAsString = true;
-                PrimaryFontFamily = Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == PrimaryFontFamilyName);
-                isLoadingPrimaryFontAsString = false;
                 OnPropertyChanged();
             }
         }
         #endregion
 
         #region SecondaryFontFamily Property
-        private bool isLoadingSecondaryFontAsString = false;
         private FontFamily _SecondaryFontFamily = default;
         /// <summary>Gets/sets the SecondaryFontFamily.</summary>
         /// <value>The SecondaryFontFamily.</value>
-        [JsonIgnore]
+        [JsonProperty("secondaryfontfamily")]
         public FontFamily SecondaryFontFamily {
             get => _SecondaryFontFamily;
             set {
                 _SecondaryFontFamily = value;
-                if (!isLoadingSecondaryFontAsString)
-                    SecondaryFontFamilyName = SecondaryFontFamily != null
-                        ? SecondaryFontFamily.Source : default;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region SecondaryFontFamilyName Property
-        private string _SecondaryFontFamilyName = default;
-        /// <summary>Gets/sets the SecondaryFontFamilyName.</summary>
-        /// <value>The SecondaryFontFamilyName.</value>
-        [JsonProperty("name")]
-        public string SecondaryFontFamilyName {
-            get => _SecondaryFontFamilyName;
-            set {
-                _SecondaryFontFamilyName = value;
-                isLoadingSecondaryFontAsString = true;
-                SecondaryFontFamily = Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == SecondaryFontFamilyName);
-                isLoadingSecondaryFontAsString = false;
                 OnPropertyChanged();
             }
         }
