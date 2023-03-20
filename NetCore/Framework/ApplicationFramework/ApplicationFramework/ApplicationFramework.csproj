@@ -42,9 +42,31 @@
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
 	  <PackageReference Include="SharpDX" Version="4.2.0" />
+	  <PackageReference Include="System.Composition.AttributedModel" Version="7.0.0" />
 	  <PackageReference Include="System.DirectoryServices" Version="8.0.0-preview.1.23110.8" />
 	  <PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0-preview.1.23110.8" />
 	  <PackageReference Include="System.Management" Version="8.0.0-preview.1.23110.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.VisualStudio.CoreUtility">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.VisualStudio.Text.Data">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.Text.Data.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.VisualStudio.Text.Internal">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.Text.Internal.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.VisualStudio.Text.Logic">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.VisualStudio.Text.UI">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.Text.UI.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf">
+	    <HintPath>..\..\..\Tools\BasicUndo\references\Vs2017\Update7\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

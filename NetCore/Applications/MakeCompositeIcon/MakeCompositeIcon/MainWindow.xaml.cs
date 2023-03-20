@@ -2,6 +2,7 @@
 using Common.Application.Primitives;
 using Common.Application.Windows.Controls;
 using Dsafa.WpfColorPicker;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
 using System.Linq;
@@ -16,11 +17,64 @@ namespace MakeCompositeIcon {
             View.Initialize();
             Closing += MainWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
+            App.Current.DispatcherUnhandledException += App.Current.As<App>().App_DispatcherUnhandledException;
         }
 
         private async void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.Actions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.Actions.ViewXaml: {
+                            var win = new ViewCodeWindow {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this
+                            };
+                            win.View.Icon = View.SelectedIcon;
+                            var result = win.ShowDialog();
+                            if (!result.HasValue || !result.Value)
+                                return;
+                            Clipboard.SetText(win.View.Icon.GetXaml(win.View.IsUWPChecked));
+                            break;
+                        }
+                    case MainWindowView.Actions.OpenSettings: {
+                            var win = new OptionsWindow {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this
+                            };
+                            var result = win.ShowDialog();
+                            break;
+                        }
+                    case MainWindowView.Actions.Delete: {
+                            var td = new TaskDialog {
+                                MainIcon = TaskDialogIcon.Shield,
+                                MainInstruction = $"Delete {View.SelectedIcon.Filename}?",
+                                AllowDialogCancellation = true,
+                                ButtonStyle = TaskDialogButtonStyle.Standard,
+                                Content = $"If you delete {View.SelectedIcon.Filename} it will no longer" +
+                                    $"be available. You can also choose to recycle the file by placing it" +
+                                    $"in the Recycle Bin.",
+                                CenterParent = true,
+                                MinimizeBox = false,
+                                WindowTitle = "Delete icon..."
+                            };
+                            td.Buttons.Add(new TaskDialogButton("Delete"));
+                            td.Buttons.Add(new TaskDialogButton(ButtonType.Cancel));
+                            td.Buttons.Add(new TaskDialogButton("Recycle"));
+                            var result = td.ShowDialog(this);
+                            if (result.ButtonType == ButtonType.Cancel) {
+                                return;
+                            }
+                            else if (result.Text == "Delete") {
+                                File.Delete(View.SelectedIcon.FullPath); 
+                            }
+                            else {
+                                var recycleFilename = Path.Combine(App.Current.As<App>().RecycleDirectory, 
+                                    $"{Guid.NewGuid()}_{View.SelectedIcon.Filename}");
+                                File.Move(View.SelectedIcon.FullPath, recycleFilename);
+                            }
+                            View.Icons.Remove(View.SelectedIcon);
+                            View.SelectedIcon = null;
+                            break;
+                        }
                     case MainWindowView.Actions.FileSave: {
                             if (View.SelectedIcon == null)
                                 return;
@@ -32,8 +86,8 @@ namespace MakeCompositeIcon {
                                     CheckFileExists = false,
                                     CheckPathExists = true,
                                     CreatePrompt = false,
-                                    DefaultExt = ",compo",
-                                    Filter = "Composite Icons|.compo",
+                                    DefaultExt = ".compo",
+                                    Filter = "Composite Icons|*.compo",
                                     InitialDirectory = lastDir,
                                     OverwritePrompt = true,
                                     RestoreDirectory = true,
@@ -53,14 +107,38 @@ namespace MakeCompositeIcon {
                                 await View.SelectedIcon.Save();
                             break;
                         }
-                    case MainWindowView.Actions.FileOpen:
-                        break;
+                    case MainWindowView.Actions.FileOpen: {
+                            var lastDir = App.Current.As<App>().MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
+                                        App.Current.As<App>().FilesDirectory);
+                            var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
+                                AddExtension = false,
+                                CheckFileExists = true,
+                                CheckPathExists = true,
+                                DefaultExt = ".compo",
+                                Filter = "Composite Icons|*.compo",
+                                InitialDirectory = lastDir,
+                                RestoreDirectory = true,
+                                Title = "Open composite icon..."
+                            };
+                            var result = dialog.ShowDialog(this);
+                            if (result.HasValue && result.Value) {
+                                var icon = View.Icons.FirstOrDefault(x => x.Filename.Equals(dialog.FileName, StringComparison.OrdinalIgnoreCase));
+                                if (icon == null) {
+                                    App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
+                                        Path.GetDirectoryName(dialog.FileName));
+                                    icon = CompositeIcon.FromFile(dialog.FileName);
+                                    View.Icons.Add(icon);
+                                }
+                                View.SelectedIcon = icon;
+                            }
+                            break;
+                        }
                     case MainWindowView.Actions.FileNew: {
                             var icon = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.White,
                                 Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"), Brushes.Black,
                                 '', 200, '', Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"),
                                 Brushes.Black, 200);
-                            View.SubscriptVisibility= Visibility.Collapsed;
+                            View.SubscriptVisibility = Visibility.Collapsed;
                             View.SelectedIcon = icon;
 
                             break;
@@ -127,13 +205,13 @@ namespace MakeCompositeIcon {
         internal MainWindowView View => DataContext.As<MainWindowView>();
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
-                
+
         private void SecondSlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            View.UpdateClipWithSize();
+            View.UpdateClipWithSize(nameof(CompositeIcon.SecondarySize));
         }
 
         private void PrimarySlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            View.UpdateClipWithSize();
+            View.UpdateClipWithSize(nameof(CompositeIcon.PrimarySize));
         }
     }
 }

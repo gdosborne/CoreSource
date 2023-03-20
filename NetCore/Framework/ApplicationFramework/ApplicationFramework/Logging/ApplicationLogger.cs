@@ -128,23 +128,25 @@ namespace Common.Application.Logging {
         }
 
         public async Task<ApplicationLogger> LogMessageAsync(string text, EntryTypes type, int indent = 0) {
-            await Task.Yield();
-            if (Options.HasFlag(StorageOptions.StoreInMemoryUntilFlush)) {
-                cache.Add(new InternalStorage {
-                    EntryType = type,
-                    TimeStamp = DateTime.Now,
-                    Text = new string(' ', indent * 3) + text
-                });
-            }
-            else {
-                if (!string.IsNullOrEmpty(LogDirectory) && !string.IsNullOrEmpty(logger.LogPath) && !logger.LogPath.Equals(LogDirectory)) {
-                    logger.LogPath = LogDirectory;
+            var t = Task.Factory.StartNew(() => { 
+                if (Options.HasFlag(StorageOptions.StoreInMemoryUntilFlush)) {
+                    cache.Add(new InternalStorage {
+                        EntryType = type,
+                        TimeStamp = DateTime.Now,
+                        Text = new string(' ', indent * 3) + text
+                    });
                 }
-                using var sr = new StringReader(text);
-                while (sr.Peek() > -1) {
-                    logger.Write(new string(' ', indent * 3) + sr.ReadLine(), DateTime.Now, type);
+                else {
+                    if (!string.IsNullOrEmpty(LogDirectory) && !string.IsNullOrEmpty(logger.LogPath) && !logger.LogPath.Equals(LogDirectory)) {
+                        logger.LogPath = LogDirectory;
+                    }
+                    using var sr = new StringReader(text);
+                    while (sr.Peek() > -1) {
+                        logger.Write(new string(' ', indent * 3) + sr.ReadLine(), DateTime.Now, type);
+                    }
                 }
-            }
+            });
+            t.Wait();
             return this;
         }
 

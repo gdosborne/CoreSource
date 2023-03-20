@@ -1,8 +1,10 @@
-﻿using Common.Application.Media;
+﻿using ApplicationFramework.Media;
+using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView {
@@ -19,7 +21,9 @@ namespace MakeCompositeIcon {
             Paste,
             CloseIcon,
             OpenSettings,
-            SelectColor
+            SelectColor,
+            Delete,
+            ViewXaml
         }
 
         #region FileOpenCommand
@@ -83,23 +87,22 @@ namespace MakeCompositeIcon {
         /// <value>The Undo command.</value>
         public DelegateCommand UndoCommand => _UndoCommand ??= new DelegateCommand(Undo, ValidateUndoState);
         private bool ValidateUndoState(object state) {
-            if (clipboard == null)
+            if (SelectedIcon == null)
                 return false;
-            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
-            if (cb == null)
-                return false;
-            var pos = cb.Position;
-            return pos > 0;
+
+            var result = false;
+            return result;
         }
         private void Undo(object state) {
-            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
-            if (cb != null) {
-                var pos = cb.Position;
-                if (pos > 0) {
-                    cb.Position--;
-                    SelectedIcon = cb.GetValue();
-                }
-            }
+            if (SelectedIcon == null)
+                return;
+            var result = false;
+
+            //var value = SelectedIcon.Clipboard.GetPrevious(true, ref propertyName);
+            //if (!string.IsNullOrEmpty(propertyName)) {
+            //    var prop = SelectedIcon.GetType().GetProperty(propertyName);
+            //    prop?.SetValue(SelectedIcon, value);
+            //}
         }
         #endregion
 
@@ -109,56 +112,21 @@ namespace MakeCompositeIcon {
         /// <value>The Redo command.</value>
         public DelegateCommand RedoCommand => _RedoCommand ??= new DelegateCommand(Redo, ValidateRedoState);
         private bool ValidateRedoState(object state) {
-            if (clipboard == null)
+            if (SelectedIcon == null)
                 return false;
-            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
-            if (cb == null)
-                return false;
-            var pos = cb.Position;
-            return pos < cb.Count;
+
+            var result = false;
+            return result;
         }
+    
         private void Redo(object state) {
-            var cb = clipboard.FirstOrDefault(x => !string.IsNullOrEmpty(x.GetValue().Filename) && x.GetValue().Filename.Equals(SelectedIcon.Filename));
-            if (cb != null) {
-                var pos = cb.Position;
-                if (pos < cb.Count) {
-                    cb.Position++;
-                    SelectedIcon = cb.GetValue();
-                }
-            }
-        }
-        #endregion
-
-        #region CutCommand
-        private DelegateCommand _CutCommand = default;
-        /// <summary>Gets the Cut command.</summary>
-        /// <value>The Cut command.</value>
-        public DelegateCommand CutCommand => _CutCommand ??= new DelegateCommand(Cut, ValidateCutState);
-        private bool ValidateCutState(object state) => true;
-        private void Cut(object state) {
-            ExecuteAction(nameof(Actions.Cut));
-        }
-        #endregion
-
-        #region CopyCommand
-        private DelegateCommand _CopyCommand = default;
-        /// <summary>Gets the Copy command.</summary>
-        /// <value>The Copy command.</value>
-        public DelegateCommand CopyCommand => _CopyCommand ??= new DelegateCommand(Copy, ValidateCopyState);
-        private bool ValidateCopyState(object state) => true;
-        private void Copy(object state) {
-            ExecuteAction(nameof(Actions.Copy));
-        }
-        #endregion
-
-        #region PasteCommand
-        private DelegateCommand _PasteCommand = default;
-        /// <summary>Gets the Paste command.</summary>
-        /// <value>The Paste command.</value>
-        public DelegateCommand PasteCommand => _PasteCommand ??= new DelegateCommand(Paste, ValidatePasteState);
-        private bool ValidatePasteState(object state) => true;
-        private void Paste(object state) {
-            ExecuteAction(nameof(Actions.Paste));
+            if (SelectedIcon == null)
+                return;
+            var result = false;
+            //if (!string.IsNullOrEmpty(propertyName)) {
+            //    var prop = SelectedIcon.GetType().GetProperty(propertyName);
+            //    prop?.SetValue(SelectedIcon, value);
+            //}
         }
         #endregion
 
@@ -200,5 +168,28 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
+        #region DeleteIconCommand
+        private DelegateCommand _DeleteIconCommand = default;
+        /// <summary>Gets the DeleteIcon command.</summary>
+        /// <value>The DeleteIcon command.</value>
+        public DelegateCommand DeleteIconCommand => _DeleteIconCommand ??= new DelegateCommand(DeleteIcon, ValidateDeleteIconState);
+        private bool ValidateDeleteIconState(object state) => SelectedIcon != null;
+        private void DeleteIcon(object state) {
+            ExecuteAction(nameof(Actions.Delete));
+        }
+        #endregion
+
+        #region ViewXamlCommand
+        private DelegateCommand _ViewXamlCommand = default;
+        /// <summary>Gets the ViewXaml command.</summary>
+        /// <value>The ViewXaml command.</value>
+        public DelegateCommand ViewXamlCommand => _ViewXamlCommand ??= new DelegateCommand(ViewXaml, ValidateViewXamlState);
+        private bool ValidateViewXamlState(object state) => SelectedIcon != null;
+        private void ViewXaml(object state) {
+            ExecuteAction(nameof(Actions.ViewXaml));
+        }
+        #endregion
+
     }
+    
 }

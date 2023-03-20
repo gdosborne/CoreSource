@@ -9,7 +9,9 @@
     <s:Double x:Key="GlyphFontSize">50</s:Double>
 
     <FontFamily x:Key="AppFontFamily">Calibri</FontFamily>
-    <FontFamily x:Key="IconFontFamily">Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">Consolas</FontFamily>
+    <FontFamily x:Key="IconFontFamily">pack://application:,,,/Fonts/#Segoe Fluent Icons</FontFamily>
+    <FontFamily x:Key="PeopleFontFamily">pack://application:,,,/Fonts/#People</FontFamily>
 
     <SolidColorBrush x:Key="VertLightBrush" Color="#FFF9F9F9" />
 
@@ -124,7 +126,7 @@
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-        <Setter Property="Width" Value="200" />
+        <Setter Property="Width" Value="250" />
     </Style>
 
     <Style TargetType="CheckBox" x:Key="StandardCheckBox">
@@ -139,6 +141,8 @@
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Width" Value="180" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="TextBlockWithHyperlink">
@@ -174,6 +178,19 @@
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="MaxLength" Value="1" />
         <Setter Property="Width" Value="75" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="CodeTextBox">
+        <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="FontFamily" Value="{DynamicResource CodeFontFamily}" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="AcceptsTab" Value="True" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        
     </Style>
 
     <Style TargetType="Hyperlink" x:Key="StandardHyperlink">
@@ -205,6 +222,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="Slider" x:Key="StandardSlider">

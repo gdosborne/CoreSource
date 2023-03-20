@@ -1,4 +1,5 @@
-﻿using Common.Application.Primitives;
+﻿using ApplicationFramework.Media;
+using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -80,6 +81,30 @@ namespace Common.Application.Media {
             names.ForEach(x => result.Add(new System.Windows.Media.FontFamily(x)));
             return result;
         }
+
+        //public static IList<Character> GetCharacters(this System.Windows.Media.FontFamily fontFamily) {
+        //    var result = new List<Character>();
+        //    var gtf = default(GlyphTypeface);
+        //    foreach (var tf in fontFamily.GetTypefaces()) {
+        //        tf.TryGetGlyphTypeface(out gtf);
+        //        if (gtf != null) {
+        //            var charMap = gtf.CharacterToGlyphMap;
+        //            foreach (var kvp in charMap) {
+        //                if (kvp.Key == 13 || kvp.Key == 32) {
+        //                    continue;
+        //                }
+        //                var ch = new Character {
+        //                    Index = kvp.Key,
+        //                    ASCII = kvp.Key.ToString("00000"),
+        //                    Hex = kvp.Key.ToString("X"),
+        //                    View = char.ConvertFromUtf32(kvp.Key)
+        //                };
+        //                result.Add(ch);
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public static BitmapImage GetBitmapImage(this string fileName) {
             BitmapImage bitmapImage;
@@ -251,10 +276,12 @@ namespace Common.Application.Media {
             public string Hex { get; set; }
             public string Image { get; set; }
             public System.Windows.Media.FontFamily FontFamily { get; set; }
+            public double FontSize { get; set; }
         }
 
-        public static List<CharInfo> GetCharacters(this System.Windows.Media.FontFamily fontFamily) {
+        public static List<CharInfo> GetCharacters(this System.Windows.Media.FontFamily fontFamily, double size) {
             var chars = new List<CharInfo>();
+            size = size < 10 ? 10 : size;
             if (fontFamily != null) {
                 GlyphTypeface gtf = null;
                 foreach (var tf in fontFamily.GetTypefaces()) {
@@ -269,6 +296,7 @@ namespace Common.Application.Media {
                             var hex = kvp.Key.ToString("X");
                             var ci = new CharInfo {
                                 FontFamily = fontFamily,
+                                FontSize = size,
                                 Ascii = ascii,
                                 Index = kvp.Key,
                                 Image = char.ConvertFromUtf32(kvp.Key),

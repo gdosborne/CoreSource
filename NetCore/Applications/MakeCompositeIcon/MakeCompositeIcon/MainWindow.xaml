@@ -8,12 +8,14 @@
 
         mc:Ignorable="d" Style="{DynamicResource DefaultSizableWindow}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-        Height="450" Width="800">
+        Height="450" Width="800" Icon="/MakeComositeIcon.ico">
+    
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding FileNewCommand}" />
         <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding FileOpenCommand}" />
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding FileSaveCommand}" />
         <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding FileSaveAsCommand}" />
+        <KeyBinding Key="Delete" Modifiers="" Command="{Binding DeleteIconCommand}" />
         <KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding UndoCommand}" />
         <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding RedoCommand}" />
         <KeyBinding Key="X" Modifiers="Ctrl" Command="{Binding CutCommand}" />
@@ -61,9 +63,14 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Close Icon" Command="{Binding CloseIconCommand}">
+                <!--<MenuItem Header="Close Icon" Command="{Binding CloseIconCommand}">
                     <MenuItem.Icon>
                         <Core:FontIcon Glyph="&#xE13F;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                    </MenuItem.Icon>
+                </MenuItem>-->
+                <MenuItem Header="Delete Icon" InputGestureText="Delete" Command="{Binding DeleteIconCommand}">
+                    <MenuItem.Icon>
+                        <Core:FontIcon Glyph="&#xE107;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
@@ -74,17 +81,19 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Undo" InputGestureText="Ctrl-Z" Command="{Binding FileSaveCommand}">
+                <MenuItem Header="Undo" InputGestureText="Ctrl-Z" Command="{Binding UndoCommand}"
+                          Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <MenuItem.Icon>
                         <Core:FontIcon Glyph="&#xE10E;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Redo" InputGestureText="Ctrl-Y" Command="{Binding RedoCommand}">
+                <MenuItem Header="Redo" InputGestureText="Ctrl-Y" Command="{Binding RedoCommand}"
+                          Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                     <MenuItem.Icon>
                         <Core:FontIcon Glyph="&#xE10D;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <Separator />
+                <!--<Separator />
                 <MenuItem Header="Cut" InputGestureText="Ctrl-X" Command="{Binding CutCommand}">
                     <MenuItem.Icon>
                         <Core:FontIcon Glyph="&#xE16B;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
@@ -99,13 +108,22 @@
                     <MenuItem.Icon>
                         <Core:FontIcon Glyph="&#xE16D;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
-                </MenuItem>
+                </MenuItem>-->
                 <Separator />
                 <MenuItem Header="Settings" InputGestureText="Ctrl-T" Command="{Binding OpenSettingsCommand}">
                     <MenuItem.Icon>
                         <Grid>
                             <Core:FontIcon Grid.Column="0" Glyph="&#xF8B0;" Foreground="#FFECE7BA" FontSize="{DynamicResource MenuIconSize}" />
                             <Core:FontIcon Grid.Column="0" Glyph="&#xE115;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        </Grid>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Xaml" Command="{Binding ViewXamlCommand}">
+                    <MenuItem.Icon>
+                        <Grid>
+                            <Core:FontIcon Grid.Column="0" Glyph="&#xE732;" FontFamily="{DynamicResource PeopleFontFamily}" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
                         </Grid>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -129,22 +147,24 @@
                 <Core:FontIcon Glyph="&#xE105;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
             <Separator />
-            <Button Command="{Binding UndoCommand}" ToolTip="Undo">
+            <Button Command="{Binding UndoCommand}" ToolTip="Undo" 
+                    Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 <Core:FontIcon Glyph="&#xE10E;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
-            <Button Command="{Binding RedoCommand}" ToolTip="Redo">
+            <Button Command="{Binding RedoCommand}" ToolTip="Redo"
+                    Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 <Core:FontIcon Glyph="&#xE10D;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
-            <Separator />
-            <Button Command="{Binding CutCommand}" ToolTip="Cut">
-                <Core:FontIcon Glyph="&#xE16B;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
+            <Separator Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            <Button Command="{Binding DeleteIconCommand}" ToolTip="Delete Icon">
+                <Core:FontIcon Glyph="&#xE107;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
-            <Button Command="{Binding CopyCommand}" ToolTip="Copy">
+            <!--<Button Command="{Binding CopyCommand}" ToolTip="Copy">
                 <Core:FontIcon Glyph="&#xE16F;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
             <Button Command="{Binding PasteCommand}" ToolTip="Paste">
                 <Core:FontIcon Glyph="&#xE16D;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
-            </Button>
+            </Button>-->
         </ToolBar>
 
         <Grid Grid.Row="2">
@@ -156,6 +176,15 @@
             <Border Grid.Row="2" Style="{DynamicResource FileListArea}">
                 <ListBox Grid.Column="0" Style="{DynamicResource FileList}" ItemsSource="{Binding Icons}"
                          SelectedItem="{Binding SelectedIcon,UpdateSourceTrigger=Default,Mode=TwoWay}">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete Icon" InputGestureText="Delete" Command="{Binding DeleteIconCommand}">
+                                <MenuItem.Icon>
+                                    <Core:FontIcon Glyph="&#xE107;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -185,7 +214,7 @@
                         <Expander Header="Icon Type" Style="{DynamicResource SectionExpander}" 
                                   IsExpanded="{Binding IsIconTypeExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                             <StackPanel Orientation="Vertical" Margin="5">
-                                <Label Content="Icon Type" Style="{DynamicResource StandardLabel}" Width="130" />
+                                <Label Content="Icon Type" Style="{DynamicResource StandardLabel}" />
                                 <ComboBox Style="{StaticResource StandardComboBox}" ItemsSource="{Binding IconTypes}"
                                           SelectedItem="{Binding SelectedIcon.IconType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                     <ComboBox.ItemTemplate>
@@ -206,10 +235,26 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                    <Label Content="Surface" Style="{DynamicResource StandardLabel}" Width="130" />
+                                    <Label Content="Surface" Style="{DynamicResource StandardLabel}"/>
                                     <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
                                         <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
                                                    CommandParameter="Surface">
+                                            <Hyperlink.ToolTip>
+                                                <TextBlock Width="300" TextWrapping="Wrap">
+                                                    <Run>
+                                                        This color should be set to the background color of the control the 
+                                                        icon will be hosted on.
+                                                    </Run>
+                                                    <LineBreak />
+                                                    <LineBreak />
+                                                    <Run>
+                                                        If this color is transparent, the backside icon will show if the 
+                                                        frontside icon is a wireframe and the icon type is SubscriptedOverlay, 
+                                                        because the Surface color is used for clearing the area behind the 
+                                                        frontside icon.
+                                                    </Run>
+                                               </TextBlock>
+                                            </Hyperlink.ToolTip>
                                             <Ellipse Fill="{Binding SelectedIcon.SurfaceBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                      Style="{DynamicResource ColorEllipse}" />
                                         </Hyperlink>
@@ -220,10 +265,11 @@
                                           IsChecked="{Binding IsSingleColorSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
-                                    <Label Content="Primary Color" Style="{DynamicResource StandardLabel}" Width="130" />
+                                    <Label Content="Backside Icon  Color" Style="{DynamicResource StandardLabel}" />
                                     <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
                                         <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
-                                                   CommandParameter="Primary">
+                                                   CommandParameter="Primary"
+                                                   ToolTip="This is the color of primary, or backside, icon">
                                             <Ellipse Fill="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                      Style="{DynamicResource ColorEllipse}" />
                                         </Hyperlink>
@@ -232,10 +278,11 @@
 
                                 <StackPanel Orientation="Horizontal" Grid.Row="3" 
                                             Visibility="{Binding SecondaryBrushVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                    <Label Content="Secondary Color" Style="{DynamicResource StandardLabel}" Width="130" />
+                                    <Label Content="Frontside Icon Color" Style="{DynamicResource StandardLabel}"/>
                                     <TextBlock Style="{DynamicResource TextBlockWithHyperlink}">
                                         <Hyperlink Style="{DynamicResource StandardHyperlink}" Command="{Binding SelectedColorCommand}"
-                                                   CommandParameter="Secondary">
+                                                   CommandParameter="Secondary"
+                                                   ToolTip="This is the color of secondary, or frontside, icon">
                                             <Ellipse Fill="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                      Style="{DynamicResource ColorEllipse}" />
                                         </Hyperlink>
@@ -257,7 +304,7 @@
                                 <CheckBox Content="Use single font" Grid.Row="0" Style="{DynamicResource StandardCheckBox}"
                                           IsChecked="{Binding IsSingleFontSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
-                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Primary Font" />
+                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Backside" />
                                 <ComboBox Grid.Row="2" Style="{DynamicResource StandardComboBox}" ItemsSource="{Binding Fonts}"                                           
                                           SelectedItem="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                     <ComboBox.ItemTemplate>
@@ -267,7 +314,7 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>                                
                                 
-                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Secondary Font" 
+                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Frontside" 
                                        Visibility="{Binding SecondaryFontVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 <ComboBox Grid.Row="4" Style="{DynamicResource StandardComboBox}" ItemsSource="{Binding Fonts}"
                                           Visibility="{Binding SecondaryFontVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                          
@@ -294,7 +341,7 @@
                                 <CheckBox Content="Use single size" Grid.Row="0" Style="{DynamicResource StandardCheckBox}"
                                           IsChecked="{Binding IsSingleSizeSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
-                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Primary Size" />
+                                <Label Grid.Row="1" Style="{DynamicResource StandardLabel}" Content="Backside Size" />
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                                     <Slider Minimum="0" Maximum="200" Margin="0,0,10,0" Width="110" Style="{DynamicResource StandardSlider}"
                                             Value="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
@@ -302,7 +349,7 @@
                                     <Core:NumericOnlyTextBox Text="{Binding SelectedIcon.PrimarySize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"                                              
                                              Style="{DynamicResource NumberTextBox}"/>
                                 </StackPanel>
-                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Secondary Size" 
+                                <Label Grid.Row="3" Style="{DynamicResource StandardLabel}" Content="Frontside Size" 
                                        Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 <StackPanel Orientation="Horizontal" Grid.Row="4"
                                             Visibility="{Binding SecondSizeVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
@@ -325,17 +372,40 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Style="{DynamicResource StandardLabel}" Content="Primary Glyph" />
-                                <TextBox Grid.Row="1" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
-                                         Text="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                         Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                         FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-
-                                <Label Grid.Row="2" Style="{DynamicResource StandardLabel}" Content="Secondary Glyph" />
-                                <TextBox Grid.Row="3" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
-                                         Text="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                         Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                         FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <Label Grid.Row="0" Style="{DynamicResource StandardLabel}" Content="Backside Glyph" />
+                                <StackPanel Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center">
+                                    <TextBox Name="PrimeChar" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
+                                             Text="{Binding SelectedIcon.PrimaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             Foreground="{Binding SelectedIcon.PrimaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             FontFamily="{Binding SelectedIcon.PrimaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    <ComboBox ItemsSource="{Binding PrimaryCharacters}" Width="{Binding ElementName=PrimeChar,Path=ActualWidth}"
+                                              SelectedItem="{Binding SelectedPrimaryCharacter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontFamily="{Binding FontFamily}" Text="{Binding Image}"
+                                                           FontSize="{DynamicResource GlyphFontSize}"
+                                                           HorizontalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </StackPanel>
+                                <Label Grid.Row="2" Style="{DynamicResource StandardLabel}" Content="Frontside Glyph" />
+                                <StackPanel Orientation="Vertical" Grid.Row="3" HorizontalAlignment="Center">
+                                    <TextBox Name="SecondChar" Style="{DynamicResource CharacterTextBox}" GotFocus="TextBox_GotFocus"
+                                             Text="{Binding SelectedIcon.SecondaryGlyph,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             Foreground="{Binding SelectedIcon.SecondaryBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             FontFamily="{Binding SelectedIcon.SecondaryFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    <ComboBox ItemsSource="{Binding SecondaryCharacters}" Width="{Binding ElementName=SecondChar,Path=ActualWidth}"
+                                              SelectedItem="{Binding SelectedSecondaryCharacter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontFamily="{Binding FontFamily}" Text="{Binding Image}"
+                                                           FontSize="{DynamicResource GlyphFontSize}"
+                                                           HorizontalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </StackPanel>
                             </Grid>
                         </Expander>
                     </StackPanel>
@@ -345,7 +415,7 @@
                             <DropShadowEffect Direction="0" Opacity="0.5" BlurRadius="20" ShadowDepth="0"/>
                         </Border.Effect>
 
-                        <Grid>
+                        <Grid Background="{Binding SelectedIcon.SurfaceBrush}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
