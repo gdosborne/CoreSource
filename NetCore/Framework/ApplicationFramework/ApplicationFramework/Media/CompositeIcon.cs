@@ -1,6 +1,4 @@
-﻿using Common.Application.Media;
-using Common.Application.Primitives;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -61,6 +59,7 @@ namespace ApplicationFramework.Media {
 
             var result = FromJson(json);
             if (result != null) {
+                result.ShortName = Path.GetFileNameWithoutExtension(filename);
                 result.FullPath = filename;
                 result.Filename = Path.GetFileName(filename);
                 result.SecondaryFontFamily ??= result.PrimaryFontFamily;
@@ -110,6 +109,20 @@ namespace ApplicationFramework.Media {
         #endregion
 
         public object Clone() => this.MemberwiseClone();
+
+        #region ShortName Property
+        private string _ShortName = default;
+        /// <summary>Gets/sets the ShortName.</summary>
+        /// <value>The ShortName.</value>
+        [JsonIgnore]
+        public string ShortName {
+            get => _ShortName;
+            set {
+                _ShortName = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         #region Filename Property
         private string _Filename = default;
@@ -298,6 +311,34 @@ namespace ApplicationFramework.Media {
         }
         #endregion
 
+        #region SecondaryVerticalOffset Property
+        private double _SecondaryVerticalOffset = default;
+        /// <summary>Gets/sets the SecondaryVerticalOffset.</summary>
+        /// <value>The VerticalOffset.</value>
+        [JsonProperty("secondaryverticaloffset")]
+        public double SecondaryVerticalOffset {
+            get => _SecondaryVerticalOffset;
+            set {
+                _SecondaryVerticalOffset = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SecondayHorizontalOffset Property
+        private double _SecondayHorizontalOffset = default;
+        /// <summary>Gets/sets the SecondayHorizontalOffset.</summary>
+        /// <value>The SecondayHorizontalOffset.</value>
+        [JsonProperty("secondaryhorizontaloffset")]
+        public double SecondayHorizontalOffset {
+            get => _SecondayHorizontalOffset;
+            set {
+                _SecondayHorizontalOffset = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public string GetXaml(bool isUWPXaml) {
             var widthAndHeight = !SecondarySize.HasValue
                 ? PrimarySize + 20.0
@@ -311,87 +352,71 @@ namespace ApplicationFramework.Media {
             result.RowDefinitions.Add(new RowDefinition { Height = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
             result.ColumnDefinitions.Add(new ColumnDefinition { Width = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
             result.ColumnDefinitions.Add(new ColumnDefinition { Width = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
-            result.Children.Add(new ContentControl { Name = "primary" });
-            result.Children.Add(new ContentControl { Name = "secondary" });
 
-            var primaryChar = $"&#x{((int)PrimaryGlyph).ToString("X2")};";
-            var secondaryChar = $"&#x{((int)SecondaryGlyph).ToString("X2")};";
+            var primeIcon = new TextBlock {
+                Text = PrimaryGlyph.ToString(),
+                FontFamily = PrimaryFontFamily,
+                FontSize = PrimarySize,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                Foreground = PrimaryBrush,
+                Margin = new System.Windows.Thickness(10)
+            };
+            primeIcon.SetValue(Grid.ColumnProperty, 0);
+            primeIcon.SetValue(Grid.RowProperty, 0);
+            primeIcon.SetValue(Grid.ColumnSpanProperty, 2);
+            primeIcon.SetValue(Grid.RowSpanProperty, 2);
+            result.Children.Add(primeIcon);
 
-            var primaryIcon = default(string);
-            var secondaryIcon = default(string);
-            
-            if (isUWPXaml) {
-                primaryIcon = $"<FontIcon FontFamily=\"{PrimaryFontFamily.Source}\" " +
-                    $"FontSize=\"{PrimarySize}\" Glyph=\"{primaryChar}\" " +
-                    $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                    $"Grid.RowSpan=\"2\" Foreground=\"{PrimaryBrush.Color.ToHexValue()}\" " +
-                    $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>";
+            var font = SecondaryFontFamily == null ? PrimaryFontFamily : SecondaryFontFamily;
+            var brush = IsSingleBrushInUse ? PrimaryBrush : SecondaryBrush;
+            var size = !SecondarySize.HasValue ? PrimarySize : SecondarySize.Value;
+
+            if (IconType == IconTypes.FullOverlay) {
+                var secondIcon = new TextBlock {
+                    Text = SecondaryGlyph.ToString(),
+                    FontFamily = font,
+                    FontSize = size,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    Foreground = brush,
+                    Margin = new System.Windows.Thickness(SecondayHorizontalOffset, SecondaryVerticalOffset, 0, 0)
+                };
+                secondIcon.SetValue(Grid.ColumnProperty, 0);
+                secondIcon.SetValue(Grid.RowProperty, 0);
+                secondIcon.SetValue(Grid.ColumnSpanProperty, 2);
+                secondIcon.SetValue(Grid.RowSpanProperty, 2);
+                result.Children.Add(secondIcon);
             }
             else {
-                primaryIcon = $"<TextBlock FontFamily=\"{PrimaryFontFamily.Source}\" " +
-                    $"FontSize=\"{PrimarySize}\" Text=\"{primaryChar}\" " +
-                    $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                    $"Grid.RowSpan=\"2\" Foreground=\"{PrimaryBrush.Color.ToHexValue()}\" " +
-                    $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\" " +
-                    $"Margin=\"10\"/>";
+                var border = new Border {
+                    Padding = new System.Windows.Thickness(10),
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Background = SurfaceBrush
+                };
+
+                var secondIcon = new TextBlock {
+                    Text = SecondaryGlyph.ToString(),
+                    FontFamily = font,
+                    FontSize = size,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    Foreground = brush
+                };
+
+                border.SetValue(Grid.ColumnProperty, 1);
+                border.SetValue(Grid.RowProperty, 1);
+                border.SetValue(Grid.ColumnSpanProperty, 1);
+                border.SetValue(Grid.RowSpanProperty, 1);
+
+                border.Child = secondIcon;
+                result.Children.Add(border);
             }
-
-            var font = default(FontFamily);
-            var color = default(Color);
-            var size = default(double);
-
-            font = SecondaryFontFamily == null ? PrimaryFontFamily : SecondaryFontFamily;
-            color = IsSingleBrushInUse ? PrimaryBrush.Color : SecondaryBrush.Color;
-            size = !SecondarySize.HasValue ? PrimarySize : SecondarySize.Value;
-
-            if (isUWPXaml) {
-                if (IconType == IconTypes.FullOverlay) {
-                    secondaryIcon = $"<FontIcon FontFamily=\"{font.Source}\" " +
-                        $"FontSize=\"{size}\" Glyph=\"{secondaryChar}\" " +
-                        $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                        $"Grid.RowSpan=\"2\" Foreground=\"{color.ToHexValue()}\" " +
-                        $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\" " +
-                        $"Margin=\"10\"/>";
-                }
-                else {
-                    secondaryIcon = $"<Border Grid.Column=\"1\" Grid.Row=\"1\" Background=\"{SurfaceBrush.Color.ToHexValue()}\" " +
-                        $"Padding=\"10\" HorizontalAlignment=\"Left\" VerticalAlignment=\"Top\">" +
-                        $"<FontIcon FontFamily=\"{font.Source}\" " +
-                            $"FontSize=\"{size}\" Glyph=\"{secondaryChar}\" " +
-                            $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                            $"Grid.RowSpan=\"2\" Foreground=\"{color.ToHexValue()}\" " +
-                            $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>" +
-                            $"</Border>";
-                }
-            }
-            else {
-                if (IconType == IconTypes.FullOverlay) {
-                    secondaryIcon = $"<TextBlock FontFamily=\"{font.Source}\" " +
-                        $"FontSize=\"{size}\" Text=\"{secondaryChar}\" " +
-                        $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                        $"Grid.RowSpan=\"2\" Foreground=\"{color.ToHexValue()}\" " +
-                        $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\" " +
-                        $"Margin=\"10\"/>";
-                }
-                else {
-                    secondaryIcon = $"<Border Grid.Column=\"1\" Grid.Row=\"1\" Background=\"{SurfaceBrush.Color.ToHexValue()}\" " +
-                        $"Padding=\"10\" HorizontalAlignment=\"Left\" VerticalAlignment=\"Top\">" +
-                        $"<TextBlock FontFamily=\"{font.Source}\" " +
-                        $"FontSize=\"{size}\" Text=\"{secondaryChar}\" " +
-                        $"Grid.Column=\"0\" Grid.Row=\"0\" Grid.ColumnSpan=\"2\" " +
-                        $"Grid.RowSpan=\"2\" Foreground=\"{color.ToHexValue()}\" " +
-                        $"HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>" +
-                        $"</Border>";
-                }
-            }
-
 
             var xaml = XamlWriter.Save(result);
             xaml = xaml.Replace(" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"", string.Empty);
-            xaml = xaml.Replace("<ContentControl Name=\"primary\" />", primaryIcon);
-            xaml = xaml.Replace("<ContentControl Name=\"secondary\" />", secondaryIcon);
             var doc = XDocument.Parse(xaml);
-
 
             return doc.ToString();
         }

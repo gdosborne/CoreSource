@@ -1,12 +1,12 @@
-﻿<Window x:Class="MakeCompositeIcon.OptionsWindow"
+﻿<Window xmlns:Core="clr-namespace:Controls.Core;assembly=Controls.Core"  x:Class="MakeCompositeIcon.OptionsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MakeCompositeIcon"
         mc:Ignorable="d" Style="{DynamicResource DefaultSizableWindow}"
-        ResizeMode="NoResize" SizeToContent="Height" WindowStyle="ThreeDBorderWindow"
-        Title="OptionsWindow" Width="549">
+        ResizeMode="NoResize" SizeToContent="Height"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="620">
     <Window.DataContext>
         <local:OptionsWindowView />
     </Window.DataContext>
@@ -23,15 +23,31 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
+            <Grid Name="LeftGrid" Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Core:ToggleSwitch IsOn="{Binding IsUseLastPositionChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />                
+
+                <TextBlock Style="{DynamicResource StandardTextBlock}" TextWrapping="Wrap" Margin="00,0,10,0"
+                           Grid.Column="1" Grid.Row="0" Text="Use last size and position for all Windows" 
+                           VerticalAlignment="Top"/>
+            </Grid>
             <Line Grid.Column="1" StrokeThickness="1" Stroke="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" HorizontalAlignment="Center" 
                   X1="0" X2="0" Y1="0" Y2="{Binding ElementName=MainGrid,Path=ActualHeight}"/>
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-            <Button Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}" 
-                    IsDefault="True" Content="OK" />
+            <!--<Button Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}" 
+                    IsDefault="True" Content="OK" />-->
             <Button Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" 
-                    IsCancel="True" Content="Cancel" />
+                    IsCancel="True" Content="Close" />
         </StackPanel>
     </Grid>
 </Window>

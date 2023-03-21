@@ -2,22 +2,20 @@
 using Common.Application.Linq;
 using Common.Application.Media;
 using Common.Application.Primitives;
-using Common.Application.Windows.Expressions;
 using Common.MVVMFramework;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using static ApplicationFramework.Media.CompositeIconData;
 using static Common.Application.Media.Extensions;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView : ViewModelBase {
         public MainWindowView() {
-            Title = $"{App.Current.As<App>().ApplicationName} [designer]";
+            Title = $"{App.ThisApp.ApplicationName} [designer]";
             SelectedIcon = default;
             IsSingleColorSelected = true;
             IsEditorEnabled = false;
@@ -27,7 +25,8 @@ namespace MakeCompositeIcon {
                 CompositeIconData.IconTypes.FullOverlay,
                 CompositeIconData.IconTypes.SubscriptedOverlay
             };
-            UndoRedoVisibility = Visibility.Collapsed;
+            GuideBrush = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0));
+            HideSettings();
         }
 
         public void Reset() {
@@ -36,31 +35,36 @@ namespace MakeCompositeIcon {
             }
             IsSingleColorSelected = false;
             IsEditorEnabled = false;
-            IsColorExpanded = false;
-            IsFontExpanded = false;
-            IsGlyphExpanded = false;
-            IsIconTypeExpanded = false;
             IsSingleFontSelected = false;
             IsSingleSizeSelected = false;
             SubscriptVisibility = Visibility.Collapsed;
             CenteredVisibility = Visibility.Collapsed;
         }
 
+        internal void HideSettings() {
+            CharactersVisibility = Visibility.Collapsed;
+            SizeVisibility = Visibility.Collapsed;
+            FontsVisibility = Visibility.Collapsed;
+            ColorsVisibility = Visibility.Collapsed;
+            IconTypeVisibility = Visibility.Collapsed;
+        }
+
         public override void Initialize() {
             base.Initialize();
 
-            Title = App.Current.As<App>().ApplicationName;
-            var files = new DirectoryInfo(App.Current.As<App>().FilesDirectory).GetFiles("*.compo");
+            Title = App.ThisApp.ApplicationName;
+            var files = new DirectoryInfo(App.ThisApp.FilesDirectory).GetFiles("*.compo");
             foreach (var file in files.OrderBy(x => x.Name)) {
                 var icon = CompositeIcon.FromFile(file.FullName);
                 Icons.Add(icon);
             }
-
+            OffsetVisibility = Visibility.Hidden;
             var fonts = System.Windows.Media.Fonts.SystemFontFamilies.OrderBy(x => x.Source);
             Fonts.AddRange(fonts);
+            cachedCharacters = new Dictionary<string, List<CharInfo>>();
         }
 
-        internal double glyphFontSize => (double)App.Current.Resources["GlyphFontSize"];
+        internal double glyphFontSize => (double)App.ThisApp.Resources["GlyphFontSize"];
 
         #region PrimaryCharacters Property
         private ObservableCollection<CharInfo> _PrimaryCharacters = default;
@@ -83,38 +87,6 @@ namespace MakeCompositeIcon {
             get => _SecondaryCharacters;
             set {
                 _SecondaryCharacters = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region SelectedPrimaryCharacter Property
-        private CharInfo _SelectedPrimaryCharacter = default;
-        /// <summary>Gets/sets the SelectedPrimaryCharacter.</summary>
-        /// <value>The SelectedCharacter.</value>
-        public CharInfo SelectedPrimaryCharacter {
-            get => _SelectedPrimaryCharacter;
-            set {
-                _SelectedPrimaryCharacter = value;
-                if(SelectedIcon != null) {
-                    SelectedIcon.PrimaryGlyph = SelectedPrimaryCharacter.Image.ToCharArray()[0];
-                }
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region SelectedSecondaryCharacter Property
-        private CharInfo _SelectedSecondaryCharacter = default;
-        /// <summary>Gets/sets the SelectedSecondaryCharacter.</summary>
-        /// <value>The SelectedSecondaryCharacter.</value>
-        public CharInfo SelectedSecondaryCharacter {
-            get => _SelectedSecondaryCharacter;
-            set {
-                _SelectedSecondaryCharacter = value;
-                if (SelectedIcon != null) {
-                    SelectedIcon.SecondaryGlyph = SelectedSecondaryCharacter.Image.ToCharArray()[0];
-                }
                 OnPropertyChanged();
             }
         }
@@ -259,6 +231,8 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
+        private Dictionary<string, List<CharInfo>> cachedCharacters = default;
+
         #region SelectedIcon Property
         private CompositeIcon _SelectedIcon = default;
         /// <summary>Gets/sets the SelectedIcon.</summary>
@@ -276,8 +250,7 @@ namespace MakeCompositeIcon {
                     SelectedIcon.PropertyChanged += SelectedIcon_PropertyChanged;
 
                     SelectedIcon.IsLoadComplete = false;
-                    SelectedIcon.PrimaryGlyph = SelectedIcon.PrimaryGlyph;
-                    SelectedIcon.SecondaryGlyph = SelectedIcon.SecondaryGlyph;
+
                     SelectedIcon.PrimarySize = SelectedIcon.PrimarySize;
                     SelectedIcon.SecondarySize = SelectedIcon.SecondarySize;
                     SelectedIcon.PrimaryBrush = SelectedIcon.PrimaryBrush;
@@ -286,39 +259,85 @@ namespace MakeCompositeIcon {
                     SelectedIcon.SurfaceBrush = SelectedIcon.SurfaceBrush;
                     SelectedIcon.PrimaryFontFamily = SelectedIcon.PrimaryFontFamily;
                     SelectedIcon.SecondaryFontFamily = SelectedIcon.SecondaryFontFamily;
+                    
                     PrimaryCharacters ??= new ObservableCollection<CharInfo>();
                     SecondaryCharacters ??= new ObservableCollection<CharInfo>();
+                    
                     PrimaryCharacters.Clear();
                     SecondaryCharacters.Clear();
 
                     if (SelectedIcon.PrimaryFontFamily != null) {
-                        var chars = GetCharacters(SelectedIcon.PrimaryFontFamily, glyphFontSize);
-                        if(chars != null) {                            
-                            PrimaryCharacters.AddRange(chars);
-                            SelectedPrimaryCharacter = PrimaryCharacters.FirstOrDefault(x => x.Image == SelectedIcon.PrimaryGlyph.ToString());
+                        if (!cachedCharacters.ContainsKey(SelectedIcon.PrimaryFontFamily.Source)) {
+                            var chars = GetCharacters(SelectedIcon.PrimaryFontFamily, glyphFontSize);
+                            cachedCharacters.Add(SelectedIcon.PrimaryFontFamily.Source, chars);
                         }
+                        PrimaryCharacters.AddRange(cachedCharacters[SelectedIcon.PrimaryFontFamily.Source]);
+                        
                     }
                     if (SelectedIcon.SecondaryFontFamily != null) {
-                        if(SelectedIcon.SecondaryFontFamily.Source == SelectedIcon.PrimaryFontFamily.Source) {
-                            SecondaryCharacters = PrimaryCharacters;
-                        }
-                        else {
+                        if (!cachedCharacters.ContainsKey(SelectedIcon.SecondaryFontFamily.Source)) {
                             var chars = GetCharacters(SelectedIcon.SecondaryFontFamily, glyphFontSize);
-                            if (chars != null) {                                
-                                SecondaryCharacters.AddRange(chars);
-                                SelectedSecondaryCharacter = SecondaryCharacters.FirstOrDefault(x => x.Image == SelectedIcon.SecondaryGlyph.ToString());
-                            }
+                            cachedCharacters.Add(SelectedIcon.SecondaryFontFamily.Source, chars);
                         }
+                        SecondaryCharacters.AddRange(cachedCharacters[SelectedIcon.SecondaryFontFamily.Source]);
                     }
+
+                    PrimaryGlyph = PrimaryCharacters.FirstOrDefault(x => x.Index == SelectedIcon.PrimaryGlyph);
+                    SecondaryGlyph = SecondaryCharacters.FirstOrDefault(x => x.Index == SelectedIcon.SecondaryGlyph);
 
                     IsSingleColorSelected = SelectedIcon.SecondaryBrush == null
                         || (SelectedIcon.PrimaryBrush.Color.ToHexValue() == SelectedIcon.SecondaryBrush.Color.ToHexValue());
                     IsSingleSizeSelected = SelectedIcon.PrimarySize == SelectedIcon.SecondarySize;
+
+                    OffsetVisibility = Visibility.Hidden;
+                    if (SelectedIcon.IconType == CompositeIconData.IconTypes.FullOverlay) {
+                        OffsetVisibility = Visibility.Visible;
+                        RecalcOffsets();
+                    }
+
+                    ShowSettingTypeCommand.Execute("Characters");
                     SelectedIcon.IsLoadComplete = true;
                 }
                 IsEditorEnabled = SelectedIcon != null;
                 OnPropertyChanged();
             }
+        }
+
+        #region PrimaryGlyph Property
+        private CharInfo _PrimaryGlyph = default;
+        /// <summary>Gets/sets the PrimaryGlyph.</summary>
+        /// <value>The PrimaryGlyph.</value>
+        public CharInfo PrimaryGlyph {
+            get => _PrimaryGlyph;
+            set {
+                _PrimaryGlyph = value;
+                if (PrimaryGlyph.Index > 0)
+                    SelectedIcon.PrimaryGlyph = PrimaryGlyph.Image.ToCharArray()[0];
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SecondaryGlyph Property
+        private CharInfo _SecondaryGlyph = default;
+        /// <summary>Gets/sets the SecondaryGlyph.</summary>
+        /// <value>The SecondaryGlyph.</value>
+        public CharInfo SecondaryGlyph {
+            get => _SecondaryGlyph;
+            set {
+                _SecondaryGlyph = value;
+                if (SecondaryGlyph.Index > 0)
+                    SelectedIcon.SecondaryGlyph = SecondaryGlyph.Image.ToCharArray()[0];
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        private void RecalcOffsets() {
+            OffsetPositive = SelectedIcon.PrimarySize - SelectedIcon.SecondarySize.Value;
+            OffsetNegative = -(SelectedIcon.PrimarySize - SelectedIcon.SecondarySize.Value);
+            SecondaryMargin = new Thickness(SelectedIcon.SecondayHorizontalOffset,
+                SelectedIcon.SecondaryVerticalOffset, 0, 0);
         }
 
         private void SelectedIcon_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
@@ -328,10 +347,17 @@ namespace MakeCompositeIcon {
                     icon.SecondaryBrush = SelectedIcon.PrimaryBrush;
                 }
             }
+            else if (e.PropertyName == nameof(CompositeIcon.SurfaceBrush)) {
+                GuideBrush = icon.SurfaceBrush.Invert(128);
+            }
             else if (e.PropertyName == nameof(CompositeIcon.PrimarySize)) {
                 if (IsSingleSizeSelected) {
                     icon.SecondarySize = SelectedIcon.PrimarySize;
                 }
+                RecalcOffsets();
+            }
+            else if (e.PropertyName == nameof(CompositeIcon.SecondarySize)) {
+                RecalcOffsets();
             }
             else if (e.PropertyName == nameof(CompositeIcon.PrimaryFontFamily)) {
                 if (IsSingleFontSelected) {
@@ -346,26 +372,23 @@ namespace MakeCompositeIcon {
                     icon.SecondarySize = MaxOverlayIconSize;
                 }
             }
-            else if(e.PropertyName == nameof(CompositeIcon.PrimaryFontFamily)) {
+            else if (e.PropertyName == nameof(CompositeIcon.PrimaryFontFamily)) {
                 var chars = GetCharacters(icon.PrimaryFontFamily, icon.PrimarySize);
                 if (chars != null) {
                     PrimaryCharacters = new ObservableCollection<CharInfo>(chars);
                 }
             }
-            if (e.PropertyName == nameof(CompositeIcon.SecondarySize) 
+            else if (e.PropertyName == nameof(CompositeIcon.SecondaryVerticalOffset)
+                || e.PropertyName == nameof(CompositeIcon.SecondayHorizontalOffset)) {
+                SecondaryMargin = new Thickness(SelectedIcon.SecondayHorizontalOffset,
+                           SelectedIcon.SecondaryVerticalOffset, 0, 0);
+            }
+            if (e.PropertyName == nameof(CompositeIcon.SecondarySize)
                     || e.PropertyName == nameof(CompositeIcon.PrimarySize)
                     || e.PropertyName == nameof(CompositeIcon.IsLoadComplete)) {
                 return;
             }
-            if (icon.IsLoadComplete) {
-                var prop = SelectedIcon.GetType().GetProperty(e.PropertyName);
-                if (prop != null) {
-                    var value = prop.GetValue(icon, null);
-                    
-                    Clipboard.SetText($"{e.PropertyName}={value}", TextDataFormat.Text);
-                    UpdateInterface();
-                }
-            }
+            UpdateInterface();
         }
 
         private List<CharInfo> GetCharacters(System.Windows.Media.FontFamily fontFamily, double size) =>
@@ -382,106 +405,6 @@ namespace MakeCompositeIcon {
             set {
                 _Fonts = value;
                 OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region IsIconTypeExpanded Property
-        private bool _IsIconTypeExpanded = default;
-        /// <summary>Gets/sets the IsIconTypeExpanded.</summary>
-        /// <value>The IsIconTypeExpanded.</value>
-        public bool IsIconTypeExpanded {
-            get => _IsIconTypeExpanded;
-            set {
-                _IsIconTypeExpanded = value;
-                OnPropertyChanged();
-
-                if (!value)
-                    return;
-                IsGlyphExpanded = false;
-                IsSizeExpanded = false;
-                IsColorExpanded = false;
-                IsFontExpanded = false;
-            }
-        }
-        #endregion
-
-        #region IsColorExpanded Property
-        private bool _IsColorExpanded = default;
-        /// <summary>Gets/sets the IsColorExpanded.</summary>
-        /// <value>The IsColorExpanded.</value>
-        public bool IsColorExpanded {
-            get => _IsColorExpanded;
-            set {
-                _IsColorExpanded = value;
-                OnPropertyChanged();
-
-                if (!value)
-                    return;
-                IsGlyphExpanded = false;
-                IsIconTypeExpanded = false;
-                IsSizeExpanded = false;
-                IsFontExpanded = false;
-            }
-        }
-        #endregion
-
-        #region IsFontExpanded Property
-        private bool _IsFontExpanded = default;
-        /// <summary>Gets/sets the IsFontExpanded.</summary>
-        /// <value>The IsFontExpanded.</value>
-        public bool IsFontExpanded {
-            get => _IsFontExpanded;
-            set {
-                _IsFontExpanded = value;
-                OnPropertyChanged();
-
-                if (!value)
-                    return;
-                IsGlyphExpanded = false;
-                IsIconTypeExpanded = false;
-                IsSizeExpanded = false;
-                IsColorExpanded = false;
-            }
-        }
-        #endregion
-
-        #region IsSizeExpanded Property
-        private bool _IsSizeExpanded = default;
-        /// <summary>Gets/sets the IsSizeExpanded.</summary>
-        /// <value>The IsSizeExpanded.</value>
-        public bool IsSizeExpanded {
-            get => _IsSizeExpanded;
-            set {
-                _IsSizeExpanded = value;
-                OnPropertyChanged();
-
-                if (!value)
-                    return;
-                IsGlyphExpanded = false;
-                IsIconTypeExpanded = false;
-                IsColorExpanded = false;
-                IsFontExpanded = false;
-            }
-        }
-        #endregion
-
-        #region IsGlyphExpanded Property
-        private bool _IsGlyphExpanded = default;
-        /// <summary>Gets/sets the IsGlyphExpanded.</summary>
-        /// <value>The IsGlyphExpanded.</value>
-        public bool IsGlyphExpanded {
-            get => _IsGlyphExpanded;
-            set {
-                _IsGlyphExpanded = value;
-                OnPropertyChanged();
-
-                if (!value)
-                    return;
-                IsIconTypeExpanded = false;
-                IsSizeExpanded = false;
-                IsColorExpanded = false;
-                IsFontExpanded = false;
             }
         }
         #endregion
@@ -524,14 +447,131 @@ namespace MakeCompositeIcon {
             UpdateInterface();
         }
 
-        #region UndoRedoVisibility Property
-        private Visibility _UndoRedoVisibility = default;
-        /// <summary>Gets/sets the UndoRedoVisibility.</summary>
-        /// <value>The UndoRedoVisibility.</value>
-        public Visibility UndoRedoVisibility {
-            get => _UndoRedoVisibility;
+        #region OffsetNegative Property
+        private double _OffsetNegative = default;
+        /// <summary>Gets/sets the OffsetNegative.</summary>
+        /// <value>The OffsetNegative.</value>
+        public double OffsetNegative {
+            get => _OffsetNegative;
             set {
-                _UndoRedoVisibility = value;
+                _OffsetNegative = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region OffsetPositive Property
+        private double _OffsetPositive = default;
+        /// <summary>Gets/sets the OffsetPositive.</summary>
+        /// <value>The OffsetPositive.</value>
+        public double OffsetPositive {
+            get => _OffsetPositive;
+            set {
+                _OffsetPositive = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region OffsetVisibility Property
+        private Visibility _OffsetVisibility = default;
+        /// <summary>Gets/sets the OffsetVisibility.</summary>
+        /// <value>The OffsetVisibility.</value>
+        public Visibility OffsetVisibility {
+            get => _OffsetVisibility;
+            set {
+                _OffsetVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SecondaryMargin Property
+        private Thickness _SecondaryMargin = default;
+        /// <summary>Gets/sets the SecondaryMargin.</summary>
+        /// <value>The SecondaryMargin.</value>
+        public Thickness SecondaryMargin {
+            get => _SecondaryMargin;
+            set {
+                _SecondaryMargin = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region GuideBrush Property
+        private SolidColorBrush _GuideBrush = default;
+        /// <summary>Gets/sets the GuideBrush.</summary>
+        /// <value>The GuideBrush.</value>
+        public SolidColorBrush GuideBrush {
+            get => _GuideBrush;
+            set {
+                _GuideBrush = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IconTypeVisibility Property
+        private Visibility _IconTypeVisibility = default;
+        /// <summary>Gets/sets the IconTypeVisibility.</summary>
+        /// <value>The IconTypeVisibility.</value>
+        public Visibility IconTypeVisibility {
+            get => _IconTypeVisibility;
+            set {
+                _IconTypeVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ColorsVisibility Property
+        private Visibility _ColorsVisibility = default;
+        /// <summary>Gets/sets the ColorsVisibility.</summary>
+        /// <value>The ColorsVisibility.</value>
+        public Visibility ColorsVisibility {
+            get => _ColorsVisibility;
+            set {
+                _ColorsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region FontsVisibility Property
+        private Visibility _FontsVisibility = default;
+        /// <summary>Gets/sets the FontsVisibility.</summary>
+        /// <value>The FontsVisibility.</value>
+        public Visibility FontsVisibility {
+            get => _FontsVisibility;
+            set {
+                _FontsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SizeVisibility Property
+        private Visibility _SizeVisibility = default;
+        /// <summary>Gets/sets the SizeVisibility.</summary>
+        /// <value>The SizeVisibility.</value>
+        public Visibility SizeVisibility {
+            get => _SizeVisibility;
+            set {
+                _SizeVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region CharactersVisibility Property
+        private Visibility _CharactersVisibility = default;
+        /// <summary>Gets/sets the CharactersVisibility.</summary>
+        /// <value>The CharactersVisibility.</value>
+        public Visibility CharactersVisibility {
+            get => _CharactersVisibility;
+            set {
+                _CharactersVisibility = value;
                 OnPropertyChanged();
             }
         }

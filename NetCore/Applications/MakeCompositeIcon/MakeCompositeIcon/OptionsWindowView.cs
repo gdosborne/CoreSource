@@ -16,6 +16,7 @@ namespace MakeCompositeIcon {
             base.Initialize();
 
             Title = "Options";
+            IsUseLastPositionChecked = App.ThisApp.IsUseLastPositionChecked;
         }
 
         #region DialogResult Property
@@ -26,6 +27,20 @@ namespace MakeCompositeIcon {
             get => _DialogResult;
             set {
                 _DialogResult = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsUseLastPositionChecked Property
+        private bool _IsUseLastPositionChecked = default;
+        /// <summary>Gets/sets the IsUseLastPositionChecked.</summary>
+        /// <value>The IsUseLastPositionChecked.</value>
+        public bool IsUseLastPositionChecked {
+            get => _IsUseLastPositionChecked;
+            set {
+                _IsUseLastPositionChecked = value;
+                App.ThisApp.IsUseLastPositionChecked = IsUseLastPositionChecked;
                 OnPropertyChanged();
             }
         }

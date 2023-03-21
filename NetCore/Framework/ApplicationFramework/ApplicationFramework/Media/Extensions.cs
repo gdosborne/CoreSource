@@ -220,6 +220,16 @@ namespace Common.Application.Media {
             return result;
         }
 
+        public static Color Invert(this Color value) {
+            var argb = value.ToColor().ToArgb();
+            var inverse = argb ^ 0xffffff;
+            var c = System.Drawing.Color.FromArgb(inverse);
+            return c.ToColor();
+        }
+
+        public static SolidColorBrush Invert(this SolidColorBrush value) => new(value.Color.Invert());
+        public static SolidColorBrush Invert(this SolidColorBrush value, byte alpha) => new(value.Color.Invert().ReduceAlpha(alpha));
+
         public static Color ReduceAlpha(this Color original, byte alpha) => Color.FromArgb(alpha, original.R, original.G, original.B);
 
         public static SolidColorBrush ToMediaBrush(this System.Drawing.Color value) => new(Color.FromArgb(value.A, value.R, value.G, value.B));

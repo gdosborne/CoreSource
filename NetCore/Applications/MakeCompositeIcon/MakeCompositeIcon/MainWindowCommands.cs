@@ -23,7 +23,8 @@ namespace MakeCompositeIcon {
             OpenSettings,
             SelectColor,
             Delete,
-            ViewXaml
+            ViewXaml,
+            ShowSettingType
         }
 
         #region FileOpenCommand
@@ -189,6 +190,21 @@ namespace MakeCompositeIcon {
             ExecuteAction(nameof(Actions.ViewXaml));
         }
         #endregion
+
+        #region ShowSettingTypeCommand
+        private DelegateCommand _ShowSettingTypeCommand = default;
+        /// <summary>Gets the ShowSettingType command.</summary>
+        /// <value>The ShowSettingType command.</value>
+        public DelegateCommand ShowSettingTypeCommand => _ShowSettingTypeCommand ??= new DelegateCommand(ShowSettingType, ValidateShowSettingTypeState);
+        private bool ValidateShowSettingTypeState(object state) => true;
+        private void ShowSettingType(object state) {
+            var p = new Dictionary<string, object> {
+                { "Type", (string)state }
+            };
+            ExecuteAction(nameof(Actions.ShowSettingType), p);
+        }
+        #endregion
+
 
     }
     

@@ -16,7 +16,7 @@ namespace MakeCompositeIcon {
             MySession = new Session(ApplicationDirectory, ApplicationName,
                 Common.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
                 Common.Application.Logging.ApplicationLogger.StorageOptions.CreateFolderForEachDay);
-            App.Current.As<App>().MySession.Logger.LogMessage("Application starting",
+            App.ThisApp.MySession.Logger.LogMessage("Application starting",
                 Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
 
             ProcessDirectories();
@@ -26,8 +26,10 @@ namespace MakeCompositeIcon {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
+        public static App ThisApp => App.Current.As<App>();
+
         private void App_Exit(object sender, ExitEventArgs e) {
-            App.Current.As<App>().MySession.Logger.LogMessage("Application exiting",
+            App.ThisApp.MySession.Logger.LogMessage("Application exiting",
                 Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
         }
 
@@ -61,6 +63,11 @@ namespace MakeCompositeIcon {
         public string SettingsDirectory { get; private set; }
         public Session MySession { get; private set; }
 
+        public bool IsUseLastPositionChecked {
+            get => App.ThisApp.MySession.ApplicationSettings.GetValue("Application", nameof(IsUseLastPositionChecked), true);
+            set => App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", nameof(IsUseLastPositionChecked), value);
+        }
+
         internal void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
             HandleException(e.Exception);
         }
@@ -70,7 +77,7 @@ namespace MakeCompositeIcon {
         }
 
         public static void HandleException(Exception ex) {
-            App.Current.As<App>().MySession.Logger.LogMessage(ex.ToString(), Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
+            ThisApp.MySession.Logger.LogMessage(ex.ToString(), Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
         }
     }
 }

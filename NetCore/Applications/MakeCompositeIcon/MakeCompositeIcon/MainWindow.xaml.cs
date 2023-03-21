@@ -17,12 +17,23 @@ namespace MakeCompositeIcon {
             View.Initialize();
             Closing += MainWindow_Closing;
             View.ExecuteUiAction += View_ExecuteUiAction;
-            App.Current.DispatcherUnhandledException += App.Current.As<App>().App_DispatcherUnhandledException;
+            App.Current.DispatcherUnhandledException += App.ThisApp.App_DispatcherUnhandledException;
         }
 
         private async void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.Actions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.Actions.ShowSettingType: {
+                            View.HideSettings();
+                            switch ((string)e.Parameters["Type"]) {
+                                case "IconType": View.IconTypeVisibility = Visibility.Visible; break;
+                                case "Colors": View.ColorsVisibility = Visibility.Visible; break;
+                                case "Fonts": View.FontsVisibility = Visibility.Visible; break;
+                                case "FontSizes": View.SizeVisibility = Visibility.Visible; break;
+                                case "Characters": View.CharactersVisibility = Visibility.Visible; break;
+                            }
+                            break;
+                        }
                     case MainWindowView.Actions.ViewXaml: {
                             var win = new ViewCodeWindow {
                                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -67,7 +78,7 @@ namespace MakeCompositeIcon {
                                 File.Delete(View.SelectedIcon.FullPath); 
                             }
                             else {
-                                var recycleFilename = Path.Combine(App.Current.As<App>().RecycleDirectory, 
+                                var recycleFilename = Path.Combine(App.ThisApp.RecycleDirectory, 
                                     $"{Guid.NewGuid()}_{View.SelectedIcon.Filename}");
                                 File.Move(View.SelectedIcon.FullPath, recycleFilename);
                             }
@@ -79,8 +90,8 @@ namespace MakeCompositeIcon {
                             if (View.SelectedIcon == null)
                                 return;
                             if (string.IsNullOrEmpty(View.SelectedIcon.Filename)) {
-                                var lastDir = App.Current.As<App>().MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
-                                    App.Current.As<App>().FilesDirectory);
+                                var lastDir = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
+                                    App.ThisApp.FilesDirectory);
                                 var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog {
                                     AddExtension = true,
                                     CheckFileExists = false,
@@ -97,7 +108,7 @@ namespace MakeCompositeIcon {
                                 if (result.HasValue && result.Value) {
                                     if (View.SelectedIcon != null) {
                                         await View.SelectedIcon.Save(dialog.FileName);
-                                        App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
+                                        App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
                                             Path.GetDirectoryName(dialog.FileName));
                                         View.Icons.Add(CompositeIcon.FromFile(dialog.FileName));
                                     }
@@ -108,8 +119,8 @@ namespace MakeCompositeIcon {
                             break;
                         }
                     case MainWindowView.Actions.FileOpen: {
-                            var lastDir = App.Current.As<App>().MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
-                                        App.Current.As<App>().FilesDirectory);
+                            var lastDir = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
+                                        App.ThisApp.FilesDirectory);
                             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
                                 AddExtension = false,
                                 CheckFileExists = true,
@@ -124,7 +135,7 @@ namespace MakeCompositeIcon {
                             if (result.HasValue && result.Value) {
                                 var icon = View.Icons.FirstOrDefault(x => x.Filename.Equals(dialog.FileName, StringComparison.OrdinalIgnoreCase));
                                 if (icon == null) {
-                                    App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
+                                    App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
                                         Path.GetDirectoryName(dialog.FileName));
                                     icon = CompositeIcon.FromFile(dialog.FileName);
                                     View.Icons.Add(icon);
@@ -180,38 +191,46 @@ namespace MakeCompositeIcon {
         }
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Left", RestoreBounds.Left);
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Top", RestoreBounds.Top);
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Width", RestoreBounds.Width);
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Height", RestoreBounds.Height);
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "WindowState", WindowState);
-            App.Current.As<App>().MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "ListColumnWidth", ListColumn.ActualWidth);
-
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Left", RestoreBounds.Left);
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Top", RestoreBounds.Top);
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Width", RestoreBounds.Width);
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "Height", RestoreBounds.Height);
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "WindowState", WindowState);
+            App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), "ListColumnWidth", ListColumn.ActualWidth);
         }
 
         protected override void OnSourceInitialized(EventArgs e) {
             base.OnSourceInitialized(e);
 
             MainToolbar.RemoveOverflow();
+            ItemToolbar.RemoveOverflow();
 
-            Left = App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Left", double.IsInfinity(Left) ? 0 : Left);
-            Top = App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Top", double.IsInfinity(Top) ? 0 : Top);
-            Width = App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Width", Width);
-            Height = App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Height", Height);
-            WindowState = App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "WindowState", WindowState);
-            ListColumn.Width = new GridLength(App.Current.As<App>().MySession.ApplicationSettings.GetValue(nameof(MainWindow), "ListColumnWidth", 250.0));
+            if (App.ThisApp.IsUseLastPositionChecked) {
+                Left = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Left", double.IsInfinity(Left) ? 0 : Left);
+                Top = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Top", double.IsInfinity(Top) ? 0 : Top);
+                Width = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Width", Width);
+                Height = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "Height", Height);
+                WindowState = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "WindowState", WindowState);
+                ListColumn.Width = new GridLength(App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(MainWindow), "ListColumnWidth", 250.0));
+            }
         }
 
         internal MainWindowView View => DataContext.As<MainWindowView>();
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
 
-        private void SecondSlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+        private void SecondSlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) =>
             View.UpdateClipWithSize(nameof(CompositeIcon.SecondarySize));
+
+        private void PrimarySlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) =>
+            View.UpdateClipWithSize(nameof(CompositeIcon.PrimarySize));
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            sender.As<ListBox>().ScrollIntoView(sender.As<ListBox>().SelectedItem);
         }
 
-        private void PrimarySlider_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            View.UpdateClipWithSize(nameof(CompositeIcon.PrimarySize));
+        private void ListBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
+            sender.As<ListBox>().ScrollIntoView(sender.As<ListBox>().SelectedItem);
         }
     }
 }

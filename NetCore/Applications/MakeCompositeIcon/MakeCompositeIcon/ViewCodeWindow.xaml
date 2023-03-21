@@ -17,17 +17,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <RadioButton Style="{DynamicResource StandardRadioButton}" Content="Desktop" GroupName="DestinationType"
-                         IsChecked="{Binding IsDesktopChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-            <RadioButton Style="{DynamicResource StandardRadioButton}" Content="UWP" GroupName="DestinationType"
-                         IsChecked="{Binding IsUWPChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-            <TextBlock Style="{DynamicResource StandardTextBlock}" Margin="20,0,0,0" VerticalAlignment="Center">
-                Note: Desktop Xaml will work in UWP, but not vice-versa
-            </TextBlock>
-        </StackPanel>
-
-        <TextBox Grid.Row="1" Style="{DynamicResource CodeTextBox}"
+        <TextBox Grid.Row="1" Style="{DynamicResource CodeTextBox}" Padding="5"
                  Text="{Binding XamlText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10">

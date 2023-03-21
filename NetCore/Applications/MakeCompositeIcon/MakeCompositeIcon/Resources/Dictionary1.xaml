@@ -14,6 +14,22 @@
     <FontFamily x:Key="PeopleFontFamily">pack://application:,,,/Fonts/#People</FontFamily>
 
     <SolidColorBrush x:Key="VertLightBrush" Color="#FFF9F9F9" />
+    <SolidColorBrush x:Key="ToggleOnBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ToggleOnForeground" Color="#FF2222FF" />
+    <SolidColorBrush x:Key="ToggleOffBackground" Color="#FFCCCCCC" />
+    <SolidColorBrush x:Key="ToggleOffForeground" Color="#FF000000" />
+
+    <Style TargetType="Core:ToggleSwitch">
+        <Setter Property="OnContent" Value="Yes" />
+        <Setter Property="OffContent" Value="No" />
+        <Setter Property="Margin" Value="10,-5,10,0" />
+        <Setter Property="FontSize" Value="{DynamicResource MenuIconSize}" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="OnFillBrush" Value="{DynamicResource ToggleOnBackground}" />
+        <Setter Property="FillBrush" Value="{DynamicResource ToggleOffBackground}" />
+        <Setter Property="OnThumbBrush" Value="{DynamicResource ToggleOnForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource ToggleOffForeground}" />
+    </Style>
 
     <Style TargetType="Core:FontIcon" x:Key="ToolbarIcon">
         <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
@@ -231,5 +247,11 @@
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Line" x:Key="GuidLine">
+        <Setter Property="StrokeDashArray" Value="7" />
+        <Setter Property="X1" Value="0" />
+        <Setter Property="Y1" Value="0" />
     </Style>
 </ResourceDictionary>
