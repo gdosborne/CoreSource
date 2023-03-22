@@ -56,6 +56,15 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
+		<Compile Include="RecycleBinWindow.xaml.cs">
+			<DependentUpon>RecycleBinWindow.xaml</DependentUpon>
+		</Compile>
+		<Compile Include="RecycleBinWindowCommands.cs">
+			<DependentUpon>RecycleBinWindow.xaml</DependentUpon>
+		</Compile>
+		<Compile Include="RecycleBinWindowView.cs">
+			<DependentUpon>RecycleBinWindow.xaml</DependentUpon>
+		</Compile>
 		<Compile Include="TesterWindow.xaml.cs" />
 		<Compile Include="ViewCodeWindow.xaml.cs">
 			<DependentUpon>ViewCodeWindow.xaml</DependentUpon>

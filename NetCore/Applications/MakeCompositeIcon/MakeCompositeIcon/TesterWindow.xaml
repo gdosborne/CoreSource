@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TesterWindow" Height="450" Width="800">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Grid Background="#00FFFFFF">
+        <Grid Background="#002645CB">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.5*" />
@@ -16,8 +16,8 @@
                 <RowDefinition Height="0.5*" />
                 <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="" FontFamily="Segoe Fluent Icons" FontSize="200" Foreground="#FF000000" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-            <TextBlock Text="" FontFamily="People" FontSize="60.60606060606062" Foreground="#FF000000" Margin="79.89796121664277,-56.949016795170664,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <TextBlock Text=""  FontFamily="Segoe Fluent Icons" FontSize="64" Foreground="#FFA40000" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <TextBlock Text="" FontFamily="Segoe Fluent Icons" FontSize="49.577464788732385" Foreground="#FFFEFEFE" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
         </Grid>
     </Grid>
 </Window>

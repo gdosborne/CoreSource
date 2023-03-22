@@ -1,6 +1,9 @@
 ﻿using Common.Application;
 using Common.Application.Primitives;
+using Ookii.Dialogs.Wpf;
 using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using sysio = System.IO;
@@ -24,6 +27,7 @@ namespace MakeCompositeIcon {
             Exit += App_Exit;
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            ThisApp.Resources["RootFontSize"] = ThisApp.BaseFontSize;
         }
 
         public static App ThisApp => App.Current.As<App>();
@@ -68,6 +72,19 @@ namespace MakeCompositeIcon {
             set => App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", nameof(IsUseLastPositionChecked), value);
         }
 
+        public bool AreGuidesShown {
+            get => App.ThisApp.MySession.ApplicationSettings.GetValue("Application", nameof(AreGuidesShown), true);
+            set => App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", nameof(AreGuidesShown), value);
+        }
+
+        public double BaseFontSize {
+            get => App.ThisApp.MySession.ApplicationSettings.GetValue("Application", nameof(BaseFontSize), 18.0);
+            set {
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", nameof(BaseFontSize), value);
+                App.ThisApp.Resources["RootFontSize"] = value;
+            }
+        }
+
         internal void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
             HandleException(e.Exception);
         }
@@ -78,6 +95,43 @@ namespace MakeCompositeIcon {
 
         public static void HandleException(Exception ex) {
             ThisApp.MySession.Logger.LogMessage(ex.ToString(), Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
+        }
+
+        public static void ClearRecycleBin() {
+            var numberOfFiles = 0;
+            var dir = new DirectoryInfo(App.ThisApp.RecycleDirectory);
+            if (dir.Exists) {
+                numberOfFiles = dir.GetFiles().Count();
+            }
+            else {
+                return;
+            }
+            var td = new TaskDialog {
+                MainIcon = TaskDialogIcon.Shield,
+                MainInstruction = $"Clear recycle bin?",
+                AllowDialogCancellation = true,
+                ButtonStyle = TaskDialogButtonStyle.Standard,
+                Content = $"You are about to clear the recycle bin of {numberOfFiles} icons. Doing so " +
+                    $"will remove those files permanently.\n\nAre you sure you want to clear" +
+                    $"the recycle bin?",
+                CenterParent = true,
+                MinimizeBox = false,
+                WindowTitle = "Clear recycle bin..."
+            };
+            td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
+            td.Buttons.Add(new TaskDialogButton(ButtonType.No));
+            var result = td.ShowDialog();
+            if (result.ButtonType == ButtonType.No) {
+                return;
+            }
+            dir.GetFiles().ToList().ForEach(x => x.Delete());
+        }
+
+        public static bool RecyleBinHasFiles {
+            get {
+                var dir = new DirectoryInfo(App.ThisApp.RecycleDirectory);
+                return dir.Exists && dir.GetFiles().Any();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using Common.Application.Windows;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MakeCompositeIcon {
     public partial class ViewCodeWindow : Window {
@@ -16,6 +17,8 @@ namespace MakeCompositeIcon {
                 Width = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(ViewCodeWindow), "Width", Width);
                 Height = App.ThisApp.MySession.ApplicationSettings.GetValue(nameof(ViewCodeWindow), "Height", Height);
             }
+
+            View.Initialize();
         }
 
         private void ViewCodeWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
@@ -38,5 +41,7 @@ namespace MakeCompositeIcon {
             this.HideControlBox();
             this.HideMinimizeAndMaximizeButtons();
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
     }
 }

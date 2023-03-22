@@ -1,4 +1,5 @@
 ﻿using ApplicationFramework.Media;
+using Common.Application.Primitives;
 using Common.MVVMFramework;
 
 namespace MakeCompositeIcon {
@@ -6,44 +7,15 @@ namespace MakeCompositeIcon {
 
         public ViewCodeWindowView() {
             Title = "View Xaml [designer]";
-            IsDesktopChecked = true;
         }
 
         public override void Initialize() {
             base.Initialize();
 
             Title = "View Xaml";
+            OutputIconSize = App.ThisApp.MySession.ApplicationSettings.GetValue("Application",
+                nameof(OutputIconSize), 32);
         }
-
-        #region IsUWPChecked Property
-        private bool _IsUWPChecked = default;
-        /// <summary>Gets/sets the IsUWPChecked.</summary>
-        /// <value>The IsUWPChecked.</value>
-        public bool IsUWPChecked {
-            get => _IsUWPChecked;
-            set {
-                _IsUWPChecked = value;
-                if (Icon != null)
-                    XamlText = Icon.GetXaml(IsUWPChecked);
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region IsDesktopChecked Property
-        private bool _IsDesktopChecked = default;
-        /// <summary>Gets/sets the IsDesktopChecked.</summary>
-        /// <value>The IsDesktopChecked.</value>
-        public bool IsDesktopChecked {
-            get => _IsDesktopChecked;
-            set {
-                _IsDesktopChecked = value;
-                if (Icon != null)
-                    XamlText = Icon.GetXaml(IsUWPChecked);
-                OnPropertyChanged();
-            }
-        }
-        #endregion
 
         #region DialogResult Property
         private bool _DialogResult = default;
@@ -66,8 +38,8 @@ namespace MakeCompositeIcon {
             get => _Icon;
             set {
                 _Icon = value;
-                if (Icon !=null) 
-                    XamlText = Icon.GetXaml(IsUWPChecked);
+                if (Icon != null)
+                    XamlText = Icon.GetXaml(OutputIconSize.CastTo<int>());
                 OnPropertyChanged();
             }
         }
@@ -81,6 +53,23 @@ namespace MakeCompositeIcon {
             get => _XamlText;
             set {
                 _XamlText = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region OutputIconSize Property
+        private double _OutputIconSize = default;
+        /// <summary>Gets/sets the OutputIconSize.</summary>
+        /// <value>The OutputIconSize.</value>
+        public double OutputIconSize {
+            get => _OutputIconSize;
+            set {
+                _OutputIconSize = value;
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application",
+                    nameof(OutputIconSize), OutputIconSize.CastTo<int>());
+                if (Icon != null)
+                    XamlText = Icon.GetXaml(OutputIconSize.CastTo<int>());
                 OnPropertyChanged();
             }
         }

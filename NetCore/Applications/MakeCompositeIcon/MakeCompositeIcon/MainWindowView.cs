@@ -26,6 +26,8 @@ namespace MakeCompositeIcon {
                 CompositeIconData.IconTypes.SubscriptedOverlay
             };
             GuideBrush = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0));
+            GuideVisibility = App.ThisApp.AreGuidesShown ? Visibility.Visible : Visibility.Hidden;
+            RenameVisibility = Visibility.Hidden;
             HideSettings();
         }
 
@@ -49,15 +51,20 @@ namespace MakeCompositeIcon {
             IconTypeVisibility = Visibility.Collapsed;
         }
 
-        public override void Initialize() {
-            base.Initialize();
-
-            Title = App.ThisApp.ApplicationName;
+        public void RefreshFiles() {
+            Icons.Clear();
             var files = new DirectoryInfo(App.ThisApp.FilesDirectory).GetFiles("*.compo");
             foreach (var file in files.OrderBy(x => x.Name)) {
                 var icon = CompositeIcon.FromFile(file.FullName);
                 Icons.Add(icon);
             }
+        }
+
+        public override void Initialize() {
+            base.Initialize();
+
+            Title = App.ThisApp.ApplicationName;
+            RefreshFiles();
             OffsetVisibility = Visibility.Hidden;
             var fonts = System.Windows.Media.Fonts.SystemFontFamilies.OrderBy(x => x.Source);
             Fonts.AddRange(fonts);
@@ -296,6 +303,7 @@ namespace MakeCompositeIcon {
                     }
 
                     ShowSettingTypeCommand.Execute("Characters");
+                    
                     SelectedIcon.IsLoadComplete = true;
                 }
                 IsEditorEnabled = SelectedIcon != null;
@@ -336,7 +344,7 @@ namespace MakeCompositeIcon {
         private void RecalcOffsets() {
             OffsetPositive = SelectedIcon.PrimarySize - SelectedIcon.SecondarySize.Value;
             OffsetNegative = -(SelectedIcon.PrimarySize - SelectedIcon.SecondarySize.Value);
-            SecondaryMargin = new Thickness(SelectedIcon.SecondayHorizontalOffset,
+            SecondaryMargin = new Thickness(SelectedIcon.SecondaryHorizontalOffset,
                 SelectedIcon.SecondaryVerticalOffset, 0, 0);
         }
 
@@ -379,8 +387,8 @@ namespace MakeCompositeIcon {
                 }
             }
             else if (e.PropertyName == nameof(CompositeIcon.SecondaryVerticalOffset)
-                || e.PropertyName == nameof(CompositeIcon.SecondayHorizontalOffset)) {
-                SecondaryMargin = new Thickness(SelectedIcon.SecondayHorizontalOffset,
+                || e.PropertyName == nameof(CompositeIcon.SecondaryHorizontalOffset)) {
+                SecondaryMargin = new Thickness(SelectedIcon.SecondaryHorizontalOffset,
                            SelectedIcon.SecondaryVerticalOffset, 0, 0);
             }
             if (e.PropertyName == nameof(CompositeIcon.SecondarySize)
@@ -572,6 +580,32 @@ namespace MakeCompositeIcon {
             get => _CharactersVisibility;
             set {
                 _CharactersVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region GuideVisibility Property
+        private Visibility _GuideVisibility = default;
+        /// <summary>Gets/sets the GuideVisibility.</summary>
+        /// <value>The GuideVisibility.</value>
+        public Visibility GuideVisibility {
+            get => _GuideVisibility;
+            set {
+                _GuideVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region RenameVisibility Property
+        private Visibility _RenameVisibility = default;
+        /// <summary>Gets/sets the RenameVisibility.</summary>
+        /// <value>The RenameVisibility.</value>
+        public Visibility RenameVisibility {
+            get => _RenameVisibility;
+            set {
+                _RenameVisibility = value;
                 OnPropertyChanged();
             }
         }

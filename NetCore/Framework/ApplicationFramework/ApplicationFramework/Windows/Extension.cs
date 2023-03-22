@@ -6,6 +6,7 @@ using System.Linq;
 using System.Management;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -20,6 +21,29 @@ namespace Common.Application.Windows {
         private static bool toParent;
 
         private static DispatcherTimer windowTimer;
+
+        public static Rect? GetItemBounds(this ListBox listBox, object o) {
+            int itemIndex = listBox.Items.IndexOf(o);
+            var listBoxItem = GetListBoxItem(listBox, itemIndex);
+
+            if (listBoxItem == null) return null;
+
+            var transform = listBoxItem.TransformToVisual((Visual)listBox.Parent).Transform(new Point());
+
+            var listViewItemBounds = VisualTreeHelper.GetDescendantBounds(listBoxItem);
+            listViewItemBounds.Offset(transform.X, transform.Y);
+
+            return listViewItemBounds;
+        }
+
+        private static ListBoxItem GetListBoxItem(ListBox listBox, int index) {
+            if (listBox.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                return null;
+
+            if (index == -1) return null;
+
+            return listBox.ItemContainerGenerator.ContainerFromIndex(index).As<ListBoxItem>();
+        }
 
         public static void RemoveChild(this DependencyObject parent, UIElement child) {
             if (parent.Is<Panel>()) {
@@ -104,40 +128,43 @@ namespace Common.Application.Windows {
             }
 
             T foundChild = null;
-            var childrenCount = VisualTreeHelper.GetChildrenCount(parent);
-            if (childrenCount == 0 && parent is TextBlock) {
-                childrenCount = (parent as TextBlock).Inlines.Count;
-            }
-            if (childrenCount > 0) {
-                for (var i = 0; i < childrenCount; i++) {
-                    var child = default(DependencyObject);
-                    if (parent.Is<TextBlock>()) {
-                        child = parent.As<TextBlock>().Inlines.Cast<Inline>().ElementAt(i);
-                    }
-                    else {
-                        child = VisualTreeHelper.GetChild(parent, i);
-                    }
-                    if (child.Is<T>()) {
-                        if (child.Is<Inline>() && child.As<Inline>().Name.Equals(childName)) {
-                            foundChild = child.As<T>();
-                            break;
-                        }
-                        else if (child.Is<FrameworkElement>() && child.As<FrameworkElement>().Name.Equals(childName)) {
-                            foundChild = child.As<T>();
-                            break;
+            try {
+                var childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+                if (childrenCount == 0 && parent is TextBlock) {
+                    childrenCount = (parent as TextBlock).Inlines.Count;
+                }
+                if (childrenCount > 0) {
+                    for (var i = 0; i < childrenCount; i++) {
+                        var child = default(DependencyObject);
+                        if (parent.Is<TextBlock>()) {
+                            child = parent.As<TextBlock>().Inlines.Cast<Inline>().ElementAt(i);
                         }
                         else {
-                            continue;
+                            child = VisualTreeHelper.GetChild(parent, i);
                         }
-                    }
-                    else {
-                        foundChild = FindChildByName<T>(child, childName);
-                        if (foundChild != null) {
-                            break;
+                        if (child.Is<T>()) {
+                            if (child.Is<Inline>() && child.As<Inline>().Name.Equals(childName)) {
+                                foundChild = child.As<T>();
+                                break;
+                            }
+                            else if (child.Is<FrameworkElement>() && child.As<FrameworkElement>().Name.Equals(childName)) {
+                                foundChild = child.As<T>();
+                                break;
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                        else {
+                            foundChild = FindChildByName<T>(child, childName);
+                            if (foundChild != null) {
+                                break;
+                            }
                         }
                     }
                 }
             }
+            catch { }
             return foundChild;
         }
 

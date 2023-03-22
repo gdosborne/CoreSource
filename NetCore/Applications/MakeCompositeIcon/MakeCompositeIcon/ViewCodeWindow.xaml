@@ -20,7 +20,19 @@
         <TextBox Grid.Row="1" Style="{DynamicResource CodeTextBox}" Padding="5"
                  Text="{Binding XamlText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" Margin="10"
+                    VerticalAlignment="Center">
+            <Label Style="{DynamicResource StandardLabel}" Content="Output icon size" />
+            <Slider Minimum="10" Maximum="200" Value="{Binding OutputIconSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                    Width="200" Margin="0,10,0,0" TickPlacement="TopLeft" TickFrequency="10" 
+                    LargeChange="10" SmallChange="5"/>
+            <TextBox Style="{DynamicResource StandardTextBox}" Width="55" TextAlignment="Right" 
+                     Text="{Binding OutputIconSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}"
+                     GotFocus="TextBox_GotFocus"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10"
+                    VerticalAlignment="Center">
             <Button Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}"
                     IsDefault="True">
                 Copy

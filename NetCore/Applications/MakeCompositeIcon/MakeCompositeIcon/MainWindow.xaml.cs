@@ -1,4 +1,5 @@
 ﻿using ApplicationFramework.Media;
+using Common.Application.Linq;
 using Common.Application.Primitives;
 using Common.Application.Windows.Controls;
 using Dsafa.WpfColorPicker;
@@ -8,7 +9,9 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using static Common.Application.Windows.Extension;
 
 namespace MakeCompositeIcon {
     public partial class MainWindow : Window {
@@ -22,7 +25,8 @@ namespace MakeCompositeIcon {
 
         private async void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.Actions), e.CommandToExecute, out var action)) {
-                switch (action) {
+                var act = (MainWindowView.Actions)action;
+                switch (act) {
                     case MainWindowView.Actions.ShowSettingType: {
                             View.HideSettings();
                             switch ((string)e.Parameters["Type"]) {
@@ -34,6 +38,17 @@ namespace MakeCompositeIcon {
                             }
                             break;
                         }
+                    case MainWindowView.Actions.ShowRecycleBin: {
+                            var win = new RecycleBinWindow {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this
+                            };
+                            
+                            var result = win.ShowDialog();
+                            View.RefreshFiles();
+                            View.UpdateInterface();
+                            break;
+                        }
                     case MainWindowView.Actions.ViewXaml: {
                             var win = new ViewCodeWindow {
                                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -43,7 +58,9 @@ namespace MakeCompositeIcon {
                             var result = win.ShowDialog();
                             if (!result.HasValue || !result.Value)
                                 return;
-                            Clipboard.SetText(win.View.Icon.GetXaml(win.View.IsUWPChecked));
+                            var outSize = App.ThisApp.MySession.ApplicationSettings.GetValue("Application",
+                                "OutputIconSize", 32);
+                            Clipboard.SetText(win.View.Icon.GetXaml(outSize));
                             break;
                         }
                     case MainWindowView.Actions.OpenSettings: {
@@ -52,6 +69,7 @@ namespace MakeCompositeIcon {
                                 Owner = this
                             };
                             var result = win.ShowDialog();
+                            View.GuideVisibility = App.ThisApp.AreGuidesShown ? Visibility.Visible : Visibility.Hidden;
                             break;
                         }
                     case MainWindowView.Actions.Delete: {
@@ -75,24 +93,26 @@ namespace MakeCompositeIcon {
                                 return;
                             }
                             else if (result.Text == "Delete") {
-                                File.Delete(View.SelectedIcon.FullPath); 
+                                File.Delete(View.SelectedIcon.FullPath);
                             }
                             else {
-                                var recycleFilename = Path.Combine(App.ThisApp.RecycleDirectory, 
-                                    $"{Guid.NewGuid()}_{View.SelectedIcon.Filename}");
+                                var recycleFilename = Path.Combine(App.ThisApp.RecycleDirectory,
+                                    $"{Guid.NewGuid()}.compo");
                                 File.Move(View.SelectedIcon.FullPath, recycleFilename);
                             }
                             View.Icons.Remove(View.SelectedIcon);
                             View.SelectedIcon = null;
                             break;
                         }
-                    case MainWindowView.Actions.FileSave: {
+                    case MainWindowView.Actions.FileSave:
+                    case MainWindowView.Actions.FileSaveAs: {
                             if (View.SelectedIcon == null)
                                 return;
-                            if (string.IsNullOrEmpty(View.SelectedIcon.Filename)) {
+                            if (act == MainWindowView.Actions.FileSaveAs ||
+                                (View.SelectedIcon.IsNewIcon && act == MainWindowView.Actions.FileSave)) {
                                 var lastDir = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", "LastDirectory",
                                     App.ThisApp.FilesDirectory);
-                                var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog {
+                                var dialog = new VistaSaveFileDialog {
                                     AddExtension = true,
                                     CheckFileExists = false,
                                     CheckPathExists = true,
@@ -110,11 +130,10 @@ namespace MakeCompositeIcon {
                                         await View.SelectedIcon.Save(dialog.FileName);
                                         App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDirectory",
                                             Path.GetDirectoryName(dialog.FileName));
-                                        View.Icons.Add(CompositeIcon.FromFile(dialog.FileName));
                                     }
                                 }
                             }
-                            else
+                            else if (act == MainWindowView.Actions.FileSave)
                                 await View.SelectedIcon.Save();
                             break;
                         }
@@ -145,12 +164,17 @@ namespace MakeCompositeIcon {
                             break;
                         }
                     case MainWindowView.Actions.FileNew: {
-                            var icon = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.White,
-                                Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"), Brushes.Black,
-                                '', 200, '', Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe Fluent Icons"),
-                                Brushes.Black, 200);
+                            var font = Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == "Segoe MDL2 Assets");
+                            var result = CompositeIcon.Create(CompositeIconData.IconTypes.FullOverlay, Brushes.White,
+                                font, Brushes.Black, '', 200, '', font, Brushes.Black, 200);
+                            result.Filename = "[Unnamed].compo";
+                            result.ShortName = Path.GetFileNameWithoutExtension(result.Filename);
+                            result.FullPath = result.Filename;
+                            result.Filename = Path.GetFileName(result.Filename);
+
+                            View.Icons.Add(result);
                             View.SubscriptVisibility = Visibility.Collapsed;
-                            View.SelectedIcon = icon;
+                            View.SelectedIcon = result;
 
                             break;
                         }
@@ -186,8 +210,68 @@ namespace MakeCompositeIcon {
                             }
                             break;
                         }
+                    case MainWindowView.Actions.RenameIcon: {
+                            var index = IconListBox.Items.IndexOf(View.SelectedIcon);
+                            if (index >= 0) {
+                                if (IconListBox.ItemContainerGenerator.Status != GeneratorStatus.ContainersGenerated)
+                                    return;
+                                var lbi = IconListBox.ItemContainerGenerator.ContainerFromIndex(index).As<ListBoxItem>();
+                                //var textBlock = lbi.FindChildByName<TextBlock>("TitleTextBlock");
+                                renameTextBox = lbi.FindChildByName<TextBox>("TitleTextBox");
+                                if (renameTextBox != null) {
+                                    renameTextBox.Visibility = Visibility.Visible;
+                                    renameTextBox.Focus();
+                                }
+                            }
+                            break;
+                        }
                 }
             }
+        }
+
+        private TextBox renameTextBox = default;
+
+        private void TitleTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
+            if (e.Key == System.Windows.Input.Key.Escape) {
+                e.Handled = true;
+                View.SelectedIcon.RenameValue = View.SelectedIcon.Filename;
+                renameTextBox.Visibility = Visibility.Hidden;
+                renameTextBox = null;
+            }
+            else if (e.Key == System.Windows.Input.Key.Enter) {
+                e.Handled = true;
+                renameTextBox.Visibility = Visibility.Hidden;
+                var isRenamed = View.SelectedIcon.Rename(out var reason);
+                if (isRenamed) {
+                    var icon = View.SelectedIcon;
+                    View.SelectedIcon = null;
+                    var orderedList = View.Icons.OrderBy(x => x.ShortName).ToList();
+                    View.Icons.Clear();
+                    View.Icons.AddRange(orderedList);
+                    icon.RenameValue = icon.Filename;
+                    View.SelectedIcon = icon;
+                    renameTextBox = null;
+                    return;
+                }
+                var td = new TaskDialog {
+                    MainIcon = TaskDialogIcon.Error,
+                    MainInstruction = "Rename Error",
+                    AllowDialogCancellation = true,
+                    ButtonStyle = TaskDialogButtonStyle.Standard,
+                    Content = $"The rename failed for the following reason:\n\n{reason}",
+                    CenterParent = true,
+                    MinimizeBox = false,
+                    WindowTitle = "Rename error..."
+                };
+                td.Buttons.Add(new TaskDialogButton(ButtonType.Ok));
+                td.ShowDialog(this);
+                View.SelectedIcon.RenameValue = View.SelectedIcon.Filename;
+                renameTextBox = null;
+            }
+        }
+
+        private void TitleTextBox_GotFocus(object sender, RoutedEventArgs e) {
+            sender.As<TextBox>().SelectAll();
         }
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
@@ -232,5 +316,6 @@ namespace MakeCompositeIcon {
         private void ListBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
             sender.As<ListBox>().ScrollIntoView(sender.As<ListBox>().SelectedItem);
         }
+
     }
 }

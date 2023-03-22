@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Application.Primitives;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -14,7 +17,7 @@ using static ApplicationFramework.Media.CompositeIconData;
 namespace ApplicationFramework.Media {
     [JsonObject]
     public class CompositeIcon : INotifyPropertyChanged, ICloneable {
-        private CompositeIcon() {
+        internal CompositeIcon() {
 
         }
 
@@ -34,9 +37,10 @@ namespace ApplicationFramework.Media {
                 SecondaryGlyph = secondaryGlyph,
                 SecondaryFontFamily = secondaryFont,
                 PrimarySize = primarySize,
-                SecondarySize = !secondarySize.HasValue ? primarySize : secondarySize.Value,
+                SecondarySize = !secondarySize.HasValue ? primarySize : secondarySize.Value,                
                 IsLoadComplete = true
             };
+            result.IsNewIcon = true;
             return result;
         }
 
@@ -47,7 +51,7 @@ namespace ApplicationFramework.Media {
                 secondaryGlyph, default, default, default);
         }
 
-        private static CompositeIcon? FromJson(string json) {
+        protected static CompositeIcon? FromJson(string json) {
             var settings = new JsonSerializerSettings {
                 Formatting = Formatting.Indented
             };
@@ -78,6 +82,7 @@ namespace ApplicationFramework.Media {
             var json = JsonConvert.SerializeObject(this, settings);
             try {
                 await File.WriteAllTextAsync(FullPath, json);
+                IsNewIcon = false;
             }
             catch (Exception) {
                 throw;
@@ -85,6 +90,7 @@ namespace ApplicationFramework.Media {
         }
 
         public async Task Save(string filename) {
+            ShortName = Path.GetFileNameWithoutExtension(filename);
             FullPath = filename;
             Filename = Path.GetFileName(filename);
             await Save();
@@ -133,6 +139,7 @@ namespace ApplicationFramework.Media {
             get => _Filename;
             set {
                 _Filename = value;
+                RenameValue = Filename;
                 OnPropertyChanged();
             }
         }
@@ -142,6 +149,7 @@ namespace ApplicationFramework.Media {
         private string _FullPath = default;
         /// <summary>Gets/sets the FullPath.</summary>
         /// <value>The FullPath.</value>
+        [JsonProperty("fullpath")]
         public string FullPath {
             get => _FullPath;
             set {
@@ -325,42 +333,91 @@ namespace ApplicationFramework.Media {
         }
         #endregion
 
-        #region SecondayHorizontalOffset Property
-        private double _SecondayHorizontalOffset = default;
-        /// <summary>Gets/sets the SecondayHorizontalOffset.</summary>
-        /// <value>The SecondayHorizontalOffset.</value>
+        #region SecondaryHorizontalOffset Property
+        private double _SecondaryHorizontalOffset = default;
+        /// <summary>Gets/sets the SecondaryHorizontalOffset.</summary>
+        /// <value>The SecondaryHorizontalOffset.</value>
         [JsonProperty("secondaryhorizontaloffset")]
-        public double SecondayHorizontalOffset {
-            get => _SecondayHorizontalOffset;
+        public double SecondaryHorizontalOffset {
+            get => _SecondaryHorizontalOffset;
             set {
-                _SecondayHorizontalOffset = value;
+                _SecondaryHorizontalOffset = value;
                 OnPropertyChanged();
             }
         }
         #endregion
 
-        public string GetXaml(bool isUWPXaml) {
-            var widthAndHeight = !SecondarySize.HasValue
-                ? PrimarySize + 20.0
-                : PrimarySize > SecondarySize.Value
-                    ? PrimarySize + 20.0
-                    : SecondarySize.Value + 20.0;
+        #region IsNewIcon Property
+        private bool _IsNewIcon = default;
+        /// <summary>Gets/sets the IsNewIcon.</summary>
+        /// <value>The IsNewIcon.</value>
+        [JsonIgnore]
+        public bool IsNewIcon {
+            get => _IsNewIcon;
+            set {
+                _IsNewIcon = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region RenameValue Property
+        private string _RenameValue = default;
+        /// <summary>Gets/sets the RenameValue.</summary>
+        /// <value>The RenameValue.</value>
+        [JsonIgnore]
+        public string RenameValue {
+            get => _RenameValue;
+            set {
+                _RenameValue = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region LastDateSaved Property
+        private DateTime? _LastSavedDate = default;
+        /// <summary>Gets/sets the LastDateSaved.</summary>
+        /// <value>The LastDateSaved.</value>
+        public DateTime? LastDateSaved {
+            get => _LastSavedDate;
+            set { 
+                if(!_LastSavedDate.HasValue) {
+                    _LastSavedDate = value;
+                    OnPropertyChanged();
+                    return;
+                }
+                throw new ReadOnlyException($"{nameof(LastDateSaved)} is read-only"); 
+            }
+        }
+
+        #endregion
+        
+        public string GetXaml(int? targetFontSize = default) {
+            var multi = 1.0;
+            if(targetFontSize.HasValue) {
+                multi = targetFontSize.Value / PrimarySize;
+            }
+            var primaryFS = PrimarySize * multi;
+            var secondaryFS = SecondarySize.HasValue ? SecondarySize.Value * multi : primaryFS;
+
+            var widthAndHeight = primaryFS + 20.0;
             var result = new Grid {
                 Background = SurfaceBrush
             };
-            result.RowDefinitions.Add(new RowDefinition { Height = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
-            result.RowDefinitions.Add(new RowDefinition { Height = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
-            result.ColumnDefinitions.Add(new ColumnDefinition { Width = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
-            result.ColumnDefinitions.Add(new ColumnDefinition { Width = new System.Windows.GridLength(.5, System.Windows.GridUnitType.Star) });
+            result.RowDefinitions.Add(new RowDefinition { Height = new GridLength(.5, GridUnitType.Star) });
+            result.RowDefinitions.Add(new RowDefinition { Height = new GridLength(.5, GridUnitType.Star) });
+            result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(.5, GridUnitType.Star) });
+            result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(.5, GridUnitType.Star) });
 
             var primeIcon = new TextBlock {
                 Text = PrimaryGlyph.ToString(),
                 FontFamily = PrimaryFontFamily,
-                FontSize = PrimarySize,
-                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-                VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                FontSize = primaryFS,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
                 Foreground = PrimaryBrush,
-                Margin = new System.Windows.Thickness(10)
+                Margin = new Thickness(10)
             };
             primeIcon.SetValue(Grid.ColumnProperty, 0);
             primeIcon.SetValue(Grid.RowProperty, 0);
@@ -370,17 +427,16 @@ namespace ApplicationFramework.Media {
 
             var font = SecondaryFontFamily == null ? PrimaryFontFamily : SecondaryFontFamily;
             var brush = IsSingleBrushInUse ? PrimaryBrush : SecondaryBrush;
-            var size = !SecondarySize.HasValue ? PrimarySize : SecondarySize.Value;
 
             if (IconType == IconTypes.FullOverlay) {
                 var secondIcon = new TextBlock {
                     Text = SecondaryGlyph.ToString(),
                     FontFamily = font,
-                    FontSize = size,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    FontSize = secondaryFS,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                     Foreground = brush,
-                    Margin = new System.Windows.Thickness(SecondayHorizontalOffset, SecondaryVerticalOffset, 0, 0)
+                    Margin = new Thickness(SecondaryHorizontalOffset, SecondaryVerticalOffset, 0, 0)
                 };
                 secondIcon.SetValue(Grid.ColumnProperty, 0);
                 secondIcon.SetValue(Grid.RowProperty, 0);
@@ -389,19 +445,20 @@ namespace ApplicationFramework.Media {
                 result.Children.Add(secondIcon);
             }
             else {
+                var padSize = 10 * multi;
                 var border = new Border {
-                    Padding = new System.Windows.Thickness(10),
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Padding = new Thickness(padSize),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
                     Background = SurfaceBrush
                 };
 
                 var secondIcon = new TextBlock {
                     Text = SecondaryGlyph.ToString(),
                     FontFamily = font,
-                    FontSize = size,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    FontSize = secondaryFS,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                     Foreground = brush
                 };
 
@@ -419,6 +476,32 @@ namespace ApplicationFramework.Media {
             var doc = XDocument.Parse(xaml);
 
             return doc.ToString();
+        }
+
+        public bool Rename(out string reasonError) {
+            reasonError = default;
+            var dir = Path.GetDirectoryName(FullPath);
+            var newFile = new FileInfo(RenameValue);
+            if (string.IsNullOrEmpty(newFile.Extension)) {
+                RenameValue += ".compo";
+            }
+            var newFilename = Path.Combine(dir, RenameValue);
+            if (!File.Exists(newFilename)) {
+                try {
+                    File.Move(FullPath, newFilename);
+                    FullPath = newFilename;
+                    Filename = Path.GetFileName(FullPath);
+                    ShortName = Path.GetFileNameWithoutExtension(FullPath);
+                    RenameValue = Filename;
+                    return true;
+                }
+                catch(Exception ex) {
+                    reasonError = ex.Message;
+                    return false;
+                }
+            }
+            reasonError = $"{newFilename} already exists";
+            return false;
         }
     }
 }

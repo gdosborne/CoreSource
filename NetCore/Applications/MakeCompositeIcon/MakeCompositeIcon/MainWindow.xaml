@@ -8,20 +8,17 @@
 
         mc:Ignorable="d" Style="{DynamicResource DefaultSizableWindow}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-        Height="450" Width="910" Icon="/MakeComositeIcon.ico" MinWidth="950"
+        Height="466" Width="910" Icon="/MakeComositeIcon.ico" MinWidth="950"
         MinHeight="450">
     
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding FileNewCommand}" />
         <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding FileOpenCommand}" />
         <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding FileSaveCommand}" />
+        <KeyBinding Key="B" Modifiers="Ctrl" Command="{Binding ShowRecycleCommand}" />
         <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding FileSaveAsCommand}" />
         <KeyBinding Key="Delete" Modifiers="" Command="{Binding DeleteIconCommand}" />
-        <KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding UndoCommand}" />
-        <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding RedoCommand}" />
-        <KeyBinding Key="X" Modifiers="Ctrl" Command="{Binding CutCommand}" />
-        <KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding CopyCommand}" />
-        <KeyBinding Key="V" Modifiers="Ctrl" Command="{Binding PasteCommand}" />
+        <KeyBinding Key="R" Modifiers="Ctrl" Command="{Binding RenameIconCommand}" />
         <KeyBinding Key="T" Modifiers="Ctrl" Command="{Binding OpenSettingsCommand}" />
     </Window.InputBindings>
     <Window.DataContext>
@@ -35,13 +32,13 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0" Style="{DynamicResource MainMenu}">
+        <Menu Name="MainMenu" Grid.Row="0" Style="{DynamicResource MainMenu}">
             <MenuItem Header="File" Style="{DynamicResource MenuItems}" >
                 <MenuItem Header="New" InputGestureText="Ctrl-N" Command="{Binding FileNewCommand}">
                     <MenuItem.Icon>
                         <Grid>
                             <Core:FontIcon Glyph="&#xE132;" Foreground="#FFFFFFFF" FontSize="{DynamicResource MenuIconSize}" />
-                            <Core:FontIcon Glyph="&#xE130;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                            <Core:FontIcon Glyph="&#xE130;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                         </Grid>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -49,52 +46,46 @@
                     <MenuItem.Icon>
                         <Grid>
                             <Core:FontIcon Glyph="&#xE188;" Foreground="#FFBDAE08" FontSize="{DynamicResource MenuIconSize}" />
-                            <Core:FontIcon Glyph="&#xF12B;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                            <Core:FontIcon Glyph="&#xF12B;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                         </Grid>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Save" InputGestureText="Ctrl-S" Command="{Binding FileSaveCommand}">
                     <MenuItem.Icon>                       
-                        <Core:FontIcon Glyph="&#xE105;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <Core:FontIcon Glyph="&#xE105;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Save As" InputGestureText="Ctrl-A" Command="{Binding FileSaveAsCommand}">
                     <MenuItem.Icon>
-                        <Core:FontIcon Glyph="&#xE792;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <Core:FontIcon Glyph="&#xE792;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Delete Icon" InputGestureText="Delete" Command="{Binding DeleteIconCommand}">
                     <MenuItem.Icon>
-                        <Core:FontIcon Glyph="&#xE107;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <Core:FontIcon Glyph="&#xE107;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" Command="{Binding ExitCommand}">
                     <MenuItem.Icon>
-                        <Core:FontIcon Glyph="&#xE624;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <Core:FontIcon Glyph="&#xE624;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <!--<MenuItem Header="Undo" InputGestureText="Ctrl-Z" Command="{Binding UndoCommand}"
-                          Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <MenuItem Header="Show Recycle Bin" InputGestureText="Ctrl-B" Command="{Binding ShowRecycleCommand}">
                     <MenuItem.Icon>
-                        <Core:FontIcon Glyph="&#xE10E;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <Core:FontIcon Glyph="&#xE731;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                                       FontSize="{DynamicResource MenuIconSize}" FontFamily="{DynamicResource PeopleFontFamily}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Redo" InputGestureText="Ctrl-Y" Command="{Binding RedoCommand}"
-                          Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                    <MenuItem.Icon>
-                        <Core:FontIcon Glyph="&#xE10D;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <Separator />-->
+                <Separator />
                 <MenuItem Header="Settings" InputGestureText="Ctrl-T" Command="{Binding OpenSettingsCommand}">
                     <MenuItem.Icon>
                         <Grid>
                             <Core:FontIcon Grid.Column="0" Glyph="&#xF8B0;" Foreground="#FFECE7BA" FontSize="{DynamicResource MenuIconSize}" />
-                            <Core:FontIcon Grid.Column="0" Glyph="&#xE115;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                            <Core:FontIcon Grid.Column="0" Glyph="&#xE115;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                         </Grid>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -103,7 +94,7 @@
                 <MenuItem Header="Xaml" Command="{Binding ViewXamlCommand}">
                     <MenuItem.Icon>
                         <Grid>
-                            <Core:FontIcon Grid.Column="0" Glyph="&#xE732;" FontFamily="{DynamicResource PeopleFontFamily}" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                            <Core:FontIcon Grid.Column="0" Glyph="&#xE732;" FontFamily="{DynamicResource PeopleFontFamily}" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
                         </Grid>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -114,30 +105,29 @@
             <Button Command="{Binding FileNewCommand}" ToolTip="New File">
                 <Grid>
                     <Core:FontIcon Glyph="&#xE132;" Foreground="#FFFFFFFF" Style="{DynamicResource ToolbarIcon}" />
-                    <Core:FontIcon Glyph="&#xE130;" Foreground="Black" Style="{DynamicResource ToolbarIcon}" />
+                    <Core:FontIcon Glyph="&#xE130;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" Style="{DynamicResource ToolbarIcon}" />
                 </Grid>
             </Button>
             <Button Command="{Binding FileOpenCommand}" ToolTip="Open File">
                 <Grid>
                     <Core:FontIcon Glyph="&#xE188;" Foreground="#FFBDAE08"  Style="{DynamicResource ToolbarIcon}"/>
-                    <Core:FontIcon Glyph="&#xF12B;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
+                    <Core:FontIcon Glyph="&#xF12B;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"  Style="{DynamicResource ToolbarIcon}" />
                 </Grid>
             </Button>
             <Button Command="{Binding FileSaveCommand}" ToolTip="Save File">
-                <Core:FontIcon Glyph="&#xE105;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
+                <Core:FontIcon Glyph="&#xE105;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"  Style="{DynamicResource ToolbarIcon}" />
             </Button>
-            <!--<Separator />
-            <Button Command="{Binding UndoCommand}" ToolTip="Undo" 
-                    Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                <Core:FontIcon Glyph="&#xE10E;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
-            </Button>
-            <Button Command="{Binding RedoCommand}" ToolTip="Redo"
-                    Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                <Core:FontIcon Glyph="&#xE10D;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
-            </Button>-->
             <Separator Visibility="{Binding UndoRedoVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
             <Button Command="{Binding DeleteIconCommand}" ToolTip="Delete Icon">
-                <Core:FontIcon Glyph="&#xE107;" Foreground="Black"  Style="{DynamicResource ToolbarIcon}" />
+                <Core:FontIcon Glyph="&#xE107;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"  Style="{DynamicResource ToolbarIcon}" />
+            </Button>
+            <Button Command="{Binding RenameIconCommand}" ToolTip="Rename Icon">
+                <Core:FontIcon Glyph="&#xE13E;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
+            </Button>
+            <Separator />
+            <Button Command="{Binding ShowRecycleCommand}" ToolTip="Show Recycle Bin">
+                <Core:FontIcon Glyph="&#xE731;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                               FontSize="{DynamicResource ToolbarIconSize}" FontFamily="{DynamicResource PeopleFontFamily}" />
             </Button>
         </ToolBar>
 
@@ -147,32 +137,53 @@
                 <ColumnDefinition MinWidth="250" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="2" Style="{DynamicResource FileListArea}">
-                <ListBox Grid.Column="0" Style="{DynamicResource FileList}" ItemsSource="{Binding Icons}"
+            <Border Style="{DynamicResource FileListArea}" Grid.Column="0">
+                <Grid>
+                    <ListBox Name="IconListBox" Style="{DynamicResource FileList}" ItemsSource="{Binding Icons}"
                          SelectedItem="{Binding SelectedIcon,UpdateSourceTrigger=Default,Mode=TwoWay}">
-                    <ListBox.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Delete Icon" InputGestureText="Delete" Command="{Binding DeleteIconCommand}">
-                                <MenuItem.Icon>
-                                    <Core:FontIcon Glyph="&#xE107;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </ContextMenu>
-                    </ListBox.ContextMenu>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Grid Margin="0,0,10,0">
-                                    <Core:FontIcon Glyph="&#xE132;" Foreground="#FFFFFFFF" FontSize="{DynamicResource MenuIconSize}" />
-                                    <Core:FontIcon Glyph="&#xE130;" Foreground="Black" FontSize="{DynamicResource MenuIconSize}" />
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete Icon" InputGestureText="Delete" Command="{Binding DeleteIconCommand}">
+                                    <MenuItem.Icon>
+                                        <Core:FontIcon Glyph="&#xE107;" FontSize="{DynamicResource MenuIconSize}" 
+                                                       Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Rename Icon" InputGestureText="Ctrl-R" Command="{Binding RenameIconCommand}">
+                                    <MenuItem.Icon>
+                                        <Core:FontIcon Glyph="&#xE13E;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Name="itemgrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Margin="0,0,10,0" Grid.Column="0">
+                                        <Core:FontIcon Glyph="&#xE132;" Foreground="#FFFFFFFF" FontSize="{DynamicResource MenuIconSize}" />
+                                        <Core:FontIcon Glyph="&#xE130;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="{DynamicResource MenuIconSize}" />
+                                    </Grid>
+                                    <TextBlock Name="TitleTextBlock" Grid.Column="1" Text="{Binding ShortName}" Style="{DynamicResource StandardTextBlock}" />
+                                    <TextBox Name="TitleTextBox" Grid.Column="1" Visibility="Hidden" 
+                                             PreviewKeyDown="TitleTextBox_PreviewKeyDown" GotFocus="TitleTextBox_GotFocus" 
+                                             Text="{Binding RenameValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 </Grid>
-                                <TextBlock Text="{Binding ShortName}" Style="{DynamicResource StandardTextBlock}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                                
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </Border>
-            
+
             <GridSplitter Width="5" VerticalAlignment="Stretch" Grid.Column="0" HorizontalAlignment="Right" BorderThickness="0" 
                           Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}"/>
             
@@ -415,6 +426,10 @@
 
                     <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center" Margin="0,0,10,0" 
+                                       Visibility="{Binding OffsetVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                <Hyperlink TextDecorations="None" Command="{Binding CenterVerticallyCommand}">0</Hyperlink>
+                            </TextBlock>
                             <Slider Orientation="Vertical" Margin="20,360,0,0" Height="180" 
                                     Ticks="0" TickPlacement="TopLeft"
                                     Visibility="{Binding OffsetVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
@@ -474,23 +489,31 @@
                                     <Line Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{DynamicResource GuidLine}" 
                                           HorizontalAlignment="Right" VerticalAlignment="Stretch" 
                                           Stroke="{Binding GuideBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                          X2="0" Y2="{Binding ElementName=AreaGrid,Path=ActualHeight}" />
+                                          X2="0" Y2="{Binding ElementName=AreaGrid,Path=ActualHeight}"
+                                          Visibility="{Binding GuideVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                     <Line Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource GuidLine}" 
                                           HorizontalAlignment="Stretch" VerticalAlignment="Bottom" 
                                           Stroke="{Binding GuideBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                          X2="{Binding ElementName=AreaGrid,Path=ActualWidth}" Y2="0" />
+                                          X2="{Binding ElementName=AreaGrid,Path=ActualWidth}" Y2="0" 
+                                          Visibility="{Binding GuideVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 </Grid>
 
                             </Border>
                         </StackPanel>
-                        <Slider Orientation="Horizontal" Margin="50,-140,20,20" Width="180"
-                                Ticks="0" TickPlacement="TopLeft" VerticalAlignment="Top"
-                                Visibility="{Binding OffsetVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                Value="{Binding SelectedIcon.SecondayHorizontalOffset,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                Minimum="{Binding OffsetNegative,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                                Maximum="{Binding OffsetPositive,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <StackPanel Orientation="Vertical" Margin="90,-140,20,20">
+                            <Slider Orientation="Horizontal"  Width="180"
+                                    Ticks="0" TickPlacement="TopLeft" VerticalAlignment="Top"
+                                    Visibility="{Binding OffsetVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Value="{Binding SelectedIcon.SecondaryHorizontalOffset,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Minimum="{Binding OffsetNegative,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                    Maximum="{Binding OffsetPositive,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                            
-                        </Slider>
+                            </Slider>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" 
+                                       Visibility="{Binding OffsetVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                <Hyperlink TextDecorations="None" Command="{Binding CenterHorizontallyCommand}">0</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -504,7 +527,7 @@
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
                     <Core:FontIcon Grid.Column="0" Glyph="&#xE132;" Foreground="#FFFFFFFF" Style="{DynamicResource ToolbarIcon}" />
-                    <Core:FontIcon Grid.Column="0" Glyph="&#xE130;" Foreground="Black" Style="{DynamicResource ToolbarIcon}" />
+                    <Core:FontIcon Grid.Column="0" Glyph="&#xE130;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" Style="{DynamicResource ToolbarIcon}" />
                     <Label Grid.Column="1" Content="{Binding SelectedIcon.FullPath,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=Not set}" />
                 </Grid>
             </StatusBarItem>
@@ -513,7 +536,7 @@
                     <Hyperlink TextDecorations="None" Command="{Binding OpenSettingsCommand}" ToolTip="Open settings">
                         <Grid>
                             <Core:FontIcon Grid.Column="0" Glyph="&#xF8B0;" Foreground="#FFECE7BA" Style="{DynamicResource ToolbarIcon}" />
-                            <Core:FontIcon Grid.Column="0" Glyph="&#xE115;" Foreground="Black" Style="{DynamicResource ToolbarIcon}" />
+                            <Core:FontIcon Grid.Column="0" Glyph="&#xE115;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" Style="{DynamicResource ToolbarIcon}" />
                         </Grid>
                     </Hyperlink>
                 </TextBlock>

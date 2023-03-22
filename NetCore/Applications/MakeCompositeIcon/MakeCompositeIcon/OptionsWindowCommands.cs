@@ -1,6 +1,7 @@
 ﻿using Common.MVVMFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,21 @@ namespace MakeCompositeIcon {
         private bool ValidateCancelState(object state) => true;
         private void Cancel(object state) {
             DialogResult = false;
+        }
+        #endregion
+
+        public enum Actions {
+            ClearRecycleBin
+        }
+
+        #region ClearRecycleCommand
+        private DelegateCommand _ClearRecycleCommand = default;
+        /// <summary>Gets the ClearRecycle command.</summary>
+        /// <value>The ClearRecycle command.</value>
+        public DelegateCommand ClearRecycleCommand => _ClearRecycleCommand ??= new DelegateCommand(ClearRecycle, ValidateClearRecycleState);
+        private bool ValidateClearRecycleState(object state) => App.RecyleBinHasFiles;
+        private void ClearRecycle(object state) {
+            ExecuteAction(nameof(Actions.ClearRecycleBin));
         }
         #endregion
 

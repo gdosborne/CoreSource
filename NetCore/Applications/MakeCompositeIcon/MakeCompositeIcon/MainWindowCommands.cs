@@ -3,6 +3,7 @@ using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -14,17 +15,13 @@ namespace MakeCompositeIcon {
             FileSave,
             FileSaveAs,
             Exit,
-            UndoChanges,
-            RedoChanges,
-            Cut,
-            Copy,
-            Paste,
-            CloseIcon,
             OpenSettings,
             SelectColor,
             Delete,
             ViewXaml,
-            ShowSettingType
+            ShowSettingType,
+            RenameIcon,
+            ShowRecycleBin
         }
 
         #region FileOpenCommand
@@ -79,66 +76,6 @@ namespace MakeCompositeIcon {
         private bool ValidateExitState(object state) => true;
         private void Exit(object state) {
             ExecuteAction(nameof(Actions.Exit));
-        }
-        #endregion
-
-        #region UndoCommand
-        private DelegateCommand _UndoCommand = default;
-        /// <summary>Gets the Undo command.</summary>
-        /// <value>The Undo command.</value>
-        public DelegateCommand UndoCommand => _UndoCommand ??= new DelegateCommand(Undo, ValidateUndoState);
-        private bool ValidateUndoState(object state) {
-            if (SelectedIcon == null)
-                return false;
-
-            var result = false;
-            return result;
-        }
-        private void Undo(object state) {
-            if (SelectedIcon == null)
-                return;
-            var result = false;
-
-            //var value = SelectedIcon.Clipboard.GetPrevious(true, ref propertyName);
-            //if (!string.IsNullOrEmpty(propertyName)) {
-            //    var prop = SelectedIcon.GetType().GetProperty(propertyName);
-            //    prop?.SetValue(SelectedIcon, value);
-            //}
-        }
-        #endregion
-
-        #region RedoCommand
-        private DelegateCommand _RedoCommand = default;
-        /// <summary>Gets the Redo command.</summary>
-        /// <value>The Redo command.</value>
-        public DelegateCommand RedoCommand => _RedoCommand ??= new DelegateCommand(Redo, ValidateRedoState);
-        private bool ValidateRedoState(object state) {
-            if (SelectedIcon == null)
-                return false;
-
-            var result = false;
-            return result;
-        }
-    
-        private void Redo(object state) {
-            if (SelectedIcon == null)
-                return;
-            var result = false;
-            //if (!string.IsNullOrEmpty(propertyName)) {
-            //    var prop = SelectedIcon.GetType().GetProperty(propertyName);
-            //    prop?.SetValue(SelectedIcon, value);
-            //}
-        }
-        #endregion
-
-        #region CloseIconCommand
-        private DelegateCommand _CloseIconCommand = default;
-        /// <summary>Gets the CloseIcon command.</summary>
-        /// <value>The CloseIcon command.</value>
-        public DelegateCommand CloseIconCommand => _CloseIconCommand ??= new DelegateCommand(CloseIcon, ValidateCloseIconState);
-        private bool ValidateCloseIconState(object state) => true;
-        private void CloseIcon(object state) {
-            ExecuteAction(nameof(Actions.CloseIcon));
         }
         #endregion
 
@@ -202,6 +139,50 @@ namespace MakeCompositeIcon {
                 { "Type", (string)state }
             };
             ExecuteAction(nameof(Actions.ShowSettingType), p);
+        }
+        #endregion
+
+        #region RenameIconCommand
+        private DelegateCommand _RenameIconCommand = default;
+        /// <summary>Gets the RenameIcon command.</summary>
+        /// <value>The RenameIcon command.</value>
+        public DelegateCommand RenameIconCommand => _RenameIconCommand ??= new DelegateCommand(RenameIcon, ValidateRenameIconState);
+        private bool ValidateRenameIconState(object state) => SelectedIcon != null;
+        private void RenameIcon(object state) {
+            ExecuteAction(nameof(Actions.RenameIcon));
+        }
+        #endregion
+
+        #region ShowRecycleCommand
+        private DelegateCommand _ShowRecycleCommand = default;
+        /// <summary>Gets the ShowRecycle command.</summary>
+        /// <value>The ShowRecycle command.</value>
+        public DelegateCommand ShowRecycleCommand => _ShowRecycleCommand ??= new DelegateCommand(ShowRecycle, ValidateShowRecycleState);
+        private bool ValidateShowRecycleState(object state) => App.RecyleBinHasFiles;
+        private void ShowRecycle(object state) {
+            ExecuteAction(nameof(Actions.ShowRecycleBin));
+        }
+        #endregion
+
+        #region CenterVerticallyCommand
+        private DelegateCommand _CenterVerticallyCommand = default;
+        /// <summary>Gets the CenterVertically command.</summary>
+        /// <value>The CenterVertically command.</value>
+        public DelegateCommand CenterVerticallyCommand => _CenterVerticallyCommand ??= new DelegateCommand(CenterVertically, ValidateCenterVerticallyState);
+        private bool ValidateCenterVerticallyState(object state) => true;
+        private void CenterVertically(object state) {
+            SelectedIcon.SecondaryVerticalOffset = 0;
+        }
+        #endregion
+
+        #region CenterHorizontallyCommand
+        private DelegateCommand _CenterHorizontallyCommand = default;
+        /// <summary>Gets the CenterHorizontally command.</summary>
+        /// <value>The CenterHorizontally command.</value>
+        public DelegateCommand CenterHorizontallyCommand => _CenterHorizontallyCommand ??= new DelegateCommand(CenterHorizontally, ValidateCenterHorizontallyState);
+        private bool ValidateCenterHorizontallyState(object state) => true;
+        private void CenterHorizontally(object state) {
+            SelectedIcon.SecondaryHorizontalOffset = 0;
         }
         #endregion
 

@@ -1,18 +1,10 @@
 ﻿using Common.Application.Primitives;
 using Common.Application.Windows;
+using Ookii.Dialogs.Wpf;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MakeCompositeIcon {
     public partial class OptionsWindow : Window {
@@ -21,6 +13,20 @@ namespace MakeCompositeIcon {
 
             View.Initialize();
             View.PropertyChanged += View_PropertyChanged;
+            View.ExecuteUiAction += View_ExecuteUiAction;
+        }
+
+        private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
+            if (Enum.TryParse(typeof(OptionsWindowView.Actions), e.CommandToExecute, out var action)) {
+                var act = (OptionsWindowView.Actions)action;
+                switch (act) {
+                    case OptionsWindowView.Actions.ClearRecycleBin: {
+                            App.ClearRecycleBin();
+                            View.UpdateInterface();
+                            break;
+                        }
+                }
+            }
         }
 
         private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
