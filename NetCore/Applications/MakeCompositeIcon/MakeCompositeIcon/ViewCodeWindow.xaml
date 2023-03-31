@@ -18,7 +18,8 @@
         </Grid.RowDefinitions>
         
         <TextBox Grid.Row="1" Style="{DynamicResource CodeTextBox}" Padding="5"
-                 Text="{Binding XamlText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                 Text="{Binding XamlText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                 />
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" Margin="10"
                     VerticalAlignment="Center">

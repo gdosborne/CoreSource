@@ -2,11 +2,17 @@
 using Common.Application.Primitives;
 using Ookii.Dialogs.Wpf;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using static Common.Application.Media.Extensions;
 using sysio = System.IO;
+using static Common.Application.Exception.Extensions;
+using ApplicationFramework.Windows.Theme;
 
 namespace MakeCompositeIcon {
     /// <summary>
@@ -28,6 +34,31 @@ namespace MakeCompositeIcon {
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             ThisApp.Resources["RootFontSize"] = ThisApp.BaseFontSize;
+            ThisApp.Resources["AppFontFamily"] = this.BaseFontFamily;
+            CachedCharacters = new Dictionary<string, List<CharInfo>>();
+            OtherFilesFilename = Path.Combine(SettingsDirectory, "mru.json");
+
+            Watcher = new ThemeWatcher();
+            Watcher.ThemeChanged += Watcher_ThemeChanged;
+            Watcher.WatchTheme();
+
+            var currentTheme = MySession.ApplicationSettings.GetValue("Application", "Theme", ThemeWatcher.WindowsTheme.Light);
+            SwapThemes(currentTheme);
+
+            if (e.Args.Any()) {
+                StartupFilename = e.Args[0];
+            }
+        }
+
+        public void SwapThemes(ThemeWatcher.WindowsTheme theme) {
+            var themeName = theme == ThemeWatcher.WindowsTheme.Light ? "Light" : "Dark";
+            this.Resources.MergedDictionaries[0].Source =
+                new Uri($"/Resources/{themeName}.xaml", UriKind.Relative);
+        }
+
+        private void Watcher_ThemeChanged(object sender, ThemeChangedEventArgs e) {
+            MySession.ApplicationSettings.AddOrUpdateSetting("Application", "Theme", e.Theme);
+            SwapThemes(e.Theme);
         }
 
         public static App ThisApp => App.Current.As<App>();
@@ -59,6 +90,8 @@ namespace MakeCompositeIcon {
             }
         }
 
+        internal ThemeWatcher Watcher { get; private set; }
+
         public string ApplicationName { get; private set; } = "Make Composite Icon";
         public string ApplicationDirectory { get; private set; }
         public string TempDirectory { get; private set; }
@@ -66,6 +99,9 @@ namespace MakeCompositeIcon {
         public string RecycleDirectory { get; private set; }
         public string SettingsDirectory { get; private set; }
         public Session MySession { get; private set; }
+        public Dictionary<string, List<CharInfo>> CachedCharacters {get; private set; }
+        public string StartupFilename { get; private set; }
+        public string OtherFilesFilename { get; private set; }
 
         public bool IsUseLastPositionChecked {
             get => App.ThisApp.MySession.ApplicationSettings.GetValue("Application", nameof(IsUseLastPositionChecked), true);
@@ -85,6 +121,15 @@ namespace MakeCompositeIcon {
             }
         }
 
+        public FontFamily BaseFontFamily {
+            get => new FontFamily(App.ThisApp.MySession.ApplicationSettings.GetValue("Application", nameof(BaseFontFamily), 
+                App.ThisApp.Resources["AppFontFamily"].As<FontFamily>().Source));
+            set {
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application", nameof(BaseFontFamily), value.Source);
+                App.ThisApp.Resources["AppFontFamily"] = value;
+            }
+        }
+
         internal void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
             HandleException(e.Exception);
         }
@@ -93,8 +138,9 @@ namespace MakeCompositeIcon {
             HandleException(e.ExceptionObject.As<Exception>());
         }
 
-        public static void HandleException(Exception ex) {
-            ThisApp.MySession.Logger.LogMessage(ex.ToString(), Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
+        public static async void HandleException(Exception ex) {
+            ThisApp.MySession.Logger.LogMessage(await ex.ToStringRecurseAsync(true), 
+                Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
         }
 
         public static void ClearRecycleBin() {

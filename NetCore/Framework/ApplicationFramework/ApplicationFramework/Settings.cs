@@ -7,8 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media.Media3D;
 using System.Xml.Linq;
 
 namespace Common.Application {
@@ -222,7 +220,7 @@ namespace Common.Application {
         /// <param name="sectionName">The section name.</param>
         /// <param name="keyName">The key name.</param>
         /// <returns>A bool.</returns>
-        public bool KeyExists(string sectionName, string keyName) => 
+        public bool KeyExists(string sectionName, string keyName) =>
             GetKey($"{ApplicationName}|{sectionName}|{keyName}", out var isNewKey, true) != null && !isNewKey;
 
         /// <summary>
@@ -233,7 +231,10 @@ namespace Common.Application {
         /// <param name="value">The value.</param>
         /// <returns>A Settings.</returns>
         public Settings AddOrUpdateSetting(string section, string name, object value) {
-            AddOrUpdateSetting($"{ApplicationName}|{section}|{name}", value.GetType(), value);
+            if (value == null)
+                AddOrUpdateSetting($"{ApplicationName}|{section}|{name}", "[string]", "[null]");
+            else
+                AddOrUpdateSetting($"{ApplicationName}|{section}|{name}", value.GetType(), value);
             return this;
         }
 
@@ -345,6 +346,10 @@ namespace Common.Application {
             var theName = nameAttr.Value;
             var theType = typeof(T1);
             var isUsingDefault = string.IsNullOrEmpty(valueAttr.Value) && !string.IsNullOrEmpty(defaultValue as string);
+
+            if (typeAttr.Value == "[string]" && valueAttr.Value == "[null]") {
+                return defaultValue;
+            }
 
             if (valueAttr != null) {
                 if (!string.IsNullOrEmpty(valueAttr.Value)) {

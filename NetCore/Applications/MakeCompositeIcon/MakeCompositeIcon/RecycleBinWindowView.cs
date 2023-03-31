@@ -71,5 +71,7 @@ namespace MakeCompositeIcon {
             }
         }
         #endregion
+
+        public List<string> ItemsForOtherFiles { get; set; }
     }
 }

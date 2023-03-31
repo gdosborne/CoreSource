@@ -13,19 +13,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;8618;8625;8604;CA1416</NoWarn>
+    <NoWarn>1701;1702;8618;8625;8604;CA1416;8601;8602</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;8618;8625;8604;CA1416</NoWarn>
+    <NoWarn>1701;1702;8618;8625;8604;CA1416;8601;8602</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NoWarn>1701;1702;8618;8625;8604;CA1416</NoWarn>
+    <NoWarn>1701;1702;8618;8625;8604;CA1416;8601;8602</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NoWarn>1701;1702;8618;8625;8604;CA1416</NoWarn>
+    <NoWarn>1701;1702;8618;8625;8604;CA1416;8601;8602</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +35,15 @@
 
 	<ItemGroup>
 		<Compile Include="App.xaml.cs" />
+		<Compile Include="CharacterWindow.xaml.cs">
+			<DependentUpon>CharacterWindow.xaml</DependentUpon>
+		</Compile>
+		<Compile Include="CharacterWindowCommands.cs">
+			<DependentUpon>CharacterWindow.xaml</DependentUpon>
+		</Compile>
+		<Compile Include="CharacterWindowView.cs">
+			<DependentUpon>CharacterWindow.xaml</DependentUpon>
+		</Compile>
 		<Compile Include="MainWindow.xaml.cs" />
 		<Compile Include="MainWindowCommands.cs" />
 		<Compile Include="MainWindowView.cs">

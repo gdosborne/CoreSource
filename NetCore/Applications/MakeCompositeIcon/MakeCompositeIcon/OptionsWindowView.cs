@@ -1,13 +1,9 @@
 ﻿using ApplicationFramework.Media;
+using Common.Application.Primitives;
 using Common.MVVMFramework;
-using CredentialManagement;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Media;
 
 namespace MakeCompositeIcon {
     internal partial class OptionsWindowView : ViewModelBase {
@@ -26,6 +22,16 @@ namespace MakeCompositeIcon {
                 FontSizes.Add(i);
             }
             SelectedFontSize = (double)App.ThisApp.Resources["RootFontSize"];
+            FontFamilies = new ObservableCollection<FontFamily>(
+                Fonts.SystemFontFamilies.OrderBy(x => x.Source)
+            );
+            SelectedFont = App.ThisApp.Resources["AppFontFamily"].As<FontFamily>();
+            IsAlwaysPromptSelected = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", 
+                nameof(IsAlwaysPromptSelected), true);
+            IsAlwaysDeleteSelected = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", 
+                nameof(IsAlwaysDeleteSelected), false);
+            IsAlwaysRecycleSelected = App.ThisApp.MySession.ApplicationSettings.GetValue("Application", 
+                nameof(IsAlwaysRecycleSelected), false);
         }
 
         #region DialogResult Property
@@ -104,6 +110,78 @@ namespace MakeCompositeIcon {
             get => _SelectedIcon;
             set {
                 _SelectedIcon = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region FontFamilies Property
+        private ObservableCollection<FontFamily> _FontFamilies = default;
+        /// <summary>Gets/sets the FontFamilies.</summary>
+        /// <value>The FontFamilies.</value>
+        public ObservableCollection<FontFamily> FontFamilies {
+            get => _FontFamilies;
+            set {
+                _FontFamilies = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SelectedFont Property
+        private FontFamily _SelectedFont = default;
+        /// <summary>Gets/sets the SelectedFont.</summary>
+        /// <value>The SelectedFont.</value>
+        public FontFamily SelectedFont {
+            get => _SelectedFont;
+            set {
+                _SelectedFont = value;
+                App.ThisApp.BaseFontFamily = SelectedFont;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsAlwaysPromptSelected Property
+        private bool _IsAlwaysPromptSelected = default;
+        /// <summary>Gets/sets the IsAlwaysPromptSelected.</summary>
+        /// <value>The IsAlwaysPromptSelected.</value>
+        public bool IsAlwaysPromptSelected {
+            get => _IsAlwaysPromptSelected;
+            set {
+                _IsAlwaysPromptSelected = value;
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application",
+                    nameof(IsAlwaysPromptSelected), IsAlwaysPromptSelected);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsAlwaysDeleteSelected Property
+        private bool _IsAlwaysDeleteSelected = default;
+        /// <summary>Gets/sets the IsAlwaysDeleteSelected.</summary>
+        /// <value>The IsAlwaysDeleteSelected.</value>
+        public bool IsAlwaysDeleteSelected {
+            get => _IsAlwaysDeleteSelected;
+            set {
+                _IsAlwaysDeleteSelected = value;
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application",
+                    nameof(IsAlwaysDeleteSelected), IsAlwaysDeleteSelected);
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region IsAlwaysRecycleSelected Property
+        private bool _IsAlwaysRecycleSelected = default;
+        /// <summary>Gets/sets the IsAlwaysRecycleSelected.</summary>
+        /// <value>The IsAlwaysRecycleSelected.</value>
+        public bool IsAlwaysRecycleSelected {
+            get => _IsAlwaysRecycleSelected;
+            set {
+                _IsAlwaysRecycleSelected = value;
+                App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application",
+                    nameof(IsAlwaysRecycleSelected), IsAlwaysRecycleSelected);
                 OnPropertyChanged();
             }
         }

@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:core="clr-namespace:Controls.Core;assembly=Controls.Core">
+
+    <FontFamily x:Key="AppFontFamily">Calibri</FontFamily>
+    <FontFamily x:Key="CodeFontFamily">Consolas</FontFamily>
+    <FontFamily x:Key="IconFontFamily">pack://application:,,,/Fonts/#Segoe Fluent Icons</FontFamily>
+
+    <sys:Double x:Key="BaseFontSize">16</sys:Double>
+    <sys:Double x:Key="ToolbarButtonFontSize">16</sys:Double>
+    <sys:Double x:Key="MenuItemSize">24</sys:Double>
+    <sys:Double x:Key="HalfFontSize">8</sys:Double>
+    
+    <Style TargetType="Window" x:Key="AppWindow">
+        <Setter Property="Background" Value="{DynamicResource WindowBackground}" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+    </Style>
+
+    <Style TargetType="Menu" x:Key="AppMenu">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,3" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="MenuItem" x:Key="AppMenuItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,3" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="{DynamicResource MenuItemSize}" />
+    </Style>
+
+    <Style TargetType="ToolBar" x:Key="AppToolbar">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Margin" Value="0,3" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="ToolbarButton">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="BorderThickness" Value="1" />        
+        <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+        <Setter Property="Width" Value="26" />
+        <Setter Property="Height" Value="26" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="1,0" />
+    </Style>
+
+    <Style TargetType="core:FontIcon">
+        <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource ToolbarButtonFontSize}" />
+    </Style>
+</ResourceDictionary>

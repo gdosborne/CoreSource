@@ -6,6 +6,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,8 +23,8 @@ namespace ApplicationFramework.Media {
         }
 
         public static CompositeIcon Create(IconTypes iconType, SolidColorBrush surfaceBrush,
-                FontFamily primaryFont, SolidColorBrush primaryBrush, char primaryGlyph,
-                double primarySize, char secondaryGlyph, FontFamily secondaryFont,
+                FontFamily primaryFont, SolidColorBrush primaryBrush, string primaryGlyph,
+                double primarySize, string secondaryGlyph, FontFamily secondaryFont,
                 SolidColorBrush secondaryBrush, double? secondarySize) {
             var result = new CompositeIcon {
                 SurfaceBrush = surfaceBrush == null ? Brushes.Transparent : surfaceBrush,
@@ -45,8 +46,8 @@ namespace ApplicationFramework.Media {
         }
 
         public static CompositeIcon Create(IconTypes iconType, SolidColorBrush surfaceBrush,
-            FontFamily primaryFont, SolidColorBrush primaryBrush, char primaryGlyph,
-            double primarySize, char secondaryGlyph) {
+            FontFamily primaryFont, SolidColorBrush primaryBrush, string primaryGlyph,
+            double primarySize, string secondaryGlyph) {
             return Create(iconType, surfaceBrush, primaryFont, primaryBrush, primaryGlyph, primarySize,
                 secondaryGlyph, default, default, default);
         }
@@ -59,7 +60,7 @@ namespace ApplicationFramework.Media {
         }
 
         public static CompositeIcon FromFile(string filename) {
-            var json = File.ReadAllText(filename);
+            var json = File.ReadAllText(filename, Encoding.BigEndianUnicode);
 
             var result = FromJson(json);
             if (result != null) {
@@ -81,7 +82,7 @@ namespace ApplicationFramework.Media {
             };
             var json = JsonConvert.SerializeObject(this, settings);
             try {
-                await File.WriteAllTextAsync(FullPath, json);
+                await File.WriteAllTextAsync(FullPath, json, Encoding.BigEndianUnicode);
                 IsNewIcon = false;
             }
             catch (Exception) {
@@ -244,11 +245,11 @@ namespace ApplicationFramework.Media {
         #endregion
 
         #region PrimaryGlyph Property
-        private char _PrimaryGlyph = default;
+        private string _PrimaryGlyph = default;
         /// <summary>Gets/sets the PrimaryGlyph.</summary>
         /// <value>The PrimaryGlyph.</value>
         [JsonProperty("primaryglyph")]
-        public char PrimaryGlyph {
+        public string PrimaryGlyph {
             get => _PrimaryGlyph;
             set {
                 _PrimaryGlyph = value;
@@ -258,11 +259,11 @@ namespace ApplicationFramework.Media {
         #endregion
 
         #region SecondaryGlyph Property
-        private char _SecondaryGlyph = default;
+        private string _SecondaryGlyph = default;
         /// <summary>Gets/sets the SecondaryGlyph.</summary>
         /// <value>The SecondaryGlyph.</value>
         [JsonProperty("secondaryglyph")]
-        public char SecondaryGlyph {
+        public string SecondaryGlyph {
             get => _SecondaryGlyph;
             set {
                 _SecondaryGlyph = value;

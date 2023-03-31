@@ -1,14 +1,12 @@
-﻿using Common.Application.Primitives;
+﻿using ApplicationFramework.Media;
+using Common.Application.Primitives;
 using Common.Application.Windows;
 using Common.Application.Windows.Controls;
-using System;
-using System.Windows;
-using System.Linq;
-using ApplicationFramework.Media;
 using Ookii.Dialogs.Wpf;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection.Metadata;
-using System.Windows.Documents;
+using System.Windows;
 
 namespace MakeCompositeIcon {
     public partial class RecycleBinWindow : Window {
@@ -40,21 +38,32 @@ namespace MakeCompositeIcon {
                                 MinimizeBox = false,
                                 WindowTitle = "Restore icon(s)..."
                             };
+                            View.ItemsForOtherFiles ??= new List<string>();
                             td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
                             td.Buttons.Add(new TaskDialogButton(ButtonType.No));
                             var result = td.ShowDialog(this);
-                            var iconsToRestore = new System.Collections.Generic.List<RecycledCompositeIcon>(View.SelectedIcons);
+                            iconsToRestore ??= new List<RecycledCompositeIcon>(View.SelectedIcons);
+
                             iconsToRestore.ForEach(icon => {
                                 var restoreFilename = icon.FullPath;
                                 var currentFilename = icon.RecycleBinFilename;
-                                File.Move(currentFilename, restoreFilename);
-                                View.Icons.Remove(icon);
+
+                                try {
+                                    File.Move(currentFilename, restoreFilename, true);
+                                    View.Icons.Remove(icon);
+                                    if (!Path.GetDirectoryName(restoreFilename).Equals(App.ThisApp.FilesDirectory, StringComparison.OrdinalIgnoreCase)) {
+                                        View.ItemsForOtherFiles.Add(restoreFilename);
+                                    }
+                                }
+                                catch (Exception e) { App.HandleException(e); }
                             });
                             break;
                         }
                 }
             }
         }
+
+        private List<RecycledCompositeIcon> iconsToRestore { get; set; }
 
         private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
             if (e.PropertyName == "DialogResult") {
@@ -87,7 +96,7 @@ namespace MakeCompositeIcon {
 
         private void ListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) {
             foreach (RecycledCompositeIcon item in e.RemovedItems) {
-                if(View.SelectedIcons.Contains(item))
+                if (View.SelectedIcons.Contains(item))
                     View.SelectedIcons.Remove(item);
             }
             foreach (RecycledCompositeIcon item in e.AddedItems) {

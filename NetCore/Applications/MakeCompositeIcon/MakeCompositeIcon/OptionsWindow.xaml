@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MakeCompositeIcon"
         mc:Ignorable="d" Style="{DynamicResource DefaultSizableWindow}"
-        ResizeMode="NoResize" SizeToContent="Height"
-        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="620">
+        ResizeMode="NoResize" 
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Width="620" Height="360">
     <Window.DataContext>
         <local:OptionsWindowView />
     </Window.DataContext>
@@ -16,71 +16,112 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Grid Name="MainGrid" Height="200" Margin="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0" Margin="10" Background="{DynamicResource MyWindowBackground}">
+            <TabItem Header="General" Background="{DynamicResource MyWindowBackground}">
+                <ScrollViewer Grid.Row="0" Grid.Column="0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Core:ToggleSwitch IsOn="{Binding IsUseLastPositionChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                               Width="100" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{DynamicResource StandardTextBlock}" TextWrapping="Wrap" Margin="0,0,10,0" 
+                                       Text="Use last size and position for all Windows" VerticalAlignment="Center"/>
+                        </StackPanel>
 
-            <Grid Name="LeftGrid" Grid.Row="0" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Core:ToggleSwitch IsOn="{Binding AreGuidesShown,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                               Width="100" HorizontalAlignment="Left"/>
+                            <TextBlock Style="{DynamicResource StandardTextBlock}" TextWrapping="Wrap" Margin="0,0,10,0" 
+                                       Text="Show guide lines on icon editor" VerticalAlignment="Center"/>
+                        </StackPanel>
 
-                <Core:ToggleSwitch IsOn="{Binding IsUseLastPositionChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                   Grid.Column="0" Grid.Row="0"/>                
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical" Margin="120,0,0,0">
+                                <TextBlock Style="{DynamicResource StandardTextBlock}" Text="Delete or recycle icons" />
+                                    <RadioButton Style="{DynamicResource StandardRadioButton}" Content="Always Prompt" Margin="20,0,0,0"
+                                             IsChecked="{Binding IsAlwaysPromptSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             GroupName="Deleteactions" />
+                                    <RadioButton Style="{DynamicResource StandardRadioButton}" Content="Always Delete" Margin="20,0,0,0"
+                                             IsChecked="{Binding IsAlwaysDeleteSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             GroupName="Deleteactions" />
+                                <RadioButton Style="{DynamicResource StandardRadioButton}" Content="Always Recycle" Margin="20,0,0,0"
+                                             IsChecked="{Binding IsAlwaysRecycleSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                             GroupName="Deleteactions"/>
+                            </StackPanel>
 
-                <TextBlock Style="{DynamicResource StandardTextBlock}" TextWrapping="Wrap" Margin="0,0,10,0"
-                           Grid.Column="1" Grid.Row="0" Text="Use last size and position for all Windows" 
-                           VerticalAlignment="Top"/>
+                            <Button Command="{Binding ClearRecycleCommand}" HorizontalAlignment="Center" Margin="40,10,20,10"
+                                    Background="{DynamicResource MyButtonBackground}" Foreground="{DynamicResource MyButtonForeground}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.5*" />
+                                            <ColumnDefinition Width="0.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.5*" />
+                                            <RowDefinition Height="0.5*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="" FontFamily="People" FontSize="32" Foreground="{DynamicResource MyButtonForeground}" 
+                                                   Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                                        <Border Padding="3.2,3.2,3.2,3.2" Background="{DynamicResource MyButtonBackground}" HorizontalAlignment="Left" 
+                                                VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" 
+                                                Grid.RowSpan="1" Margin="16,16,0,0">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="10" 
+                                                       Foreground="{DynamicResource MyButtonForeground}" HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center" />
+                                        </Border>
+                                    </Grid>
 
-                <Core:ToggleSwitch IsOn="{Binding AreGuidesShown,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                                   Grid.Column="0" Grid.Row="1"/>
-
-                <TextBlock Style="{DynamicResource StandardTextBlock}" TextWrapping="Wrap" Margin="00,0,10,0"
-                           Grid.Column="1" Grid.Row="1" Text="Show guide lines on icon editor" 
-                           VerticalAlignment="Top"/>
-
-                <Button Grid.Row="2" Grid.Column="1" Command="{Binding ClearRecycleCommand}" HorizontalAlignment="Center"
-                        Margin="0,5">
-                    <StackPanel Orientation="Horizontal">
-                        <Core:FontIcon Glyph="&#xE731;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
-                                       FontSize="{DynamicResource MenuIconSize}" Margin="10,0,0,0" />
-                        <TextBlock Text="Empty Recycle Bin" Style="{DynamicResource StandardTextBlock}" Margin="10,0" />
+                                    <TextBlock Text="Empty Recycle Bin" Style="{DynamicResource StandardTextBlock}" Margin="10,0" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
-                </Button>
-            </Grid>
-            <Grid Name="RightGrid" Grid.Row="0" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <Label Style="{DynamicResource StandardLabel}" Content="FontSize" Grid.Row="0"
-                       Grid.Column="0" Width="auto" Margin="0,0,10,0" />
-                <ComboBox Style="{DynamicResource StandardComboBox}" Grid.Row="0" Grid.Column="1"
-                          Width="75" HorizontalAlignment="Left" ItemsSource="{Binding FontSizes}"
-                          SelectedItem="{Binding SelectedFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-            <Line Grid.Column="1" StrokeThickness="1" Stroke="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" HorizontalAlignment="Center" 
-                  X1="0" X2="0" Y1="0" Y2="{Binding ElementName=MainGrid,Path=ActualHeight}"/>
-        </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Appearance" Background="{DynamicResource MyWindowBackground}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
+                              Padding="10">
+                    <Grid Name="RightGrid" Grid.Row="0" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Label Style="{DynamicResource StandardLabel}" Content="Font Size" Grid.Row="0" 
+                               Grid.Column="0" Width="auto" Margin="0,0,10,0" />
+                        <ComboBox Style="{DynamicResource StandardComboBox}" Grid.Row="0" Grid.Column="1" 
+                                  Width="75" HorizontalAlignment="Left" ItemsSource="{Binding FontSizes}" 
+                                  VerticalAlignment="Center" 
+                                  SelectedItem="{Binding SelectedFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <Label Style="{DynamicResource StandardLabel}" Content="Font Family" Grid.Row="1" 
+                               Grid.Column="0" Width="auto" Margin="0,0,10,0" />
+                        <ComboBox Style="{DynamicResource StandardComboBox}" Grid.Row="1" Grid.Column="1" 
+                                  HorizontalAlignment="Stretch" ItemsSource="{Binding FontFamilies}" 
+                                  VerticalAlignment="Center"
+                                  SelectedItem="{Binding SelectedFont,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
             <Button Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" 

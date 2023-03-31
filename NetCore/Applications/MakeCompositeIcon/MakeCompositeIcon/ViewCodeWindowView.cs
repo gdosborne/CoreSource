@@ -65,7 +65,7 @@ namespace MakeCompositeIcon {
         public double OutputIconSize {
             get => _OutputIconSize;
             set {
-                _OutputIconSize = value;
+                _OutputIconSize = value < 10 ? 10 : value > 200 ? 200 : value;
                 App.ThisApp.MySession.ApplicationSettings.AddOrUpdateSetting("Application",
                     nameof(OutputIconSize), OutputIconSize.CastTo<int>());
                 if (Icon != null)

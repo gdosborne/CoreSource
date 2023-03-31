@@ -1,11 +1,8 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Media;
+﻿using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows;
+using System.Diagnostics;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView {
@@ -21,7 +18,8 @@ namespace MakeCompositeIcon {
             ViewXaml,
             ShowSettingType,
             RenameIcon,
-            ShowRecycleBin
+            ShowRecycleBin,
+            ShowCharacterWindow
         }
 
         #region FileOpenCommand
@@ -186,7 +184,55 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
+        #region ShowCharWindowCommand
+        private DelegateCommand _ShowCharWindowCommand = default;
+        /// <summary>Gets the ShowCharWindow command.</summary>
+        /// <value>The ShowCharWindow command.</value>
+        public DelegateCommand ShowCharWindowCommand => _ShowCharWindowCommand ??= new DelegateCommand(ShowCharWindow, ValidateShowCharWindowState);
+        private bool ValidateShowCharWindowState(object state) => true;
+        private void ShowCharWindow(object state) {
+            var p = new Dictionary<string, object> {
+                { "IsPrimary", (string)state == "IsPrimary" }
+            };
+            ExecuteAction(nameof(Actions.ShowCharacterWindow), p);
+        }
+        #endregion
 
+        #region GoToFilesDirCommand
+        private DelegateCommand _GoToFilesDirCommand = default;
+        /// <summary>Gets the GoToFilesDir command.</summary>
+        /// <value>The GoToFilesDir command.</value>
+        public DelegateCommand GoToFilesDirCommand => _GoToFilesDirCommand ??= new DelegateCommand(GoToFilesDir, ValidateGoToFilesDirState);
+        private bool ValidateGoToFilesDirState(object state) => true;
+        private void GoToFilesDir(object state) {
+            var p = new Process {
+                StartInfo = new ProcessStartInfo {
+                    FileName = "explorer.exe",
+                    Arguments = App.ThisApp.FilesDirectory,
+                    UseShellExecute = true                    
+                }
+            };
+            p.Start();
+        }
+        #endregion
+
+        #region GoToFileCommand
+        private DelegateCommand _GoToFileCommand = default;
+        /// <summary>Gets the GoToFile command.</summary>
+        /// <value>The GoToFile command.</value>
+        public DelegateCommand GoToFileCommand => _GoToFileCommand ??= new DelegateCommand(GoToFile, ValidateGoToFileState);
+        private bool ValidateGoToFileState(object state) => SelectedIcon != null;
+        private void GoToFile(object state) {
+            var p = new Process {
+                StartInfo = new ProcessStartInfo {
+                    FileName = "explorer.exe",
+                    Arguments = $"/select,\"{SelectedIcon.FullPath}\"",
+                    UseShellExecute = true
+                }
+            };
+            p.Start();
+        }
+        #endregion
     }
-    
+
 }

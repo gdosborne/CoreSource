@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MyWindowBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="MyWindowForeground" Color="#FF000000" />
+    <SolidColorBrush x:Key="MyBorderBrush" Color="#FF505050" />
+    <SolidColorBrush x:Key="MyWorkArea" Color="#FFFAFAFA" />
+    <SolidColorBrush x:Key="MyButtonBackground" Color="#FFFAFAFA" />
+    <SolidColorBrush x:Key="MyButtonForeground" Color="#FF141414" />
+
+    <SolidColorBrush x:Key="VertLightBrush" Color="#FFF9F9F9" />
+    <SolidColorBrush x:Key="ToggleOnBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ToggleOnForeground" Color="#FF2222FF" />
+    <SolidColorBrush x:Key="ToggleOffBackground" Color="#FFCCCCCC" />
+    <SolidColorBrush x:Key="ToggleOffForeground" Color="#FF000000" />
+
+</ResourceDictionary>

@@ -6,18 +6,24 @@
         xmlns:local="clr-namespace:MakeCompositeIcon"
         mc:Ignorable="d"
         Title="TesterWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Grid Background="#002645CB">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*" />
-                <RowDefinition Height="0.5*" />
-            </Grid.RowDefinitions>
-            <TextBlock Text=""  FontFamily="Segoe Fluent Icons" FontSize="64" Foreground="#FFA40000" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-            <TextBlock Text="" FontFamily="Segoe Fluent Icons" FontSize="49.577464788732385" Foreground="#FFFEFEFE" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-        </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Grid Background="#FFFFFFFF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="🐈" FontFamily="Segoe UI Symbol" FontSize="200" Foreground="#FF454545" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                <TextBlock Text="" FontFamily="Segoe Fluent Icons" FontSize="36.36363636363632" Foreground="#FFFF9A9A" Margin="-37.08086785009861,16.831032215647706,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

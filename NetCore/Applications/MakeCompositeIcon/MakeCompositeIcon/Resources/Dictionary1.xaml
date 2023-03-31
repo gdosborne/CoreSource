@@ -13,12 +13,6 @@
     <FontFamily x:Key="IconFontFamily">pack://application:,,,/Fonts/#Segoe Fluent Icons</FontFamily>
     <FontFamily x:Key="PeopleFontFamily">pack://application:,,,/Fonts/#People</FontFamily>
 
-    <SolidColorBrush x:Key="VertLightBrush" Color="#FFF9F9F9" />
-    <SolidColorBrush x:Key="ToggleOnBackground" Color="#FFFFFFFF" />
-    <SolidColorBrush x:Key="ToggleOnForeground" Color="#FF2222FF" />
-    <SolidColorBrush x:Key="ToggleOffBackground" Color="#FFCCCCCC" />
-    <SolidColorBrush x:Key="ToggleOffForeground" Color="#FF000000" />
-
     <Style TargetType="Core:ToggleSwitch">
         <Setter Property="OnContent" Value="Yes" />
         <Setter Property="OffContent" Value="No" />
@@ -28,108 +22,115 @@
         <Setter Property="OnFillBrush" Value="{DynamicResource ToggleOnBackground}" />
         <Setter Property="FillBrush" Value="{DynamicResource ToggleOffBackground}" />
         <Setter Property="OnThumbBrush" Value="{DynamicResource ToggleOnForeground}" />
-        <Setter Property="Foreground" Value="{DynamicResource ToggleOffForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
     </Style>
 
     <Style TargetType="Core:FontIcon" x:Key="ToolbarIcon">
         <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ToolbarIconSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
     </Style>
 
     <Style TargetType="Core:FontIcon" x:Key="DesignerSurfacePrimaryIcon">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
     </Style>
 
     <Style TargetType="Core:FontIcon" x:Key="DesignerSurfaceSubscriptIcon">
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
     </Style>
 
     <Style TargetType="Window" x:Key="DefaultSizableWindow">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
     </Style>
 
     <Style TargetType="Menu" x:Key="MainMenu">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,20,0" />
     </Style>
 
     <Style TargetType="MenuItem" x:Key="MenuItems">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
     </Style>
 
     <Style TargetType="ToolBar" x:Key="MainToolbar">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
-        <Setter Property="BorderThickness" Value="0,1,0,0" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderThickness" Value="0,0,0,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="Margin" Value="0,0,-10,0" />
     </Style>
 
     <Style TargetType="StatusBar" x:Key="MainStatusBar">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="BorderThickness" Value="0,0,0,0" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
     </Style>
 
     <Style TargetType="Button" x:Key="ToolbarButton">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyButtonForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
     <Style TargetType="ComboBox" x:Key="StandardComboBox">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
 
     <Style TargetType="ListBox" x:Key="FileList">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="0,2,2,2" />
     </Style>
 
     <Style TargetType="Border" x:Key="FileListArea">
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="CornerRadius" Value="0,8,8,0" />
     </Style>
     
     <Style TargetType="Border" x:Key="ImageArea">
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="CornerRadius" Value="8,0,0,8" />
     </Style>
 
     <Style TargetType="Border" x:Key="IconArea">
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="CornerRadius" Value="12" />
         <Setter Property="Width" Value="220" />
         <Setter Property="Height" Value="220" />
@@ -138,10 +139,10 @@
     </Style>
 
     <Style TargetType="Border" x:Key="IconAreaRecycle" >
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="Width" Value="75" />
         <Setter Property="Height" Value="75" />
@@ -150,23 +151,23 @@
     </Style>
 
     <Style TargetType="Expander" x:Key="SectionExpander">
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource MyBorderBrush}" />
         <Setter Property="Width" Value="250" />
     </Style>
 
     <Style TargetType="CheckBox" x:Key="StandardCheckBox">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="Label" x:Key="StandardLabel">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -175,30 +176,30 @@
 
     <Style TargetType="TextBlock" x:Key="TextBlockWithHyperlink">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="StandardTextBlock">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="TextBox" x:Key="StandardTextBox">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="Core:NumericOnlyTextBox" x:Key="NumberTextBox">
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -208,7 +209,8 @@
 
     <Style TargetType="TextBox" x:Key="CharacterTextBox">
         <Setter Property="FontSize" Value="{DynamicResource GlyphFontSize}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="MaxLength" Value="1" />
@@ -218,7 +220,8 @@
 
     <Style TargetType="TextBox" x:Key="CodeTextBox">
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
-        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyWindowBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontFamily" Value="{DynamicResource CodeFontFamily}" />
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="AcceptsReturn" Value="True" />
@@ -248,14 +251,15 @@
         <Setter Property="Height" Value="32" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource MyButtonBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyButtonForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
     </Style>
 
     <Style TargetType="RadioButton" x:Key="StandardRadioButton">
         <Setter Property="Margin" Value="5" />
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
@@ -263,7 +267,7 @@
     <Style TargetType="Slider" x:Key="StandardSlider">
         <Setter Property="Margin" Value="5" />
         <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource MyWindowForeground}" />
         <Setter Property="FontSize" Value="{DynamicResource RootFontSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>

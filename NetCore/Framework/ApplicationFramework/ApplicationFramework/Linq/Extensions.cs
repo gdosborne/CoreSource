@@ -18,6 +18,22 @@ namespace Common.Application.Linq {
             return value;
         }
 
+        public static bool Contains(this IList<string> list, string value, StringComparison comparison) {
+            foreach (var item in list) {
+                if(item.Equals(value, comparison))
+                    return true;
+            }
+            return false;
+        }
+
+        public static int IndexOf(this IList<string> list, string value, StringComparison comparison) {
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i].Equals(value, comparison))
+                    return i;
+            }
+            return -1;
+        }
+
         public static void Swap<T>(this IList<T> list, int index1, int index2) {
             var temp = list[index1];
             list[index1] = list[index2];

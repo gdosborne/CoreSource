@@ -7,7 +7,8 @@
         xmlns:Core="clr-namespace:Controls.Core;assembly=Controls.Core"
         Closing="Window_Closing"
         
-        mc:Ignorable="d"
+        mc:Ignorable="d" Background="{DynamicResource MyWindowBackground}"
+        Foreground="{DynamicResource MyWindowForeground}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
         Height="344" Width="661">
     <Window.DataContext>
@@ -23,25 +24,26 @@
         <ToolBar Name="MainToolbar" Grid.Row="0" Style="{DynamicResource MainToolbar}">
             <Button Command="{Binding ClearCommand}" ToolTip="Clear Recycle Bin">
                 <StackPanel Orientation="Horizontal">
-                    <Core:FontIcon Glyph="&#xE731;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                    <Core:FontIcon Glyph="&#xE731;" Foreground="{DynamicResource MyButtonForeground}" 
                                    FontSize="{DynamicResource ToolbarIconSize}" FontFamily="{DynamicResource PeopleFontFamily}" />
                     <TextBlock Style="{DynamicResource StandardTextBlock}" Text="Clear the Recycle Bin"
-                               Margin="10,0"/>
+                               Margin="10,0" Foreground="{DynamicResource MyButtonForeground}"/>
                 </StackPanel>
             </Button>
 
             <Button Command="{Binding RestoreCommand}" ToolTip="Restore Selected Items">
                 <StackPanel Orientation="Horizontal">
-                    <Core:FontIcon Glyph="&#xE10E;" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                    <Core:FontIcon Glyph="&#xE10E;" Foreground="{DynamicResource MyButtonForeground}" 
                                    FontSize="{DynamicResource ToolbarIconSize}" FontFamily="{DynamicResource IconFontFamily}" />
                     <TextBlock Style="{DynamicResource StandardTextBlock}" Text="Restore Selected"
-                               Margin="10,0"/>
+                               Margin="10,0" Foreground="{DynamicResource MyButtonForeground}"/>
                 </StackPanel>
             </Button>
         </ToolBar>
         
         <ListView Grid.Row="1" ItemsSource="{Binding Icons}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" Padding="10" SelectionChanged="ListView_SelectionChanged">
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" Padding="10" SelectionChanged="ListView_SelectionChanged"
+                  Background="{DynamicResource MyWindowBackground}" Foreground="{DynamicResource MyButtonForeground}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" IsItemsHost="True" />

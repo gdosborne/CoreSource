@@ -1,16 +1,18 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Primitives;
+﻿using Common.Application.Primitives;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Universal.Common.Reflection;
 using Color = System.Windows.Media.Color;
 using Size = System.Windows.Size;
 
@@ -236,7 +238,7 @@ namespace Common.Application.Media {
 
         public static SolidColorBrush ToSolidBrush(this Color value) => new(value);
 
-        public static System.Drawing.Color ToColor(this Color color) => 
+        public static System.Drawing.Color ToColor(this Color color) =>
             System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
 
         public static Color ToColor(this System.Drawing.Color color) =>
@@ -280,26 +282,51 @@ namespace Common.Application.Media {
 
         private static bool ThumbnailCallback() => false;
 
-        public struct CharInfo {
+        public class CharInfo : INotifyPropertyChanged {
             public int Index { get; set; }
             public string Ascii { get; set; }
             public string Hex { get; set; }
             public string Image { get; set; }
             public System.Windows.Media.FontFamily FontFamily { get; set; }
-            public double FontSize { get; set; }
+
+            private double _FontSize = default;
+
+            public event PropertyChangedEventHandler? PropertyChanged;
+            private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            public double FontSize {
+                get => _FontSize;
+                set {
+                    _FontSize = value;
+                    EnclosureSize = FontSize + 10;
+                    OnPropertyChanged();
+                }
+            }
+
+            private double _EnclosureSize = default;
+            public double EnclosureSize {
+                get => _EnclosureSize;
+                set {
+                    _EnclosureSize = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
-        public static List<CharInfo> GetCharacters(this System.Windows.Media.FontFamily fontFamily, double size) {
+        public static List<CharInfo> GetCharacters(this System.Windows.Media.FontFamily fontFamily, double size, out bool isSymbolFont) {
+           isSymbolFont = false;
             var chars = new List<CharInfo>();
             size = size < 10 ? 10 : size;
             if (fontFamily != null) {
-                GlyphTypeface gtf = null;
+                GlyphTypeface? gtf = default;
                 foreach (var tf in fontFamily.GetTypefaces()) {
                     tf.TryGetGlyphTypeface(out gtf);
                     if (gtf != null) {
+                        isSymbolFont = gtf.Symbol;
                         var charMap = gtf.CharacterToGlyphMap;
+                        var exceptKeys = new int[] { 0, 10, 13, 32 };
                         foreach (var kvp in charMap) {
-                            if (kvp.Key == 13 || kvp.Key == 32) {
+                            if (exceptKeys.Contains(kvp.Key)) {
                                 continue;
                             }
                             var ascii = kvp.Key.ToString("00000");

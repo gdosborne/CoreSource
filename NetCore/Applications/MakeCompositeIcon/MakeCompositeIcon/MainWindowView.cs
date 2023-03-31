@@ -3,10 +3,14 @@ using Common.Application.Linq;
 using Common.Application.Media;
 using Common.Application.Primitives;
 using Common.MVVMFramework;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using static ApplicationFramework.Media.CompositeIconData;
@@ -25,39 +29,10 @@ namespace MakeCompositeIcon {
                 CompositeIconData.IconTypes.FullOverlay,
                 CompositeIconData.IconTypes.SubscriptedOverlay
             };
-            GuideBrush = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0));
+            GuideBrush = new SolidColorBrush(System.Windows.Media.Color.FromArgb(128, 0, 0, 0));
             GuideVisibility = App.ThisApp.AreGuidesShown ? Visibility.Visible : Visibility.Hidden;
             RenameVisibility = Visibility.Hidden;
             HideSettings();
-        }
-
-        public void Reset() {
-            if (SelectedIcon != null) {
-                SelectedIcon.IsLoadComplete = false;
-            }
-            IsSingleColorSelected = false;
-            IsEditorEnabled = false;
-            IsSingleFontSelected = false;
-            IsSingleSizeSelected = false;
-            SubscriptVisibility = Visibility.Collapsed;
-            CenteredVisibility = Visibility.Collapsed;
-        }
-
-        internal void HideSettings() {
-            CharactersVisibility = Visibility.Collapsed;
-            SizeVisibility = Visibility.Collapsed;
-            FontsVisibility = Visibility.Collapsed;
-            ColorsVisibility = Visibility.Collapsed;
-            IconTypeVisibility = Visibility.Collapsed;
-        }
-
-        public void RefreshFiles() {
-            Icons.Clear();
-            var files = new DirectoryInfo(App.ThisApp.FilesDirectory).GetFiles("*.compo");
-            foreach (var file in files.OrderBy(x => x.Name)) {
-                var icon = CompositeIcon.FromFile(file.FullName);
-                Icons.Add(icon);
-            }
         }
 
         public override void Initialize() {
@@ -68,10 +43,18 @@ namespace MakeCompositeIcon {
             OffsetVisibility = Visibility.Hidden;
             var fonts = System.Windows.Media.Fonts.SystemFontFamilies.OrderBy(x => x.Source);
             Fonts.AddRange(fonts);
-            cachedCharacters = new Dictionary<string, List<CharInfo>>();
-        }
 
-        internal double glyphFontSize => (double)App.ThisApp.Resources["GlyphFontSize"];
+            if (!string.IsNullOrEmpty(App.ThisApp.StartupFilename)) {
+                var icon = Icons.FirstOrDefault(x => x.FullPath.Equals(App.ThisApp.StartupFilename, System.StringComparison.OrdinalIgnoreCase));
+                if (icon == null) {
+                    if (File.Exists(App.ThisApp.StartupFilename)) {
+                        icon = CompositeIcon.FromFile(App.ThisApp.StartupFilename);
+                        Icons.Add(icon);
+                    }
+                }
+                SelectedIcon = icon;
+            }
+        }
 
         #region PrimaryCharacters Property
         private ObservableCollection<CharInfo> _PrimaryCharacters = default;
@@ -238,8 +221,6 @@ namespace MakeCompositeIcon {
         }
         #endregion
 
-        private Dictionary<string, List<CharInfo>> cachedCharacters = default;
-
         #region SelectedIcon Property
         private CompositeIcon _SelectedIcon = default;
         /// <summary>Gets/sets the SelectedIcon.</summary>
@@ -266,31 +247,31 @@ namespace MakeCompositeIcon {
                     SelectedIcon.SurfaceBrush = SelectedIcon.SurfaceBrush;
                     SelectedIcon.PrimaryFontFamily = SelectedIcon.PrimaryFontFamily;
                     SelectedIcon.SecondaryFontFamily = SelectedIcon.SecondaryFontFamily;
-                    
+
                     PrimaryCharacters ??= new ObservableCollection<CharInfo>();
                     SecondaryCharacters ??= new ObservableCollection<CharInfo>();
-                    
+
                     PrimaryCharacters.Clear();
                     SecondaryCharacters.Clear();
 
                     if (SelectedIcon.PrimaryFontFamily != null) {
-                        if (!cachedCharacters.ContainsKey(SelectedIcon.PrimaryFontFamily.Source)) {
+                        if (!App.ThisApp.CachedCharacters.ContainsKey(SelectedIcon.PrimaryFontFamily.Source)) {
                             var chars = GetCharacters(SelectedIcon.PrimaryFontFamily, glyphFontSize);
-                            cachedCharacters.Add(SelectedIcon.PrimaryFontFamily.Source, chars);
+                            App.ThisApp.CachedCharacters.Add(SelectedIcon.PrimaryFontFamily.Source, chars);
                         }
-                        PrimaryCharacters.AddRange(cachedCharacters[SelectedIcon.PrimaryFontFamily.Source]);
-                        
+                        PrimaryCharacters.AddRange(App.ThisApp.CachedCharacters[SelectedIcon.PrimaryFontFamily.Source]);
+
                     }
                     if (SelectedIcon.SecondaryFontFamily != null) {
-                        if (!cachedCharacters.ContainsKey(SelectedIcon.SecondaryFontFamily.Source)) {
+                        if (!App.ThisApp.CachedCharacters.ContainsKey(SelectedIcon.SecondaryFontFamily.Source)) {
                             var chars = GetCharacters(SelectedIcon.SecondaryFontFamily, glyphFontSize);
-                            cachedCharacters.Add(SelectedIcon.SecondaryFontFamily.Source, chars);
+                            App.ThisApp.CachedCharacters.Add(SelectedIcon.SecondaryFontFamily.Source, chars);
                         }
-                        SecondaryCharacters.AddRange(cachedCharacters[SelectedIcon.SecondaryFontFamily.Source]);
+                        SecondaryCharacters.AddRange(App.ThisApp.CachedCharacters[SelectedIcon.SecondaryFontFamily.Source]);
                     }
 
-                    PrimaryGlyph = PrimaryCharacters.FirstOrDefault(x => x.Index == SelectedIcon.PrimaryGlyph);
-                    SecondaryGlyph = SecondaryCharacters.FirstOrDefault(x => x.Index == SelectedIcon.SecondaryGlyph);
+                    PrimaryGlyph = PrimaryCharacters.FirstOrDefault(x => x.Image.Equals(SelectedIcon.PrimaryGlyph));
+                    SecondaryGlyph = SecondaryCharacters.FirstOrDefault(x => x.Image.Equals(SelectedIcon.SecondaryGlyph));
 
                     IsSingleColorSelected = SelectedIcon.SecondaryBrush == null
                         || (SelectedIcon.PrimaryBrush.Color.ToHexValue() == SelectedIcon.SecondaryBrush.Color.ToHexValue());
@@ -301,9 +282,11 @@ namespace MakeCompositeIcon {
                         OffsetVisibility = Visibility.Visible;
                         RecalcOffsets();
                     }
+                    if (SelectedIcon.SurfaceBrush.Color.A > 0)
+                        GuideBrush = SelectedIcon.SurfaceBrush.Invert(128);
 
                     ShowSettingTypeCommand.Execute("Characters");
-                    
+
                     SelectedIcon.IsLoadComplete = true;
                 }
                 IsEditorEnabled = SelectedIcon != null;
@@ -319,8 +302,8 @@ namespace MakeCompositeIcon {
             get => _PrimaryGlyph;
             set {
                 _PrimaryGlyph = value;
-                if (PrimaryGlyph.Index > 0)
-                    SelectedIcon.PrimaryGlyph = PrimaryGlyph.Image.ToCharArray()[0];
+                if (PrimaryGlyph != null && PrimaryGlyph.Index > 0)
+                    SelectedIcon.PrimaryGlyph = PrimaryGlyph.Image;
                 OnPropertyChanged();
             }
         }
@@ -334,8 +317,8 @@ namespace MakeCompositeIcon {
             get => _SecondaryGlyph;
             set {
                 _SecondaryGlyph = value;
-                if (SecondaryGlyph.Index > 0)
-                    SelectedIcon.SecondaryGlyph = SecondaryGlyph.Image.ToCharArray()[0];
+                if (SecondaryGlyph != null && SecondaryGlyph.Index > 0)
+                    SelectedIcon.SecondaryGlyph = SecondaryGlyph.Image;
                 OnPropertyChanged();
             }
         }
@@ -367,11 +350,6 @@ namespace MakeCompositeIcon {
             else if (e.PropertyName == nameof(CompositeIcon.SecondarySize)) {
                 RecalcOffsets();
             }
-            else if (e.PropertyName == nameof(CompositeIcon.PrimaryFontFamily)) {
-                if (IsSingleFontSelected) {
-                    icon.SecondaryFontFamily = icon.PrimaryFontFamily;
-                }
-            }
             else if (e.PropertyName == nameof(CompositeIcon.IconType)) {
                 CenteredVisibility = icon.IconType == CompositeIconData.IconTypes.FullOverlay ? Visibility.Visible : Visibility.Collapsed;
                 SubscriptVisibility = icon.IconType == CompositeIconData.IconTypes.SubscriptedOverlay ? Visibility.Visible : Visibility.Collapsed;
@@ -380,10 +358,49 @@ namespace MakeCompositeIcon {
                     icon.SecondarySize = MaxOverlayIconSize;
                 }
             }
+            else if (e.PropertyName == nameof(CompositeIcon.PrimaryGlyph)) {
+                var glyph = PrimaryCharacters.FirstOrDefault(x => x.Image == icon.PrimaryGlyph);
+                if (glyph != null) {
+                    if (icon.PrimaryFontFamily.Source != glyph.FontFamily.Source) {
+                        icon.PrimaryFontFamily = glyph.FontFamily;
+                    }
+                }
+            }
+            else if (e.PropertyName == nameof(CompositeIcon.SecondaryGlyph)) {
+                var glyph = SecondaryCharacters.FirstOrDefault(x => x.Image == icon.SecondaryGlyph);
+                if (glyph != null) {
+                    if (icon.SecondaryFontFamily.Source != glyph.FontFamily.Source) {
+                        icon.SecondaryFontFamily = glyph.FontFamily;
+                    }
+                }
+            }
             else if (e.PropertyName == nameof(CompositeIcon.PrimaryFontFamily)) {
+                if (IsSingleFontSelected) {
+                    icon.SecondaryFontFamily = icon.PrimaryFontFamily;
+                }
                 var chars = GetCharacters(icon.PrimaryFontFamily, icon.PrimarySize);
                 if (chars != null) {
-                    PrimaryCharacters = new ObservableCollection<CharInfo>(chars);
+                    if (PrimaryCharacters != null) {
+                        PrimaryCharacters.Clear();
+                        PrimaryCharacters.AddRange(chars);
+                    }
+                    else
+                        PrimaryCharacters = new ObservableCollection<CharInfo>(chars);
+                    if (!App.ThisApp.CachedCharacters.ContainsKey(icon.PrimaryFontFamily.Source))
+                        App.ThisApp.CachedCharacters.Add(icon.PrimaryFontFamily.Source, chars);
+                }
+            }
+            else if (e.PropertyName == nameof(CompositeIcon.SecondaryFontFamily)) {
+                var chars = GetCharacters(icon.SecondaryFontFamily, icon.SecondarySize.HasValue ? icon.SecondarySize.Value : icon.PrimarySize);
+                if (chars != null) {
+                    if (SecondaryCharacters != null) {
+                        SecondaryCharacters.Clear();
+                        SecondaryCharacters.AddRange(chars);
+                    }
+                    else
+                        SecondaryCharacters = new ObservableCollection<CharInfo>(chars);
+                    if (!App.ThisApp.CachedCharacters.ContainsKey(icon.SecondaryFontFamily.Source))
+                        App.ThisApp.CachedCharacters.Add(icon.SecondaryFontFamily.Source, chars);
                 }
             }
             else if (e.PropertyName == nameof(CompositeIcon.SecondaryVerticalOffset)
@@ -400,7 +417,7 @@ namespace MakeCompositeIcon {
         }
 
         private List<CharInfo> GetCharacters(System.Windows.Media.FontFamily fontFamily, double size) =>
-            fontFamily.GetCharacters(size);
+            fontFamily.GetCharacters(size, out var isSymbolFont);
 
         #endregion
 
@@ -442,18 +459,6 @@ namespace MakeCompositeIcon {
             }
         }
         #endregion
-
-        public void UpdateClipWithSize(string propertyName) {
-            if (SelectedIcon == null)
-                return;
-
-            var prop = SelectedIcon.GetType().GetProperty(propertyName);
-            if (prop != null) {
-                var value = prop.GetValue(SelectedIcon, null);
-                Clipboard.SetText($"{propertyName}={value}", TextDataFormat.Text);
-            }
-            UpdateInterface();
-        }
 
         #region OffsetNegative Property
         private double _OffsetNegative = default;
@@ -610,5 +615,130 @@ namespace MakeCompositeIcon {
             }
         }
         #endregion
+
+        #region OtherIconFiles Property
+        private List<string> _OtherIconFiles = default;
+        /// <summary>Gets/sets the OtherIconFiles.</summary>
+        /// <value>The OtherIconFiles.</value>
+        public List<string> OtherIconFiles {
+            get => _OtherIconFiles;
+            private set {
+                _OtherIconFiles = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        public void UpdateClipWithSize(string propertyName) {
+            if (SelectedIcon == null)
+                return;
+
+            var prop = SelectedIcon.GetType().GetProperty(propertyName);
+            if (prop != null) {
+                var value = prop.GetValue(SelectedIcon, null);
+                Clipboard.SetText($"{propertyName}={value}", TextDataFormat.Text);
+            }
+            UpdateInterface();
+        }
+
+        public void Reset() {
+            if (SelectedIcon != null) {
+                SelectedIcon.IsLoadComplete = false;
+            }
+            IsSingleColorSelected = false;
+            IsEditorEnabled = false;
+            IsSingleFontSelected = false;
+            IsSingleSizeSelected = false;
+            SubscriptVisibility = Visibility.Collapsed;
+            CenteredVisibility = Visibility.Collapsed;
+        }
+
+        internal void HideSettings() {
+            CharactersVisibility = Visibility.Collapsed;
+            SizeVisibility = Visibility.Collapsed;
+            FontsVisibility = Visibility.Collapsed;
+            ColorsVisibility = Visibility.Collapsed;
+            IconTypeVisibility = Visibility.Collapsed;
+        }
+
+        public void RefreshFiles() {
+            Icons.Clear();
+            var temp = new List<CompositeIcon>();
+            var files = new DirectoryInfo(App.ThisApp.FilesDirectory).GetFiles("*.compo");
+            foreach (var file in files.OrderBy(x => x.Name)) {
+                var icon = CompositeIcon.FromFile(file.FullName);
+                temp.Add(icon);
+            }
+
+            OtherIconFiles ??= new List<string>();
+            OtherIconFiles.Clear();
+            if (File.Exists(App.ThisApp.OtherFilesFilename)) {
+                var json = File.ReadAllText(App.ThisApp.OtherFilesFilename, Encoding.BigEndianUnicode);
+                var settings = new JsonSerializerSettings {
+                    Formatting = Formatting.Indented
+                };
+                OtherIconFiles = JsonConvert.DeserializeObject<List<string>>(json, settings);
+                if (OtherIconFiles.Any()) {
+                    OtherIconFiles.ForEach(x => {
+                        try {
+                            var icon = CompositeIcon.FromFile(x);
+                            temp.Add(icon);
+                        }
+                        catch (Exception e) { App.HandleException(e); }
+                    });
+
+                }
+            }
+            Icons.AddRange(temp.OrderBy(x => x.ShortName));
+        }
+
+        internal async Task RenameOtherIcon(CompositeIcon icon, string oldFilename) {
+            if (OtherIconFiles.Contains(oldFilename, StringComparison.OrdinalIgnoreCase)) {
+                OtherIconFiles[OtherIconFiles.IndexOf(oldFilename, StringComparison.OrdinalIgnoreCase)] = icon.FullPath;
+            }
+
+            var settings = new JsonSerializerSettings {
+                Formatting = Formatting.Indented
+            };
+            var json = JsonConvert.SerializeObject(OtherIconFiles, settings);
+            await File.WriteAllTextAsync(App.ThisApp.OtherFilesFilename, json, Encoding.BigEndianUnicode);
+        }
+
+        internal async Task<bool> RemoveOtherIconAsync(CompositeIcon icon) {
+            var settings = new JsonSerializerSettings {
+                Formatting = Formatting.Indented
+            };
+            if (OtherIconFiles.Contains(icon.FullPath, StringComparison.OrdinalIgnoreCase)) {
+                var result = true;
+                while (result) {
+                    result = OtherIconFiles.Remove(icon.FullPath);
+                    if (result) {
+                        var json = JsonConvert.SerializeObject(OtherIconFiles, settings);
+                        await File.WriteAllTextAsync(App.ThisApp.OtherFilesFilename, json, Encoding.BigEndianUnicode);
+                    }
+                }
+            }
+            return true;
+        }
+
+        internal async Task<CompositeIcon> AddOtherFileAsync(string filename) {
+            if (!File.Exists(filename))
+                return null;
+            try {
+                var icon = CompositeIcon.FromFile(filename);
+                OtherIconFiles?.Add(filename);
+                var settings = new JsonSerializerSettings {
+                    Formatting = Formatting.Indented
+                };
+                var json = JsonConvert.SerializeObject(OtherIconFiles, settings);
+                await File.WriteAllTextAsync(App.ThisApp.OtherFilesFilename, json, Encoding.BigEndianUnicode);
+                return icon;
+            }
+            catch (Exception ex) { App.HandleException(ex); }
+            return null;
+        }
+
+        internal double glyphFontSize => (double)App.ThisApp.Resources["GlyphFontSize"];
+
     }
 }
