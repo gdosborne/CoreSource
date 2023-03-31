@@ -6,16 +6,6 @@ using System.Threading.Tasks;
 namespace OzDB.Management {
     [JsonObject]
     public class OzDBDataField : PropertyChangedBase {
-        public override async Task<bool> Save() {
-            await Task.Yield();
-            return true;
-        }
-
-        public override async Task<bool> MoveAsync(string destination) {
-            await Task.Yield();
-            return true;
-        }
-
         public override async Task<bool> DeleteAsync() {
             await Task.Yield();
             return true;

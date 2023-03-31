@@ -1,6 +1,7 @@
 ﻿using Common.Application.IO;
 using Common.MVVMFramework;
 using OzDB.Management;
+using OzDB.Management.Exceptions;
 using System;
 using System.IO;
 
@@ -17,6 +18,12 @@ namespace OzDBCreate.ViewModel {
         }
 
         #region commands
+        internal enum Actions {
+            AskSaveChanges,
+            OpenDatabase,
+            ShowProperties,
+            AskNewFileName
+        }
 
         #region ExitCommand
         private DelegateCommand _ExitCommand = default;
@@ -34,9 +41,9 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the SaveAs command.</summary>
         /// <value>The SaveAs command.</value>
         public DelegateCommand SaveAsCommand => _SaveAsCommand ??= new DelegateCommand(SaveAs, ValidateSaveAsState);
-        private bool ValidateSaveAsState(object state) => true;
+        private bool ValidateSaveAsState(object state) => CurrentDatabase != null;
         private void SaveAs(object state) {
-            
+            ExecuteAction(nameof(Actions.AskNewFileName));
         }
         #endregion
 
@@ -45,9 +52,14 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the Save command.</summary>
         /// <value>The Save command.</value>
         public DelegateCommand SaveCommand => _SaveCommand ??= new DelegateCommand(Save, ValidateSaveState);
-        private bool ValidateSaveState(object state) => true;
-        private void Save(object state) {
-            
+        private bool ValidateSaveState(object state) => CurrentDatabase != null && CurrentDatabase.HasChanges;
+        private async void Save(object state) {
+            try {
+                await CurrentDatabase?.SaveAsync();
+            }
+            catch(Exception ex) {
+                await App.HandleExceptionAsync(ex);
+            }
         }
         #endregion
 
@@ -57,11 +69,12 @@ namespace OzDBCreate.ViewModel {
         /// <value>The New command.</value>
         public DelegateCommand NewCommand => _NewCommand ??= new DelegateCommand(New, ValidateNewState);
         private bool ValidateNewState(object state) => true;
-        private void New(object state) {
-            var name = "[incomplete]";
-            var tempDirName = System.IO.Path.Combine(App.WorkingDirectory.FullName, $"{Guid.NewGuid()}");
-            CurrentDatabase = OzDBDatabase.Create(name, tempDirName);
-
+        private async void New(object state) {
+            var name = "[New Database]";
+            var id = Guid.NewGuid();
+            var tempDirName = System.IO.Path.Combine(App.WorkingDirectory.FullName, $"{id}");
+            CurrentDatabase = await OzDBDatabase.Create(name, tempDirName, id);
+            ShowProperties(null);
         }
         #endregion
 
@@ -72,7 +85,10 @@ namespace OzDBCreate.ViewModel {
         public DelegateCommand OpenCommand => _OpenCommand ??= new DelegateCommand(Open, ValidateOpenState);
         private bool ValidateOpenState(object state) => true;
         private void Open(object state) {
-            
+            if(CurrentDatabase != null) {
+                Close(null);
+            }
+            ExecuteAction(nameof(Actions.OpenDatabase));
         }
         #endregion
 
@@ -81,9 +97,25 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the Close command.</summary>
         /// <value>The Close command.</value>
         public DelegateCommand CloseCommand => _CloseCommand ??= new DelegateCommand(Close, ValidateCloseState);
-        private bool ValidateCloseState(object state) => true;
+        private bool ValidateCloseState(object state) => CurrentDatabase != null;
         private void Close(object state) {
-            
+            if(CurrentDatabase == null) return;
+            if(CurrentDatabase.HasChanges) {
+                ExecuteAction(nameof(Actions.AskSaveChanges));
+            }
+            CurrentDatabase.Close();
+            CurrentDatabase = null;
+        }
+        #endregion
+
+        #region ShowPropertiesCommand
+        private DelegateCommand _ShowPropertiesCommand = default;
+        /// <summary>Gets the ShowProperties command.</summary>
+        /// <value>The ShowProperties command.</value>
+        public DelegateCommand ShowPropertiesCommand => _ShowPropertiesCommand ??= new DelegateCommand(ShowProperties, ValidateShowPropertiesState);
+        private bool ValidateShowPropertiesState(object state) => CurrentDatabase != null;
+        private void ShowProperties(object state) {
+            ExecuteAction(nameof(Actions.ShowProperties));
         }
         #endregion
 

@@ -1,8 +1,10 @@
 ﻿using Common.Application;
+using Common.Application.Exception;
 using Common.Application.Windows;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace OzDBCreate {
@@ -45,5 +47,12 @@ namespace OzDBCreate {
         public static DirectoryInfo TempDirectory { get; private set; }
         public static DirectoryInfo WorkingDirectory { get; private set; }
         public static string AppName { get; private set; }
+
+        public static async Task HandleExceptionAsync(Exception ex) {
+            var exText = await ex.ToStringRecurseAsync();
+            if (exText == null) return;
+            await App.AppSession.Logger.LogMessageAsync(exText.ToString(), 
+                Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
+        }
     }
 }

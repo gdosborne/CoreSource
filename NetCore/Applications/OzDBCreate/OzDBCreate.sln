@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationFramework", "F:\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controls.Core", "F:\Git\CoreSource\NetCore\Controls\Controls.Core.csproj", "{5BB07F60-CBCA-490F-8A3D-27BA3C37AC07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzDB.Management", "OzDB.Management\OzDB.Management.csproj", "{48886EA8-8053-41B8-BA33-478A6C6A2469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzDB.Management", "OzDB.Management\OzDB.Management.csproj", "{48886EA8-8053-41B8-BA33-478A6C6A2469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +45,8 @@ Global
 		{5BB07F60-CBCA-490F-8A3D-27BA3C37AC07}.Release|x64.Build.0 = Release|x64
 		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|x64.Build.0 = Debug|Any CPU
+		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|x64.ActiveCfg = Debug|x64
+		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Debug|x64.Build.0 = Debug|x64
 		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48886EA8-8053-41B8-BA33-478A6C6A2469}.Release|x64.ActiveCfg = Release|Any CPU

@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:OzDBCreate.ViewModel"
         
         mc:Ignorable="d" Style="{DynamicResource AppWindow}"
-        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="450" Width="800">
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="450" Width="800" Icon="/database.ico">
     <Window.DataContext>
         <views:MainWindowView />
     </Window.DataContext>
@@ -16,7 +16,7 @@
         <KeyBinding Command="{Binding NewCommand}" Key="N" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding OpenCommand}" Key="O" Modifiers="Ctrl" />
         <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl" />
-        
+        <KeyBinding Command="{Binding ShowPropertiesCommand}" Key="P" Modifiers="Alt" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -44,13 +44,13 @@
                                 <core:FontIcon Glyph="" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Save Database" InputGestureText="Ctrl-S" Command="{Binding SaveCommand}"
+                        <MenuItem Header="Save" InputGestureText="Ctrl-S" Command="{Binding SaveCommand}"
                                    Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
                                 <core:FontIcon Glyph="" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Save Database As..." InputGestureText="Ctrl-A" Command="{Binding SaveAsCommand}"
+                        <MenuItem Header="Save As..." InputGestureText="Ctrl-A" Command="{Binding SaveAsCommand}"
                                    Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
                                 <core:FontIcon Glyph="" />
@@ -84,12 +84,20 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
+                        <MenuItem Header="Properties..." InputGestureText="Alt-P" Command="{Binding ShowPropertiesCommand}"
+                                   Style="{DynamicResource AppMenuItem}">
+                            <MenuItem.Icon>
+                                <core:FontIcon Glyph="" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator />
                         <MenuItem Header="Exit" Command="{Binding ExitCommand}" Style="{DynamicResource AppMenuItem}"/>
                     </MenuItem>
 
                     <MenuItem Header="Edit" Style="{DynamicResource AppMenuItem}">
-
+                       
                     </MenuItem>
+                    
                     <MenuItem Header="View" Style="{DynamicResource AppMenuItem}">
 
                     </MenuItem>
@@ -103,11 +111,22 @@
                 <ToolBar Name="MainToolbar" Grid.Column="1" Style="{DynamicResource AppToolbar}" HorizontalAlignment="Right" >
                     <Button Style="{DynamicResource ToolbarButton}" Content=""
                             Command="{Binding NewCommand}"/>
-                    <Button Style="{DynamicResource ToolbarButton}" Content="" />
-                    <Button Style="{DynamicResource ToolbarButton}" Content="" />
+                    <Button Style="{DynamicResource ToolbarButton}" Content="" 
+                            Command="{Binding OpenCommand}"/>
+                    <Button Style="{DynamicResource ToolbarButton}" Content="" 
+                            Command="{Binding SaveCommand}"/>
                     <Separator />
                 </ToolBar>
             </Grid>
         </Border>
+
+
+
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <core:FontIcon Glyph="" />
+            </StatusBarItem>
+            <StatusBarItem Content="{Binding CurrentDatabase.Name}" />
+        </StatusBar>
     </Grid>
 </Window>

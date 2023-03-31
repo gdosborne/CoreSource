@@ -17,8 +17,10 @@ namespace OzDB.Management {
         [JsonProperty]
         public string Name {
             get => _Name;
-            protected set {
+            set {
+                HasNameChange = value != Name;
                 _Name = value;
+                HasChanges = HasNameChange;
                 OnPropertyChanged();
             }
         }
@@ -28,17 +30,45 @@ namespace OzDB.Management {
         private string _Description = default;
         /// <summary>Gets/sets the Description.</summary>
         /// <value>The Description.</value>
+        [JsonProperty]
         public string Description {
             get => _Description;
             set {
                 _Description = value;
+                HasChanges = true;
                 OnPropertyChanged();
             }
         }
         #endregion
 
-        public abstract Task<bool> Save();
-        public abstract Task<bool> MoveAsync(string destination);
+        #region HasChanges Property
+        private bool _HasChanges = default;
+        /// <summary>Gets/sets the HasChanges.</summary>
+        /// <value>The HasChanges.</value>
+        [JsonIgnore]
+        public bool HasChanges {
+            get => _HasChanges;
+            set {
+                _HasChanges = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region HasNameChange Property
+        private bool _HasNameChange = default;
+        /// <summary>Gets/sets the HasNameChange.</summary>
+        /// <value>The HasNameChange.</value>
+        [JsonIgnore]
+        public bool HasNameChange {
+            get => _HasNameChange;
+            set {
+                _HasNameChange = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public abstract Task<bool> DeleteAsync();
     }
 }

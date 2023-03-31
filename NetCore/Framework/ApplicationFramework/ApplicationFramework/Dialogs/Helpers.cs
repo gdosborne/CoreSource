@@ -1,11 +1,14 @@
 ﻿using Ookii.Dialogs.Wpf;
+using System.Windows;
 
 namespace ApplicationFramework.Dialogs {
     public static class Helpers {
-        public static bool ShowYesNoDialog(string title, string content, TaskDialogIcon icon, int width = 300) =>
-            ShowYesNoDialog(title, title, content, icon, width);
+        public static bool ShowYesNoDialog(this Window window, string title, string content, TaskDialogIcon icon, 
+                int width = 300) =>
+            ShowYesNoDialog(window, title, title, content, icon, width);
 
-        public static bool ShowYesNoDialog(string title, string main, string content, TaskDialogIcon icon, int width = 300) {
+        public static bool ShowYesNoDialog(this Window window, string title, string main, string content, 
+                TaskDialogIcon icon, int width = 300) {
             var td = new TaskDialog {
                 MainIcon = icon,
                 MainInstruction = main,
@@ -13,11 +16,12 @@ namespace ApplicationFramework.Dialogs {
                 AllowDialogCancellation = true,
                 ButtonStyle = TaskDialogButtonStyle.Standard,
                 WindowTitle = title,
-                Width = width                
+                Width = width,
+                CenterParent = true                
             };
             td.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
             td.Buttons.Add(new TaskDialogButton(ButtonType.No));
-            var result = td.ShowDialog();
+            var result = td.ShowDialog(window);
             return result != null && result.ButtonType == ButtonType.Yes;
         }
 

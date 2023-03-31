@@ -45,14 +45,59 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
         <Setter Property="BorderThickness" Value="1" />        
         <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
         <Setter Property="Width" Value="26" />
         <Setter Property="Height" Value="26" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="1,0" />
     </Style>
 
+    <Style TargetType="Button" x:Key="StandardButton">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0,0,0,7" />
+    </Style>
+
     <Style TargetType="core:FontIcon">
         <Setter Property="FontFamily" Value="{DynamicResource IconFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource ToolbarButtonFontSize}" />
+    </Style>
+
+    <Style TargetType="StackPanel" x:Key="DialogButtonPanel">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="Margin" Value="0,0,10,5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="StandardTextBox">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="Margin" Value="0,0,10,5" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="MultiLineTextBox" BasedOn="{StaticResource StandardTextBox}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="AcceptsTab" Value="False" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style TargetType="StatusBarItem">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource BaseFontSize}" />
+        <Setter Property="Margin" Value="5,0,5,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>
