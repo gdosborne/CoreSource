@@ -120,13 +120,26 @@
             </Grid>
         </Border>
 
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="SplitterColumn" Width="auto" MinWidth="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TreeView Grid.Column="0" Margin="0,0,5,0">
+                
+            </TreeView>
+            <GridSplitter Grid.Column="0" />
+            <Border Grid.Column="1" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="1,0,1,0"
+                    Background="{DynamicResource AreaBackground}" />
+        </Grid>
 
-
-        <StatusBar Grid.Row="2">
-            <StatusBarItem>
-                <core:FontIcon Glyph="" />
-            </StatusBarItem>
-            <StatusBarItem Content="{Binding CurrentDatabase.Name}" />
-        </StatusBar>
+        <Border Grid.Row="2" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="0,1,0,0">
+            <StatusBar>
+                <StatusBarItem>
+                    <core:FontIcon Glyph="" />
+                </StatusBarItem>
+                <StatusBarItem Content="{Binding CurrentDatabase.Name}" />
+            </StatusBar>
+        </Border>
     </Grid>
 </Window>

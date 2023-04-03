@@ -6,5 +6,6 @@
     <SolidColorBrush x:Key="ControlBorder" Color="#FFAAAAAA" />
 
     <SolidColorBrush x:Key="ButtonBackground" Color="#FFFCFCFC" />
+    <SolidColorBrush x:Key="AreaBackground" Color="#FFFCFCFC" />
 
 </ResourceDictionary>

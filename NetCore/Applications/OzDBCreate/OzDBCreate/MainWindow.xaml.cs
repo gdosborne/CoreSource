@@ -7,6 +7,7 @@ using OzDB.Management;
 using OzDBCreate.ViewModel;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using static ApplicationFramework.Dialogs.Helpers;
 using IO = System.IO;
 
@@ -107,6 +108,7 @@ namespace OzDBCreate {
 
         private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e) {
             App.SaveWindowBounds(this, true);
+            App.AppSession.ApplicationSettings.AddOrUpdateSetting(this.GetType().Name, "SplitterPosition", SplitterColumn.ActualWidth);
         }
 
         public MainWindowView View => DataContext.As<MainWindowView>();
@@ -116,6 +118,8 @@ namespace OzDBCreate {
 
             MainToolbar.RemoveOverflow();
             App.RestoreWindowBounds(this, true);
+            var pos = App.AppSession.ApplicationSettings.GetValue(this.GetType().Name, "SplitterPosition", 150.0);
+            SplitterColumn.Width = new GridLength(pos);
         }
     }
 }

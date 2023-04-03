@@ -75,6 +75,7 @@ namespace OzDBCreate.ViewModel {
             var tempDirName = System.IO.Path.Combine(App.WorkingDirectory.FullName, $"{id}");
             CurrentDatabase = await OzDBDatabase.Create(name, tempDirName, id);
             ShowProperties(null);
+            UpdateInterface();
         }
         #endregion
 
