@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OzDBCreate"
         xmlns:core="clr-namespace:Controls.Core;assembly=Controls.Core"
         xmlns:views="clr-namespace:OzDBCreate.ViewModel"
-        
+        xmlns:mgmt="clr-namespace:OzDB.Management;assembly=OzDB.Management"
         mc:Ignorable="d" Style="{DynamicResource AppWindow}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="450" Width="800" Icon="/database.ico">
     <Window.DataContext>
@@ -35,13 +35,13 @@
                         <MenuItem Header="New..." InputGestureText="Ctrl-N" Command="{Binding NewCommand}"
                                    Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
-                                <core:FontIcon Glyph="" />
+								<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Open..." InputGestureText="Ctrl-O" Command="{Binding OpenCommand}"
                                    Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
-                                <core:FontIcon Glyph="" />
+								<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Save" InputGestureText="Ctrl-S" Command="{Binding SaveCommand}"
@@ -58,36 +58,14 @@
                         </MenuItem>
                         <MenuItem Header="Close" Command="{Binding CloseCommand}" Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
-                                <Grid Background="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.5*" />
-                                        <ColumnDefinition Width="0.5*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="0.5*" />
-                                        <RowDefinition Height="0.5*" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="" FontFamily="Segoe Fluent Icons" 
-                                               FontSize="{DynamicResource BaseFontSize}" 
-                                               Foreground="{DynamicResource WindowForeground}"  
-                                               HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" 
-                                               Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-                                    <Border Padding="0" Background="{DynamicResource WindowBackground}" HorizontalAlignment="Left" 
-                                            VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" 
-                                            Grid.RowSpan="1">
-                                        <TextBlock Text="" FontFamily="Segoe Fluent Icons" 
-                                                   FontSize="{DynamicResource HalfFontSize}"  HorizontalAlignment="Center"
-                                                   Foreground="{DynamicResource WindowForeground}" 
-                                                   VerticalAlignment="Center" />
-                                    </Border>
-                                </Grid>
-                            </MenuItem.Icon>
+								<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
+							</MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Properties..." InputGestureText="Alt-P" Command="{Binding ShowPropertiesCommand}"
                                    Style="{DynamicResource AppMenuItem}">
                             <MenuItem.Icon>
-                                <core:FontIcon Glyph="" />
+								<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
@@ -95,8 +73,20 @@
                     </MenuItem>
 
                     <MenuItem Header="Edit" Style="{DynamicResource AppMenuItem}">
-                       
-                    </MenuItem>
+						<MenuItem Header="Add Table..." InputGestureText="Alt-A" Command="{Binding AddTableCommand}"
+                                   Style="{DynamicResource AppMenuItem}">
+							<MenuItem.Icon>
+								<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<Separator />
+						<MenuItem Header="Settings" Command="{Binding SettingsCommand}"
+                                   Style="{DynamicResource AppMenuItem}">
+							<MenuItem.Icon>
+								<core:FontIcon Glyph="" />
+							</MenuItem.Icon>
+						</MenuItem>
+					</MenuItem>
                     
                     <MenuItem Header="View" Style="{DynamicResource AppMenuItem}">
 
@@ -109,9 +99,9 @@
                     </MenuItem>
                 </Menu>
                 <ToolBar Name="MainToolbar" Grid.Column="1" Style="{DynamicResource AppToolbar}" HorizontalAlignment="Right" >
-                    <Button Style="{DynamicResource ToolbarButton}" Content=""
+					<Button Style="{DynamicResource ToolbarButton}" Content="" FontFamily="{DynamicResource AppIconFontFamily}"
                             Command="{Binding NewCommand}"/>
-                    <Button Style="{DynamicResource ToolbarButton}" Content="" 
+					<Button Style="{DynamicResource ToolbarButton}" Content="" FontFamily="{DynamicResource AppIconFontFamily}" 
                             Command="{Binding OpenCommand}"/>
                     <Button Style="{DynamicResource ToolbarButton}" Content="" 
                             Command="{Binding SaveCommand}"/>
@@ -125,9 +115,30 @@
                 <ColumnDefinition Name="SplitterColumn" Width="auto" MinWidth="150" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TreeView Grid.Column="0" Margin="0,0,5,0">
-                
-            </TreeView>
+            <TreeView Grid.Column="0" Margin="0,0,5,0" ItemsSource="{Binding Databases}">
+				<TreeView.Resources>
+					<HierarchicalDataTemplate DataType="{x:Type mgmt:OzDBDatabase}" ItemsSource="{Binding Tables}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="40" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+							<core:FontIcon Grid.Column="0" Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
+							<TextBlock Grid.Column="1" Text="{Binding Name}" />
+						</Grid>
+					</HierarchicalDataTemplate>
+					<HierarchicalDataTemplate DataType="{x:Type mgmt:OzDbDataTable}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="40" />
+								<ColumnDefinition Width="auto" />
+							</Grid.ColumnDefinitions>
+							<core:FontIcon Grid.Column="0" Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
+							<TextBlock Grid.Column="1" Text="{Binding Name}" />
+						</Grid>
+					</HierarchicalDataTemplate>
+				</TreeView.Resources>
+			</TreeView>
             <GridSplitter Grid.Column="0" />
             <Border Grid.Column="1" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="1,0,1,0"
                     Background="{DynamicResource AreaBackground}" />
@@ -136,10 +147,10 @@
         <Border Grid.Row="2" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="0,1,0,0">
             <StatusBar>
                 <StatusBarItem>
-                    <core:FontIcon Glyph="" />
+					<core:FontIcon Glyph="" FontFamily="{DynamicResource AppIconFontFamily}" />
                 </StatusBarItem>
                 <StatusBarItem Content="{Binding CurrentDatabase.Name}" />
-            </StatusBar>
+			</StatusBar>
         </Border>
     </Grid>
 </Window>

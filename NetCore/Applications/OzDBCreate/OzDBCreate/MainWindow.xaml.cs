@@ -24,6 +24,30 @@ namespace OzDBCreate {
         private async void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.Actions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.Actions.ShowSettings: {
+                            var win = new SettingsWindow {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this,
+                            };
+                            var result = win.ShowDialog();
+                            break;
+                        }
+                    case MainWindowView.Actions.AddTable: {
+                            var win = new AddTableWindow {
+                                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                                Owner = this,
+                            };
+                            win.View.Name = "[Table 1]"; ;
+                            win.View.Description = string.Empty;
+
+                            var result = win.ShowDialog();
+                            if (!result.HasValue || !result.Value) return;
+
+                            var tbl = OzDbDataTable.Create(win.View.Name, win.View.Description, win.View.IsHidden);
+                            View.SelectedDatabase.Tables.Add(tbl);
+                            
+                            break;
+                        }
                     case MainWindowView.Actions.AskNewFileName: {
                             var initialDir = App.AppSession.ApplicationSettings.GetValue("Application", "LastDatabaseFolder",
                                 Environment.GetFolderPath(Environment.SpecialFolder.Personal));
@@ -43,8 +67,8 @@ namespace OzDBCreate {
                                 IO.Path.GetDirectoryName(dlg.FileName));
                             try {
                                 if (IO.File.Exists(dlg.FileName)) return;
-                                if(View.CurrentDatabase.HasChanges) {
-                                    await View.CurrentDatabase.SaveAsAsync(dlg.FileName);
+                                if(View.SelectedDatabase.HasChanges) {
+                                    await View.SelectedDatabase.SaveAsAsync(dlg.FileName);
                                 }
                             }
                             catch (Exception ex) {
@@ -57,14 +81,14 @@ namespace OzDBCreate {
                                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                                 Owner = this,
                             };
-                            win.View.DatabaseName = View.CurrentDatabase.Name;
-                            win.View.DatabaseDescription = View.CurrentDatabase.Description;
+                            win.View.DatabaseName = View.SelectedDatabase.Name;
+                            win.View.DatabaseDescription = View.SelectedDatabase.Description;
 
                             var result = win.ShowDialog();
                             if (!result.HasValue || !result.Value) return;
 
-                            View.CurrentDatabase.Name = win.View.DatabaseName;
-                            View.CurrentDatabase.Description = win.View.DatabaseDescription;
+                            View.SelectedDatabase.Name = win.View.DatabaseName;
+                            View.SelectedDatabase.Description = win.View.DatabaseDescription;
 
                             break;
                         }
@@ -74,7 +98,7 @@ namespace OzDBCreate {
                                 "changes before closing the database?", Ookii.Dialogs.Wpf.TaskDialogIcon.Shield,
                                 250);
                             if (!result) return;
-                            await View.CurrentDatabase?.SaveAsync();
+                            await View.SelectedDatabase?.SaveAsync();
                             break;
                         }
                     case MainWindowView.Actions.OpenDatabase: {
@@ -95,7 +119,7 @@ namespace OzDBCreate {
                             App.AppSession.ApplicationSettings.AddOrUpdateSetting("Application", "LastDatabaseFolder",
                                 IO.Path.GetDirectoryName(dlg.FileName));
                             try {
-                                View.CurrentDatabase = OzDBDatabase.FromDatabaseFile(dlg.FileName);
+                                View.SelectedDatabase = OzDBDatabase.FromDatabaseFile(dlg.FileName);
                             }
                             catch (Exception ex) {
                                 await App.HandleExceptionAsync(ex);
@@ -117,9 +141,11 @@ namespace OzDBCreate {
             base.OnSourceInitialized(e);
 
             MainToolbar.RemoveOverflow();
-            App.RestoreWindowBounds(this, true);
-            var pos = App.AppSession.ApplicationSettings.GetValue(this.GetType().Name, "SplitterPosition", 150.0);
-            SplitterColumn.Width = new GridLength(pos);
+            if (App.RestoreWindowPositions) {
+                App.RestoreWindowBounds(this, true);
+                var pos = App.AppSession.ApplicationSettings.GetValue(this.GetType().Name, "SplitterPosition", 150.0);
+                SplitterColumn.Width = new GridLength(pos);
+            }
         }
     }
 }

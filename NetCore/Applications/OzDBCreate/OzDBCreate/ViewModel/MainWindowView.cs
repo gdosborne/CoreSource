@@ -1,9 +1,10 @@
-﻿using Common.Application.IO;
+﻿using Common.Application.Primitives;
 using Common.MVVMFramework;
 using OzDB.Management;
-using OzDB.Management.Exceptions;
 using System;
-using System.IO;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows.Media;
 
 namespace OzDBCreate.ViewModel {
     public class MainWindowView : ViewModelBase {
@@ -15,6 +16,7 @@ namespace OzDBCreate.ViewModel {
             base.Initialize();
 
             Title = App.AppName;
+            Databases = new ObservableCollection<OzDBDatabase>();
         }
 
         #region commands
@@ -22,7 +24,9 @@ namespace OzDBCreate.ViewModel {
             AskSaveChanges,
             OpenDatabase,
             ShowProperties,
-            AskNewFileName
+            AskNewFileName,
+            AddTable,
+            ShowSettings
         }
 
         #region ExitCommand
@@ -41,7 +45,7 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the SaveAs command.</summary>
         /// <value>The SaveAs command.</value>
         public DelegateCommand SaveAsCommand => _SaveAsCommand ??= new DelegateCommand(SaveAs, ValidateSaveAsState);
-        private bool ValidateSaveAsState(object state) => CurrentDatabase != null;
+        private bool ValidateSaveAsState(object state) => Databases.Any();
         private void SaveAs(object state) {
             ExecuteAction(nameof(Actions.AskNewFileName));
         }
@@ -52,12 +56,12 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the Save command.</summary>
         /// <value>The Save command.</value>
         public DelegateCommand SaveCommand => _SaveCommand ??= new DelegateCommand(Save, ValidateSaveState);
-        private bool ValidateSaveState(object state) => CurrentDatabase != null && CurrentDatabase.HasChanges;
+        private bool ValidateSaveState(object state) => SelectedDatabase != null && SelectedDatabase.HasChanges;
         private async void Save(object state) {
             try {
-                await CurrentDatabase?.SaveAsync();
+                await SelectedDatabase?.SaveAsync();
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 await App.HandleExceptionAsync(ex);
             }
         }
@@ -73,7 +77,9 @@ namespace OzDBCreate.ViewModel {
             var name = "[New Database]";
             var id = Guid.NewGuid();
             var tempDirName = System.IO.Path.Combine(App.WorkingDirectory.FullName, $"{id}");
-            CurrentDatabase = await OzDBDatabase.Create(name, tempDirName, id);
+            SelectedDatabase = await OzDBDatabase.Create(name, tempDirName, id);
+            SelectedDatabase.IconFontFamily = App.Current.Resources["AppIconFontFamily"].As<FontFamily>();
+            Databases.Add(SelectedDatabase);
             ShowProperties(null);
             UpdateInterface();
         }
@@ -86,9 +92,6 @@ namespace OzDBCreate.ViewModel {
         public DelegateCommand OpenCommand => _OpenCommand ??= new DelegateCommand(Open, ValidateOpenState);
         private bool ValidateOpenState(object state) => true;
         private void Open(object state) {
-            if(CurrentDatabase != null) {
-                Close(null);
-            }
             ExecuteAction(nameof(Actions.OpenDatabase));
         }
         #endregion
@@ -98,14 +101,15 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the Close command.</summary>
         /// <value>The Close command.</value>
         public DelegateCommand CloseCommand => _CloseCommand ??= new DelegateCommand(Close, ValidateCloseState);
-        private bool ValidateCloseState(object state) => CurrentDatabase != null;
+        private bool ValidateCloseState(object state) => SelectedDatabase != null;
         private void Close(object state) {
-            if(CurrentDatabase == null) return;
-            if(CurrentDatabase.HasChanges) {
+            if (SelectedDatabase == null) return;
+            if (SelectedDatabase.HasChanges) {
                 ExecuteAction(nameof(Actions.AskSaveChanges));
             }
-            CurrentDatabase.Close();
-            CurrentDatabase = null;
+            SelectedDatabase.Close();
+            Databases.Remove(SelectedDatabase);
+            SelectedDatabase = null;
         }
         #endregion
 
@@ -114,23 +118,50 @@ namespace OzDBCreate.ViewModel {
         /// <summary>Gets the ShowProperties command.</summary>
         /// <value>The ShowProperties command.</value>
         public DelegateCommand ShowPropertiesCommand => _ShowPropertiesCommand ??= new DelegateCommand(ShowProperties, ValidateShowPropertiesState);
-        private bool ValidateShowPropertiesState(object state) => CurrentDatabase != null;
+        private bool ValidateShowPropertiesState(object state) => SelectedDatabase != null;
         private void ShowProperties(object state) {
             ExecuteAction(nameof(Actions.ShowProperties));
         }
         #endregion
 
+        #region AddTableCommand
+        private DelegateCommand _AddTableCommand = default;
+        public DelegateCommand AddTableCommand => _AddTableCommand ??= new DelegateCommand(AddTable, ValidateAddTableState);
+        private bool ValidateAddTableState(object state) => true;
+        private void AddTable(object state) {
+            ExecuteAction(nameof(Actions.AddTable));
+        }
         #endregion
 
-        #region CurrentDatabase Property
-        private OzDBDatabase _CurrentDatabase = default;
-        /// <summary>Gets/sets the CurrentDatabase.</summary>
-        /// <value>The CurrentDatabase.</value>
-        public OzDBDatabase CurrentDatabase {
-            get => _CurrentDatabase;
+        #region Settings Command
+        private DelegateCommand _SettingsCommand = default;
+        public DelegateCommand SettingsCommand => _SettingsCommand ??= new DelegateCommand(Settings, ValidateSettingsState);
+        private bool ValidateSettingsState(object state) => true;
+        private void Settings(object state) {
+            ExecuteAction(nameof(Actions.ShowSettings));
+        }
+        #endregion
+
+        #endregion
+
+        #region Databases Property
+        private ObservableCollection<OzDBDatabase> _Databases = default;
+        public ObservableCollection<OzDBDatabase> Databases {
+            get => _Databases;
             set {
-                _CurrentDatabase = value;
-                OnPropertyChanged();
+                _Databases = value;
+                InvokePropertyChanged(nameof(Databases));
+            }
+        }
+        #endregion
+
+        #region SelectedDatabase Property
+        private OzDBDatabase _SelectedDatabase = default;
+        public OzDBDatabase SelectedDatabase {
+            get => _SelectedDatabase;
+            set {
+                _SelectedDatabase = value;
+                InvokePropertyChanged(nameof(SelectedDatabase));
             }
         }
         #endregion

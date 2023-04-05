@@ -22,6 +22,9 @@ namespace OzDBCreate {
             AppDirectory = !appDir.GetDirectories().Any(x => x.Name == AppName)
                 ? appDir.CreateSubdirectory(AppName)
                 : appDir.GetDirectories().FirstOrDefault(x => x.Name == AppName);
+            DatabaseLocation = AppDirectory.GetDirectories().Any(x => x.Name == "Database")
+                ? AppDirectory.GetDirectories().FirstOrDefault(x => x.Name == "Database")
+                : AppDirectory.CreateSubdirectory("Database");
             TempDirectory = AppDirectory.GetDirectories().Any(x => x.Name == "temp")
                 ? AppDirectory.GetDirectories().FirstOrDefault(x => x.Name == "temp")
                 : AppDirectory.CreateSubdirectory("temp");
@@ -46,7 +49,9 @@ namespace OzDBCreate {
         public static DirectoryInfo AppDirectory { get; private set; }
         public static DirectoryInfo TempDirectory { get; private set; }
         public static DirectoryInfo WorkingDirectory { get; private set; }
+        public static DirectoryInfo DatabaseLocation { get; private set; }
         public static string AppName { get; private set; }
+        public static bool RestoreWindowPositions => AppSession.ApplicationSettings.GetValue("Application", "General.Save window positions", true);
 
         public static async Task HandleExceptionAsync(Exception ex) {
             var exText = await ex.ToStringRecurseAsync();

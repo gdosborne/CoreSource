@@ -28,11 +28,25 @@
 
   <ItemGroup>
     <None Remove="database.ico" />
+    <None Remove="Fonts\Application.ttf" />
     <None Remove="Fonts\Segoe Fluent Icons.ttf" />
+    <None Remove="Resources\Database-Close.png" />
+    <None Remove="Resources\Database-Open.png" />
+    <None Remove="Resources\Database.png" />
+    <None Remove="ViewModel\SettingsWindowView.cs~RF475dcf98.TMP" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="database.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database-Close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database-Open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Database.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -49,6 +63,7 @@
 
   <ItemGroup>
     <Resource Include="database.ico" />
+    <Resource Include="Fonts\Application.ttf" />
     <Resource Include="Fonts\Segoe Fluent Icons.ttf" />
   </ItemGroup>
 

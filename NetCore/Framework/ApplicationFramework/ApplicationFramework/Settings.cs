@@ -376,10 +376,6 @@ namespace Common.Application {
                 }
                 else {
                     switch (theType.Name.ToLowerInvariant()) {
-                        //case "timedisplayvalue":
-                        //    theType = typeof(TimeDisplayValue);
-                        //    theValue = new TimeDisplayValue(TimeSpan.Parse(theValue.ToString()));
-                        //    break;
                         case "timespan":
                         case "system.timespan":
                             theType = typeof(TimeSpan);
@@ -400,6 +396,10 @@ namespace Common.Application {
                         case "size":
                             theType = typeof(System.Windows.Size);
                             theValue = System.Windows.Size.Parse((string)theValue);
+                            break;
+                        case "directoryinfo":
+                            theType = typeof(DirectoryInfo);
+                            theValue = new DirectoryInfo((string)theValue);
                             break;
                         default:
                             theValue = Convert.ChangeType(theValue, theType);

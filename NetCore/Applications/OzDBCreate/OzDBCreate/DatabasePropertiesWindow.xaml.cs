@@ -32,7 +32,9 @@ namespace OzDBCreate {
             base.OnSourceInitialized(e);
 
             this.HideMinimizeAndMaximizeButtons();
-            App.RestoreWindowBounds(this, true);
+            if (App.RestoreWindowPositions) {
+                App.RestoreWindowBounds(this, true);
+            }
         }
 
         private void TBGotFocus(object sender, RoutedEventArgs e) => sender.As<TextBox>().SelectAll();
