@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationFramework.Media {
+namespace Common.OzApplication.Media {
     public static class CompositeIconData {
         public enum IconTypes {
             FullOverlay,

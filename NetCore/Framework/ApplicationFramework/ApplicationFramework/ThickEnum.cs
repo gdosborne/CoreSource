@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public class ThickFlagAttribute : Attribute {
     }
 

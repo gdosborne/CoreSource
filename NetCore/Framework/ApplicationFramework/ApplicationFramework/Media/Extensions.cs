@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.OzApplication.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ using Universal.Common.Reflection;
 using Color = System.Windows.Media.Color;
 using Size = System.Windows.Size;
 
-namespace Common.Application.Media {
+namespace Common.OzApplication.Media {
     public static class Extensions {
         public static Icon To16BitIcon(this ImageSource src) {
             var img = src.ImageSourceToGDIImage();

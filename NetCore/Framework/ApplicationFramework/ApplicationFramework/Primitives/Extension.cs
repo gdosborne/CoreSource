@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Common.Application.Primitives {
+namespace Common.OzApplication.Primitives {
     public static class Extension {
         private const double oneKb = 1024.0;
         public static double OneMegaByte => oneKb * 1000;

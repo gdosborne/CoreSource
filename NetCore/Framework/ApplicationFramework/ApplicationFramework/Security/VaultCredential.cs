@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Common.Application.Security {
+namespace Common.OzApplication.Security {
     /// <summary>
     /// The Vault Credentials
     /// </summary>

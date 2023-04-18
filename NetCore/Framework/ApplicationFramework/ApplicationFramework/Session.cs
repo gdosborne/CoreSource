@@ -1,8 +1,8 @@
-﻿using Common.Application.Logging;
+﻿using Common.OzApplication.Logging;
 using System;
 using System.IO;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public sealed class Session {
         private WriteStatusHandler handler = default;
 
@@ -12,7 +12,7 @@ namespace Common.Application {
             ApplicationDirectory = applicationDirectory;
             var settingsDirectry = Path.Combine(ApplicationDirectory, "Settings");
             var logDirectory = Path.Combine(ApplicationDirectory, "Logs");
-            ApplicationSettings = Settings.CreateFromApplicationSettingsFile(applicationName, settingsDirectry);
+            ApplicationSettings = AppSettings.CreateFromApplicationSettingsFile(applicationName, settingsDirectry);
             Logger = new ApplicationLogger(applicationName, logType, logDirectory, logOptions, "application", logOptions.HasFlag(ApplicationLogger.StorageOptions.CreateFolderForEachDay)) {
                 SingleFileMaxSizeInMB = 15
             };
@@ -25,7 +25,7 @@ namespace Common.Application {
 
         public string ApplicationName { get; private set; }
 
-        public Settings ApplicationSettings { get; private set; }
+        public AppSettings ApplicationSettings { get; private set; }
 
         public ApplicationLogger Logger { get; private set; }
 

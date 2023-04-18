@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Common.Application.Windows {
+namespace Common.OzApplication.Windows {
     public class ApplicationProcess {
         public ApplicationProcess() { }
 

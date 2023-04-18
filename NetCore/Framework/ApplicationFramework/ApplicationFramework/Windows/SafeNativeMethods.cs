@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Common.Application.Windows {
+namespace Common.OzApplication.Windows {
     public static class SafeNativeMethods {
         private const int SwHide = 0;
 

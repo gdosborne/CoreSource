@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Common.Application.Windows.Media {
+namespace Common.OzApplication.Windows.Media {
     public class Font {
         public FontFamily FontFamily { get; set; }
 

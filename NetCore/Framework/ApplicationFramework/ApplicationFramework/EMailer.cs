@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using static Common.Application.MailTracker;
-using static Common.Application.Session;
+using static Common.OzApplication.MailTracker;
+using static Common.OzApplication.Session;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public class EMailer : IDisposable {
         public EMailer(string smtpServer, TimeSpan cacheExpire, MatchingFlags flags) {
             addresses = new Dictionary<string, MailAddress>();
@@ -186,7 +186,7 @@ namespace Common.Application {
         //                emailMessage.Bcc.Add(bccEmail);
         //            }
 
-        //            var isAvailable = Common.Applicationn.Net.Utilities.IsServerPortAvailable(SMTPServer, 25);
+        //            var isAvailable = Common.OzApplicationn.Net.Utilities.IsServerPortAvailable(SMTPServer, 25);
         //            if (isAvailable) {
         //                using (var client = new SmtpClient(SMTPServer, 25)) {
         //                    client.Send(emailMessage);

@@ -1,10 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Management;
 using System.Security.Principal;
 
-namespace ApplicationFramework.Windows.Theme {
+namespace Common.OzApplication.Windows.Theme {
     public sealed class ThemeWatcher {
         private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string RegistryValueName = "AppsUseLightTheme";
@@ -36,7 +37,7 @@ namespace ApplicationFramework.Windows.Theme {
                 // Start listening for events
                 watcher.Start();
             }
-            catch (Exception) {
+            catch (System.Exception) {
                 // This can fail on Windows 7
             }
 
@@ -44,7 +45,7 @@ namespace ApplicationFramework.Windows.Theme {
         }
 
         private static WindowsTheme GetWindowsTheme() {
-            using var key = Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
+            using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryKeyPath);
             var registryValueObject = key?.GetValue(RegistryValueName);
             if (registryValueObject == null) {
                 return WindowsTheme.Light;

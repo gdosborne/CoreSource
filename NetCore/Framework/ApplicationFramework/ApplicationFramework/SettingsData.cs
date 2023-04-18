@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.OzApplication.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public sealed class ObservableKeyValuePair : INotifyPropertyChanged {
         private object value;
 

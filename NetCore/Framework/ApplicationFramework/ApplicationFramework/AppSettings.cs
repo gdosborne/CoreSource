@@ -1,5 +1,5 @@
-﻿using Common.Application.Media;
-using Common.Application.Primitives;
+﻿using Common.OzApplication.Media;
+using Common.OzApplication.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,16 +9,16 @@ using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     /// <summary>
     /// The settings.
     /// </summary>
-    public class Settings : XmlInfrastructureFile {
+    public class AppSettings : XmlInfrastructureFile {
         /// <summary>
         /// Initializes a new instance of the <see cref="Settings"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public Settings(string name) {
+        public AppSettings(string name) {
             ApplicationName = name;
             AllKeys = new List<string>();
         }
@@ -72,7 +72,7 @@ namespace Common.Application {
         /// <param name="applicationName">The application name.</param>
         /// <param name="fileName">The file name.</param>
         /// <returns>A Settings.</returns>
-        public static Settings CreateFromOtherSettingsFile(string applicationName, string fileName) => Create(applicationName, fileName);
+        public static AppSettings CreateFromOtherSettingsFile(string applicationName, string fileName) => Create(applicationName, fileName);
 
         /// <summary>
         /// Creates the from application settings file.
@@ -80,7 +80,7 @@ namespace Common.Application {
         /// <param name="applicationName">The application name.</param>
         /// <param name="applicationDirectory">The application directory.</param>
         /// <returns>A Settings.</returns>
-        public static Settings CreateFromApplicationSettingsFile(string applicationName, string applicationDirectory) => Create(applicationName, GetFileName(applicationDirectory, FileTypes.Settings));
+        public static AppSettings CreateFromApplicationSettingsFile(string applicationName, string applicationDirectory) => Create(applicationName, GetFileName(applicationDirectory, FileTypes.Settings));
 
         /// <summary>
         /// Creates the.
@@ -88,7 +88,7 @@ namespace Common.Application {
         /// <param name="applicationName">The application name.</param>
         /// <param name="fileName">The file name.</param>
         /// <returns>A Settings.</returns>
-        private static Settings Create(string applicationName, string fileName) {
+        private static AppSettings Create(string applicationName, string fileName) {
             var dir = Path.GetDirectoryName(fileName);
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
@@ -98,7 +98,7 @@ namespace Common.Application {
                 new XDocument(new XElement("settings")).Save(fileName);
             }
 
-            var result = new Settings(applicationName) {
+            var result = new AppSettings(applicationName) {
                 ActualFileName = fileName,
             };
 
@@ -122,7 +122,7 @@ namespace Common.Application {
                         var t = Type.GetType(type.ToLowerInvariant(), true, true);
                         if (t.IsEnum) {
                             var objResult = default(object);
-                            var s = new Settings(applicationName);
+                            var s = new AppSettings(applicationName);
                             var mi = s.GetType().GetMethods().FirstOrDefault(m => m.Name == "GetLocalValue");
                             if (mi != null) {
                                 mi = mi.MakeGenericMethod(t);
@@ -230,7 +230,7 @@ namespace Common.Application {
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
         /// <returns>A Settings.</returns>
-        public Settings AddOrUpdateSetting(string section, string name, object value) {
+        public AppSettings AddOrUpdateSetting(string section, string name, object value) {
             if (value == null)
                 AddOrUpdateSetting($"{ApplicationName}|{section}|{name}", "[string]", "[null]");
             else
@@ -303,8 +303,8 @@ namespace Common.Application {
                 }
                 catch (System.Exception ex) {
                     ex.Data.Add("FileExists", SettingsFileExists);
-                    throw ex;
-                }
+					throw;
+				}
                 xDocumentFileName = ActualFileName;
             }
             if (xDocument == default) {

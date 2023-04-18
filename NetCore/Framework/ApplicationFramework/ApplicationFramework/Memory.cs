@@ -1,10 +1,10 @@
-﻿using Common.Application.Process;
+﻿using Common.OzApplication.Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public class Memory {
         public Dictionary<DateTime, long> Log { get; } = default;
 

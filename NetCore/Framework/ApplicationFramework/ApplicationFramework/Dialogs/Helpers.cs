@@ -1,7 +1,7 @@
 ﻿using Ookii.Dialogs.Wpf;
 using System.Windows;
 
-namespace ApplicationFramework.Dialogs {
+namespace Common.OzApplication.Dialogs {
     public static class Helpers {
         public static bool ShowYesNoDialog(this Window window, string title, string content, TaskDialogIcon icon, 
                 int width = 300) =>

@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+	
+	<sys:Double x:Key="TextFontSize">13</sys:Double>
+	<sys:Double x:Key="TitleHeaderFontSize">16</sys:Double>
+
+	<Style TargetType="Label">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="{DynamicResource TextFontSize}" />
+	</Style>
+
+	<Style TargetType="ComboBox">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="{DynamicResource TextFontSize}" />
+	</Style>
+</ResourceDictionary>

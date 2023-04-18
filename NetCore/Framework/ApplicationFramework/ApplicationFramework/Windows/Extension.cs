@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.OzApplication.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +11,9 @@ using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using static Common.Application.NativeMethods;
+using static Common.OzApplication.NativeMethods;
 
-namespace Common.Application.Windows {
+namespace Common.OzApplication.Windows {
 
     public static class Extension {
         private static Window timerWindow;
@@ -396,7 +396,7 @@ namespace Common.Application.Windows {
             timerWindow.Left = left < 0 ? 0 : left;
         }
 
-        public static void SetBounds(this Window win, Settings appSettings, bool includeState = false) {
+        public static void SetBounds(this Window win, AppSettings appSettings, bool includeState = false) {
             if (win == null) {
                 throw new ArgumentNullException("Window is missing");
             }
@@ -432,7 +432,7 @@ namespace Common.Application.Windows {
                 win.WindowState = winState;
         }
 
-        public static void SaveBounds(this Window win, Settings appSettings, bool includeState = false) {
+        public static void SaveBounds(this Window win, AppSettings appSettings, bool includeState = false) {
             var name = win.GetType().Name;
             if (win.RestoreBounds != Rect.Empty) {
                 appSettings.AddOrUpdateSetting(name, "Left", win.RestoreBounds.Left);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Common.Application {
+namespace Common.OzApplication {
     public struct ByteSize : IComparable<ByteSize>, IEquatable<ByteSize> {
         public static readonly ByteSize MinValue = ByteSize.FromBits(0);
         public static readonly ByteSize MaxValue = ByteSize.FromBits(long.MaxValue);

@@ -4,7 +4,7 @@ using System.Management;
 using System.Security.Principal;
 using System.Windows;
 
-namespace Common.Application.Theme {
+namespace Common.OzApplication.Theme {
     public delegate void ThemeChangedDelegate(WindowsTheme newTheme);
 
     public enum WindowsTheme {

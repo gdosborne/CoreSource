@@ -1,11 +1,11 @@
-﻿using Common.Application.Xml.Linq;
+﻿using Common.OzApplication.Xml.Linq;
 using System;
 using System.IO;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
 
-namespace Common.Application.Security {
+namespace Common.OzApplication.Security {
     /// <summary>
     /// PasswordVault
     /// </summary>

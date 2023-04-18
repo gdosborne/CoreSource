@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace Common.Application.Security {
+namespace Common.OzApplication.Security {
     /// <summary>
     /// Extensions
     /// </summary>

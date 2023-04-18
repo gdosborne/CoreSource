@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Security;
+﻿using Common.OzApplication.Primitives;
+using Common.OzApplication.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ApplicationFramework.Security {
+namespace Common.OzApplication.Security {
     public class ApplicationCredentials : NetworkCredential {
         public ApplicationCredentials()
             : base() { }

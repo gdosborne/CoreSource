@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Text;
+﻿using Common.OzApplication.Primitives;
+using Common.OzApplication.Text;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Application.Exception {
+namespace Common.OzApplication.Exception {
     public static class Extensions {
         public static async Task<StringBuilder> ProcessDataAsync(this System.Diagnostics.Process proc, int tabStop = 0) {
             await Task.Yield();

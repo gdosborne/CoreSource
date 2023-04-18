@@ -1,0 +1,87 @@
+Version Updater (c#) V2022.6.19.1
+
+Project not recognized - use EnableVersioning to add the project
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 1.0.0.0
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.14.0
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.14.0
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.14.1
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.14.1
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.14.2
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.14.2
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.17.0
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.17.0
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.17.1
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.17.1
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.17.2
+Version Updater (c#) V2022.6.19.1
+
+     Project file: Territory.Checkout.csproj
+   Project folder: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout
+           Schema: daily
+AssemblyInfo file: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+
+Modifying version for project Territory.Checkout
+          AssemblyInfo path: D:\Git\CoreSource\NetCore\Applications\Territory.Checkout\Territory.Checkout\Properties\AssemblyInfo.cs
+     Start Assembly Version: 2023.4.17.2
+           Assembly methods: Year,Month,Day,IncrementResetEachDay
+       End Assembly Version: 2023.4.18.0

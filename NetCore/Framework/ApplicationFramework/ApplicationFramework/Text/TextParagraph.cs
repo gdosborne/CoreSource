@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Common.Application.Text {
+namespace Common.OzApplication.Text {
     /// <summary>
     /// The text paragraph.
     /// </summary>

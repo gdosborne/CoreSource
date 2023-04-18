@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<Platforms>AnyCPU;x64</Platforms>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<ApplicationIcon>map.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>1701;1702;8602;8618;CA1416;8625;8603;8601</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>1701;1702;8602;8618;CA1416;8625;8603;8601</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <NoWarn>1701;1702;8602;8618;CA1416;8625;8603;8601</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <NoWarn>1701;1702;8602;8618;CA1416;8625;8603;8601</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="map.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="ApplicationSettingsWindow.xaml.cs" />
+		<Compile Include="CheckoutWindow.xaml.cs">
+			<DependentUpon>CheckoutWindow.xaml</DependentUpon>
+		</Compile>		
+		<Compile Include="Data\AreaItem.cs" />
+		<Compile Include="Data\CheckoutItem.cs" />
+		<Compile Include="Data\DataItemBase.cs" />
+		<Compile Include="Data\NeedsWorkedItem.cs" />
+		<Compile Include="Data\PersonItem.cs" />
+		<Compile Include="Properties\AssemblyInfoTheme.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Data\TerritoryItem.cs" />
+		<Compile Include="ViewModels\ApplicationSettingsWindowView.cs" />
+		<Compile Include="ViewModels\CheckoutWindowView.cs" />
+		<Compile Include="ViewModels\MainWindowView.cs" />
+		<Compile Include="MainWindow.xaml.cs">
+			<DependentUpon>MainWindow.xaml</DependentUpon>
+		</Compile>
+		<Compile Include="App.xaml.cs">
+			<DependentUpon>App.xaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="map.ico">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Framework\ApplicationFramework\ApplicationFramework\ApplicationFramework.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Setup\" />
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="if $(ConfigurationName) == Release &quot;C:\Program Files\Update Version\UpdateVersionSharp.exe&quot; -p=&quot;$(ProjectPath)&quot;" />
+	</Target>
+</Project>

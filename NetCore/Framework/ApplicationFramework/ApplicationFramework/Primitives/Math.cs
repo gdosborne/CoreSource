@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Common.Application.Primitives {
+namespace Common.OzApplication.Primitives {
     public static class Math {
         public static T MaxOf<T>(T[] values) => values.ToList().Max();
         public static T MaxOf<T>(T value1, T value2) => MaxOf(new[] { value1, value2 });

@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.OzApplication.Primitives;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -13,9 +13,9 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml.Linq;
-using static ApplicationFramework.Media.CompositeIconData;
+using static Common.OzApplication.Media.CompositeIconData;
 
-namespace ApplicationFramework.Media {
+namespace Common.OzApplication.Media {
     [JsonObject]
     public class CompositeIcon : INotifyPropertyChanged, ICloneable {
         internal CompositeIcon() {
@@ -85,7 +85,7 @@ namespace ApplicationFramework.Media {
                 await File.WriteAllTextAsync(FullPath, json, Encoding.BigEndianUnicode);
                 IsNewIcon = false;
             }
-            catch (Exception) {
+            catch (System.Exception) {
                 throw;
             }
         }
@@ -496,7 +496,7 @@ namespace ApplicationFramework.Media {
                     RenameValue = Filename;
                     return true;
                 }
-                catch(Exception ex) {
+                catch(System.Exception ex) {
                     reasonError = ex.Message;
                     return false;
                 }

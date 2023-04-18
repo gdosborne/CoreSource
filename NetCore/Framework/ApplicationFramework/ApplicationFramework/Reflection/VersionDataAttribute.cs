@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Application.Reflection {
+namespace Common.OzApplication.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public class VersionSchemaNameAttribute : Attribute {        
         public VersionSchemaNameAttribute(string data) {

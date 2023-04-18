@@ -1,4 +1,4 @@
-﻿using Common.Application;
+﻿using Common.OzApplication;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.OzApplication.Logging.ApplicationLogger;
 
 namespace Application {
     public struct StackEntry {
