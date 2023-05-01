@@ -1,4 +1,4 @@
-using Common.OzApplication.Reflection;
+using Common.AppFramework.Reflection;
 using System.Reflection;
 using System.Runtime.InteropServices;
 

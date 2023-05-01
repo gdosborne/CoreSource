@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.OzApplication.Logging {
+namespace Common.AppFramework.Logging {
     [Serializable]
     public class LogDirectoryMissingException : System.Exception {
         #region Public Constructors

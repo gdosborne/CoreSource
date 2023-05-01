@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.OzApplication.Text {
+namespace Common.AppFramework.Text {
     /// <summary>
     /// The text dcument
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using Common.OzApplication.Theme;
+﻿using Common.AppFramework.Theme;
 using System;
 
-namespace Common.OzApplication.Windows.Theme {
+namespace Common.AppFramework.Windows.Theme {
     public delegate void ThemeChangedHandler(object sender, ThemeChangedEventArgs e);
 
     public class ThemeChangedEventArgs : EventArgs {

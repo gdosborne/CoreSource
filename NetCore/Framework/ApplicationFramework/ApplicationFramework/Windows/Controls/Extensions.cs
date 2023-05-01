@@ -1,4 +1,4 @@
-﻿using Common.OzApplication.Media;
+﻿using Common.AppFramework.Media;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Common.OzApplication.Windows.Controls {
+namespace Common.AppFramework.Windows.Controls {
     public static class Extensions {
         private static Delegate conversionHandler;
 

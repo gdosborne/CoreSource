@@ -1,11 +1,11 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using static Common.OzApplication.Reflection.Extensions;
+using static Common.AppFramework.Reflection.Extensions;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     [Serializable]
     public class USState : INotifyPropertyChanged {
         public static List<USState> States = new List<USState> {

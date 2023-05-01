@@ -1,10 +1,10 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Common.OzApplication.Linq {
+namespace Common.AppFramework.Linq {
     public static class Extensions {
         public static IList<T> Randomize<T>(this IList<T> value, Random r = null) {
             r ??= new Random();

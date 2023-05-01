@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Common.OzApplication.IO {
+namespace Common.AppFramework.IO {
     public static class OneDrive {
         public static string GetOneDriveDirectory() {
             var result = default(string);

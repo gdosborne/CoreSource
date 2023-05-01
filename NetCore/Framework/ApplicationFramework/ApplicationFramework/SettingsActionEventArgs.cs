@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public delegate void SettingsActionHandler(object sender, SettingsActionEventArgs e);
 
     public enum Actions {

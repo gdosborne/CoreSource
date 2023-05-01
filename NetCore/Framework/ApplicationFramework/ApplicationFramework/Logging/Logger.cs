@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace Common.OzApplication.Logging {
+namespace Common.AppFramework.Logging {
     public static class Logger {
         static Logger() => SingleLogMaxSize = Convert.ToInt32(System.Math.Pow(10.24, 6));
 

@@ -5,7 +5,7 @@ using System.DirectoryServices.AccountManagement;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace Common.OzApplication.Security {
+namespace Common.AppFramework.Security {
     internal enum TOKEN_INFORMATION_CLASS {
         TokenUser = 1,
         TokenGroups,

@@ -1,7 +1,7 @@
-﻿using Common.OzApplication.Logging;
+﻿using Common.AppFramework.Logging;
 using System;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public delegate void WriteStatusHandler(object sender, WriteStatusEventArgs e);
 
     public class WriteStatusEventArgs : EventArgs {

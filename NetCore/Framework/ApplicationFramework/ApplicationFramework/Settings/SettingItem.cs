@@ -1,4 +1,4 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Common.OzApplication.Settings {
+namespace Common.AppFramework.Settings {
     public class SettingItem : INotifyPropertyChanged {
         public SettingItem(SettingSection section, string name, Type dataType, object value) {
             Section = section;

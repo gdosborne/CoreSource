@@ -1,4 +1,4 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +11,9 @@ using System.Windows.Documents;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using static Common.OzApplication.NativeMethods;
+using static Common.AppFramework.NativeMethods;
 
-namespace Common.OzApplication.Windows {
+namespace Common.AppFramework.Windows {
 
     public static class Extension {
         private static Window timerWindow;

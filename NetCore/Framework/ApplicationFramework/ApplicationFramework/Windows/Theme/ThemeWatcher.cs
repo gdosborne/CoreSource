@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Management;
 using System.Security.Principal;
 
-namespace Common.OzApplication.Windows.Theme {
+namespace Common.AppFramework.Windows.Theme {
     public sealed class ThemeWatcher {
         private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string RegistryValueName = "AppsUseLightTheme";

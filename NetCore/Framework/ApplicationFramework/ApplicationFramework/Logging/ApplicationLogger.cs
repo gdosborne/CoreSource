@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.OzApplication.Logging {
+namespace Common.AppFramework.Logging {
     public sealed class ApplicationLogger {
         public class InternalStorage {
             public EntryTypes EntryType { get; set; }

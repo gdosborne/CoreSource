@@ -1,4 +1,4 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -13,9 +13,9 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml.Linq;
-using static Common.OzApplication.Media.CompositeIconData;
+using static Common.AppFramework.Media.CompositeIconData;
 
-namespace Common.OzApplication.Media {
+namespace Common.AppFramework.Media {
     [JsonObject]
     public class CompositeIcon : INotifyPropertyChanged, ICloneable {
         internal CompositeIcon() {

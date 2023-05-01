@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Interop;
 
-namespace Common.OzApplication.Windows {
+namespace Common.AppFramework.Windows {
     public class WindowWrapper : System.Windows.Forms.IWin32Window {
         public WindowWrapper(IntPtr handle) {
             Handle = handle;

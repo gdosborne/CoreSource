@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using static Common.OzApplication.Security.PasswordVault;
+using static Common.AppFramework.Security.PasswordVault;
 
-namespace Common.OzApplication.Security {
+namespace Common.AppFramework.Security {
     /// <summary>
     ///   <para>The vault interface</para>
     /// </summary>
