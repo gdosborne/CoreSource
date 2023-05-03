@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 14.5" name="Territory">
+  <DataContextMoniker Name="/TerritoryDataContext" />
+  <nestedChildShapes>
+    <classShape Id="de4dbbce-f2c9-4695-bbac-3806cebbc3f8" absoluteBounds="3.5, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TerritoryDataContext/UserCongregationRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ab4c0104-bead-4e6d-94d6-8ac77d8c6410" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="27f3765c-da6f-4fcd-b88d-ffa14568c6e3" absoluteBounds="3.5, 3.875, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/TerritoryDataContext/UserApplication" />
+      <nestedChildShapes>
+        <elementListCompartment Id="165b55ee-6d4c-40ae-8013-4e209e07eecc" absoluteBounds="3.515, 4.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2fe2e120-7c8b-457c-af7d-5eff9ea2632f" absoluteBounds="0.75, 2.875, 2, 3.3093082682291666">
+      <DataClassMoniker Name="/TerritoryDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1affd93a-19d4-4102-9bd2-dcec87060f15" absoluteBounds="0.765, 3.335, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="da7305f5-470b-4c45-b15d-360ffd1298ac" absoluteBounds="0.75, 7.75, 2, 1.3862939453125014">
+      <DataClassMoniker Name="/TerritoryDataContext/Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7a9246ef-6c58-4c32-ba0a-869033c306bf" absoluteBounds="0.765, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ad9dc290-5996-4842-8911-79fac3411fae" absoluteBounds="0.75, 9.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TerritoryDataContext/Congregation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fa22dab-bfe4-41c7-8c45-31dfbd414ff6" absoluteBounds="0.765, 10.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4d9c6a5e-df67-46a0-a4ea-7a3eea5360ec" absoluteBounds="0.75, 12.875, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/TerritoryDataContext/Application" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f81b5cbe-84bd-47fb-b02e-9cecfbc19432" absoluteBounds="0.765, 13.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 2.875); (1.75 : 1.53929768880208); (3.04166666666667 : 1.53929768880208 : JumpStart); (3.20833333333333 : 1.53929768880208 : JumpEnd); (3.5 : 1.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/User/User_UserCongregationRole" />
+      <nodes>
+        <classShapeMoniker Id="2fe2e120-7c8b-457c-af7d-5eff9ea2632f" />
+        <classShapeMoniker Id="de4dbbce-f2c9-4695-bbac-3806cebbc3f8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.56814697265625); (2.91666666666667 : 4.56814697265625 : JumpStart); (3.20833333333333 : 4.56814697265625 : JumpEnd); (3.5 : 4.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TerritoryDataContext/User/User_UserApplication" />
+      <nodes>
+        <classShapeMoniker Id="2fe2e120-7c8b-457c-af7d-5eff9ea2632f" />
+        <classShapeMoniker Id="27f3765c-da6f-4fcd-b88d-ffa14568c6e3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 7.75); (1.75 : 6.43430826822917); (2.79166666666667 : 6.43430826822917 : JumpStart); (2.95833333333333 : 6.43430826822917 : JumpEnd); (3 : 6.43430826822917); (3 : 1.96519853320312); (3.04166666666667 : 1.96519853320312 : JumpStart); (3.20833333333333 : 1.96519853320312 : JumpEnd); (3.5 : 1.96519853320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/Role/Role_UserCongregationRole" />
+      <nodes>
+        <classShapeMoniker Id="da7305f5-470b-4c45-b15d-360ffd1298ac" />
+        <classShapeMoniker Id="de4dbbce-f2c9-4695-bbac-3806cebbc3f8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 9.875); (1.75 : 9.3862939453125); (2.79166666666667 : 9.3862939453125 : JumpStart); (2.95833333333333 : 9.3862939453125 : JumpEnd); (3.125 : 9.3862939453125); (3.125 : 1.11339684440104); (3.5 : 1.11339684440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/Congregation/Congregation_UserCongregationRole" />
+      <nodes>
+        <classShapeMoniker Id="ad9dc290-5996-4842-8911-79fac3411fae" />
+        <classShapeMoniker Id="de4dbbce-f2c9-4695-bbac-3806cebbc3f8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 12.875); (1.75 : 11.7035953776042); (2.875 : 11.7035953776042); (2.875 : 4.56814697265625); (2.91666666666667 : 4.56814697265625 : JumpStart); (3.20833333333333 : 4.56814697265625 : JumpEnd); (3.5 : 4.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/Application/Application_UserApplication" />
+      <nodes>
+        <classShapeMoniker Id="4d9c6a5e-df67-46a0-a4ea-7a3eea5360ec" />
+        <classShapeMoniker Id="27f3765c-da6f-4fcd-b88d-ffa14568c6e3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="fe17dccc-8baf-4c41-9fba-4727d6dd29be" absoluteBounds="7.75, 2, 2, 1.9631982421875">
+      <DataClassMoniker Name="/TerritoryDataContext/T_Territory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6d92c66f-ddf7-428b-ba3e-6e3800fbae71" absoluteBounds="7.765, 2.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="59619fc1-baaa-46d8-9567-60d6120cfdb4" absoluteBounds="12, 2.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/TerritoryDataContext/T_Work" />
+      <nestedChildShapes>
+        <elementListCompartment Id="94301731-5c72-4b3a-a6c9-7c87868ffdd7" absoluteBounds="12.015, 3.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.75 : 3.29409912109375); (12 : 3.29409912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TerritoryDataContext/T_Territory/T_Territory_T_Work" />
+      <nodes>
+        <classShapeMoniker Id="fe17dccc-8baf-4c41-9fba-4727d6dd29be" />
+        <classShapeMoniker Id="59619fc1-baaa-46d8-9567-60d6120cfdb4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3ba8a72c-b92f-489e-ab46-df2bb41424ce" absoluteBounds="10.625, 0.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/TerritoryDataContext/T_TerritoryType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c2cf1cb1-09dc-4e6f-ae99-ea2daf5abce0" absoluteBounds="10.64, 1.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.625 : 1.22199625651042); (8.75 : 1.22199625651042); (8.75 : 2)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TerritoryDataContext/T_TerritoryType/T_TerritoryType_T_Territory" />
+      <nodes>
+        <classShapeMoniker Id="3ba8a72c-b92f-489e-ab46-df2bb41424ce" />
+        <classShapeMoniker Id="fe17dccc-8baf-4c41-9fba-4727d6dd29be" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="40d8fd5b-7a7d-43c1-ac7a-4769cf7598e6" absoluteBounds="9.25, 4.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TerritoryDataContext/T_Publisher" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0accab89-a1e7-4797-9049-9a4e27a3177a" absoluteBounds="9.265, 5.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5fb15e9e-3b53-4134-9a96-0316bf8c322b" absoluteBounds="3.375, 6.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/TerritoryDataContext/T_SpecialCampaign" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce0b1e35-006d-4e11-9eb4-c28ffd921daf" absoluteBounds="3.39, 7.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.25 : 5.66429768880208); (13 : 5.66429768880208); (13 : 4.5881982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TerritoryDataContext/T_Publisher/T_Publisher_T_Work" />
+      <nodes>
+        <classShapeMoniker Id="40d8fd5b-7a7d-43c1-ac7a-4769cf7598e6" />
+        <classShapeMoniker Id="59619fc1-baaa-46d8-9567-60d6120cfdb4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.375 : 7.28125); (6.19791666666667 : 7.28125 : JumpStart); (6.36458333333333 : 7.28125 : JumpEnd); (8.38541666666667 : 7.28125 : JumpStart); (8.55208333333333 : 7.28125 : JumpEnd); (13.5312525 : 7.28125); (13.5312525 : 4.5881982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/T_SpecialCampaign/T_SpecialCampaign_T_Work" />
+      <nodes>
+        <classShapeMoniker Id="5fb15e9e-3b53-4134-9a96-0316bf8c322b" />
+        <classShapeMoniker Id="59619fc1-baaa-46d8-9567-60d6120cfdb4" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a7b016c3-274d-4b6e-89ae-c7ad702a5dd5" absoluteBounds="5, 9.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/TerritoryDataContext/T_Area" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4798ed3a-5cc2-4f22-bf5c-4113cbb5ba1d" absoluteBounds="5.015, 9.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3570a8c7-111c-4752-a18f-ffb392b504ea" absoluteBounds="10.5, 7.75, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/TerritoryDataContext/T_DoNotCall" />
+      <nestedChildShapes>
+        <elementListCompartment Id="895f397f-694d-4247-97ef-93a55e64463b" absoluteBounds="10.515, 8.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.28125 : 9.375); (6.28125 : 3.10179768880208); (7.75 : 3.10179768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/T_Area/T_Area_T_Territory" />
+      <nodes>
+        <classShapeMoniker Id="a7b016c3-274d-4b6e-89ae-c7ad702a5dd5" />
+        <classShapeMoniker Id="fe17dccc-8baf-4c41-9fba-4727d6dd29be" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.46875 : 3.9631982421875); (8.46875 : 8.92390055338542); (10.5 : 8.92390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TerritoryDataContext/T_Territory/T_Territory_T_DoNotCall" />
+      <nodes>
+        <classShapeMoniker Id="fe17dccc-8baf-4c41-9fba-4727d6dd29be" />
+        <classShapeMoniker Id="3570a8c7-111c-4752-a18f-ffb392b504ea" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

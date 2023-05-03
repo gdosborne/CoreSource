@@ -1,0 +1,65 @@
+﻿<Window x:Class="DesktopClock.MainWindow"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
+        xmlns:OSControls="clr-namespace:OSControls;assembly=OSControls"  
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:DesktopClock" 
+        SizeToContent="WidthAndHeight"
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent" 
+        ShowInTaskbar="False" MouseDown="Window_MouseDown" Loaded="Window_Loaded"
+        LocationChanged="Window_LocationChanged" ResizeMode="NoResize"
+        PreviewMouseLeftButtonUp="AnalogClock_PreviewMouseLeftButtonUp"
+        Unloaded="Window_Unloaded">
+    <Window.Resources>
+        <views:MainWindowView x:Key="view" ExecuteUIAction="MainWindowView_ExecuteUIAction" PropertyChanged="MainWindowView_PropertyChanged" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <OSControls:AnalogClock Name="MyClock" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10" DropShadowColor="#FF000000" 
+                                MoonOpacity="{Binding MoonOpacity,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                MoonSize="{Binding MoonSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                MoonMargin="{Binding MoonMargin,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                MoonPhaseVisibility="{Binding MoonVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                DateOffset="{Binding DateOffset,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                FontSize="{Binding SelectedDateFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                FontWeight="{Binding SelectedDateFontWeight,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                FontFamily="{Binding SelectedDateFontFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                SelectedTimeZone="{Binding SelectedTimeZone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                SmoothSecondsHand="{Binding SmoothSecondsHand,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                HandThickness="{Binding HandThickness,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                ClockFaceSource="{Binding ClockFaceSource,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                HandsBrush="{Binding HandsBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                SecondsBrush="{Binding SecondsBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                ShowHandsDropShadow="{Binding ShowHandsDropShadow,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                HandShortenAmount="{Binding HandShortenAmount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                HubSize="{Binding HubSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                HubBrush="{Binding TheHubBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                ClockSize="{Binding ClockSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                Foreground="{Binding DateBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                SecondsVisibility="{Binding SecondsVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                DateVisibility="{Binding DateVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                ActivityValue="{Binding ActivityValue,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                ActivityVisibility="{Binding ActivityVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                ActivityBrush="{Binding ActivityBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                ActivityMargin="{Binding ActivityMargin,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                ActivityHeight="{Binding ActivityHeight,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                ActivityWidth="{Binding ActivityWidth,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            <OSControls:AnalogClock.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="10"/>
+            </OSControls:AnalogClock.Effect>
+        </OSControls:AnalogClock>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Settings" Command="{Binding SettingsCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/settings1.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </ContextMenu>
+        </Grid.ContextMenu>
+    </Grid>
+</Window>

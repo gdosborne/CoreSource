@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="SDFManagerControls.LinearGradientBrushEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="24" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Rectangle Width="16" Height="16" Grid.Column="0" Name="ValueRectangle" Stroke="Black" StrokeThickness=".5" RadiusX="3" RadiusY="3" VerticalAlignment="Center" />
+        <Label Grid.Column="1" Name="TitleLabel" Content="Title" VerticalAlignment="Center" Margin="5,2" />
+        <RadioButton Name="VertRadioButton" Grid.Column="2" Content="V" GroupName="Direction" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="True" Margin="0,0,5,0" />
+        <RadioButton Name="HorzRadioButton" Grid.Column="3" Content="H" GroupName="Direction" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Grid Grid.Column="4" Margin="5,0,0,0">
+            <Border Name="ColorSlider" BorderBrush="Black" BorderThickness=".5" Margin="5,0,5,8" Background="White"/>
+            <Polygon Fill="White" Stroke="Black" StrokeThickness=".5" Points="5,19 0,24 10,24" />
+            <Polygon Fill="White" Stroke="Black" StrokeThickness=".5" Points="5,19 0,24 10,24" />
+        </Grid>
+    </Grid>
+</UserControl>

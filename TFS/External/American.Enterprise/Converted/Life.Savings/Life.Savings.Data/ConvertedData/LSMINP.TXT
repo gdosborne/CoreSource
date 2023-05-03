@@ -1,0 +1,434 @@
+<lsminp_data>
+  <lsminp id="1">
+    <MaleNSMinp>2.53,2.53,2.53,2.51</MaleNSMinp>
+    <MaleSMMinp>2.76,2.71,2.67,2.67</MaleSMMinp>
+    <FemaleNSMinp>1.76,1.76,1.7,1.63</FemaleNSMinp>
+    <FemaleSMMinp>2.12,2.05,2.05,1.98</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="2">
+    <MaleNSMinp>1.86,1.86,1.86,1.86</MaleNSMinp>
+    <MaleSMMinp>2.19,2.15,2.12,2.12</MaleSMMinp>
+    <FemaleNSMinp>1.5,1.5,1.45,1.4</FemaleNSMinp>
+    <FemaleSMMinp>1.78,1.72,1.72,1.67</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="3">
+    <MaleNSMinp>1.85,1.85,1.85,1.85</MaleNSMinp>
+    <MaleSMMinp>2.17,2.13,2.1,2.1</MaleSMMinp>
+    <FemaleNSMinp>1.45,1.45,1.4,1.35</FemaleNSMinp>
+    <FemaleSMMinp>1.7,1.65,1.65,1.6</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="4">
+    <MaleNSMinp>1.83,1.83,1.83,1.83</MaleNSMinp>
+    <MaleSMMinp>2.14,2.11,2.08,2.08</MaleSMMinp>
+    <FemaleNSMinp>1.43,1.43,1.39,1.34</FemaleNSMinp>
+    <FemaleSMMinp>1.67,1.62,1.62,1.58</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="5">
+    <MaleNSMinp>1.81,1.81,1.81,1.81</MaleNSMinp>
+    <MaleSMMinp>2.07,2.04,2.02,2.02</MaleSMMinp>
+    <FemaleNSMinp>1.41,1.41,1.37,1.32</FemaleNSMinp>
+    <FemaleSMMinp>1.64,1.6,1.6,1.55</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="6">
+    <MaleNSMinp>1.78,1.78,1.78,1.78</MaleNSMinp>
+    <MaleSMMinp>2.05,2.02,2,2</MaleSMMinp>
+    <FemaleNSMinp>1.43,1.43,1.39,1.34</FemaleNSMinp>
+    <FemaleSMMinp>1.66,1.61,1.61,1.57</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="7">
+    <MaleNSMinp>1.77,1.77,1.77,1.77</MaleNSMinp>
+    <MaleSMMinp>2.04,2.01,1.98,1.98</MaleSMMinp>
+    <FemaleNSMinp>1.45,1.45,1.41,1.36</FemaleNSMinp>
+    <FemaleSMMinp>1.68,1.64,1.64,1.59</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="8">
+    <MaleNSMinp>1.77,1.77,1.77,1.77</MaleNSMinp>
+    <MaleSMMinp>2.07,2.04,2.02,2.02</MaleSMMinp>
+    <FemaleNSMinp>1.48,1.48,1.45,1.41</FemaleNSMinp>
+    <FemaleSMMinp>1.75,1.7,1.7,1.65</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="9">
+    <MaleNSMinp>1.79,1.79,1.79,1.79</MaleNSMinp>
+    <MaleSMMinp>2.11,2.08,2.06,2.06</MaleSMMinp>
+    <FemaleNSMinp>1.51,1.51,1.49,1.47</FemaleNSMinp>
+    <FemaleSMMinp>1.82,1.77,1.77,1.72</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="10">
+    <MaleNSMinp>1.85,1.85,1.85,1.85</MaleNSMinp>
+    <MaleSMMinp>2.15,2.12,2.1,2.1</MaleSMMinp>
+    <FemaleNSMinp>1.55,1.55,1.55,1.53</FemaleNSMinp>
+    <FemaleSMMinp>1.9,1.84,1.84,1.79</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="11">
+    <MaleNSMinp>1.97,1.97,1.97,1.97</MaleNSMinp>
+    <MaleSMMinp>2.24,2.21,2.19,2.19</MaleSMMinp>
+    <FemaleNSMinp>1.6,1.6,1.59,1.56</FemaleNSMinp>
+    <FemaleSMMinp>1.92,1.87,1.87,1.82</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="12">
+    <MaleNSMinp>2.13,2.13,2.13,2.13</MaleNSMinp>
+    <MaleSMMinp>2.38,2.34,2.32,2.32</MaleSMMinp>
+    <FemaleNSMinp>1.66,1.66,1.64,1.59</FemaleNSMinp>
+    <FemaleSMMinp>1.96,1.91,1.91,1.85</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="13">
+    <MaleNSMinp>2.33,2.33,2.33,2.33</MaleNSMinp>
+    <MaleSMMinp>2.53,2.49,2.46,2.46</MaleSMMinp>
+    <FemaleNSMinp>1.72,1.72,1.68,1.63</FemaleNSMinp>
+    <FemaleSMMinp>1.99,1.94,1.94,1.89</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="14">
+    <MaleNSMinp>2.56,2.56,2.56,2.54</MaleNSMinp>
+    <MaleSMMinp>2.71,2.67,2.65,2.65</MaleSMMinp>
+    <FemaleNSMinp>1.8,1.8,1.75,1.7</FemaleNSMinp>
+    <FemaleSMMinp>2.07,2.02,2.02,1.97</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="15">
+    <MaleNSMinp>2.8,2.75,2.75,2.7</MaleNSMinp>
+    <MaleSMMinp>2.9,2.86,2.83,2.83</MaleSMMinp>
+    <FemaleNSMinp>1.89,1.89,1.85,1.79</FemaleNSMinp>
+    <FemaleSMMinp>2.2,2.14,2.14,2.08</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="16">
+    <MaleNSMinp>3.02,2.93,2.93,2.84</MaleNSMinp>
+    <MaleSMMinp>3.14,3.09,3.06,3.06</MaleSMMinp>
+    <FemaleNSMinp>2.01,2.01,1.96,1.89</FemaleNSMinp>
+    <FemaleSMMinp>2.33,2.27,2.27,2.21</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="17">
+    <MaleNSMinp>3.19,3.04,3.04,2.93</MaleNSMinp>
+    <MaleSMMinp>3.29,3.24,3.2,3.2</MaleSMMinp>
+    <FemaleNSMinp>2.1,2.1,2.06,1.99</FemaleNSMinp>
+    <FemaleSMMinp>2.51,2.44,2.44,2.37</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="18">
+    <MaleNSMinp>3.29,3.14,3.14,3.03</MaleNSMinp>
+    <MaleSMMinp>3.39,3.33,3.3,3.3</MaleSMMinp>
+    <FemaleNSMinp>2.18,2.18,2.14,2.07</FemaleNSMinp>
+    <FemaleSMMinp>2.68,2.61,2.61,2.53</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="19">
+    <MaleNSMinp>3.39,3.23,3.23,3.12</MaleNSMinp>
+    <MaleSMMinp>3.48,3.42,3.39,3.39</MaleSMMinp>
+    <FemaleNSMinp>2.26,2.26,2.24,2.17</FemaleNSMinp>
+    <FemaleSMMinp>2.91,2.83,2.83,2.74</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="20">
+    <MaleNSMinp>3.49,3.33,3.33,3.21</MaleNSMinp>
+    <MaleSMMinp>3.57,3.51,3.47,3.47</MaleSMMinp>
+    <FemaleNSMinp>2.34,2.34,2.32,2.26</FemaleNSMinp>
+    <FemaleSMMinp>3.05,2.95,2.95,2.87</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="21">
+    <MaleNSMinp>3.58,3.43,3.43,3.3</MaleNSMinp>
+    <MaleSMMinp>3.64,3.59,3.56,3.56</MaleSMMinp>
+    <FemaleNSMinp>2.41,2.41,2.4,2.35</FemaleNSMinp>
+    <FemaleSMMinp>3.13,3.02,3.02,2.95</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="22">
+    <MaleNSMinp>3.62,3.48,3.48,3.33</MaleNSMinp>
+    <MaleSMMinp>3.66,3.62,3.59,3.59</MaleSMMinp>
+    <FemaleNSMinp>2.48,2.48,2.48,2.44</FemaleNSMinp>
+    <FemaleSMMinp>3.21,3.08,3.08,3.02</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="23">
+    <MaleNSMinp>3.65,3.54,3.54,3.37</MaleNSMinp>
+    <MaleSMMinp>3.72,3.69,3.67,3.67</MaleSMMinp>
+    <FemaleNSMinp>2.57,2.57,2.56,2.54</FemaleNSMinp>
+    <FemaleSMMinp>3.29,3.14,3.14,3.1</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="24">
+    <MaleNSMinp>3.69,3.61,3.61,3.42</MaleNSMinp>
+    <MaleSMMinp>3.8,3.77,3.76,3.76</MaleSMMinp>
+    <FemaleNSMinp>2.65,2.65,2.65,2.65</FemaleNSMinp>
+    <FemaleSMMinp>3.38,3.2,3.2,3.18</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="25">
+    <MaleNSMinp>3.72,3.68,3.68,3.49</MaleNSMinp>
+    <MaleSMMinp>3.9,3.88,3.87,3.87</MaleSMMinp>
+    <FemaleNSMinp>2.74,2.74,2.74,2.74</FemaleNSMinp>
+    <FemaleSMMinp>3.44,3.26,3.26,3.25</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="26">
+    <MaleNSMinp>3.76,3.75,3.75,3.57</MaleNSMinp>
+    <MaleSMMinp>3.99,3.97,3.97,3.97</MaleSMMinp>
+    <FemaleNSMinp>2.85,2.85,2.82,2.82</FemaleNSMinp>
+    <FemaleSMMinp>3.58,3.39,3.39,3.38</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="27">
+    <MaleNSMinp>3.83,3.83,3.83,3.68</MaleNSMinp>
+    <MaleSMMinp>4.16,4.13,4.13,4.13</MaleSMMinp>
+    <FemaleNSMinp>2.96,2.96,2.91,2.91</FemaleNSMinp>
+    <FemaleSMMinp>3.75,3.56,3.56,3.55</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="28">
+    <MaleNSMinp>3.92,3.92,3.92,3.8</MaleNSMinp>
+    <MaleSMMinp>4.34,4.31,4.31,4.31</MaleSMMinp>
+    <FemaleNSMinp>3.08,3.07,3.01,3.01</FemaleNSMinp>
+    <FemaleSMMinp>3.92,3.74,3.74,3.72</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="29">
+    <MaleNSMinp>4.04,4.04,4.04,3.92</MaleNSMinp>
+    <MaleSMMinp>4.58,4.53,4.53,4.53</MaleSMMinp>
+    <FemaleNSMinp>3.2,3.18,3.11,3.11</FemaleNSMinp>
+    <FemaleSMMinp>4.05,3.89,3.89,3.86</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="30">
+    <MaleNSMinp>4.18,4.18,4.18,4.1</MaleNSMinp>
+    <MaleSMMinp>4.77,4.73,4.73,4.72</MaleSMMinp>
+    <FemaleNSMinp>3.34,3.3,3.22,3.2</FemaleNSMinp>
+    <FemaleSMMinp>4.24,4.07,4.07,4.03</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="31">
+    <MaleNSMinp>4.35,4.35,4.35,4.29</MaleNSMinp>
+    <MaleSMMinp>5.02,4.98,4.98,4.96</MaleSMMinp>
+    <FemaleNSMinp>3.48,3.42,3.33,3.29</FemaleNSMinp>
+    <FemaleSMMinp>4.44,4.26,4.26,4.22</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="32">
+    <MaleNSMinp>4.54,4.54,4.54,4.5</MaleNSMinp>
+    <MaleSMMinp>5.22,5.19,5.19,5.15</MaleSMMinp>
+    <FemaleNSMinp>3.6,3.55,3.47,3.37</FemaleNSMinp>
+    <FemaleSMMinp>4.69,4.5,4.5,4.44</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="33">
+    <MaleNSMinp>4.76,4.76,4.76,4.66</MaleNSMinp>
+    <MaleSMMinp>5.48,5.46,5.46,5.41</MaleSMMinp>
+    <FemaleNSMinp>3.76,3.73,3.64,3.49</FemaleNSMinp>
+    <FemaleSMMinp>4.9,4.7,4.7,4.64</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="34">
+    <MaleNSMinp>5.02,5.02,5.01,4.84</MaleNSMinp>
+    <MaleSMMinp>5.76,5.75,5.75,5.67</MaleSMMinp>
+    <FemaleNSMinp>3.94,3.92,3.83,3.62</FemaleNSMinp>
+    <FemaleSMMinp>5.18,4.96,4.96,4.89</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="35">
+    <MaleNSMinp>5.3,5.3,5.29,5.06</MaleNSMinp>
+    <MaleSMMinp>6.08,6.07,6.07,5.97</MaleSMMinp>
+    <FemaleNSMinp>4.14,4.13,4.04,3.79</FemaleNSMinp>
+    <FemaleSMMinp>5.38,5.16,5.16,5.08</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="36">
+    <MaleNSMinp>5.56,5.56,5.54,5.27</MaleNSMinp>
+    <MaleSMMinp>6.45,6.44,6.43,6.32</MaleSMMinp>
+    <FemaleNSMinp>4.31,4.31,4.22,3.97</FemaleNSMinp>
+    <FemaleSMMinp>5.61,5.41,5.41,5.3</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="37">
+    <MaleNSMinp>5.85,5.85,5.8,5.53</MaleNSMinp>
+    <MaleSMMinp>6.86,6.83,6.82,6.7</MaleSMMinp>
+    <FemaleNSMinp>4.52,4.52,4.43,4.19</FemaleNSMinp>
+    <FemaleSMMinp>5.81,5.66,5.66,5.51</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="38">
+    <MaleNSMinp>6.14,6.14,6.07,5.78</MaleNSMinp>
+    <MaleSMMinp>7.33,7.29,7.27,7.14</MaleSMMinp>
+    <FemaleNSMinp>4.78,4.78,4.69,4.47</FemaleNSMinp>
+    <FemaleSMMinp>6.06,5.97,5.97,5.78</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="39">
+    <MaleNSMinp>6.45,6.45,6.36,6.06</MaleNSMinp>
+    <MaleSMMinp>7.82,7.76,7.73,7.59</MaleSMMinp>
+    <FemaleNSMinp>5.05,5.05,4.96,4.75</FemaleNSMinp>
+    <FemaleSMMinp>6.37,6.34,6.34,6.09</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="40">
+    <MaleNSMinp>6.76,6.76,6.66,6.34</MaleNSMinp>
+    <MaleSMMinp>8.35,8.28,8.24,8.08</MaleSMMinp>
+    <FemaleNSMinp>5.35,5.35,5.26,5.06</FemaleNSMinp>
+    <FemaleSMMinp>6.72,6.72,6.72,6.44</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="41">
+    <MaleNSMinp>7.07,7.07,6.95,6.63</MaleNSMinp>
+    <MaleSMMinp>8.92,8.85,8.82,8.64</MaleSMMinp>
+    <FemaleNSMinp>5.63,5.63,5.54,5.36</FemaleNSMinp>
+    <FemaleSMMinp>7.13,7.1,7.1,6.84</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="42">
+    <MaleNSMinp>7.48,7.48,7.36,7.03</MaleNSMinp>
+    <MaleSMMinp>9.54,9.49,9.46,9.25</MaleSMMinp>
+    <FemaleNSMinp>5.89,5.89,5.8,5.64</FemaleNSMinp>
+    <FemaleSMMinp>7.51,7.43,7.43,7.21</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="43">
+    <MaleNSMinp>7.97,7.97,7.83,7.49</MaleNSMinp>
+    <MaleSMMinp>10.17,10.13,10.11,9.88</MaleSMMinp>
+    <FemaleNSMinp>6.15,6.15,6.07,5.93</FemaleNSMinp>
+    <FemaleSMMinp>7.93,7.78,7.78,7.63</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="44">
+    <MaleNSMinp>8.52,8.52,8.37,8</MaleNSMinp>
+    <MaleSMMinp>10.8,10.78,10.77,10.51</MaleSMMinp>
+    <FemaleNSMinp>6.41,6.41,6.35,6.23</FemaleNSMinp>
+    <FemaleSMMinp>8.4,8.17,8.17,8.09</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="45">
+    <MaleNSMinp>9.09,9.09,8.9,8.52</MaleNSMinp>
+    <MaleSMMinp>11.45,11.44,11.43,11.15</MaleSMMinp>
+    <FemaleNSMinp>6.79,6.79,6.72,6.62</FemaleNSMinp>
+    <FemaleSMMinp>8.95,8.64,8.64,8.61</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="46">
+    <MaleNSMinp>9.68,9.68,9.43,9.06</MaleNSMinp>
+    <MaleSMMinp>12.12,12.1,12.08,11.8</MaleSMMinp>
+    <FemaleNSMinp>7.23,7.22,7.15,7.06</FemaleNSMinp>
+    <FemaleSMMinp>9.53,9.16,9.16,9.16</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="47">
+    <MaleNSMinp>10.3,10.3,9.96,9.6</MaleNSMinp>
+    <MaleSMMinp>12.86,12.81,12.78,12.5</MaleSMMinp>
+    <FemaleNSMinp>7.74,7.71,7.62,7.55</FemaleNSMinp>
+    <FemaleSMMinp>10.15,9.74,9.74,9.74</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="48">
+    <MaleNSMinp>10.98,10.98,10.54,10.2</MaleNSMinp>
+    <MaleSMMinp>13.66,13.57,13.53,13.26</MaleSMMinp>
+    <FemaleNSMinp>8.25,8.22,8.09,8.04</FemaleNSMinp>
+    <FemaleSMMinp>10.78,10.32,10.32,10.32</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="49">
+    <MaleNSMinp>11.75,11.75,11.17,10.86</MaleNSMinp>
+    <MaleSMMinp>14.57,14.45,14.38,14.12</MaleSMMinp>
+    <FemaleNSMinp>8.79,8.73,8.58,8.55</FemaleNSMinp>
+    <FemaleSMMinp>11.43,10.92,10.92,10.92</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="50">
+    <MaleNSMinp>12.57,12.55,11.89,11.59</MaleNSMinp>
+    <MaleSMMinp>15.54,15.4,15.3,15.06</MaleSMMinp>
+    <FemaleNSMinp>9.32,9.24,9.07,9.06</FemaleNSMinp>
+    <FemaleSMMinp>12.11,11.56,11.56,11.56</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="51">
+    <MaleNSMinp>13.38,13.32,12.63,12.33</MaleNSMinp>
+    <MaleSMMinp>16.62,16.48,16.31,16.1</MaleSMMinp>
+    <FemaleNSMinp>9.9,9.78,9.6,9.6</FemaleNSMinp>
+    <FemaleSMMinp>12.85,12.28,12.28,12.28</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="52">
+    <MaleNSMinp>14.2,14.09,13.43,13.12</MaleNSMinp>
+    <MaleSMMinp>17.73,17.62,17.36,17.19</MaleSMMinp>
+    <FemaleNSMinp>10.51,10.35,10.19,10.19</FemaleNSMinp>
+    <FemaleSMMinp>13.66,13.08,13.08,13.08</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="53">
+    <MaleNSMinp>15.09,14.91,14.29,13.96</MaleNSMinp>
+    <MaleSMMinp>18.92,18.83,18.48,18.35</MaleSMMinp>
+    <FemaleNSMinp>11.19,10.98,10.82,10.82</FemaleNSMinp>
+    <FemaleSMMinp>14.53,13.95,13.95,13.95</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="54">
+    <MaleNSMinp>16.05,15.79,15.22,14.88</MaleNSMinp>
+    <MaleSMMinp>20.11,20.07,19.6,19.53</MaleSMMinp>
+    <FemaleNSMinp>11.87,11.6,11.47,11.47</FemaleNSMinp>
+    <FemaleSMMinp>15.49,14.91,14.91,14.91</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="55">
+    <MaleNSMinp>17.02,16.7,16.18,15.83</MaleNSMinp>
+    <MaleSMMinp>21.33,21.31,20.77,20.73</MaleSMMinp>
+    <FemaleNSMinp>12.62,12.31,12.19,12.19</FemaleNSMinp>
+    <FemaleSMMinp>16.52,15.92,15.92,15.92</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="56">
+    <MaleNSMinp>18.01,17.64,17.15,16.82</MaleNSMinp>
+    <MaleSMMinp>22.57,22.55,21.98,21.96</MaleSMMinp>
+    <FemaleNSMinp>13.31,12.99,12.89,12.89</FemaleNSMinp>
+    <FemaleSMMinp>17.5,16.87,16.87,16.87</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="57">
+    <MaleNSMinp>19.05,18.67,18.2,17.88</MaleNSMinp>
+    <MaleSMMinp>23.83,23.78,23.26,23.2</MaleSMMinp>
+    <FemaleNSMinp>13.9,13.59,13.51,13.51</FemaleNSMinp>
+    <FemaleSMMinp>18.33,17.66,17.66,17.66</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="58">
+    <MaleNSMinp>20.2,19.81,19.35,19.07</MaleNSMinp>
+    <MaleSMMinp>25.15,25.07,24.61,24.52</MaleSMMinp>
+    <FemaleNSMinp>14.49,14.19,14.13,14.13</FemaleNSMinp>
+    <FemaleSMMinp>19.16,18.44,18.44,18.44</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="59">
+    <MaleNSMinp>21.52,21.12,20.68,20.43</MaleNSMinp>
+    <MaleSMMinp>26.61,26.48,26.08,25.96</MaleSMMinp>
+    <FemaleNSMinp>15.07,14.8,14.77,14.77</FemaleNSMinp>
+    <FemaleSMMinp>19.99,19.22,19.22,19.22</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="60">
+    <MaleNSMinp>22.78,22.36,21.95,21.73</MaleNSMinp>
+    <MaleSMMinp>28.02,27.87,27.53,27.39</MaleSMMinp>
+    <FemaleNSMinp>15.72,15.46,15.44,15.44</FemaleNSMinp>
+    <FemaleSMMinp>20.81,20.03,20.03,20.03</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="61">
+    <MaleNSMinp>24.02,23.56,23.2,23.02</MaleNSMinp>
+    <MaleSMMinp>29.45,29.27,28.99,28.85</MaleSMMinp>
+    <FemaleNSMinp>16.47,16.21,16.21,16.21</FemaleNSMinp>
+    <FemaleSMMinp>21.64,20.89,20.89,20.89</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="62">
+    <MaleNSMinp>25.34,24.85,24.55,24.4</MaleNSMinp>
+    <MaleSMMinp>30.99,30.81,30.58,30.47</MaleSMMinp>
+    <FemaleNSMinp>17.39,17.1,17.1,17.1</FemaleNSMinp>
+    <FemaleSMMinp>22.54,21.87,21.87,21.87</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="63">
+    <MaleNSMinp>26.84,26.29,26.08,25.97</MaleNSMinp>
+    <MaleSMMinp>32.71,32.51,32.34,32.26</MaleSMMinp>
+    <FemaleNSMinp>18.41,18.09,18.09,18.09</FemaleNSMinp>
+    <FemaleSMMinp>23.56,22.97,22.97,22.97</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="64">
+    <MaleNSMinp>28.5,27.9,27.78,27.72</MaleNSMinp>
+    <MaleSMMinp>34.63,34.41,34.32,34.28</MaleSMMinp>
+    <FemaleNSMinp>19.51,19.17,19.17,19.17</FemaleNSMinp>
+    <FemaleSMMinp>24.69,24.2,24.2,24.2</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="65">
+    <MaleNSMinp>30.38,29.72,29.67,29.65</MaleNSMinp>
+    <MaleSMMinp>36.82,36.58,36.55,36.53</MaleSMMinp>
+    <FemaleNSMinp>20.71,20.35,20.35,20.35</FemaleNSMinp>
+    <FemaleSMMinp>25.96,25.54,25.54,25.54</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="66">
+    <MaleNSMinp>32.45,31.72,31.72,31.72</MaleNSMinp>
+    <MaleSMMinp>39.24,38.98,38.98,38.98</MaleSMMinp>
+    <FemaleNSMinp>22.07,21.71,21.71,21.71</FemaleNSMinp>
+    <FemaleSMMinp>27.42,27.02,27.02,27.02</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="67">
+    <MaleNSMinp>34.71,33.91,33.91,33.91</MaleNSMinp>
+    <MaleSMMinp>41.89,41.61,41.61,41.61</MaleSMMinp>
+    <FemaleNSMinp>23.59,23.26,23.26,23.26</FemaleNSMinp>
+    <FemaleSMMinp>29.11,28.67,28.67,28.67</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="68">
+    <MaleNSMinp>37.14,36.26,36.26,36.26</MaleNSMinp>
+    <MaleSMMinp>44.84,44.53,44.53,44.53</MaleSMMinp>
+    <FemaleNSMinp>25.27,24.97,24.97,24.97</FemaleNSMinp>
+    <FemaleSMMinp>30.98,30.51,30.51,30.51</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="69">
+    <MaleNSMinp>39.84,38.87,38.87,38.87</MaleNSMinp>
+    <MaleSMMinp>48.1,47.76,47.76,47.76</MaleSMMinp>
+    <FemaleNSMinp>27.07,26.81,26.81,26.81</FemaleNSMinp>
+    <FemaleSMMinp>33,32.48,32.48,32.48</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="70">
+    <MaleNSMinp>42.91,41.83,41.83,41.83</MaleNSMinp>
+    <MaleSMMinp>51.64,51.28,51.28,51.28</MaleSMMinp>
+    <FemaleNSMinp>29,28.79,28.79,28.79</FemaleNSMinp>
+    <FemaleSMMinp>35.17,34.63,34.63,34.63</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="71">
+    <MaleNSMinp>47.12,45.93,45.93,45.93</MaleNSMinp>
+    <MaleSMMinp>56.05,55.65,55.65,55.65</MaleSMMinp>
+    <FemaleNSMinp>37.76,37.58,37.58,37.58</FemaleNSMinp>
+    <FemaleSMMinp>44.26,43.71,43.71,43.71</FemaleSMMinp>
+  </lsminp>
+  <lsminp id="72">
+    <MaleNSMinp>0,0,0,0</MaleNSMinp>
+    <MaleSMMinp>0,0,0,0</MaleSMMinp>
+    <FemaleNSMinp>0,0,0,0</FemaleNSMinp>
+    <FemaleSMMinp>0,0,0,0</FemaleSMMinp>
+  </lsminp>
+</lsminp_data>

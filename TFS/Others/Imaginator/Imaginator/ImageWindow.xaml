@@ -1,0 +1,57 @@
+﻿<y:InternalWindow x:Class="Imaginator.ImageWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:y="clr-namespace:Imaginator"
+    xmlns:app="clr-namespace:Imaginator.Views"
+    Style="{StaticResource MainWindow}" x:Name="ThisWindow"
+    Title="Import Image" Height="550" Width="700" 
+    WindowStartupLocation="CenterOwner" WindowStyle="None" 
+    AllowsTransparency="True" Background="Transparent">
+    <Window.Resources>
+        <app:ImageWindowView x:Key="view" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Border Style="{StaticResource MainBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBorder}" Grid.ColumnSpan="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                    <TextBlock Style="{StaticResource TitleTextBlock}" Text="{Binding Title, ElementName=ThisWindow}" />
+                </Border>
+                <Border Grid.Row="0" Grid.Column="2" Style="{DynamicResource CloseBorder}" PreviewMouseLeftButtonUp="Close_PreviewMouseLeftButtonUp" />
+                <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource NormalTextBlock}" Grid.Row="0" TextWrapping="Wrap" Margin="10,5">
+                        This window allows you to view a selected image and then select a square portion of that image to use as an icon/image. 
+                        No matter the size of the area selected, the resulting image size will be 128x128 pixels. When you save, you will be given 
+                        the choice to convert the image to the other sizes.
+                    </TextBlock>
+                    <ScrollViewer Grid.Row="1" Style="{StaticResource ImageEditScrollViewer}">
+                        <Canvas x:FieldModifier="internal" Name="ImageCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{Binding ImageWidth,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Height="{Binding ImageHeight,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" MouseMove="Canvas_MouseMove" MouseUp="Canvas_MouseUp" >
+                            <Image x:FieldModifier="internal" Name="Displayer" Canvas.Left="0" Canvas.Top="0" Source="{Binding ImportImageSource,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Stretch="Fill" Width="{Binding ImageWidth,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Height="{Binding ImageHeight,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                            <Rectangle x:FieldModifier="internal" Name="SelectionRectangle" Canvas.Left="0" Canvas.Top="0" Width="0" Height="0" Stroke="Green" StrokeThickness="1" StrokeDashArray="10,5" Fill="#33ffffff" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown" SizeChanged="SelectionRectangle_SizeChanged" MinWidth="128" MinHeight="128" />
+                            <Rectangle x:FieldModifier="internal" Name="SizeRectangle" Width="5" Height="5" Fill="#00000000" Cursor="SizeNWSE" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown" />
+                        </Canvas>
+                    </ScrollViewer>
+                </Grid>
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatusBorder}" Grid.ColumnSpan="3" Background="{DynamicResource WindowStatusBrush}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                        <Button Content="OK" Style="{StaticResource RegularButton}" IsDefault="True" Command="{Binding OKCommand}" />
+                        <Button Content="Cancel" Style="{StaticResource RegularButton}" IsCancel="True" Command="{Binding CancelCommand}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</y:InternalWindow>

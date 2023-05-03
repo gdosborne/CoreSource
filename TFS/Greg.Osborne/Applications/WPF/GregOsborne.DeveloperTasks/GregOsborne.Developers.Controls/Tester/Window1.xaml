@@ -1,0 +1,15 @@
+﻿<Window x:Class="GregOsborne.Developers.Controls.Tester.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GregOsborne.Developers.Controls.Tester"
+        xmlns:Controls="clr-namespace:GregOsborne.Developers.Controls" 
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+    <Grid>
+
+        <Controls:LabelAndToggleSwitch HorizontalAlignment="Left" Margin="342,137,0,0" VerticalAlignment="Top" Width="auto" Height="auto" Text="This is the text" Foreground="Orange" SwitchBackground="DarkGray" SwitchForeground="Yellow" LabelAlignment="RightSide"/>
+
+    </Grid>
+</Window>

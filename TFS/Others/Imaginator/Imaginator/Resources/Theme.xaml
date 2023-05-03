@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="AppFontFamily">Segoe UI</FontFamily>
+    <sys:Double x:Key="AppFontSize">13</sys:Double>
+    <sys:Double x:Key="StatusFontSize">11</sys:Double>
+    <sys:Double x:Key="TooltipFontSize">9</sys:Double>
+    <sys:Double x:Key="TitleFontSize">16</sys:Double>
+    <FontWeight x:Key="AppFontWeight">Regular</FontWeight>
+    <FontWeight x:Key="TitleFontWeight">Regular</FontWeight>
+    
+    <LinearGradientBrush x:Key="WindowBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF595959" Offset="0"/>
+        <GradientStop Color="#FF252525" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="GlyphBrush" Color="White" />
+    <SolidColorBrush x:Key="ButtonMouseOverColor" Color="white" />
+    <SolidColorBrush x:Key="ErrorTextBrush" Color="#FFFB7777" />
+    <SolidColorBrush x:Key="TooltipTextBrush" Color="#FF293072" />
+    <SolidColorBrush x:Key="TooltipBorderBrush" Color="#FF707070" />
+    <SolidColorBrush x:Key="ControlTextBrush" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="InvertedControlTextBrush" Color="#FF4B4B4B" />
+    <SolidColorBrush x:Key="GeneralBorderBrush" Color="#FF787878" />
+    <SolidColorBrush x:Key="TextBoxForegroundBrush" Color="#FF474747" />
+    <SolidColorBrush x:Key="IndentTopLeftBrush" Color="#FF252424" />
+    <SolidColorBrush x:Key="IndentBottomRightBrush" Color="#FFA0A0A0" />
+    <SolidColorBrush x:Key="ListBackgroundBrush" Color="#FF595959" />
+    <SolidColorBrush x:Key="ControlDisabledBrush" Color="#55DDDDDD" />
+    <LinearGradientBrush x:Key="TreeViewSelectedBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FF262630" Offset="1"/>
+        <GradientStop Color="#FF1F2489" Offset="0.25"/>
+        <GradientStop Color="#FF1F2489" Offset="0.75"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TextBoxBackgroundBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FFB9B9B9" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TooltipBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FFB9B9B9" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TitleBarBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FF1A1D3C" Offset="1"/>
+        <GradientStop Color="#FF3E4264" Offset="0.238"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="CloseButtonBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FF320D0D" Offset="1"/>
+        <GradientStop Color="#FE934343" Offset="0.343"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MinimizeButtonBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FF0D2332" Offset="1"/>
+        <GradientStop Color="#FE436F93" Offset="0.343"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="WindowStatusBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF3E4264" Offset="0"/>
+        <GradientStop Color="#FF1A1D3C" Offset="1"/>
+        <GradientStop Color="#FF3E4264" Offset="0.808"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="StatusBarColor" Color="#19000000"/>
+    <SolidColorBrush x:Key="SelectedImageBrush" Color="#FF838383"/>
+    <SolidColorBrush x:Key="SelectedOutlineBrush" Color="#FFCBC4FD"/>
+    <LinearGradientBrush x:Key="GridsplitterBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                <RotateTransform Angle="-90" CenterY="0.5" CenterX="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="Black" Offset="1"/>
+        <GradientStop Color="White"/>
+    </LinearGradientBrush>
+</ResourceDictionary>

@@ -3,7 +3,8 @@
 					xmlns:sys="clr-namespace:System;assembly=mscorlib">
 	
 	<sys:Double x:Key="TextFontSize">13</sys:Double>
-	<sys:Double x:Key="TitleHeaderFontSize">16</sys:Double>
+	<sys:Double x:Key="TitleHeaderFontSize">19.5</sys:Double>
+	<sys:Double x:Key="GlyphFontSize">18</sys:Double>
 
 	<Style TargetType="Label">
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -13,5 +14,12 @@
 	<Style TargetType="ComboBox">
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="FontSize" Value="{DynamicResource TextFontSize}" />
+	</Style>
+	<Style TargetType="RadioButton">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="{DynamicResource TextFontSize}" />
+		<Setter Property="Margin" Value="0,2.5"/>
 	</Style>
 </ResourceDictionary>

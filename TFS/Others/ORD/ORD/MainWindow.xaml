@@ -1,0 +1,162 @@
+﻿<Window x:Class="SNC.Applications.Developer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:SNC.Applications.Developer.Views"
+        Title="OptiRamp Developer" Height="500" Width="700" 
+        WindowStartupLocation="Manual" Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <v:MainWindowView x:Key="view" PropertyChanged="MainWindowView_PropertyChanged" ExecuteUIAction="MainWindowView_ExecuteUIAction" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Projects">
+                <MenuItem Header="New" Command="{Binding NewProjectCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/new.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open" Command="{Binding OpenProjectCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/openFile.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save" Command="{Binding SaveProjectCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/saveFile.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save as..." Command="{Binding SaveProjectAsCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/saveas.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Recent Items">
+
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit">
+
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Tools">
+
+            </MenuItem>
+            <MenuItem Header="Help">
+
+            </MenuItem>
+        </Menu>
+        <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
+            <ToolBar DockPanel.Dock="Top">
+                <Button Command="{Binding NewProjectCommand}">
+                    <Image Source="images/new.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                </Button>
+                <Button Command="{Binding OpenProjectCommand}">
+                    <Image Source="images/openFile.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                </Button>
+            </ToolBar>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="images/new.png" Width="16" Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding ProjectFileName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Visibility="{Binding ProjectFileNameVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                        <TextBlock Text="No project file currently open" Visibility="{Binding NoFileNameVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                    </StackPanel>
+                </StatusBarItem>
+            </StatusBar>
+            <ToolBarTray Orientation="Vertical" DockPanel.Dock="Left">
+                <ToolBar>
+                    <Button ToolTip="Shape">
+                        <Image Source="images/shapes.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Rectangle" />
+                                <MenuItem Header="Ellipse" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Text">
+                        <Image Source="images/text.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Static" />
+                                <MenuItem Header="Dynamic" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Image">
+                        <Image Source="images/image.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Static" />
+                                <MenuItem Header="Dynamic" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Table">
+                        <Image Source="images/table1.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Realtime" />
+                                <MenuItem Header="Snapshot" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Chart/Plot">
+                        <Image Source="images/chart.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Trend Chart" />
+                                <MenuItem Header="Bar Chart" />
+                                <MenuItem Header="Pie Chart">
+                                    <MenuItem Header="Standard" />
+                                    <MenuItem Header="Fixed" />
+                                </MenuItem>
+                                <MenuItem Header="Normal Distribution Chart" />
+                                <MenuItem Header="Box and Whisker Chart" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Meter/Gauge">
+                        <Image Source="images/meter.png" Style="{StaticResource ObjectToolbarImage}" />
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Meter" />
+                                <MenuItem Header="Circular Progress Bar" />
+                                <MenuItem Header="Speedometer" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button ToolTip="Pin">
+                        <Image Source="images/pin.png" Style="{StaticResource ObjectToolbarImage}" />
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="150" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TreeView Grid.Column="0" Margin="0,0,3,0" ItemsSource="{Binding TreeItems}">
+                    <TreeView.ContextMenu>
+                        <ContextMenu>
+                            <Separator />
+                            <MenuItem Header="Properties" Command="{Binding ShowObjectPropertiesCommand}">
+                                <MenuItem.Icon>
+                                    <Image Source="images/properties.png" Style="{StaticResource ToolbarAndMenuImage}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </TreeView.ContextMenu>
+                </TreeView>
+                <GridSplitter Width="3" HorizontalAlignment="Right" Grid.Column="0" />
+                <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Grid.Column="1" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+#define APSTUDIO_READONLY_SYMBOLS 0
+#define MAIN 1
+#define IDR_VERSION1 1
+
+#include "../../common/Attributes_SNC_U.h"
+#include "../../version.h"
+
+MAIN ICON DISCARDABLE "../../Icons/OptiRamp_ADCS_Off_Line.ico"
+
+
+IDR_VERSION1 VERSIONINFO
+FILEVERSION MY_VERSION
+PRODUCTVERSION MY_VERSION
+FILEOS 0x00000004
+FILETYPE 0x00000000
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "04090000"
+    BEGIN
+      VALUE "FileVersion", MY_VERSION_TXT
+      VALUE "ProductVersion", MY_VERSION_TXT
+      VALUE "FileDescription", "OptiRamp Services Assembly\0"
+      VALUE "InternalName", "fADCSServices\0"
+      VALUE "ProductName", "fADCSServices\0"
+MUMBO_JUMBO
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 0x0000
+  END
+END
+

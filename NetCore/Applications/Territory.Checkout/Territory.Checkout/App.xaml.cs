@@ -32,10 +32,11 @@
 
 		private void UpdateSettings() {
 			var fontSize = AppSettings.GetValue("Application", "Font.Size", 13.0);
-			var titleHeaderSize = AppSettings.GetValue("Application", "Title.Size", 16.0);
 
 			Resources["TextFontSize"] = fontSize;
-			Resources["TitleHeaderFontSize"] = titleHeaderSize;
+			Resources["TitleHeaderFontSize"] = fontSize * 1.5;
+			Resources["GlyphFontSize"] = fontSize * 1.25;
+
 		}
 
 		public static string AppName { get; private set; } = "Territory Checkout";
@@ -43,6 +44,10 @@
 		public static DirectoryInfo TempDirectory { get; private set; }
 		public static Session AppSession { get; private set; }
 		public static AppSettings AppSettings { get; private set; }
+		public static int NumberOfDaysNeedsWorked { 
+			get => AppSettings.GetValue("Application", "DaysForNeedsWorked", 180);
+			set => AppSettings.AddOrUpdateSetting("Application", "DaysForNeedsWorked", value);
+		}
 
 		public static void DisplayOKDialog(Window window, string title, string content, 
 				string mainText) =>

@@ -1,0 +1,578 @@
+<lsratesi_data>
+  <lsratesi id="1">
+    <MaleNS>.219,.2163</MaleNS>
+    <MaleSM>.3833,.2163</MaleSM>
+    <FemaleNS>.1568,.105</FemaleNS>
+    <FemaleSM>.2744,.1425</FemaleSM>
+  </lsratesi>
+  <lsratesi id="2">
+    <MaleNS>.0858,.0858</MaleNS>
+    <MaleSM>.1502,.103</MaleSM>
+    <FemaleNS>.07,.063</FemaleNS>
+    <FemaleSM>.1225,.0855</FemaleSM>
+  </lsratesi>
+  <lsratesi id="3">
+    <MaleNS>.082,.082</MaleNS>
+    <MaleSM>.1436,.103</MaleSM>
+    <FemaleNS>.0666,.056</FemaleNS>
+    <FemaleSM>.1166,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="4">
+    <MaleNS>.0804,.0804</MaleNS>
+    <MaleSM>.1407,.103</MaleSM>
+    <FemaleNS>.065,.056</FemaleNS>
+    <FemaleSM>.1137,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="5">
+    <MaleNS>.077,.077</MaleNS>
+    <MaleSM>.1349,.0927</MaleSM>
+    <FemaleNS>.0637,.049</FemaleNS>
+    <FemaleSM>.1115,.0665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="6">
+    <MaleNS>.0733,.0733</MaleNS>
+    <MaleSM>.1283,.0927</MaleSM>
+    <FemaleNS>.062,.049</FemaleNS>
+    <FemaleSM>.1086,.0665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="7">
+    <MaleNS>.0691,.0691</MaleNS>
+    <MaleSM>.121,.0824</MaleSM>
+    <FemaleNS>.0604,.049</FemaleNS>
+    <FemaleSM>.1057,.0665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="8">
+    <MaleNS>.065,.065</MaleNS>
+    <MaleSM>.1137,.0824</MaleSM>
+    <FemaleNS>.0591,.049</FemaleNS>
+    <FemaleSM>.1035,.0665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="9">
+    <MaleNS>.0625,.0625</MaleNS>
+    <MaleSM>.1093,.0824</MaleSM>
+    <FemaleNS>.0579,.049</FemaleNS>
+    <FemaleSM>.1013,.0665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="10">
+    <MaleNS>.0612,.0612</MaleNS>
+    <MaleSM>.1071,.0824</MaleSM>
+    <FemaleNS>.057,.056</FemaleNS>
+    <FemaleSM>.0999,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="11">
+    <MaleNS>.0625,.0625</MaleNS>
+    <MaleSM>.1093,.0824</MaleSM>
+    <FemaleNS>.057,.056</FemaleNS>
+    <FemaleSM>.0999,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="12">
+    <MaleNS>.0675,.0675</MaleNS>
+    <MaleSM>.1181,.0824</MaleSM>
+    <FemaleNS>.0587,.056</FemaleNS>
+    <FemaleSM>.1028,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="13">
+    <MaleNS>.0766,.0766</MaleNS>
+    <MaleSM>.1341,.0927</MaleSM>
+    <FemaleNS>.0612,.056</FemaleNS>
+    <FemaleSM>.1071,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="14">
+    <MaleNS>.0891,.0891</MaleNS>
+    <MaleSM>.156,.103</MaleSM>
+    <FemaleNS>.0645,.056</FemaleNS>
+    <FemaleSM>.113,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="15">
+    <MaleNS>.1033,.103</MaleNS>
+    <MaleSM>.1808,.103</MaleSM>
+    <FemaleNS>.0687,.056</FemaleNS>
+    <FemaleSM>.1203,.076</FemaleSM>
+  </lsratesi>
+  <lsratesi id="16">
+    <MaleNS>.1183,.1133</MaleNS>
+    <MaleSM>.2071,.1236</MaleSM>
+    <FemaleNS>.0729,.063</FemaleNS>
+    <FemaleSM>.1276,.0855</FemaleSM>
+  </lsratesi>
+  <lsratesi id="17">
+    <MaleNS>.1325,.1133</MaleNS>
+    <MaleSM>.2318,.1339</MaleSM>
+    <FemaleNS>.077,.07</FemaleNS>
+    <FemaleSM>.1349,.095</FemaleSM>
+  </lsratesi>
+  <lsratesi id="18">
+    <MaleNS>.1437,.1236</MaleNS>
+    <MaleSM>.2515,.1442</MaleSM>
+    <FemaleNS>.0804,.07</FemaleNS>
+    <FemaleSM>.1407,.095</FemaleSM>
+  </lsratesi>
+  <lsratesi id="19">
+    <MaleNS>.1516,.1236</MaleNS>
+    <MaleSM>.2654,.1442</MaleSM>
+    <FemaleNS>.0833,.077</FemaleNS>
+    <FemaleSM>.1458,.114</FemaleSM>
+  </lsratesi>
+  <lsratesi id="20">
+    <MaleNS>.1566,.1236</MaleNS>
+    <MaleSM>.2742,.1442</MaleSM>
+    <FemaleNS>.0862,.077</FemaleNS>
+    <FemaleSM>.1509,.1235</FemaleSM>
+  </lsratesi>
+  <lsratesi id="21">
+    <MaleNS>.1587,.1339</MaleNS>
+    <MaleSM>.2778,.1545</MaleSM>
+    <FemaleNS>.0883,.084</FemaleNS>
+    <FemaleSM>.1545,.133</FemaleSM>
+  </lsratesi>
+  <lsratesi id="22">
+    <MaleNS>.1583,.1299</MaleNS>
+    <MaleSM>.2771,.1514</MaleSM>
+    <FemaleNS>.09,.0843</FemaleNS>
+    <FemaleSM>.1575,.1302</FemaleSM>
+  </lsratesi>
+  <lsratesi id="23">
+    <MaleNS>.1562,.126</MaleNS>
+    <MaleSM>.2734,.1484</MaleSM>
+    <FemaleNS>.0916,.0846</FemaleNS>
+    <FemaleSM>.1604,.1275</FemaleSM>
+  </lsratesi>
+  <lsratesi id="24">
+    <MaleNS>.1533,.1222</MaleNS>
+    <MaleSM>.2683,.1455</MaleSM>
+    <FemaleNS>.0937,.0908</FemaleNS>
+    <FemaleSM>.164,.1338</FemaleSM>
+  </lsratesi>
+  <lsratesi id="25">
+    <MaleNS>.1496,.1184</MaleNS>
+    <MaleSM>.2618,.152</MaleSM>
+    <FemaleNS>.0958,.0919</FemaleNS>
+    <FemaleSM>.1677,.131</FemaleSM>
+  </lsratesi>
+  <lsratesi id="26">
+    <MaleNS>.1458,.1146</MaleNS>
+    <MaleSM>.2552,.1489</MaleSM>
+    <FemaleNS>.0979,.0926</FemaleNS>
+    <FemaleSM>.1713,.1282</FemaleSM>
+  </lsratesi>
+  <lsratesi id="27">
+    <MaleNS>.1433,.1162</MaleNS>
+    <MaleSM>.2508,.1508</MaleSM>
+    <FemaleNS>.1004,.0933</FemaleNS>
+    <FemaleSM>.1757,.1312</FemaleSM>
+  </lsratesi>
+  <lsratesi id="28">
+    <MaleNS>.1421,.1179</MaleNS>
+    <MaleSM>.2486,.1528</MaleSM>
+    <FemaleNS>.1033,.094</FemaleNS>
+    <FemaleSM>.1808,.1431</FemaleSM>
+  </lsratesi>
+  <lsratesi id="29">
+    <MaleNS>.1421,.1195</MaleNS>
+    <MaleSM>.2486,.1643</MaleSM>
+    <FemaleNS>.1066,.0948</FemaleNS>
+    <FemaleSM>.1866,.1463</FemaleSM>
+  </lsratesi>
+  <lsratesi id="30">
+    <MaleNS>.1433,.1212</MaleNS>
+    <MaleSM>.2508,.1663</MaleSM>
+    <FemaleNS>.1104,.0955</FemaleNS>
+    <FemaleSM>.1932,.1493</FemaleSM>
+  </lsratesi>
+  <lsratesi id="31">
+    <MaleNS>.1462,.1228</MaleNS>
+    <MaleSM>.2559,.1781</MaleSM>
+    <FemaleNS>.1145,.0962</FemaleNS>
+    <FemaleSM>.2005,.1524</FemaleSM>
+  </lsratesi>
+  <lsratesi id="32">
+    <MaleNS>.1504,.1348</MaleNS>
+    <MaleSM>.2632,.1817</MaleSM>
+    <FemaleNS>.1187,.0944</FemaleNS>
+    <FemaleSM>.2078,.1665</FemaleSM>
+  </lsratesi>
+  <lsratesi id="33">
+    <MaleNS>.1558,.1373</MaleNS>
+    <MaleSM>.2727,.1957</MaleSM>
+    <FemaleNS>.1229,.0927</FemaleNS>
+    <FemaleSM>.2151,.1712</FemaleSM>
+  </lsratesi>
+  <lsratesi id="34">
+    <MaleNS>.1629,.1398</MaleNS>
+    <MaleSM>.2851,.1995</MaleSM>
+    <FemaleNS>.1283,.091</FemaleNS>
+    <FemaleSM>.2245,.1863</FemaleSM>
+  </lsratesi>
+  <lsratesi id="35">
+    <MaleNS>.1712,.1423</MaleNS>
+    <MaleSM>.2997,.2142</MaleSM>
+    <FemaleNS>.1346,.0962</FemaleNS>
+    <FemaleSM>.2355,.1914</FemaleSM>
+  </lsratesi>
+  <lsratesi id="36">
+    <MaleNS>.1812,.1449</MaleNS>
+    <MaleSM>.3172,.2293</MaleSM>
+    <FemaleNS>.142,.0945</FemaleNS>
+    <FemaleSM>.2486,.2074</FemaleSM>
+  </lsratesi>
+  <lsratesi id="37">
+    <MaleNS>.1933,.1541</MaleNS>
+    <MaleSM>.3383,.2385</MaleSM>
+    <FemaleNS>.1521,.1008</FemaleNS>
+    <FemaleSM>.2661,.2059</FemaleSM>
+  </lsratesi>
+  <lsratesi id="38">
+    <MaleNS>.2075,.153</MaleNS>
+    <MaleSM>.3632,.2583</MaleSM>
+    <FemaleNS>.1637,.1071</FemaleNS>
+    <FemaleSM>.2865,.2152</FemaleSM>
+  </lsratesi>
+  <lsratesi id="39">
+    <MaleNS>.2237,.1621</MaleNS>
+    <MaleSM>.3916,.2778</MaleSM>
+    <FemaleNS>.1775,.1134</FemaleNS>
+    <FemaleSM>.3106,.2244</FemaleSM>
+  </lsratesi>
+  <lsratesi id="40">
+    <MaleNS>.2421,.171</MaleNS>
+    <MaleSM>.4237,.297</MaleSM>
+    <FemaleNS>.1933,.1282</FemaleNS>
+    <FemaleSM>.3383,.2333</FemaleSM>
+  </lsratesi>
+  <lsratesi id="41">
+    <MaleNS>.2629,.1698</MaleNS>
+    <MaleSM>.4601,.3159</MaleSM>
+    <FemaleNS>.2108,.135</FemaleNS>
+    <FemaleSM>.369,.2527</FemaleSM>
+  </lsratesi>
+  <lsratesi id="42">
+    <MaleNS>.2854,.1788</MaleNS>
+    <MaleSM>.4995,.3455</MaleSM>
+    <FemaleNS>.2296,.1451</FemaleNS>
+    <FemaleSM>.4018,.2687</FemaleSM>
+  </lsratesi>
+  <lsratesi id="43">
+    <MaleNS>.3096,.1877</MaleNS>
+    <MaleSM>.5419,.3748</MaleSM>
+    <FemaleNS>.2483,.1554</FemaleNS>
+    <FemaleSM>.4346,.2839</FemaleSM>
+  </lsratesi>
+  <lsratesi id="44">
+    <MaleNS>.3359,.2063</MaleNS>
+    <MaleSM>.5878,.4038</MaleSM>
+    <FemaleNS>.2671,.1566</FemaleNS>
+    <FemaleSM>.4674,.2983</FemaleSM>
+  </lsratesi>
+  <lsratesi id="45">
+    <MaleNS>.3642,.2248</MaleNS>
+    <MaleSM>.6374,.4324</MaleSM>
+    <FemaleNS>.2867,.1671</FemaleNS>
+    <FemaleSM>.5017,.3217</FemaleSM>
+  </lsratesi>
+  <lsratesi id="46">
+    <MaleNS>.3947,.243</MaleNS>
+    <MaleSM>.6907,.4606</MaleSM>
+    <FemaleNS>.3067,.1778</FemaleNS>
+    <FemaleSM>.5368,.3439</FemaleSM>
+  </lsratesi>
+  <lsratesi id="47">
+    <MaleNS>.4268,.2604</MaleNS>
+    <MaleSM>.7469,.4885</MaleSM>
+    <FemaleNS>.3271,.195</FemaleNS>
+    <FemaleSM>.5725,.3696</FemaleSM>
+  </lsratesi>
+  <lsratesi id="48">
+    <MaleNS>.4609,.2777</MaleNS>
+    <MaleSM>.8067,.5161</MaleSM>
+    <FemaleNS>.3492,.2119</FemaleNS>
+    <FemaleSM>.6112,.3947</FemaleSM>
+  </lsratesi>
+  <lsratesi id="49">
+    <MaleNS>.4981,.2946</MaleNS>
+    <MaleSM>.8716,.5534</MaleSM>
+    <FemaleNS>.3734,.2286</FemaleNS>
+    <FemaleSM>.6535,.4194</FemaleSM>
+  </lsratesi>
+  <lsratesi id="50">
+    <MaleNS>.5385,.3206</MaleNS>
+    <MaleSM>.9424,.5902</MaleSM>
+    <FemaleNS>.3997,.2449</FemaleNS>
+    <FemaleSM>.6994,.4436</FemaleSM>
+  </lsratesi>
+  <lsratesi id="51">
+    <MaleNS>.5839,.3463</MaleNS>
+    <MaleSM>1.0219,.6364</MaleSM>
+    <FemaleNS>.428,.261</FemaleNS>
+    <FemaleSM>.7491,.4674</FemaleSM>
+  </lsratesi>
+  <lsratesi id="52">
+    <MaleNS>.6361,.3673</MaleNS>
+    <MaleSM>1.1132,.6835</MaleSM>
+    <FemaleNS>.4589,.2714</FemaleNS>
+    <FemaleSM>.8031,.5019</FemaleSM>
+  </lsratesi>
+  <lsratesi id="53">
+    <MaleNS>.6949,.3874</MaleNS>
+    <MaleSM>1.2161,.74</MaleSM>
+    <FemaleNS>.4939,.2896</FemaleNS>
+    <FemaleSM>.8644,.5361</FemaleSM>
+  </lsratesi>
+  <lsratesi id="54">
+    <MaleNS>.7616,.4154</MaleNS>
+    <MaleSM>1.3329,.796</MaleSM>
+    <FemaleNS>.5318,.3064</FemaleNS>
+    <FemaleSM>.9308,.579</FemaleSM>
+  </lsratesi>
+  <lsratesi id="55">
+    <MaleNS>.835,.4421</MaleNS>
+    <MaleSM>1.4614,.8516</MaleSM>
+    <FemaleNS>.571,.3219</FemaleNS>
+    <FemaleSM>.9994,.6216</FemaleSM>
+  </lsratesi>
+  <lsratesi id="56">
+    <MaleNS>.9143,.4675</MaleNS>
+    <MaleSM>1.6001,.9067</MaleSM>
+    <FemaleNS>.6111,.3362</FemaleNS>
+    <FemaleSM>1.0694,.6727</FemaleSM>
+  </lsratesi>
+  <lsratesi id="57">
+    <MaleNS>.9986,.5004</MaleNS>
+    <MaleSM>1.7476,.9613</MaleSM>
+    <FemaleNS>.6503,.3675</FemaleNS>
+    <FemaleSM>1.1381,.7218</FemaleSM>
+  </lsratesi>
+  <lsratesi id="58">
+    <MaleNS>1.0875,.5333</MaleNS>
+    <MaleSM>1.9032,1.0155</MaleSM>
+    <FemaleNS>.6878,.3988</FemaleNS>
+    <FemaleSM>1.2038,.7702</FemaleSM>
+  </lsratesi>
+  <lsratesi id="59">
+    <MaleNS>1.1827,.5745</MaleNS>
+    <MaleSM>2.0697,1.0692</MaleSM>
+    <FemaleNS>.7258,.4301</FemaleNS>
+    <FemaleSM>1.2702,.8178</FemaleSM>
+  </lsratesi>
+  <lsratesi id="60">
+    <MaleNS>1.2866,.6239</MaleNS>
+    <MaleSM>2.2516,1.132</MaleSM>
+    <FemaleNS>.7675,.4613</FemaleNS>
+    <FemaleSM>1.3432,.8648</FemaleSM>
+  </lsratesi>
+  <lsratesi id="61">
+    <MaleNS>1.4023,.6816</MaleNS>
+    <MaleSM>2.454,1.2039</MaleSM>
+    <FemaleNS>.8172,.4926</FemaleNS>
+    <FemaleSM>1.4301,.9111</FemaleSM>
+  </lsratesi>
+  <lsratesi id="62">
+    <MaleNS>1.5321,.739</MaleNS>
+    <MaleSM>2.6812,1.2872</MaleSM>
+    <FemaleNS>.8793,.5306</FemaleNS>
+    <FemaleSM>1.5388,.961</FemaleSM>
+  </lsratesi>
+  <lsratesi id="63">
+    <MaleNS>1.6791,.8045</MaleNS>
+    <MaleSM>2.9385,1.3798</MaleSM>
+    <FemaleNS>.9581,.5761</FemaleNS>
+    <FemaleSM>1.6767,1.0193</FemaleSM>
+  </lsratesi>
+  <lsratesi id="64">
+    <MaleNS>1.8441,.8782</MaleNS>
+    <MaleSM>3.2272,1.4814</MaleSM>
+    <FemaleNS>1.0537,.6292</FemaleNS>
+    <FemaleSM>1.844,1.0859</FemaleSM>
+  </lsratesi>
+  <lsratesi id="65">
+    <MaleNS>2.0263,.9682</MaleNS>
+    <MaleSM>3.546,1.6016</MaleSM>
+    <FemaleNS>1.1609,.6821</FemaleNS>
+    <FemaleSM>2.0316,1.1609</FemaleSM>
+  </lsratesi>
+  <lsratesi id="66">
+    <MaleNS>2.2232,1.0662</MaleNS>
+    <MaleSM>3.8906,1.7401</MaleSM>
+    <FemaleNS>1.2757,.7425</FemaleNS>
+    <FemaleSM>2.2326,1.2441</FemaleSM>
+  </lsratesi>
+  <lsratesi id="67">
+    <MaleNS>2.4331,1.1721</MaleNS>
+    <MaleSM>4.2579,1.8915</MaleSM>
+    <FemaleNS>1.3943,.8157</FemaleNS>
+    <FemaleSM>2.4401,1.3354</FemaleSM>
+  </lsratesi>
+  <lsratesi id="68">
+    <MaleNS>2.6565,1.2858</MaleNS>
+    <MaleSM>4.6488,2.0522</MaleSM>
+    <FemaleNS>1.513,.9051</FemaleNS>
+    <FemaleSM>2.6477,1.4434</FemaleSM>
+  </lsratesi>
+  <lsratesi id="69">
+    <MaleNS>2.8962,1.4074</MaleNS>
+    <MaleSM>5.0684,2.2319</MaleSM>
+    <FemaleNS>1.6354,1.0031</FemaleNS>
+    <FemaleSM>2.8619,1.5679</FemaleSM>
+  </lsratesi>
+  <lsratesi id="70">
+    <MaleNS>3.1607,1.5449</MaleNS>
+    <MaleSM>5.5312,2.4494</MaleSM>
+    <FemaleNS>1.7719,1.1098</FemaleNS>
+    <FemaleSM>3.1009,1.7004</FemaleSM>
+  </lsratesi>
+  <lsratesi id="71">
+    <MaleNS>3.4591,1.7067</MaleNS>
+    <MaleSM>6.0535,2.6764</MaleSM>
+    <FemaleNS>1.9335,1.2252</FemaleNS>
+    <FemaleSM>3.3837,1.8407</FemaleSM>
+  </lsratesi>
+  <lsratesi id="72">
+    <MaleNS>3.7999,1.9186</MaleNS>
+    <MaleSM>6.5359,2.9129</MaleSM>
+    <FemaleNS>2.1323,1.3625</FemaleNS>
+    <FemaleSM>3.6676,2.0018</FemaleSM>
+  </lsratesi>
+  <lsratesi id="73">
+    <MaleNS>4.1911,2.1603</MaleNS>
+    <MaleSM>7.083,3.1588</MaleSM>
+    <FemaleNS>2.3779,1.5195</FemaleNS>
+    <FemaleSM>4.0187,2.1969</FemaleSM>
+  </lsratesi>
+  <lsratesi id="74">
+    <MaleNS>4.633,2.4412</MaleNS>
+    <MaleSM>7.6908,3.4141</MaleSM>
+    <FemaleNS>2.673,1.705</FemaleNS>
+    <FemaleSM>4.4372,2.4005</FemaleSM>
+  </lsratesi>
+  <lsratesi id="75">
+    <MaleNS>5.1177,2.7625</MaleNS>
+    <MaleSM>8.3418,3.6884</MaleSM>
+    <FemaleNS>3.013,1.92</FemaleNS>
+    <FemaleSM>4.9112,2.6126</FemaleSM>
+  </lsratesi>
+  <lsratesi id="76">
+    <MaleNS>5.6361,3.1253</MaleNS>
+    <MaleSM>9.0178,4.0856</MaleSM>
+    <FemaleNS>3.3913,2.1657</FemaleNS>
+    <FemaleSM>5.4262,2.8331</FemaleSM>
+  </lsratesi>
+  <lsratesi id="77">
+    <MaleNS>6.18,3.4992</MaleNS>
+    <MaleSM>9.7026,4.6532</MaleSM>
+    <FemaleNS>3.8018,2.435</FemaleNS>
+    <FemaleSM>5.9689,3.0762</FemaleSM>
+  </lsratesi>
+  <lsratesi id="78">
+    <MaleNS>6.7429,3.9096</MaleNS>
+    <MaleSM>10.3842,5.223</MaleSM>
+    <FemaleNS>4.2411,2.7417</FemaleNS>
+    <FemaleSM>6.5313,3.3385</FemaleSM>
+  </lsratesi>
+  <lsratesi id="79">
+    <MaleNS>7.3298,4.3568</MaleNS>
+    <MaleSM>11.0681,5.8428</MaleSM>
+    <FemaleNS>4.7153,3.0866</FemaleNS>
+    <FemaleSM>7.1202,3.7149</FemaleSM>
+  </lsratesi>
+  <lsratesi id="80">
+    <MaleNS>7.9594,4.753</MaleNS>
+    <MaleSM>11.7799,6.465</MaleSM>
+    <FemaleNS>5.2413,3.4704</FemaleNS>
+    <FemaleSM>7.7572,4.2415</FemaleSM>
+  </lsratesi>
+  <lsratesi id="81">
+    <MaleNS>8.6521,5.2743</MaleNS>
+    <MaleSM>12.5456,7.042</MaleSM>
+    <FemaleNS>5.8393,3.8935</FemaleNS>
+    <FemaleSM>8.467,4.7726</FemaleSM>
+  </lsratesi>
+  <lsratesi id="82">
+    <MaleNS>9.4287,5.8947</MaleNS>
+    <MaleSM>13.3887,7.6213</MaleSM>
+    <FemaleNS>6.5283,4.4052</FemaleNS>
+    <FemaleSM>9.2702,5.3878</FemaleSM>
+  </lsratesi>
+  <lsratesi id="83">
+    <MaleNS>10.3061,6.5726</MaleNS>
+    <MaleSM>14.3255,8.2028</MaleSM>
+    <FemaleNS>7.3238,4.8785</FemaleNS>
+    <FemaleSM>10.1801,6.0155</FemaleSM>
+  </lsratesi>
+  <lsratesi id="84">
+    <MaleNS>11.2794,7.3185</MaleNS>
+    <MaleSM>15.34,8.7867</MaleSM>
+    <FemaleNS>8.2251,5.4946</FemaleNS>
+    <FemaleSM>11.1861,6.6108</FemaleSM>
+  </lsratesi>
+  <lsratesi id="85">
+    <MaleNS>12.3268,8.1434</MaleNS>
+    <MaleSM>16.3947,9.3921</MaleSM>
+    <FemaleNS>9.219,6.1761</FemaleNS>
+    <FemaleSM>12.2613,7.2177</FemaleSM>
+  </lsratesi>
+  <lsratesi id="86">
+    <MaleNS>13.4258,9.0307</MaleNS>
+    <MaleSM>17.4535,10.1254</MaleSM>
+    <FemaleNS>10.2956,6.9255</FemaleNS>
+    <FemaleSM>13.3843,7.836</FemaleSM>
+  </lsratesi>
+  <lsratesi id="87">
+    <MaleNS>14.5598,10.0571</MaleNS>
+    <MaleSM>18.4909,11.2673</MaleSM>
+    <FemaleNS>11.4479,7.7088</FemaleNS>
+    <FemaleSM>14.5388,8.5272</FemaleSM>
+  </lsratesi>
+  <lsratesi id="88">
+    <MaleNS>15.7211,11.16</MaleNS>
+    <MaleSM>19.4941,12.4344</MaleSM>
+    <FemaleNS>12.6733,8.5748</FemaleNS>
+    <FemaleSM>15.7149,9.258</FemaleSM>
+  </lsratesi>
+  <lsratesi id="89">
+    <MaleNS>16.9086,12.3507</MaleNS>
+    <MaleSM>20.4594,13.7158</MaleSM>
+    <FemaleNS>13.9745,9.506</FemaleNS>
+    <FemaleSM>16.9091,10.1358</FemaleSM>
+  </lsratesi>
+  <lsratesi id="90">
+    <MaleNS>18.1306,13.6313</MaleNS>
+    <MaleSM>21.3941,15.0838</MaleSM>
+    <FemaleNS>15.361,10.5831</FemaleNS>
+    <FemaleSM>18.126,11.3936</FemaleSM>
+  </lsratesi>
+  <lsratesi id="91">
+    <MaleNS>19.4049,14.9842</MaleNS>
+    <MaleSM>22.3156,16.54</MaleSM>
+    <FemaleNS>16.8504,11.74</FemaleNS>
+    <FemaleSM>19.3779,12.7</FemaleSM>
+  </lsratesi>
+  <lsratesi id="92">
+    <MaleNS>20.7646,16.3442</MaleNS>
+    <MaleSM>23.2564,17.96</MaleSM>
+    <FemaleNS>18.4748,12.86</FemaleNS>
+    <FemaleSM>20.6918,13.91</FemaleSM>
+  </lsratesi>
+  <lsratesi id="93">
+    <MaleNS>22.2707,17.4974</MaleNS>
+    <MaleSM>24.2751,19.15</MaleSM>
+    <FemaleNS>20.2948,14.05</FemaleNS>
+    <FemaleSM>22.1214,15.19</FemaleSM>
+  </lsratesi>
+  <lsratesi id="94">
+    <MaleNS>24.077,19.2745</MaleNS>
+    <MaleSM>25.5217,21.01</MaleSM>
+    <FemaleNS>22.4435,15.29</FemaleNS>
+    <FemaleSM>23.7901,16.54</FemaleSM>
+  </lsratesi>
+  <lsratesi id="95">
+    <MaleNS>26.516,20.9857</MaleNS>
+    <MaleSM>27.3114,22.79</MaleSM>
+    <FemaleNS>25.223,16.61</FemaleNS>
+    <FemaleSM>25.9797,17.96</FemaleSM>
+  </lsratesi>
+  <lsratesi id="96">
+    <MaleNS>0,0</MaleNS>
+    <MaleSM>0,0</MaleSM>
+    <FemaleNS>0,0</FemaleNS>
+    <FemaleSM>0,0</FemaleSM>
+  </lsratesi>
+</lsratesi_data>

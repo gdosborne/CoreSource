@@ -1,0 +1,29 @@
+﻿<Window x:Class="DesktopClock.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:view="clr-namespace:DesktopClock"
+        Title="Settings" Height="300" MinWidth="500" SizeToContent="Width"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource PrimaryWindowStyle}">
+    <Window.Resources>
+        <view:SettingsWindowView x:Key="view" AddTopLevelSetting="SettingsWindowView_AddTopLevelSetting" ExecuteUIAction="SettingsWindowView_ExecuteUIAction" AddControlToEditor="SettingsWindowView_AddControlToEditor" PropertyChanged="SettingsWindowView_PropertyChanged" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" Margin="5" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TreeView Name="CategoryTreeView" Grid.Column="0" Margin="0,0,3,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" SelectedItemChanged="CategoryTreeView_SelectedItemChanged" />
+        <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right" />
+        <Border Grid.Column="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1">
+            <Grid Name="ItemsGrid" Margin="3" />
+        </Border>
+        <StackPanel Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Close" Command="{Binding CancelCommand}" IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

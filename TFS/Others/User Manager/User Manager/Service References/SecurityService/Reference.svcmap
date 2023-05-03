@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="88e25d67-073c-4ed0-923d-d22993d9a610" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:63112/RemoteSecurityService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RemoteSecurityService.xsd" MetadataType="Schema" ID="e9942768-1278-4b76-bac0-422a6a030de0" SourceId="1" SourceUrl="http://localhost:63112/RemoteSecurityService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RemoteSecurityService.wsdl" MetadataType="Wsdl" ID="cd42d15a-cea7-4ebe-993b-f1aafe02c701" SourceId="1" SourceUrl="http://localhost:63112/RemoteSecurityService.svc?wsdl" />
+    <MetadataFile FileName="RemoteSecurityService.disco" MetadataType="Disco" ID="97af7a13-7778-4c11-884e-2e8365b8c5da" SourceId="1" SourceUrl="http://localhost:63112/RemoteSecurityService.svc?disco" />
+    <MetadataFile FileName="RemoteSecurityService1.xsd" MetadataType="Schema" ID="d5d4acfa-d401-4d81-a48f-2ad8b976467f" SourceId="1" SourceUrl="http://localhost:63112/RemoteSecurityService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

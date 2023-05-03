@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46E344A4-5EF7-498A-84FD-CA037B43223C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>User_Manager</RootNamespace>
+    <AssemblyName>User Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>images\blueSecurity.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hammer.SpinningWheel">
+      <HintPath>..\..\..\..\Controls\Hammer.SpinningWheel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\..\Documents\Visual Studio 2013\Assemblies\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Client, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.TeamFoundation.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="microsoft.teamfoundation.controls, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.ExtensibilityHosting, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Security.3.2.3.0\lib\net45\Mono.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf">
+      <HintPath>..\..\..\..\..\Documents\Visual Studio 2013\Assemblies\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLCrypto, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCLCrypto.1.0.2.15130\lib\net40-Client\PCLCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Validation.2.0.6.15003\lib\portable-net40+sl50+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AboutWindowView.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserWindow.xaml.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserWindowView.cs">
+      <DependentUpon>AddUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ApplicationSettings.cs" />
+    <Compile Include="Classes\AuthorizationSelector.cs" />
+    <Compile Include="Classes\Converters\AuthorizationDescriptionConverter.cs" />
+    <Compile Include="Classes\Documents\UserPrintDocument.cs" />
+    <Compile Include="Classes\Events\ClipboardElementsEventArgs.cs" />
+    <Compile Include="Classes\Events\GetItemsToDeleteEventArgs.cs" />
+    <Compile Include="Classes\Exceptions\PermissionRootElementMissingException.cs" />
+    <Compile Include="Classes\PermissionItemSelector.cs" />
+    <Compile Include="Classes\SingleInstance.cs" />
+    <Compile Include="EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditUserWindowView.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditWebConfigWindow.xaml.cs">
+      <DependentUpon>EditWebConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditWebConfigWindowView.cs">
+      <DependentUpon>EditWebConfigWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsWindow.xaml.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OptionsWindowView.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SecurityService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="WebServiceWindow.xaml.cs">
+      <DependentUpon>WebServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WebServiceWindowView.cs">
+      <DependentUpon>WebServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zip\BaseCommand.cs" />
+    <Compile Include="Zip\GetFileFromZipCommand.cs" />
+    <Compile Include="Zip\InitializeZipCommand.cs" />
+    <Compile Include="Zip\IOptiRampInstallerCommand.cs" />
+    <Compile Include="Zip\ReadSncZipFileCommand.cs" />
+    <Compile Include="Zip\UnzipAllCommand.cs" />
+    <Compile Include="Zip\WriteSncZipFileCommand.cs" />
+    <Compile Include="Zip\ZipAllCommand.cs" />
+    <Compile Include="Zip\ZipCommand.cs" />
+    <Compile Include="Zip\ZipDirectoryCommand.cs" />
+    <Compile Include="Zip\ZipFileCommand.cs" />
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditWebConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Manager.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="styles\ContextMenuStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="styles\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WebServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindowView.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="images\UserManagerSplash.pdn" />
+    <None Include="images\WizModernImage.pdn" />
+    <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\SecurityService\RemoteSecurityService.wsdl" />
+    <None Include="Service References\SecurityService\RemoteSecurityService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SecurityService\RemoteSecurityService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\_Main\_Web\_Common\Application\Application\Application.csproj">
+      <Project>{577a2e28-1c3d-49e4-921e-0a63135b5b3f}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Source\Workspaces\Domaination\FormatCode\MVVMFramework\MVVMFramework.csproj">
+      <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
+      <Name>MVVMFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SNCAuthorization\SNCAuthorization.csproj">
+      <Project>{b38b08d6-a579-49d0-a883-a17bb5268bc6}</Project>
+      <Name>SNCAuthorization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SNCInstallation\SNCInstallation.csproj">
+      <Project>{2c6dcc06-581f-4040-a311-968ffd9640ba}</Project>
+      <Name>SNCInstallation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\openFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\closeFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\saveFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\saveas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\reddot1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\greendot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\blueSecurity.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\copy.png" />
+    <Resource Include="images\cut.png" />
+    <Resource Include="images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\web.png" />
+    <Resource Include="Output\Version.xml" />
+    <Resource Include="images\user1.png" />
+    <Resource Include="images\UserManagerSplash.png" />
+    <Resource Include="images\options.png" />
+    <Resource Include="images\closedFolder.png" />
+    <Resource Include="images\UserManagerWizard.png" />
+    <Resource Include="images\userx.png" />
+    <Resource Include="images\key1.png" />
+    <Resource Include="images\upload.png" />
+    <Resource Include="images\web_xml.png" />
+    <Resource Include="images\info.png" />
+    <None Include="Service References\SecurityService\RemoteSecurityService.disco" />
+    <None Include="Service References\SecurityService\configuration91.svcinfo" />
+    <None Include="Service References\SecurityService\configuration.svcinfo" />
+    <None Include="Service References\SecurityService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Resource Include="images\logs.png" />
+    <Content Include="setup.iss" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SecurityService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="C:\_Main\_X8\UpdateVersion\UpdateVersion.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+      if $(ConfigurationName) == Release (
+        C:\_Main\_X8\UpdateVersion\ORIC.exe -p="Y:\Projects\Official Release\Packages\$(ProjectName).orip" -d="Y:\Projects\Official Release\OptiRamp Application Packages\$(ProjectName)"
+       )
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

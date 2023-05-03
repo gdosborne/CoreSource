@@ -1,0 +1,261 @@
+﻿<Window x:Class="Life.Savings.PremiumCalculationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:rules="clr-namespace:Life.Savings.Rules"
+        xmlns:conv="clr-namespace:Life.Savings.Converters"
+        mc:Ignorable="d" Height="525" MaxHeight="545" MinHeight="545" 
+        Width="900" MinWidth="900" ResizeMode="CanResize" 
+        Title="{Binding WindowTitle}" Style="{DynamicResource MainWindowStyle}">
+    <Window.DataContext>
+        <local:PremiumCalculationWindowView PropertyChanged="PremiumCalculationWindowView_PropertyChanged" ShowMessage="PremiumCalculationWindowView_ShowMessage" SetCursor="PremiumCalculationWindowView_SetCursor" ShowIllustration="PremiumCalculationWindowView_ShowIllustration" />
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:CurrencyConverter x:Key="CurrencyConverter" />
+        <conv:CurrencyNAConverter x:Key="CurrencyNAConverter" />
+        <conv:IntegerConverter x:Key="IntegerConverter" />
+        <conv:PercentageConverter x:Key="PercentageConverter" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Content="Premium Mode" Grid.Column="0" VerticalAlignment="Center" />
+        <ComboBox Grid.Column="1" VerticalAlignment="Center" ItemsSource="{Binding PremModes}" SelectedItem="{Binding PremiumMode,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayedValue}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Years to Pay Premium (Default: To age 95)" Grid.Column="2" HorizontalAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <ComboBox Grid.Column="4" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" ItemsSource="{Binding YearsToPay}" SelectedItem="{Binding PremiumYearsToPay,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DisplayedValue}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Content="Planned Modal Premium" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBox Grid.Column="1"  Grid.Row="1" Width="100" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+            <TextBox.Text>
+                <Binding Path="PlannedModalPremium" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                    <Binding.ValidationRules>
+                        <rules:DecimalTextBoxValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Lump Sum Initial Premium Amount" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <TextBox Grid.Column="4" Grid.Row="1" Width="100" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+            <TextBox.Text>
+                <Binding Path="InitialLumpSumAmount" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                    <Binding.ValidationRules>
+                        <rules:DecimalTextBoxValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Header="Select or Exclude Illustrated Insured">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".25*" />
+                    <ColumnDefinition Width=".25*" />
+                    <ColumnDefinition Width=".25*" />
+                    <ColumnDefinition Width=".25*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <CheckBox Grid.Column="0" Grid.Row="0" Content="{Binding Insured[0].Name}" IsEnabled="{Binding Insured[0].IsEnabled}" IsChecked="{Binding Insured[0].IsSelected}" Visibility="{Binding Insured[0].Visibility}" />
+                <CheckBox Grid.Column="0" Grid.Row="1" Content="{Binding Insured[1].Name}" IsEnabled="{Binding Insured[1].IsEnabled}" IsChecked="{Binding Insured[1].IsSelected}" Visibility="{Binding Insured[1].Visibility}" />
+                <CheckBox Grid.Column="0" Grid.Row="2" Content="{Binding Insured[2].Name}" IsEnabled="{Binding Insured[2].IsEnabled}" IsChecked="{Binding Insured[2].IsSelected}" Visibility="{Binding Insured[2].Visibility}" />
+                <CheckBox Grid.Column="1" Grid.Row="0" Content="{Binding Insured[3].Name}" IsEnabled="{Binding Insured[3].IsEnabled}" IsChecked="{Binding Insured[3].IsSelected}" Visibility="{Binding Insured[3].Visibility}" />
+                <CheckBox Grid.Column="1" Grid.Row="1" Content="{Binding Insured[4].Name}" IsEnabled="{Binding Insured[4].IsEnabled}" IsChecked="{Binding Insured[4].IsSelected}" Visibility="{Binding Insured[4].Visibility}" />
+                <CheckBox Grid.Column="1" Grid.Row="2" Content="{Binding Insured[5].Name}" IsEnabled="{Binding Insured[5].IsEnabled}" IsChecked="{Binding Insured[5].IsSelected}" Visibility="{Binding Insured[5].Visibility}" />
+                <CheckBox Grid.Column="2" Grid.Row="0" Content="{Binding Insured[6].Name}" IsEnabled="{Binding Insured[6].IsEnabled}" IsChecked="{Binding Insured[6].IsSelected}" Visibility="{Binding Insured[6].Visibility}" />
+                <CheckBox Grid.Column="2" Grid.Row="1" Content="{Binding Insured[7].Name}" IsEnabled="{Binding Insured[7].IsEnabled}" IsChecked="{Binding Insured[7].IsSelected}" Visibility="{Binding Insured[7].Visibility}" />
+                <CheckBox Grid.Column="2" Grid.Row="2" Content="{Binding Insured[8].Name}" IsEnabled="{Binding Insured[8].IsEnabled}" IsChecked="{Binding Insured[8].IsSelected}" Visibility="{Binding Insured[8].Visibility}" />
+                <CheckBox Grid.Column="3" Grid.Row="0" Content="{Binding Insured[9].Name}" IsEnabled="{Binding Insured[9].IsEnabled}" IsChecked="{Binding Insured[9].IsSelected}" Visibility="{Binding Insured[9].Visibility}" />
+                <CheckBox Grid.Column="3" Grid.Row="1" Content="{Binding Insured[10].Name}" IsEnabled="{Binding Insured[10].IsEnabled}" IsChecked="{Binding Insured[10].IsSelected}" Visibility="{Binding Insured[10].Visibility}" />
+                <CheckBox Grid.Column="3" Grid.Row="2" Content="{Binding Insured[11].Name}" IsEnabled="{Binding Insured[11].IsEnabled}" IsChecked="{Binding Insured[11].IsSelected}" Visibility="{Binding Insured[11].Visibility}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="4" Header="Current Interest Rate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center">
+                    <TextBox Width="75" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="PremiumInterestRate" UpdateSourceTrigger="LostFocus" Mode="TwoWay"  Converter="{StaticResource PercentageConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:DecimalTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,2" BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" CornerRadius="3" BorderThickness="1">
+            <Grid Margin="0,3,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Using the premium figures and the current interest rate, the policy will:" Grid.Column="0" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Width="150" IsReadOnly="True" Text="{Binding InForceYears,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+            </Grid>
+        </Border>
+
+        <GroupBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Header="Calculated Premiums">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Minimum Modal Premium" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="Target Premium" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="Maximum Guidance Annual Premium (Principal Only)" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="---- Maximum Guideline Single Premium ----" TextWrapping="Wrap" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="(Principal Only)" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="(Including Spouse/Additional Insureds)" TextWrapping="Wrap" Grid.Row="1" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBox Grid.Row="2" Grid.Column="0" Width="100" IsReadOnly="True" Text="{Binding MinimumModalPremium,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+                <TextBox Grid.Row="2" Grid.Column="1" Width="100" IsReadOnly="True" Text="{Binding TargetPremium,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+                <TextBox Grid.Row="2" Grid.Column="2" Width="100" IsReadOnly="True" Text="{Binding MinGuidanceAnnualPremium,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+                <TextBox Grid.Row="2" Grid.Column="3" Width="100" IsReadOnly="True" Text="{Binding MinGuidanceSinglePremiumPrincipal,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyNAConverter}}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+                <TextBox Grid.Row="2" Grid.Column="4" Width="100" IsReadOnly="True" Text="{Binding MinGuidanceSinglePremiumAdditional,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyNAConverter}}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Header="Special Illustration Options">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="---- Solve For Modal Premium ----" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBlock Text="Cash Value" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBlock Text="At Age" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBlock Text="Modal Premium" TextWrapping="Wrap" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBox Grid.Row="2" Grid.Column="0" Width="100" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="SpecialOptionsCashValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:DecimalTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="2" Grid.Column="1" Width="50" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="SpecialOptionsAge" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="#,0"  Converter="{StaticResource IntegerConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:IntegerTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="2" Grid.Column="2" Width="100" IsReadOnly="True" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="SpecialOptionsModalPremium" UpdateSourceTrigger="PropertyChanged" Mode="OneWay" StringFormat="C" Converter="{StaticResource CurrencyNAConverter}" />
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        Enter Cash Value and At Age, then press <Bold>Calculate</Bold> to return the level Modal Value at the desired Age. 
+                        For an illustration, put the returned Modal Premium amount into Planned Modal Premium above and press 
+                        <Bold>Illustrate</Bold>.
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="---- Illustrate an Active Contract ----" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBlock Text="Begin at Age" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBlock Text="Attained Cash Value" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom" />
+                    <TextBox Grid.Row="2" Grid.Column="0" Width="50" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="IllustrateBeginAtAge" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="#,0" Converter="{StaticResource IntegerConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:IntegerTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Row="2" Grid.Column="1" Width="100" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="IllustrateInitialCashValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:DecimalTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock TextWrapping="Wrap" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        Enter Begin at Age and Attained Cash Value, the press <Bold>Illustrate</Bold> to create an illustration showing projected values from 
+                        that Attained (Begin) Age forward to lapse or endowment
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <StackPanel Grid.Row="3" Grid.Column="4" Grid.RowSpan="3">
+            <Button Content="Calculate" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding CalculateCommand}" />
+            <Button Content="Illustrate" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding IllustrateCommand}" />
+            <Button Content="Insured Riders" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding InsuredRidersCommand}" />
+            <Button Content="Future Changes" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding FutureChangesCommand}"/>
+            <Button Content="{Binding ReturnToText}" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding ReturnToClientCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

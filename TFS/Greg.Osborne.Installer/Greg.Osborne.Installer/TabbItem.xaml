@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Greg.Osborne.Installer.TabbItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Greg.Osborne.Installer"
+             mc:Ignorable="d" FontSize="14" PreviewMouseDown="UserControl_PreviewMouseDown"
+             d:DesignHeight="46.972" d:DesignWidth="227.591" Cursor="Hand">
+    <Grid Margin="0,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Header" Name="header" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,10" />
+        <Border Name="selectedBorder" Grid.Row="1" Background="Blue" Height="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="Collapsed" />
+    </Grid>
+</UserControl>

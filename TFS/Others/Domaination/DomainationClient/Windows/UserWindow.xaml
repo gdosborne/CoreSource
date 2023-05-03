@@ -1,0 +1,49 @@
+﻿<Window xmlns:DomainationControls="clr-namespace:DomainationControls;assembly=DomainationControls"  x:Class="DomainationClient.Windows.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="User Registration" Width="271"  WindowStartupLocation="CenterOwner" SizeToContent="Height"
+        ShowInTaskbar="False" ResizeMode="NoResize" Style="{DynamicResource DefaultWindow}"
+        FocusManager.FocusedElement="{Binding ElementName=TheUserName}">
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource OKCommand}" CanExecute="OKCanExecute" Executed="OKExecute" />
+        <CommandBinding Command="{StaticResource CancelCommand}" Executed="CancelExecute" />
+    </Window.CommandBindings>
+    <Grid Style="{DynamicResource LayoutGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <DomainationControls:TextBoxWithLabel Name="TheUserName" Label="Username/EMail:" LabelForeground="White" Grid.Row="0" />
+            <DomainationControls:TextBoxWithLabel Name="TheFirstName" Label="First Name:" LabelForeground="White" Grid.Row="1" />
+            <DomainationControls:TextBoxWithLabel Name="TheLastName" Label="Last Name:" LabelForeground="White" Grid.Row="2" />
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="White" Content="Password" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" />
+                <PasswordBox Name="ThePassword1" Grid.Column="1" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Foreground="White" Content="Retype Password" Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center" />
+                <PasswordBox Name="ThePassword2" Grid.Column="1" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="3" HorizontalAlignment="Right">
+            <Button Content="OK" IsDefault="True" Command="{StaticResource OKCommand}" />
+            <Button Content="Cancel" IsCancel="True" Command="{StaticResource CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

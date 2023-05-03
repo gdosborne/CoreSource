@@ -1,0 +1,114 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GregOsborne.Documater", "GregOsborne.Documater\GregOsborne.Documater.csproj", "{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ookii.Dialogs.Wpf", "..\..\..\Framework\OkiiDialogs\Ookii.Dialogs.Wpf.csproj", "{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GregOsborne.Documater.Library", "GregOsborne.Documater.Library\GregOsborne.Documater.Library.csproj", "{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Debug|x86.Build.0 = Debug|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|x64.Build.0 = Release|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{8964CC42-8B6D-4C3E-BA30-2ED29AAA62FF}.Release|x86.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x64.ActiveCfg = Debug|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x64.Build.0 = Debug|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x86.ActiveCfg = Debug|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x86.Build.0 = Debug|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x64.ActiveCfg = Release|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x64.Build.0 = Release|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x86.ActiveCfg = Release|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x86.Build.0 = Release|x86
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|x64.Build.0 = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Debug|x86.Build.0 = Debug|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|x64.ActiveCfg = Release|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|x64.Build.0 = Release|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{2BE664AF-26E0-4FA2-9EB7-FD2C0FB6B1DC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {801BBF7F-6BE2-4E62-9968-E6486B132AF6}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = GregOsborne.Documater\\GregOsborne.Documater.csproj
+		SccProjectName1 = GregOsborne.Documater
+		SccLocalPath1 = GregOsborne.Documater
+		SccProjectUniqueName2 = ..\\..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName2 = ../../../Framework/MVVMFramework
+		SccLocalPath2 = ..\\..\\..\\Framework\\MVVMFramework
+		SccProjectUniqueName3 = ..\\..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName3 = ../../../Framework/Application
+		SccLocalPath3 = ..\\..\\..\\Framework\\Application
+		SccProjectUniqueName4 = ..\\..\\..\\Framework\\OkiiDialogs\\Ookii.Dialogs.Wpf.csproj
+		SccProjectName4 = ../../../Framework/OkiiDialogs
+		SccLocalPath4 = ..\\..\\..\\Framework\\OkiiDialogs
+		SccProjectUniqueName5 = GregOsborne.Documater.Library\\GregOsborne.Documater.Library.csproj
+		SccProjectName5 = GregOsborne.Documater.Library
+		SccLocalPath5 = GregOsborne.Documater.Library
+	EndGlobalSection
+EndGlobal

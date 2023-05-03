@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BitmapImage x:Key="NewImage" UriSource="/InnoUI;component/Resources/Images/new.png" />
+    <BitmapImage x:Key="OpenImage" UriSource="/InnoUI;component/Resources/Images/openFile.png" />
+    <BitmapImage x:Key="CloseImage" UriSource="/InnoUI;component/Resources/Images/closeFile.png" />
+    <BitmapImage x:Key="SaveImage" UriSource="/InnoUI;component/Resources/Images/saveFile.png" />
+    <BitmapImage x:Key="SaveAsImage" UriSource="/InnoUI;component/Resources/Images/saveas.png" />
+
+    <Style x:Key="CanDisableImage" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SmallImage" TargetType="{x:Type Image}" BasedOn="{StaticResource CanDisableImage}">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+    <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+    <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
+</ResourceDictionary>

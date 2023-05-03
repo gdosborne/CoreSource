@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Update Version Help</title>
+    <style type="text/css">
+        body {
+            padding: 10px;
+            font-size: 10pt;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        td {
+            padding: 3px 8px 3px 3px;
+            vertical-align: top;
+        }
+
+        th {
+            text-align: left;
+            border-bottom: 1px solid black;
+        }
+
+        .title {
+            font-weight: bold;
+            font-size: 200%;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 5px;
+            background-color: #f1f1f1;
+            ;
+            box-shadow: 5px 5px #88888888;
+        }
+
+        .subtitle {
+            font-weight: bold;
+            font-size: 150%;
+            margin: 5px 0 5px 0;
+        }
+
+        .sectiontitle {
+            font-weight: bold;
+            font-size: 125%;
+            margin: 5px 0 5px 0;
+        }
+
+        .subsectiontitle {
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+        }
+
+        .dataarea {
+            margin: 5px 20px 5px 20px;
+        }
+
+        .importantnote {
+            color: #741212;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">UpdateVersionSharp Help</div>
+    <p>The UpdateVersionSharp Tool (UpdateVersion) provides an automatic, configurable way for a developer to manage the versions of their assemblies.</p>
+    <a href="https://blogs.msdn.microsoft.com/jjameson/2009/04/03/best-practices-for-net-assembly-versioning/">Versioning information</a>
+    <div class="subtitle">Command Line Parameters</div>
+    <div class="dataarea">
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>/e</td>
+                <td>Display Error Codes</td>
+            </tr>
+            <tr>
+                <td>/p</td>
+                <td>Project file name</td>
+            </tr>
+        </table>
+        <p>
+            Usage Example1: /p="test.csproj"<br />
+            Usage Example2: /p="$(ProjectName)"</br>
+
+    </div>
+    <hr />
+
+    <p>The available schema methods are defined below:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Day</td>
+            <td>Two-digit day value</td>
+        </tr>
+        <tr>
+            <td>DayValueFrom</td>
+            <td>Number of days from a specific parameter date</td>
+        </tr>
+        <tr>
+            <td>Ignore</td>
+            <td>Leaves value unchanged</td>
+        </tr>
+        <tr>
+            <td>Month</td>
+            <td>Two-digit current month value</td>
+        </tr>
+        <tr>
+            <td>Random</td>
+            <td>A random value</td>
+        </tr>
+        <tr>
+            <td>SecondValueFrom</td>
+            <td>Number of Seconds from a specific parameter date</td>
+        </tr>
+        <tr>
+            <td>Year</td>
+            <td>Four-digit current year value</td>
+        </tr>
+        <tr>
+            <td>TwoDigitYear</td>
+            <td>Two-digit current year value</td>
+        </tr>
+        <tr>
+            <td>Increment</td>
+            <td>Increments the current value by 1</td>
+        </tr>
+        <tr>
+            <td>IncrementEachDay</td>
+            <td>Increments the current value by 1 the first build of the day, afterwords leaves value unchanged</td>
+        </tr>
+        <tr>
+            <td>IncrementResetEachDay</td>
+            <td>Increments the current value by 1 and resets the value to zero the first build of the day</td>
+        </tr>
+    </table>   
+</body>
+</html>

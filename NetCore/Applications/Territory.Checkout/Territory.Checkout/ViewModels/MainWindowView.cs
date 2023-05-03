@@ -35,20 +35,32 @@
 			Persons = new ObservableCollection<PersonItem>(tempPersons.OrderBy(x => x.LastName).ThenBy(x => x.FirstName));
 
 			Checkouts = new ObservableCollection<CheckoutItem>(await CheckoutItem.GetAllAsync());
-			var tempNeedsWorked = new List<NeedsWorkedItem>();
-			Territories.ForEach(x => {
-				var coItems = Checkouts.Where(y => y.Territory.ID == x.ID);
-				var nw = NeedsWorkedItem.Create(x, coItems.ToList());
-				if (nw != null) tempNeedsWorked.Add(nw);
-			});
-			ItemsNeedingWorked = new ObservableCollection<NeedsWorkedItem>(tempNeedsWorked.OrderByDescending(x => x.NumberOfDays));
-			
+			NeedsWorkedRefresh();
+
 			Areas.ForEach(item => item.PropertyChanged += Item_PropertyChanged);
 			Territories.ForEach(item => item.PropertyChanged += Item_PropertyChanged);
 			Persons.ForEach(item => item.PropertyChanged += Item_PropertyChanged);
 			Checkouts.ForEach(item => item.PropertyChanged += Item_PropertyChanged);
 
-			IsTerritoryExpanded = true;
+			var startup = App.AppSettings.GetValue("Application", "Startup", "Territory");
+			IsAreaExpanded = startup == "Area";
+			IsTerritoryExpanded = startup == "Territory";
+			_IsPersonExpanded = startup == "Person";
+
+		}
+
+		public void NeedsWorkedRefresh() {
+			var tempNeedsWorked = new List<NeedsWorkedItem>();
+			if (ItemsNeedingWorked == null) {
+				ItemsNeedingWorked = new ObservableCollection<NeedsWorkedItem>();
+			}
+			ItemsNeedingWorked.Clear();
+			Territories.ForEach(x => {
+				var coItems = Checkouts.Where(y => y.Territory.ID == x.ID);
+				var nw = NeedsWorkedItem.Create(x, coItems.ToList());
+				if (nw != null) tempNeedsWorked.Add(nw);
+			});
+			ItemsNeedingWorked.AddRange(tempNeedsWorked.OrderByDescending(x => x.NumberOfDays));
 		}
 
 		private void Item_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
@@ -341,9 +353,11 @@
 			set {
 				_SelectedPersonItem = value;
 				PersonCheckoutItems.Clear();
-				var items = Checkouts.Where(x => x.Person.ID == SelectedPersonItem.ID).OrderByDescending(x => x.CheckedOut);
-				PersonCheckoutItems.AddRange(items);
-				InvokePropertyChanged();
+				if (SelectedPersonItem != null) {
+					var items = Checkouts.Where(x => x.Person.ID == SelectedPersonItem.ID).OrderByDescending(x => x.CheckedOut);
+					PersonCheckoutItems.AddRange(items);
+					InvokePropertyChanged();
+				}
 			}
 		}
 		#endregion

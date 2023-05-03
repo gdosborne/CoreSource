@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="SoundDesk.Controls.Songs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Name="LayoutRoot" Margin="5">
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="{DynamicResource BorderColor}" BorderThickness="0,2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Name="Song1Border" Grid.Row="0" Background="{StaticResource InActiveSongBackground}" VerticalAlignment="Center" PreviewMouseDown="SongBorder_PreviewMouseDown">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Name="Song1Controller" Grid.Column="0" Style="{StaticResource ControlImage}" IsEnabled="False" />
+                        <Label Name="Song1Sequence" Grid.Column="1" Content="1" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song1Number" Grid.Column="2" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song1Title" Grid.Column="3" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Image Name="Song1Deleter" Grid.Column="4" Style="{StaticResource RemoveImage}" IsEnabled="False" />
+                    </Grid>
+                </Border>
+                <Border Name="Song2Border" Grid.Row="1" Background="{StaticResource InActiveSongBackground}" VerticalAlignment="Center" PreviewMouseDown="SongBorder_PreviewMouseDown">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Name="Song2Controller" Grid.Column="0" Style="{StaticResource ControlImage}" IsEnabled="False" />
+                        <Label Name="Song2Sequence" Grid.Column="1" Content="2" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song2Number" Grid.Column="2" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song2Title" Grid.Column="3" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Image Name="Song2Deleter" Grid.Column="4" Style="{StaticResource RemoveImage}" IsEnabled="False" />
+                    </Grid>
+                </Border>
+                <Border Name="Song3Border" Grid.Row="2" Background="{StaticResource InActiveSongBackground}" VerticalAlignment="Center" PreviewMouseDown="SongBorder_PreviewMouseDown">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Name="Song3Controller" Grid.Column="0" Style="{StaticResource ControlImage}" IsEnabled="False" />
+                        <Label Name="Song3Sequence" Grid.Column="1" Content="3" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song3Number" Grid.Column="2" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Label Name="Song3Title" Grid.Column="3" Style="{StaticResource ControlLabel}" IsEnabled="False" />
+                        <Image Name="Song3Deleter" Grid.Column="4" Style="{StaticResource RemoveImage}" IsEnabled="False" />
+                    </Grid>
+                </Border>
+
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

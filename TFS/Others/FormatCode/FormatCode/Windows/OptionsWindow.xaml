@@ -1,0 +1,146 @@
+﻿<Window x:Class="FormatCode.Windows.OptionsWindow"
+        xmlns:win="clr-namespace:FormatCode.Windows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Format Options" Height="400" Width="600" 
+        WindowStartupLocation="CenterOwner" WindowStyle="None" 
+        ShowInTaskbar="False" ResizeMode="NoResize" Background="Transparent"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <win:OptionsWindowView x:Key="View" PropertyChanged="OptionsWindowView_PropertyChanged" CloseRequest="OptionsWindowView_CloseRequest" />
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="2.5" />
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
+            <Setter Property="CornerRadius" Value="3,3,0,0" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,2" />
+        </Style>
+    </Window.Resources>
+    <Border Background="White" BorderBrush="Black" BorderThickness="1" Padding="1,0">
+        <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource View}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Height="24" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Grid.Row="0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <TextBlock Text="Formatting Options" VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontWeight="Bold" />
+            </Border>
+            <TabControl Grid.Row="1">
+                <TabItem Header="Preformat">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CheckBox Content="Remove HTML comments" Grid.Row="0" Grid.Column="0" IsChecked="{Binding RemoveHTMLComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Remove comments" Grid.Row="0" Grid.Column="1" IsChecked="{Binding RemoveComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Remove blank lines" Grid.Row="1" Grid.Column="0" IsChecked="{Binding RemoveBlankLines,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Remove regions" Grid.Row="1" Grid.Column="1" IsChecked="{Binding RemoveRegions,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Format">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CheckBox Content="Group items of same scope" Grid.Row="0" Grid.Column="0" IsChecked="{Binding GroupItemsOfSameScope,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Alphabetize items of same scope" Grid.Row="0" Grid.Column="1" IsChecked="{Binding AlphabetizeItemsOfSameScope,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Create selected region even if no members" Grid.Row="1" Grid.Column="0" IsChecked="{Binding CreateRegionsEvenIfNoItems,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Alphabetize usings" Grid.Row="1" Grid.Column="1" IsChecked="{Binding AlphabetizeUsings,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Regions">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+                            <TextBlock Text="Private" FontWeight="Bold" TextAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+                        </Border>
+                        <CheckBox Content="Usings" Grid.Row="1" Grid.Column="0" IsChecked="{Binding PrivateUsingRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Classes" Grid.Row="1" Grid.Column="1" IsChecked="{Binding PrivateClassRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Structures" Grid.Row="1" Grid.Column="2" IsChecked="{Binding PrivateStructRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Enumerations" Grid.Row="1" Grid.Column="3" IsChecked="{Binding PrivateEnumRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Delegates" Grid.Row="2" Grid.Column="0" IsChecked="{Binding PrivateDelegateRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Fields" Grid.Row="2" Grid.Column="1" IsChecked="{Binding PrivateFieldRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Properties" Grid.Row="2" Grid.Column="2" IsChecked="{Binding PrivatePropertyRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Methods" Grid.Row="2" Grid.Column="3" IsChecked="{Binding PrivateMethodRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
+                            <TextBlock Text="Internal" FontWeight="Bold" TextAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+                        </Border>
+                        <CheckBox Content="Classes" Grid.Row="4" Grid.Column="0" IsChecked="{Binding InternalClassRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Structures" Grid.Row="4" Grid.Column="1" IsChecked="{Binding InternalStructRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Enumerations" Grid.Row="4" Grid.Column="2" IsChecked="{Binding InternalEnumRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Delegates" Grid.Row="4" Grid.Column="3" IsChecked="{Binding InternalDelegateRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Fields" Grid.Row="5" Grid.Column="0" IsChecked="{Binding InternalFieldRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Properties" Grid.Row="5" Grid.Column="1" IsChecked="{Binding InternalPropertyRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Methods" Grid.Row="5" Grid.Column="2" IsChecked="{Binding InternalMethodRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Events" Grid.Row="5" Grid.Column="3" IsChecked="{Binding InternalEventRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                        <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4">
+                            <TextBlock Text="Protected" FontWeight="Bold" TextAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+                        </Border>
+                        <CheckBox Content="Classes" Grid.Row="7" Grid.Column="0" IsChecked="{Binding ProtectedClassRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Structures" Grid.Row="7" Grid.Column="1" IsChecked="{Binding ProtectedStructRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Enumerations" Grid.Row="7" Grid.Column="2" IsChecked="{Binding ProtectedEnumRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Delegates" Grid.Row="7" Grid.Column="3" IsChecked="{Binding ProtectedDelegateRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Fields" Grid.Row="8" Grid.Column="0" IsChecked="{Binding ProtectedFieldRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Properties" Grid.Row="8" Grid.Column="1" IsChecked="{Binding ProtectedPropertyRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Methods" Grid.Row="8" Grid.Column="2" IsChecked="{Binding ProtectedMethodRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Events" Grid.Row="8" Grid.Column="3" IsChecked="{Binding ProtectedEventRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                        <Border Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4">
+                            <TextBlock Text="Public" FontWeight="Bold" TextAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
+                        </Border>
+                        <CheckBox Content="Classes" Grid.Row="10" Grid.Column="0" IsChecked="{Binding PublicClassRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Structures" Grid.Row="10" Grid.Column="1" IsChecked="{Binding PublicStructRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Enumerations" Grid.Row="10" Grid.Column="2" IsChecked="{Binding PublicEnumRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Delegates" Grid.Row="10" Grid.Column="3" IsChecked="{Binding PublicDelegateRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Fields" Grid.Row="11" Grid.Column="0" IsChecked="{Binding PublicFieldRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Properties" Grid.Row="11" Grid.Column="1" IsChecked="{Binding PublicPropertyRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Methods" Grid.Row="11" Grid.Column="2" IsChecked="{Binding PublicMethodRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <CheckBox Content="Events" Grid.Row="11" Grid.Column="3" IsChecked="{Binding PublicEventRegion,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
+                <Button Style="{StaticResource StandardButton}" Command="{Binding OKCommand}" Content="OK" />
+                <Button Style="{StaticResource StandardButton}" Command="{Binding CancelCommand}" Content="Cancel" Margin="5,0,0,0" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

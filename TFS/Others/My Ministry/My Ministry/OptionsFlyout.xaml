@@ -1,0 +1,60 @@
+﻿<SettingsFlyout
+    x:Class="MyMinistry.OptionsFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyMinistry"
+    xmlns:viewModel="using:MyMinistry.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+    IconSource="Assets/SmallLogo.png"
+    Title="My Ministry Options" Width="431.155">
+	<SettingsFlyout.DataContext>
+		<viewModel:OptionsFlyoutView />
+	</SettingsFlyout.DataContext>
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<!-- Section 1 header -->
+			<TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Personal Information" Grid.Row="0" />
+
+			<!-- Section 1 body -->
+			<Grid Grid.Row="1" Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="First Name" Grid.Row="0" Grid.Column="0" />
+				<TextBox Text="{Binding FirstName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,10" />
+
+				<TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Last Name" Grid.Row="1" Grid.Column="0" />
+				<TextBox Text="{Binding LastName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,10" />
+
+				<TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Assignment" Grid.Row="2" Grid.Column="0" />
+				<ComboBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,10" ItemsSource="{Binding Assignments}" SelectedItem="{Binding Assignment,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+				<TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Data Load" Grid.Row="3" Grid.Column="0" />
+				<ComboBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,10" ItemsSource="{Binding DataLocations}" SelectedItem="{Binding DataLocation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+			</Grid>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+				<Button Content="Save" Width="75" Command="{Binding SaveCommand}" />
+				<Button Content="Cancel" Width="75" Command="{Binding CancelCommand}" />
+			</StackPanel>
+		</Grid>
+	</ScrollViewer>
+</SettingsFlyout>

@@ -48,13 +48,12 @@
 		}
 		#endregion
 
-		private static int daysSmallestNeedWorked = 180;
 		internal static NeedsWorkedItem Create(TerritoryItem territory, List<CheckoutItem> checkOuts) {
 			var lastCheckout = checkOuts.OrderByDescending(x => x.CheckedOut).FirstOrDefault();
 			if (!checkOuts.Any() || (lastCheckout != null && lastCheckout.CheckedIn.HasValue)) {
 				var days = !checkOuts.Any() ? int.MaxValue : DateTime.Now.Subtract(lastCheckout.CheckedIn.Value).Days;
 				days = days < 1 ? 0 : days;
-				if (days > daysSmallestNeedWorked) {
+				if (days > App.NumberOfDaysNeedsWorked) {
 					return new NeedsWorkedItem {
 						Territory = territory,
 						LastWorked = lastCheckout == null ? null : lastCheckout.CheckedIn.Value,

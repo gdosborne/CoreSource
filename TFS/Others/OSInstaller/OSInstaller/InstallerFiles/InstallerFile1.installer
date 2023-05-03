@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<installation fileversion="1.0">
+  <data variabletrigger="$" allowsilentinstall="true">
+    <add name="FileName" value="C:\Users\Greg\Source\Workspaces\Domaination\OSInstaller\OSInstaller\InstallerFiles\InstallerFile1.installer" mustvalidate="false" />
+    <add name="ZipFileName" value="C:\Users\Greg\Source\Workspaces\Domaination\OSInstaller\OSInstaller\InstallerFiles\InstallerFile1.zip" mustvalidate="false" />
+    <add name="CompanyName" value="Fictitious, Inc." mustvalidate="false" />
+    <add name="ApplicationName" value="My Cool Program Testing" mustvalidate="false" />
+    <add name="InstallationTitle" value="$ApplicationName$ Installer" mustvalidate="false" />
+    <add name="InstallationDir" value="$ProgramFilesX86$\$CompanyName$\$ApplicationName$" mustvalidate="true" />
+    <add name="CancelInstallTitle" value="Exit Installation" mustvalidate="false" />
+    <add name="CancelInstallMessage" value="Exit installation wizard?" mustvalidate="false" />
+    <add name="CancelInstallAdditionalMessage" value="The $ApplicationName$ application will not be installed if you exit the application installation wizard." mustvalidate="false" />
+    <add name="Testing" value="Testing 123" mustvalidate="true" />
+    <add name="SomeTest" value="Now is the time for $CompanyName$ to explode" mustvalidate="true" />
+    <add name="SomeOtherItem" value="SomeOtherTest $InstallationTitle$" mustvalidate="true" />
+  </data>
+  <properties>
+    <add name="TitleBackground" type="Color" value="#FF5B7AA3" />
+    <add name="TitleForeground" type="Color" value="#FFE3E3E3" />
+    <add name="WindowBackground" type="Color" value="#FFC0C0C0" />
+    <add name="WindowText" type="Color" value="#FF043269" />
+    <add name="AreaSeparator" type="Color" value="#FFF0F8FF" />
+    <add name="ImagePath" type="String" value="62A73D9B-DC28-4E81-8FE4-C09B0F3EBD3E" />
+  </properties>
+  <steps>
+    <add sequence="0" id="StartStep" type="OSInstallerBasicSteps.StartStep" installstep="False">
+      <data>
+        <add name="Header" value="Welcome to the $InstallationTitle$ Wizard" />
+        <add name="Paragraph1" value="This wizard will guide you through the process of installing the $ApplicationName$ application on your machine." />
+        <add name="Paragraph2" value="To start installation, click the Next Button." />
+      </data>
+    </add>
+    <add sequence="1" id="AskInstallDirStep" type="OSInstallerBasicSteps.AskInstallDirStep" installstep="False">
+      <data>
+        <add name="Header" value="Select the installation directory" />
+        <add name="InstallationDirectoryPrompt" value="Installation directory" />
+      </data>
+    </add>
+    <add sequence="2" id="InformationCollectedStep" type="OSInstallerBasicSteps.InformationCollectedStep" installstep="False">
+      <data>
+        <add name="Header" value="Data collection complete" />
+        <add name="Paragraph1" value="You have collected enough information to install this application. Verify the information below." />
+      </data>
+    </add>
+    <add sequence="3" id="InstallingStep" type="OSInstallerBasicSteps.InstallingStep" installstep="True">
+      <data>
+        <add name="Header" value="Installing..." />
+      </data>
+    </add>
+    <add sequence="4" id="RevertStep" type="OSInstallerBasicSteps.RevertStep" installstep="False">
+      <data>
+        <add name="Header" value="Installation failure" />
+        <add name="Paragraph1" value="The $ApplicationName$ application has failed to install properly. Click the next button to revert the application to the previous version." />
+      </data>
+    </add>
+    <add sequence="5" id="CompleteStep" type="OSInstallerBasicSteps.CompleteStep" installstep="False">
+      <data>
+        <add name="Header" value="Installation complete" />
+        <add name="Paragraph1" value="The $ApplicationName$ application has been installed on your machine." />
+      </data>
+    </add>
+  </steps>
+  <preprocessingitems>
+    <add id="62A73D9B-DC28-4E81-8FE4-C09B0F3EBD3E" originalpath="C:\Users\Greg\Pictures\Intaller.png" type="File" includesubfolders="False" />
+  </preprocessingitems>
+  <items>
+    <add id="04008181-DF36-4909-A07D-125525AF76E0" originalpath="C:\Local for installations\OptiRamp\Manual\ClientAccessPolicy.xml" type="File" includesubfolders="False" />
+    <add id="915A8217-AE55-4E87-89B1-8F05710F9C39" originalpath="C:\Local for installations\OptiRamp\Manual\Global.asax" type="File" includesubfolders="False" />
+    <add id="7537D4C9-F058-499F-9318-D9A2475321DA" originalpath="C:\Local for installations\OptiRamp\Manual\Index.aspx" type="File" includesubfolders="False" />
+    <add id="FF14E3F7-6FDD-465E-AC7B-709266D21E1B" originalpath="C:\Local for installations\OptiRamp\Manual\NotificationServer.aspx" type="File" includesubfolders="False" />
+    <add id="45131409-59DC-445D-84F9-CCABED9235C3" originalpath="C:\Local for installations\OptiRamp\Manual\NotificationService.svc" type="File" includesubfolders="False" />
+    <add id="005D289B-5A3C-4003-B76A-F5DE49012F1D" originalpath="C:\Local for installations\OptiRamp\Manual\OptiRampDataService.svc" type="File" includesubfolders="False" />
+    <add id="A7896236-2F4A-4252-AA22-8BDC454A6CD8" originalpath="C:\Local for installations\OptiRamp\Manual\packages.config" type="File" includesubfolders="False" />
+    <add id="237D0B8D-57F3-4316-95B0-BE655C2DC7B7" originalpath="C:\Local for installations\OptiRamp\Manual\RemoteProjectService.svc" type="File" includesubfolders="False" />
+    <add id="F733E5A9-9CEF-4017-8E10-E4A9EFF6C754" originalpath="C:\Local for installations\OptiRamp\Manual\RemoteSecurityService.svc" type="File" includesubfolders="False" />
+    <add id="09042A65-D574-4918-8477-BFE0DFB0FC22" originalpath="C:\Local for installations\OptiRamp\Manual\ReportingServer.aspx" type="File" includesubfolders="False" />
+    <add id="07C570FB-63FC-4F1F-8243-35EBF3A33790" originalpath="C:\Local for installations\OptiRamp\Manual\ReportService.svc" type="File" includesubfolders="False" />
+    <add id="2686F93D-165B-4591-ABB2-8F94D9E4BA48" originalpath="C:\Local for installations\OptiRamp\Manual\Silverlight.js" type="File" includesubfolders="False" />
+    <add id="4B5BADEB-E999-4FEC-AFB5-265121ADF1E2" originalpath="C:\Local for installations\OptiRamp\Manual\UpdateService.svc" type="File" includesubfolders="False" />
+    <add id="E6E3CDD0-EB50-4675-96C8-1E029F21B7AE" originalpath="C:\Local for installations\OptiRamp\Manual\Version2DataSubmittalService.asmx" type="File" includesubfolders="False" />
+    <add id="2F818A37-3D02-4E86-B0BD-EF740CD3A8FB" originalpath="C:\Local for installations\OptiRamp\Manual\Version2MessageService.asmx" type="File" includesubfolders="False" />
+    <add id="3AF39244-7765-4115-BE77-7E4B54A5190E" originalpath="C:\Local for installations\OptiRamp\Manual\VirtualTagServerConfig.aspx" type="File" includesubfolders="False" />
+    <add id="A9B2226D-E1A3-4179-BE74-86434974D705" originalpath="C:\Local for installations\OptiRamp\Manual\VTSTrending.aspx" type="File" includesubfolders="False" />
+    <add id="001A2B3A-3FF0-495E-95DC-76E794FEE38A" originalpath="C:\Local for installations\OptiRamp\Manual\Web.config" type="File" includesubfolders="False" />
+    <add id="45257F40-6DF2-48D0-9EBF-42CE810DC67B" originalpath="C:\Local for installations\OptiRamp\Manual\WebAnalytics.aspx" type="File" includesubfolders="False" />
+    <add id="89298f67-02da-45bf-9867-6ddf2de87018" originalpath="C:\Local for installations\OptiRamp\Manual\bin" type="Folder" includesubfolders="True" />
+    <add id="e494c4bb-b35d-4b5f-88c1-ed4d056ab57f" originalpath="C:\Local for installations\OptiRamp\Manual\ClientBin" type="Folder" includesubfolders="True" />
+    <add id="46bab499-6995-410c-9a17-4102b6b7bda7" originalpath="C:\Local for installations\OptiRamp\Manual\Config" type="Folder" includesubfolders="True" />
+    <add id="48ae836b-e8ad-4e5f-ac6e-7b31f45906fe" originalpath="C:\Local for installations\OptiRamp\Manual\Images" type="Folder" includesubfolders="True" />
+    <add id="9f5aa299-be65-469b-bd1d-a9ca79e0bece" originalpath="C:\Local for installations\OptiRamp\Manual\logs" type="Folder" includesubfolders="True" />
+    <add id="e45173b3-e9a1-4a39-a935-0c0b8a85b991" originalpath="C:\Local for installations\OptiRamp\Manual\Projects" type="Folder" includesubfolders="True" />
+    <add id="c01d69ea-509d-4886-a669-c44074300c37" originalpath="C:\Local for installations\OptiRamp\Manual\Service" type="Folder" includesubfolders="True" />
+    <add id="2890f236-7913-4890-ae14-25682c49d7b7" originalpath="C:\Local for installations\OptiRamp\Manual\Trending" type="Folder" includesubfolders="True" />
+  </items>
+  <commands>
+    <add sequence="0" type="OSInstallerCommands.IO.CreateOutputDirectoryCommand" message="Creating installation directory">
+      <parameters>
+        <add name="outputdirectory" value="$InstallationDir$" />
+      </parameters>
+    </add>
+  </commands>
+</installation>

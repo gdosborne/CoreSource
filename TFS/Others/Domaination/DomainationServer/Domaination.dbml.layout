@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 8.5" name="Domaination">
+  <DataContextMoniker Name="/DomainationDataContext" />
+  <nestedChildShapes>
+    <classShape Id="df5b5fda-f5b6-4ade-b318-3a07ca56ca82" absoluteBounds="6.25, 1, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/DomainationDataContext/DomDomain" />
+      <nestedChildShapes>
+        <elementListCompartment Id="387fcefc-db06-402f-9e6a-4b0efb053cd9" absoluteBounds="6.265, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6d7dea8b-3334-4087-8019-740d34893061" absoluteBounds="9, 1, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/DomainationDataContext/DomFolder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fb0b6f33-6cce-41eb-9e59-7302d31ff7b0" absoluteBounds="9.015, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5d99616b-623f-4d59-bf8f-2a54ce739a18" absoluteBounds="0.75, 2, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/DomainationDataContext/DomUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b08c59a-5a3b-40e8-9854-4dea4305ed25" absoluteBounds="0.765, 2.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f485691f-f786-4742-b360-c73b2f2841b6" absoluteBounds="3.5, 1, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/DomainationDataContext/DomInstance" />
+      <nestedChildShapes>
+        <elementListCompartment Id="05d406bd-6a6a-460d-9a7f-5eea4aff12dc" absoluteBounds="3.515, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e313c936-71f7-49f2-b840-2a2bf1d1bd74" absoluteBounds="3.5, 3.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DomainationDataContext/DomNotification" />
+      <nestedChildShapes>
+        <elementListCompartment Id="be464cd8-342f-4aac-bb50-74f3be7c890c" absoluteBounds="3.515, 3.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 1.69314697265625); (9 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DomainationDataContext/DomDomain/DomDomain_DomFolder" />
+      <nodes>
+        <classShapeMoniker Id="df5b5fda-f5b6-4ade-b318-3a07ca56ca82" />
+        <classShapeMoniker Id="6d7dea8b-3334-4087-8019-740d34893061" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 1.69314697265625); (6.25 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DomainationDataContext/DomInstance/DomInstance_DomDomain" />
+      <nodes>
+        <classShapeMoniker Id="f485691f-f786-4742-b360-c73b2f2841b6" />
+        <classShapeMoniker Id="df5b5fda-f5b6-4ade-b318-3a07ca56ca82" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.19314697265625); (3.5 : 2.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DomainationDataContext/DomUser/DomUser_DomInstance" />
+      <nodes>
+        <classShapeMoniker Id="5d99616b-623f-4d59-bf8f-2a54ce739a18" />
+        <classShapeMoniker Id="f485691f-f786-4742-b360-c73b2f2841b6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.54409912109375); (3.5 : 3.54409912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DomainationDataContext/DomUser/DomUser_DomNotification" />
+      <nodes>
+        <classShapeMoniker Id="5d99616b-623f-4d59-bf8f-2a54ce739a18" />
+        <classShapeMoniker Id="e313c936-71f7-49f2-b840-2a2bf1d1bd74" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.27204956054688); (3.5 : 3.27204956054688)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DomainationDataContext/DomUser/DomUser_DomNotification1" />
+      <nodes>
+        <classShapeMoniker Id="5d99616b-623f-4d59-bf8f-2a54ce739a18" />
+        <classShapeMoniker Id="e313c936-71f7-49f2-b840-2a2bf1d1bd74" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

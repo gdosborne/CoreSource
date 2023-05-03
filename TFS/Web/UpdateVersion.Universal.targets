@@ -1,0 +1,13 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <TestFile Include='$(UpdateVerDir)\UpdateVersionSharp.exe' />    
+  </ItemGroup>
+  <PropertyGroup>
+    <UpdateVerDir>'C:\Program Files\UpdateVersion'</UpdateVerDir>
+    <UpdateVersionExe>'@(TestFile)'</UpdateVersionExe>
+    <UpdateVersionFile>'$(ProjectPath).updateversion'</UpdateVersionFile>
+  </PropertyGroup>
+  <Target Name="UpdateVersion" BeforeTargets="BeforeCompile" Condition="Exists(@(TestFile))">
+    <Exec Command="'$(UpdateVersionExe)' -z='$(ProjectPath)' -s=increment_daily_universal" />
+  </Target>
+</Project>

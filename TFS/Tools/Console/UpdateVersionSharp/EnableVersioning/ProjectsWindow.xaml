@@ -1,0 +1,87 @@
+﻿<Window x:Class="EnableVersioning.ProjectsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EnableVersioning"
+        mc:Ignorable="d"
+        Title="Projects" MinHeight="300" Height="450" MinWidth="520" Width="520">
+    <Window.DataContext>
+        <local:SchemaWindowview />
+    </Window.DataContext>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="0,0,0,10">
+            Use this dialog to assign schemas and manage your projects. Use the 
+            <TextBlock Text="&#xEC26;" Style="{DynamicResource buttonTextBlock}" Margin="0,3,0,0" /> button to add a new 
+            project, the <TextBlock Text="&#xE16F;" Style="{DynamicResource buttonTextBlock}" Margin="0,3,0,0" /> button to 
+            duplicate a project with a new name, and the 
+            <TextBlock Text="&#xE107;" Style="{DynamicResource buttonTextBlock}" Margin="0,3,0,0" /> button to remove a project. 
+            Once you have made your changes, use the 
+            <TextBlock Text="&#xE105;" Style="{DynamicResource buttonTextBlock}" Margin="0,3,0,0" /> button to save your work.
+        </TextBlock>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
+            <Button Command="{Binding ExitAppCommand}" ToolTip="Add new schema" Style="{DynamicResource smallButton}" Margin="0,0,3,3">
+                <TextBlock Text="&#xEC26;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+            <Button Command="{Binding ExitAppCommand}" ToolTip="Duplicate schema" Style="{DynamicResource smallButton}" Margin="0,0,3,3">
+                <TextBlock Text="&#xE16F;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+            <Button Command="{Binding RemoveCommand}" ToolTip="Delete schema" Style="{DynamicResource smallButton}" Margin="0,0,3,3">
+                <TextBlock Text="&#xE107;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+            <Button Command="{Binding SaveCommand}" ToolTip="Edit schema" Style="{DynamicResource smallButton}" Margin="0,0,3,3">
+                <TextBlock Text="&#xE105;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="0,10,0,5">
+            <Hyperlink><Run Text="Name" /> <Run Text="&#xE74A;" FontFamily="Segoe MDL2 Assets" /></Hyperlink>
+        </TextBlock>
+
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,20,5">
+            <Hyperlink><Run Text="Schema" /> <Run Text="&#xE74A;" FontFamily="Segoe MDL2 Assets" /></Hyperlink>
+        </TextBlock>
+
+        <ListBox Grid.Row="3" Grid.Column="0" ItemsSource="{Binding Projects}" SelectedItem="{Binding SelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,0,5,0">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <!--<Style.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="IsSelected" Value="True" />
+                        </Trigger>
+                    </Style.Triggers>-->
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid PreviewMouseDown="Grid_PreviewMouseDown">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="nameTextBox" Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="0" Style="{DynamicResource listBoxTextBox}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
+
+                        <ComboBox Grid.Column="1" Style="{DynamicResource standardComboBox}" ItemsSource="{Binding Schemas}" SelectedItem="{Binding SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

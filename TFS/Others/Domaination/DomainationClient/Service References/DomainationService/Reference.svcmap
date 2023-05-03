@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="849a556f-4705-417f-9d0f-66cc97a1170a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:50273/DomainationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DomainationService.xsd" MetadataType="Schema" ID="79364f7d-b498-4116-a086-45783f61bbf3" SourceId="1" SourceUrl="http://localhost:50273/DomainationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DomainationService.wsdl" MetadataType="Wsdl" ID="584b223b-b15b-451d-a5aa-17a3500cf1aa" SourceId="1" SourceUrl="http://localhost:50273/DomainationService.svc?wsdl" />
+    <MetadataFile FileName="DomainationService1.xsd" MetadataType="Schema" ID="3511dcea-fa60-4bbf-9a1f-b21a08541627" SourceId="1" SourceUrl="http://localhost:50273/DomainationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DomainationService2.xsd" MetadataType="Schema" ID="e4ea2edd-83a4-4d90-8333-b18ed203b279" SourceId="1" SourceUrl="http://localhost:50273/DomainationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DomainationService.disco" MetadataType="Disco" ID="c05e7b4e-d243-454a-8e8e-6fbb80b689ad" SourceId="1" SourceUrl="http://localhost:50273/DomainationService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

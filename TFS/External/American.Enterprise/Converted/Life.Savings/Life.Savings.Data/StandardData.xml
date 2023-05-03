@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <text_value id="-1" value="None" />
+  <text_value id="-2" value="No" />
+  <text_value id="-3" value="Yes" />
+  <text_value id="-4" value="Year" />
+  <text_value id="-5" value="Age" />
+  <text_value id="-6" value="Level Death Benefit" />
+  <text_value id="-7" value="Increasing Death Benefit" />
+  <text_value id="-8" value="Non-Smoker" />
+  <text_value id="-9" value="Smoker" />
+  <text_value id="-10" value="Monthly (APP)" />
+  <text_value id="-11" value="Quarterly" />
+  <text_value id="-12" value="Semiannual" />
+  <text_value id="-13" value="Annual" />
+  <text_value id="-14" value="20 years" />
+  <text_value id="-15" value="To Age 65" />
+  <text_value id="-16" value="To Age 95" />
+
+  <years_to_pay id="0" value="-14" />
+  <years_to_pay id="1" value="-15" />
+  <years_to_pay id="2" value="-16" />
+
+  <premium_mode id="0" value="-10" />
+  <premium_mode id="1" value="-11" />
+  <premium_mode id="2" value="-12" />
+  <premium_mode id="3" value="-13" />
+
+  <client_plan id="0" value="-8" />
+  <client_plan id="1" value="-9" />
+
+  <client_option id="0" value="-6" />
+  <client_option id="1" value="-7" />
+
+  <client_rider_option id="0" value="-4" />
+  <client_rider_option id="1" value="-5" />
+
+  <client_wpd id="0" value="-2" />
+  <client_wpd id="1" value="-3" />
+
+  <client_gpo id="0" value="-1" />
+  <client_gpo id="1" value="5000" />
+  <client_gpo id="2" value="6000" />
+  <client_gpo id="3" value="7000" />
+  <client_gpo id="4" value="8000" />
+  <client_gpo id="5" value="9000" />
+  <client_gpo id="6" value="10000" />
+  <client_gpo id="7" value="11000" />
+  <client_gpo id="8" value="12000" />
+  <client_gpo id="9" value="13000" />
+  <client_gpo id="10" value="14000" />
+  <client_gpo id="11" value="15000" />
+  <client_gpo id="12" value="16000" />
+  <client_gpo id="13" value="17000" />
+  <client_gpo id="14" value="18000" />
+  <client_gpo id="15" value="19000" />
+  <client_gpo id="16" value="20000" />
+  <client_gpo id="17" value="21000" />
+  <client_gpo id="18" value="22000" />
+  <client_gpo id="19" value="23000" />
+  <client_gpo id="20" value="24000" />
+  <client_gpo id="21" value="25000" />
+
+  <client_cola id="0" value="-1" />
+  <client_cola id="1" value=".01" />
+  <client_cola id="2" value=".02" />
+  <client_cola id="3" value=".03" />
+  <client_cola id="4" value=".04" />
+  <client_cola id="5" value=".05" />
+  <client_cola id="6" value=".06" />
+  <client_cola id="7" value=".07" />
+  <client_cola id="8" value=".08" />
+  <client_cola id="9" value=".09" />
+  <client_cola id="10" value=".1" />
+
+  <substandard_table_rating id="0" value="-1" />
+  <substandard_table_rating id="1" value="1.25" />
+  <substandard_table_rating id="2" value="1.50" />
+  <substandard_table_rating id="3" value="1.75" />
+  <substandard_table_rating id="4" value="2.00" />
+  <substandard_table_rating id="5" value="2.25" />
+  <substandard_table_rating id="6" value="2.50" />
+  <substandard_table_rating id="7" value="2.75" />
+  <substandard_table_rating id="8" value="3.00" />
+  <substandard_table_rating id="9" value="3.25" />
+  <substandard_table_rating id="10" value="3.50" />
+  <substandard_table_rating id="11" value="3.75" />
+  <substandard_table_rating id="12" value="4.00" />
+  <substandard_table_rating id="13" value="4.25" />
+  <substandard_table_rating id="14" value="4.50" />
+  <substandard_table_rating id="15" value="4.75" />
+  <substandard_table_rating id="16" value="5.00" />
+
+</data>

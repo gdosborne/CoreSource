@@ -1,0 +1,35 @@
+﻿<Window x:Class="MoMoney.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:MoMoney.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoMoney"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="Settings" Height="282.102" Width="450">
+    <Window.Resources>
+        <v:SettingsWindowView x:Key="view" PropertyChanged="SettingsWindowView_PropertyChanged" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Margin="5">
+            <TabItem Header="Application">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <CheckBox IsChecked="{Binding OpenLastMMFFile,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Content="Open last used MMF file on start" />
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+            <Button Content="OK" Margin="0,0,5,0" Command="{Binding OKCommand}" />
+            <Button Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,156 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace FormatCode.Classes
+{
+	public static class Enumerations
+	{
+		public enum ScopeTypes
+		{
+			None,
+			Public,
+			Protected,
+			Internal,
+			Private
+		}
+		[Flags]
+		public enum OptionFlags : long
+		{
+			None = 0,
+			RemoveHTMLComments = 1,
+			RemoveComments = RemoveHTMLComments * 2,
+			RemoveBlankLines = RemoveComments * 2,
+			RemoveRegions = RemoveBlankLines * 2,
+			GroupItemsOfSameScope = RemoveRegions * 2,
+			AlphabetizeItemsOfSameScope = GroupItemsOfSameScope * 2,
+			AlphabetizeUsings = AlphabetizeItemsOfSameScope * 2,
+			CreateRegionsEvenIfNoItems = AlphabetizeUsings * 2,
+
+			PrivateUsingRegion = CreateRegionsEvenIfNoItems * 2,
+			PrivateClassRegion = PrivateUsingRegion * 2,
+			PrivateStructRegion = PrivateClassRegion * 2,
+			PrivateEnumRegion = PrivateStructRegion * 2,
+			PrivateDelegateRegion = PrivateEnumRegion * 2,
+			PrivateFieldRegion = PrivateDelegateRegion * 2,
+			PrivatePropertyRegion = PrivateFieldRegion * 2,
+			PrivateMethodRegion = PrivatePropertyRegion * 2,
+
+			InternalClassRegion = PrivateMethodRegion * 2,
+			InternalStructRegion = InternalClassRegion * 2,
+			InternalEnumRegion = InternalStructRegion * 2,
+			InternalDelegateRegion = InternalEnumRegion * 2,
+			InternalFieldRegion = InternalDelegateRegion * 2,
+			InternalPropertyRegion = InternalFieldRegion * 2,
+			InternalMethodRegion = InternalPropertyRegion * 2,
+			InternalEventRegion = InternalMethodRegion * 2,
+
+			ProtectedClassRegion = InternalEventRegion * 2,
+			ProtectedStructRegion = ProtectedClassRegion * 2,
+			ProtectedEnumRegion = ProtectedStructRegion * 2,
+			ProtectedDelegateRegion = ProtectedEnumRegion * 2,
+			ProtectedFieldRegion = ProtectedDelegateRegion * 2,
+			ProtectedPropertyRegion = ProtectedFieldRegion * 2,
+			ProtectedMethodRegion = ProtectedPropertyRegion * 2,
+			ProtectedEventRegion = ProtectedMethodRegion * 2,
+
+			PublicClassRegion = ProtectedEventRegion * 2,
+			PublicStructRegion = PublicClassRegion * 2,
+			PublicEnumRegion = PublicStructRegion * 2,
+			PublicDelegateRegion = PublicEnumRegion * 2,
+			PublicFieldRegion = PublicDelegateRegion * 2,
+			PublicPropertyRegion = PublicFieldRegion * 2,
+			PublicMethodRegion = PublicPropertyRegion * 2,
+			PublicEventRegion = PublicMethodRegion * 2,
+		}
+
+		public static readonly Brush NormalText = new SolidColorBrush(Colors.Black);
+		public static readonly Brush CommentText = new SolidColorBrush(Colors.Green);
+		public static readonly Brush KeywordText = new SolidColorBrush(Colors.Blue);
+		public static readonly Brush RegionText = new SolidColorBrush(Color.FromArgb(150, 0, 0, 0));
+
+		public static List<string> CSharpKeywords = new List<string>
+		{
+			"abstract" , 
+			"as" , 
+			"base", 
+			"bool",
+			"break" ,
+			"byte" ,
+			"case" ,
+			"catch" ,
+			"char" ,
+			"checked", 
+			"class", 
+			"const",
+			"continue", 
+			"decimal",  
+			"default",  
+			"delegate",  
+			"do",  
+			"double",  
+			"else",  
+			"enum",  
+			"event",  
+			"explicit",  
+			"extern",  
+			"false",  
+			"finally",  
+			"fixed",  
+			"float",  
+			"for",  
+			"foreach",  
+			"goto",  
+			"if",  
+			"implicit", 
+			"in", 
+			"int",  
+			"interface",  
+			"internal",  
+			"is",  
+			"lock",  
+			"long",  
+			"namespace",  
+			"new",  
+			"null",  
+			"object",  
+			"operator",  
+			"out",  
+			"override", 
+			"params",  
+			"private",  
+			"protected",  
+			"public",  
+			"readonly",  
+			"ref",  
+			"return",  
+			"sbyte",  
+			"sealed",  
+			"short",  
+			"sizeof",  
+			"stackalloc",  
+			"static",  
+			"string",  
+			"struct",  
+			"switch",  
+			"this",  
+			"throw",  
+			"true",  
+			"try",  
+			"typeof",  
+			"uint",  
+			"ulong",  
+			"unchecked",  
+			"unsafe",  
+			"ushort",  
+			"using",  
+			"virtual",  
+			"void",  
+			"volatile",  
+			"while",  
+		};
+	}
+}

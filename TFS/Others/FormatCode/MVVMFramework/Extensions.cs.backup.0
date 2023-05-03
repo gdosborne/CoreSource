@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using Application.Windows;
+
+namespace MVVMFramework
+{
+	public static class Extensions
+	{
+		/// <summary>
+		/// Gets the view.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="root">The root.</param>
+		/// <returns>T.</returns>
+		public static T GetView<T>(this FrameworkElement root)
+		{
+			if (Window.GetWindow(root).IsInDesignMode())
+				return default(T);
+			return (T)root.DataContext;
+		}
+
+	}
+}

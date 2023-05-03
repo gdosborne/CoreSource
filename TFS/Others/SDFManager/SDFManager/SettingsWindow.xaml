@@ -1,0 +1,60 @@
+﻿<Window x:Class="SDFManager.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:app="clr-namespace:SDFManager"
+        xmlns:s="clr-namespace:SDFManager.Settings"
+        Style="{DynamicResource BaseWindow}"
+        Title="Settings" Height="350" Width="550" 
+        Loaded="Window_Loaded" Closing="Window_Closing"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <app:SettingsWindowView x:Key="view" />
+        <HierarchicalDataTemplate DataType="{x:Type s:CategoryItem}" ItemsSource="{Binding Categories}">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="16" Height="16" Margin="5,0,0,0" Source="Resources/Images/folder.png" />
+                <TextBlock Text="{Binding Name}" Margin="5,2" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.InputBindings>
+            <KeyBinding Key="S" Modifiers="Control" Command="{Binding SearchCommand}" />
+        </Grid.InputBindings>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="203" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Margin="0,0,3,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Margin="3" Background="White" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Search Options (Ctrl+S)" VerticalAlignment="Center" Grid.Column="0" Margin="6,3,3,3" Opacity=".5" Visibility="{Binding SearchTipVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                    <TextBox Name="SearchBox" BorderThickness="0" Margin="3" Grid.Column="0" Background="Transparent" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <Image Source="Resources/Images/search.png" Grid.Column="1" Width="12" Height="12" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <TreeView Grid.Row="1" Margin="3,0" ItemsSource="{Binding Categories}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" SelectedItemChanged="TreeView_SelectedItemChanged" />
+        </Grid>
+        <GridSplitter Width="3" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Background="{DynamicResource Visual.Theme.Window.Background}" />
+        <Border Padding="5,0" Name="SettingsBorder" Grid.Column="1" />
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Content="OK" Grid.Column="0" Style="{DynamicResource StandardButton}" IsDefault="False" Command="{Binding OKCommand}" />
+            <Button Content="Cancel" Grid.Column="1" Style="{DynamicResource StandardButton}" IsCancel="True" Command="{Binding CancelCommand}" />
+        </Grid>
+    </Grid>
+</Window>

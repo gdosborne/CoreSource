@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Genders>
+  <Gender>
+    <Id>1</Id>
+    <Name>Male</Name>
+    <Abbreviation>M</Abbreviation>
+  </Gender>
+  <Gender>
+    <Id>2</Id>
+    <Name>Female</Name>
+    <Abbreviation>F</Abbreviation>
+  </Gender>
+  <Gender>
+    <Id>3</Id>
+    <Name>Unspecified</Name>
+    <Abbreviation>U</Abbreviation>
+  </Gender>
+</Genders>

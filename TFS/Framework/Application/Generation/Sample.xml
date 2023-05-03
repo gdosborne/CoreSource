@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<enumerations ResultantAssemblyName="" ResultantDirectory="">
+  <enumeration EnumBaseType="System.Int32" EnumName="HistoryEventTypes" TableName="HistoryEventType" IdFieldName="HistoryEventTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaAkaTypes" TableName="AamvaAkaType" IdFieldName="AamvaAkaTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaBatchStatusTypes" TableName="AamvaBatchStatusType" IdFieldName="AamvaBatchStatusTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AAMVABatchSetStatuss" TableName="AAMVABatchSetStatus" IdFieldName="AAMVABatchSetStatusID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AAMVADocumentTypeCodes" TableName="AAMVADocumentTypeCode" IdFieldName="AAMVADocumentTypeCodeID" NameFieldName="Description" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AAMVADueProcessStatuss" TableName="AAMVADueProcessStatus" IdFieldName="AAMVADueProcessStatusID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AAMVADurationDateTypes" TableName="AAMVADurationDateType" IdFieldName="AAMVADurationDateTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaErrorCallLists" TableName="AamvaErrorCallList" IdFieldName="AamvaErrorCallListID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaErrorMessages" TableName="AamvaErrorMessage" IdFieldName="AamvaErrorMessageID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaMessageContextTypes" TableName="AamvaMessageContextType" IdFieldName="AamvaMessageContextTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AAMVAMessageTypes" TableName="AAMVAMessageType" IdFieldName="AAMVAMessageTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaPointerDispositionTypes" TableName="AamvaPointerDispositionType" IdFieldName="AamvaPointerDispositionTypeID" NameFieldName="LookupValue" />
+  <enumeration EnumBaseType="System.Int32" EnumName="AamvaPointerDispositionTypes" TableName="AamvaPointerDispositionType" IdFieldName="AamvaPointerDispositionTypeID" NameFieldName="LookupValue" />
+  
+</enumerations>

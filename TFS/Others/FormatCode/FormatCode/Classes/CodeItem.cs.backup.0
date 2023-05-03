@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormatCode.Classes
+{
+	public class CodeItem
+	{
+		public enum ItemTypes
+		{
+			Using
+		}
+		public ItemTypes ItemType { get; set; }
+		public string Text { get; set; }
+	}
+}

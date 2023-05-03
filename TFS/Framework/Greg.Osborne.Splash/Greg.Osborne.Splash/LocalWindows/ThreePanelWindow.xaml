@@ -1,0 +1,36 @@
+﻿<Window x:Class="Greg.Osborne.Splash.LocalWindows.ThreePanelWindow"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Greg.Osborne.Splash.LocalWindows"
+        PreviewMouseDown="Border_PreviewMouseDown" WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" AllowsTransparency="True" Background="Transparent"
+        Title="LeisureTimeWindow" Height="342" Width="608.923" WindowStyle="None"
+        ShowInTaskbar="False">
+    <Window.DataContext>
+        <local:ThreePanelWindowView />
+    </Window.DataContext>
+    <Border Background="White" CornerRadius="{Binding CornerRadius,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" BorderBrush="Black" BorderThickness="1.5">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MinWidth="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="LightCyan">
+                <Image Source="../Assets/ThreePanel/Installer-LargeImage.bmp" Visibility="Visible" />
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0">
+
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
+
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

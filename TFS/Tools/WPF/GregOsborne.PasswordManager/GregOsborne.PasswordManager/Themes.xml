@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<themes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com themes.xsd">
+  <theme name="Default">
+    <visualelement type="solidcolorbrush" name="ActiveCaptionBrush" value="#FF515151" />
+    <visualelement type="solidcolorbrush" name="WindowBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="ActiveCaptionTextBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="BorderBrush" value="#FF191970" />
+    <visualelement type="solidcolorbrush" name="WindowTextBrush" value="#FF000000" />
+    <visualelement type="double" name="FontSize" value="14.0" />
+  </theme>
+  <theme name="Blue">
+    <visualelement type="solidcolorbrush" name="ActiveCaptionBrush" value="#FF5151FF" />
+    <visualelement type="solidcolorbrush" name="WindowBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="ActiveCaptionTextBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="BorderBrush" value="#FF191970" />
+    <visualelement type="solidcolorbrush" name="WindowTextBrush" value="#FF000000" />
+    <visualelement type="double" name="FontSize" value="14.0" />
+  </theme>
+  <theme name="Orange">
+    <visualelement type="solidcolorbrush" name="ActiveCaptionBrush" value="#FFC98000" />
+    <visualelement type="solidcolorbrush" name="WindowBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="ActiveCaptionTextBrush" value="#FFF0F8FF" />
+    <visualelement type="solidcolorbrush" name="BorderBrush" value="#FF191970" />
+    <visualelement type="solidcolorbrush" name="WindowTextBrush" value="#FF000000" />
+    <visualelement type="double" name="FontSize" value="14.0" />
+  </theme>
+</themes>

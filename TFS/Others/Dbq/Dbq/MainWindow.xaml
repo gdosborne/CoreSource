@@ -1,0 +1,151 @@
+﻿<Window x:Class="Dbq.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dbq"
+        xmlns:views="clr-namespace:Dbq.Views"
+        mc:Ignorable="d"
+        Title="Database Querier" Height="350" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <views:MainWindowView />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NewCommand}" Modifiers="Ctrl" Key="N" />
+        <KeyBinding Command="{Binding OpenCommand}" Modifiers="Ctrl" Key="O" />
+        <KeyBinding Command="{Binding SaveCommand}" Modifiers="Ctrl" Key="S" />
+        <KeyBinding Command="{Binding RedoCommand}" Modifiers="Ctrl" Key="R" />
+        <KeyBinding Command="{Binding UndoCommand}" Modifiers="Ctrl" Key="U" />
+        <KeyBinding Command="{Binding CutCommand}" Modifiers="Ctrl" Key="X" />
+        <KeyBinding Command="{Binding CopyCommand}" Modifiers="Ctrl" Key="C" />
+        <KeyBinding Command="{Binding PasteCommand}" Modifiers="Ctrl" Key="V" />
+    </Window.InputBindings>
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition />
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Menu Grid.Row="0">
+			<MenuItem Header="_File">
+				<MenuItem Header="_New" Command="{Binding NewCommand}" InputGestureText="Ctrl-N">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE160;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+                <MenuItem Header="_Open" Command="{Binding OpenCommand}" InputGestureText="Ctrl-O">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE19C;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}" InputGestureText="Ctrl-S">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE105;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Header="Save _as..." Command="{Binding SaveAsCommand}">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE28F;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+				<Separator />
+                <MenuItem Header="_Print" Command="{Binding PrintCommand}" InputGestureText="Ctrl-P">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE2F6;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+				<Separator />
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}">
+					
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding UndoCommand}" InputGestureText="Ctrl-U">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE7A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+                <MenuItem Header="_Redo" Command="{Binding RedoCommand}" InputGestureText="Ctrl-R">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE7A6;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+				<Separator />
+                <MenuItem Header="_Cut" Command="{Binding CutCommand}" InputGestureText="Ctrl-X">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE16B;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+                <MenuItem Header="C_opy" Command="{Binding CopyCommand}" InputGestureText="Ctrl-C">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE16F;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+                <MenuItem Header="_Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl-V">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE16D;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+				<Separator />
+				<MenuItem Header="_Settings..." Command="{Binding SettingsCommand}">
+					<MenuItem.Icon>
+                        <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                    </MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Tools">
+				
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About" Command="{Binding HelpAboutCommand}">
+					
+				</MenuItem>
+			</MenuItem>
+		</Menu>
+		<ToolBarTray Grid.Row="1" Background="Transparent">
+			<ToolBar Background="Transparent">
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding NewCommand}" ToolTip="New query">
+                    <TextBlock Text="&#xE160;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                </Button>
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding OpenCommand}" ToolTip="Open query">
+                    <TextBlock Text="&#xE19C;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                </Button>
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding SaveCommand}" ToolTip="Save query">
+                    <TextBlock Text="&#xE105;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                </Button>
+				<Separator />
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding UndoCommand}" ToolTip="Undo last change">
+                    <TextBlock Text="&#xE7A7;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                </Button>
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding RedoCommand}" ToolTip="Redo last undo">
+                    <TextBlock Text="&#xE7A6;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                </Button>
+				<Separator />
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding CutCommand}" ToolTip="Cut selected text">
+					<Image Source="images/small/cut.png" Style="{StaticResource CanDisableImage}" />
+				</Button>
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding CopyCommand}" ToolTip="Copy selected text">
+					<Image Source="images/small/copy.png" Style="{StaticResource CanDisableImage}" />
+				</Button>
+				<Button Style="{StaticResource toolBarButton}" Command="{Binding PasteCommand}" ToolTip="Paste text from clipboard">
+					<Image Source="images/small/paste1.png" Style="{StaticResource CanDisableImage}" />
+				</Button>
+			</ToolBar>
+		</ToolBarTray>
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" MinWidth="200" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<TreeView Grid.Column="0" Margin="0,0,3,0" MinWidth="197" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+			<GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="3" VerticalAlignment="Stretch" />
+			<TextBox Grid.Column="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+		</Grid>
+		<StatusBar Grid.Row="3">
+			<StatusBarItem>
+				<TextBlock Text="Filename goes here" />
+			</StatusBarItem>
+		</StatusBar>
+    </Grid>
+</Window>

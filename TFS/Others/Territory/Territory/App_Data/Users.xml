@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<users>
+  <user id="1" roleid="1" congregationid="1">
+    <email>greg@gdosborne.com</email>
+    <firstname>Greg</firstname>
+    <lastname>Osborne</lastname>
+    <password>Ozzy0118@</password>
+  </user>
+</users>

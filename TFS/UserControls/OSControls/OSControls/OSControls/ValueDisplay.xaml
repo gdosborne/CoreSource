@@ -1,0 +1,29 @@
+﻿<UserControl xmlns:OSControls="clr-namespace:OSControls"  x:Class="OSControls.ValueDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="35" d:DesignWidth="300"
+             SizeChanged="UserControl_SizeChanged">
+    <Grid>
+        <Grid Name="HorizontalGrid" Visibility="Visible">
+            <Grid Name="HValueGrid">
+                <Line Name="HLineMarker" X1="0" X2="0" Y1="0" Y2="{Binding ElementName=HorizontalGrid,Path=ActualHeight}" StrokeThickness="1" Stroke="Red" Visibility="Collapsed" />
+                <Rectangle Name="HRectangleMarker" Fill="Red" Visibility="Visible" HorizontalAlignment="Left" />
+                <Rectangle Name="HRectangleGlass" HorizontalAlignment="Left" Visibility="Visible">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#99FFFFFF" Offset="0"/>
+                            <GradientStop Color="#19FFFFFF" Offset="0.498"/>
+                            <GradientStop Offset="1" Color="#99000000"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+            <Grid Name="HGrid" />
+        </Grid>
+        <Grid Name="VerticalGrid" Visibility="Collapsed">
+            
+        </Grid>
+    </Grid>
+</UserControl>

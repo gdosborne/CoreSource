@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DEC99279-960F-471D-91AE-D4B636307536}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OSInstallerExtensibility</RootNamespace>
+    <AssemblyName>OSInstallerExtensibility</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Data\InstallerExtension.cs" />
+    <Compile Include="Classes\Data\InstallerItem.cs" />
+    <Compile Include="Classes\Data\InstallerProperty.cs" />
+    <Compile Include="Classes\Data\InstallerData.cs" />
+    <Compile Include="Classes\Data\InstallerStep.cs" />
+    <Compile Include="Classes\Extensions.cs" />
+    <Compile Include="Classes\Install\InstallWorker.cs" />
+    <Compile Include="Classes\Managers\Manager.cs" />
+    <Compile Include="Events\InstallCompleteEventArgs.cs" />
+    <Compile Include="Events\InstallerCommandExecutingEventArgs.cs" />
+    <Compile Include="Events\StepChangedEventArgs.cs" />
+    <Compile Include="Interfaces\IInstallerComplete.cs" />
+    <Compile Include="Interfaces\IInstallerExtension.cs" />
+    <Compile Include="Interfaces\IInstallerData.cs" />
+    <Compile Include="Interfaces\IInstallerItem.cs" />
+    <Compile Include="Interfaces\IInstallerProperty.cs" />
+    <Compile Include="Interfaces\IInstallerPropertyBase.cs" />
+    <Compile Include="Interfaces\IInstallerManager.cs" />
+    <Compile Include="Interfaces\IInstallerRevertStep.cs" />
+    <Compile Include="Interfaces\IInstallerSettingsController.cs" />
+    <Compile Include="Interfaces\IInstallerWizardStep.cs" />
+    <Compile Include="Interfaces\IInstallerView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Application\Application\Application.csproj">
+      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MVVMFramework\MVVMFramework.csproj">
+      <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
+      <Name>MVVMFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSInstallerCommands\OSInstallerCommands.csproj">
+      <Project>{39d6e490-effc-4850-a8e9-505b9b32c3a0}</Project>
+      <Name>OSInstallerCommands</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="C:\Users\Greg\Source\Workspaces\Domaination\UpdateVer\UpdateVersionSharp\UpdateVersion.targets" />
+</Project>

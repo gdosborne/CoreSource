@@ -94,7 +94,8 @@
 					CornerRadius="0,5,5,0">
 				<TextBlock ToolTip="Show Application Settings" Margin="5,5,0,5" HorizontalAlignment="Left">
 					<Hyperlink TextDecorations="None" Command="{Binding ShowSettingsCommand}">
-						<Run Text="" FontFamily="Segoe Fluent Icons" BaselineAlignment="Center" />
+						<Run Text="" FontFamily="Segoe Fluent Icons" BaselineAlignment="Center"
+							  FontSize="{DynamicResource GlyphFontSize}"/>
 						<Run Text=" Application Settings" BaselineAlignment="Center" />
 					</Hyperlink>
 				</TextBlock>
@@ -117,11 +118,11 @@
 
 					<ToolBar Name="areaToolbar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Add" 
-								Command="{Binding AddAreaCommand}" />
+								Command="{Binding AddAreaCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Remove" 
-								Command="{Binding RemoveAreaCommand}" />
+								Command="{Binding RemoveAreaCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Update" 
-								Command="{Binding UpdateAreaCommand}" />
+								Command="{Binding UpdateAreaCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 					</ToolBar>
 
 					<Label Content="Name" Grid.Row="1" Grid.Column="0"
@@ -154,19 +155,21 @@
 
 					<ToolBar Name="territoryToolbar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Add" 
-								Command="{Binding AddTerritoryCommand}" />
+								Command="{Binding AddTerritoryCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Remove" 
-								Command="{Binding RemoveTerritoryCommand}" />
+								Command="{Binding RemoveTerritoryCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Update" 
-								Command="{Binding UpdateTerritoryCommand}" />
+								Command="{Binding UpdateTerritoryCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Separator />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Check out territory" 
-								Command="{Binding ShowCheckout1Command}" CommandParameter="territory" />
+								Command="{Binding ShowCheckout1Command}" CommandParameter="territory"
+								 FontSize="{DynamicResource GlyphFontSize}"/>
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Check in territory" 
-								Command="{Binding CheckInCommand}" />
+								Command="{Binding CheckInCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Separator />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Territory Reports" 
-								Command="{Binding ReportCommand}" CommandParameter="territory" />
+								Command="{Binding ReportCommand}" CommandParameter="territory"
+								 FontSize="{DynamicResource GlyphFontSize}"/>
 					</ToolBar>
 
 					<Label Name="lblNumber" Content="Number" Grid.Row="1" Grid.Column="0"
@@ -228,11 +231,11 @@
 
 					<ToolBar Name="personToolbar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Add" 
-								Command="{Binding AddPersonCommand}" />
+								Command="{Binding AddPersonCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Remove" 
-								Command="{Binding RemovePersonCommand}" />
+								Command="{Binding RemovePersonCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Update" 
-								Command="{Binding UpdatePersonCommand}" />
+								Command="{Binding UpdatePersonCommand}" FontSize="{DynamicResource GlyphFontSize}" />
 						<Separator />
 						<Button FontFamily="Segoe Fluent Icons" Content="" ToolTip="Check out territory" 
 								Command="{Binding ShowCheckoutCommand}" CommandParameter="Person" />

@@ -1,0 +1,163 @@
+﻿<Window xmlns:Controls="clr-namespace:KHS4.Controls"  x:Class="KHS4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kingdom Hall Sound" Height="650" Width="1000" WindowStyle="None" 
+		WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+		Background="Transparent" FontFamily="Calibri" Loaded="Window_Loaded">
+    <Window.Resources>
+        <RoutedUICommand x:Key="MusicFolderCommand" />
+        <RoutedUICommand x:Key="RecordFolderCommand" />
+        <RoutedUICommand x:Key="StopPlayingCommand" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource MusicFolderCommand}" Executed="MusicFolderExecuted" />
+        <CommandBinding Command="{StaticResource RecordFolderCommand}" Executed="RecordFolderExecuted" />
+        <CommandBinding Command="{StaticResource StopPlayingCommand}" Executed="StopPlayingExecuted" CanExecute="StopPlayingCanExecute" />
+    </Window.CommandBindings>
+    <Grid Margin="15">
+        <Border Background="LightGray" CornerRadius="8,8,2,2">
+            <Border.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="15" Color="#FFA0950A" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="8,8,2,2" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="{DynamicResource TitleBarBackground}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Kingdom Hall Sound" Grid.Column="0" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                        <Border Grid.Column="1" Width="30" Height="16" BorderBrush="#90D3D3D3" CornerRadius="3" Margin="0,5,10,5" BorderThickness="1" MouseLeftButtonDown="Border_MouseLeftButtonDown_1" Style="{StaticResource CloseButtonStyle}" />
+                    </Grid>
+                </Border>
+                <TabControl Grid.Row="1" Margin="10" FontSize="18">
+                    <TabItem Header="Playback">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ListBox Name="SongsListBox" Grid.Column="0" Grid.Row="0"  PreviewMouseLeftButtonDown="SongsListBox_PreviewMouseLeftButtonDown">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="60" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Sequence, StringFormat=000}" />
+                                            <TextBlock Grid.Column="1" Text="{Binding Title}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <ProgressBar Name="PlayProgressBar" Grid.Row="1" Grid.Column="0" Height="20" VerticalAlignment="Center" Margin="10" MouseLeftButtonDown="PlayProgressBar_MouseLeftButtonDown"/>
+                            <TextBlock Name="RemainingTextBlock" Grid.Column="1" Grid.Row="1" Text="00:00" VerticalAlignment="Center" TextAlignment="Center" Margin="10"/>
+                            <StackPanel Grid.Column="1" Grid.Row="0">
+                                <Border Name="Song1Border" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10" AllowDrop="True" Drop="Song1Border_Drop" MouseEnter="SongBorder_MouseEnter" MouseLeave="SongBorder_MouseLeave" MouseLeftButtonDown="Song1Border_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Image Name="Song1Image" Width="64" Height="64" Margin="10" Opacity=".25" Source="Images/Record.png" />
+                                        <TextBlock Name="Song1TextBlock" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="AntiqueWhite" />
+                                        <Image Name="Song1ClearImage" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,3,3" Source="Images/delete.png" Visibility="Collapsed" Cursor="Hand" MouseLeftButtonDown="Song1ClearImage_MouseLeftButtonDown"/>
+                                    </Grid>
+                                </Border>
+                                <Border Name="Song2Border" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10" AllowDrop="True" Drop="Song2Border_Drop" MouseEnter="SongBorder_MouseEnter" MouseLeave="SongBorder_MouseLeave">
+                                    <Grid>
+                                        <Image Name="Song2Image" Width="64" Height="64" Margin="10" Opacity=".25" Source="Images/Record.png" />
+                                        <TextBlock Name="Song2TextBlock" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="AntiqueWhite" />
+                                        <Image Name="Song2ClearImage" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,3,3" Source="Images/delete.png" Visibility="Collapsed" Cursor="Hand" MouseLeftButtonDown="Song2ClearImage_MouseLeftButtonDown"/>
+                                    </Grid>
+                                </Border>
+                                <Border Name="Song3Border" CornerRadius="5" BorderThickness="1.5" BorderBrush="Black" Margin="10" AllowDrop="True" Drop="Song3Border_Drop" MouseEnter="SongBorder_MouseEnter" MouseLeave="SongBorder_MouseLeave">
+                                    <Grid>
+                                        <Image Name="Song3Image" Width="64" Height="64" Margin="10" Opacity=".25" Source="Images/Record.png" />
+                                        <TextBlock Name="Song3TextBlock" Text="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="AntiqueWhite" />
+                                        <Image Name="Song3ClearImage" Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,3,3" Source="Images/delete.png" Visibility="Collapsed" Cursor="Hand" MouseLeftButtonDown="Song3ClearImage_MouseLeftButtonDown"/>
+                                    </Grid>
+                                </Border>
+                                <Button Name="StopButton" HorizontalAlignment="Center" Margin="15" Command="{StaticResource StopPlayingCommand}">
+                                    <Image Source="Images/stop.png" Width="48" Height="48" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Recording">
+
+                    </TabItem>
+                    <TabItem Header="Settings">
+                        <Grid Margin="20,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10,5" VerticalAlignment="Center">
+                                    <TextBlock Text="Music Folder" VerticalAlignment="Center"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Name="MusicFolderTextBox" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0" IsReadOnly="True"/>
+                                        <Button Grid.Column="1" Command="{StaticResource MusicFolderCommand}">
+                                            <Image Source="Images/closedFolder.png" Margin="2" VerticalAlignment="Center" />
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,5" VerticalAlignment="Center">
+                                    <TextBlock Text="Recording Folder" VerticalAlignment="Center"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Name="RecordingFolderTextBox" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,0" IsReadOnly="True"/>
+                                        <Button Grid.Column="1" Command="{StaticResource RecordFolderCommand}">
+                                            <Image Source="Images/closedFolder.png" Margin="2" VerticalAlignment="Center" />
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                    <RowDefinition Height="50" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Auto convert file when recording completes" VerticalAlignment="Center" Margin="0,0,10,0" TextWrapping="Wrap" />
+                                <Controls:OnOff x:Name="AutoConvertOnOff" Grid.Row="0" Grid.Column="1" Width="75" Height="30" VerticalAlignment="Center" ValueChanged="AutoConvertOnOff_ValueChanged" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Allow clicking on the progress bar to jump to position during playback" VerticalAlignment="Center" Margin="0,0,10,0" TextWrapping="Wrap" />
+                                <Controls:OnOff x:Name="ClickToJumpOnOff" Grid.Row="1" Grid.Column="1" Width="75" Height="30" VerticalAlignment="Center" ValueChanged="ClickToJumpOnOff_ValueChanged" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Clicking Stop removes currently playing song from queue" VerticalAlignment="Center" Margin="0,0,10,0" TextWrapping="Wrap" />
+                                <Controls:OnOff x:Name="ClickStopRemovesSongOnOff" Grid.Row="2" Grid.Column="1" Width="75" Height="30" VerticalAlignment="Center" ValueChanged="ClickStopRemovesSongOnOff_ValueChanged" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Remove song when playback ends" VerticalAlignment="Center" Margin="0,0,10,0" TextWrapping="Wrap" />
+                                <Controls:OnOff x:Name="RemoveSongWhenEndOnOff" Grid.Row="3" Grid.Column="1" Width="75" Height="30" VerticalAlignment="Center" ValueChanged="RemoveSongWhenEndOnOff_ValueChanged" />
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Automatically start next recording when stopping current recording" VerticalAlignment="Center" Margin="0,0,10,0" TextWrapping="Wrap" />
+                                <Controls:OnOff x:Name="AutomaticallyStartNextRecordingOnOff" Grid.Row="4" Grid.Column="1" Width="75" Height="30" VerticalAlignment="Center" ValueChanged="AutomaticallyStartNextRecordingOnOff_ValueChanged" />
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,162 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life.Savings", "Life.Savings.csproj", "{985A0469-448D-444D-8082-AA6DD51E7AA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life.Savings.Data", "..\Life.Savings.Data\Life.Savings.Data.csproj", "{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Life.Savings.Extensions", "..\Life.Savings.Extensions\Life.Savings.Extensions.csproj", "{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ookii.Dialogs.Wpf", "..\OkiiDialogs\Ookii.Dialogs.Wpf.csproj", "{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSCrypto", "..\OSCrypto\OSCrypto.csproj", "{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dialog", "..\Dialog\Dialog.csproj", "{106C6475-DF19-449B-A55D-398768235A7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|x64.ActiveCfg = Debug|x64
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|x64.Build.0 = Debug|x64
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Debug|x86.Build.0 = Debug|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|x64.ActiveCfg = Release|x64
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|x64.Build.0 = Release|x64
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{985A0469-448D-444D-8082-AA6DD51E7AA4}.Release|x86.Build.0 = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|x64.ActiveCfg = Debug|x64
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|x64.Build.0 = Debug|x64
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Debug|x86.Build.0 = Debug|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|x64.ActiveCfg = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|x64.Build.0 = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|x86.ActiveCfg = Release|Any CPU
+		{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}.Release|x86.Build.0 = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|x64.ActiveCfg = Debug|x64
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|x64.Build.0 = Debug|x64
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Debug|x86.Build.0 = Debug|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|x64.ActiveCfg = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|x64.Build.0 = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED0AA6C1-F22B-4C3D-9591-C38D542F2DA5}.Release|x86.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x64.ActiveCfg = Debug|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x64.Build.0 = Debug|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x86.ActiveCfg = Debug|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Debug|x86.Build.0 = Debug|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x64.ActiveCfg = Release|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x64.Build.0 = Release|x64
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x86.ActiveCfg = Release|x86
+		{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}.Release|x86.Build.0 = Release|x86
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|x64.ActiveCfg = Debug|x64
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|x64.Build.0 = Debug|x64
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Debug|x86.Build.0 = Debug|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|x64.ActiveCfg = Release|x64
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|x64.Build.0 = Release|x64
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FBDE49F-27D1-400A-83DD-74B7F38F59D3}.Release|x86.Build.0 = Release|Any CPU
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.ActiveCfg = Debug|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.Build.0 = Debug|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.Build.0 = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|Any CPU.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x64.ActiveCfg = Release|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x64.Build.0 = Release|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {128A0D03-01FA-433C-A34A-8213208488D5}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Life.Savings.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\Life.Savings.Data\\Life.Savings.Data.csproj
+		SccProjectName2 = ../Life.Savings.Data
+		SccLocalPath2 = ..\\Life.Savings.Data
+		SccProjectUniqueName3 = ..\\Life.Savings.Extensions\\Life.Savings.Extensions.csproj
+		SccProjectName3 = ../Life.Savings.Extensions
+		SccLocalPath3 = ..\\Life.Savings.Extensions
+		SccProjectUniqueName4 = ..\\Application\\Application.csproj
+		SccProjectName4 = ../Application
+		SccLocalPath4 = ..\\Application
+		SccProjectUniqueName5 = ..\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName5 = ../MVVMFramework
+		SccLocalPath5 = ..\\MVVMFramework
+		SccProjectUniqueName6 = ..\\OkiiDialogs\\Ookii.Dialogs.Wpf.csproj
+		SccProjectName6 = ../OkiiDialogs
+		SccLocalPath6 = ..\\OkiiDialogs
+		SccProjectUniqueName7 = ..\\OSCrypto\\OSCrypto.csproj
+		SccProjectName7 = ../OSCrypto
+		SccLocalPath7 = ..\\OSCrypto
+		SccProjectUniqueName8 = ..\\Dialog\\Dialog.csproj
+		SccProjectName8 = ../Dialog
+		SccLocalPath8 = ..\\Dialog
+	EndGlobalSection
+EndGlobal

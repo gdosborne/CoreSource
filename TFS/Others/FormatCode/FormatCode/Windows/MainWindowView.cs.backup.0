@@ -1,0 +1,777 @@
+﻿using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using FormatCode.Classes;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CSharp;
+using MVVMFramework;
+using Ookii.Dialogs.Wpf;
+using Application.Text;
+
+namespace FormatCode.Windows
+{
+	public class MainWindowView : OptionFlag, INotifyPropertyChanged
+	{
+		public MainWindowView()
+		{
+			FontSource = Fonts.SystemFontFamilies.OrderBy(x => x.Source).ToList();
+			SizeSource = new List<double>
+			{
+				6,8,10,12,14,16
+			};
+			DefaultSize = 10;
+			DefaultFont = FontSource.First(x => x.Source == "Tahoma");
+			ProgressBarVisibility = Visibility.Collapsed;
+
+			base.PropertyChanged += OptionsWindowView_PropertyChanged;
+		}
+
+		void OptionsWindowView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, e);
+		}
+		private ICommand _UndoFormatCommand = null;
+		public DelegateCommand UndoFormatCommand
+		{
+			get
+			{
+				if (_UndoFormatCommand == null)
+					_UndoFormatCommand = new DelegateCommand(UndoFormat, ValidateUndoFormatState);
+				return _UndoFormatCommand as DelegateCommand;
+			}
+		}
+		public event AskHandler AskUndoFormat;
+		private void UndoFormat(object state)
+		{
+			if (AskUndoFormat != null)
+			{
+				var e = new AskEventArgs();
+				AskUndoFormat(this, e);
+				if (!e.Answer.GetValueOrDefault())
+					return;
+			}
+
+			using (var fs = new FileStream(OpenFileName, FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var sr = new StreamReader(fs))
+			{
+				CodeFileText = sr.ReadToEnd();
+			}
+			IsSaveEnabled = false;
+			FormatCommand.RaiseCanExecuteChanged();
+			UndoFormatCommand.RaiseCanExecuteChanged();
+			SaveCommand.RaiseCanExecuteChanged();
+		}
+		private bool ValidateUndoFormatState(object state)
+		{
+			return IsSaveEnabled;
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public event DisplayExceptionHandler DisplayException;
+		private ICommand _OptionsCommand = null;
+		public DelegateCommand OptionsCommand
+		{
+			get
+			{
+				if (_OptionsCommand == null)
+					_OptionsCommand = new DelegateCommand(Options, ValidateOptionsState);
+				return _OptionsCommand as DelegateCommand;
+			}
+		}
+		private void Options(object state)
+		{
+			var optionsWin = new OptionsWindow
+			{
+				Owner = App.Current.MainWindow
+			};
+			var result = optionsWin.ShowDialog();
+			if (!result.GetValueOrDefault())
+				return;
+			OptionFlags = optionsWin.View.OptionFlags;
+			InitializeOptions();
+		}
+		private bool ValidateOptionsState(object state)
+		{
+			return true;
+		}
+
+		private ICommand _SaveCommand = null;
+		public DelegateCommand SaveCommand
+		{
+			get
+			{
+				if (_SaveCommand == null)
+					_SaveCommand = new DelegateCommand(Save, ValidateSaveState);
+				return _SaveCommand as DelegateCommand;
+			}
+		}
+		private void Save(object state)
+		{
+			using (var fs = new FileStream(OpenFileName, FileMode.Open, FileAccess.Write, FileShare.None))
+			using (var sw = new StreamWriter(fs))
+			{
+				sw.Write(CodeFileText);
+			}
+			IsSaveEnabled = false;
+		}
+		private bool ValidateSaveState(object state)
+		{
+			return IsSaveEnabled;
+		}
+		private ICommand _ExitCommand = null;
+		public DelegateCommand ExitCommand
+		{
+			get
+			{
+				if (_ExitCommand == null)
+					_ExitCommand = new DelegateCommand(Exit, ValidateExitState);
+				return _ExitCommand as DelegateCommand;
+			}
+		}
+		public event EventHandler ExitRequest;
+		private void Exit(object state)
+		{
+			if (ExitRequest != null)
+				ExitRequest(this, EventArgs.Empty);
+		}
+		private bool ValidateExitState(object state)
+		{
+			return true;
+		}
+
+		private ICommand _FormatCommand = null;
+		public DelegateCommand FormatCommand
+		{
+			get
+			{
+				if (_FormatCommand == null)
+					_FormatCommand = new DelegateCommand(Format, ValidateFormatState);
+				return _FormatCommand as DelegateCommand;
+			}
+		}
+		private BackgroundWorker FileFormatter = null;
+		public event AskHandler AskStartFormat;
+		private void Format(object state)
+		{
+			if (AskStartFormat != null)
+			{
+				var e = new AskEventArgs();
+				AskStartFormat(this, e);
+				if (!e.Answer.GetValueOrDefault())
+					return;
+				FileFormatter = new BackgroundWorker
+				{
+					WorkerReportsProgress = true,
+					WorkerSupportsCancellation = true
+				};
+				FileFormatter.ProgressChanged += FileFormatter_ProgressChanged;
+				FileFormatter.RunWorkerCompleted += FileFormatter_RunWorkerCompleted;
+				FileFormatter.DoWork += FileFormatter_DoWork;
+				ProgressBarVisibility = Visibility.Visible;
+				ProgressBarValue = 0;
+				ProgressText = string.Empty;
+
+				FileFormatter.RunWorkerAsync();
+			}
+		}
+		private string GetIndent(int count)
+		{
+			if (count == 0)
+				return string.Empty;
+			return new string('\t', count);
+		}
+		private string _ProcessedText = null;
+		void FileFormatter_DoWork(object sender, DoWorkEventArgs e)
+		{
+			BackgroundWorker worker = sender as BackgroundWorker;
+			try
+			{
+				ProgressBarMaximum = 100;
+				var items = new List<CodeItem>();
+				_ProcessedText = string.Empty;
+				_ProcessedText = PreProcessFile(worker, CodeFileText);
+
+				var finalText = new StringBuilder();
+				var st = _SavedComments.FirstOrDefault(x => x.IsTopOfFile);
+				if (st != null)
+				{
+					finalText.AppendLine(st.Text);
+					_SavedComments.Remove(st);
+				}
+
+				SyntaxTree sTree = CSharpSyntaxTree.ParseText(_ProcessedText);
+				SyntaxNode rootNode = sTree.GetRoot();
+				var children = rootNode.ChildNodes().ToList();
+				var indentValue = 0;
+
+				if (PrivateUsingRegion)
+					finalText.AppendLine(GetIndent(indentValue) + "#region Usings");
+
+				var usings = children.Where(x => x.GetType() == typeof(UsingDirectiveSyntax))
+					.Cast<UsingDirectiveSyntax>();
+				if (AlphabetizeUsings)
+					usings = usings.OrderBy(x => x.ToFullString());
+
+				usings.ToList().ForEach(u =>
+				{
+					var usingText = u.ToFullString();
+					st = _SavedComments.FirstOrDefault(x => usingText.StartsWith(x.BeforeLine));
+					if (st != null)
+					{
+						finalText.AppendLine(st.Text);
+						_SavedComments.Remove(st);
+					}
+					finalText.Append(GetIndent(indentValue) + usingText);
+				});
+
+				if (PrivateUsingRegion)
+					finalText.AppendLine(GetIndent(indentValue) + "#endregion Usings");
+
+				children.Where(x => x.GetType() == typeof(NamespaceDeclarationSyntax))
+					.Cast<NamespaceDeclarationSyntax>()
+					.ToList().ForEach(ns =>
+					{
+						finalText.AppendLineFormat(GetIndent(indentValue) + "namespace {0}", ns.Name.ToString());
+						finalText.AppendLine(GetIndent(indentValue) + "{");
+						indentValue++;
+
+						var nsChildren = ns.ChildNodes();
+						nsChildren.Where(x => x.GetType() == typeof(EnumDeclarationSyntax))
+							.Cast<EnumDeclarationSyntax>()
+							.ToList().ForEach(cls =>
+							{
+								var tokens = cls.ChildTokens().ToList();
+								Enumerations.ScopeTypes scope = GetScope(tokens);
+
+								if (scope != Enumerations.ScopeTypes.None)
+									finalText.AppendLineFormat(GetIndent(indentValue) + "#region {0} Enumerations", scope.ToString());
+
+								var signature = GetIndent(indentValue);
+								tokens.Where(x => x.Kind() != SyntaxKind.OpenBraceToken && x.Kind() != SyntaxKind.CloseBraceToken && x.Kind() != SyntaxKind.CommaToken)
+									.ToList().ForEach(tkn =>
+									{
+										signature += tkn.Text + " ";
+									});
+								st = _SavedComments.FirstOrDefault(x => signature.StartsWith(x.BeforeLine));
+								if (st != null)
+								{
+									finalText.AppendLine(st.Text);
+									_SavedComments.Remove(st);
+								}
+								st = _SavedHtmlComments.FirstOrDefault(x => signature.StartsWith(x.BeforeLine));
+								if (st != null)
+								{
+									finalText.AppendLine(st.Text);
+									_SavedHtmlComments.Remove(st);
+								}
+								finalText.AppendLine(signature.TrimEnd());
+								finalText.AppendLine(GetIndent(indentValue) + "{");
+								indentValue++;
+
+								indentValue--;
+								finalText.AppendLine(GetIndent(indentValue) + "}");
+								if (scope != Enumerations.ScopeTypes.None)
+									finalText.AppendLineFormat(GetIndent(indentValue) + "#endregion {0} Enumerations", scope.ToString());
+							});
+
+						nsChildren.Where(x => x.GetType() == typeof(ClassDeclarationSyntax))
+							.Cast<ClassDeclarationSyntax>()
+							.ToList().ForEach(cls =>
+							{
+								var clsTokens = cls.ChildTokens().ToList();
+								Enumerations.ScopeTypes classScope = GetScope(clsTokens);
+
+								if (classScope != Enumerations.ScopeTypes.None)
+									finalText.AppendLineFormat(GetIndent(indentValue) + "#region {0} Classes", classScope.ToString());
+
+								var signature = GetIndent(indentValue);
+								clsTokens.Where(x => x.Kind() != SyntaxKind.OpenBraceToken && x.Kind() != SyntaxKind.CloseBraceToken)
+									.ToList().ForEach(tkn =>
+									{
+										signature += tkn.Text + " ";
+									});
+								st = _SavedComments.FirstOrDefault(x => signature.StartsWith(x.BeforeLine));
+								if (st != null)
+								{
+									finalText.AppendLine(st.Text);
+									_SavedComments.Remove(st);
+								}
+								st = _SavedHtmlComments.FirstOrDefault(x => signature.StartsWith(x.BeforeLine));
+								if (st != null)
+								{
+									finalText.AppendLine(st.Text);
+									_SavedHtmlComments.Remove(st);
+								} 
+								finalText.AppendLine(signature.TrimEnd());
+								finalText.AppendLine(GetIndent(indentValue) + "{");
+								indentValue++;
+
+								indentValue--;
+								finalText.AppendLine(GetIndent(indentValue) + "}");
+								if (classScope != Enumerations.ScopeTypes.None)
+									finalText.AppendLineFormat(GetIndent(indentValue) + "#endregion {0} Classes", classScope.ToString());
+							});
+
+						indentValue--;
+						finalText.AppendLine(GetIndent(indentValue) + "}");
+					});
+
+				sTree = null;
+				_ProcessedText = finalText.ToString();
+				ProgressBarValue = 0;
+			}
+			catch (Exception ex)
+			{
+				if (DisplayException != null)
+					DisplayException(this, new DisplayExceptionEventArgs(ex));
+			}
+		}
+
+		private static Enumerations.ScopeTypes GetScope(List<SyntaxToken> clsTokens)
+		{
+			return clsTokens.Any(x => x.Kind() == SyntaxKind.PublicKeyword)
+				? Enumerations.ScopeTypes.Public
+				: clsTokens.Any(x => x.Kind() == SyntaxKind.PrivateKeyword)
+					? Enumerations.ScopeTypes.Private
+					: clsTokens.Any(x => x.Kind() == SyntaxKind.InternalKeyword)
+						? Enumerations.ScopeTypes.Internal
+						: clsTokens.Any(x => x.Kind() == SyntaxKind.ProtectedKeyword)
+							? Enumerations.ScopeTypes.Protected
+							: Enumerations.ScopeTypes.None;
+		}
+
+		private void ReportProgress(BackgroundWorker worker, double current, double max)
+		{
+			if ((current % 100) == 0)
+			{
+				double value = (current / max) * 100.0;
+				worker.ReportProgress(Convert.ToInt32(value));
+				System.Threading.Thread.Sleep(1);
+			}
+		}
+
+		private List<SavedText> _SavedComments = new List<SavedText>();
+		private List<SavedText> _SavedHtmlComments = new List<SavedText>();
+		private string PreProcessFile(BackgroundWorker worker, string data)
+		{
+			var result = new StringBuilder();
+
+			var lines = new List<string>();
+			using (var sr = new StringReader(data))
+			{
+				while (sr.Peek() > -1)
+				{
+					lines.Add(sr.ReadLine());
+				}
+			}
+
+			double lineNumber = 0;
+			int passNumber = 1;
+			var sb = new StringBuilder();
+
+			//this will be processed if we have at least one region selected for generation and remove flag is set
+			if ((OptionFlags & Enumerations.OptionFlags.RemoveRegions) == Enumerations.OptionFlags.RemoveRegions && OptionFlags >= Enumerations.OptionFlags.PrivateUsingRegion)
+			{
+				var tmpLines = new List<string>();
+				lineNumber = 0;
+				ProgressText = string.Format("Pass {0}", passNumber);
+				foreach (var line in lines)
+				{
+					worker.ReportProgress((int)((lineNumber / Convert.ToDouble(lines.Count)) * 100.0));
+					if (!line.Contains("#region") && !line.Contains("#endregion"))
+						tmpLines.Add(line);
+				}
+				lines = tmpLines;
+				passNumber++;
+			}
+
+			if ((OptionFlags & Enumerations.OptionFlags.RemoveBlankLines) == Enumerations.OptionFlags.RemoveBlankLines)
+			{
+				var tmpLines = new List<string>();
+				lineNumber = 0;
+				ProgressText = string.Format("Pass {0}", passNumber);
+				foreach (var line in lines)
+				{
+					worker.ReportProgress((int)((lineNumber / Convert.ToDouble(lines.Count)) * 100.0));
+					if (!string.IsNullOrWhiteSpace(line))
+						tmpLines.Add(line);
+				}
+				lines = tmpLines;
+				passNumber++;
+			}
+
+			var tmpLines1 = new List<string>();
+			lineNumber = 0;
+			ProgressText = string.Format("Pass {0}", passNumber);
+			var isInLongComment = false;
+			var lineText = string.Empty;
+			var commentCurrentLine = false;
+			SavedText st = null;
+			var firstLine = true;
+			foreach (var line in lines)
+			{
+				worker.ReportProgress((int)((lineNumber / Convert.ToDouble(lines.Count)) * 100.0));
+				if (isInLongComment)
+				{
+					if (line.Contains("*/"))
+					{
+						var end = line.IndexOf("*/");
+						var temp2 = line.Substring(end + 2, line.Length - (end + 2));
+						if (!string.IsNullOrWhiteSpace(temp2))
+							sb.AppendLine(temp2.TrimStart(new char[] { '\t', ' ' }));
+						isInLongComment = false;
+					}
+					lineNumber++;
+					continue;
+				}
+				var isComment = line.Contains("//") && !line.Contains("///");
+				var isLongComment = line.Contains("/*");
+				if (isLongComment)
+				{
+					if (line.Contains("*/"))
+					{
+						var start = line.IndexOf("/*");
+						var end = line.IndexOf("*/");
+						var temp1 = line.Substring(0, start);
+						var temp2 = line.Substring(end + 2, line.Length - (end + 2));
+						lineText = temp1 + temp2;
+						st = new SavedText { Text = line.Substring(start + 2, end - start - 2), BeforeLine = lineText };
+						_SavedComments.Add(st);
+						st = null;
+					}
+					else
+						isInLongComment = true;
+				}
+				else if (isComment)
+				{
+					if (line.TrimStart(new char[] { '\t', ' ' }).StartsWith("//"))
+					{
+						if (st != null)
+							st.Text += "\r\n" + line;
+						else
+						{
+							commentCurrentLine = true;
+							st = new SavedText { Text = line, BeforeLine = string.Empty, IsTopOfFile = firstLine };
+						}
+					}
+					else
+					{
+						lineText = line.Substring(0, line.IndexOf("//"));
+						st = new SavedText { Text = line.Substring(0, lineText.Length), OnSameLineAsText = lineText, IsTopOfFile = firstLine };
+						_SavedComments.Add(st);
+						st = null;
+					}
+				}
+				if (!isInLongComment)
+				{
+					if (st != null && !commentCurrentLine && !isComment)
+					{
+						st.BeforeLine = !string.IsNullOrWhiteSpace(lineText) ? lineText : line;
+						_SavedComments.Add(st);
+						st = null;
+					}
+				}
+				if (!isComment && !isLongComment && !isInLongComment)
+					tmpLines1.Add(!string.IsNullOrWhiteSpace(lineText) ? lineText : line);
+
+				firstLine = false;
+				commentCurrentLine = false;
+				lineText = string.Empty;
+				ReportProgress(worker, lineNumber, lines.Count);
+				lineNumber++;
+			}
+			lines = tmpLines1;
+			passNumber++;
+
+			tmpLines1 = new List<string>();
+			lineNumber = 0;
+			st = null;
+			commentCurrentLine = false;
+			ProgressText = string.Format("Pass {0}", passNumber);
+			foreach (var line in lines)
+			{
+				worker.ReportProgress((int)((lineNumber / Convert.ToDouble(lines.Count)) * 100.0));
+				var isHtmlComment = line.Contains("///");
+				if (isHtmlComment)
+				{
+					if (st != null && !commentCurrentLine)
+						st.Text += "\r\n" + line;
+					else
+					{
+						st = new SavedText { Text = line };
+						commentCurrentLine = true;
+					}
+				}
+				else
+				{
+					if (st != null && !commentCurrentLine)
+					{
+						st.BeforeLine = line;
+						_SavedHtmlComments.Add(st);
+						st = null;
+					}
+					tmpLines1.Add(line);
+				}
+				commentCurrentLine = false;
+			}
+			lines = tmpLines1;
+			passNumber++;
+
+			foreach (var line in lines)
+			{
+				result.AppendLine(line);
+			}
+			return result.ToString();
+		}
+
+		void FileFormatter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			CodeFileText = _ProcessedText;
+			ProgressBarVisibility = Visibility.Collapsed;
+			ProgressText = string.Empty;
+			ProgressBarValue = 0;
+		}
+
+		void FileFormatter_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			ProgressBarValue = e.ProgressPercentage;
+		}
+		private bool ValidateFormatState(object state)
+		{
+			return !string.IsNullOrEmpty(OpenFileName);
+		}
+		private FlowDocument _CodeDocument;
+		public FlowDocument CodeDocument
+		{
+			get { return _CodeDocument; }
+			set
+			{
+				_CodeDocument = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("CodeDocument"));
+			}
+		}
+		private Visibility _ProgressBarVisibility;
+		public Visibility ProgressBarVisibility
+		{
+			get { return _ProgressBarVisibility; }
+			set
+			{
+				_ProgressBarVisibility = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("ProgressBarVisibility"));
+			}
+		}
+		private int _ProgressBarValue;
+		public int ProgressBarValue
+		{
+			get { return _ProgressBarValue; }
+			set
+			{
+				_ProgressBarValue = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("ProgressBarValue"));
+			}
+		}
+		private int _ProgressBarMaximum;
+		public int ProgressBarMaximum
+		{
+			get { return _ProgressBarMaximum; }
+			set
+			{
+				_ProgressBarMaximum = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("ProgressBarMaximum"));
+			}
+		}
+		private string _ProgressText;
+		public string ProgressText
+		{
+			get { return _ProgressText; }
+			set
+			{
+				_ProgressText = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("ProgressText"));
+			}
+		}
+		private ICommand _OpenFileCommand = null;
+		public DelegateCommand OpenFileCommand
+		{
+			get
+			{
+				if (_OpenFileCommand == null)
+					_OpenFileCommand = new DelegateCommand(OpenFile, ValidateOpenFileState);
+				return _OpenFileCommand as DelegateCommand;
+			}
+		}
+		private void OpenFile(object state)
+		{
+			if (IsSaveEnabled)
+			{
+				if (AskFileSave != null)
+				{
+					var e = new AskEventArgs();
+					AskFileSave(this, e);
+					if (e.Answer.GetValueOrDefault())
+						return;
+				}
+			}
+			var dlg = new Ookii.Dialogs.Wpf.VistaOpenFileDialog()
+			{
+				AddExtension = false,
+				CheckFileExists = true,
+				CheckPathExists = true,
+				Filter = "cs files|*.cs",
+				InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+				Multiselect = false,
+				Title = "Select file..."
+			};
+			var result = dlg.ShowDialog(App.Current.MainWindow);
+			if (!result.GetValueOrDefault())
+				return;
+			OpenFileName = dlg.FileName;
+			using (var fs = new FileStream(OpenFileName, FileMode.Open, FileAccess.Read, FileShare.None))
+			using (var sr = new StreamReader(fs))
+			{
+				CodeFileText = sr.ReadToEnd();
+			}
+			FormatCommand.RaiseCanExecuteChanged();
+		}
+		private double _DefaultSize;
+		public double DefaultSize
+		{
+			get { return _DefaultSize; }
+			set
+			{
+				_DefaultSize = value;
+				if (CodeDocument != null)
+				{
+					CodeDocument.SetFontSize(value);
+					CodeDocument.PageWidth = CodeDocument.ActualWidth(DefaultFont, DefaultSize);
+				}
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("DefaultSize"));
+			}
+		}
+		private List<double> _SizeSource;
+		public List<double> SizeSource
+		{
+			get { return _SizeSource; }
+			set
+			{
+				_SizeSource = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("SizeSource"));
+			}
+		}
+		private FontFamily _DefaultFont;
+		public FontFamily DefaultFont
+		{
+			get { return _DefaultFont; }
+			set
+			{
+				_DefaultFont = value;
+				if (CodeDocument != null)
+				{
+					CodeDocument.SetFont(value);
+					CodeDocument.PageWidth = CodeDocument.ActualWidth(DefaultFont, DefaultSize);
+				}
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("DefaultFont"));
+			}
+		}
+		private List<FontFamily> _FontSource;
+		public List<FontFamily> FontSource
+		{
+			get { return _FontSource; }
+			set
+			{
+				_FontSource = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Fonts"));
+			}
+		}
+		private bool _SaveIsEnabled;
+		public bool IsSaveEnabled
+		{
+			get { return _SaveIsEnabled; }
+			set
+			{
+				_SaveIsEnabled = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("SaveIsEnabled"));
+			}
+		}
+		private string _CodeFileText;
+		public string CodeFileText
+		{
+			get { return _CodeFileText; }
+			set
+			{
+				var previous = _CodeFileText;
+				_CodeFileText = value;
+				if (!string.IsNullOrWhiteSpace(previous) && _CodeFileText != previous)
+					IsSaveEnabled = true;
+				DispatchService.Invoke(SaveCommand.RaiseCanExecuteChanged);
+				DispatchService.Invoke(UndoFormatCommand.RaiseCanExecuteChanged);
+
+				var doc = Document.GetFlowDocument(value, DefaultFont, DefaultSize);
+				CodeDocument = doc;
+				CodeDocument.PageWidth = CodeDocument.ActualWidth(DefaultFont, DefaultSize);
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("CodeFileText"));
+			}
+		}
+
+		private bool ValidateOpenFileState(object state)
+		{
+			return true;
+		}
+		public event AskHandler AskFileSave;
+		private string _OpenFileName;
+		public string OpenFileName
+		{
+			get { return _OpenFileName; }
+			set
+			{
+				_OpenFileName = value;
+
+				IsSaveEnabled = false;
+				SaveCommand.RaiseCanExecuteChanged();
+				UndoFormatCommand.RaiseCanExecuteChanged();
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("OpenFileName"));
+			}
+		}
+
+		public override void InitializeOptions()
+		{
+			if (OptionFlags == Classes.Enumerations.OptionFlags.None)
+				return;
+			var flags = Enum.GetNames(typeof(FormatCode.Classes.Enumerations.OptionFlags)).ToList();
+			flags.Remove("None");
+			var t = this.GetType();
+			flags.ForEach(x =>
+			{
+				var val = (FormatCode.Classes.Enumerations.OptionFlags)Enum.Parse(typeof(FormatCode.Classes.Enumerations.OptionFlags), x, true);
+				var p = t.GetProperty(x);
+				if (p != null)
+					p.SetValue(this, (OptionFlags & val) == val);
+			});
+		}
+	}
+}

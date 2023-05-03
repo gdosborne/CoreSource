@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSoftComponents", "OSoftComponents.csproj", "{56C9266F-5230-4C9E-89EF-5A3D5C5A40D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56C9266F-5230-4C9E-89EF-5A3D5C5A40D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C9266F-5230-4C9E-89EF-5A3D5C5A40D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C9266F-5230-4C9E-89EF-5A3D5C5A40D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C9266F-5230-4C9E-89EF-5A3D5C5A40D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDAAB622-5225-4FDB-8524-2F1CE8527229}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OSoftComponents.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+EndGlobal

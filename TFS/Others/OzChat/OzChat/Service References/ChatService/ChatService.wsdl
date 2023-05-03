@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ChatService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:5555/ChatService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:5555/ChatService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:5555/ChatService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/OzChatServer" />
+      <xsd:import schemaLocation="http://localhost:5555/ChatService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IChatService_PostConversationItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostConversationItem" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_PostConversationItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostConversationItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetNextMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNextMessage" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetNextMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNextMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_UnRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnRegister" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_UnRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_AcknowledgeRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeRequest" />
+  </wsdl:message>
+  <wsdl:message name="IChatService_AcknowledgeRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeRequestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IChatService">
+    <wsdl:operation name="PostConversationItem">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/PostConversationItem" message="tns:IChatService_PostConversationItem_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/PostConversationItemResponse" message="tns:IChatService_PostConversationItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNextMessage">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/GetNextMessage" message="tns:IChatService_GetNextMessage_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/GetNextMessageResponse" message="tns:IChatService_GetNextMessage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/GetAllUsers" message="tns:IChatService_GetAllUsers_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/GetAllUsersResponse" message="tns:IChatService_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/RegisterUser" message="tns:IChatService_RegisterUser_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/RegisterUserResponse" message="tns:IChatService_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnRegister">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/UnRegister" message="tns:IChatService_UnRegister_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/UnRegisterResponse" message="tns:IChatService_UnRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeRequest">
+      <wsdl:input wsam:Action="http://tempuri.org/IChatService/AcknowledgeRequest" message="tns:IChatService_AcknowledgeRequest_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IChatService/AcknowledgeRequestResponse" message="tns:IChatService_AcknowledgeRequest_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IChatService" type="tns:IChatService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PostConversationItem">
+      <soap:operation soapAction="http://tempuri.org/IChatService/PostConversationItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNextMessage">
+      <soap:operation soapAction="http://tempuri.org/IChatService/GetNextMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap:operation soapAction="http://tempuri.org/IChatService/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/IChatService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnRegister">
+      <soap:operation soapAction="http://tempuri.org/IChatService/UnRegister" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeRequest">
+      <soap:operation soapAction="http://tempuri.org/IChatService/AcknowledgeRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ChatService">
+    <wsdl:port name="BasicHttpBinding_IChatService" binding="tns:BasicHttpBinding_IChatService">
+      <soap:address location="http://localhost:5555/ChatService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

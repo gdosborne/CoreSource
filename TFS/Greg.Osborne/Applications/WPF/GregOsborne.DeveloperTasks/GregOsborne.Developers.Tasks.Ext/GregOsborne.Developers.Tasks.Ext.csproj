@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D5908A1-5909-440E-8450-65298AD2251A}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>GregOsborne.Developers.Tasks.Ext</RootNamespace>
+    <AssemblyName>GregOsborne.Developers.Tasks.Ext</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="..\..\GregOsborne.Developers.Suite\Resources\Styles.xaml">
+      <Link>Styles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeveloprTasks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="DeveloprTasks.View.cs">
+      <DependentUpon>DeveloprTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeveloprTasks.xaml.cs">
+      <DependentUpon>DeveloprTasks.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Framework\Application\Application_4.8.csproj">
+      <Project>{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}</Project>
+      <Name>Application_4.8</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Framework\Application\ApplicationFramework.csproj">
+      <Project>{0FC7E7BF-E8B4-424E-9A89-454D36213362}</Project>
+      <Name>ApplicationFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
+      <Project>{DA87E838-FB93-441A-A6E2-444764FA284E}</Project>
+      <Name>MVVMFramework_4.8</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\UserControls\GregOsborne.WPFControls\GregOsborne.WPFControls.csproj">
+      <Project>{346400B4-6C7F-47B3-9C4B-9A8B8CA8CBD5}</Project>
+      <Name>GregOsborne.WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GregOsborne.Developers.Controls\GregOsborne.Developers.Controls.csproj">
+      <Project>{606310e4-9519-4b3a-bac3-8b3f47ee2350}</Project>
+      <Name>GregOsborne.Developers.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GregOsborne.Suite.Extender\GregOsborne.Suite.Extender.csproj">
+      <Project>{944f256d-cb0c-4fb0-9784-3409eae1c3f9}</Project>
+      <Name>GregOsborne.Suite.Extender</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="C:\Users\gosborn\Documents\Visual Studio 2017\Source\UpdateVersion.targets" />
+</Project>

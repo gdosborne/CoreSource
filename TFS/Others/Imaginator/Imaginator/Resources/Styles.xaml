@@ -1,0 +1,145 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="MainWindow" TargetType="Window">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="MinWidth" Value="300" />
+        <Setter Property="MinHeight" Value="200" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}" />
+    </Style>
+    <Style x:Key="MainBorder" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="10,10,0,0"/>
+    </Style>
+    <Style x:Key="ImageEditScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+    </Style>
+    <Style x:Key="TitleBorder" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource TitleBarBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="CornerRadius" Value="10,10,0,0"/>
+    </Style>
+    <Style x:Key="StatusBorder" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource TitleBarBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+    </Style>
+    <Style x:Key="MainAreaBorder" TargetType="Border">
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,0"/>
+    </Style>
+    <Style x:Key="MainAreaLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}" />
+    </Style>
+    <Style x:Key="NormalTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}" />
+    </Style>
+    <Style x:Key="InvertedTextBlock" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="Foreground" Value="{DynamicResource InvertedControlTextBrush}" />
+    </Style>
+    <Style x:Key="MainAreaCheckbox" TargetType="CheckBox">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="5,0" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}" />
+    </Style>
+    <Style x:Key="MainAreaTextBox" TargetType="TextBox">
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource AppFontWeight}" />
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundBrush}" />
+        <Setter Property="BorderThickness" Value=".5"/>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+    </Style>
+    <Style x:Key="MainTreeView" TargetType="TreeView">
+        <Setter Property="BorderThickness" Value=".5"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ListBackgroundBrush}" />
+    </Style>
+    <Style x:Key="TitleTextBlock" TargetType="TextBlock">
+        <Setter Property="Margin" Value="20,1,5,1"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource TitleFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource TitleFontWeight}" />
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}" />
+    </Style>
+    <Style x:Key="TreeItemTextBlock" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10,3"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource AppFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource TitleFontWeight}" />
+        <Setter Property="Text" Value="Title" />
+    </Style>
+    <Style x:Key="StatusBarText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ControlTextBrush}"/>
+        <Setter Property="Margin" Value="5,0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource StatusFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource TitleFontWeight}" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+    <Style x:Key="StatusBarErrorText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ErrorTextBrush}"/>
+        <Setter Property="Margin" Value="5,0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource AppFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource StatusFontSize}" />
+        <Setter Property="FontWeight" Value="{StaticResource TitleFontWeight}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+    <Style x:Key="WindowControlBorder" TargetType="Border">
+        <Setter Property="Margin" Value="0,0,12,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="CornerRadius" Value="0,0,5,5" />
+        <Setter Property="BorderThickness" Value="1,1,0,1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource GeneralBorderBrush}" />
+    </Style>
+    <Style x:Key="CloseBorder" TargetType="Border" BasedOn="{StaticResource WindowControlBorder}">
+        <Setter Property="Margin" Value="0,0,12,0" />
+        <Setter Property="ToolTip" Value="Close Window" />
+        <Setter Property="Background" Value="{DynamicResource CloseButtonBrush}" />
+    </Style>
+    <Style x:Key="MinimizeBorder" TargetType="Border" BasedOn="{StaticResource WindowControlBorder}">
+        <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="ToolTip" Value="Minimize Window" />
+        <Setter Property="Background" Value="{DynamicResource MinimizeButtonBrush}" />
+    </Style>
+    <Style x:Key="StatusProgressBar" TargetType="ProgressBar">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="Foreground" Value="{DynamicResource StatusBarColor}" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+</ResourceDictionary>

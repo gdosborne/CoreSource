@@ -1,0 +1,81 @@
+﻿<Window x:Class="EnableVersioning.AddNewSchemaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EnableVersioning"
+        xmlns:sys="clr-namespace:System;assembly=System"
+        mc:Ignorable="d" SizeToContent="Height" ResizeMode="NoResize"
+        Title="Add New Schema" Width="433.721"
+        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
+    <Window.DataContext>
+        <local:AddNewSchemaWindowView />
+    </Window.DataContext>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Name" Grid.Row="0" Grid.Column="0" Style="{DynamicResource contentLabel}" />
+        <TextBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource standardTextBox}"/>
+
+        <GroupBox Header="Item Parts" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource standardGroupBox}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Value" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Parameter" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                <Label Content="Major" Grid.Row="1" Grid.Column="0" Style="{DynamicResource contentLabel}" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource standardComboBox}" ItemsSource="{Binding Methods}" SelectedItem="{Binding MajorPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <Border Name="MajorBorder" Grid.Row="1" Grid.Column="2" Width="150" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="{Binding MajorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <TextBox BorderThickness="0" Style="{DynamicResource standardTextBox}" />
+                </Border>
+
+                <Label Content="Minor" Grid.Row="2" Grid.Column="0" Style="{DynamicResource contentLabel}" />
+                <ComboBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource standardComboBox}" ItemsSource="{Binding Methods}" SelectedItem="{Binding MinorPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <Border Name="MinorBorder" Grid.Row="2" Grid.Column="2" Width="150" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="{Binding MinorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <TextBox BorderThickness="0" Style="{DynamicResource standardTextBox}"/>
+                </Border>
+
+                <Label Content="Build" Grid.Row="3" Grid.Column="0" Style="{DynamicResource contentLabel}" />
+                <ComboBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource standardComboBox}" ItemsSource="{Binding Methods}" SelectedItem="{Binding BuildPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <Border Name="BuildBorder" Grid.Row="3" Grid.Column="2" Width="150" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="{Binding BuildVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <TextBox BorderThickness="0" Style="{DynamicResource standardTextBox}" />
+                </Border>
+
+                <Label Content="Revision" Grid.Row="4" Grid.Column="0" Style="{DynamicResource contentLabel}" />
+                <ComboBox Grid.Row="4" Grid.Column="1" Style="{DynamicResource standardComboBox}" ItemsSource="{Binding Methods}" SelectedItem="{Binding RevisionPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <Border Name="RevisionBorder" Grid.Row="4" Grid.Column="2" Width="150" BorderThickness="1" BorderBrush="{x:Static SystemColors.ActiveBorderBrush}" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="{Binding RevisionVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <TextBox BorderThickness="0" Style="{DynamicResource standardTextBox}" />
+                </Border>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,0">
+            <Button Margin="0,0,10,0" Style="{DynamicResource standardButton}" Command="{Binding SaveSchemaCommand}" ToolTip="Save Schema" >
+                <TextBlock Text="&#xE105;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+            <Button Style="{DynamicResource standardButton}" Command="{Binding CloseCommand}" ToolTip="Exit without changes">
+                <TextBlock Text="&#xEE35;" Style="{DynamicResource buttonTextBlock}" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,211 @@
+﻿<Window x:Class="ProcessSourceFiles.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProcessSourceFiles"
+        Title="Source Modification Explorer" Height="350" Width="525"
+        Closing="Window_Closing" Style="{StaticResource BaseWindow}" 
+        Icon="code.ico">
+    <Window.Resources>
+        <local:MainWindowView x:Key="view" ExecuteUIAction="MainWindowView_ExecuteUIAction" CheckAccess="MainWindowView_CheckAccess" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.InputBindings>
+            <KeyBinding Command="{Binding OpenFileCommand}" Modifiers="Control" Key="O" />
+            <KeyBinding Command="{Binding FindCommand}" Modifiers="Control" Key="F" />
+            <KeyBinding Command="{Binding OverwriteFileCommand}" Modifiers="Control" Key="S" />
+            <KeyBinding Command="{Binding OverwriteAllFilesCommand}" Modifiers="Control" Key="A" />
+            <KeyBinding Command="{Binding ClearFilesCommand}" Modifiers="Control" Key="C" />
+            <KeyBinding Command="{Binding ProcessCommand}" Modifiers="Control" Key="P" />
+            <KeyBinding Command="{Binding RulesCommand}" Modifiers="Control" Key="R" />
+        </Grid.InputBindings>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Open..." Command="{Binding OpenFileCommand}" InputGestureText="Ctrl-O">
+                    <MenuItem.Icon>
+                        <Image Source="images/openFile.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Find..." Command="{Binding FindCommand}" InputGestureText="Ctrl-F">
+                    <MenuItem.Icon>
+                        <Image Source="images/find.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Overwrite selected file" Command="{Binding OverwriteFileCommand}" InputGestureText="Ctrl-S">
+                    <MenuItem.Icon>
+                        <Image Source="images/saveFile.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Overwrite all files" Command="{Binding OverwriteAllFilesCommand}" InputGestureText="Ctrl-A">
+                    <MenuItem.Icon>
+                        <Image Source="images/saveas.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Clear list" Command="{Binding ClearFilesCommand}" InputGestureText="Ctrl-C">
+                    <MenuItem.Icon>
+                        <Image Source="images/hidewin.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Process" Command="{Binding ProcessCommand}" InputGestureText="Ctrl-P">
+                    <MenuItem.Icon>
+                        <Image Source="images/forward1.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Remove Html Comments" IsCheckable="True" IsChecked="{Binding RemoveHtmlComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <MenuItem Header="Remove Regions" IsCheckable="True" IsChecked="{Binding RemoveRegions,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <MenuItem Header="Remove Full Line Comments" IsCheckable="True" IsChecked="{Binding RemoveFullLineComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <MenuItem Header="Remove Consecutive Blank Lines" IsCheckable="True" IsChecked="{Binding RemoveConsecutiveBlankLines,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <MenuItem Header="Remove All Blank Lines" IsCheckable="True" IsChecked="{Binding RemoveAllBlankLines,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <MenuItem Header="Usings">
+                    <MenuItem Header="Inside Namespace" IsCheckable="True" IsChecked="{Binding InsideUsings,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <MenuItem Header="Outside Namespace" IsCheckable="True" IsChecked="{Binding OutsideUsings,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Rules" Command="{Binding RulesCommand}" InputGestureText="Ctrl-R">
+                    <MenuItem.Icon>
+                        <Image Source="images/working.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ToolBarTray Grid.Row="1">
+            <ToolBar>
+                <Button Command="{Binding OpenFileCommand}" ToolTip="Open source files">
+                    <Image Source="images/openFile.png" />
+                </Button>
+                <Button Command="{Binding FindCommand}" ToolTip="Find source files">
+                    <Image Source="images/find.png" />
+                </Button>
+                <Separator />
+                <Button Command="{Binding ClearFilesCommand}" ToolTip="Clear files">
+                    <Image Source="images/hidewin.png" />
+                </Button>
+                <Separator />
+                <Button Command="{Binding ProcessCommand}" ToolTip="Process all files">
+                    <Image Source="images/forward1.png" />
+                </Button>
+                <Button Command="{Binding OverwriteFileCommand}" ToolTip="Save selected">
+                    <Image Source="images/saveFile.png" />
+                </Button>
+                <Button Command="{Binding OverwriteAllFilesCommand}" ToolTip="Save all">
+                    <Image Source="images/saveas.png" />
+                </Button>
+                <Separator />
+                <CheckBox IsChecked="{Binding RemoveHtmlComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Remove html comments">
+                    <Image Source="images/htmlComment.png" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding RemoveRegions,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Remove regions">
+                    <Image Source="images/region.png" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding RemoveFullLineComments,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Remove full line comments">
+                    <Image Source="images/comment.png" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding RemoveConsecutiveBlankLines,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Remove 2 consecutive blank lines">
+                    <Image Source="images/x-lines.png" />
+                </CheckBox>
+                <CheckBox IsChecked="{Binding RemoveAllBlankLines,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Remove all blank lines">
+                    <Image Source="images/noBlanklines.png" />
+                </CheckBox>
+                <Separator />
+                <RadioButton IsChecked="{Binding OutsideUsings,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" GroupName="usingsGroup" ToolTip="Usings outside namespace">
+                    <Image Source="images/outside.png" />
+                </RadioButton>
+                <RadioButton IsChecked="{Binding InsideUsings,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" GroupName="usingsGroup" ToolTip="Usings inside namespace">
+                    <Image Source="images/inside.png" />
+                </RadioButton>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="150" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Margin="0,0,3,0" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding FileNames,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" SelectedItem="{Binding SelectedFile,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" BorderThickness="0,0,0,1">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                    <TextBlock Text="{Binding FileName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" ToolTip="{Binding FullPath,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Margin="5,1,0,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="All" Style="{StaticResource LinkButton}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="0,5" Command="{Binding SelectAllCommand, Mode=OneWay}" />
+                    <Button Content="None" Style="{StaticResource LinkButton}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5" Command="{Binding SelectNoneCommand, Mode=OneWay}" />
+                </Grid>
+            </Border>
+            <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right" />
+            <Border Grid.Column="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" BorderThickness="0,0,0,1" Text="{Binding TextData,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Stretch" Padding="10" />
+                    <TextBlock Grid.Row="1" Text="Original File" Margin="0,5" TextAlignment="Center" />
+                </Grid>
+            </Border>
+            <Border Grid.Column="2" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="0,1,0,1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" BorderThickness="0,0,0,1" Text="{Binding ModifiedTextData,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" VerticalAlignment="Stretch" Padding="10" />
+                    <TextBlock Grid.Row="1" Text="Modified File" Margin="0,5" TextAlignment="Center" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2" Background="#55000000" Visibility="{Binding FileErrorVisibility}">
+            <Border Background="Red" BorderBrush="Black" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <ListBox ItemsSource="{Binding FileErrors,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Margin="10" BorderThickness="0" Background="Transparent" Foreground="White"/>
+            </Border>
+        </Border>
+
+        <StatusBar Grid.Row="3">
+            <StatusBar.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="3,0" />
+                </Style>
+            </StatusBar.Resources>
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding FileCount,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                    <TextBlock Text="files" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem>
+                <ProgressBar Value="{Binding ProgressValue,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Maximum="{Binding ProgressMaximum,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Width="200" Height="12" VerticalAlignment="Center" Visibility="{Binding ProgressVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding ProgressFileName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Visibility="{Binding ProgressVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

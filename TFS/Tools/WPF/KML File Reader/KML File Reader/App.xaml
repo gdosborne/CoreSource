@@ -1,0 +1,67 @@
+﻿<Application x:Class="KML_File_Reader.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:KML_File_Reader"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="_Segoe_MDL2_Assets">/Fonts/segoe-mdl2-assets.ttf#Segoe MDL2 Assets</FontFamily>
+        <FontFamily x:Key="_dripicons-v2">/Fonts/dripicons-v2.ttf#dripicons-v2</FontFamily>
+
+        <Style TargetType="TextBlock" x:Key="ToolbarButtonIcon">
+            <Setter Property="FontFamily" Value="{DynamicResource _Segoe_MDL2_Assets}" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="ToolbarButtonStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="TextTrimming" Value="None" />
+            <Setter Property="FontFamily" Value="{DynamicResource _Segoe_MDL2_Assets}" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="#FF111111" />
+            <Setter Property="Opacity" Value=".75" />
+        </Style>
+        <SolidColorBrush x:Key="ToolBarButtonHoverBorder" Color="#3399FF" />
+        <SolidColorBrush x:Key="ToolBarButtonHover" Color="#FFEAEAEA" />
+        <SolidColorBrush x:Key="ToolBarButtonPressedBorder" Color="#3399FF" />
+        <SolidColorBrush x:Key="ToolBarButtonPressed" Color="#FFBBBBBB" />
+        <Style x:Key="ToolbarButton" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" CornerRadius="3">
+                            <ContentPresenter Name="Ct" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ToolBarButtonHoverBorder}" />
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ToolBarButtonHover}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ToolBarButtonHoverBorder}" />
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ToolBarButtonHover}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ToolBarButtonPressedBorder}" />
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource ToolBarButtonPressed}" />
+                                <Setter Property="Margin" TargetName="Bd" Value="1,1,-1,-1" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

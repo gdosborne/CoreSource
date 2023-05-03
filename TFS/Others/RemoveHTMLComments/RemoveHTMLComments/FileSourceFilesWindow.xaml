@@ -1,0 +1,36 @@
+﻿<Window x:Class="ProcessSourceFiles.FindSourceFilesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProcessSourceFiles"
+        Title="Find source files..." SizeToContent="Height"
+        Width="447" Style="{StaticResource BaseWindow}" ShowInTaskbar="False">
+    <Window.Resources>
+        <local:FindSourceFilesWindowView x:Key="view" ExecuteUIAction="FindSourceFilesWindowView_ExecuteUIAction" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Folder" Grid.Row="0" Grid.Column="0" />
+        <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding TopFolder,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Padding="2" />
+        <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource DefaultButton}" Width="24" VerticalAlignment="Center" ToolTip="Select folder..." Command="{Binding GetTopFolderCommand, Mode=OneWay}">
+            <Image Source="images/openFolder.png" Margin="3" />
+        </Button>
+
+        <CheckBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Include all sub-folders" IsChecked="{Binding IncludeSubFolders,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,3" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <Button Content="OK" Style="{StaticResource DefaultButton}" IsDefault="True" Command="{Binding OKCommand}" />
+            <Button Content="Cancel" Style="{StaticResource DefaultButton}" IsCancel="True" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,116 @@
+﻿<Window x:Class="EnableVersioning.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=System"
+        xmlns:local="clr-namespace:EnableVersioning"
+        mc:Ignorable="d" Closing="Window_Closing" Height="500"
+        Title="Enable Versioning" Width="600" FontSize="11"
+        WindowStartupLocation="CenterScreen" Icon="version-update.ico">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Path to C# Project (csproj) file:" Grid.Column="0" Style="{DynamicResource contentLabel}"/>
+            <ComboBox Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" ItemsSource="{Binding Projects}" SelectedItem="{Binding ProjectData,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!--<TextBox Grid.Column="1" Style="{DynamicResource standardTextBox}" Text="{Binding ProjectFileName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" GotFocus="TextBox_GotFocus" />-->
+            <Button Grid.Column="2" Style="{DynamicResource smallButton}" Command="{Binding SelectProjectCommand}" ToolTip="Open project file" >
+                <TextBlock Text="&#xED43;" Style="{DynamicResource buttonTextBlock}" FontSize="12"/>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Select the version schema:" Grid.Column="0" Style="{DynamicResource contentLabel}" IsEnabled="{Binding HasProjectFile,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            <ComboBox Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" ItemsSource="{Binding Schemas}" SelectedItem="{Binding SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsEnabled="{Binding HasProjectFile,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Grid.Column="2" Style="{DynamicResource smallButton}" Command="{Binding ShowProjectsCommand}" ToolTip="Edit schemas" >
+                <TextBlock Text="&#xE18C;" Style="{DynamicResource buttonTextBlock}" FontSize="12" />
+            </Button>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Content="Major" Grid.Column="0" HorizontalAlignment="Right" />
+            <Label Content="Minor" Grid.Column="2" HorizontalAlignment="Right" />
+            <Label Content="Build" Grid.Column="4" HorizontalAlignment="Right" />
+            <Label Content="Revision" Grid.Column="6" HorizontalAlignment="Right" />
+            <TextBox Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right"/>
+            <TextBox Grid.Column="3" VerticalAlignment="Center" TextAlignment="Right"/>
+            <TextBox Grid.Column="5" VerticalAlignment="Center" TextAlignment="Right"/>
+            <TextBox Grid.Column="7" VerticalAlignment="Center" TextAlignment="Right"/>
+        </Grid>
+
+        <GroupBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Header="Console">
+            <TextBox Name="ConsoleTextBox" Style="{DynamicResource consoleTextBox}" Text="{Binding ConsoleText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextChanged="ConsoleTextBox_TextChanged" />
+        </GroupBox>
+
+        <Grid Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="0,0,10,0" Command="{Binding RunTestCommand}" ToolTip="Run a test update (no changes made to project)" Style="{DynamicResource standardButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xF78C;" Style="{DynamicResource buttonTextBlock}" />
+                        <TextBlock Text="Test Version" Margin="5,0,0,0" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0,0,10,0" Command="{Binding SaveFilesCommand}" ToolTip="Make changes to project file" Style="{DynamicResource standardButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xE105;" Style="{DynamicResource buttonTextBlock}" />
+                        <TextBlock Text="Save" Margin="5,0,0,0" />
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ExitAppCommand}" ToolTip="Exit application" Style="{DynamicResource standardButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="&#xEE35;" Style="{DynamicResource buttonTextBlock}" />
+                        <TextBlock Text="Exit" Margin="5,0,0,0" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

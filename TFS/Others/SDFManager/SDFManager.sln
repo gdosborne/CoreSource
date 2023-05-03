@@ -1,0 +1,120 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDFManager", "SDFManager\SDFManager.csproj", "{00F954A6-EBB0-4ED1-B674-8581AF5D7919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDFManagerSupport", "SDFManagerSupport\SDFManagerSupport.csproj", "{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dialog", "..\Dialog\Dialog.csproj", "{106C6475-DF19-449B-A55D-398768235A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDFManagerControls", "SDFManagerControls\SDFManagerControls.csproj", "{BD23D05A-C637-4AF1-9337-E22D761D7A7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Debug|x64.ActiveCfg = Debug|x64
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Debug|x64.Build.0 = Debug|x64
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Release|x64.ActiveCfg = Release|Any CPU
+		{00F954A6-EBB0-4ED1-B674-8581AF5D7919}.Release|x86.ActiveCfg = Release|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Debug|x64.ActiveCfg = Debug|x64
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Debug|x64.Build.0 = Debug|x64
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Release|x64.ActiveCfg = Release|Any CPU
+		{E09D0EBC-C3C1-4BEA-A431-9407F2665E1D}.Release|x86.ActiveCfg = Release|Any CPU
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.ActiveCfg = Debug|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.Build.0 = Debug|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.Build.0 = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|Any CPU.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x64.ActiveCfg = Release|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x64.Build.0 = Release|x64
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.Build.0 = Release|x86
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Debug|x64.ActiveCfg = Debug|x64
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Debug|x64.Build.0 = Debug|x64
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD23D05A-C637-4AF1-9337-E22D761D7A7D}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CE63D33-252C-45C7-89D2-6038D443C0CE}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\Dialog\\Dialog.csproj
+		SccProjectName1 = ../Dialog
+		SccLocalPath1 = ..\\Dialog
+		SccProjectUniqueName2 = SDFManager\\SDFManager.csproj
+		SccProjectName2 = SDFManager
+		SccLocalPath2 = SDFManager
+		SccProjectUniqueName3 = SDFManagerSupport\\SDFManagerSupport.csproj
+		SccProjectName3 = SDFManagerSupport
+		SccLocalPath3 = SDFManagerSupport
+		SccProjectUniqueName4 = SDFManagerControls\\SDFManagerControls.csproj
+		SccProjectName4 = SDFManagerControls
+		SccLocalPath4 = SDFManagerControls
+		SccProjectUniqueName5 = ..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName5 = ../../Framework/Application
+		SccLocalPath5 = ..\\..\\Framework\\Application
+		SccProjectUniqueName6 = ..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName6 = ../../Framework/MVVMFramework
+		SccLocalPath6 = ..\\..\\Framework\\MVVMFramework
+	EndGlobalSection
+EndGlobal

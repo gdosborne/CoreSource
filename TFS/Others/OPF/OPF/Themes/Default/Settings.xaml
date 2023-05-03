@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:OPF.Themes.Default"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <LinearGradientBrush x:Key="MainWindowBackgroundBrush">
+        <GradientStop Color="White"/>
+        <GradientStop Color="White" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="MainWindowBorderBrush" Color="Black" />
+    <LinearGradientBrush x:Key="TitleBarBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF020297" Offset="1"/>
+        <GradientStop Color="#FF8787FD" Offset="0"/>
+        <GradientStop Color="#FF0A0AE3" Offset="0.254"/>
+        <GradientStop Color="#FF0606C5" Offset="0.475"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TitleBarForegroundBrush" Color="#BFFFFFFF" />
+
+    <CornerRadius x:Key="MainWindowCornerRadius">8,8,2,2</CornerRadius>
+    <CornerRadius x:Key="TitlebarCornerRadius">7,7,0,0</CornerRadius>
+    <Thickness x:Key="MainWindowBorderThickness">1</Thickness>
+</ResourceDictionary>

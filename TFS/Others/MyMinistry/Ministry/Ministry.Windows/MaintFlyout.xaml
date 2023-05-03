@@ -1,0 +1,53 @@
+﻿<SettingsFlyout
+    x:Class="Ministry.MaintFlyout"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Ministry"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IconSource="Assets/SmallLogo.png"
+    Title="My Ministry Maintenance" Width="460">
+
+    <!-- This StackPanel acts as a root panel for vertical layout of the content sections -->
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+        <!-- The StackPanel(s) below define individual content sections -->
+
+        <!-- Content Section 1-->
+        <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
+
+            <!-- Section 1 header -->
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Backup" />
+
+            <!-- Section 1 body -->
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    Use this section to backup your data.
+                </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Restore" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    Use this section to restore a previous backup.
+                </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Copy" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    Use this section to copy the current data file to another file you will be using.
+                </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Submit to service overseer" />
+            <Button Content="Submit Now" Margin="0,10" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap">
+                When this button is clicked, it will complete the previous month, then begin submittal of your report to the congregation service overseer.
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Define more Content Sections below as necessary -->
+    </StackPanel>
+</SettingsFlyout>

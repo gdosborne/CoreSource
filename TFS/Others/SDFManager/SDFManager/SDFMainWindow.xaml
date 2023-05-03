@@ -1,0 +1,115 @@
+﻿<RibbonWindow x:Class="SDFManager.SDFMainWindow"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:app="clr-namespace:SDFManager"
+              Closing="RibbonWindow_Closing"
+              Loaded="RibbonWindow_Loaded" 
+              Title="SDF Manager" Height="377" Width="629" Icon="Resources/Images/databaseIcon.ico">
+    <Window.Resources>
+        <app:SDFMainWindowView x:Key="view" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0">
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="Resources\Images\24\help1.png" ToolTipImageSource="Resources\Images\256\help1.png" />
+            </Ribbon.HelpPaneContent>
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar>
+                    <RibbonButton SmallImageSource="Resources\Images\24\openFile.png" Command="{Binding OpenCommand}" ToolTipDescription="Open an existing database definition file" ToolTipTitle="Open a database definition" ToolTipImageSource="Resources\Images\256\openFile.png" LargeImageSource="Resources\Images\48\openFile.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\24\save1.png" Command="{Binding SaveCommand}" ToolTipImageSource="Resources\Images\256\save1.png" LargeImageSource="Resources\Images\48\save1.png" ToolTipTitle="Save database definition" ToolTipDescription="Save a changed database definition file"/>
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu>
+                    <RibbonApplicationMenuItem Header="Options" ImageSource="Resources\Images\gear.png" Command="{Binding OptionsCommand}" />
+                    <RibbonApplicationMenuItem Header="Exit" ImageSource="Resources\Images\exit.png" Command="{Binding ExitCommand}" />
+                    <RibbonSeparator />
+                    <RibbonApplicationMenuItem Header="Recent Items" ItemsSource="{Binding RecentItems}"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Home" KeyTip="H">
+                <RibbonGroup x:Name="FileGroup" Header="File">
+                    <RibbonButton SmallImageSource="Resources\Images\16\newfile.png" Command="{Binding NewCommand}" LargeImageSource="Resources\Images\48\newfile.png" Label="New" KeyTip="N" ToolTipImageSource="Resources/Images/256/newfile.png" ToolTipTitle="Create new database definition" ToolTipDescription="Create a new database definition file" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\openFile.png" Command="{Binding OpenCommand}" LargeImageSource="Resources\Images\48\openFile.png" Label="Open" KeyTip="O" ToolTipImageSource="Resources/Images/256/openFile.png" ToolTipDescription="Open an existing database definition file" ToolTipTitle="Open a database definition" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\closeFile.png" Command="{Binding CloseCommand}" LargeImageSource="Resources\Images\48\closeFile.png" Label="Close" KeyTip="L" ToolTipImageSource="Resources/Images/256/closeFile.png" ToolTipTitle="Close database definition" ToolTipDescription="Close an open database definition file" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\save1.png" Command="{Binding SaveCommand}" LargeImageSource="Resources\Images\48\save1.png" Label="Save" KeyTip="S" ToolTipImageSource="Resources/Images/256/save1.png" ToolTipTitle="Save database definition" ToolTipDescription="Save a changed database definition file" />
+                </RibbonGroup>
+                <RibbonGroup x:Name="ClipboardGroup" Header="Clipboard">
+                    <RibbonButton SmallImageSource="Resources\Images\16\cut.png" Command="{Binding CutCommand}" LargeImageSource="Resources\Images\48\cut.png" Label="Cut" KeyTip="X" ToolTipImageSource="Resources/Images/256/cut.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\copy.png" Command="{Binding CopyCommand}" LargeImageSource="Resources\Images\48\copy.png" Label="Copy" KeyTip="C" ToolTipImageSource="Resources/Images/256/copy.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\paste.png" Command="{Binding PasteCommand}" LargeImageSource="Resources\Images\48\paste.png" Label="Paste" KeyTip="V" ToolTipImageSource="Resources/Images/256/paste.png" />
+                </RibbonGroup>
+                <RibbonGroup x:Name="ScaleGroup" Header="Scale">
+                    <RibbonButton SmallImageSource="Resources\Images\16\triangle.png" Command="{Binding ScaleUpCommand}" LargeImageSource="Resources\Images\48\triangle.png" Label="Up" KeyTip="U" ToolTipImageSource="Resources/Images/256/triangle.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\triangle1.png" Command="{Binding ScaleDownCommand}" LargeImageSource="Resources\Images\48\triangle1.png" Label="Down" KeyTip="D" ToolTipImageSource="Resources/Images/256/triangle1.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\121.png" Command="{Binding ScaleResetCommand}" LargeImageSource="Resources\Images\48\121.png" Label="Reset" KeyTip="E" ToolTipImageSource="Resources/Images/256/121.png" />
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Table">
+                <RibbonGroup x:Name="ActionGroup" Header="Actions">
+                    <RibbonButton SmallImageSource="Resources\Images\16\insert_table.png" Command="{Binding AddTableCommand}" LargeImageSource="Resources\Images\48\insert_table.png" Label="Add Table" KeyTip="T" ToolTipImageSource="Resources/Images/48/insert_table.png" />
+                    <RibbonButton SmallImageSource="Resources\Images\16\remove_table.png" Command="{Binding DeleteTableCommand}" LargeImageSource="Resources\Images\48\remove_table.png" Label="Remove Table" KeyTip="R" ToolTipImageSource="Resources/Images/48/remove_table.png" />
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <ScrollViewer Name="Scroller" Grid.Row="1" VerticalScrollBarVisibility="Auto" Background="{DynamicResource Visual.Theme.Window.Background}" HorizontalScrollBarVisibility="Auto" SizeChanged="Scroller_SizeChanged" PreviewMouseWheel="Scroller_PreviewMouseWheel">
+            <ScrollViewer.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add Table" Command="{Binding AddTableCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/table.png" Style="{DynamicResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Delete Table" Command="{Binding DeleteTableCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/delete.png" Style="{DynamicResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Cut" Command="{Binding CutCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/16/cut.png" Style="{DynamicResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Copy" Command="{Binding CopyCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/16/copy.png" Style="{DynamicResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Paste" Command="{Binding PasteCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/16/paste.png" Style="{DynamicResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ScrollViewer.ContextMenu>
+            <app:DragCanvas x:Name="DiagramCanvas" HorizontalAlignment="Left" VerticalAlignment="Top" MoveComplete="DiagramCanvas_MoveComplete" Background="{DynamicResource Visual.Theme.Window.Background}" Width="Auto" Height="Auto" DeselectItem="DiagramCanvas_DeselectItem" TableSelected="DiagramCanvas_TableSelected">
+                <app:DragCanvas.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform x:Name="Scaler" ScaleX="{Binding CurrentScale,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ScaleY="{Binding CurrentScale,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </app:DragCanvas.LayoutTransform>
+            </app:DragCanvas>
+        </ScrollViewer>
+        <StatusBar Grid.Row="2" BorderThickness="0,1,0,0"  BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" FontFamily="Calibri" FontSize="12">
+            <StatusBarItem>
+                <Image Source="Resources/Images/databaseIcon.ico" Width="16" />
+            </StatusBarItem>
+            <StatusBarItem Content="{Binding Definition.FileName}" />
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding CurrentScale,StringFormat='Scale: {0:F1}'}" VerticalAlignment="Center" />
+                    <Rectangle Stroke="#33000000" StrokeThickness=".5" Width="12" Height="12" RadiusX="4" RadiusY="4" Fill="#33FF0000" Margin="5,2,0,2" VerticalAlignment="Center" Visibility="{Binding ChangeIndicatorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</RibbonWindow>

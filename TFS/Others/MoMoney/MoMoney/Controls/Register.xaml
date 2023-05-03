@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="MoMoney.Controls.Register"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             ScrollViewer.VerticalScrollBarVisibility="Hidden"
+             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid Style="{StaticResource Register}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+    </Grid>
+</UserControl>

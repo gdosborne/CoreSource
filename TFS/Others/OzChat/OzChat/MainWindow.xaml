@@ -1,0 +1,59 @@
+﻿<Window x:Class="OzChat.MainWindow" x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:OzChat.Views"
+        Loaded="Window_Loaded" FontSize="11" FontFamily="Calibri"
+        Title="Oz Chat" Height="350" Width="525">
+    <Window.Resources>
+        <v:MainWindowView x:Key="view" TextSent="MainWindowView_TextSent" ConversationItemReceived="MainWindowView_ConversationItemReceived" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+            <Label Content="User:" VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Persons,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Width="150" Margin="0,0,10,0" VerticalAlignment="Center" SelectedItem="{Binding SelectedPerson,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>            
+        </StackPanel>
+        <ListBox Visibility="{Binding ConversationVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" ItemsSource="{Binding ConversationItems,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Margin="0,10" SelectedItem="{Binding SelectedConversationItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy Item" Command="{Binding CopyItemCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="images/copy.png" Style="{StaticResource SmallImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Copy Conversation" Command="{Binding CopyConversationCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="images/copy.png" Style="{StaticResource SmallImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Text}" Foreground="{Binding TextBrush}" />
+                        <TextBlock Text="{Binding FromText}" Foreground="{Binding TextBrush}" Margin="5,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Visibility="{Binding ConversationVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="SendTextBox" Text="{Binding SendText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,0,10,0" Grid.Column="0" GotFocus="SendTextBox_GotFocus"/>
+            <Button Command="{Binding SendTextCommand}" Content="Send" Grid.Column="1" IsDefault="True" />
+        </Grid>
+    </Grid>
+</Window>

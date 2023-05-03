@@ -1,0 +1,125 @@
+﻿<Window x:Class="Life.Savings.IllustrateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:rules="clr-namespace:Life.Savings.Rules"
+        FontFamily="Lucida Console"
+        mc:Ignorable="d" Title="Illustrate" Height="470.54" MinWidth="725" Width="619">
+    <Window.DataContext>
+        <local:IllustrateWindowView PrintFlowDocument="IllustrateWindowView_PrintFlowDocument" PropertyChanged="IllustrateWindowView_PropertyChanged" GetIllustrationSaveParameters="IllustrateWindowView_GetIllustrationSaveParameters" SetCursor="IllustrateWindowView_SetCursor" ShowMessage="IllustrateWindowView_ShowMessage" CompleteIllustration="IllustrateWindowView_CompleteIllustration" />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Command="{Binding SaveIllustrationCommand}">
+                    <MenuItem.Icon>
+                        <TextBlock Text="&#xE105;" Style="{StaticResource IconTB}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Print" Command="{Binding PrintIllustrationCommand}">
+                    <MenuItem.Icon>
+                        <TextBlock Text="&#xE2F6;" Style="{StaticResource IconTB}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitIllustrationCommand}">
+                    <MenuItem.Icon>
+                        <TextBlock Text="&#xE7E8;" Style="{StaticResource IconTB}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <FlowDocumentReader Grid.Row="1">
+            <FlowDocument Name="IllustrationDocument" FontFamily="Lucida Console" FontSize="12" ColumnWidth="999999">
+               
+            </FlowDocument>
+        </FlowDocumentReader>
+        <Grid Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding TypeOfIllustrationVisibility}" Background="#55000000">
+            <Border VerticalAlignment="Center" Margin="50" Background="{StaticResource Theme.WindowBackground}" Padding="20,5" BorderBrush="{StaticResource Theme.WindowBorder}" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock FontFamily="Segoe UI" Text="Type of Illustration" Grid.Row="0" Style="{StaticResource DialogHeader}" />
+                    <StackPanel Orientation="Vertical" Grid.Row="1" Margin="10,20,10,0">
+                        <RadioButton FontFamily="Segoe UI" Content="Show all years to age 95 or lapse year" FontSize="16" FontWeight="Bold" GroupName="TypeOfIllustration" IsChecked="{Binding IsAllYearsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <RadioButton FontFamily="Segoe UI" Content="Show first 25 years (with optional highlighted ages)" FontSize="16" FontWeight="Bold" GroupName="TypeOfIllustration" IsChecked="{Binding IsFirst25Checked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal" Margin="30,5" IsEnabled="{Binding IsFirst25Checked}">
+                            <TextBlock FontFamily="Segoe UI" Text="Highlight ages (past the first 25 years)" VerticalAlignment="Center" />
+                            <TextBox FontFamily="Segoe UI" Name="First25FirstBox" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="First25_1" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox FontFamily="Segoe UI" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="First25_2" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox FontFamily="Segoe UI" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="First25_3" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox FontFamily="Segoe UI" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="First25_4" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBox FontFamily="Segoe UI" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="First25_5" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </StackPanel>
+                        <RadioButton FontFamily="Segoe UI" Content="Show first 10 years, then every 5 years until:" FontSize="16" FontWeight="Bold" GroupName="TypeOfIllustration" IsChecked="{Binding IsFirst10Checked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal" Margin="30,5" IsEnabled="{Binding IsFirst10Checked}">
+                            <TextBlock FontFamily="Segoe UI" Text="Show to age (Default is age 95)" VerticalAlignment="Center" />
+                            <TextBox FontFamily="Segoe UI" Name="First10FirstBox" Width="50" VerticalAlignment="Center" Margin="5,0" GotFocus="TextBox_GotFocus">
+                                <TextBox.Text>
+                                    <Binding Path="ShowToAge" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10">
+                            <Button FontFamily="Segoe UI" Content="OK" Command="{Binding TypeOfIllustrationOKCommand}" IsDefault="True" />
+                            <Button FontFamily="Segoe UI" Content="Cancel" Command="{Binding TypeOfIllustrationCancelCommand}" IsCancel="True" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

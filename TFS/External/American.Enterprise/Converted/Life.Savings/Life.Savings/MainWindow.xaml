@@ -1,0 +1,396 @@
+﻿<Window x:Class="Life.Savings.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:rules="clr-namespace:Life.Savings.Rules"
+        xmlns:conv="clr-namespace:Life.Savings.Converters"
+        mc:Ignorable="d" Name="ThisWindow" Loaded="ThisWindow_Loaded"
+        Closing="ThisWindow_Closing"
+        Title="{Binding WindowTitle}" 
+        Height="550" MaxHeight="550" MinHeight="550" MinWidth="940" ResizeMode="CanResize" 
+        Style="{DynamicResource MainWindowStyle}">
+    <Window.DataContext>
+        <local:MainWindowView 
+            ShowSettings="View_ShowSettings" 
+            WarnToRefresh="MainWindowView_WarnToRefresh" 
+            AskToClear="MainWindowView_AskToClear" 
+            ShowClientList="MainWindowView_ShowClientList" 
+            ShowPremiumCalc="MainWindowView_ShowPremiumCalc" 
+            ShowAdditionalInsured="MainWindowView_ShowAdditionalInsured" 
+            ShowFutureYears="MainWindowView_ShowFutureYears" 
+            ShowProducts="MainWindowView_ShowProducts" 
+            ShowCannotIllustrate="MainWindowView_ShowCannotIllustrate"
+            ShowSpouseData="MainWindowView_ShowSpouseData" 
+            ShowIllustration="MainWindowView_ShowIllustration" />
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:PercentageConverter x:Key="PercentageConverter"/>
+        <conv:CurrencyConverter x:Key="CurrencyConverter" />
+        <conv:TelephoneConverter x:Key="TelephoneConverter" />
+        <conv:IntegerConverter x:Key="IntegerConverter" />
+        <ContextMenu x:Key="MainContextMenu">
+            <MenuItem Header="Settings" Click="SettingsMenuItem_Click">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE115;" FontFamily="Segoe MDL2 Assets" FontSize="10" Margin="3" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Open log folder" Click="LogMenuItem_Click">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE1DA;" FontFamily="Segoe MDL2 Assets" FontSize="10" Margin="3" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Refresh static data" Click="RefreshMenuItem_Click">
+                <MenuItem.Icon>
+                    <TextBlock Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="10" Margin="3" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Save client information" Click="SaveClientInfoMenuItem_Click">
+                <MenuItem.Icon>
+                    <Grid>
+                        <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="10" Margin="3" />
+                        <TextBlock Text="&#xE105;" FontFamily="Segoe MDL2 Assets" FontSize="6" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                    </Grid>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="#FF4D4DFF" BorderThickness="0,0,0,0">
+            <StackPanel Orientation="Vertical">
+                <Border VerticalAlignment="Top" Margin="5" ToolTip="Click for menu" PreviewMouseDown="Border_PreviewMouseDown" ContextMenu="{StaticResource MainContextMenu}" >
+                    <TextBlock Text="&#xE700;" FontFamily="Segoe MDL2 Assets" FontSize="18" Margin="3"/>
+                </Border>
+                <Border VerticalAlignment="Top" Margin="5" ToolTip="Client has changed - save client for later use" Visibility="{Binding ChangedVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <TextBlock Margin="3">
+                        <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="18" TextDecorations="" Foreground="{Binding ElementName=ThisWindow,Path=Foreground}" Click="SaveClientInfoMenuItem_Click">&#xE159;</Hyperlink>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+        </Border>
+        <Border Name="PrimaryBorder" Grid.Column="1" Style="{StaticResource GlobalBorder}">
+            <Grid Name="PrimaryGrid" Margin="5,5,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Client Name" Grid.Column="0" />
+                    <TextBox Name="ClientFirstNameTextBox" Grid.Column="1" GotFocus="TextBox_GotFocus">
+                        <TextBox.Text>
+                            <Binding Path="ClientFirstName" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <rules:RequiredStringItemValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBox Grid.Column="2" Width="30" CharacterCasing="Upper" Text="{Binding ClientMiddleInitial,UpdateSourceTrigger=LostFocus,Mode=TwoWay}" GotFocus="TextBox_GotFocus" MaxLength="1" TextAlignment="Center" />
+                    <TextBox Grid.Column="3" GotFocus="TextBox_GotFocus">
+                        <TextBox.Text>
+                            <Binding Path="ClientLastName" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <rules:RequiredStringItemValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Age" Grid.Column="0" />
+                    <TextBox Grid.Column="1" Width="30" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="ClientAge" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:IntegerTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="or Birthdate" Grid.Column="2" />
+                    <DatePicker Grid.Column="3" Width="120" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="0" BorderThickness="1" BorderBrush="{Binding ElementName=ClientFirstNameTextBox,Path=BorderBrush}">
+                        <DatePicker.SelectedDate>
+                            <Binding Path="ClientBirthDate" UpdateSourceTrigger="LostFocus" Mode="TwoWay">
+                                <Binding.ValidationRules>
+                                    <rules:BirthDateValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.SelectedDate>
+                    </DatePicker>
+                    <Label Content="Gender" Grid.Column="4" Margin="50,0,0,0" />
+                    <ComboBox Grid.Column="5" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding Genders}" SelectedItem="{Binding ClientGender,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="State of Residence" Grid.Column="6" HorizontalAlignment="Right" />
+                    <ComboBox Grid.Column="7" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding States}" SelectedItem="{Binding ClientState,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Abbreviation}" />
+                                    <TextBlock Text=" (" />
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text=")" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Plan Type" Grid.Column="0" />
+                    <ComboBox Grid.Column="1" Width="160" HorizontalAlignment="Left" ItemsSource="{Binding ClientPlanTypes}" SelectedItem="{Binding ClientPlanType,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="Initial Specified Death Benefit" Grid.Column="2" />
+                    <TextBox Grid.Column="3" Width="100" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="ClientInitialDeathBenefit" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:DecimalTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Current Interest Rate" Grid.Column="0" />
+                    <TextBox Grid.Column="1" Width="60" HorizontalAlignment="Left" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                        <TextBox.Text>
+                            <Binding Path="ClientInterestRate" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="P" Converter="{StaticResource PercentageConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:DecimalTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <!--<TextBlock Text="%" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"/>-->
+                    <Label Content="Option Code" Grid.Column="3" />
+                    <ComboBox Grid.Column="4" ItemsSource="{Binding ClientBenfitOptions}" SelectedItem="{Binding ClientBenefitOption,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DisplayedValue}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <GroupBox Grid.Row="4" Header="Additional Features and Riders for Client" Margin="0,0,5,0" BorderBrush="{Binding ElementName=ClientFirstNameTextBox,Path=BorderBrush}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock TextAlignment="Center" Grid.Column="0" Grid.Row="0" TextWrapping="Wrap" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="5,0">
+							Table Rating (Substandard)
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="5,0">
+							Disability Waiver of Cost of Insurance Rider
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="2" Grid.Row="0" TextWrapping="Wrap" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="5,0">
+							Guaranteed Added Death Benefit Rider
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="3" Grid.Row="0" TextWrapping="Wrap" Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="5,0">
+							Cost of Living Increase Benefit Rider
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="5,0">
+							Term Insurance Rider
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="4" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="5,0">
+							Death Benefit Amount
+                        </TextBlock>
+                        <TextBlock TextAlignment="Center" Grid.Column="5" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="5,0">
+							Years or to Age
+                        </TextBlock>
+                        <ComboBox Grid.Row="2" Grid.Column="0" Margin="5" ItemsSource="{Binding SubstandardRates}" SelectedItem="{Binding ClientSubStandardRate,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="5" ItemsSource="{Binding ClientWpds}" SelectedItem="{Binding ClientWpd,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox Grid.Row="2" Grid.Column="2" Margin="5" ItemsSource="{Binding ClientGpos}" SelectedItem="{Binding ClientGpo,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox Grid.Row="2" Grid.Column="3" Margin="5" ItemsSource="{Binding ClientColas}" SelectedItem="{Binding ClientCola,UpdateSourceTrigger=LostFocus,Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Grid.Row="2" Grid.Column="4" Margin="5" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                            <TextBox.Text>
+                                <Binding Path="ClientDeathBenefitAmount" UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="C" Converter="{StaticResource CurrencyConverter}">
+                                    <Binding.ValidationRules>
+                                        <rules:DecimalTextBoxValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="5" Margin="5">
+                            <TextBox Width="40" TextAlignment="Right" Margin="0,0,0,0" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}">
+                                <TextBox.Text>
+                                    <Binding Path="ClientTermYears" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                                        <Binding.ValidationRules>
+                                            <rules:IntegerTextBoxValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <ComboBox Width="80" ItemsSource="{Binding ClientYearToAgeOptions}" SelectedItem="{Binding ClientYearToAgeOption,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DisplayedValue}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="5" Header="Illustrate Using" Margin="0,0,5,0" BorderBrush="{Binding ElementName=ClientFirstNameTextBox,Path=BorderBrush}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,10,0">
+                            <RadioButton Content="Guideline Premium" GroupName="Premium" Margin="0,5" IsChecked="{Binding IsClientGuidelineChecked}"/>
+                            <RadioButton Content="Target Premium" GroupName="Premium" Margin="0,5" IsChecked="{Binding IsClientTargetChecked}" />
+                            <RadioButton Content="Minimum Premium" GroupName="Premium" Margin="0,5" IsChecked="{Binding IsClientMinimumChecked}" />
+                        </StackPanel>
+                        <Grid Grid.Column="1" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Margin="5,0">
+								"Quick" Illustration Using Current Options (above) and Annual Premium (selected at left)
+                            </TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Margin="5,0">
+								Display/Change Planned Premium, Mode, Lump Sum Payments or Target Cash Values Before Illustrating
+                            </TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Margin="5,0">
+								Display and Make Policy Changes for Future Years Before Illustrating
+                            </TextBlock>
+                            <Button Content="Illustrate" Grid.Row="1" Grid.Column="0" IsDefault="True" Command="{Binding IllustrateCommand}" />
+                            <Button Content="Premium Calc" Grid.Row="1" Grid.Column="1" Command="{Binding PremiumCommand}" />
+                            <Button Content="Future Changes" Grid.Row="1" Grid.Column="2" Command="{Binding FutureYearsCommand}" />
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="6" Header="Spouse, Children and Additional Insureds" Margin="0,0,5,0" BorderBrush="{Binding ElementName=ClientFirstNameTextBox,Path=BorderBrush}" Visibility="{Binding PrimaryDataVisibility}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Content="Create a second illustration with Spouse as Client" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding IsSecondIllustrationChecked}" />
+                        <Button Content="View Spouse" Grid.Row="0" Grid.Column="1" Visibility="{Binding ViewSpouseVisibility}" Command="{Binding ViewSpouseDataCommand}"/>
+                        <Button Content="Insured Riders" Grid.Row="0" Grid.Column="2" Command="{Binding AdditionalInsuredCommand}" />
+                    </Grid>
+                </GroupBox>
+                <Grid Grid.Row="7" Visibility="{Binding PrimaryDataVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Prepared by" Grid.Column="0" />
+                    <TextBox Width="250" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding PreparedBy}" GotFocus="TextBox_GotFocus" />
+                </Grid>
+                <Grid Grid.Row="8" Visibility="{Binding PrimaryDataVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Contact Telephone Number" Grid.Column="0" />
+                    <TextBox Width="165" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding ContactTelephoneNumber,Converter={StaticResource TelephoneConverter}}" GotFocus="TextBox_GotFocus" />
+                </Grid>
+                <Grid Grid.Row="9" Visibility="{Binding PrimaryDataVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Client List" Grid.Row="0" Grid.Column="0" Command="{Binding ClientListCommand}" />
+                    <Button Content="Products" Grid.Row="0" Grid.Column="1" Command="{Binding ProductsCommand}" />
+                    <Button Content="Clear" Grid.Row="0" Grid.Column="2" Command="{Binding ClearWindowCommand}" />
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,599 @@
+﻿<Window x:Class="Life.Savings.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:conv="clr-namespace:Life.Savings.Converters"
+        mc:Ignorable="d"
+        Title="Settings" Height="350" Width="850" 
+        ShowInTaskbar="False" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <local:SettingsWindowView PropertyChanged="View_PropertyChanged" ShowBrowseFolder="SettingsWindowView_ShowBrowseFolder" />
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:TelephoneConverter x:Key="TelephoneConverter" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border Name="PrimaryBorder" Grid.Row="1" Style="{StaticResource GlobalBorder}">
+            <Grid Name="PrimaryGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TabControl Grid.Row="0" Name="TabContoller" Margin="5" BorderThickness="1,1,1,1.5">
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE12A;" FontFamily="Segoe MDL2 Assets" FontSize="12" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                <TextBlock Text="Application" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>                                
+                                <Label Grid.Column="0" Content="Static data location:" />
+                                <TextBox Name="RepoLocationTextBox" Text="{Binding RepositoryLocation,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" GotFocus="RepoLocationTextBox_GotFocus" />
+                                <Button Grid.Column="2" Width="{Binding ElementName=RepoLocationTextBox,Path=ActualHeight}" Height="{Binding ElementName=RepoLocationTextBox,Path=ActualHeight}" Command="{Binding SelectRepoFolderCommand}">
+                                    <TextBlock Text="&#xEC25;" Style="{StaticResource IconTB}" FontSize="12" />
+                                </Button>                                
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Illustration save location:" />
+                                <TextBox Text="{Binding XpsFileSaveLocation,UpdateSourceTrigger=LostFocus,Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True" GotFocus="RepoLocationTextBox_GotFocus" />
+                                <Button Grid.Column="2" Width="{Binding ElementName=RepoLocationTextBox,Path=ActualHeight}" Height="{Binding ElementName=RepoLocationTextBox,Path=ActualHeight}" Command="{Binding SelectXpsFolderCommand}">
+                                    <TextBlock Text="&#xEC25;" Style="{StaticResource IconTB}" FontSize="12" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Insurance Company Name:" />
+                                <TextBox Text="{Binding InsuranceCompanyName,UpdateSourceTrigger=LostFocus,Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" GotFocus="RepoLocationTextBox_GotFocus" />
+                            </Grid>
+                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                <Label Content="Default State:" />
+                                <ComboBox Grid.Column="7" Width="100" HorizontalAlignment="Left" ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Abbreviation}" />
+                                                <TextBlock Text=" (" />
+                                                <TextBlock Text="{Binding Name}" />
+                                                <TextBlock Text=")" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <CheckBox Grid.Row="4" Content="Encrypt Client Data" Margin="5,2" IsChecked="{Binding IsClientDataEncrypted}" VerticalContentAlignment="Center" />
+                            <CheckBox Grid.Row="5" Content="Ask about refresh of static data" Margin="5,2" IsChecked="{Binding IsDoNotAskAboutRefreshChecked}" VerticalContentAlignment="Center" />
+                            <CheckBox Grid.Row="6" Content="Ask about clearing form data" Margin="5,2" IsChecked="{Binding IsDoNotAskAboutClearChecked}" VerticalContentAlignment="Center" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE13D;" FontFamily="Segoe MDL2 Assets" FontSize="12" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                <TextBlock Text="Preparer" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Name:" />
+                                <TextBox Text="{Binding PreparersName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Column="1" VerticalAlignment="Center" GotFocus="RepoLocationTextBox_GotFocus" />
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Phone number:" />
+                                <TextBox Text="{Binding PreparersPhoneNumber,UpdateSourceTrigger=LostFocus,Mode=TwoWay,Converter={StaticResource TelephoneConverter}}" Grid.Column="1" VerticalAlignment="Center" GotFocus="RepoLocationTextBox_GotFocus" />
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE825;" FontFamily="Segoe MDL2 Assets" FontSize="12" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                <TextBlock Text="Rates" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <TabItem.Resources>
+                            <Style TargetType="ListBox">
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Margin" Value="0,5,0,0" />
+                                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+                            </Style>                            
+                            <Style TargetType="GroupBox">
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                <Setter Property="Height" Value="170" />
+                            </Style>
+                        </TabItem.Resources>
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto" Padding="0,5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                    <GroupBox Header="Minimum Premium">
+                                        <ListBox ItemsSource="{Binding LsMinpItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male Non-Smoker" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleNonSmokerMinp[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="3" Text="{Binding MaleNonSmokerMinp[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="4" Text="{Binding MaleNonSmokerMinp[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="5" Text="{Binding MaleNonSmokerMinp[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Male Smoker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding MaleSmokerMinp[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="3" Text="{Binding MaleSmokerMinp[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="4" Text="{Binding MaleSmokerMinp[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="5" Text="{Binding MaleSmokerMinp[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Non-Smoker" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="2" Text="{Binding FemaleNonSmokerMinp[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="3" Text="{Binding FemaleNonSmokerMinp[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="4" Text="{Binding FemaleNonSmokerMinp[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="5" Text="{Binding FemaleNonSmokerMinp[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Smoker" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="2" Text="{Binding FemaleSmokerMinp[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="3" Text="{Binding FemaleSmokerMinp[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="4" Text="{Binding FemaleSmokerMinp[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="5" Text="{Binding FemaleSmokerMinp[3],StringFormat=N2}" />
+                                                        <Line Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="CS080 Values for Guideline">
+                                        <ListBox ItemsSource="{Binding LsCso80Items}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male Non-Smoker" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleNonSmoker,StringFormat=N2}" />
+                                                        <TextBlock Text="Male Smoker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding MaleSmoker,StringFormat=N2}" />
+                                                        <TextBlock Text="Female Non-Smoker" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="2" Text="{Binding FemaleNonSmoker,StringFormat=N2}" />
+                                                        <TextBlock Text="Female Smoker" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="2" Text="{Binding FemaleSmoker,StringFormat=N2}" />
+                                                        <Line Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="19" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Principal Insured">
+                                        <ListBox ItemsSource="{Binding LsRatePrItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male Non-Smoker" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="3" Text="{Binding MaleNonSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="4" Text="{Binding MaleNonSmoker[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="5" Text="{Binding MaleNonSmoker[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Male Smoker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding MaleSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="3" Text="{Binding MaleSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="4" Text="{Binding MaleSmoker[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="5" Text="{Binding MaleSmoker[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Non-Smoker" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="2" Text="{Binding FemaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="3" Text="{Binding FemaleNonSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="4" Text="{Binding FemaleNonSmoker[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="5" Text="{Binding FemaleNonSmoker[3],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Smoker" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="2" Text="{Binding FemaleSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="3" Text="{Binding FemaleSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="4" Text="{Binding FemaleSmoker[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="5" Text="{Binding FemaleSmoker[3],StringFormat=N2}" />
+                                                        <Line Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="19" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Spouse/Additional Insured">
+                                        <ListBox ItemsSource="{Binding LsRateSiItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male Non-Smoker" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="3" Text="{Binding MaleSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Text="Male Smoker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding MaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="3" Text="{Binding MaleSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Non-Smoker" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="2" Text="{Binding MaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="2" Grid.Column="3" Text="{Binding MaleSmoker[1],StringFormat=N2}" />
+                                                        <TextBlock Text="Female Smoker" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="2" Text="{Binding MaleNonSmoker[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="3" Grid.Column="3" Text="{Binding MaleSmoker[1],StringFormat=N2}" />
+                                                        <Line Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Substandard Rates">
+                                        <ListBox ItemsSource="{Binding LsRateSbItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Smoker" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding SmokerSubstandard,StringFormat=N2}" />
+                                                        <TextBlock Text="Non-Smoker" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding NonSmokerSubstandard,StringFormat=N2}" />
+                                                        <Line Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Waiver of Premium">
+                                        <ListBox ItemsSource="{Binding LsRateWpItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleWPD,StringFormat=N2}" />
+                                                        <TextBlock Text="Female" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding FemaleWPD,StringFormat=N2}" />
+                                                        <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Target Premium">
+                                        <ListBox ItemsSource="{Binding LsTargItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleTarget,StringFormat=N2}" />
+                                                        <TextBlock Text="Female" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding FemaleTarget,StringFormat=N2}" />
+                                                        <Line Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Surrender Charges">
+                                        <ListBox ItemsSource="{Binding LsSurrItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Male" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding MaleSurr[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="3" Text="{Binding MaleSurr[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="4" Text="{Binding MaleSurr[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="5" Text="{Binding MaleSurr[3],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="6" Text="{Binding MaleSurr[4],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="7" Text="{Binding MaleSurr[5],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="8" Text="{Binding MaleSurr[6],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="9" Text="{Binding MaleSurr[7],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="10" Text="{Binding MaleSurr[8],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="11" Text="{Binding MaleSurr[9],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="12" Text="{Binding MaleSurr[10],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="13" Text="{Binding MaleSurr[11],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="14" Text="{Binding MaleSurr[12],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="15" Text="{Binding MaleSurr[13],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="16" Text="{Binding MaleSurr[14],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="17" Text="{Binding MaleSurr[15],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="18" Text="{Binding MaleSurr[16],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="19" Text="{Binding MaleSurr[17],StringFormat=N2}" />
+                                                        <TextBlock Text="Female" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding FemaleSurr[0],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="3" Text="{Binding FemaleSurr[1],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="4" Text="{Binding FemaleSurr[2],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="5" Text="{Binding FemaleSurr[3],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="6" Text="{Binding FemaleSurr[4],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="7" Text="{Binding FemaleSurr[5],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="8" Text="{Binding FemaleSurr[6],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="9" Text="{Binding FemaleSurr[7],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="10" Text="{Binding FemaleSurr[8],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="11" Text="{Binding FemaleSurr[9],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="12" Text="{Binding FemaleSurr[10],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="13" Text="{Binding FemaleSurr[11],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="14" Text="{Binding FemaleSurr[12],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="15" Text="{Binding FemaleSurr[13],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="16" Text="{Binding FemaleSurr[14],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="17" Text="{Binding FemaleSurr[15],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="18" Text="{Binding FemaleSurr[16],StringFormat=N2}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="19" Text="{Binding FemaleSurr[17],StringFormat=N2}" />
+                                                        <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="19" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="GPO Rates">
+                                        <ListBox ItemsSource="{Binding LsRateGpItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="1" Text="{Binding Value,StringFormat=N2}" />
+                                                        <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Corridor of Coverage">
+                                        <ListBox ItemsSource="{Binding LsCorrItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="1" Text="{Binding Value,StringFormat=N2}" />
+                                                        <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Spouse DB Adjustment">
+                                        <ListBox ItemsSource="{Binding LsSpouseItems}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="1" Text="{Binding Value,StringFormat=N2}" />
+                                                        <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Height/Weight Tables">
+                                        <ListBox ItemsSource="{Binding WeightMinMaxValues}" ItemContainerStyle="{StaticResource LBItemContainer}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                            <RowDefinition />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Text="{Binding Id,StringFormat=00}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" TextAlignment="Right" Margin="0,0,5,0" />
+                                                        <TextBlock Text="Max" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="2" Text="{Binding WeightValues[0].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="3" Text="{Binding WeightValues[1].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="4" Text="{Binding WeightValues[2].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="5" Text="{Binding WeightValues[3].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="6" Text="{Binding WeightValues[4].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="7" Text="{Binding WeightValues[5].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="8" Text="{Binding WeightValues[6].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="9" Text="{Binding WeightValues[7].Max,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="0" Grid.Column="10" Text="{Binding WeightValues[8].Max,StringFormat=N0}" />
+                                                        <TextBlock Text="Min" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,5,0" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="2" Text="{Binding WeightValues[0].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="3" Text="{Binding WeightValues[1].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="4" Text="{Binding WeightValues[2].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="5" Text="{Binding WeightValues[3].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="6" Text="{Binding WeightValues[4].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="7" Text="{Binding WeightValues[5].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="8" Text="{Binding WeightValues[6].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="9" Text="{Binding WeightValues[7].Min,StringFormat=N0}" />
+                                                        <TextBlock Style="{StaticResource NumericValue}" Grid.Row="1" Grid.Column="10" Text="{Binding WeightValues[8].Min,StringFormat=N0}" />
+                                                        <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="99" X1="0" Y1="5" X2="{Binding RelativeSource={RelativeSource AncestorType=Grid},Path=ActualWidth}" Y2="5" StrokeThickness="1" Stroke="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                </TabControl>
+                <Border Grid.Row="1" Padding="5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Close" IsCancel="True" Command="{Binding CloseCommand}" Style="{StaticResource SmallButton}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

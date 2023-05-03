@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="OSControls.AnalogClock"
+             xmlns:OSControls="clr-namespace:OSControls"  
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+    <Grid Name="LayoutRoot" Margin="10" SizeChanged="LayoutRoot_SizeChanged">
+
+        <!--clock face-->
+        <Image Name="BackgroundImage" Width="250" Height="250" Source="Themes/DefaultClockFace.png" />
+
+        <!--date-->
+        <Border Name="MonthBorder" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Visible">
+            <TextBlock Name="MonthTextBlock" Text="Jan" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16" FontWeight="Bold" />
+        </Border>
+        <Border Name="DayBorder" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Visible">
+            <TextBlock Name="DayTextBlock" Text="30" Margin="2" Width="{Binding ElementName=MonthTextBlock,Path=ActualWidth}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" />
+        </Border>
+
+        <OSControls:ValueDisplay x:Name="MyValueDisplay" VerticalAlignment="Center" HorizontalAlignment="Center" Height="10" Width="75" Margin="0,50,0,0" IndicatorType="Solid" GlassVisibility="Visible" MarkerVisibility="Collapsed" ShowMinorTicks="false" IndicatorOrientation="Horizontal" MajorTicksAtPercent="10" BorderThickness="1" Foreground="#FFE6E6E6" MajorTickThickness="1" MinorTickThickness=".25" FontSize="9" ScaleVisibility="Collapsed" ScaleForeground="#BFC2C5D6" ValueIndicator="#FF041BAA" Background="{x:Null}" BorderBrush="#FF727272" >
+            <OSControls:ValueDisplay.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0"/>
+            </OSControls:ValueDisplay.Effect>
+        </OSControls:ValueDisplay>
+
+        <!--hands-->
+        <Canvas Name="HandsCanvas" Background="Transparent" SizeChanged="HandsCanvas_SizeChanged" />
+
+        <Image Name="SecondHandImage" Source="Themes/SecondHand1.png" Height="105" RenderTransformOrigin="1,1" Visibility="Collapsed" >
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
+        <!--hub-->
+        <Ellipse Name="HubEllipse" Margin="3" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Fill="Black" Stroke="Black" />
+        <Image Name="GlassImage" Margin="3" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Source="Themes/AlarmGlass.png" />
+
+        <!--moon-->
+        <OSControls:Moon x:Name="TheMoon" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="30" Margin="0,0,0,0" Phase="0"/>
+
+    </Grid>
+</UserControl>

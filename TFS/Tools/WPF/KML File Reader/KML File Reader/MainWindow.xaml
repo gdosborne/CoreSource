@@ -1,0 +1,28 @@
+﻿<Window x:Class="KML_File_Reader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KML_File_Reader"
+        mc:Ignorable="d"
+        Title="KML File Reader" Height="450" Width="800" Icon="kml.ico">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBar>
+            <Button Style="{DynamicResource ToolbarButton}" Command="{Binding OpenKmlFileCommand}">
+                <TextBlock Text="&#xE8DE;" Style="{DynamicResource ToolbarButtonStyle}" />
+            </Button>
+            <Border Padding="3" BorderThickness="1" BorderBrush="#FF000000" VerticalAlignment="Center" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrush}}">
+                <Grid>
+                    <TextBlock VerticalAlignment="Center" Text="KML File Name..." Opacity=".4" Margin="2,0" Visibility="{Binding KMLFileNameWatermarkVisibility}" />
+                    <TextBox Width="250" BorderThickness="0" VerticalAlignment="Center" Padding="0" Background="Transparent" Text="{Binding KMLFileName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                </Grid>
+            </Border>
+        </ToolBar>
+    </Grid>
+</Window>

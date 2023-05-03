@@ -1,0 +1,13 @@
+﻿<Window x:Class="StartupTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StartupTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="Call It!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="75" Height="30" Click="Button_Click"/>
+        <Label Name="MessageLabel" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,60,0,0"/>
+    </Grid>
+</Window>

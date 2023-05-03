@@ -1,0 +1,249 @@
+﻿<UserControl
+    x:Class="ProjectFileManager.FileManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:v="clr-namespace:ProjectFileManager"
+    Background="{DynamicResource
+        {x:Static SystemColors.WindowBrushKey}}"
+    d:DesignHeight="300"
+    d:DesignWidth="499"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <v:FileManagerView
+                        x:Key="view"
+                        ExecuteAction="FileManagerView_ExecuteAction"
+                        PropertyChanged="FileManagerView_PropertyChanged" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid
+        Name="LayoutRoot"
+        DataContext="{Binding
+            Source={StaticResource view}}">
+        <Grid.Background>
+            <SolidColorBrush
+                Color="{DynamicResource
+                    {x:Static SystemColors.ControlColorKey}}" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <SolidColorBrush
+                    Color="{DynamicResource
+                        {x:Static SystemColors.ControlColorKey}}" />
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Line
+                Grid.Column="0"
+                Style="{StaticResource SeparatorLine}" />
+            <Label
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Content="Address:" />
+            <TextBox
+                Grid.Column="2"
+                Margin="0,0,5,0"
+                Padding="0,3"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                BorderBrush="{DynamicResource
+                    {x:Static SystemColors.ActiveBorderBrushKey}}"
+                BorderThickness="1"
+                GotFocus="TextBox_GotFocus"
+                Text="{Binding
+                    Address,
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=TwoWay}" />
+            <Button
+                Grid.Column="3"
+                Command="{Binding SetServerCommand}"
+                Style="{StaticResource SmallButton}"
+                ToolTip="Set web service address">
+                <Image
+                    Source="images/forward.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+            <Line
+                Grid.Column="4"
+                Style="{StaticResource SeparatorLine}" />
+            <Button
+                Grid.Column="5"
+                Command="{Binding DeleteCommand}"
+                Style="{StaticResource SmallButton}"
+                ToolTip="Delete selected">
+                <Image
+                    Source="images/delete.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+            <Button
+                Grid.Column="6"
+                Command="{Binding RefreshCommand}"
+                Style="{StaticResource SmallButton}"
+                ToolTip="Refresh file list">
+                <Image
+                    Source="images/refresh.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+            <Line
+                Grid.Column="7"
+                Style="{StaticResource SeparatorLine}" />
+            <Button
+                Grid.Column="8"
+                Command="{Binding ReorderCommand}"
+                Style="{StaticResource SmallButton}"
+                ToolTip="Reorder file list">
+                <Image
+                    Source="images/flag.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+            <Button
+                Grid.Column="9"
+                Command="{Binding GetBackupsCommand}"
+                Style="{StaticResource SmallButton}"
+                ToolTip="Project backups">
+                <Image
+                    Source="images/backup.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+        </Grid>
+        <DataGrid
+            Name="FileListView"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            Background="White"
+            BorderBrush="{DynamicResource
+                {x:Static SystemColors.ActiveBorderBrushKey}}"
+            CanUserReorderColumns="False"
+            CanUserResizeRows="False"
+            GridLinesVisibility="None"
+            HeadersVisibility="Column"
+            IsReadOnly="True"
+            ItemsSource="{Binding
+                Projects,
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}"
+            MouseDoubleClick="FileListView_MouseDoubleClick"
+            SelectedItem="{Binding
+                SelectedProject,
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=TwoWay}"
+            SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name}"
+                    Header="Name"
+                    SortMemberPath="Name" />
+                <DataGridTemplateColumn
+                    Width="75"
+                    Header="Size">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Margin="0,0,5,0"
+                                HorizontalAlignment="Right"
+                                Text="{Binding
+                                    Size,
+                                    StringFormat='0,0'}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="150"
+                    Header="Modified (UTC)">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LastModifyTimeUtc}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid
+            Grid.Row="2"
+            Margin="5,3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Content="File name:" />
+            <TextBox
+                Grid.Column="1"
+                Padding="3"
+                VerticalAlignment="Center"
+                Style="{StaticResource ReadOnlyTextBox}"
+                Text="{Binding SelectedProject.Name}" />
+        </Grid>
+        <StackPanel
+            Grid.Row="3"
+            Margin="10,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Background="#FFD30000"
+            Orientation="Horizontal"
+            Visibility="{Binding
+                ErrorVisibility,
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}">
+            <Image
+                Margin="10,0"
+                VerticalAlignment="Center"
+                Source="images/warning.png" />
+            <Label
+                Margin="0,0,10,0"
+                VerticalAlignment="Center"
+                Content="{Binding
+                    ErrorText,
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=OneWay}"
+                Foreground="White" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Command="{Binding OKCommand}"
+                Content="OK"
+                IsDefault="True" />
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="Cancel"
+                IsCancel="True" />
+        </StackPanel>
+        <Border
+            Grid.Row="3"
+            Height="5"
+            Width="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="Transparent"
+            ToolTip="{Binding ControlVersion}" />
+    </Grid>
+</UserControl>

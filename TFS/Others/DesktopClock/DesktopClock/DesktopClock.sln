@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio 15
+VisualStudioVersion = 15.0.28307.1300
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClock", "DesktopClock\DesktopClock.csproj", "{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSoftComponents", "..\..\OSoftComponents\OSoftComponents.csproj", "{A2DA55D5-5613-4036-8336-2A2968D0BF05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlTester", "..\..\OSControls\ControlTester\ControlTester.csproj", "{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Release|x64.ActiveCfg = Release|x64
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Release|x64.Build.0 = Release|x64
+		{5E8D12CE-046F-42E7-91A7-4AA28B5CB23A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Release|x64.ActiveCfg = Release|x64
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Release|x64.Build.0 = Release|x64
+		{A2DA55D5-5613-4036-8336-2A2968D0BF05}.Release|x86.ActiveCfg = Release|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Release|x64.ActiveCfg = Release|x64
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Release|x64.Build.0 = Release|x64
+		{79DDD92C-9C46-40FE-9856-F6FCD4E960F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {592F12A3-8F00-47CB-B3BE-1F8136E2C41A}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DesktopClock\\DesktopClock.csproj
+		SccProjectName1 = DesktopClock
+		SccLocalPath1 = DesktopClock
+		SccProjectUniqueName2 = ..\\..\\OSoftComponents\\OSoftComponents.csproj
+		SccProjectName2 = ../../OSoftComponents
+		SccLocalPath2 = ..\\..\\OSoftComponents
+		SccProjectUniqueName3 = ..\\..\\OSControls\\ControlTester\\ControlTester.csproj
+		SccProjectName3 = ../../OSControls/ControlTester
+		SccLocalPath3 = ..\\..\\OSControls\\ControlTester
+		SccProjectUniqueName4 = ..\\..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName4 = ../../../Framework/Application
+		SccLocalPath4 = ..\\..\\..\\Framework\\Application
+		SccProjectUniqueName5 = ..\\..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName5 = ../../../Framework/MVVMFramework
+		SccLocalPath5 = ..\\..\\..\\Framework\\MVVMFramework
+	EndGlobalSection
+EndGlobal

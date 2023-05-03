@@ -1,0 +1,151 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<FontFamily x:Key = "_linea-basic-10">pack://application:,,,/Fonts/#linea-basic-10</FontFamily>
+	<sys:Double x:Key="LineaBasicFreeGlyphFontSize">18</sys:Double>
+	<SolidColorBrush x:Key="LineaBasicFreeGlyphForeground">#FF000000</SolidColorBrush>
+	<Style TargetType="TextBlock" x:Key="LineaBasicFreeGlyphItem" BasedOn="{x:Null}">
+		<Setter Property="FontFamily" Value="{DynamicResource _linea-basic-10}" />
+		<Setter Property="FontSize" Value="{DynamicResource LineaBasicFreeGlyphFontSize}" />
+		<Setter Property="Foreground" Value="{DynamicResource LineaBasicFreeGlyphForeground}" />
+	</Style>
+
+	<TextBlock Text="&#x0021;" x:Key="_character00033" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0022;" x:Key="_character00034" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0023;" x:Key="_character00035" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0024;" x:Key="_character00036" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0025;" x:Key="_character00037" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0026;" x:Key="_character00038" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0027;" x:Key="_character00039" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0028;" x:Key="_character00040" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0029;" x:Key="_character00041" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002A;" x:Key="_character00042" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002B;" x:Key="_character00043" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002C;" x:Key="_character00044" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002D;" x:Key="_character00045" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002E;" x:Key="_character00046" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x002F;" x:Key="_character00047" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0030;" x:Key="_character00048" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0031;" x:Key="_character00049" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0032;" x:Key="_character00050" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0033;" x:Key="_character00051" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0034;" x:Key="_character00052" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0035;" x:Key="_character00053" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0036;" x:Key="_character00054" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0037;" x:Key="_character00055" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0038;" x:Key="_character00056" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0039;" x:Key="_character00057" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003A;" x:Key="_character00058" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003B;" x:Key="_character00059" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003C;" x:Key="_character00060" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003D;" x:Key="_character00061" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003E;" x:Key="_character00062" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x003F;" x:Key="_character00063" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0040;" x:Key="_character00064" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0041;" x:Key="_character00065" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0042;" x:Key="_character00066" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0043;" x:Key="_character00067" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0044;" x:Key="_character00068" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0045;" x:Key="_character00069" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0046;" x:Key="_character00070" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0047;" x:Key="_character00071" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0048;" x:Key="_character00072" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0049;" x:Key="_character00073" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004A;" x:Key="_character00074" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004B;" x:Key="_character00075" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004C;" x:Key="_character00076" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004D;" x:Key="_character00077" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004E;" x:Key="_character00078" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x004F;" x:Key="_character00079" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0050;" x:Key="_character00080" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0051;" x:Key="_character00081" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0052;" x:Key="_character00082" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0053;" x:Key="_character00083" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0054;" x:Key="_character00084" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0055;" x:Key="_character00085" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0056;" x:Key="_character00086" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0057;" x:Key="_character00087" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0058;" x:Key="_character00088" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0059;" x:Key="_character00089" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005A;" x:Key="_character00090" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005B;" x:Key="_character00091" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005C;" x:Key="_character00092" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005D;" x:Key="_character00093" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005E;" x:Key="_character00094" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x005F;" x:Key="_character00095" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0060;" x:Key="_character00096" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0061;" x:Key="_character00097" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0062;" x:Key="_character00098" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0063;" x:Key="_character00099" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0064;" x:Key="_character00100" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0065;" x:Key="_character00101" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0066;" x:Key="_character00102" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0067;" x:Key="_character00103" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0068;" x:Key="_character00104" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0069;" x:Key="_character00105" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006A;" x:Key="_character00106" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006B;" x:Key="_character00107" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006C;" x:Key="_character00108" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006D;" x:Key="_character00109" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006E;" x:Key="_character00110" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x006F;" x:Key="_character00111" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0070;" x:Key="_character00112" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0071;" x:Key="_character00113" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0072;" x:Key="_character00114" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0073;" x:Key="_character00115" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0074;" x:Key="_character00116" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0075;" x:Key="_character00117" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0076;" x:Key="_character00118" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0077;" x:Key="_character00119" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0078;" x:Key="_character00120" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x0079;" x:Key="_character00121" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x007A;" x:Key="_character00122" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<!--<TextBlock Text="&#x007B;" x:Key="_character00123" Style="{DynamicResource LineaBasicFreeGlyphItem}" />-->
+	<TextBlock Text="&#x007C;" x:Key="_character00124" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x007D;" x:Key="_character00125" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#x007E;" x:Key="_character00126" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE000;" x:Key="_character57344" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE001;" x:Key="_character57345" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE002;" x:Key="_character57346" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE003;" x:Key="_character57347" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE004;" x:Key="_character57348" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE005;" x:Key="_character57349" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE006;" x:Key="_character57350" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE007;" x:Key="_character57351" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE008;" x:Key="_character57352" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE009;" x:Key="_character57353" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00A;" x:Key="_character57354" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00B;" x:Key="_character57355" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00C;" x:Key="_character57356" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00D;" x:Key="_character57357" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00E;" x:Key="_character57358" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE00F;" x:Key="_character57359" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE010;" x:Key="_character57360" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE011;" x:Key="_character57361" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE012;" x:Key="_character57362" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE013;" x:Key="_character57363" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE014;" x:Key="_character57364" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE015;" x:Key="_character57365" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE016;" x:Key="_character57366" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE017;" x:Key="_character57367" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE018;" x:Key="_character57368" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE019;" x:Key="_character57369" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01A;" x:Key="_character57370" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01B;" x:Key="_character57371" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01C;" x:Key="_character57372" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01D;" x:Key="_character57373" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01E;" x:Key="_character57374" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE01F;" x:Key="_character57375" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE020;" x:Key="_character57376" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE021;" x:Key="_character57377" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE022;" x:Key="_character57378" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE023;" x:Key="_character57379" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE024;" x:Key="_character57380" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE025;" x:Key="_character57381" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE026;" x:Key="_character57382" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE027;" x:Key="_character57383" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+	<TextBlock Text="&#xE028;" x:Key="_character57384" Style="{DynamicResource LineaBasicFreeGlyphItem}" />
+
+</ResourceDictionary>
+

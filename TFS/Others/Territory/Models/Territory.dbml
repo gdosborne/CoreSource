@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="gdos7825" Class="TerritoryDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=gdos7825.db.11133221.hostedresource.com;Initial Catalog=gdos7825;Persist Security Info=True;User ID=gdos7825" SettingsObjectName="Models.Properties.Settings" SettingsPropertyName="gdos7825ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.UserCongregationRole" Member="UserCongregationRoles">
+    <Type Name="UserCongregationRole">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CongregationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserCongregationRole" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="Role_UserCongregationRole" Member="Role" ThisKey="RoleId" OtherKey="Id" Type="Role" IsForeignKey="true" />
+      <Association Name="Congregation_UserCongregationRole" Member="Congregation" ThisKey="CongregationId" OtherKey="Id" Type="Congregation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserApplication" Member="UserApplications">
+    <Type Name="UserApplication">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserApplication" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Application_UserApplication" Member="Application" ThisKey="ApplicationId" OtherKey="Id" Type="Application" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsAdmin" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EMail" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RegionId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordChangeRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsLoggedIn" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastRequest" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_UserCongregationRole" Member="UserCongregationRoles" ThisKey="Id" OtherKey="UserId" Type="UserCongregationRole" />
+      <Association Name="User_UserApplication" Member="UserApplications" ThisKey="Id" OtherKey="UserId" Type="UserApplication" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(5) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_UserCongregationRole" Member="UserCongregationRoles" ThisKey="Id" OtherKey="RoleId" Type="UserCongregationRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Congregation" Member="Congregations">
+    <Type Name="Congregation">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="CityState" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Congregation_UserCongregationRole" Member="UserCongregationRoles" ThisKey="Id" OtherKey="CongregationId" Type="UserCongregationRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Application" Member="Applications">
+    <Type Name="Application">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Application_UserApplication" Member="UserApplications" ThisKey="Id" OtherKey="ApplicationId" Type="UserApplication" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Territory" Member="T_Territories">
+    <Type Name="T_Territory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OtherFileName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TerritoryTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="T_Territory_T_Work" Member="T_Works" ThisKey="ID" OtherKey="TerritoryID" Type="T_Work" />
+      <Association Name="T_Territory_T_DoNotCall" Member="T_DoNotCalls" ThisKey="ID" OtherKey="TerritoryID" Type="T_DoNotCall" />
+      <Association Name="T_TerritoryType_T_Territory" Member="T_TerritoryType" ThisKey="TerritoryTypeID" OtherKey="ID" Type="T_TerritoryType" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="T_Area_T_Territory" Member="T_Area" ThisKey="AreaID" OtherKey="ID" Type="T_Area" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Work" Member="T_Works">
+    <Type Name="T_Work">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TerritoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="WorkBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SpecialCampaignID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="T_Territory_T_Work" Member="T_Territory" ThisKey="TerritoryID" OtherKey="ID" Type="T_Territory" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="T_Publisher_T_Work" Member="T_Publisher" ThisKey="WorkBy" OtherKey="ID" Type="T_Publisher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="T_SpecialCampaign_T_Work" Member="T_SpecialCampaign" ThisKey="SpecialCampaignID" OtherKey="ID" Type="T_SpecialCampaign" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_TerritoryType" Member="T_TerritoryTypes">
+    <Type Name="T_TerritoryType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="T_TerritoryType_T_Territory" Member="T_Territories" ThisKey="ID" OtherKey="TerritoryTypeID" Type="T_Territory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Publisher" Member="T_Publishers">
+    <Type Name="T_Publisher">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Lastname" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Special" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="T_Publisher_T_Work" Member="T_Works" ThisKey="ID" OtherKey="WorkBy" Type="T_Work" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_SpecialCampaign" Member="T_SpecialCampaigns">
+    <Type Name="T_SpecialCampaign">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="T_SpecialCampaign_T_Work" Member="T_Works" ThisKey="ID" OtherKey="SpecialCampaignID" Type="T_Work" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_Area" Member="T_Areas">
+    <Type Name="T_Area">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="T_Area_T_Territory" Member="T_Territories" ThisKey="ID" OtherKey="AreaID" Type="T_Territory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.T_DoNotCall" Member="T_DoNotCalls">
+    <Type Name="T_DoNotCall">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TerritoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DNCPhone" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DNCDoorToDoor" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="T_Territory_T_DoNotCall" Member="T_Territory" ThisKey="TerritoryID" OtherKey="ID" Type="T_Territory" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

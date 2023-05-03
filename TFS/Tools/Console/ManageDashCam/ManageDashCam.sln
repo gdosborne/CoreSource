@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageDashCam", "ManageDashCam\ManageDashCam.csproj", "{1CA8BDB2-94C8-4EA9-A79E-05A3B1BA764D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CA8BDB2-94C8-4EA9-A79E-05A3B1BA764D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CA8BDB2-94C8-4EA9-A79E-05A3B1BA764D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CA8BDB2-94C8-4EA9-A79E-05A3B1BA764D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CA8BDB2-94C8-4EA9-A79E-05A3B1BA764D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0C8D86E-4122-4B31-A07E-5D2FF8A93C94}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ManageDashCam\\ManageDashCam.csproj
+		SccProjectName1 = ManageDashCam
+		SccLocalPath1 = ManageDashCam
+	EndGlobalSection
+EndGlobal

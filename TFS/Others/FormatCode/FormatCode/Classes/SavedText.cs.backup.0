@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormatCode.Classes
+{
+	public class SavedText
+	{
+		public string Text { get; set; }
+		public string BeforeLine { get; set; }
+		public string OnSameLineAsText { get; set; }
+		public bool IsTopOfFile { get; set; }
+	}
+}

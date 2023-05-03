@@ -1,0 +1,56 @@
+
+Software Engineer- HY-VEE
+
+KEY RESPONSIBILITIES
+
+• Enable system integration that also helps achieve a great developer experience
+
+•Help us plan and implement our cloud infrastructure
+
+•Pair with other team members to cross-pollinate ideas and skills
+
+• Champion code quality, maintainability, and reliability
+
+• Find and address performance issues
+
+• Take features from conception to final production deployment
+
+• Contribute heavily to user story definition that takes our technology stack into consideration, but also continue to push the bounds of what is possible
+
+KNOWLEDGE, SKILLS AND EXPERIENCE
+
+Required
+
+• Expert level knowledge of JavaScript (closures, scoping, functional concepts, OOP)
+
+• Production experience with modern JavaScript libraries such as React, Redux, and D3
+
+• Strong understanding of front end software architectures such as Flux and MVC
+
+• Expert level knowledge of at least one of the following programming languages: JavaScript, Java, C #7, Ruby, Scala, or Clojure
+
+• Production experience implementing RESTful APIs
+
+• Production experience with a variety of data storage systems such as PostgreSQL, SQL Server, Mongo, and Elasticsearch
+
+• Demonstrable grasp of software design patterns such as Singleton and Façade
+
+• Demonstrable grasp of logical data modeling techniques (ex. entity relationship diagrams)
+
+• Strong understanding of event-oriented software architectures
+
+Advantageous
+
+• Experience with using CI/CD technologies such as Jenkins, Bamboo, Travis CI, and Drone
+
+• Production experience with OAuth and Identity Provider integration
+
+• Degree level qualifications in a technical related subject • Demonstrable knowledge of secure programming techniques
+
+• Experience building cloud-native applications (kubernetes, docker swarm, etc.)
+
+• Experience with Node.js
+
+• Experience building cloud-native applications (kubernetes, docker swarm, etc)
+
+• Experience with test driven design and general automation

@@ -1,12 +1,7 @@
 ﻿namespace Territory.Checkout.ViewModels {
 	using Common.MVVMFramework;
-	using System;
-	using System.Collections.Generic;
-	using System.Collections.ObjectModel;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using Common.OzApplication.Primitives;
+	using System.Collections.ObjectModel;
 
 	internal class ApplicationSettingsWindowView : ViewModelBase {
 		public ApplicationSettingsWindowView() {
@@ -22,6 +17,14 @@
 				FontSizes.Add(i);
 			}
 			SelectedTextFontSize = App.AppSettings.GetValue("Application", "Font.Size", 13.0);
+			var startup = App.AppSettings.GetValue("Application", "Startup", "Territory");
+			IsAreaStartup = startup == "Area";
+			IsTerritoryStartup = startup == "Territory";
+			IsPersonStartup = startup == "Person";
+			NeedsWorkedSelection = new ObservableCollection<int> {
+				90, 180, 270, 365
+			};
+			NeedsWorkedSelected = App.NumberOfDaysNeedsWorked;
 		}
 
 		#region DialogResult Property
@@ -54,6 +57,83 @@
 				_SelectedTextFontSize = value;
 				App.AppSettings.AddOrUpdateSetting("Application", "Font.Size", SelectedTextFontSize);
 				App.Current.As<App>().Resources["TextFontSize"] = SelectedTextFontSize;
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region IsAreaStartup Property
+		private bool _IsAreaStartup = default;
+		public bool IsAreaStartup {
+			get => _IsAreaStartup;
+			set {
+				_IsAreaStartup = value;
+				if (IsAreaStartup) {
+					App.AppSettings.AddOrUpdateSetting("Application", "Startup", "Area");
+				}
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region IsTerritoryStartup Property
+		private bool _IsTerritoryStartup = default;
+		public bool IsTerritoryStartup {
+			get => _IsTerritoryStartup;
+			set {
+				_IsTerritoryStartup = value;
+				if (IsTerritoryStartup) {
+					App.AppSettings.AddOrUpdateSetting("Application", "Startup", "Territory");
+				}
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region IsPersonStartup Property
+		private bool _IsPersonStartup = default;
+		public bool IsPersonStartup {
+			get => _IsPersonStartup;
+			set {
+				_IsPersonStartup = value;
+				if (IsPersonStartup) {
+					App.AppSettings.AddOrUpdateSetting("Application", "Startup", "Person");
+				}
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region NeedsWorkedSelection Property
+		private ObservableCollection<int> _NeedsWorkedSelection = default;
+		public ObservableCollection<int> NeedsWorkedSelection {
+			get => _NeedsWorkedSelection;
+			set {
+				_NeedsWorkedSelection = value;
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region NeedsWorkedSelected Property
+		private int _NeedsWorkedSelected = default;
+		public int NeedsWorkedSelected {
+			get => _NeedsWorkedSelected;
+			set {
+				NeedsWorkRequiresRefresh = value != NeedsWorkedSelected;
+				_NeedsWorkedSelected = value;
+				App.NumberOfDaysNeedsWorked = NeedsWorkedSelected;
+				InvokePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region NeedsWorkRequiresRefresh Property
+		private bool _NeedsWorkRequiresRefresh = default;
+		public bool NeedsWorkRequiresRefresh {
+			get => _NeedsWorkRequiresRefresh;
+			set {
+				_NeedsWorkRequiresRefresh = value;
 				InvokePropertyChanged();
 			}
 		}

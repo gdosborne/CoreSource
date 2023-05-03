@@ -1,0 +1,313 @@
+﻿<Window x:Class="Life.Savings.FutureYearsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:conv="clr-namespace:Life.Savings.Converters"
+        mc:Ignorable="d" Height="560" MaxHeight="560" MinHeight="560" 
+        Width="900" MinWidth="900" ResizeMode="CanResize"
+        Title="Changes in Future Years" Style="{StaticResource MainWindowStyle}">
+    <Window.DataContext>
+        <local:FutureYearsWindowView PropertyChanged="FutureYearsWindowView_PropertyChanged" />
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:PercentageConverter x:Key="PercentConverter" />
+        <conv:CurrencyConverter x:Key="CurrencyConverter" />
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <GroupBox Header="Death Benefits, Premiums, Interest Rates and Options">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Column="0">
+                    <GroupBox.Header>
+                        <CheckBox Content="Specified Death Benefit" IsChecked="{Binding IsSpecialDeathBenefitChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding SpecifiedDeathBenefitVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".35*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Age" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="New Benefit" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0" ItemsSource="{Binding SpecifiedDeathBenefits}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".35*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="1">
+                    <GroupBox.Header>
+                        <CheckBox Content="Modal Premium Amount" IsChecked="{Binding IsModalPremiumAmountChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding ModalPremiumAmountVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".35*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Age" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="New Premium" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0" ItemsSource="{Binding ModalPremiums}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".35*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="2">
+                    <GroupBox.Header>
+                        <CheckBox Content="Current Interest Rate" IsChecked="{Binding IsCurrentInterestRateChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding CurrentInterestRateVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".35*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Age" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="New Interest Rate" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0" ItemsSource="{Binding CurrentInterestRates}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".35*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=P,Converter={StaticResource PercentConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="3">
+                    <GroupBox.Header>
+                        <CheckBox Content="Death Benefit Option" IsChecked="{Binding IsDeathBenefitOptionOptionChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding DeathBenefitOptionVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".35*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Age" TextWrapping="Wrap" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="New Option" TextWrapping="Wrap" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="0" ItemsSource="{Binding DeathBenefitOptions}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".35*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Header="Withdrawls, Loans and Loan Repayments">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Column="0">
+                    <GroupBox.Header>
+                        <CheckBox Content="Withdrawls" IsChecked="{Binding IsWithdrawlsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding WithdrawlsVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".25*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width=".25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Start Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <TextBlock Text="New Option" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
+                        <TextBlock Text="End Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0" ItemsSource="{Binding Withdrawls}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="2" Text="{Binding EndAge,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="1">
+                    <GroupBox.Header>
+                        <CheckBox Content="Annual Policy Loan" IsChecked="{Binding IsAnnualPolicyLoanChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding AnnualPolicyLoanVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".25*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width=".25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Start Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <TextBlock Text="Annual Loan Amount" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
+                        <TextBlock Text="End Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0" ItemsSource="{Binding AnnualPolicyLoans}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="2" Text="{Binding EndAge,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Column="2">
+                    <GroupBox.Header>
+                        <CheckBox Content="Annual Loan Repayments" IsChecked="{Binding IsAnnualLoanRepaymentsChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </GroupBox.Header>
+                    <Grid Visibility="{Binding AnnualLoanRepaymentsVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".25*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width=".25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Start Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <TextBlock Text="Annual Repay Amount" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" />
+                        <TextBlock Text="End Age" TextWrapping="Wrap" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" LineHeight="10pt" LineStackingStrategy="BlockLineHeight" />
+                        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0" ItemsSource="{Binding AnnualLoanRepayments}" HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width=".25*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Age,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="1" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=C,Converter={StaticResource CurrencyConverter}}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBox Grid.Column="2" Text="{Binding EndAge,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,StringFormat=0}" TextAlignment="Right" GotFocus="TextBox_GotFocus" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}"/>
+                                        <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Hyperlink FontFamily="Segoe MDL2 Assets" FontSize="8" Command="{Binding ClearItemCommand}">&#xE10A;</Hyperlink>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" HorizontalAlignment="Center" Content="Return to Client" Command="{Binding ReturnToClientCommand}" />
+            <Button Grid.Column="1" HorizontalAlignment="Center" Content="Premium Calc" Command="{Binding PremiumCalcCommand}" />
+            <Button Grid.Column="2" HorizontalAlignment="Center" Content="Insured Riders" Command="{Binding InsuredRidersCommand}" />
+        </Grid>
+    </Grid>
+
+</Window>

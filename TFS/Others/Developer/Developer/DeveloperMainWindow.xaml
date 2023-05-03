@@ -1,0 +1,237 @@
+﻿<RibbonWindow
+    x:Class="SNC.OptiRamp.Application.Developer.DeveloperMainWindow"
+    Title="OptiRamp© Developer"
+    x:ClassModifier="internal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:SNC.OptiRamp.Application.Developer.Classes"
+    xmlns:v="clr-namespace:SNC.OptiRamp.Application.Developer.Views"
+    Height="413"
+    Width="906"
+    Closing="Window_Closing"
+    Icon="Images/code.ico">
+    <Window.Resources>
+        <v:DeveloperMainWindowView
+            x:Key="view"
+            ExecuteUIAction="DeveloperMainWindowView_ExecuteUIAction" />
+    </Window.Resources>
+    <Grid
+        Name="LayoutRoot"
+        DataContext="{Binding
+            Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Ribbon
+            Name="ApplicationRibbon"
+            Grid.Row="0">
+            <Ribbon.HelpPaneContent>
+                <RibbonButton
+                    KeyTip="B"
+                    Label="KnowledgeBase"
+                    SmallImageSource="Images/x24/help_book.png"
+                    ToolTipDescription="Displays the knowledgebase."
+                    ToolTipImageSource="Images/x128/help_book.png"
+                    ToolTipTitle="KnowledgeBase" />
+            </Ribbon.HelpPaneContent>
+            <Ribbon.QuickAccessToolBar>
+                <RibbonQuickAccessToolBar>
+                    <RibbonButton
+                        Name="SelectProject"
+                        Command="{Binding OpenLocalCommand}"
+                        SmallImageSource="Images/x24/openFile.png"
+                        ToolTip="Select Project" />
+                    <RibbonButton
+                        Name="Save"
+                        Command="{Binding SaveProjectCommand}"
+                        SmallImageSource="Images/x24/save.png"
+                        ToolTip="Save" />
+                </RibbonQuickAccessToolBar>
+            </Ribbon.QuickAccessToolBar>
+            <Ribbon.ApplicationMenu>
+                <c:MyApplicationMenu
+                    x:Name="MyAppMenu"
+                    Label="Files"
+                    MenuWidth="300"
+                    ShowAuxilaryPanel="True">
+                    <RibbonApplicationMenu.Style>
+                        <Style TargetType="RibbonApplicationMenu">
+                            <Setter
+                                Property="Template"
+                                Value="{StaticResource RibbonApplicationMenuControlTemplate1}" />
+                        </Style>
+                    </RibbonApplicationMenu.Style>
+                    <RibbonApplicationMenu.AuxiliaryPaneContent>
+                        <StackPanel
+                            Name="RecentStackPanel"
+                            Margin="10,0"
+                            Orientation="Vertical">
+                            <Label Content="Recent Items" />
+                            <Separator />
+                        </StackPanel>
+                    </RibbonApplicationMenu.AuxiliaryPaneContent>
+                </c:MyApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <RibbonTab Header="Projects">
+                <RibbonGroup
+                    Name="FileGroup"
+                    Header="File">
+                    <RibbonButton
+                        Command="{Binding NewProjectCommand}"
+                        KeyTip="N"
+                        Label="New"
+                        LargeImageSource="Images/x32/new.png"
+                        SmallImageSource="Images/x24/new.png"
+                        ToolTipDescription="Creates a new project file."
+                        ToolTipImageSource="Images\x128\new.png"
+                        ToolTipTitle="New" />
+                    <RibbonButton
+                        Command="{Binding OpenLocalCommand}"
+                        KeyTip="O"
+                        Label="Open"
+                        LargeImageSource="Images/x32/openFile.png"
+                        SmallImageSource="Images/x24/openFile.png"
+                        ToolTipDescription="Opens an existing local project file."
+                        ToolTipImageSource="Images/x128/openFile.png"
+                        ToolTipTitle="Open" />
+                    <RibbonButton
+                        Command="{Binding OpenRemoteCommand}"
+                        KeyTip="R"
+                        Label="Remote"
+                        LargeImageSource="Images/x32/openFromWeb.png"
+                        SmallImageSource="Images/x24/openFromWeb.png"
+                        ToolTipDescription="Opens an existing project file from the web configuration server."
+                        ToolTipImageSource="Images/x128/openFromWeb.png"
+                        ToolTipTitle="Open from web" />
+                    <RibbonButton
+                        Command="{Binding CloseProjectCommand}"
+                        KeyTip="C"
+                        Label="Close"
+                        LargeImageSource="Images/x32/closeFile.png"
+                        SmallImageSource="Images/x24/closeFile.png"
+                        ToolTipDescription="Closes an open project file."
+                        ToolTipImageSource="Images/x128/closeFile.png"
+                        ToolTipTitle="Close" />
+                    <RibbonMenuButton
+                        Label="Save"
+                        LargeImageSource="Images/x32/save.png"
+                        SmallImageSource="Images/x24/save.png"
+                        ToolTipDescription="Saves an unsaved project file."
+                        ToolTipImageSource="Images/x128/Save.png"
+                        ToolTipTitle="Save">
+                        <RibbonMenuItem
+                            Command="{Binding SaveProjectCommand}"
+                            Header="Save"
+                            ImageSource="Images/x24/save.png"
+                            KeyTip="T"
+                            ToolTipDescription="Saves an unsaved project file."
+                            ToolTipImageSource="Images/x128/Save.png"
+                            ToolTipTitle="Save" />
+                        <RibbonMenuItem
+                            Command="{Binding SaveProjectAsCommand}"
+                            Header="Save as..."
+                            ImageSource="Images/x24/saveas.png"
+                            KeyTip="S"
+                            ToolTipDescription="Saves an unsaved project file to another file name."
+                            ToolTipImageSource="Images/x128/SaveAs.png"
+                            ToolTipTitle="Save As" />
+                    </RibbonMenuButton>
+                </RibbonGroup>
+                <RibbonGroup
+                    Name="ConfigurationGroup"
+                    Header="Configure">
+                    <RibbonButton
+                        Command="{Binding SettingsXCommand}"
+                        KeyTip="P"
+                        Label="Settings"
+                        LargeImageSource="Images/x32/options.png"
+                        SmallImageSource="Images/x24/options.png"
+                        ToolTipDescription="Displays the settings necessary for proper operation of the OptiRamp Developer."
+                        ToolTipImageSource="Images/x128/options.png"
+                        ToolTipTitle="Settings" />
+                </RibbonGroup>
+                <RibbonGroup
+                    Name="HelpGroup"
+                    Header="About">
+                    <RibbonButton
+                        Command="{Binding AboutCommand}"
+                        KeyTip="A"
+                        Label="About"
+                        LargeImageSource="Images/x32/build.png"
+                        SmallImageSource="Images/x24/build.png"
+                        ToolTipDescription="Displays information about the application."
+                        ToolTipImageSource="Images/x128/build.png"
+                        ToolTipTitle="About" />
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Tools" />
+        </Ribbon>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="{Binding
+                        TreeViewWidth,
+                        UpdateSourceTrigger=PropertyChanged,
+                        Mode=TwoWay}"
+                    MinWidth="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Margin="0,0,3,0"
+                BorderBrush="{DynamicResource
+                    {x:Static SystemColors.ActiveBorderBrushKey}}"
+                BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        BorderBrush="{DynamicResource
+                            {x:Static SystemColors.ActiveBorderBrushKey}}"
+                        BorderThickness="0,0,0,1">
+                        <Grid Margin="0,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Content="Filters" />
+                            <ComboBox
+                                Grid.Column="1"
+                                VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <TreeView
+                        Grid.Row="1"
+                        BorderThickness="0" />
+                </Grid>
+            </Border>
+            <GridSplitter
+                Grid.Column="0"
+                Width="3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Stretch" />
+            <Border
+                Name="ExtensionBorder"
+                Grid.Column="1"
+                Padding="5"
+                BorderBrush="{DynamicResource
+                    {x:Static SystemColors.ActiveBorderBrushKey}}"
+                BorderThickness="1" />
+        </Grid>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem
+                Content="{Binding
+                    ProjectFile.FileName,
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=TwoWay}" />
+        </StatusBar>
+    </Grid>
+</RibbonWindow>

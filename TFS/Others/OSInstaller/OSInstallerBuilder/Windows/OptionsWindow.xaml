@@ -1,0 +1,50 @@
+﻿<Window x:Class="OSInstallerBuilder.Windows.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:windows="clr-namespace:OSInstallerBuilder.Windows"
+        xmlns:options="clr-namespace:OSInstallerBuilder.Classes.Options"
+        Title="Options" Height="334" Width="575" WindowStyle="SingleBorderWindow" 
+        ShowInTaskbar="False" ResizeMode="CanResize" Closing="Window_Closing"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <windows:OptionsWindowView x:Key="view" PropertyChanged="OptionsWindowView_PropertyChanged" ExecuteUIAction="OptionsWindowView_ExecuteUIAction" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}" Margin="5" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TreeView Name="MyTreeView" Grid.Row="0" Grid.Column="0" Width="150" Template="{DynamicResource TreeViewTemplate}" ItemsSource="{Binding OptionCategories,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type options:Category}" ItemsSource="{Binding Pages}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type options:Page}" >
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </TreeView.Resources>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    <Setter Property="IsSelected" Value="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+
+        <ScrollViewer Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <ItemsControl ItemsSource="{Binding GroupsList,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Right" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Content="OK" Command="{Binding OKCommand}" />
+            <Button Content="Cancel" Command="{Binding CancelCommand}" IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

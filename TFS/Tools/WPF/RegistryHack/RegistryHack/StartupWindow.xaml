@@ -1,0 +1,22 @@
+﻿<Window x:Class="RegistryHack.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegistryHack"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="StartupWindow" Height="300" Width="496.023" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}">
+    <Window.DataContext>
+        <local:StartupWindowView />
+    </Window.DataContext>
+    <Border Style="{DynamicResource WindowlessBorder}">
+        <Canvas Margin="10">
+            <TextBlock Text="Registry Hacks" Style="{DynamicResource SplashTitleTextBlock}" Canvas.Left="59" Canvas.Top="85" />
+
+            <TextBlock Text="{Binding VersionText}" Style="{DynamicResource SplashVersionTextBlock}" Canvas.Left="359" Canvas.Top="252" />
+            <!--<Border  Height="26" Width="284" Canvas.Left="99" Canvas.Top="135">
+                <ProgressBar Foreground="#FF1C009B" />
+            </Border>-->
+        </Canvas>
+    </Border>
+</Window>

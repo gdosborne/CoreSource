@@ -1,0 +1,123 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User Manager", "User Manager\User Manager.csproj", "{46E344A4-5EF7-498A-84FD-CA037B43223C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNCAuthorization", "SNCAuthorization\SNCAuthorization.csproj", "{B38B08D6-A579-49D0-A883-A17BB5268BC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNCInstallation", "SNCInstallation\SNCInstallation.csproj", "{2C6DCC06-581F-4040-A311-968FFD9640BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\..\..\..\..\_Main\_Web\_Common\Application\Application\Application.csproj", "{577A2E28-1C3D-49E4-921E-0A63135B5B3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\..\..\Source\Workspaces\Domaination\FormatCode\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SNCAuthorization\\SNCAuthorization.csproj
+		SccProjectName1 = SNCAuthorization
+		SccLocalPath1 = SNCAuthorization
+		SccProjectUniqueName2 = User\u0020Manager\\User\u0020Manager.csproj
+		SccProjectName2 = User\u0020Manager
+		SccLocalPath2 = User\u0020Manager
+		SccProjectUniqueName3 = SNCInstallation\\SNCInstallation.csproj
+		SccProjectName3 = SNCInstallation
+		SccLocalPath3 = SNCInstallation
+		SccProjectUniqueName4 = ..\\..\\..\\..\\..\\..\\_Main\\_Web\\_Common\\Application\\Application\\Application.csproj
+		SccProjectName4 = ../Application
+		SccLocalPath4 = ..\\..\\..\\..\\..\\..\\_Main\\_Web\\_Common\\Application\\Application
+		SccProjectUniqueName5 = ..\\..\\..\\..\\Source\\Workspaces\\Domaination\\FormatCode\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName5 = ../FormatCode/MVVMFramework
+		SccLocalPath5 = ..\\..\\..\\..\\Source\\Workspaces\\Domaination\\FormatCode\\MVVMFramework
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		Test-Lenovo|Any CPU = Test-Lenovo|Any CPU
+		Test-Lenovo|x64 = Test-Lenovo|x64
+		Test-Lenovo|x86 = Test-Lenovo|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Release|x64.ActiveCfg = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Release|x86.ActiveCfg = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Test-Lenovo|Any CPU.ActiveCfg = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Test-Lenovo|Any CPU.Build.0 = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Test-Lenovo|x64.ActiveCfg = Release|Any CPU
+		{46E344A4-5EF7-498A-84FD-CA037B43223C}.Test-Lenovo|x86.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Release|x64.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Test-Lenovo|Any CPU.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Test-Lenovo|Any CPU.Build.0 = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Test-Lenovo|x64.ActiveCfg = Release|Any CPU
+		{B38B08D6-A579-49D0-A883-A17BB5268BC6}.Test-Lenovo|x86.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Release|x64.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Test-Lenovo|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Test-Lenovo|Any CPU.Build.0 = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Test-Lenovo|x64.ActiveCfg = Release|Any CPU
+		{2C6DCC06-581F-4040-A311-968FFD9640BA}.Test-Lenovo|x86.ActiveCfg = Release|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Debug|x86.ActiveCfg = Debug|x86
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Debug|x86.Build.0 = Debug|x86
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Release|x64.ActiveCfg = Release|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Release|x86.ActiveCfg = Release|x86
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Release|x86.Build.0 = Release|x86
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Test-Lenovo|Any CPU.ActiveCfg = Test-Lenovo|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Test-Lenovo|Any CPU.Build.0 = Test-Lenovo|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Test-Lenovo|x64.ActiveCfg = Test-Lenovo|Any CPU
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Test-Lenovo|x86.ActiveCfg = Test-Lenovo|x86
+		{577A2E28-1C3D-49E4-921E-0A63135B5B3F}.Test-Lenovo|x86.Build.0 = Test-Lenovo|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Test-Lenovo|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

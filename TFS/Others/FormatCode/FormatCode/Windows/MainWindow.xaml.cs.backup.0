@@ -1,0 +1,172 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Application.Primitives;
+using FormatCode.Classes;
+using Ookii.Dialogs.Wpf;
+
+namespace FormatCode.Windows
+{
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
+
+		private MainWindowView View
+		{
+			get
+			{
+				if (DesignerProperties.GetIsInDesignMode(this))
+					return null;
+				return LayoutRoot.DataContext.As<MainWindowView>();
+			}
+		}
+
+		protected override void OnSourceInitialized(EventArgs e)
+		{
+			base.OnSourceInitialized(e);
+			View.OptionFlags = (FormatCode.Classes.Enumerations.OptionFlags)Registry.GetValue<long>("Options", 0);
+			View.InitializeOptions();
+			View.DefaultFont = Fonts.SystemFontFamilies.FirstOrDefault(x => x.Source == Registry.GetValue<string>("Font", "Tahoma"));
+			View.DefaultSize = Registry.GetValue<double>("FontSize", 10.0);
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			this.Left = Registry.GetValue<double>("MainWindowLeft", Left);
+			this.Top = Registry.GetValue<double>("MainWindowTop", Top);
+			this.Width = Registry.GetValue<double>("MainWindowWidth", Width);
+			this.Height = Registry.GetValue<double>("MainWindowHeight", Height);
+		}
+
+		private void Window_Closing(object sender, CancelEventArgs e)
+		{
+			Registry.SetValue<double>("MainWindowLeft", Left);
+			Registry.SetValue<double>("MainWindowTop", Top);
+			Registry.SetValue<double>("MainWindowWidth", Width);
+			Registry.SetValue<double>("MainWindowHeight", Height);
+			Registry.SetValue<string>("Font", View.DefaultFont.Source);
+			Registry.SetValue<double>("FontSize", View.DefaultSize);
+
+			if (View.IsSaveEnabled)
+			{
+				e.Cancel = !AskSave("Do you still want to close this code file?");
+			}
+		}
+
+		private void MainWindowView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			switch (e.PropertyName)
+			{
+				case "OptionFlags":
+					Registry.SetValue<long>("Options", (long)sender.As<MainWindowView>().OptionFlags);
+					break;
+				case "CodeDocument":
+					CodeTextBox.Document = View.CodeDocument;
+					break;
+			}
+		}
+
+		private void MainWindowView_AskStartFormat(object sender, AskEventArgs e)
+		{
+			var dlg = new TaskDialog
+			{
+				WindowTitle = "Start format",
+				MainInstruction = "You are about to format the opened document.",
+				CenterParent = true,
+				Content = "Format the document with the selected options?",
+				MainIcon = TaskDialogIcon.Warning,
+				MinimizeBox = false
+			};
+			var yesButton = new TaskDialogButton(ButtonType.Yes);
+			var noButton = new TaskDialogButton(ButtonType.No);
+			dlg.Buttons.Add(yesButton);
+			dlg.Buttons.Add(noButton);
+			e.Answer = dlg.ShowDialog(this) == yesButton;
+		}
+
+		private bool AskSave(string prompt)
+		{
+			var dlg = new TaskDialog
+			{
+				WindowTitle = "Save formatted file",
+				MainInstruction = "The file you have loaded has been formatted but is not saved. The action you are about to perform will not save the file.",
+				CenterParent = true,
+				Content = prompt,
+				MainIcon = TaskDialogIcon.Warning,
+				MinimizeBox = false
+			};
+			var yesButton = new TaskDialogButton(ButtonType.Yes);
+			var noButton = new TaskDialogButton(ButtonType.No);
+			dlg.Buttons.Add(yesButton);
+			dlg.Buttons.Add(noButton);
+			return dlg.ShowDialog(this) == yesButton;
+		}
+
+		private void MainWindowView_AskFileSave(object sender, AskEventArgs e)
+		{
+			e.Answer = AskSave("Do you still want open a new code file?");
+		}
+
+		private void MainWindowView_DisplayException(object sender, DisplayExceptionEventArgs e)
+		{
+			if (Dispatcher.CheckAccess())
+			{
+				var dlg = new TaskDialog
+				{
+					WindowTitle = "Error",
+					MainInstruction = "An exception has occurred in the application.",
+					CenterParent = true,
+					Content = e.Ex.Message,
+					MainIcon = TaskDialogIcon.Error,
+					MinimizeBox = false
+				};
+				var okButton = new TaskDialogButton(ButtonType.Ok);
+				dlg.Buttons.Add(okButton);
+				dlg.ShowDialog(this);
+			}
+			else
+				Dispatcher.BeginInvoke(new DisplayExceptionHandler(MainWindowView_DisplayException), new object[] { sender, e });
+		}
+
+		private void MainWindowView_ExitRequest(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void MainWindowView_AskUndoFormat(object sender, AskEventArgs e)
+		{
+			var dlg = new TaskDialog
+			{
+				WindowTitle = "Undo format",
+				MainInstruction = "The file you have loaded has been formatted but is not saved. This action will revert the file to it's original state.",
+				CenterParent = true,
+				Content = "Undo file format?",
+				MainIcon = TaskDialogIcon.Warning,
+				MinimizeBox = false
+			};
+			var yesButton = new TaskDialogButton(ButtonType.Yes);
+			var noButton = new TaskDialogButton(ButtonType.No);
+			dlg.Buttons.Add(yesButton);
+			dlg.Buttons.Add(noButton);
+			e.Answer = dlg.ShowDialog(this) == yesButton;
+		}
+	}
+}

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<installation>
+  <settings>
+    <installation_header_text name="Installation Header Text" type="System.String">New Application Installer</installation_header_text>
+    <products_tab_text name="Products Tab Text" type="System.String">Installation Items</products_tab_text>
+    <options_tab_text name="Options Tab Text" type="System.String">Options</options_tab_text>
+    <!-- value must be > 0.3 and < 1.0 -->
+    <window_size_ratio name="Window to Screen Size Ratio" type="System.Double">.75</window_size_ratio>
+    <silent_installation name="Silent Installation" type="System.Boolean">false</silent_installation>
+    <welcome_paragraph_text name="Welcome Paragraph Text" type="System.String">
+      <CData>Quisque imperdiet fringilla tellus, at vestibulum nisl volutpat nec. Donec dapibus quis neque eu finibus. Lorem ipsum</CData>
+    </welcome_paragraph_text>
+    <theme_resource_dictionary name="Theme Resource Dictionary" type="System.String"></theme_resource_dictionary>
+  </settings>
+  <actions>
+    <!-- action targets = (start_of_install, before_install, during_install, after_install, end_of_install) 
+          activities
+            check_framework - checks machine for installation of a specific version of the .net framework
+          
+            call_dll_method - loads the specified .net assembly and calls the method, function must return a bool value (continue/abort)
+    
+          operators = (=, !=, <, <=, >=, >, noop)
+         
+         operations
+            abort_install - aborts the install
+            install_framework - installs the specified version of the .net framework
+          
+            call_dll_method - loads the specified .net assembly and calls the method, function must return a bool value (success/fail)
+    -->
+    <action sequence="0" target="start_of_install">
+      <activities>
+        <activity type="check_framework">
+          <operator>&gt;=</operator>
+          <value>4.8</value>
+          <results>
+            <result value="false">
+              <operations>
+                <operation sequence="0">install_framework</operation>
+              </operations>
+            </result>
+          </results>
+        </activity>
+      </activities>
+    </action> 
+  </actions>
+  <side_items>
+    <item icon_hex_value="xE83D" header="Security">
+      <![CDATA[Aliquam pharetra pretium tellus eu faucibus. Pellentesque et dignissim odio, vitae viverra lacus. Morbi tincidunt odio massa, sed tempus nisl sagittis rhoncus.]]>
+    </item>
+    <item icon_hex_value="xEC24" header="Unification">
+      <![CDATA[Suspendisse hendrerit metus nec eros tempor, eget viverra mi sollicitudin. Morbi nec vulputate risus, interdum scelerisque urna. Sed sit amet orci velit.
+
+Sed ut vulputate erat, et aliquam sem. Vivamus vitae lectus iaculis, venenatis nunc sed, commodo ipsum. Nam egestas nisl nec sapien pellentesque egestas. Suspendisse potenti.]]>
+    </item>
+  </side_items>
+  <installation_items>
+    <item id="{72C1A6E4-4114-4C42-82F3-B1C416496FCA}">
+      <title>Some cool application</title>
+      <description>
+        <![CDATA[Etiam imperdiet sapien eu auctor viverra. Nulla id eleifend felis. Nulla in mi erat. Integer maximus sit amet odio ac vehicula. Maecenas condimentum eget felis at sodales.]]>
+      </description>
+      <icon>Teal</icon>
+      <version>2.0.3.45</version>
+    </item>
+    <item id="{8BFB4F34-0DD7-4106-A737-048D66F177D2}">
+      <title>Some other equally cool application</title>
+      <description>
+        <![CDATA[Fusce ultrices sollicitudin rutrum. Proin ultricies ipsum massa, vel malesuada diam feugiat id. Nullam at maximus orci, et congue quam. Praesent egestas posuere diam, in tempor lacus varius non. Etiam malesuada eros a diam interdum, id vestibulum orci sagittis. Donec nec nibh non enim eleifend laoreet.]]>
+      </description>
+      <icon>Custom</icon>
+      <iconpath>C:\Users\gosborn\Pictures\Icons\MeetingSound.ico</iconpath>
+      <version>2.0.125478.2345</version>
+    </item>
+  </installation_items>
+</installation>

@@ -1,0 +1,134 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication8", "WpfApplication8\WpfApplication8.csproj", "{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Domain|Any CPU = Domain|Any CPU
+		Domain|x64 = Domain|x64
+		Domain|x86 = Domain|x86
+		External|Any CPU = External|Any CPU
+		External|x64 = External|x64
+		External|x86 = External|x86
+		Manual|Any CPU = Manual|Any CPU
+		Manual|x64 = Manual|x64
+		Manual|x86 = Manual|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Debug|x64.ActiveCfg = Debug|x64
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Debug|x64.Build.0 = Debug|x64
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Domain|Any CPU.ActiveCfg = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Domain|Any CPU.Build.0 = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Domain|x64.ActiveCfg = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Domain|x86.ActiveCfg = Debug|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.External|Any CPU.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.External|Any CPU.Build.0 = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.External|x64.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.External|x86.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Manual|Any CPU.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Manual|Any CPU.Build.0 = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Manual|x64.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Manual|x86.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Release|x64.ActiveCfg = Release|Any CPU
+		{92F3FEEC-FA0E-4655-AA22-3EEAC2FAE117}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Domain|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.External|x86.Build.0 = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Manual|x86.Build.0 = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Domain|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.External|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Manual|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {990FE1B2-FB25-4A81-A532-0142F063A9A3}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WpfApplication8\\WpfApplication8.csproj
+		SccProjectName1 = WpfApplication8
+		SccLocalPath1 = WpfApplication8
+		SccProjectUniqueName2 = ..\\..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName2 = ../../../Framework/Application
+		SccLocalPath2 = ..\\..\\..\\Framework\\Application
+		SccProjectUniqueName3 = ..\\..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName3 = ../../../Framework/MVVMFramework
+		SccLocalPath3 = ..\\..\\..\\Framework\\MVVMFramework
+	EndGlobalSection
+EndGlobal

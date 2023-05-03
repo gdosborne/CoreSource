@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Commands package="guidDocumentPkg">
+
+    <Menus>
+      <Menu guid="guidCodeDocCmdSet" id="TopLevelMenu" priority="0x100" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_WINDOWHELP" />
+        <Strings>
+          <ButtonText>Code Documentation</ButtonText>
+          <CommandName>Code Documentation</CommandName>
+        </Strings>
+      </Menu>
+
+      <Menu guid="guidCodeDocCmdSet" id="DocSubMenu" priority="0x200" type="Menu">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenuGroup" />
+        <Strings>
+          <ButtonText>DocSubMenu</ButtonText>
+          <CommandName>Documents</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <Group guid="guidCodeDocCmdSet" id="TopLevelMenuGroup" priority="0x0600">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenu"/>
+      </Group>
+      
+      <Group guid="guidCodeDocCmdSet" id="OptionsGroup" priority="0x0600">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenu"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidCodeDocCmdSet" id="cmdidCurrentDocument" priority="0x0100" type="Button">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic2" />
+        <Strings>
+          <CommandName>cmdidCurrentDocument</CommandName>
+          <ButtonText>Current Document</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidCodeDocCmdSet" id="cmdidOpenDocuments" priority="0x0100" type="Button">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <CommandName>cmdidOpenDocuments</CommandName>
+          <ButtonText>Open Documents</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidCodeDocCmdSet" id="cmdidAllDocuments" priority="0x0100" type="Button">
+        <Parent guid="guidCodeDocCmdSet" id="TopLevelMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic3" />
+        <Strings>
+          <CommandName>cmdidAllDocuments</CommandName>
+          <ButtonText>All Documents</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidCodeDocCmdSet" id="cmdidOptions" priority="0x0100" type="Button">
+        <Parent guid="guidCodeDocCmdSet" id="OptionsGroup" />
+        <Icon guid="guidImages" id="bmpPic4" />
+        <Strings>
+          <CommandName>cmdidOptions</CommandName>
+          <ButtonText>Options</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPic3, bmpPic4, bmpPic5, bmpPic6"/>
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidDocumentPkg" value="{23A997F3-427A-4F0F-B6D2-488D1C480CAA}" />
+
+    <!-- This is the command set guid. -->
+    <GuidSymbol name="guidCodeDocCmdSet" value="{9970E061-D253-47C2-869A-925CDDFC72EF}" >
+
+      <IDSymbol name="TopLevelMenu" value="0x0100" />
+      <IDSymbol name="TopLevelMenuGroup" value="0x0200" />
+      <IDSymbol name="OptionsGroup" value="0x0201" />
+      <IDSymbol name="cmdidCurrentDocument" value="0x0300" />
+      <IDSymbol name="cmdidOpenDocuments" value="0x0301" />
+      <IDSymbol name="cmdidAllDocuments" value="0x0302" />
+      <IDSymbol name="cmdidOptions" value="0x0303" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidCodeDocCmdSet" value="{A176AC48-05DB-4EA6-8793-A2EA33E4626C}" >
+      <IDSymbol name="DocSubMenu" value="0x0101" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{DC2C115D-C138-4CFB-B300-BB73EEFFF362}" >
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPic3" value="3" />
+      <IDSymbol name="bmpPic4" value="4" />
+      <IDSymbol name="bmpPic5" value="5" />
+      <IDSymbol name="bmpPic6" value="6" />
+    </GuidSymbol>
+  </Symbols>
+  
+</CommandTable>

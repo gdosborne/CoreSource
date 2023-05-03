@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DAFD34B-E4AA-4E71-9FDA-73C69A230C83}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Life.Savings.Data</RootNamespace>
+    <AssemblyName>Life.Savings.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CalculatedPremiums.cs" />
+    <Compile Include="CalculationValues.cs" />
+    <Compile Include="GlobalData.cs" />
+    <Compile Include="LSRepository.cs" />
+    <Compile Include="Model\Application\Calculations.cs" />
+    <Compile Include="Model\Application\DataAccess.cs" />
+    <Compile Include="Model\Application\FutureAgeValue.cs" />
+    <Compile Include="Model\Application\FutureWithdrawls.cs" />
+    <Compile Include="Model\Application\Global.cs" />
+    <Compile Include="Model\Application\GuarProtValue.cs" />
+    <Compile Include="Model\Application\InsuredIllustrationParameters.cs" />
+    <Compile Include="Model\Application\LedgerValues.cs" />
+    <Compile Include="Model\Application\LifeX.cs" />
+    <Compile Include="Model\Application\YearlyData.cs" />
+    <Compile Include="Model\Application\WithdrawlTotal.cs" />
+    <Compile Include="Model\Gender.cs" />
+    <Compile Include="Model\AppData.cs" />
+    <Compile Include="Model\IIndividualData.cs" />
+    <Compile Include="Model\IllustrationInfo.cs" />
+    <Compile Include="Model\IToXElement.cs" />
+    <Compile Include="Model\LSChildRiderParameter.cs" />
+    <Compile Include="Model\LsClientParameters.cs" />
+    <Compile Include="Model\LsCorr.cs" />
+    <Compile Include="Model\LsCso80.cs" />
+    <Compile Include="Model\LsFutureChanges.cs" />
+    <Compile Include="Model\LsFutureWithDrawals.cs" />
+    <Compile Include="Model\LsLedgerValues.cs" />
+    <Compile Include="Model\LsMinp.cs" />
+    <Compile Include="Model\LsRateSb.cs" />
+    <Compile Include="Model\LsRateGp.cs" />
+    <Compile Include="Model\LsRatePr.cs" />
+    <Compile Include="Model\LsRateSi.cs" />
+    <Compile Include="Model\LsRateWp.cs" />
+    <Compile Include="Model\LsSpouse.cs" />
+    <Compile Include="Model\LSSpouseRiderParm.cs" />
+    <Compile Include="Model\LsSurr.cs" />
+    <Compile Include="Model\LsTarg.cs" />
+    <Compile Include="Model\Month.cs" />
+    <Compile Include="Model\MortalityItem.cs" />
+    <Compile Include="Model\ParameterBase.cs" />
+    <Compile Include="Model\SimpleValue.cs" />
+    <Compile Include="Model\State.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\TTIllusParm.cs" />
+    <Compile Include="Model\WeightMinMax.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="States.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StandardData.xml" />
+    <EmbeddedResource Include="LS2Data_LsRatePr.xml" />
+    <EmbeddedResource Include="LS2Data_LsRateGp.xml" />
+    <EmbeddedResource Include="LS2Data_WeightMinMax.xml" />
+    <EmbeddedResource Include="Clients.xml" />
+    <Content Include="ConvertedData\HTWTLIFE.TXT" />
+    <Content Include="ConvertedData\LSCORR.TXT" />
+    <Content Include="ConvertedData\LSCSO80.TXT" />
+    <Content Include="ConvertedData\LSMINP.TXT" />
+    <Content Include="ConvertedData\LSRATEGP.TXT" />
+    <Content Include="ConvertedData\LSRATEPR.TXT" />
+    <Content Include="ConvertedData\LSRATESB.TXT" />
+    <Content Include="ConvertedData\LSRATESI.TXT" />
+    <Content Include="ConvertedData\LSRATEWP.TXT" />
+    <Content Include="ConvertedData\LSSPOUSE.TXT" />
+    <Content Include="ConvertedData\LSSURR.TXT" />
+    <Content Include="ConvertedData\LSTARG.TXT" />
+    <EmbeddedResource Include="Genders.xml" />
+    <EmbeddedResource Include="LS2Data_LsCorr.xml" />
+    <EmbeddedResource Include="LS2Data_LsCsO80.xml" />
+    <EmbeddedResource Include="LS2Data_LsMinp.xml" />
+    <EmbeddedResource Include="LS2Data_LsRateB.xml" />
+    <EmbeddedResource Include="LS2Data_LsRateSi.xml" />
+    <EmbeddedResource Include="LS2Data_LsRateWp.xml" />
+    <EmbeddedResource Include="LS2Data_LsSpouse.xml" />
+    <EmbeddedResource Include="LS2Data_LsSurr.xml" />
+    <EmbeddedResource Include="LS2Data_LsTarg.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj">
+      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Life.Savings.Extensions\Life.Savings.Extensions.csproj">
+      <Project>{ed0aa6c1-f22b-4c3d-9591-c38d542f2da5}</Project>
+      <Name>Life.Savings.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVVMFramework\MVVMFramework.csproj">
+      <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
+      <Name>MVVMFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSCrypto\OSCrypto.csproj">
+      <Project>{0fbde49f-27d1-400a-83dd-74b7f38f59d3}</Project>
+      <Name>OSCrypto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

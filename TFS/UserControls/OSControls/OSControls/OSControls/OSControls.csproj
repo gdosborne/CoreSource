@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A58B496A-7CA9-4E7A-9FFD-99C8D7D1EDD7}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OSControls</RootNamespace>
+    <AssemblyName>OSControls</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OSSign.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="AnalogClock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChildWindows\ValueEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColorPickerAndLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FontAndLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Glyph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Moon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NamedValueEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SliderAndLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TimeZoneAndLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ValueDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnalogClock.xaml.cs">
+      <DependentUpon>AnalogClock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChildWindows\ValueEditor.xaml.cs">
+      <DependentUpon>ValueEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChildWindows\ValueEditorView.cs">
+      <DependentUpon>ValueEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Events\QueryAddNewItemEventArgs.cs" />
+    <Compile Include="Classes\Extensions.cs" />
+    <Compile Include="ColorPickerAndLabel.xaml.cs">
+      <DependentUpon>ColorPickerAndLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="FontAndLabel.xaml.cs">
+      <DependentUpon>FontAndLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Glyph.xaml.cs">
+      <DependentUpon>Glyph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Moon.xaml.cs">
+      <DependentUpon>Moon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NamedValueEditor.xaml.cs">
+      <DependentUpon>NamedValueEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SliderAndLabel.xaml.cs">
+      <DependentUpon>SliderAndLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TimeZoneAndLabel.xaml.cs">
+      <DependentUpon>TimeZoneAndLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ValueDisplay.xaml.cs">
+      <DependentUpon>ValueDisplay.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="OSSign.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\DefaultClockFace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\AlarmGlass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\SecondHand1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Moon\x-0.png" />
+    <Resource Include="Themes\Moon\x-1.png" />
+    <Resource Include="Themes\Moon\x-10.png" />
+    <Resource Include="Themes\Moon\x-11.png" />
+    <Resource Include="Themes\Moon\x-12.png" />
+    <Resource Include="Themes\Moon\x-13.png" />
+    <Resource Include="Themes\Moon\x-14.png" />
+    <Resource Include="Themes\Moon\x-15.png" />
+    <Resource Include="Themes\Moon\x-16.png" />
+    <Resource Include="Themes\Moon\x-17.png" />
+    <Resource Include="Themes\Moon\x-18.png" />
+    <Resource Include="Themes\Moon\x-19.png" />
+    <Resource Include="Themes\Moon\x-2.png" />
+    <Resource Include="Themes\Moon\x-20.png" />
+    <Resource Include="Themes\Moon\x-21.png" />
+    <Resource Include="Themes\Moon\x-22.png" />
+    <Resource Include="Themes\Moon\x-23.png" />
+    <Resource Include="Themes\Moon\x-24.png" />
+    <Resource Include="Themes\Moon\x-25.png" />
+    <Resource Include="Themes\Moon\x-26.png" />
+    <Resource Include="Themes\Moon\x-27.png" />
+    <Resource Include="Themes\Moon\x-28.png" />
+    <Resource Include="Themes\Moon\x-29.png" />
+    <Resource Include="Themes\Moon\x-3.png" />
+    <Resource Include="Themes\Moon\x-4.png" />
+    <Resource Include="Themes\Moon\x-5.png" />
+    <Resource Include="Themes\Moon\x-6.png" />
+    <Resource Include="Themes\Moon\x-7.png" />
+    <Resource Include="Themes\Moon\x-8.png" />
+    <Resource Include="Themes\Moon\x-9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\delete.png" />
+    <Resource Include="Themes\insert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Framework\Application\Application_4.8.csproj">
+      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
+      <Name>Application_4.8</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
+      <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
+      <Name>MVVMFramework_4.8</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

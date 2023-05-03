@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetPath", "SetPath\SetPath.csproj", "{0562244F-46D4-4D08-B3C4-F3ECC2A09526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Debug|x64.ActiveCfg = Debug|x64
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Debug|x64.Build.0 = Debug|x64
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Debug|x86.ActiveCfg = Debug|x86
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Debug|x86.Build.0 = Debug|x86
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Release|x64.ActiveCfg = Release|x64
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Release|x64.Build.0 = Release|x64
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Release|x86.ActiveCfg = Release|x86
+		{0562244F-46D4-4D08-B3C4-F3ECC2A09526}.Release|x86.Build.0 = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13D39190-FA88-46F3-8207-D3EBC838D1EF}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SetPath\\SetPath.csproj
+		SccProjectName1 = SetPath
+		SccLocalPath1 = SetPath
+		SccProjectUniqueName2 = ..\\..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName2 = ../../../Framework/Application
+		SccLocalPath2 = ..\\..\\..\\Framework\\Application
+		SccProjectUniqueName3 = ..\\..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName3 = ../../../Framework/MVVMFramework
+		SccLocalPath3 = ..\\..\\..\\Framework\\MVVMFramework
+	EndGlobalSection
+EndGlobal

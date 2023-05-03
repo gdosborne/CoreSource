@@ -1,0 +1,12 @@
+﻿Error Codes
+
+Name                     Value      Description
+======================== ========== ================================
+ProjectPathInvalid       601        Path to project is required
+ProjectFolderInvalid     602        Project folder does not exist
+AssemblyInfoFileMissing  603        AssemblyInfo file missing
+ProjectFileInvalid       604        Project file does not exist
+CannotGetAssemblyVersion 605        Error getting assembly version
+ProjectSkipped           606        Project is skipped
+ProjectNotRecognized     607        Project not recognized
+UnKnown                  700        Unknown error - see console

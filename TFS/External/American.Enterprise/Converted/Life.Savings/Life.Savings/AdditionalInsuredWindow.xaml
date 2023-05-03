@@ -1,0 +1,341 @@
+﻿<Window x:Class="Life.Savings.AdditionalInsuredWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Life.Savings"
+        xmlns:rules="clr-namespace:Life.Savings.Rules"
+        xmlns:conv="clr-namespace:Life.Savings.Converters"
+        mc:Ignorable="d"
+        Title="Additional Insured and Riders" 
+        Height="535" MaxHeight="535" MinHeight="535" MinWidth="685" Width="900">
+    <Window.DataContext>
+        <local:AdditionalInsuredWindowView PropertyChanged="AdditionalInsuredWindowView_PropertyChanged" ShowMessage="AdditionalInsuredWindowView_ShowMessage"/>
+    </Window.DataContext>
+    <Window.Resources>
+        <conv:IntegerConverter x:Key="IntegerConverter" />
+        <conv:CurrencyConverter x:Key="CurrencyConverter" />
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Insured Child(ren) Rider" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Show?" VerticalContentAlignment="Center" IsChecked="{Binding IsInsuredChildRiderChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                <TextBlock Text="Age Youngest Child" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredChildRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="Death Benefit Amount" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredChildRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBox Grid.Row="2" Grid.Column="0" Visibility="{Binding InsuredChildRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" GotFocus="TextBox_GotFocus">
+                    <TextBox.Text>
+                        <Binding Path="AgeYoungestChild" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                            <Binding.ValidationRules>
+                                <rules:IntegerTextBoxValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ChildBenefitAmounts}" SelectedItem="{Binding SelectedChildBenefitAmount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding InsuredChildRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <Binding Path="." UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="{}{0:C0}"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Insured Spouse Rider" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Row="0" Content="Show?" VerticalContentAlignment="Center" IsChecked="{Binding IsInsuredSpouseRiderChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                <TextBlock Text="Issue Age" TextWrapping="Wrap" Grid.Row="1" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="Plan Type" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="Death Benefit Amount" TextWrapping="Wrap" Grid.Row="1" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="For ?? Years or to Age ??" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="Table Rating (Substandard)" TextWrapping="Wrap" Grid.Row="1" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBlock Text="COLA Percent" TextWrapping="Wrap" Grid.Row="1" Grid.Column="5" TextAlignment="Center" VerticalAlignment="Bottom" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <TextBox Grid.Row="2" Grid.Column="0" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" GotFocus="TextBox_GotFocus">
+                    <TextBox.Text>
+                        <Binding Path="SpouseAge" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                            <Binding.ValidationRules>
+                                <rules:IntegerTextBoxValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding PlanTypes}" VerticalAlignment="Center" SelectedItem="{Binding SpouseSelectedPlanType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ComboBox Grid.Row="2" Grid.Column="2" ItemsSource="{Binding SpouseBenefitAmounts}" SelectedItem="{Binding SelectedSpouseBenefitAmount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <Binding Path="." UpdateSourceTrigger="LostFocus" Mode="TwoWay" StringFormat="{}{0:C0}"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Grid Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" Margin="0" GotFocus="TextBox_GotFocus">
+                        <TextBox.Text>
+                            <Binding Path="SpouseYears" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                                <Binding.ValidationRules>
+                                    <rules:IntegerTextBoxValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding YearsOrAges}" SelectedItem="{Binding SpouseSelectedYearsOrAge,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <ComboBox Grid.Row="2" Grid.Column="4" ItemsSource="{Binding TableRatings}" SelectedItem="{Binding SelectedSpouseTableRating,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <ComboBox Grid.Row="2" Grid.Column="5" IsEnabled="False" ItemsSource="{Binding ColaPercents}" SelectedItem="{Binding SelectedSpouseColaPercent,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding InsuredSpouseRiderVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Additional Insureds" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Show?" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" TextAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Text="Issue Age" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Gender" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Plan Type" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Death Benefit Amount" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Table Rating (Substandard)" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="5" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="COLA Percent" TextWrapping="Wrap" Grid.Row="0" Grid.RowSpan="2" Grid.Column="6" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="---- Add-on and Removal Years ----" TextWrapping="Wrap" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="7" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Add at Year or Age" TextWrapping="Wrap" Grid.Row="1" Grid.Column="7" TextAlignment="Center" VerticalAlignment="Bottom"/>
+                <TextBlock Text="Removal at Year or Age" TextWrapping="Wrap" Grid.Row="1" Grid.Column="8" TextAlignment="Center" VerticalAlignment="Bottom"/>
+
+                <ScrollViewer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding AdditionalInsureds}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" Visibility="{Binding Visibility}">
+                                        <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="(" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding Index,Converter={StaticResource IntegerConverter}}" VerticalAlignment="Center" />
+                                        <TextBlock Text=")" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBox Grid.Column="1" Text="{Binding Age,Converter={StaticResource IntegerConverter},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding Visibility,TargetNullValue=Hidden}" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" GotFocus="TextBox_GotFocus" />
+                                    <ComboBox Grid.Column="2" ItemsSource="{Binding Genders}" SelectedItem="{Binding Gender,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding Visibility,TargetNullValue=Hidden}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <Binding Path="Name" />
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <ComboBox Grid.Column="3" ItemsSource="{Binding PlanTypes}" VerticalAlignment="Center" SelectedItem="{Binding PlanType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding Visibility,TargetNullValue=Hidden}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <Binding Path="DisplayedValue" />
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <TextBox Grid.Column="4" Visibility="{Binding Visibility,TargetNullValue=Hidden}"  GotFocus="TextBox_GotFocus">
+                                        <TextBox.Text>
+                                            <Binding Path="DeathBenefitAmount" StringFormat="C" UpdateSourceTrigger="LostFocus" Converter="{StaticResource CurrencyConverter}">
+                                                <Binding.ValidationRules>
+                                                    <rules:IntegerTextBoxValidationRule />
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
+                                    <ComboBox Grid.Column="5" ItemsSource="{Binding TableRatings}" SelectedItem="{Binding SubstandardRate,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding Visibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <ComboBox Grid.Column="6" ItemsSource="{Binding ColaPercents}" SelectedItem="{Binding Cola,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Visibility="{Binding Visibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <Binding Path="DisplayedValue" UpdateSourceTrigger="LostFocus" Mode="TwoWay"/>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Grid Grid.Column="7" VerticalAlignment="Center" Visibility="{Binding Visibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" Margin="0" GotFocus="TextBox_GotFocus">
+                                            <TextBox.Text>
+                                                <Binding Path="TermYears" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                                                    <Binding.ValidationRules>
+                                                        <rules:IntegerTextBoxValidationRule />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <ComboBox Grid.Column="1" ItemsSource="{Binding YearsToAges}" SelectedItem="{Binding YearToAgeOption,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Grid>
+                                    <Grid Grid.Column="8" VerticalAlignment="Center" Visibility="{Binding Visibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Style="{StaticResource NumericTextBoxWithReadOnlyBackground}" Margin="0" GotFocus="TextBox_GotFocus">
+                                            <TextBox.Text>
+                                                <Binding Path="RemoveYears" UpdateSourceTrigger="LostFocus" Mode="TwoWay" Converter="{StaticResource IntegerConverter}">
+                                                    <Binding.ValidationRules>
+                                                        <rules:IntegerTextBoxValidationRule />
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <ComboBox Grid.Column="1" ItemsSource="{Binding YearsToAges}" SelectedItem="{Binding RemoveYearToAge,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding DisplayedValue}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" HorizontalAlignment="Center" Content="Return to Client" Command="{Binding ReturnToClientCommand}" />
+            <Button Grid.Column="1" HorizontalAlignment="Center" Content="Premium Calc" Command="{Binding PremiumCalcCommand}" />
+            <Button Grid.Column="2" HorizontalAlignment="Center" Content="Future Changes" Command="{Binding FutureChangesCommand}" />
+            <Button Grid.Column="3" HorizontalAlignment="Center" Content="Refresh" />
+        </Grid>
+    </Grid>
+</Window>

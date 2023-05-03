@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup Label="UpdateVersion">
+    <AppData Label="SchemaName">increment_revision</AppData>
+    <AppData Label="LastUpdate">2020-01-01</AppData>
+    <AppData Label="Skip">false</AppData>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="GregOsborne.Developers.Suite.ExtensionManagerWindow"        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GregOsborne.Developers.Suite"
+        mc:Ignorable="d" Style="{DynamicResource standardWindow}"
+        Title="Extension Manager" Height="363.462" Width="458.173" WindowStartupLocation="CenterOwner">
+    <Window.DataContext>
+        <local:ExtensionManagerWindowView />
+    </Window.DataContext>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="The following extensions are installed on your computer. Click Browse... to add new extensions." TextWrapping="Wrap" Margin="0,0,0,10" />
+            <Button Grid.Row="0" Grid.Column="1" Width="Auto" Height="Auto" Padding="1" VerticalAlignment="Top" IsEnabled="True" Background="#00000000" BorderThickness="0" Command="{Binding ExpandContractCommand}">
+                <TextBlock Name="controllerTextBlock" Text="&#xEDDC;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+            </Button>
+        </Grid>
+        <TextBlock Grid.Row="1" Text="If you wish to remove an extension, click the extension and then click remove. Remember, an assembly may contain more than one extension, so if you remove one extension and there are more in the assembly, they too will be removed." TextWrapping="Wrap" Visibility="{Binding SecondLineVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,0,0,10"/>
+
+        <ListBox Grid.Row="2" ItemsSource="{Binding Extensions}" SelectedItem="{Binding SelectedExtension,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding MDL2AssetsChar}" Style="{DynamicResource iconTextBlock}" />
+                        <TextBlock Text="{Binding Title}" Style="{DynamicResource labelTextBlock}" Margin="5,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Style="{DynamicResource buttonStackPanel}">
+            <Button Content="Remove" Command="{Binding RemoveCommand}" />
+            <Button Content="Browse..." Command="{Binding BrowseCommand}" />
+            <Button Content="OK" Command="{Binding OKCommand}" IsDefault="True" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,139 @@
+﻿<Window x:Class="GregOsborne.RoamSync.Tray.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GregOsborne.RoamSync.Tray"
+        xmlns:tb="http://www.hardcodet.net/taskbar" 
+        xmlns:controls="clr-namespace:GregOsborne.WPFControls;assembly=GregOsborne.WPFControls"
+        mc:Ignorable="d" Visibility="{Binding WindowVisibility,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+        Title="{Binding WindowTitle,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        MinHeight="200" Height="200" MinWidth="575" Width="575"
+        WindowStyle="ToolWindow" Icon="Resources/Folder Refresh Cloud 1.ico" 
+        FontFamily="{DynamicResource appFont}" 
+        FontSize="{Binding AppFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Source="Resources/Folder Refresh Cloud 1.ico" Height="128" VerticalAlignment="Top" Margin="0,0,0,0" />
+
+        <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource mainBorder}">
+            <ScrollViewer>
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Border Style="{DynamicResource dataHeaderBorder}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBlock Text="Synchronization Status" Grid.Row="0" Grid.Column="0" Style="{DynamicResource dataHeaderTextBlock}" Margin="2,0,0,2" />
+
+                            <TextBlock Text="Last synchronization" Grid.Row="1" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LastSynchronizationDate,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,StringFormat='yyyy-MM-dd h:mm:ss tt',TargetNullValue='Never synced'}" Style="{DynamicResource dataTextBox}" />
+
+                            <TextBlock Text="Next synchronization" Grid.Row="2" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NextSynchronizationDate,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,StringFormat='yyyy-MM-dd h:mm:ss tt',TargetNullValue='Never synced'}" Style="{DynamicResource dataTextBox}" />
+
+                            <TextBlock Text="Total # files" Grid.Row="3" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding TotalFileCount,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,StringFormat='{}{0:#,0}'}" Style="{DynamicResource dataTextBox}" />
+
+                            <TextBlock Text="# files changed" Grid.Row="4" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SyncedFileCount,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,StringFormat='{}{0:#,0}'}" Style="{DynamicResource dataTextBox}" />
+
+                            <TextBlock Text="# files unchanged" Grid.Row="5" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding UnsyncedFileCount,UpdateSourceTrigger=PropertyChanged,Mode=OneWay,StringFormat='{}{0:#,0}'}" Style="{DynamicResource dataTextBox}" />
+
+                            <Border Style="{DynamicResource dataHeaderBorder}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBlock Text="Application Settings" Grid.Row="6" Grid.Column="0" Style="{DynamicResource dataHeaderTextBlock}" />
+
+                            <TextBlock Text="Disable ask to exit" Grid.Row="7" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <controls:ToggleSwitch Grid.Row="7" Grid.Column="1" IsChecked="{Binding IsDisableAskToExitSet,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+                            <TextBlock Text="Font Size" Grid.Row="8" Grid.Column="0" Style="{DynamicResource dataTextBlock}" />
+                            <ComboBox Grid.Row="8" Grid.Column="1" MinWidth="50" Width="auto" HorizontalAlignment="Left" ItemsSource="{Binding AllowedFontSizes}" SelectedItem="{Binding AppFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Style="{DynamicResource standardButton}" Command="{Binding ShowHideWindowCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Sync Now" />
+                </StackPanel>
+            </Button>
+            <Button Style="{DynamicResource standardButton}" Command="{Binding ShowHideWindowCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Hide" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <tb:TaskbarIcon Grid.Row="0" Grid.Column="0" 
+                        Name="taskBarIcon" HorizontalAlignment="Right" Height="100" VerticalAlignment="Top" Width="100" 
+                        IconSource="Resources/Folder Refresh Cloud 1.ico" ToolTipText="Sync Remote Folder"
+                        DoubleClickCommand="{Binding ShowHideWindowCommand}">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Sync">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="Now">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Out only">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xF194;" FontFamily="{DynamicResource _LineAwesome}" FontSize="16" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="In only">
+                            <MenuItem.Icon>
+                                <TextBlock Text="&#xF193;" FontFamily="{DynamicResource _LineAwesome}" FontSize="16" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="{Binding ShowHideText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding ShowHideWindowCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE737;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Exit" Command="{Binding ExitAppCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xEA39;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="User_Manager.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:User_Manager" SizeToContent="Height"
+        Title="About User Manager" Width="400" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <local:AboutWindowView x:Key="view" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource SectionCaption}">
+            <TextBlock FontFamily="Segoe WP Black" FontSize="36" Text="User Manager" Foreground="#FF202EB6" Margin="20,0,20,5"/>
+        </Border>
+        <Image Source="images/user1.png" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Width="128" Height="128" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" />
+        <Image Grid.Row="1" Grid.Column="1" Width="75" Height="75" Opacity=".2" Source="images/blueSecurity.ico" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,5" />
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="{Binding Description,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" Grid.Column="1" Margin="0,30,10,0" TextWrapping="Wrap" FontSize="14" />
+            <TextBlock Text="{Binding CompanyName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="2" Grid.Column="1" Margin="0,0,10,0" TextWrapping="Wrap" FontSize="14" />
+            <TextBlock Text="{Binding Version,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="3" Grid.Column="1" Margin="0,0,10,0" TextWrapping="Wrap" FontSize="14" />
+        </StackPanel>
+    </Grid>
+</Window>

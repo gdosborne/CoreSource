@@ -1,0 +1,51 @@
+﻿<Window x:Class="ControlTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlTester"
+		xmlns:controls="clr-namespace:GregOsborne.Controls;assembly=GregOsborne.Controls"
+        mc:Ignorable="d" WindowState="{Binding WindowState}"
+        Name="ThisWindow" BorderThickness="0"
+        Title="Greg's Test Application" Height="350" Width="525" AllowsTransparency="True" 
+        WindowStyle="None" Background="Transparent" ResizeMode="CanResizeWithGrip">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Border CornerRadius="{Binding ElementName=MyTitlebar,Path=CornerRadius}" Background="LightGray">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <controls:TitleBar Name="MyTitlebar"
+                Title="Greg's Test Application"
+                CloseCommand="{Binding TitlebarCommand}" 
+                MinimizeCommand="{Binding TitlebarCommand}" 
+                MaximizeCommand="{Binding TitlebarCommand}"
+                CloseCommandParameter="Close" 
+                MinimizeCommandParameter="Minimize" 
+                MaximizeCommandParameter="Maximize" 
+                ImageSource="account.png"
+                ApplicationMenuOffset="40">
+                <controls:TitleBar.ApplicationMenu>
+                    <Menu FontFamily="{Binding RelativeSource={RelativeSource AncestorType=controls:TitleBar},Path=FontFamily}" FontSize="{Binding RelativeSource={RelativeSource AncestorType=controls:TitleBar},Path=FontSize}" FontStretch="{Binding RelativeSource={RelativeSource AncestorType=controls:TitleBar},Path=FontStretch}" FontStyle="{Binding RelativeSource={RelativeSource AncestorType=controls:TitleBar},Path=FontStyle}" VerticalAlignment="Center" Background="#00000000" Foreground="{Binding RelativeSource={RelativeSource AncestorType=controls:TitleBar},Path=Foreground}">
+                        <MenuItem Header="_File">
+                            <MenuItem Header="New" Foreground="Black" />
+                            <MenuItem Header="Open" Foreground="Black"/>
+                            <MenuItem Header="Save" Foreground="Black" />
+                            <MenuItem Header="Save as..." Foreground="Black" />
+                            <Separator />
+                            <MenuItem Header="Exit" Foreground="Black" />
+                        </MenuItem>
+                        <MenuItem Header="_Edit"></MenuItem>
+                        <MenuItem Header="_Tools"></MenuItem>
+                        <MenuItem Header="_Help"></MenuItem>
+                    </Menu>
+                </controls:TitleBar.ApplicationMenu>
+            </controls:TitleBar>
+            
+            <Label Grid.Row="1" Content="Testing" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,50 @@
+﻿<ribbon:RibbonWindow x:Class="OptiRampDesigner.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ribbon="clr-namespace:System.Windows.Controls.Ribbon;assembly=System.Windows.Controls.Ribbon"
+        xmlns:w="clr-namespace:OptiRampDesigner.Windows"
+        Loaded="RibbonWindow_Loaded" Closing="RibbonWindow_Closing"
+        Title="OptiRamp© Designer" Height="525" Width="750">
+    <ribbon:RibbonWindow.Resources>
+        <w:MainWindowView x:Key="view" />
+    </ribbon:RibbonWindow.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ribbon:Ribbon x:Name="Ribbon" Title="Ribbon Title" SelectionChanged="Ribbon_SelectionChanged">
+            <ribbon:Ribbon.HelpPaneContent>
+                <ribbon:RibbonButton SmallImageSource="/images/24/Help.png" ToolTipDescription="This button is used to access application help topics" ToolTipTitle="Application help" ToolTipImageSource="/images/48/Help.png" Command="{Binding HelpCommand}" />
+            </ribbon:Ribbon.HelpPaneContent>
+            <ribbon:Ribbon.QuickAccessToolBar>
+                <ribbon:RibbonQuickAccessToolBar>
+                    <ribbon:RibbonButton SmallImageSource="/images/24/New.png" ToolTipDescription="This button is used to create a new project" ToolTipTitle="New project" ToolTipImageSource="/images/48/New.png" Command="{Binding NewProjectCommand}" />
+                    <ribbon:RibbonButton SmallImageSource="/images/24/Open.png" ToolTipDescription="This button is used to create a open an existing project" ToolTipTitle="Open project" ToolTipImageSource="/images/48/Open.png" Command="{Binding OpenProjectCommand}" />
+                    <ribbon:RibbonButton SmallImageSource="/images/24/Gear.png" ToolTipDescription="This button is used to access application settings" ToolTipTitle="Application settings" ToolTipImageSource="/images/48/Gear.png" Command="{Binding ApplicationSettingsCommand}" />
+                </ribbon:RibbonQuickAccessToolBar>
+            </ribbon:Ribbon.QuickAccessToolBar>
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu>
+                    <!--<ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon" x:Name="MenuItem1" ImageSource="Images\LargeIcon.png" />-->
+                </ribbon:RibbonApplicationMenu>
+            </ribbon:Ribbon.ApplicationMenu>
+            <ribbon:RibbonTab x:Name="MainTab" Header="Home">
+                <ribbon:RibbonGroup Header="File">
+                    <ribbon:RibbonButton LargeImageSource="/images/48/New.png" SmallImageSource="/images/24/New.png" Label="New" ToolTipDescription="This button is used to create a new project" ToolTipTitle="New project" ToolTipImageSource="/images/48/New.png" Command="{Binding NewProjectCommand}" />
+                    <ribbon:RibbonButton LargeImageSource="/images/48/Open.png" SmallImageSource="/images/24/Open.png" Label="Open" ToolTipDescription="This button is used to create a open an existing project" ToolTipTitle="Open project" ToolTipImageSource="/images/48/Open.png" Command="{Binding OpenProjectCommand}" />
+                    <ribbon:RibbonButton LargeImageSource="/images/48/Save.png" SmallImageSource="/images/24/Save.png" Label="Save" ToolTipDescription="This button is used to save a modified project" ToolTipTitle="Save project" ToolTipImageSource="/images/48/Save.png" Command="{Binding SaveCommand}" />
+                    <ribbon:RibbonSeparator />
+                    <ribbon:RibbonButton LargeImageSource="/images/48/SaveAs.png" SmallImageSource="/images/24/SaveAs.png" Label="Save as..." ToolTipDescription="This button is used to save a project to a different name" ToolTipTitle="Save project as new file" ToolTipImageSource="/images/48/SaveAs.png" Command="{Binding SaveAsCommand}" />
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup Header="Tools">
+                    <ribbon:RibbonButton LargeImageSource="/images/48/Gear.png" SmallImageSource="/images/24/Gear.png" Label="Settings" ToolTipDescription="This button is used to access application settings" ToolTipTitle="Application settings" ToolTipImageSource="/images/48/Gear.png" Command="{Binding ApplicationSettingsCommand}" />
+                    <ribbon:RibbonButton LargeImageSource="/images/48/Module.png" SmallImageSource="/images/24/Module.png" Label="Modules" ToolTipDescription="This button is used to select the modules loaded in the application container" ToolTipTitle="Modules" ToolTipImageSource="/images/48/Module.png" Command="{Binding LoadModulesCommand}" />
+                    <ribbon:RibbonButton LargeImageSource="/images/48/log.png" SmallImageSource="/images/24/log.png" Label="View Log" ToolTipDescription="This button is used to view the application log" ToolTipTitle="Log" ToolTipImageSource="/images/48/log.png" Command="{Binding LogCommand}" />
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+        <Grid Name="ContainerGrid" Grid.Row="1" />
+    </Grid>
+</ribbon:RibbonWindow>

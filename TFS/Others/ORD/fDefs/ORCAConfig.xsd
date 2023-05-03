@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="ORCAConfiguration">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="General">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Server">
+                <xsd:complexType>
+                  <xsd:attribute name="Address" type="xsd:string" use="optional" />
+                  <xsd:attribute name="ID" type="xsd:string" use="optional" />
+                  <xsd:attribute name="ScanRate" type="xsd:unsignedShort" use="optional" />
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ControlModule">
+                <xsd:complexType>
+                  <xsd:attribute name="Name" type="xsd:string" use="optional" />
+                  <xsd:attribute name="OPCITemRecordingInterval" type="xsd:string" use="optional" />
+                  <xsd:attribute name="Samples" type="xsd:string" use="optional" />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="Name" type="xsd:string" use="optional" />
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ControlBlocks">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="unbounded" name="ControlBlock">
+                <xsd:complexType>
+                  <xsd:attribute name="Name" type="xsd:string" use="optional" />
+                  <xsd:attribute name="EU" type="xsd:string" use="optional" />
+                  <xsd:attribute name="Description" type="xsd:string" use="optional" />
+                  <xsd:attribute name="LineThickness" type="xsd:string" use="optional" />
+                  <xsd:attribute name="LineColor" type="xsd:string" use="optional" />
+                  <xsd:attribute name="AxisMinScale" type="xsd:string" use="optional" />
+                  <xsd:attribute name="AxisMaxScale" type="xsd:string" use="optional" />
+                  <xsd:attribute name="AutoScale" type="xsd:string" use="optional" />
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="AdvancedParameters">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Communication">
+                <xsd:complexType>
+                  <xsd:attribute name="TimeOut" type="xsd:unsignedByte" use="optional" />
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="OPCItems">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="CurrentTableNumber">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeSecAfterCE">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeDTLastCET1">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeMSLastCET1">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeDTLastCET2">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeMSLastCET2">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeDTLastCET3">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="TimeMSLastCET3">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="CurrentTableNumberRequest">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="CurrentTableNumberRecording">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="StringData">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="StringDataArrayIndex">
+                      <xsd:complexType>
+                        <xsd:attribute name="Item" type="xsd:string" use="optional" />
+                        <xsd:attribute name="Access" type="xsd:string" use="optional" />
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

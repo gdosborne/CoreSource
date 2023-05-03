@@ -1,0 +1,337 @@
+﻿<Window x:Class="User_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:User_Manager.Classes.Converters"
+        xmlns:local="clr-namespace:User_Manager" 
+        Style="{StaticResource BaseWindow}"
+        Title="OptiRamp® User Manager" Height="586.591" Width="612" Closing="Window_Closing"
+        Loaded="Window_Loaded" Icon="images/blueSecurity.ico">
+    <Window.Resources>
+        <local:MainWindowView x:Key="view" 
+                              PropertyChanged="MainWindowView_PropertyChanged" 
+                              ExecuteCommand="MainWindowView_ExecuteCommand" 
+                              GetSelectedElements="MainWindowView_GetSelectedElements" 
+                              GetItemsToDelete="MainWindowView_GetItemsToDelete" />
+        <converters:AuthorizationDescriptionConverter x:Key="authconverter" />
+        <ContextMenu x:Key="DataGridContextMenu">
+            <MenuItem Header="Add User" Command="{Binding AddUserCommand}" InputGestureText="Ins">
+                <MenuItem.Icon>
+                    <Image Source="images/user.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Edit User" Command="{Binding EditUserCommand}" InputGestureText="Enter">
+                <MenuItem.Icon>
+                    <Image Source="images/edit.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete User" Command="{Binding DeleteUserCommand}" InputGestureText="Del">
+                <MenuItem.Icon>
+                    <Image Source="images/delete.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Cut" Command="{Binding CutCommand}" InputGestureText="Ctrl-X">
+                <MenuItem.Icon>
+                    <Image Source="images/cut.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy" Command="{Binding CopyCommand}" InputGestureText="Ctrl-C">
+                <MenuItem.Icon>
+                    <Image Source="images/copy.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl-V">
+                <MenuItem.Icon>
+                    <Image Source="images/paste.png" Style="{StaticResource CanDisableImage}" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.InputBindings>
+            <KeyBinding Command="{Binding NewCommand}" Key="N" Modifiers="Control" />
+            <KeyBinding Command="{Binding OpenCommand}" Key="O" Modifiers="Control" />
+            <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Control" />
+            <KeyBinding Command="{Binding PrintCommand}" Key="P" Modifiers="Control" />
+            <KeyBinding Command="{Binding CutCommand}" Key="X" Modifiers="Control" />
+            <KeyBinding Command="{Binding CopyCommand}" Key="C" Modifiers="Control" />
+            <KeyBinding Command="{Binding PasteCommand}" Key="V" Modifiers="Control" />
+            <KeyBinding Command="{Binding OptionsCommand}" Key="O" Modifiers="Alt" />
+            <KeyBinding Command="{Binding OpenWebServiceCommand}" Key="S" Modifiers="Alt" />
+            <KeyBinding Command="{Binding OpenWebConfigCommand}" Key="W" Modifiers="Control" />
+            <KeyBinding Command="{Binding OpenUserSecurityCommand}" Key="U" Modifiers="Control" />
+            <KeyBinding Command="{Binding AddUserCommand}" Key="Insert" />
+            <KeyBinding Command="{Binding EditUserCommand}" Key="Enter" />
+            <KeyBinding Command="{Binding DeleteUserCommand}" Key="Delete" />
+        </Grid.InputBindings>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Background="{DynamicResource BarBrush}">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Command="{Binding NewCommand}" InputGestureText="Ctrl-N">
+                    <MenuItem.Icon>
+                        <Image Source="images/new.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open" Command="{Binding OpenCommand}" InputGestureText="Ctrl-O">
+                    <MenuItem.Icon>
+                        <Image Source="images/openFile.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Recent" ItemsSource="{Binding RecentMenuItems}">
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=MenuItem}, Path=DataContext.RecentItemCommand}" />
+                            <Setter Property="CommandParameter" Value="{Binding}" />
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
+                  
+                <MenuItem Header="Open web config..." Command="{Binding OpenWebConfigCommand}" InputGestureText="Ctrl-W">
+                    <MenuItem.Icon>
+                        <Image Source="images/web.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open current user security file" Command="{Binding OpenUserSecurityCommand}" InputGestureText="Ctrl-U">
+                    <MenuItem.Icon>
+                        <Image Source="images/userx.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open security data from web service..." Command="{Binding OpenWebServiceCommand}" InputGestureText="Alt-S">
+                    <MenuItem.Icon>
+                        <Image Source="images/web_xml.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Close" Command="{Binding CloseCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/closeFile.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Save">
+                    <MenuItem.Icon>
+                        <Image Source="images/saveFile.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="Save" Command="{Binding SaveCommand}" InputGestureText="Ctrl-S">
+                        <MenuItem.Icon>
+                            <Image Source="images/saveFile.png" Style="{StaticResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Save as..." Command="{Binding SaveAsCommand}">
+                        <MenuItem.Icon>
+                            <Image Source="images/saveas.png" Style="{StaticResource CanDisableImage}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Print" Command="{Binding PrintCommand}" InputGestureText="Ctrl-P">
+                    <MenuItem.Icon>
+                        <Image Source="images/print.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Printer settings..." Command="{Binding PrintSetupCommand}" />
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            <MenuItem Header="Edit" PreviewMouseLeftButtonDown="MenuItem_PreviewMouseLeftButtonDown">
+                <MenuItem Header="Add User" Command="{Binding AddUserCommand}" InputGestureText="Ins">
+                    <MenuItem.Icon>
+                        <Image Source="images/user.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Edit User" Command="{Binding EditUserCommand}" InputGestureText="Enter">
+                    <MenuItem.Icon>
+                        <Image Source="images/edit.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete User" Command="{Binding DeleteUserCommand}" InputGestureText="Del">
+                    <MenuItem.Icon>
+                        <Image Source="images/delete.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Cut" Command="{Binding CutCommand}" InputGestureText="Ctrl-X">
+                    <MenuItem.Icon>
+                        <Image Source="images/cut.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copy" Command="{Binding CopyCommand}" InputGestureText="Ctrl-C">
+                    <MenuItem.Icon>
+                        <Image Source="images/copy.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Paste" Command="{Binding PasteCommand}" InputGestureText="Ctrl-V">
+                    <MenuItem.Icon>
+                        <Image Source="images/paste.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Options" Command="{Binding OptionsCommand}" InputGestureText="Alt-O">
+                    <MenuItem.Icon>
+                        <Image Source="images/options.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Check for updates" Command="{Binding CheckForUpdateCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/upload.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open log folder" Command="{Binding OpenLogFolderCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/logs.png" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="About User Manager" Command="{Binding HelpAboutCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="images/blueSecurity.ico" Style="{StaticResource CanDisableImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Grid.Row="1" Background="{DynamicResource BarBrush}">
+            <ToolBar Background="{DynamicResource BarBrush}">
+                <Button Command="{Binding NewCommand}" ToolTip="New security file">
+                    <Button.Content>
+                        <Image Source="images/new.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding OpenCommand}" ToolTip="Open security file">
+                    <Button.Content>
+                        <Image Source="images/openFile.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding SaveCommand}" ToolTip="Save security file">
+                    <Button.Content>
+                        <Image Source="images/saveFile.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Separator />
+                <Button Command="{Binding PrintCommand}" ToolTip="Print security file data">
+                    <Button.Content>
+                        <Image Source="images/print.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+            <ToolBar Visibility="{Binding ManageToolbarVisibility}" Background="{DynamicResource BarBrush}">
+                <Button Command="{Binding AddUserCommand}" ToolTip="Add user">
+                    <Button.Content>
+                        <Image Source="images/user.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding EditUserCommand}" ToolTip="Edit user">
+                    <Button.Content>
+                        <Image Source="images/edit.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding DeleteUserCommand}" ToolTip="Delete user">
+                    <Button.Content>
+                        <Image Source="images/delete.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Separator />
+                <Button Command="{Binding CutCommand}" ToolTip="Cut">
+                    <Button.Content>
+                        <Image Source="images/cut.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding CopyCommand}" ToolTip="Copy">
+                    <Button.Content>
+                        <Image Source="images/copy.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+                <Button Command="{Binding PasteCommand}" ToolTip="Paste">
+                    <Button.Content>
+                        <Image Source="images/paste.png" Style="{StaticResource CanDisableImage}" />
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="PermissionsDataGrid" Grid.Column="0" Grid.Row="0" Grid.RowSpan="6" ItemsSource="{Binding PermissionItems,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False" HeadersVisibility="Column" GridLinesVisibility="None" PreviewMouseDoubleClick="DataGrid_PreviewMouseDoubleClick" Background="White" AlternatingRowBackground="#14000DFF" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" ContextMenu="{StaticResource DataGridContextMenu}" ContextMenuOpening="PermissionsDataGrid_ContextMenuOpening" RowBackground="#0A0017FF" Style="{DynamicResource DataGridStyle1}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" SortMemberPath="Name" Width="*" IsReadOnly="True" HeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" SortMemberPath="Type" Width="*" IsReadOnly="True" HeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="1" Grid.Row="0" Style="{StaticResource CaptionBorder}">
+                        <TextBlock Text="Permissions" Style="{StaticResource CaptionTitle}" />
+                    </Border>
+                    <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Permissions,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsEnabled="{Binding PermissionsAreEnabled}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Converter={StaticResource authconverter},Path=Authorization}" IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,2" MouseRightButtonDown="CheckBox_MouseRightButtonDown" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border Grid.Column="1" Grid.Row="2" Style="{StaticResource CaptionBorder}">
+                        <TextBlock Text="Applications" Style="{StaticResource CaptionTitle}" />
+                    </Border>
+                    <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Applications,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsEnabled="{Binding PermissionsAreEnabled}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Converter={StaticResource authconverter},Path=Authorization}" IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,2" MouseRightButtonDown="CheckBox_MouseRightButtonDown"  />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Border Grid.Column="1" Grid.Row="4" Style="{StaticResource CaptionBorder}">
+                        <TextBlock Text="Special Flags" Style="{StaticResource CaptionTitle}" />
+                    </Border>
+                    <ListBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding SpecialFlags,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsEnabled="{Binding PermissionsAreEnabled}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Converter={StaticResource authconverter},Path=Authorization}" IsChecked="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="0,2" MouseRightButtonDown="CheckBox_MouseRightButtonDown"  />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <StatusBar Grid.Row="3" Background="{DynamicResource BarBrush}">
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Username:" Margin="0,0,5,0" />
+                    <TextBlock Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                </StackPanel>
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Filename:" Margin="0,0,5,0" />
+                    <TextBlock Text="{Binding FileName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                </StackPanel>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Version}" Grid.Column="0" />
+                    <Image Visibility="{Binding HasChangeVisibility}" Grid.Column="1" Margin="10,0,0,0" Source="images/reddot1.png" Style="{StaticResource SmallImage}" ToolTip="Document has changes" />
+                    <Image Visibility="{Binding NoChangeVisibility}" Grid.Column="1" Margin="10,0,0,0" Source="images/greendot.png" Style="{StaticResource SmallImage}" ToolTip="Document has not changed" />
+                </Grid>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

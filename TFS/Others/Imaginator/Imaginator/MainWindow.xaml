@@ -1,0 +1,179 @@
+﻿<Window x:Class="Imaginator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:app="clr-namespace:Imaginator.Views"
+        xmlns:app1="clr-namespace:Imaginator.Data"
+        Style="{StaticResource MainWindow}" Name="ThisWindow"
+        Title="Imaginator" Height="410" Width="725"
+        Loaded="ThisWindow_Loaded" Closing="ThisWindow_Closing" 
+        Icon="Resources/Imaginator.ico">
+    <Window.Resources>
+        <app:MainWindowView x:Key="view" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}" >
+        <Border Style="{StaticResource MainBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBorder}" Grid.ColumnSpan="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown">
+                    <TextBlock Style="{StaticResource TitleTextBlock}" Text="{Binding Title, ElementName=ThisWindow}" />
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" Style="{DynamicResource MinimizeBorder}" PreviewMouseLeftButtonUp="Minimize_PreviewMouseLeftButtonUp"/>
+                <Border Grid.Row="0" Grid.Column="2" Style="{DynamicResource CloseBorder}" PreviewMouseLeftButtonUp="Close_PreviewMouseLeftButtonUp" />
+                <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="TreeColumn" MinWidth="150" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Style="{DynamicResource MainAreaBorder}" Grid.ColumnSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultButton}" Height="{Binding ActualHeight, ElementName=RootFolderTextBox, Mode=OneWay}" Margin="5,0,0,0" ToolTip="Open other image file..." Command="{Binding OpenImageFileCommand}">
+                                    <Image Source="Resources/openFile.png" />
+                                </Button>
+                                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource DefaultButton}" Height="{Binding ActualHeight, ElementName=RootFolderTextBox, Mode=OneWay}" Margin="5,0,0,0" ToolTip="Paste image from clipboard" Command="{Binding PasteImageCommand}">
+                                    <Image Source="Resources/paste.png" />
+                                </Button>
+                                <Line Grid.Row="0" Grid.Column="2" X1="0" X2="0" Y1="0" Y2="24" StrokeThickness="2" Stroke="{DynamicResource GeneralBorderBrush}" Margin="5,0,2,0" />
+                                <Button Grid.Row="0" Grid.Column="3" Style="{StaticResource DefaultButton}" Height="{Binding ActualHeight, ElementName=RootFolderTextBox, Mode=OneWay}" Margin="5,0,0,0" ToolTip="Open settings..." Command="{Binding SettingsCommand}">
+                                    <Image Source="Resources/settings.png" />
+                                </Button>
+                            </Grid>
+                            
+                            <Label Content="Source" Grid.Row="0" Grid.Column="2" Style="{DynamicResource MainAreaLabel}" />
+                            <TextBox Name="RootFolderTextBox" Style="{DynamicResource MainAreaTextBox}" Grid.Row="0" Grid.Column="3" Text="{Binding RootFolder,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" GotFocus="RootFolderTextBox_GotFocus" />
+                            <Button Grid.Row="0" Grid.Column="4" Style="{StaticResource DefaultButton}" Height="{Binding ActualHeight, ElementName=RootFolderTextBox, Mode=OneWay}" Margin="5,0,0,0" ToolTip="Set Source Folder" Command="{Binding RootFolderCommand}">
+                                <Image Source="Resources/openFolder.png" />
+                            </Button>
+                            <StackPanel Orientation="Horizontal" Grid.Column="5">
+                                <Label Content="Types" Style="{DynamicResource MainAreaLabel}" />
+                                <CheckBox Content="*.png" Style="{DynamicResource MainAreaCheckbox}" IsChecked="{Binding UsePng,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                <CheckBox Content="*.jpg" Style="{DynamicResource MainAreaCheckbox}" IsChecked="{Binding UseJpg,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                <CheckBox Content="*.bmp" Style="{DynamicResource MainAreaCheckbox}" IsChecked="{Binding UseBmp,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                <CheckBox Content="*.ico" Style="{DynamicResource MainAreaCheckbox}" IsChecked="{Binding UseIco,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <TreeView Name="ImagesTreeView" Grid.Row="1" Grid.Column="0" Margin="0,0,3,0" MinWidth="147" Style="{StaticResource MainTreeView}" SelectedItemChanged="ImagesTreeView_SelectedItemChanged">
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Convert All" Command="{Binding ConvertAllFilesCommand}" />
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                    </TreeView>
+                    <GridSplitter Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Width="3" Background="{DynamicResource GridsplitterBrush}"/>
+                    <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                        <WrapPanel Name="ImagesWrapPanel" Orientation="Horizontal">
+                            <WrapPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Convert">
+                                        <MenuItem.Icon>
+                                            <Image Source="Resources/CopyPicture.png" />
+                                        </MenuItem.Icon>
+                                        <MenuItem Header="Perform All" Command="{Binding ConvertCommand}" CommandParameter="All" />
+                                        <Separator />
+                                        <MenuItem Header="128x128" Command="{Binding ConvertCommand}" CommandParameter="128" />
+                                        <MenuItem Header="64x64" Command="{Binding ConvertCommand}" CommandParameter="64" />
+                                        <MenuItem Header="48x48" Command="{Binding ConvertCommand}" CommandParameter="48" />
+                                        <MenuItem Header="32x32" Command="{Binding ConvertCommand}" CommandParameter="32" />
+                                        <MenuItem Header="24x24" Command="{Binding ConvertCommand}" CommandParameter="24" />
+                                        <MenuItem Header="16x16" Command="{Binding ConvertCommand}" CommandParameter="16" />
+                                        <Separator />
+                                        <MenuItem Header="Custom..." Command="{Binding ConvertCommand}" CommandParameter="Custom" />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </WrapPanel.ContextMenu>
+                        </WrapPanel>
+                    </ScrollViewer>
+                    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="#7F002AE6" Visibility="{Binding LoadingVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <Border Width="300" Height="200" CornerRadius="10" VerticalAlignment="Center" HorizontalAlignment="Center" Background="White" BorderBrush="Black" BorderThickness="2">
+                            <Border.Effect>
+                                <DropShadowEffect/>
+                            </Border.Effect>
+                            <TextBlock FontSize="24" Foreground="#FF953535" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center">
+                                Reloading image tree
+                                <LineBreak/>
+                                Please wait...
+                            </TextBlock>
+                        </Border>
+                    </Border>
+                </Grid>
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource StatusBorder}" Grid.ColumnSpan="3" PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown" Background="{DynamicResource WindowStatusBrush}">
+                    <StatusBar Background="Transparent">
+                        <StatusBarItem>
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <ProgressBar Style="{DynamicResource StatusProgressBar}" Minimum="{Binding ProgressMinimum,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Maximum="{Binding ProgressMaximum,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Value="{Binding ProgressValue,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <ProgressBar Style="{DynamicResource StatusProgressBar}" Minimum="{Binding AllProgressMinimum,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Maximum="{Binding AllProgressMaximum,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Value="{Binding AllProgressValue,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <TextBlock Text="{Binding SelectedItemName,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource StatusBarText}"/>
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <TextBlock Text="{Binding SelectedItemDimension,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource StatusBarText}"/>
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <TextBlock Text="{Binding SelectedItemSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource StatusBarText}"/>
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                        <StatusBarItem Visibility="{Binding ErrorVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                            <Border BorderBrush="{DynamicResource IndentTopLeftBrush}" BorderThickness=".5,.5,0,0">
+                                <Border BorderBrush="{DynamicResource IndentBottomRightBrush}" BorderThickness="0,0,.5,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="16" Height="16" Source="Resources/warning.png" Margin="0,0,5,0" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding ErrorText,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{StaticResource StatusBarErrorText}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </StatusBarItem>
+                    </StatusBar>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

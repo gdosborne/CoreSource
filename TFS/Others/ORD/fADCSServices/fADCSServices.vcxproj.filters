@@ -1,0 +1,1106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\common\Utils_ConfigFile.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_File.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_LocalTime.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_Native.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_Native_to_Managed.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_NET_Resources.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_Net_UI.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\X_to_Y_Polynom.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\Spline.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\Least_Squares_Polynom.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\LeastSq_Points_to_Polynom.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\LeastSq_Points_to_Polynom_U.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\Gaussian_Elimination.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Parser\Formula_Parser.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DS\DS_Control.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DS\DS_Engine.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\EX_ListView_FlickerFree.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_ListView.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DS\DS_Engine_UI.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DS\DS_App_Status.cpp">
+      <Filter>Legacy\DS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Model\Computer_Defs.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Project_File.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Project_Tree.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Project_Tree_Utils.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Application.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Application_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\CC\Config_Set_AT_I.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Computer.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Computer_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\Config_Set_DB.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_Conn_Info.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_ID.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Project.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Project_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\CC\Config_Set_Sim3_Core.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\CC\Config_Set_Sim3_Core_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Wiki.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Wiki_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Items_HMI.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Items_HMI_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Model\Log_Proxy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\MB\MB_Coeff_Def.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Parameters_Helper.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Report\Report_HeaderFooter.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Revisions_List.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\TS_Storage_Config.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_TreeView.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Notification_U_Dummy.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_I_Utils.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_Proxy.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Web.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Config_Set_HMI_Wrapper.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Config_Set_HMI_Wrapper_UI_Dummy.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Page.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_HMI_Multi.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Report_Custom_I_Dummy.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_Main_Common.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_Main_fC.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\CC\Config_Set_CC_App.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\CC\Config_Set_CC_App_UI_Dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\ODBC\Confgi_Set_ODBC_UI_Dummy.cpp">
+      <Filter>Legacy\Config\ODBC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\ODBC\Config_Set_ODBC.cpp">
+      <Filter>Legacy\Config\ODBC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Oil\Config_Set_Rod_Pump_UI_Dummy.cpp">
+      <Filter>Legacy\Config\RodPump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Oil\Config_Set_Rod_Pump.cpp">
+      <Filter>Legacy\Config\RodPump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Channels_Values.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Core.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Table.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\utf8_string.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_String_Ex.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\Utils_DB.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\IBPP\all_in_one.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_Peer.cpp">
+      <Filter>Legacy\data_mining</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\Dirty_Interval.cpp">
+      <Filter>Legacy\data_mining</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DM\Config_Set_Data_Mining_UI_dummy.cpp">
+      <Filter>Legacy\data_mining</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DM\Config_Set_Data_Mining.cpp">
+      <Filter>Legacy\data_mining</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\utils_com_error.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Wrapper_Thread.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Form_Splash_Dummy.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DM\DM_Sequencer.cpp">
+      <Filter>Legacy\data_mining</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\cobyla.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Math\cobyla_last_best.cpp">
+      <Filter>Legacy\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Main.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Notification_List.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Notification_List_UI_Dummy.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Recorder\TV_DB_I.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB_Config_Dummy.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB_U.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_DB.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="fDatabase.cpp">
+      <Filter>f</Filter>
+    </ClCompile>
+    <ClCompile Include="fDS.cpp">
+      <Filter>f</Filter>
+    </ClCompile>
+    <ClCompile Include="fElement.cpp">
+      <Filter>f\fProject</Filter>
+    </ClCompile>
+    <ClCompile Include="fElementType.cpp">
+      <Filter>f\fProject</Filter>
+    </ClCompile>
+    <ClCompile Include="fProject.cpp">
+      <Filter>f\fProject</Filter>
+    </ClCompile>
+    <ClCompile Include="fProjectEUFactory.cpp">
+      <Filter>f\fProject</Filter>
+    </ClCompile>
+    <ClCompile Include="fProperty.cpp">
+      <Filter>f\fProject</Filter>
+    </ClCompile>
+    <ClCompile Include="fRodPumpServices.cpp">
+      <Filter>f\fRodPump</Filter>
+    </ClCompile>
+    <ClCompile Include="fRPProject.cpp">
+      <Filter>f\fRodPump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\OPC_DA_Client_WT\OPC_Client.cpp">
+      <Filter>Legacy\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\OPC\Utils_OPC.cpp">
+      <Filter>Legacy\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="fOPCClient.cpp">
+      <Filter>f\fOPC</Filter>
+    </ClCompile>
+    <ClCompile Include="fOPCEngine.cpp">
+      <Filter>f\fOPC</Filter>
+    </ClCompile>
+    <ClCompile Include="fOPCGroup.cpp">
+      <Filter>f\fOPC</Filter>
+    </ClCompile>
+    <ClCompile Include="fOPCItem.cpp">
+      <Filter>f\fOPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Signals_OPC.cpp">
+      <Filter>Legacy\Config\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="fWeb_HMI_Proxy.cpp">
+      <Filter>f\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="fWebChannel.cpp">
+      <Filter>f\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Signals_OPC_UI_Dummy.cpp">
+      <Filter>Legacy\Config\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\RP\RP_Position_Comp.cpp">
+      <Filter>f\fRodPump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_Notification_Dummy.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_String.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DA\DA_Check_Tag.cpp">
+      <Filter>Legacy\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DB\DB_CA.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_API_N.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Threading\ThreadsWatchdogU_fC.cpp">
+      <Filter>Legacy\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_EU.cpp">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_EU_UI_Dummy.cpp">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Gas\Control_EU_Defs.cpp">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CC\EU_Project_List.cpp">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Gas\Gas_EU.cpp">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Params.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Params_UI_Dummy.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_P_Out_UI.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_P_Out.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Model\App_Input.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Model\App_Output.cpp">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Gas_Comp.cpp">
+      <Filter>Legacy\Config\Gas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_Gas_Comp_UI_Dummy.cpp">
+      <Filter>Legacy\Config\Gas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\VTS\Config_Set_Signals_VTS.cpp">
+      <Filter>Legacy\Config\VTS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\VTS\Config_Set_Signals_VTS_UI_Dummy.cpp">
+      <Filter>Legacy\Config\VTS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Recorder\TV_Totalizer_Sum.cpp">
+      <Filter>Legacy\DB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_Export_HMI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_Property.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Control_HMI.cpp">
+      <Filter>Legacy\HMI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_Form_Position.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Dialog_Enter_Text.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Find_Form_Simple.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Style.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\EX_ListView.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\EX_ListView_AddRemove.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Dialog_Select_One_Choice.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Target\Config_Set_Target_Compliance.cpp">
+      <Filter>Legacy\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\ComboBox_Ex.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Control_Select_Web_HMI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_AutoScale.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Target\Config_Set_Target_Compliance_UI.cpp">
+      <Filter>Legacy\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Totalizer.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Totalizer_UI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\TreeView_Search.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\ListView_Clipboard_Copy.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Lock\Lock_File_Read.cpp">
+      <Filter>Legacy\Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Utils_TextBox.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_ToolStripMenuItem.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Model\App_Input_Switch.cpp">
+      <Filter>Legacy\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_ActiveForm.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_I_Config.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Web_UI_dummy.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_UI_dummy.cpp">
+      <Filter>Legacy\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\HMI\Control_HMI_UI_Dummy.cpp">
+      <Filter>Legacy\HMI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\UI\Utils_Clipboard.cpp">
+      <Filter>Legacy\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_Property_UI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Web_HMI_UI.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Style_UI_Dummy.cpp">
+      <Filter>Legacy\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="fWebPicture.cpp">
+      <Filter>f\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\DA\Startup_Synch_Dummy.cpp">
+      <Filter>Legacy\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Pipeline_Profile\Config_Set_Pipeline_Profile.cpp">
+      <Filter>Legacy\PipelineProfile</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\Utils_ConfigFile.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Delegate.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_File.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_LocalTime.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Native.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_NET_Resources.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_Net_UI.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_NET_XML.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\X_to_Y_Polynom.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\Spline.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\Least_Squares_Polynom.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\LeastSq_Points_to_Polynom.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\LeastSq_Points_to_Polynom_U.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\Gaussian_Elimination.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Parser\Formula_Parser.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Main.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DS\DS_Control.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DS\DS_Engine.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\EX_ListView_FlickerFree.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_ListView.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DS\DS_Engine_UI.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DS\DS_App_Status.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Array.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Model\Computer_Defs.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Project_File.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Project_Tree.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Project_Tree_Utils.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Application.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\CC\Config_Set_AT_I.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Computer.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\Config_Set_DB.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI_ID.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Project.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\CC\Config_Set_Sim3_Core.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_Wiki.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\HMI\Items_HMI.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Model\Log_Proxy.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\MB\MB_Coeff_Def.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Parameters_Helper.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Project_Structure_Revision_Number.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Report\Report_HeaderFooter.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Revisions_List.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\TS_Storage_Config.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_TreeView.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Notification_I.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Notification_U.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_I.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_I_Utils.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_Proxy.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_Web.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\HMI\Config_Set_HMI_Wrapper.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_Web_Page.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_HMI_Multi.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Report_Custom_I.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Main_fC.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Main_Ex.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_String.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_Compiler.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\CC\Config_Set_CC_App.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Runtime_Picture.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ODBC\Config_Set_ODBC.h">
+      <Filter>Legacy\Config\ODBC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\ODBC\Config_Set_ODBC_Defs.h">
+      <Filter>Legacy\Config\ODBC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Oil\Config_Set_Rod_Pump.h">
+      <Filter>Legacy\Config\RodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Channels_Values.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Constants.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Core.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Table.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\utf8_string.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_String_Ex.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\Utils_DB.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_Peer.h">
+      <Filter>Legacy\data_mining</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\Dirty_Interval.h">
+      <Filter>Legacy\data_mining</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DM\Config_Set_Data_Mining.h">
+      <Filter>Legacy\data_mining</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\utils_com_error.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Wrapper_Thread.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DM\DM_Sequencer.h">
+      <Filter>Legacy\data_mining</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\cobyla.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Math\cobyla_last_best.h">
+      <Filter>Legacy\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Oil\Signals_Rod_Pump.h">
+      <Filter>Legacy\Config\RodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DS\DS_Engine_Update.h">
+      <Filter>Legacy\DS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Main.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_Notification_List.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_DB_I.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB_U.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_DB.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\fApp.h">
+      <Filter>f</Filter>
+    </ClInclude>
+    <ClInclude Include="fDatabase.h">
+      <Filter>f</Filter>
+    </ClInclude>
+    <ClInclude Include="fDS.h">
+      <Filter>f</Filter>
+    </ClInclude>
+    <ClInclude Include="fElement.h">
+      <Filter>f\fProject</Filter>
+    </ClInclude>
+    <ClInclude Include="fElementType.h">
+      <Filter>f\fProject</Filter>
+    </ClInclude>
+    <ClInclude Include="fProject.h">
+      <Filter>f\fProject</Filter>
+    </ClInclude>
+    <ClInclude Include="fProjectEUFactory.h">
+      <Filter>f\fProject</Filter>
+    </ClInclude>
+    <ClInclude Include="fProperty.h">
+      <Filter>f\fProject</Filter>
+    </ClInclude>
+    <ClInclude Include="fRodPumpServices.h">
+      <Filter>f\fRodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="fRPProject.h">
+      <Filter>f\fRodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\OPC_Client.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\WTclientAPI.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\WtclientAPIex.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\OPC\Utils_OPC.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="fOPCClient.h">
+      <Filter>f\fOPC</Filter>
+    </ClInclude>
+    <ClInclude Include="fOPCEngine.h">
+      <Filter>f\fOPC</Filter>
+    </ClInclude>
+    <ClInclude Include="fOPCGroup.h">
+      <Filter>f\fOPC</Filter>
+    </ClInclude>
+    <ClInclude Include="fOPCItem.h">
+      <Filter>f\fOPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Signals_OPC.h">
+      <Filter>Legacy\Config\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="fProject_Rod_Pump.h">
+      <Filter>f\fRodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="fWeb_HMI_Proxy.h">
+      <Filter>f\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="fWebChannel.h">
+      <Filter>f\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\RP\RP_Position_Comp.h">
+      <Filter>f\fRodPump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DA\DA_Client_I.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DA\DA_Check_Tag.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DB\DB_CA.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_API_N.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Signals.h">
+      <Filter>Legacy\Config\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Threading\ThreadsWatchdogU.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Threading\ThreadsWatchdogU_fC.h">
+      <Filter>Legacy\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_EU.h">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Gas\Control_EU_Defs.h">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Gas\Gas_EU.h">
+      <Filter>Legacy\Config\EU</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Params.h">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Params_UI.h">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_P_Out.h">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Model\App_Input.h">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Model\App_Output.h">
+      <Filter>Legacy\Config\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_Gas_Comp.h">
+      <Filter>Legacy\Config\Gas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\VTS\Config_Set_Signals_VTS.h">
+      <Filter>Legacy\Config\VTS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB_Config.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_Totalizer.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Recorder\TV_Totalizer_Sum.h">
+      <Filter>Legacy\DB</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_Export_HMI.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_Property.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\HMI\Control_HMI.h">
+      <Filter>Legacy\HMI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_Form_Position.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Dialog_Enter_Text.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Find_Form_Simple.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_Web_Style.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\EX_ListView.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\EX_ListView_AddRemove.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Dialog_Select_One_Choice.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Target\Config_Set_Target_Compliance.h">
+      <Filter>Legacy\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\ComboBox_Ex.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Control_Select_Web_HMI.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_AutoScale.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Config_Set_Totalizer.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\TreeView_Search.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\ListView_Clipboard_Copy.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Lock\Lock_File_Read.h">
+      <Filter>Legacy\Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Utils_TextBox.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_ToolStripMenuItem.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Model\App_Input_Switch.h">
+      <Filter>Legacy\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_ActiveForm.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_I_Config.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI_UI.h">
+      <Filter>Legacy\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\UI\Utils_Clipboard.h">
+      <Filter>Legacy\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_Property_UI.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\web\Web_HMI_UI.h">
+      <Filter>Legacy\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\DA\Startup_Synch.h">
+      <Filter>Legacy\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Pipeline_Profile\Config_Set_Pipeline_Profile.h">
+      <Filter>Legacy\PipelineProfile</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Legacy">
+      <UniqueIdentifier>{eddf29c8-efa4-46b5-9e2e-5c9a87ff387c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\System">
+      <UniqueIdentifier>{ca115dbd-8d1c-4155-a0c5-aae76e3a2fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Math">
+      <UniqueIdentifier>{ae9dccbc-f300-4b4a-a39d-f96b3442f03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\DS">
+      <UniqueIdentifier>{c8833282-80f3-480d-8326-fc2c5089cc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config">
+      <UniqueIdentifier>{e6e014fe-4aad-4b1c-a5a8-f637f00ab223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\DB">
+      <UniqueIdentifier>{01a3ff1b-5cad-4e55-9ce2-6e2829516989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Web">
+      <UniqueIdentifier>{1163ced5-dd30-43a5-a08f-95391953d9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\ODBC">
+      <UniqueIdentifier>{b32f030e-c5b9-4b3b-adb2-0a8045fd072f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\RodPump">
+      <UniqueIdentifier>{8e1a2ffc-60b5-4bee-907a-3e59b280b6b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\data_mining">
+      <UniqueIdentifier>{c0683150-701b-4a9d-8038-0f5c83c61de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="f">
+      <UniqueIdentifier>{51affc5e-e425-4bcd-b156-dde1ead59c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="f\fProject">
+      <UniqueIdentifier>{81eb4ba1-410b-4fd9-bc37-80d0500ca335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="f\fRodPump">
+      <UniqueIdentifier>{fe215b95-57c5-45f6-b685-327da68b9f73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\OPC">
+      <UniqueIdentifier>{fb5b1c9c-b4ef-4aa5-809f-18e77bea8b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\OPC">
+      <UniqueIdentifier>{a7dc9a90-c54f-4e0c-b78e-413c7e6e14f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="f\fOPC">
+      <UniqueIdentifier>{4a5f2282-cd99-4ad9-ba8e-500b1d349737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="f\Web">
+      <UniqueIdentifier>{febc8c46-f903-4512-9fb0-055136e8343b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\EU">
+      <UniqueIdentifier>{d9845424-7676-4c0e-a7b5-52a307aad43e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\Params">
+      <UniqueIdentifier>{e10d6b55-a9f8-4ea5-ba1d-e1305b41d0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\Gas">
+      <UniqueIdentifier>{234564b5-e3b1-4141-b13f-84db72cb03ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Config\VTS">
+      <UniqueIdentifier>{c27a37af-01fb-4687-ae38-882cfdb53305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\HMI">
+      <UniqueIdentifier>{2a90add8-d740-42ac-acc0-d01870298b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\UI">
+      <UniqueIdentifier>{f4d28c0b-6699-4244-b491-87ec8e516072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Target">
+      <UniqueIdentifier>{098854fc-6cc3-468d-94dc-d4127cc3ce98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Lock">
+      <UniqueIdentifier>{8d23e166-6f60-48a8-bba0-2e756883dbfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Model">
+      <UniqueIdentifier>{6cde279b-4e99-4e06-b166-587679bce900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\PipelineProfile">
+      <UniqueIdentifier>{d724368f-d8fb-4256-86e1-289ce78e5dad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\common\DS\DS.resX">
+      <Filter>Legacy\DS</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\common\web\Web_HMI.resX">
+      <Filter>Legacy\Web</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\common\web\Config_Set_Web.resX">
+      <Filter>Legacy\Web</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\common\Target\Config_Set_Target_Compliance.resx">
+      <Filter>Legacy\Target</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+</Project>

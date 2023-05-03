@@ -1,0 +1,189 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    
+    <FontFamily x:Key="appFont">Calibri</FontFamily>
+    <FontFamily x:Key="segoeAssets">Segoe MDL2 Assets</FontFamily>
+    
+    <system:Double x:Key="standardFontSize">14</system:Double>
+    <system:Double x:Key="iconFontSize">16.0</system:Double>
+    <system:Double x:Key="headerFontSize">24.0</system:Double>
+    <system:Double x:Key="watermarkOpacity">.05</system:Double>
+    <system:Double x:Key="lineThickness">.75</system:Double>
+
+    <Thickness x:Key="noBorder">0</Thickness>
+    <Thickness x:Key="fullBorder">.75</Thickness>
+    <Thickness x:Key="fullNoBottomBorder">.75,.75,.75,0</Thickness>
+    <Thickness x:Key="vsplitBorder">0,0,.75,0</Thickness>
+
+    <SolidColorBrush x:Key="headerBrush" Color="#FF6773C3" />
+    <SolidColorBrush x:Key="allBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="highlightBackground" Color="#FF0000FF" />
+    <SolidColorBrush x:Key="highlightForegound" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="allBorders" Color="{DynamicResource borderColor}" />
+    <SolidColorBrush x:Key="allText" Color="#FF272727" />
+    <SolidColorBrush x:Key="buttonBackground" Color="#FFE2E2E2" />
+    <SolidColorBrush x:Key="buttonMouseOverBackground" Color="#FFF4F4FF" />
+    <SolidColorBrush x:Key="watermarkFill" Color="#FF0000FF" />
+    <SolidColorBrush x:Key="watermarkStroke" Color="#FF000000" />
+
+    <Color x:Key="borderColor">#FF707070</Color>
+
+    <CornerRadius x:Key="tabItemCorners">4,14,0,0</CornerRadius>
+
+    <Style TargetType="Window" x:Key="standardWindow">
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+        <Setter Property="Background" Value="{DynamicResource allBackground}" />
+    </Style>
+
+    <Style TargetType="Menu" x:Key="mainMenu">
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Background" Value="{DynamicResource allBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+    </Style>
+
+    <Style TargetType="MenuItem" x:Key="mainMenuItem">
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Background" Value="{DynamicResource allBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource noBorder}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="iconTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontFamily" Value="{DynamicResource segoeAssets}" />
+        <Setter Property="FontSize" Value="{DynamicResource iconFontSize}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="paragraphText" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="Margin" Value="0,0,0,5" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="labelTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="headerTextBlock"  BasedOn="{StaticResource {x:Type TextBlock}}">
+        <Setter Property="FontSize" Value="{DynamicResource headerFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource headerBrush}" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style TargetType="Line" x:Key="headerLine">
+        <Setter Property="Stroke" Value="{DynamicResource headerBrush}" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="X1" Value="0" />
+        <Setter Property="Y1" Value="0" />
+        <Setter Property="Y2" Value="0" />
+        <Setter Property="Margin" Value="0,0,0,5" />
+        <Setter Property="StrokeThickness" Value="1.5" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="readOnlyFalseText" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="IsReadOnly" Value="true" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource allBorders}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource fullBorder}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+        <Setter Property="Background" Value="{DynamicResource buttonBackground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Name="outerGrid" Margin="{TemplateBinding Margin}">
+                        <Border Name="border" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3,3,3,3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Rectangle x:Name="defaultRectangle" Stroke="{DynamicResource allBorders}" Opacity=".5" StrokeThickness="1" StrokeDashArray="5,2,3,2" Margin="2" Visibility="Hidden" />
+                                <ContentPresenter x:Name="contentSite" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource buttonMouseOverBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="contentSite" Property="Opacity" Value=".5" />
+                        </Trigger>
+                        <Trigger Property="IsDefault" Value="True">
+                            <Setter TargetName="defaultRectangle" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ListBox" x:Key="standardListBox">
+        <Setter Property="Background" Value="{DynamicResource allBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource allBorders}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource fullBorder}" />
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+    </Style>
+
+    <Style TargetType="TabControl">
+        <Setter Property="BorderBrush" Value="{DynamicResource allBorders}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource fullBorder}" />
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+    </Style>
+
+    <Style TargetType="GridSplitter" x:Key="verticalSplitter">
+        <Setter Property="BorderBrush" Value="{DynamicResource allBorders}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource fullBorder}" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Width" Value="3" />
+        <Setter Property="BorderThickness" Value="{DynamicResource vsplitBorder}" />
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="FontFamily" Value="{DynamicResource appFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource standardFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource allText}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid Name="outerGrid" Margin="0,4,0,0">
+                        <Border Name="border" BorderThickness="{DynamicResource fullNoBottomBorder}" CornerRadius="{DynamicResource tabItemCorners}" BorderBrush="{DynamicResource allBorders}" Padding="5,2">
+                            <ContentPresenter x:Name="contentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True" />
+                        </Border>
+                        <Line Name="bottomLine" Stroke="{DynamicResource allBackground}" Visibility="Hidden" StrokeThickness="3" X1="0" Y1="0" Y2="0" X2="{Binding ElementName=border,Path=ActualWidth}" VerticalAlignment="Bottom" Margin="0,0,0,-2" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="outerGrid" Property="Margin" Value="0,0,0,0" />
+                            <Setter TargetName="bottomLine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter> 
+    </Style>
+
+    <Style TargetType="StackPanel" x:Key="buttonStackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+</ResourceDictionary>

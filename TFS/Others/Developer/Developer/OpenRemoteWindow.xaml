@@ -1,0 +1,22 @@
+﻿<Window
+    x:Class="SNC.OptiRamp.Application.Developer.OpenRemoteWindow"
+    Title="Open project..."
+    x:ClassModifier="internal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:v="clr-namespace:SNC.OptiRamp.Application.Developer.Views"
+    Height="322"
+    Width="528"
+    Closing="Window_Closing">
+    <Window.Resources>
+        <v:OpenRemoteWindowView
+            x:Key="view"
+            PropertyChanged="OpenRemoteWindowView_PropertyChanged" />
+    </Window.Resources>
+    <Grid
+        x:Name="LayoutRoot"
+        Margin="5"
+        DataContext="{Binding
+            Source={StaticResource view}}">
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿<UserControl xmlns:OSControls="clr-namespace:OSControls;assembly=OSControls"  x:Class="OSInstallerBuilder.Controls.InstallerData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:OSInstallerBuilder.Controls"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <controls:InstallerDataView x:Key="view" PropertyChanged="InstallerDataView_PropertyChanged" />
+    </UserControl.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Style="{StaticResource SettingsHeader}" Text="Data" Grid.Row="0" Foreground="{Binding TextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+
+        <TextBlock Grid.Row="1" Style="{StaticResource SettingsDescription}" Foreground="{Binding TextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            This is data used throughout the installation. Required values cannot be removed or renamed. If the value is an internal
+            or system value, it is not editable. For values that you want the user to validate prior to installation, check the
+            Validated check box.
+        </TextBlock>
+
+        <Line Grid.Row="2" Style="{StaticResource SettingsSeparator}" X1="0" X2="{Binding ElementName=LayoutRoot,Path=ActualWidth}" Y1="0" Y2="0" />
+
+        <OSControls:NamedValueEditor Name="TheNameValueEditor" Grid.Row="3" Margin="0,10,0,0"
+                                     ItemsSource="{Binding Data,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                     VariableTrigger="{Binding VariableTrigger,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                                     RequiredNames="{Binding RequiredNames,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                                     QueryAddNewItem="NamedValueEditor_QueryAddNewItem" 
+                                     AlternatingBackground="#4C8F8FFD" 
+                                     IsValidatedVisibility="Visible" />
+    </Grid>
+</UserControl>

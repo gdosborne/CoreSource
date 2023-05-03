@@ -1,0 +1,27 @@
+This file contains help messages for the Illustration Preview display.
+
+> 1, Illustration Preview Help -- General Help
+Use the "ARROW" (up/down/left/right) to move one 
+line or column at a time in the Illustration Preview.  Use
+"PAGE UP" and "PAGE DOWN" to move 21 lines at a 
+time.  Use "END" to view the leftmost portion of a 
+line, and "HOME" to get back to the text on the right.
+Use the provided scroll bars to move up, down or to 
+the left or right in larger increments.
+The illustration you are seeing on the display will be an
+exact replication of the printed illustration, should you
+choose to print it.
+
+Click the "QUIT" menu item (or press ALT-Q) to return 
+to the illustration parameter display.  Nothing is printed 
+or saved, but you can redisplay the illustration as many 
+times as you like from the previous parameter display.
+"QUIT" or double-clicking the upper left hand icon are
+the only ways to leave this display.
+
+Click the "PRINT" menu item (or press ALT-P) to open
+the printer options.  You can set printer types, print 
+fonts or send the currently viewed illustration to be
+printed.  A message ("Illustration being printed") will
+appear.  
+

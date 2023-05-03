@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Greg.Osborne.Installer"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <SolidColorBrush x:Key="InstallerTextBrush" Color="#FF1421A4" />
+    <SolidColorBrush x:Key="SeparatorLineBrush" Color="#FFDEF2FF"/>
+    <SolidColorBrush x:Key="TabBottomBrush" Color="#FF4F7FFF"/>
+    <SolidColorBrush x:Key="StandardTextBrush" Color="#FF2F395F" />
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFFEFEFE" />
+    <SolidColorBrush x:Key="ItemHighlightBrush" Color="#FFDEF2FF" />
+    <SolidColorBrush x:Key="ItemHighlightTextBrush" Color="#FFFF0000" />
+
+    <system:Double x:Key="InstructionAreaWidth">350</system:Double>
+    <system:Double x:Key="StandardFontSize">11.0</system:Double>
+    <system:Double x:Key="TabFontSize">16.0</system:Double>
+    <system:Double x:Key="HeaderFontSize">36.0</system:Double>
+    <system:Double x:Key="InstructionMinorFontSize">24.0</system:Double>
+    <system:Double x:Key="TooltipTextFontSize">10.0</system:Double>
+</ResourceDictionary>

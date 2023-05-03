@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Hybrid|Win32">
+      <Configuration>Hybrid</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CD05A919-B158-47FB-AC83-AEE5111CC43C}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>fProjectNodes</RootNamespace>
+    <SccProjectName>
+    </SccProjectName>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>true</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>true</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>true</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;FPROJECTNODES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;FPROJECTNODES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\CC\EU_Project_List.cpp" />
+    <ClCompile Include="..\..\common\CC\Config_Set_AT_I.cpp" />
+    <ClCompile Include="..\..\common\CC\Config_Set_CC_App.cpp" />
+    <ClCompile Include="..\..\common\CC\Config_Set_CC_App_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\CC\Config_Set_Sim3_Core.cpp" />
+    <ClCompile Include="..\..\common\CC\Config_Set_Sim3_Core_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Project_File.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Project_Tree.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Project_Tree_Utils.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Application.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Application_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Computer.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Computer_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_EU.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_EU_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Gas_Comp.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Gas_Comp_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_Conn_Info.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_ID.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_HMI_UI_dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Params.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Params_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Project.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Project_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_P_Out.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_P_Out_UI.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Signals_OPC.cpp" />
+    <ClCompile Include="..\..\common\Config\Config_Set_Signals_OPC_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Config\Parameters_Helper.cpp" />
+    <ClCompile Include="..\..\common\Config\Revisions_List.cpp" />
+    <ClCompile Include="..\..\common\DA\DA_Check_Tag.cpp" />
+    <ClCompile Include="..\..\common\DA\Startup_Synch_Dummy.cpp" />
+    <ClCompile Include="..\..\common\DB\Config_Set_DB.cpp" />
+    <ClCompile Include="..\..\common\DB\DB.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_CA.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Channels_Values.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Core.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Main.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Notification_Dummy.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Notification_List.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Notification_List_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Notification_U_Dummy.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Report_Custom_I_Dummy.cpp" />
+    <ClCompile Include="..\..\common\DB\DB_Table.cpp" />
+    <ClCompile Include="..\..\common\DB\Utils_DB.cpp" />
+    <ClCompile Include="..\..\common\DM\Config_Set_Data_Mining.cpp" />
+    <ClCompile Include="..\..\common\DM\Config_Set_Data_Mining_UI_dummy.cpp" />
+    <ClCompile Include="..\..\common\DM\DM_Sequencer.cpp" />
+    <ClCompile Include="..\..\common\DS\DS_App_Status.cpp" />
+    <ClCompile Include="..\..\common\DS\DS_Control.cpp" />
+    <ClCompile Include="..\..\common\DS\DS_Engine.cpp" />
+    <ClCompile Include="..\..\common\DS\DS_Engine_UI.cpp" />
+    <ClCompile Include="..\..\common\Gas\Control_EU_Defs.cpp" />
+    <ClCompile Include="..\..\common\Gas\Gas_EU.cpp" />
+    <ClCompile Include="..\..\common\HMI\Config_Set_HMI_Wrapper.cpp" />
+    <ClCompile Include="..\..\common\HMI\Config_Set_HMI_Wrapper_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\HMI\Control_HMI.cpp" />
+    <ClCompile Include="..\..\common\HMI\Control_HMI_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\HMI\Items_HMI.cpp" />
+    <ClCompile Include="..\..\common\HMI\Items_HMI_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\IBPP\all_in_one.cpp" />
+    <ClCompile Include="..\..\common\Lock\Lock_File_Read.cpp" />
+    <ClCompile Include="..\..\common\Math\cobyla.cpp" />
+    <ClCompile Include="..\..\common\Math\cobyla_last_best.cpp" />
+    <ClCompile Include="..\..\common\Math\Dirty_Interval.cpp" />
+    <ClCompile Include="..\..\common\Math\Gaussian_Elimination.cpp" />
+    <ClCompile Include="..\..\common\Math\LeastSq_Points_to_Polynom.cpp" />
+    <ClCompile Include="..\..\common\Math\LeastSq_Points_to_Polynom_U.cpp" />
+    <ClCompile Include="..\..\common\Math\Least_Squares_Polynom.cpp" />
+    <ClCompile Include="..\..\common\Math\Spline.cpp" />
+    <ClCompile Include="..\..\common\Math\TS_Storage_Config.cpp" />
+    <ClCompile Include="..\..\common\Math\X_to_Y_Polynom.cpp" />
+    <ClCompile Include="..\..\common\MB\MB_Coeff_Def.cpp" />
+    <ClCompile Include="..\..\common\Model\App_Input.cpp" />
+    <ClCompile Include="..\..\common\Model\App_Input_Switch.cpp" />
+    <ClCompile Include="..\..\common\Model\App_Output.cpp" />
+    <ClCompile Include="..\..\common\Model\Computer_Defs.cpp" />
+    <ClCompile Include="..\..\common\Model\Log_Proxy.cpp" />
+    <ClCompile Include="..\..\common\ODBC\Confgi_Set_ODBC_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\ODBC\Config_Set_ODBC.cpp" />
+    <ClCompile Include="..\..\common\Oil\Config_Set_Rod_Pump.cpp" />
+    <ClCompile Include="..\..\common\Oil\Config_Set_Rod_Pump_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\OPC\Utils_OPC.cpp" />
+    <ClCompile Include="..\..\common\OPC_DA_Client_WT\OPC_Client.cpp" />
+    <ClCompile Include="..\..\common\Parser\Formula_Parser.cpp" />
+    <ClCompile Include="..\..\common\Pipeline_Profile\Config_Set_Pipeline_Profile.cpp" />
+    <ClCompile Include="..\..\common\Recorder\TV_DB_I.cpp" />
+    <ClCompile Include="..\..\common\Recorder\TV_Totalizer_Sum.cpp" />
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB.cpp" />
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB_Config_Dummy.cpp" />
+    <ClCompile Include="..\..\common\Recorder\TV_Write_DB_U.cpp" />
+    <ClCompile Include="..\..\common\Report\Report_HeaderFooter.cpp" />
+    <ClCompile Include="..\..\common\Target\Config_Set_Target_Compliance.cpp" />
+    <ClCompile Include="..\..\common\Target\Config_Set_Target_Compliance_UI.cpp" />
+    <ClCompile Include="..\..\common\Threading\ThreadsWatchdogU_fC.cpp" />
+    <ClCompile Include="..\..\common\UI\ComboBox_Ex.cpp" />
+    <ClCompile Include="..\..\common\UI\Dialog_Enter_Text.cpp" />
+    <ClCompile Include="..\..\common\UI\Dialog_Select_One_Choice.cpp" />
+    <ClCompile Include="..\..\common\UI\EX_ListView.cpp" />
+    <ClCompile Include="..\..\common\UI\EX_ListView_AddRemove.cpp" />
+    <ClCompile Include="..\..\common\UI\EX_ListView_FlickerFree.cpp" />
+    <ClCompile Include="..\..\common\UI\Find_Form_Simple.cpp" />
+    <ClCompile Include="..\..\common\UI\Form_Splash_Dummy.cpp" />
+    <ClCompile Include="..\..\common\UI\ListView_Clipboard_Copy.cpp" />
+    <ClCompile Include="..\..\common\UI\TreeView_Search.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_ActiveForm.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_AutoScale.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_Clipboard.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_Form_Position.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_NET_Resources.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_Net_UI.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_ToolStripMenuItem.cpp" />
+    <ClCompile Include="..\..\common\UI\Utils_TreeView.cpp" />
+    <ClCompile Include="..\..\common\utf8_string.cpp" />
+    <ClCompile Include="..\..\common\Utils.cpp" />
+    <ClCompile Include="..\..\common\Utils_API_N.cpp" />
+    <ClCompile Include="..\..\common\utils_com_error.cpp" />
+    <ClCompile Include="..\..\common\Utils_ConfigFile.cpp" />
+    <ClCompile Include="..\..\common\Utils_File.cpp" />
+    <ClCompile Include="..\..\common\Utils_ListView.cpp" />
+    <ClCompile Include="..\..\common\Utils_LocalTime.cpp" />
+    <ClCompile Include="..\..\common\Utils_Main_Common.cpp" />
+    <ClCompile Include="..\..\common\Utils_Main_fC.cpp" />
+    <ClCompile Include="..\..\common\Utils_Native.cpp" />
+    <ClCompile Include="..\..\common\Utils_Native_to_Managed.cpp" />
+    <ClCompile Include="..\..\common\Utils_String.cpp" />
+    <ClCompile Include="..\..\common\Utils_String_Ex.cpp" />
+    <ClCompile Include="..\..\common\Utils_TextBox.cpp" />
+    <ClCompile Include="..\..\common\VTS\Config_Set_Signals_VTS.cpp" />
+    <ClCompile Include="..\..\common\VTS\Config_Set_Signals_VTS_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_HMI_Multi.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Totalizer.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Totalizer_UI.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Web.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Page.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Style.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Web_Style_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Web_UI_dummy.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Wiki.cpp" />
+    <ClCompile Include="..\..\common\web\Config_Set_Wiki_UI_Dummy.cpp" />
+    <ClCompile Include="..\..\common\web\Control_Select_Web_HMI.cpp" />
+    <ClCompile Include="..\..\common\web\Web_Export_HMI.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_DB.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_I_Config.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_I_Utils.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_Peer.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_Property.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_Property_UI.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_Proxy.cpp" />
+    <ClCompile Include="..\..\common\web\Web_HMI_UI.cpp" />
+    <ClCompile Include="..\..\common\Wrapper_Thread.cpp" />
+    <ClCompile Include="..\common\RP\RP_Position_Comp.cpp" />
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="fDatabase.cpp" />
+    <ClCompile Include="fDS.cpp" />
+    <ClCompile Include="fElement.cpp" />
+    <ClCompile Include="fElementType.cpp" />
+    <ClCompile Include="fOPCClient.cpp" />
+    <ClCompile Include="fOPCEngine.cpp" />
+    <ClCompile Include="fOPCGroup.cpp" />
+    <ClCompile Include="fOPCItem.cpp" />
+    <ClCompile Include="fProject.cpp" />
+    <ClCompile Include="fProjectEUFactory.cpp" />
+    <ClCompile Include="fProperty.cpp" />
+    <ClCompile Include="fRodPumpServices.cpp" />
+    <ClCompile Include="fRPProject.cpp" />
+    <ClCompile Include="fWebChannel.cpp" />
+    <ClCompile Include="fWebPicture.cpp" />
+    <ClCompile Include="fWeb_HMI_Proxy.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\CC\Config_Set_AT_I.h" />
+    <ClInclude Include="..\..\common\CC\Config_Set_CC_App.h" />
+    <ClInclude Include="..\..\common\CC\Config_Set_Sim3_Core.h" />
+    <ClInclude Include="..\..\common\Config\Config_Project_File.h" />
+    <ClInclude Include="..\..\common\Config\Config_Project_Tree.h" />
+    <ClInclude Include="..\..\common\Config\Config_Project_Tree_Utils.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Application.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Computer.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_EU.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Gas_Comp.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI_ID.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_HMI_UI.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Params.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Params_UI.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Project.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_P_Out.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Signals.h" />
+    <ClInclude Include="..\..\common\Config\Config_Set_Signals_OPC.h" />
+    <ClInclude Include="..\..\common\Config\Parameters_Helper.h" />
+    <ClInclude Include="..\..\common\Config\Project_Structure_Revision_Number.h" />
+    <ClInclude Include="..\..\common\Config\Revisions_List.h" />
+    <ClInclude Include="..\..\common\DA\DA_Check_Tag.h" />
+    <ClInclude Include="..\..\common\DA\DA_Client_I.h" />
+    <ClInclude Include="..\..\common\DA\Startup_Synch.h" />
+    <ClInclude Include="..\..\common\DB\Config_Set_DB.h" />
+    <ClInclude Include="..\..\common\DB\DB.h" />
+    <ClInclude Include="..\..\common\DB\DB_CA.h" />
+    <ClInclude Include="..\..\common\DB\DB_Channels_Values.h" />
+    <ClInclude Include="..\..\common\DB\DB_Constants.h" />
+    <ClInclude Include="..\..\common\DB\DB_Core.h" />
+    <ClInclude Include="..\..\common\DB\DB_Main.h" />
+    <ClInclude Include="..\..\common\DB\DB_Notification_I.h" />
+    <ClInclude Include="..\..\common\DB\DB_Notification_List.h" />
+    <ClInclude Include="..\..\common\DB\DB_Notification_U.h" />
+    <ClInclude Include="..\..\common\DB\DB_Report_Custom_I.h" />
+    <ClInclude Include="..\..\common\DB\DB_Table.h" />
+    <ClInclude Include="..\..\common\DB\Utils_DB.h" />
+    <ClInclude Include="..\..\common\DM\Config_Set_Data_Mining.h" />
+    <ClInclude Include="..\..\common\DM\DM_Sequencer.h" />
+    <ClInclude Include="..\..\common\DS\DS_App_Status.h" />
+    <ClInclude Include="..\..\common\DS\DS_Control.h" />
+    <ClInclude Include="..\..\common\DS\DS_Engine.h" />
+    <ClInclude Include="..\..\common\DS\DS_Engine_UI.h" />
+    <ClInclude Include="..\..\common\DS\DS_Engine_Update.h" />
+    <ClInclude Include="..\..\common\Gas\Control_EU_Defs.h" />
+    <ClInclude Include="..\..\common\Gas\Gas_EU.h" />
+    <ClInclude Include="..\..\common\HMI\Config_Set_HMI_Wrapper.h" />
+    <ClInclude Include="..\..\common\HMI\Control_HMI.h" />
+    <ClInclude Include="..\..\common\HMI\Items_HMI.h" />
+    <ClInclude Include="..\..\common\Lock\Lock_File_Read.h" />
+    <ClInclude Include="..\..\common\Math\cobyla.h" />
+    <ClInclude Include="..\..\common\Math\cobyla_last_best.h" />
+    <ClInclude Include="..\..\common\Math\Dirty_Interval.h" />
+    <ClInclude Include="..\..\common\Math\Gaussian_Elimination.h" />
+    <ClInclude Include="..\..\common\Math\LeastSq_Points_to_Polynom.h" />
+    <ClInclude Include="..\..\common\Math\LeastSq_Points_to_Polynom_U.h" />
+    <ClInclude Include="..\..\common\Math\Least_Squares_Polynom.h" />
+    <ClInclude Include="..\..\common\Math\Spline.h" />
+    <ClInclude Include="..\..\common\Math\TS_Storage_Config.h" />
+    <ClInclude Include="..\..\common\Math\X_to_Y_Polynom.h" />
+    <ClInclude Include="..\..\common\MB\MB_Coeff_Def.h" />
+    <ClInclude Include="..\..\common\Model\App_Input.h" />
+    <ClInclude Include="..\..\common\Model\App_Input_Switch.h" />
+    <ClInclude Include="..\..\common\Model\App_Output.h" />
+    <ClInclude Include="..\..\common\Model\Computer_Defs.h" />
+    <ClInclude Include="..\..\common\Model\Log_Proxy.h" />
+    <ClInclude Include="..\..\common\ODBC\Config_Set_ODBC.h" />
+    <ClInclude Include="..\..\common\ODBC\Config_Set_ODBC_Defs.h" />
+    <ClInclude Include="..\..\common\Oil\Config_Set_Rod_Pump.h" />
+    <ClInclude Include="..\..\common\Oil\Signals_Rod_Pump.h" />
+    <ClInclude Include="..\..\common\OPC\Utils_OPC.h" />
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\OPC_Client.h" />
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\WTclientAPI.h" />
+    <ClInclude Include="..\..\common\OPC_DA_Client_WT\WtclientAPIex.h" />
+    <ClInclude Include="..\..\common\Parser\Formula_Parser.h" />
+    <ClInclude Include="..\..\common\Pipeline_Profile\Config_Set_Pipeline_Profile.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_DB_I.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_Totalizer.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_Totalizer_Sum.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB_Config.h" />
+    <ClInclude Include="..\..\common\Recorder\TV_Write_DB_U.h" />
+    <ClInclude Include="..\..\common\Report\Report_HeaderFooter.h" />
+    <ClInclude Include="..\..\common\Target\Config_Set_Target_Compliance.h" />
+    <ClInclude Include="..\..\common\Threading\ThreadsWatchdogU.h" />
+    <ClInclude Include="..\..\common\Threading\ThreadsWatchdogU_fC.h" />
+    <ClInclude Include="..\..\common\UI\ComboBox_Ex.h" />
+    <ClInclude Include="..\..\common\UI\Dialog_Enter_Text.h" />
+    <ClInclude Include="..\..\common\UI\Dialog_Select_One_Choice.h" />
+    <ClInclude Include="..\..\common\UI\EX_ListView.h" />
+    <ClInclude Include="..\..\common\UI\EX_ListView_AddRemove.h" />
+    <ClInclude Include="..\..\common\UI\EX_ListView_FlickerFree.h" />
+    <ClInclude Include="..\..\common\UI\Find_Form_Simple.h" />
+    <ClInclude Include="..\..\common\UI\ListView_Clipboard_Copy.h" />
+    <ClInclude Include="..\..\common\UI\TreeView_Search.h" />
+    <ClInclude Include="..\..\common\UI\Utils_ActiveForm.h" />
+    <ClInclude Include="..\..\common\UI\Utils_AutoScale.h" />
+    <ClInclude Include="..\..\common\UI\Utils_Clipboard.h" />
+    <ClInclude Include="..\..\common\UI\Utils_Form_Position.h" />
+    <ClInclude Include="..\..\common\UI\Utils_NET_Resources.h" />
+    <ClInclude Include="..\..\common\UI\Utils_Net_UI.h" />
+    <ClInclude Include="..\..\common\UI\Utils_ToolStripMenuItem.h" />
+    <ClInclude Include="..\..\common\UI\Utils_TreeView.h" />
+    <ClInclude Include="..\..\common\utf8_string.h" />
+    <ClInclude Include="..\..\common\Utils.h" />
+    <ClInclude Include="..\..\common\Utils_API_N.h" />
+    <ClInclude Include="..\..\common\Utils_Array.h" />
+    <ClInclude Include="..\..\common\Utils_Compiler.h" />
+    <ClInclude Include="..\..\common\utils_com_error.h" />
+    <ClInclude Include="..\..\common\Utils_ConfigFile.h" />
+    <ClInclude Include="..\..\common\Utils_Delegate.h" />
+    <ClInclude Include="..\..\common\Utils_File.h" />
+    <ClInclude Include="..\..\common\Utils_ListView.h" />
+    <ClInclude Include="..\..\common\Utils_LocalTime.h" />
+    <ClInclude Include="..\..\common\Utils_Main.h" />
+    <ClInclude Include="..\..\common\Utils_Main_Ex.h" />
+    <ClInclude Include="..\..\common\Utils_Main_fC.h" />
+    <ClInclude Include="..\..\common\Utils_Native.h" />
+    <ClInclude Include="..\..\common\Utils_NET_XML.h" />
+    <ClInclude Include="..\..\common\Utils_String.h" />
+    <ClInclude Include="..\..\common\Utils_String_Ex.h" />
+    <ClInclude Include="..\..\common\Utils_TextBox.h" />
+    <ClInclude Include="..\..\common\VTS\Config_Set_Signals_VTS.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_HMI_Multi.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_Totalizer.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_Web.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_Web_Page.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_Web_Style.h" />
+    <ClInclude Include="..\..\common\web\Config_Set_Wiki.h" />
+    <ClInclude Include="..\..\common\web\Control_Select_Web_HMI.h" />
+    <ClInclude Include="..\..\common\web\Runtime_Picture.h" />
+    <ClInclude Include="..\..\common\web\Web_Export_HMI.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_DB.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_I.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_I_Config.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_I_Utils.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_Peer.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_Property.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_Property_UI.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_Proxy.h" />
+    <ClInclude Include="..\..\common\web\Web_HMI_UI.h" />
+    <ClInclude Include="..\..\common\Wrapper_Thread.h" />
+    <ClInclude Include="..\common\fApp.h" />
+    <ClInclude Include="..\common\RP\RP_Position_Comp.h" />
+    <ClInclude Include="fDatabase.h" />
+    <ClInclude Include="fDS.h" />
+    <ClInclude Include="fElement.h" />
+    <ClInclude Include="fElementType.h" />
+    <ClInclude Include="fOPCClient.h" />
+    <ClInclude Include="fOPCEngine.h" />
+    <ClInclude Include="fOPCGroup.h" />
+    <ClInclude Include="fOPCItem.h" />
+    <ClInclude Include="fProject.h" />
+    <ClInclude Include="fProjectEUFactory.h" />
+    <ClInclude Include="fProject_Rod_Pump.h" />
+    <ClInclude Include="fProperty.h" />
+    <ClInclude Include="fRodPumpServices.h" />
+    <ClInclude Include="fRPProject.h" />
+    <ClInclude Include="fWebChannel.h" />
+    <ClInclude Include="fWeb_HMI_Proxy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\common\DS\DS.resX" />
+    <EmbeddedResource Include="..\..\common\Target\Config_Set_Target_Compliance.resx" />
+    <EmbeddedResource Include="..\..\common\web\Config_Set_Web.resX" />
+    <EmbeddedResource Include="..\..\common\web\Web_HMI.resX" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fDefs\fDefs\fDefs.csproj">
+      <Project>{fa793b00-50de-4721-9814-d4a9ef39d6c8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\fDiagnostics\fDiagnostics\fDiagnostics.csproj">
+      <Project>{8346a0bc-9195-455b-8686-6c2a323c8efe}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

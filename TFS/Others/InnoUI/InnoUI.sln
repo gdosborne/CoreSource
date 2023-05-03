@@ -1,0 +1,127 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnoUI", "InnoUI\InnoUI.csproj", "{1CE99E9C-47EC-440D-B924-A38CE0B77479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dialog", "..\Dialog\Dialog.csproj", "{106C6475-DF19-449B-A55D-398768235A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnoUILib", "InnoUILib\InnoUILib.csproj", "{98884675-80CD-4629-98A6-AB6855F28CDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\..\Framework\Application\Application.csproj", "{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\..\Framework\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|x64.ActiveCfg = Debug|x86
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|x64.Build.0 = Debug|x86
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|x64.ActiveCfg = Release|Any CPU
+		{1CE99E9C-47EC-440D-B924-A38CE0B77479}.Release|x86.ActiveCfg = Release|Any CPU
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x64.Build.0 = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.ActiveCfg = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Debug|x86.Build.0 = Debug|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|Any CPU.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|Mixed Platforms.Build.0 = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x64.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.ActiveCfg = Release|x86
+		{106C6475-DF19-449B-A55D-398768235A7A}.Release|x86.Build.0 = Release|x86
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|x64.ActiveCfg = Debug|x86
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|x64.Build.0 = Debug|x86
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|x64.ActiveCfg = Release|Any CPU
+		{98884675-80CD-4629-98A6-AB6855F28CDF}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.ActiveCfg = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x64.Build.0 = Debug|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.ActiveCfg = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Debug|x86.Build.0 = Debug|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.ActiveCfg = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x64.Build.0 = Release|x64
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.ActiveCfg = Release|x86
+		{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}.Release|x86.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.ActiveCfg = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x64.Build.0 = Debug|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.ActiveCfg = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Debug|x86.Build.0 = Debug|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.ActiveCfg = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x64.Build.0 = Release|x64
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.ActiveCfg = Release|x86
+		{DA87E838-FB93-441A-A6E2-444764FA284E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E052EAD-FDA7-4FEB-BE92-A6EBB68D0BB2}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://gdosborne.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = InnoUI\\InnoUI.csproj
+		SccProjectName1 = InnoUI
+		SccLocalPath1 = InnoUI
+		SccProjectUniqueName2 = ..\\Dialog\\Dialog.csproj
+		SccProjectName2 = ../Dialog
+		SccLocalPath2 = ..\\Dialog
+		SccProjectUniqueName3 = InnoUILib\\InnoUILib.csproj
+		SccProjectName3 = InnoUILib
+		SccLocalPath3 = InnoUILib
+		SccProjectUniqueName4 = ..\\..\\Framework\\Application\\Application.csproj
+		SccProjectName4 = ../../Framework/Application
+		SccLocalPath4 = ..\\..\\Framework\\Application
+		SccProjectUniqueName5 = ..\\..\\Framework\\MVVMFramework\\MVVMFramework.csproj
+		SccProjectName5 = ../../Framework/MVVMFramework
+		SccLocalPath5 = ..\\..\\Framework\\MVVMFramework
+	EndGlobalSection
+EndGlobal

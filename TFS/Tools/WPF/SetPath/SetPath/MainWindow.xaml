@@ -1,0 +1,64 @@
+﻿<Window x:Class="SetPath.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SetPath"
+        mc:Ignorable="d" Closing="Window_Closing"
+        Title="Set Path" Height="350" Width="525" Icon="Intersection.ico">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0" Margin="5,10">
+            <Label Content="Targets" />
+            <RadioButton Content="Machine" IsChecked="{Binding MachineIsChecked}" />
+            <RadioButton Content="User" IsChecked="{Binding UserIsChecked}" />
+            <RadioButton Content="Process" IsChecked="{Binding ProcessIsChecked}" />
+        </StackPanel>
+        <ListBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding PathItems}" SelectedItem="{Binding SelectedPathItem}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1,0,1,1" Tag="{Binding Position}" PreviewMouseLeftButtonDown="BorderLeftButtonDown">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <Button Height="18" Width="18" Command="{Binding DeleteCommand}" ToolTip="Delete" IsEnabled="{Binding IsDeleteEnabled}">
+                                    <TextBlock Text="&#xE9AC;" FontFamily="{DynamicResource _IcoMoon-Free}" FontSize="10" />
+                                </Button>
+                                <Button Height="18" Width="18" Command="{Binding MoveUpCommand}" ToolTip="Move Up" IsEnabled="{Binding IsMoveUpEnabled}">
+                                    <TextBlock Text="&#xE9C6;" FontFamily="{DynamicResource _IcoMoon-Free}" FontSize="10" />
+                                </Button>
+                                <Button Height="18" Width="18" Command="{Binding MoveDownCommand}" ToolTip="Move Down" IsEnabled="{Binding IsMoveDownEnabled}">
+                                    <TextBlock Text="&#xE9C5;" FontFamily="{DynamicResource _IcoMoon-Free}" FontSize="10" />
+                                </Button>
+                            </StackPanel>
+                            <Label Grid.Column="1" Width="50" Content="{Binding Position}" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="2" Text="{Binding Value,UpdateSourceTrigger=PropertyChanged}" GotFocus="TextBox_GotFocus" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1">
+            <Button Width="60" Height="30" ToolTip="Save" Command="{Binding SaveCommand}">
+                <TextBlock Text="&#xE962;" FontFamily="{DynamicResource _IcoMoon-Free}" FontSize="14" />
+            </Button>
+            <Button Width="60" Height="30" ToolTip="Exit" IsCancel="True" Command="{Binding CloseCommand}">
+                <TextBlock Text="&#xEA13;" FontFamily="{DynamicResource _IcoMoon-Free}" FontSize="14" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

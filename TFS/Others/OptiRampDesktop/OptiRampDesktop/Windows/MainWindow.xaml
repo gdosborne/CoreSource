@@ -1,0 +1,38 @@
+﻿<Window xmlns:OptiRampControls="clr-namespace:OptiRampControls;assembly=OptiRampControls"  x:Class="OptiRampDesktop.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Views="clr-namespace:OptiRampDesktop.Views"
+        Title="OptiRamp Desktop" Height="564" Width="1002.667"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <Views:MainWindowView x:Key="View" OpenProperties="MainWindowView_OpenProperties" DeleteItem="MainWindowView_DeleteItem" />
+    </Window.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource View}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Name="MainMenu" Grid.Row="0">
+            <MenuItem Header="File">
+
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Name="MainToolBarTray" Grid.Row="1">
+            <ToolBar>
+                <Button>
+                    <Button.Content>
+                        <Image Source="/OptiRampDesktop;component/Images/openFile.png" />
+                    </Button.Content>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <OptiRampControls:DesignerPanel Name="AnalyticsDesignerPanel" Grid.Row="2" Background="White" ReduceOpacityOnMove="True" />
+        <StatusBar Name="MainStatusBar" Grid.Row="3">
+            <StatusBarItem>Text</StatusBarItem>
+        </StatusBar>
+        <!-- Make sure this is the last control on the window -->
+        <Rectangle Name="KioskCloseRectangle" Width="20" Height="20" Grid.Row="0" Grid.RowSpan="4" Fill="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Visibility="Collapsed" />
+    </Grid>
+</Window>

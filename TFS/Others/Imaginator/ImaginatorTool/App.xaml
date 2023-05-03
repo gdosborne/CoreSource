@@ -1,0 +1,15 @@
+﻿<Application
+    x:Class="ImaginatorTool.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImaginatorTool"
+    xmlns:localData="using:ImaginatorTool.Data">
+
+    <Application.Resources>
+
+        <!-- Application-specific resources -->
+
+        <x:String x:Key="AppName">Imaginator</x:String>
+
+    </Application.Resources>
+</Application>

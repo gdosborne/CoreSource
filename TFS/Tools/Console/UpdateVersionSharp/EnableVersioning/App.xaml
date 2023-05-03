@@ -1,0 +1,72 @@
+﻿<Application x:Class="EnableVersioning.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:EnableVersioning"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+        <FontFamily x:Key="appFont">Calibri</FontFamily>
+        <FontFamily x:Key="iconFont">Segoe MDL2 Assets</FontFamily>
+        <FontFamily x:Key="consoleFont">Andale Mono</FontFamily>
+        
+        <system:Double x:Key="fontSize">11.0</system:Double>
+        <system:Double x:Key="buttonIconFontSize">14.0</system:Double>
+        
+        <Style TargetType="Button" x:Key="standardButton">
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="MinWidth" Value="80" />
+            <Setter Property="Height" Value="26" />
+        </Style>
+        <Style TargetType="Button" x:Key="smallButton">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Height" Value="18" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="buttonTextBlock">
+            <Setter Property="FontFamily" Value="{DynamicResource iconFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource buttonIconFontSize}" />
+        </Style>
+        <Style TargetType="Label" x:Key="contentLabel">
+            <Setter Property="FontFamily" Value="{DynamicResource appFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="standardTextBox">
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="FontFamily" Value="{DynamicResource appFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="listBoxTextBox">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="FontFamily" Value="{DynamicResource appFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="consoleTextBox">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="IsReadOnlyCaretVisible" Value="True" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="FontFamily" Value="{DynamicResource consoleFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+        </Style>
+        <Style TargetType="ComboBox" x:Key="standardComboBox">
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="FontFamily" Value="{DynamicResource appFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="GroupBox" x:Key="standardGroupBox">
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontFamily" Value="{DynamicResource appFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource fontSize}" />
+        </Style>
+    </Application.Resources>
+</Application>

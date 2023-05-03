@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Domination" Class="DomainationDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=Domination;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DominationConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.DomDomain" Member="DomDomains">
+    <Type Name="DomDomain">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DomInstanceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="DomDomain_DomFolder" Member="DomFolders" ThisKey="Id" OtherKey="DomDomainId" Type="DomFolder" />
+      <Association Name="DomInstance_DomDomain" Member="DomInstance" ThisKey="DomInstanceId" OtherKey="Id" Type="DomInstance" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DomFolder" Member="DomFolders">
+    <Type Name="DomFolder">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DomDomainId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="DomDomain_DomFolder" Member="DomDomain" ThisKey="DomDomainId" OtherKey="Id" Type="DomDomain" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DomUser" Member="DomUsers">
+    <Type Name="DomUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EncryptedPassword" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="DomUser_DomInstance" Member="DomInstances" ThisKey="Id" OtherKey="DomUserId" Type="DomInstance" />
+      <Association Name="DomUser_DomNotification" Member="DomNotifications" ThisKey="Id" OtherKey="FromUserId" Type="DomNotification" />
+      <Association Name="DomUser_DomNotification1" Member="DomNotifications1" ThisKey="Id" OtherKey="ToUserId" Type="DomNotification" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DomInstance" Member="DomInstances">
+    <Type Name="DomInstance">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DomUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WatchDog" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="DomInstance_DomDomain" Member="DomDomains" ThisKey="Id" OtherKey="DomInstanceId" Type="DomDomain" />
+      <Association Name="DomUser_DomInstance" Member="DomUser" ThisKey="DomUserId" OtherKey="Id" Type="DomUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DomNotification" Member="DomNotifications">
+    <Type Name="DomNotification">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FromUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ToUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NotificationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CommunicationId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="DomUser_DomNotification" Member="DomUser" ThisKey="FromUserId" OtherKey="Id" Type="DomUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DomUser_DomNotification1" Member="DomUser1" ThisKey="ToUserId" OtherKey="Id" Type="DomUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

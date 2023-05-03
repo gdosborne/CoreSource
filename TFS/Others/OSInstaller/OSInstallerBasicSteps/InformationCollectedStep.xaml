@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="OSInstallerBasicSteps.InformationCollectedStep"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:steps="clr-namespace:OSInstallerBasicSteps"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <steps:InformationCollectedStepView x:Key="view" />
+    </UserControl.Resources>
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Header,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="0" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,10,10" Foreground="{Binding WindowText}" />
+        <TextBlock Text="{Binding Paragraph1Text,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Row="1" TextWrapping="Wrap" Margin="10" Foreground="{Binding WindowText}" />
+        <TextBox Text="{Binding CompletedText}" Grid.Row="2" Background="Transparent" Foreground="{Binding WindowText}" BorderBrush="{Binding WindowText}" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" />
+    </Grid>
+</UserControl>

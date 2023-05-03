@@ -1,0 +1,19 @@
+﻿<Window x:Class="ControlTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:OSControls="clr-namespace:OSControls;assembly=OSControls"
+        Title="MainWindow" Height="350" Width="421">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Padding="2" BorderBrush="#FF00009B" BorderThickness="1" VerticalAlignment="Center" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0"/>
+            </Border.Effect>
+            <OSControls:ValueDisplay Name="MyValueDisplay" Height="16" IndicatorType="Solid" GlassVisibility="Visible" MarkerVisibility="Collapsed" ShowMinorTicks="false" Value="50" IndicatorOrientation="Horizontal" BorderBrush="#FF00009B" MajorTicksAtPercent="10" BorderThickness="1" Foreground="#FFE6E6E6" MajorTickThickness="1" MinorTickThickness=".25" FontSize="9" ScaleVisibility="Visible" ScaleForeground="#BFC2C5D6" ValueIndicator="#FF041BAA" Background="#FF000E68"/>
+        </Border>
+    </Grid>
+</Window>

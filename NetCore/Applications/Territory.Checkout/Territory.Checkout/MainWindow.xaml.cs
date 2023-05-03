@@ -148,6 +148,9 @@
 							WindowStartupLocation = WindowStartupLocation.CenterOwner,
 						};
 						win.ShowDialog();
+						if(win.View.NeedsWorkRequiresRefresh) {
+							View.NeedsWorkedRefresh();
+						}
 					}
 					break;
 			}

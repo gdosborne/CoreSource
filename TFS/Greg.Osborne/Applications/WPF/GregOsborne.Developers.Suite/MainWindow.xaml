@@ -1,0 +1,178 @@
+﻿<Window x:Class="GregOsborne.Developers.Suite.MainWindow"
+        xmlns:WPFControls="clr-namespace:GregOsborne.WPFControls;assembly=GregOsborne.WPFControls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GregOsborne.Developers.Suite"
+        mc:Ignorable="d" Style="{DynamicResource standardWindow}"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Height="450" Width="800" Icon="Resources/DevelopersSuite.png">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="A" Modifiers="Ctrl" Command="{Binding SaveConfigFileAsCommand}" />
+        <KeyBinding Key="B" Modifiers="Ctrl" Command="{Binding ManagerCommand}" />
+        <KeyBinding Key="C" Modifiers="Ctrl" Command="{Binding CopyCommand}" />
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding NewConfigFileCommand}" />
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenConfigFileCommand}" />
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveConfigFileCommand}" />
+        <KeyBinding Key="V" Modifiers="Ctrl" Command="{Binding PasteCommand}" />
+        <KeyBinding Key="X" Modifiers="Ctrl" Command="{Binding CutCommand}" />
+        <KeyBinding Key="Y" Modifiers="Ctrl" Command="{Binding RedoCommand}" />
+        <KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding UndoCommand}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Menu Name="mainMenu" Grid.Row="0" Grid.Column="0" Style="{DynamicResource mainMenu}">
+                <MenuItem Header="File" Style="{DynamicResource mainMenuItem}">
+                    <MenuItem InputGestureText="Ctrl-N" Header="{Binding NewConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{DynamicResource mainMenuItem}" Command="{Binding NewConfigFileCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE160;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-O" Header="{Binding OpenConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{DynamicResource mainMenuItem}" Command="{Binding OpenConfigFileCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xED25;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-S" Header="{Binding SaveConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{DynamicResource mainMenuItem}" Command="{Binding SaveConfigFileCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE105;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-A" Header="{Binding SaveConfigFileAsTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{DynamicResource mainMenuItem}" Command="{Binding SaveConfigFileAsCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE792;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="{Binding ExitApplicationTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Style="{DynamicResource mainMenuItem}" Command="{Binding ExitApplicationCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE792;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem InputGestureText="Ctrl-Z" Header="{Binding UndoTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding UndoCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE10E;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-Y" Header="{Binding RedoTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding RedoCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE10D;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem InputGestureText="Ctrl-X" Header="{Binding CutTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding CutCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE16B;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-C" Header="{Binding CopyTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding CopyCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE16F;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem InputGestureText="Ctrl-V" Header="{Binding PasteTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding PasteCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE16D;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Tools">
+                    <MenuItem InputGestureText="Ctrl-B" Header="{Binding ManagerTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding ManagerCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE7EE;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="{Binding SettingsTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding SettingsCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE115;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Menu Name="helpMenu" Grid.Row="0" Grid.Column="1">
+                <MenuItem Header="Help" Style="{DynamicResource mainMenuItem}">
+                    <MenuItem Header="{Binding AboutTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding AboutCommand}">
+                        <MenuItem.Icon>
+                            <TextBlock Text="&#xE902;" Style="{DynamicResource iconTextBlock}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <ToolBarTray Grid.Row="1" Grid.Column="0" Background="{DynamicResource allBackground}">
+            <ToolBar Name="mainToolbar" Background="{DynamicResource allBackground}">
+                <Button ToolTip="{Binding NewConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding NewConfigFileCommand}">
+                    <TextBlock Text="&#xE160;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Button ToolTip="{Binding OpenConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding OpenConfigFileCommand}">
+                    <TextBlock Text="&#xED25;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Button ToolTip="{Binding SaveConfigFileTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding SaveConfigFileCommand}">
+                    <TextBlock Text="&#xE105;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Separator />
+                <Button ToolTip="{Binding UndoTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding UndoCommand}">
+                    <TextBlock Text="&#xE10E;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Button ToolTip="{Binding RedoTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding RedoCommand}">
+                    <TextBlock Text="&#xE10D;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Separator />
+                <Button ToolTip="{Binding CutTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding CutCommand}">
+                    <TextBlock Text="&#xE16B;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Button ToolTip="{Binding CopyTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding CopyCommand}">
+                    <TextBlock Text="&#xE16F;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Button ToolTip="{Binding PasteTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding PasteCommand}">
+                    <TextBlock Text="&#xE16D;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+                <Separator />
+                <Button ToolTip="{Binding ManagerTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Command="{Binding ManagerCommand}">
+                    <TextBlock Text="&#xE7EE;" Style="{DynamicResource iconTextBlock}" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <TabControl Name="tabControls" Grid.Row="2" Margin="0,5,0,0" Background="{DynamicResource allBackground}">
+            <!--<TabItem Header="Testing tabitems" />
+            <TabItem Header="More tabitems" />-->
+        </TabControl>
+
+        <StatusBar Grid.Row="3" Grid.Column="0" Background="{DynamicResource allBackground}">
+            <StatusBarItem Background="{DynamicResource allBackground}" VerticalAlignment="Center">
+                <TextBlock Text="{Binding ConfigfileName, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+            </StatusBarItem>
+            <StatusBarItem Background="{DynamicResource allBackground}" VerticalAlignment="Center">
+                <Border Visibility="{Binding NeedsSavingVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Width="16" Height="16" Padding="2" BorderThickness="{DynamicResource fullBorder}" BorderBrush="{DynamicResource allBorders}" CornerRadius="8" ToolTip="{Binding RequiresSavingTip,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <!--<Border.Background>
+                        <RadialGradientBrush GradientOrigin="0.25,0.25" RadiusX="0.75" RadiusY="0.75" Opacity="0.75">
+                            <GradientStop Color="White"/>
+                            <GradientStop Color="#FFD45151" Offset="0.506"/>
+                        </RadialGradientBrush>
+                    </Border.Background>-->
+                    <TextBlock Style="{DynamicResource iconTextBlock}" Text="&#xE105;" FontSize="8" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF5D5D5D" />
+                </Border>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

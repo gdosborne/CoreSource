@@ -1,0 +1,15 @@
+﻿<sub:ToolbarApp x:Class="ApplicationSettings.Addon.App"
+        xmlns:sub="clr-namespace:Toolbar.Controller;assembly=Toolbar.Controller"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ApplicationSettings.Addon"
+        StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ApplicationSettings.Addon;component/Style/MainResourceDictionary.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Toolbar.Images;component/ImageResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</sub:ToolbarApp>

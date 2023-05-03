@@ -1,0 +1,94 @@
+﻿<Window
+    x:Class="ProjectFileManager.OrderProjectsWindow"
+    Title="Order Projects..."
+    x:ClassModifier="internal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:v="clr-namespace:ProjectFileManager"
+    Height="350"
+    MinHeight="350"
+    Width="300"
+    MinWidth="300"
+    ShowInTaskbar="False"
+    WindowStyle="SingleBorderWindow">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <v:OrderProjectsWindowView
+                        x:Key="view"
+                        ExecuteUIAction="OrderProjectsWindowView_ExecuteUIAction"
+                        PropertyChanged="OrderProjectsWindowView_PropertyChanged" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid
+        Name="LayoutRoot"
+        DataContext="{Binding
+            Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0">
+            <Button
+                Command="{Binding UpCommand}"
+                ToolTip="Move up">
+                <Image
+                    Source="images/up.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+            <Button
+                Command="{Binding DownCommand}"
+                ToolTip="Move down">
+                <Image
+                    Source="images/down.png"
+                    Style="{StaticResource CanDisableImage}" />
+            </Button>
+        </ToolBar>
+        <DataGrid
+            Name="FileListView"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            Background="White"
+            BorderBrush="{DynamicResource
+                {x:Static SystemColors.ActiveBorderBrushKey}}"
+            CanUserReorderColumns="False"
+            CanUserResizeRows="False"
+            GridLinesVisibility="None"
+            HeadersVisibility="Column"
+            ItemsSource="{Binding
+                Projects,
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}"
+            SelectedItem="{Binding
+                SelectedProject,
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=TwoWay}"
+            SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name}"
+                    Header="Name"
+                    SortMemberPath="Name" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                Command="{Binding OKCommand}"
+                Content="OK"
+                IsDefault="True" />
+            <Button
+                Command="{Binding CancelCommand}"
+                Content="Cancel"
+                IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

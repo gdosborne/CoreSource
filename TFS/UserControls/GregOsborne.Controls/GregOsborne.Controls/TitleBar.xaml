@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="GregOsborne.Controls.TitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" d:DesignWidth="300" Loaded="TitleBar_OnLoaded">
+    <UserControl.Resources>
+        <system:Double x:Key="TitleBar.Icon.WidthAndHeight">12</system:Double>
+        <SolidColorBrush x:Key="ButtonForeground" Color="#FF000000"/>
+        <Viewbox x:Key="Icon.Minimize" x:Shared="false">
+            <Grid>
+                <Path Data="M7.9750088,17.000004L24.024009,17.000004C24.577003,17.000004 25.024009,17.447025 25.024009,18.000004 25.024009,18.552982 24.577003,19.000004 24.024009,19.000004L7.9750088,19.000004C7.4219998,19.000004 6.9750087,18.552982 6.9750089,18.000004 6.9750087,17.447025 7.4219998,17.000004 7.9750088,17.000004z M2,2L2,26 30,26 30,2z M0,0L32,0 32,28 0,28z" Stretch="Uniform" Fill="{DynamicResource ButtonForeground}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <Viewbox x:Key="Icon.Close" x:Shared="false">
+            <Grid>
+                <Path Data="M2.999979,0C3.8000264,0,4.4999763,0.30000305,5.1000115,0.90000927L15.999954,11.700012 26.899959,0.90000927C28.099967,-0.29998779 29.999927,-0.29998779 31.099961,0.90000927 32.299972,2.1000061 32.299972,4 31.099961,5.1000061L20.199958,16 31.099961,26.900009C32.299972,28.100006 32.299972,30 31.099961,31.100006 29.899951,32.300003 27.999931,32.300003 26.899959,31.100006L15.999954,20.200012 5.1000115,31.100006C3.9000017,32.300003 1.9999809,32.300003 0.90000743,31.100006 -0.30000248,29.900009 -0.30000248,28 0.90000743,26.900009L11.800011,16 0.90000743,5.1000061C-0.30000248,3.9000092 -0.30000248,2 0.90000743,0.90000927 1.4999818,0.30000305 2.1999928,0 2.999979,0z" Stretch="Uniform" Fill="{DynamicResource ButtonForeground}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <Viewbox x:Key="Icon.Maximize" x:Shared="false">
+            <Grid>
+                <Path Data="M8,11L8,21 24,21 24,11z M8,7L8,9 24,9 24,7z M6,5L26,5 26,23 6,23z M2,2L2,26 30,26 30,2z M0,0L32,0 32,28 0,28z" Stretch="Uniform" Fill="{DynamicResource ButtonForeground}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <Viewbox x:Key="Icon.Help" x:Shared="false">
+            <Grid>
+                <Path Data="M16.015988,22.000006C16.587003,22.000006 17.059996,22.190009 17.436003,22.570014 17.812011,22.941992 17.999999,23.414008 17.999999,23.988015 17.999999,24.570015 17.815001,25.051003 17.44699,25.430001 17.070982,25.810006 16.593992,26.000008 16.015988,26.000008 15.437985,26.000008 14.956997,25.806008 14.574001,25.418007 14.191005,25.014016 13.999995,24.538002 13.999995,23.988015 13.999995,23.422003 14.191005,22.950018 14.574001,22.570014 14.956997,22.190009 15.437985,22.000006 16.015988,22.000006z M16.432004,5.8760081C17.279997,5.8760079 18.067992,5.9700021 18.798004,6.1560069 19.527009,6.3429881 20.161989,6.6369945 20.704988,7.0379959 21.247012,7.4389968 21.670993,7.9519975 21.975986,8.5759909 22.28101,9.2009907 22.433994,9.9500146 22.433994,10.825015 22.433994,11.381015 22.369999,11.885013 22.243015,12.336002 22.114994,12.786991 21.928013,13.213016 21.68201,13.613987 21.436007,14.015995 21.131015,14.399998 20.765993,14.769993 20.40201,15.139012 19.981996,15.519993 19.509004,15.911015 19.188996,16.175999 18.908997,16.422001 18.667999,16.648991 18.425994,16.876989 18.225006,17.103002 18.066009,17.325994 17.906005,17.549993 17.78601,17.786993 17.704009,18.036993 17.622008,18.288 17.580992,18.573003 17.580992,18.892004 17.580992,19.109991 17.609984,19.33399 17.669982,19.562018 17.729003,19.790015 17.807982,19.980994 17.908996,20.135993L14.312984,20.135993C14.22198,19.898993 14.150996,19.631995 14.100978,19.336004 14.05099,19.040014 14.025996,18.760015 14.025996,18.495 14.025996,18.075994 14.066981,17.692998 14.148982,17.34699 14.230983,17.000005 14.353999,16.674992 14.518001,16.368992 14.682003,16.064 14.886989,15.772007 15.133999,15.493992 15.380001,15.216008 15.666989,14.940007 15.994992,14.666996 16.341001,14.375004 16.64401,14.104007 16.90399,13.854008 17.164,13.603001 17.384001,13.353 17.566985,13.101993 17.748992,12.851017 17.885985,12.591007 17.976989,12.321994 18.067992,12.053988 18.113983,11.755008 18.113983,11.427005 18.113983,11.144992 18.063994,10.881991 17.963988,10.640994 17.863006,10.398989 17.718993,10.191988 17.532988,10.019015 17.346007,9.8460104 17.11801,9.7089865 16.848997,9.6080039 16.579984,9.5079978 16.28201,9.45801 15.954007,9.45801 15.243008,9.45801 14.505,9.6059897 13.738978,9.9020104 12.972986,10.199008 12.248986,10.647006 11.564995,11.248996L11.564995,7.1340042C12.266991,6.7149975 13.032007,6.3999949 13.861994,6.1900035 14.691005,5.9809884 15.548001,5.8760079 16.432004,5.8760081z M16,2C8.2799997,2.0000002 2,8.2800002 2,16 2,23.72 8.2799997,30 16,30 23.719999,30 30,23.72 30,16 30,8.2800002 23.719999,2.0000002 16,2z M16,0C24.822,0 32,7.1780001 32,16 32,24.822001 24.822,32 16,32 7.1779995,32 0,24.822001 0,16 0,7.1780001 7.1779995,0 16,0z" Stretch="Uniform" Fill="#FF000000" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <Viewbox x:Key="Icon.HelpAbout" x:Shared="false">
+            <Grid>
+                <Path Data="M15.618005,20.325974C16.015005,20.325974 16.346004,20.452974 16.607004,20.706974 16.868004,20.955975 16.999004,21.271975 16.999004,21.654974 16.999004,22.043974 16.871004,22.365974 16.614004,22.618975 16.353004,22.872974 16.021004,22.999973 15.618005,22.999973 15.215005,22.999973 14.881004,22.869974 14.614004,22.610973 14.347005,22.340975 14.214005,22.021975 14.214005,21.654974 14.214005,21.276974 14.347005,20.960974 14.614004,20.706974 14.881004,20.452974 15.215005,20.325974 15.618005,20.325974z M15.686005,10.999974C16.154005,10.999974 16.589005,11.054975 16.992004,11.165975 17.395004,11.276975 17.745005,11.450974 18.044004,11.688974 18.344004,11.925974 18.578005,12.229974 18.747004,12.599975 18.915005,12.970974 18.999004,13.414974 18.999004,13.932974 18.999004,14.262974 18.964005,14.560974 18.893005,14.827974 18.823004,15.095974 18.720005,15.348974 18.584005,15.585975 18.448004,15.822974 18.279005,16.051973 18.078005,16.270975 17.878004,16.489975 17.645004,16.714973 17.384005,16.946974 17.207005,17.103973 17.053005,17.249973 16.921005,17.384974 16.786005,17.519974 16.676004,17.653975 16.589005,17.785975 16.500004,17.917974 16.433004,18.058973 16.388004,18.206974 16.343004,18.355974 16.320005,18.524975 16.320005,18.713974 16.320005,18.842974 16.337004,18.974974 16.368004,19.110973 16.401005,19.245974 16.445005,19.358974 16.501005,19.450974L14.516005,19.450974C14.466004,19.310974 14.427005,19.152975 14.400004,18.976974 14.371004,18.800974 14.358005,18.634974 14.358005,18.478973 14.358005,18.229975 14.380005,18.002974 14.426004,17.797974 14.471004,17.592974 14.539004,17.398973 14.629004,17.218975 14.720004,17.037973 14.833005,16.864975 14.969005,16.699974 15.105004,16.535975 15.263004,16.371975 15.444004,16.209974 15.636004,16.036974 15.804005,15.875975 15.946005,15.727974 16.090004,15.579974 16.211004,15.430974 16.312004,15.281974 16.413004,15.133974 16.489004,14.979974 16.539005,14.819974 16.589005,14.660975 16.614004,14.483974 16.614004,14.289974 16.614004,14.121974 16.587004,13.966974 16.531004,13.823975 16.475004,13.679975 16.397005,13.557974 16.293005,13.454974 16.190004,13.351974 16.065004,13.270974 15.915005,13.211974 15.767005,13.152974 15.603004,13.122974 15.422005,13.122974 15.029004,13.122974 14.622005,13.209974 14.199004,13.385974 13.777004,13.561975 13.376004,13.827974 12.999004,14.183974L12.999004,11.744974C13.387005,11.496974 13.810004,11.309975 14.267005,11.185974 14.724005,11.061975 15.198005,10.999974 15.686005,10.999974z M2,9.0000019L2,25 30,25 30,9.0000019z M13.499005,2.9999743C14.327009,2.9999743 14.999013,3.6719742 14.999013,4.4999743 14.999013,5.3279743 14.327009,5.9999743 13.499005,5.9999743 12.671001,5.9999743 11.998998,5.3279743 11.998998,4.4999743 11.998998,3.6719742 12.671001,2.9999743 13.499005,2.9999743z M9.4989977,2.9999743C10.326998,2.9999743 10.998998,3.6719742 10.998998,4.4999743 10.998998,5.3279743 10.326998,5.9999743 9.4989977,5.9999743 8.6709976,5.9999743 7.9989977,5.3279743 7.9989977,4.4999743 7.9989977,3.6719742 8.6709976,2.9999743 9.4989977,2.9999743z M5.4989977,2.9999743C6.3269978,2.9999743 6.9989977,3.6719742 6.9989977,4.4999743 6.9989977,5.3279743 6.3269978,5.9999743 5.4989977,5.9999743 4.6709976,5.9999743 3.9989977,5.3279743 3.9989977,4.4999743 3.9989977,3.6719742 4.6709976,2.9999743 5.4989977,2.9999743z M2,2L2,7.0000014 30,7.0000014 30,2z M0,0L32,0 32,27 0,27z" Stretch="Uniform" Fill="#FF000000" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <TransformGroup.Children>
+                                <RotateTransform Angle="0" />
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </TransformGroup.Children>
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <Brush x:Key="MouseOverBackground">LightGray</Brush>
+        <Style x:Key="TitleBarButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="3,3,8,3" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="24" />
+            <Setter Property="Height" Value="24" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Margin="3,0,0,0" CornerRadius="3">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource MouseOverBackground}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter></ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Name="OuterGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Border Name="TitleBorder" Grid.Row="0" Grid.Column="0" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Grid.ColumnSpan="6" PreviewMouseLeftButtonDown="_TitleBorder_OnPreviewMouseLeftButtonDown" CornerRadius="5,5,0,0" />
+        <Border Name="IconBorder" Grid.Column="0" Margin="0,8,2,0" Padding="3" VerticalAlignment="Center">
+            <Image Name="IconImage" Width="16" Height="16" Margin="10,-5,0,0" VerticalAlignment="Center" Source="application.ico">
+                <Image.ContextMenu>
+                    <ContextMenu Name="TitlebarContextMenu" Visibility="Collapsed">
+                        <MenuItem Header="Help" Name="HelpMenuItem" Visibility="Collapsed" Icon="{StaticResource Icon.Help}">
+                            <MenuItem Header="Show" Name="HelpShowMenuItem" Icon="{StaticResource Icon.Help}"/>
+                            <MenuItem Header="About" Name="HelpAboutMenuItem" Icon="{StaticResource Icon.HelpAbout}" />
+                        </MenuItem>
+                        <Separator Name="FirstSeperator" Visibility="Collapsed" />
+                        <MenuItem Header="Minimize" Name="MinimizeMenuItem" Icon="{StaticResource Icon.Minimize}" />
+                        <MenuItem Header="Maximize/Restore" Name="MaximizeMenuItem" Icon="{StaticResource Icon.Maximize}" />
+                        <Separator />
+                        <MenuItem Header="Exit" Name="ExitMenuItem" Icon="{StaticResource Icon.Close}" />
+                    </ContextMenu>
+                </Image.ContextMenu>
+            </Image>
+        </Border>
+        <Label Name="TitleBarText" Margin="0,3,0,0" Grid.Column="1" Content="Testing" VerticalAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" PreviewMouseLeftButtonDown="_TitleBorder_OnPreviewMouseLeftButtonDown" />
+        <Button Name="MinimizeButton" Grid.Column="3" Style="{StaticResource TitleBarButtonStyle}" Content="{StaticResource Icon.Minimize}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}"/>
+        <Button Name="MaximizeButton" Grid.Column="4" Style="{StaticResource TitleBarButtonStyle}" Content="{StaticResource Icon.Maximize}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}"/>
+        <Button Name="CloseButton" Grid.Column="5" Style="{StaticResource TitleBarButtonStyle}" Content="{StaticResource Icon.Close}" Width="{StaticResource TitleBar.Icon.WidthAndHeight}" Height="{StaticResource TitleBar.Icon.WidthAndHeight}"/>
+    </Grid>
+</UserControl>

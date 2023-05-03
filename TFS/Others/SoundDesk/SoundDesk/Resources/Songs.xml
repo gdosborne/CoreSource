@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Songs>
+  <Settings>
+    <orchestralfileformat>iasnm_E_{0}.mp3</orchestralfileformat>
+    <pianofileformat>iasn_E_{0}.mp3</pianofileformat>
+    <newfileformat>snnw_E_{0}.mp3</newfileformat>
+    <vocalfileformat>iasnv_E_{0}.mp3</vocalfileformat>
+    <newfolder>%Music%\JWLibrary\New</newfolder>
+    <orchestralfolder>%Music%\JWLibrary\Orchestal</orchestralfolder>
+    <vocalfolder>%Music%\JWLibrary\Vocal</vocalfolder>
+    <pianofolder>%Music%\JWLibrary\Piano</pianofolder>
+  </Settings>
+  <Song number="1" title="Jehovah's Attributes" />
+  <Song number="2" title="We Thank You Jehovah" />
+  <Song number="3" title="God Is Love" />
+  <Song number="4" title="Making a Good Name With God" />
+  <Song number="5" title="Christ, Our Exemplar" />
+  <Song number="6" title="The Prayer of God’s Servant" />
+  <Song number="7" title="Christian Dedication" />
+  <Song number="8" title="The Lord's Evening Meal" />
+  <Song number="9" title="Praise Jehovah, Our God!" />
+  <Song number="10" title="Here I Am! Send Me" />
+  <Song number="11" title="Making Jehovah's Heart Glad" />
+  <Song number="12" title="Life Everlasting Is Promised" />
+  <Song number="13" title="A Prayer of Thanksgiving" />
+  <Song number="14" title="All Things Made New" />
+  <Song number="15" title="Creation Reveals Jehovah's Glory" />
+  <Song number="16" title="Flee To God's Kingdom" />
+  <Song number="17" title="Forward, You Witnesses!" />
+  <Song number="18" title="God's Loyal Love" />
+  <Song number="19" title="God's Promise of Paradise" />
+  <Song number="20" title="Bless Our Meeting Together" />
+  <Song number="21" title="Happy, The Merciful" />
+  <Song number="22" title="Jehovah Is My Shepard" />
+  <Song number="23" title="Jehovah, Our Strength" />
+  <Song number="24" title="Keep Your Eye On the Proze!" />
+  <Song number="25" title="Proof of Discipleship" />
+  <Song number="26" title="Oh, Walk With God" />
+  <Song number="27" title="Take Sides With Jehovah!" />
+  <Song number="28" title="The New Song" />
+  <Song number="29" title="Walking In Integrity" />
+  <Song number="30" title="Jehovah Begins His Rule" />
+  <Song number="31" title="We Are Jehovah's Witnesses!" />
+  <Song number="32" title="Be Steadfast, Unmovable!" />
+  <Song number="33" title="Fear Them Not" />
+  <Song number="34" title="Living Up to Our Name" />
+  <Song number="35" title="Gratitude for Divine Patience" />
+  <Song number="36" title="What God Has Yoked Together" />
+  <Song number="37" title="The Scriptures - Inspired of God" />
+  <Song number="38" title="Throw Your Burden on Jehovah" />
+  <Song number="39" title="Our Posession of Peace" />
+  <Song number="40" title="Keep on Seeking First the Kingdom" />
+  <Song number="41" title="Worship Jehovah During Youth" />
+  <Song number="42" title="Assist Those Who Are Weak" />
+  <Song number="43" title="Stay Awake, Stand Firm, Grow Mighty" />
+  <Song number="44" title="Sharing Fully In The Harvest" />
+  <Song number="45" title="Move Ahead!" />
+  <Song number="46" title="Jehovah Is Our King!" />
+  <Song number="47" title="Declare The Good News" />
+  <Song number="48" title="Daily Walking With Jehovah" />
+  <Song number="49" title="Jehovah Is Our Refuge" />
+  <Song number="50" title="The Divine Pattern of Love" />
+  <Song number="51" title="We Cleave to Jehovah" />
+  <Song number="52" title="Guard Your Heart" />
+  <Song number="53" title="Working Together in Unity" />
+  <Song number="54" title="We Must Have the Faith" />
+  <Song number="55" title="Life Without End - At Last!" />
+  <Song number="56" title="Please Hear My Prayer" />
+  <Song number="57" title="The Meditation of My Heart" />
+  <Song number="58" title="My Prayer of Dedication" />
+  <Song number="59" title="To God We Are Dedicated!" />
+  <Song number="60" title="He Will Make You Strong" />
+  <Song number="61" title="What Sort of Person Should I Be" />
+  <Song number="62" title="To Whom Do We Belong?" />
+  <Song number="63" title="Ever Loyal" />
+  <Song number="64" title="Make the Truth Your Own" />
+  <Song number="65" title="This is the Way" />
+  <Song number="66" title="Serving Jehovah Whole-Souled" />
+  <Song number="67" title="Pray To Jehovah Each Day" />
+  <Song number="68" title="A Prayer of the Lowly One" />
+  <Song number="69" title="Make Me Know Your Ways" />
+  <Song number="70" title="Make Sure of the More Important Things" />
+  <Song number="71" title="God's Gift of Holy Spirit" />
+  <Song number="72" title="Cultivating the Quality of Love" />
+  <Song number="73" title="Love Intensely From the Heart" />
+  <Song number="74" title="The Joy of Jehovah" />
+  <Song number="75" title="Our Reasons for Joy" />
+  <Song number="76" title="Jehovah, God of Peace" />
+  <Song number="77" title="Be Forgiving" />
+  <Song number="78" title="Long-Suffering" />
+  <Song number="79" title="The Power of Kindness" />
+  <Song number="80" title="The Quality of Goodness" />
+  <Song number="81" title="Give Us More Faith" />
+  <Song number="82" title="Imitate Christ's Mildness" />
+  <Song number="83" title="We Need Self Control" />
+  <Song number="84" title="I Want To" />
+  <Song number="85" title="A Full Reward From Jehovah" />
+  <Song number="86" title="Faithful Women, Christian Sisters" />
+  <Song number="87" title="Now We Are One" />
+  <Song number="88" title="Children Are A Trust From God" />
+  <Song number="89" title="Jehovah’s Warm Appeal: Be Wise, My Son" />
+  <Song number="90" title="Beauty In Grey-Headedness" />
+  <Song number="91" title="My Father, My God and Friend" />
+  <Song number="92" title="Preach the Word" />
+  <Song number="93" title="Let Your Light Shine" />
+  <Song number="94" title="Content With God's Good Gifts" />
+  <Song number="95" title="Taste and See That Jehovah is Good" />
+  <Song number="96" title="Seek Out Deserving Ones" />
+  <Song number="97" title="Forward You Ministers of the Kingdom" />
+  <Song number="98" title="Sowing Kingdom Seed" />
+  <Song number="99" title="Praising Earth's New King" />
+  <Song number="100" title="We Are Jehovah's Army!" />
+  <Song number="101" title="Making Known the Kingdom Truth" />
+  <Song number="102" title="Join in the Kingdom Song" />
+  <Song number="103" title="From House to House" />
+  <Song number="104" title="Gaining Jehovah's Friendship" />
+  <Song number="105" title="The Jeavens Declare God's Glory" />
+  <Song number="106" title="Gaining Jehovah's Friendship" />
+  <Song number="107" title="Come to Jehovah's Mountain" />
+  <Song number="108" title="Praise Jehovah for His Kingdom" />
+  <Song number="109" title="Hail Jehovah's Firstborn!" />
+  <Song number="110" title="God's Wonderous Works" />
+  <Song number="111" title="He Will Call" />
+  <Song number="112" title="Great God, Jehovah" />
+  <Song number="113" title="Grateful for God's Word" />
+  <Song number="114" title="God's Own Book - A Treasure" />
+  <Song number="115" title="Making Our Way Successful" />
+  <Song number="116" title="The Light Gets Brighter" />
+  <Song number="117" title="We Must BE Taught" />
+  <Song number="118" title="Welcome One Another" />
+  <Song number="119" title="Come! Be Refreshed" />
+  <Song number="120" title="Listen, Obey, and Be Blessed" />
+  <Song number="121" title="Encourage One Another" />
+  <Song number="122" title="Myriads of Brothers" />
+  <Song number="123" title="Shepards - Gifts In Men" />
+  <Song number="124" title="Receive Them With Hospitality" />
+  <Song number="125" title="Loyally Submitting to Theocratic Order" />
+  <Song number="126" title="Our Labor of Love" />
+  <Song number="127" title="A Place Bearing Your Name" />
+  <Song number="128" title="The Scene of this World is Changing" />
+  <Song number="129" title="Holding Fast Our Hope" />
+  <Song number="130" title="The Miracle of Life" />
+  <Song number="131" title="Jehovah Provides Escape" />
+  <Song number="132" title="A Victory Song" />
+  <Song number="133" title="Seek God For Your Deliverence" />
+  <Song number="134" title="See Yourself When All Is New" />
+  <Song number="135" title="Enduring to the End" />
+  <Song number="136" title="The Kingdom Is In Place - Let It Come!" />
+  <Song number="137" title="Grant Us Boldness" />
+  <Song number="138" title="Jehovah Is Your Name" />
+  <Song number="139" title="Teach Them to Stand Firm" />
+  <Song number="140" title="The Life of a Pioneer" />
+  <Song number="141" title="Searching for Friends of Peace" />
+  <Song number="142" title="Preaching to All Sorts of People" />
+  <Song number="143" title="Light in a Darkened World" />
+  <Song number="144" title="It Means Their Life" />
+  <Song number="145" title="Preparing to Preach" />
+  <Song number="146" title="You Did It for Me" />
+  <Song number="147" title="A Special Posession" />
+  <Song number="148" title="You Gave Your Only-Begotten Son" />
+  <Song number="149" title="Greatful for the Ransom" />
+  <Song number="150" title="Reaching Out" />
+  <Song number="152" title="Our Stregth, Our Hope, Our Confidence" />
+  <Song number="153" title="How Does it Make You Feel?" />
+  <Song number="154" title="We Will Keep Enduring" />
+</Songs>

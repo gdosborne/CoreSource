@@ -1,0 +1,67 @@
+﻿<?xml version="1.0"?>
+<Carriers>
+  <carrier id="Access_Wireless" name="Access Wireless" email="iwirelesshometext.com" />
+  <carrier id="Airfire_Mobile" name="Airfire Mobile" email="sms.airfiremobile.com" />
+  <carrier id="Airtel_Wireless" name="Airtel Wireless" email="sms.airtelmontana.com" />
+  <carrier id="Airvoice" name="Airvoice" email="vmobl.com" />
+  <carrier id="Alaska_Communications_Systems" name="Alaska Communications Systems" email="msg.acsalaska.com" />
+  <carrier id="Alaska_Digitel" name="Alaska Digitel" email="akdigitel.com" />
+  <carrier id="Alltel" name="Alltel" email="message.alltel.com" />
+  <carrier id="Appalachian_Wireless" name="Appalachian Wireless" email="awsms.com" />
+  <carrier id="Assurance_Mobile" name="Assurance Mobile" email="vmobl.com" />
+  <carrier id="AT_T_Wireless" name="AT&amp;T Wireless" email="txt.att.net" />
+  <carrier id="Bell_South" name="Bell South" email="blsdcs.net" />
+  <carrier id="Boost_Mobile" name="Boost Mobile" email="myboostmobile.com" />
+  <carrier id="C_Spire_Wireless" name="C Spire Wireless" email="csouth1.com" />
+  <carrier id="cbeyond" name="cbeyond" email="cbeyond.sprintpcs.com" />
+  <carrier id="Cellcom" name="Cellcom" email="cellcom.quiktxt.com" />
+  <carrier id="Cellular_One" name="Cellular One" email="mobile.celloneusa.co" />
+  <carrier id="Cellular_South" name="Cellular South" email="csouth1.com" />
+  <carrier id="Cincinnati_Bell" name="Cincinnati Bell" email="gocbw.com" />
+  <carrier id="Cingular" name="Cingular" email="mobile.mycingular.com" />
+  <carrier id="Comcast" name="Comcast" email="comcastpcs.textmsg.com" />
+  <carrier id="Comcel" name="Comcel" email="comcel.com.com" />
+  <carrier id="Consumer_Cellular" name="Consumer Cellular" email="mms.att.net" />
+  <carrier id="Corr_Wireless" name="Corr Wireless" email="corrwireless.net" />
+  <carrier id="Credo_Mobile" name="Credo Mobile" email="messaging.sprintpcs.com" />
+  <carrier id="Cricket" name="Cricket" email="mms.mycricket.com" />
+  <carrier id="Element_Mobile" name="Element Mobile" email="sms.elementmobile.net" />
+  <carrier id="Family_Mobile" name="Family Mobile" email="tmomail.net" />
+  <carrier id="Golden_State_Cellular" name="Golden State Cellular" email="gscsms.com" />
+  <carrier id="Google_Project_Fi" name="Google Project Fi" email="msg.fi.google.com" />
+  <carrier id="Google_Voice" name="Google Voice" email="txt.voice.google.com" />
+  <carrier id="H2O" name="H2O" email="txt.att.net" />
+  <carrier id="Illinois_Valley_Cellular" name="Illinois Valley Cellular" email="ivctext.com" />
+  <carrier id="Inland_Cellular" name="Inland Cellular" email="inlandlink.com" />
+  <carrier id="Message_Media_(US)" name="Message Media (US)" email="pcsms.us" />
+  <carrier id="Metro_PCS" name="Metro PCS" email="mymetropcs.com" />
+  <carrier id="Mid_River" name="Mid_River" email="text.midrivers.com" />
+  <carrier id="Mobi_PCS" name="Mobi PCS" email="mobipcs.net" />
+  <carrier id="Nemont" name="Nemont" email="sms.nemont.net" />
+  <carrier id="NET10" name="NET10" email="txt.att.net" />
+  <carrier id="Nextel" name="Nextel" email="messaging.nextel.com" />
+  <carrier id="NTelos" name="NTelos" email="pcs.ntelos.com" />
+  <carrier id="Pageplus" name="Pageplus" email="vtext.com" />
+  <carrier id="Plateautel" name="Plateautel" email="smsmail.plateautel.net" />
+  <carrier id="Platinumtel" name="Platinumtel" email="mailmymobile.net" />
+  <carrier id="Pocket" name="Pocket" email="sms.pocket.com" />
+  <carrier id="Qwest" name="Qwest" email="qwestmp.com" />
+  <carrier id="Revol" name="Revol" email="mms.revol.com" />
+  <carrier id="Simple_Mobile" name="Simple Mobile" email="smtext.com" />
+  <carrier id="Skytel" name="Skytel" email="email.skytel.com" />
+  <carrier id="Solavei" name="Solavei" email="tmomail.net" />
+  <carrier id="Southern_Linc" name="Southern Linc" email="page.southernlinc.com" />
+  <carrier id="Sprint_PCS" name="Sprint PCS" email="pm.sprint.com" />
+  <carrier id="Sprint_Wireless" name="Sprint Wireless" email="pm.sprint.com" />
+  <carrier id="Straight_Talk" name="Straight Talk" email="vtext.com" />
+  <carrier id="SunCom" name="SunCom" email="tms.suncom.com" />
+  <carrier id="T_mobile" name="T_mobile" email="tmomail.net" />
+  <carrier id="Thumb_Cellular" name="Thumb Cellular" email="sms.thumbcellular.com" />
+  <carrier id="Ting_Mobile" name="Ting Mobile" email="message.ting.com" />
+  <carrier id="TracFone" name="TracFone" email="mms.att.net" />
+  <carrier id="Union_Wireless" name="Union Wireless" email="union_tel.com" />
+  <carrier id="US_Cellular" name="US Cellular" email="email.uscc.net" />
+  <carrier id="Verizon" name="Verizon" email="vtext.com" />
+  <carrier id="Virgin_Mobile" name="Virgin Mobile" email="vmobl.com" />
+  <carrier id="VoiceStream" name="VoiceStream" email="voicestream.net" />
+</Carriers>

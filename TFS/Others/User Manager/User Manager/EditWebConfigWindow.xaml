@@ -1,0 +1,47 @@
+﻿<Window x:Class="User_Manager.EditWebConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:local="clr-namespace:User_Manager"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit Password in web.config" Width="460"
+         Style="{StaticResource DialogWindow}">
+    <Window.Resources>
+        <local:EditWebConfigWindowView x:Key="view" PropertyChanged="EditWebConfigWindowView_PropertyChanged" ExecuteCommand="EditWebConfigWindowView_ExecuteCommand" />
+    </Window.Resources>
+
+    <Grid Name="LayoutRoot" DataContext="{Binding Source={StaticResource view}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" TextWrapping="Wrap">
+            Select the setting below that will be used as a password. The value you enter will be
+            hashed using state of the art encryption and stored in the selected web.config file. 
+            The password <Bold>cannot</Bold> be retrieved once it is set, but must be compared to 
+            another hashed string for authentication.
+        </TextBlock>
+        <Label Content="Password setting name:" Grid.Row="1" Grid.Column="0" />
+        <ComboBox ItemsSource="{Binding SettingNames}" Grid.Row="1" Grid.Column="1" Margin="5" SelectedItem="{Binding SelectedSetting,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Margin="5,2" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="Current Value" Grid.Row="2" Grid.Column="0" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CurrentValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" TextTrimming="CharacterEllipsis" />
+        <Label Content="New Value" Grid.Row="3" Grid.Column="0" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding NewValue,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5" Grid.Row="99" Grid.ColumnSpan="2">
+            <Button Command="{Binding OKCommand}" Content="OK" Style="{StaticResource DefaultButton}" IsDefault="True" />
+            <Button Command="{Binding CancelCommand}" Content="Cancel" Style="{StaticResource DefaultButton}" IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

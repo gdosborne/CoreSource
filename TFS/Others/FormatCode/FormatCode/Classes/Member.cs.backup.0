@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FormatCode.Classes
+{
+	public class Member
+	{
+		public Member()
+		{
+			Members = new List<Member>();
+			ScopeType = ScopeTypes.Undefined;
+		}
+		public enum MemberTypes
+		{
+			Namespace,
+			Using,
+			Enum,
+			Method,
+			Class
+		}
+		public enum ScopeTypes
+		{
+			Undefined,
+			Public,
+			Protected,
+			Internal,
+			Private
+		}
+		public string Code { get; set; }
+		public int StartIndex { get; set; }
+		public int EndIndex { get; set; }
+		public MemberTypes MemberType { get; set; }
+		public string Name { get; set; }
+		public ScopeTypes ScopeType { get; set; }
+		public List<Member> Members { get; private set; }
+		public static Member FromCode(string code, int start, int end)
+		{
+			var result = new Member
+			{
+				StartIndex = start,
+				EndIndex = end,
+				Code = code
+			};
+			if(code.StartsWith("public"))
+			{
+				result.ScopeType = ScopeTypes.Public;
+				if (code.Split(' ')[1].Equals("void") || code.Split(' ')[2].Equals("void"))
+				{
+					result.MemberType = MemberTypes.Method;
+					if (code.Split(' ')[1].Equals("void"))
+						result.Name = code.Split(' ')[2];
+					else
+						result.Name = code.Split(' ')[3];
+				}
+				else if (code.Split(' ')[1].Equals("class") || code.Split(' ')[2].Equals("class"))
+				{
+					result.MemberType = MemberTypes.Class;
+					if (code.Split(' ')[1].Equals("class"))
+						result.Name = code.Split(' ')[2];
+					else
+						result.Name = code.Split(' ')[3];
+				}
+				else if (code.Split(' ')[1].Equals("enum"))
+				{
+					result.MemberType = MemberTypes.Enum;
+					result.Name = code.Split(' ')[2];
+				}
+			}
+			else if (code.StartsWith("protected"))
+			{
+				result.ScopeType = ScopeTypes.Protected;
+			}
+			else if (code.StartsWith("internal"))
+			{
+				result.ScopeType = ScopeTypes.Internal;
+			}
+			else if (code.StartsWith("private"))
+			{
+				result.ScopeType = ScopeTypes.Private;
+			}
+			else if (code.StartsWith("using"))
+			{
+				result.ScopeType = ScopeTypes.Undefined;
+				result.MemberType = MemberTypes.Using;
+				result.Name = code.Substring(5).Trim();
+			}
+			else if (code.StartsWith("namespace"))
+			{
+				result.ScopeType = ScopeTypes.Undefined;
+				result.MemberType = MemberTypes.Namespace;
+				result.Name = code.Substring(9).Trim();
+			}
+			return result;
+		}
+	}
+}

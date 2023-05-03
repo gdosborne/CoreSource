@@ -1,0 +1,239 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Windows.Media;
+
+namespace FormatCode.Classes
+{
+	public static class Document
+	{
+		public static FlowDocument GetFlowDocument(string text, FontFamily defaultFont, double defaultSize)
+		{
+
+			FlowDocument doc = new FlowDocument();
+			var p = new Paragraph();
+
+			using (var sr = new StringReader(text))
+			{
+				bool isInComment = false;
+				bool isInLongComment = false;
+				bool isInRegion = false;
+				Brush textBrush = Enumerations.NormalText;
+
+
+				while (sr.Peek() > -1)
+				{
+					var line = sr.ReadLine();
+					var lineChars = line.ToCharArray();
+					var runText = string.Empty;
+					textBrush = Enumerations.NormalText;
+					for (int i = 0; i < lineChars.Length; i++)
+					{
+						if (isInComment || isInLongComment || isInRegion)
+							runText += lineChars[i];
+						else
+						{
+							if (lineChars[i] == '#')
+							{
+								runText += lineChars[i];
+								isInRegion = true;
+							}
+							else if (lineChars[i] == '/' && i < lineChars.Length - 1 && lineChars[i + 1] == '/')
+							{
+								runText += lineChars[i];
+								isInComment = true;
+							}
+							else if (lineChars[i] == '/' && i < lineChars.Length - 1 && lineChars[i + 1] == '*')
+							{
+								runText += lineChars[i];
+								isInLongComment = true;
+							}
+							else if (lineChars[i] == ' ')
+							{
+								if (Enumerations.CSharpKeywords.Contains(runText.Trim()))
+								{
+									textBrush = Enumerations.KeywordText;
+									p.Inlines.Add(GetRun(runText, textBrush, defaultFont, defaultSize));
+									textBrush = Enumerations.NormalText;
+									runText = string.Empty;
+								}
+								runText += lineChars[i];
+
+							}
+							else
+								runText += lineChars[i];
+						}
+					}
+					if (isInRegion)
+					{
+						textBrush = Enumerations.RegionText;
+						isInRegion = !isInRegion;
+					}
+					if (isInComment || isInLongComment)
+					{
+						textBrush = Enumerations.CommentText;
+						isInComment = !isInComment;
+					}
+
+					p.Inlines.Add(GetRun(runText, textBrush, defaultFont, defaultSize));
+					p.Inlines.Add(new LineBreak());
+
+					runText = string.Empty;
+				}
+
+			}
+
+			doc.Blocks.Add(p);
+			return doc;
+
+		}
+		private static Run GetRun(string text, Brush brush, FontFamily fontFamily, double fontSize)
+		{
+			var result = new Run(text);
+			result.Foreground = brush;
+			result.FontFamily = fontFamily;
+			result.FontSize = fontSize;
+			return result;
+		}
+
+
+		private static IEnumerable<TextElement> GetRunsAndParagraphs(FlowDocument doc)
+		{
+			for (TextPointer position = doc.ContentStart;
+			  position != null && position.CompareTo(doc.ContentEnd) <= 0;
+			  position = position.GetNextContextPosition(LogicalDirection.Forward))
+			{
+				if (position.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.ElementEnd)
+				{
+					Run run = position.Parent as Run;
+
+					if (run != null)
+					{
+						yield return run;
+					}
+					else
+					{
+						Paragraph para = position.Parent as Paragraph;
+
+						if (para != null)
+						{
+							yield return para;
+						}
+					}
+				}
+			}
+		}
+
+		private static FormattedText GetFormattedText(this FlowDocument doc, FontFamily fontFamily, double fontSize)
+		{
+			if (doc == null)
+			{
+				throw new ArgumentNullException("doc");
+			}
+
+			FormattedText output = new FormattedText(
+			  GetText(doc),
+			  CultureInfo.CurrentCulture,
+			  doc.FlowDirection,
+			  new Typeface(fontFamily, doc.FontStyle, doc.FontWeight, doc.FontStretch),
+			  fontSize,
+			  doc.Foreground);
+
+			int offset = 0;
+
+			foreach (TextElement el in GetRunsAndParagraphs(doc))
+			{
+				Run run = el as Run;
+
+				if (run != null)
+				{
+					int count = run.Text.Length;
+
+					output.SetFontFamily(run.FontFamily, offset, count);
+					output.SetFontStyle(run.FontStyle, offset, count);
+					output.SetFontWeight(run.FontWeight, offset, count);
+					output.SetFontSize(run.FontSize, offset, count);
+					output.SetForegroundBrush(run.Foreground, offset, count);
+					output.SetFontStretch(run.FontStretch, offset, count);
+					output.SetTextDecorations(run.TextDecorations, offset, count);
+
+					offset += count;
+				}
+				else
+				{
+					offset += Environment.NewLine.Length;
+				}
+			}
+
+			return output;
+		}
+
+		public static double ActualWidth(this FlowDocument doc, FontFamily fontFamily, double fontSize)
+		{
+			return GetFormattedText(doc, fontFamily, fontSize).WidthIncludingTrailingWhitespace + 20;
+		}
+
+		public static void SetFont(this FlowDocument doc, FontFamily fontFamily)
+		{
+			foreach (var block in doc.Blocks)
+			{
+				if (block is Paragraph)
+				{
+					foreach (var inline in ((Paragraph)block).Inlines)
+					{
+						if (inline is Run)
+						{
+							((Run)inline).FontFamily = fontFamily;
+						}
+					}
+				}
+			}
+		}
+
+		public static void SetFontSize(this FlowDocument doc, double fontSize)
+		{
+			foreach (var block in doc.Blocks)
+			{
+				if (block is Paragraph)
+				{
+					foreach (var inline in ((Paragraph)block).Inlines)
+					{
+						if (inline is Run)
+						{
+							((Run)inline).FontSize = fontSize;
+						}
+					}
+				}
+			}
+		}
+
+		private static string GetText(FlowDocument doc)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (var block in doc.Blocks)
+			{
+				if(block is Paragraph)
+				{
+					foreach (var inline in ((Paragraph)block).Inlines)
+					{
+						if(inline is LineBreak)
+						{
+							sb.AppendLine();
+						}
+						else if(inline is Run)
+						{
+							sb.Append(((Run)inline).Text);
+						}
+
+					}
+				}
+			}
+			return sb.ToString();
+		}
+	}
+}

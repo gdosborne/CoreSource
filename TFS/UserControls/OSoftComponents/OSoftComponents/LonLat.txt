@@ -1,0 +1,26 @@
+316 N 7th St, Adel IA 50003 USA
+Lat		Lon
+41.6198790,	-94.0160620
+41,34,11.56N	94,0,57.82W
+
+KML Data
+<?xml version="1.0" encoding="iso-8859-1"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+  <Placemark>
+    <name>316 North 7th Street, Adel, IA 50003, USA</name>
+    <description></description>
+    <Point>
+      <coordinates>-94.0160620,41.6198790,272.45</coordinates>
+    </Point>
+  </Placemark>
+</kml>
+
+GPX Data
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="MyGeoPosition.com" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <wpt lat="41.6198790" lon="-94.0160620">
+    <name>316 North 7th Street, Adel, IA 50003, USA</name>
+    <src>MyGeoPosition.com</src>
+    <link>http://mygeoposition.com</link>
+  </wpt>
+</gpx>

@@ -20,25 +20,50 @@
 		</Grid.ColumnDefinitions>
 		<TabControl Grid.Row="0" Grid.Column="0" TabStripPlacement="Left">
 			<TabItem Header="User Interface">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition />
-						<ColumnDefinition Width="auto" />
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="auto" />
-					</Grid.RowDefinitions>
-					<Label Content="Text Font Size" Grid.Row="0" Grid.Column="0" />
-					<ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding FontSizes}"
-							  SelectedItem="{Binding SelectedTextFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-							  Width="50">
-						<ComboBox.ItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding}" />
-							</DataTemplate>
-						</ComboBox.ItemTemplate>
-					</ComboBox>
-				</Grid>
+				<ScrollViewer Padding="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition Width="auto" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
+						<Label Content="Text Font Size" Grid.Row="0" Grid.Column="0" />
+						<Label Content="Startup Selection" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" />
+						<Label Content="Set needs worked after days" Grid.Row="2" Grid.Column="0" />
+
+						<ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding FontSizes}"
+								  SelectedItem="{Binding SelectedTextFontSize,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+								  Width="80" HorizontalAlignment="Right">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding}" />
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+						<StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+							<RadioButton GroupName="StartupType" Content="Areas" 
+										 IsChecked="{Binding IsAreaStartup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+							<RadioButton GroupName="StartupType" Content="Territories" 
+										 IsChecked="{Binding IsTerritoryStartup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+							<RadioButton GroupName="StartupType" Content="Persons" 
+										 IsChecked="{Binding IsPersonStartup,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+						</StackPanel>
+						<ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding NeedsWorkedSelection}"
+								  SelectedItem="{Binding NeedsWorkedSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+								  Width="80" HorizontalAlignment="Right">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding}" />
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+					</Grid>
+				</ScrollViewer>
 			</TabItem>
 		</TabControl>
 

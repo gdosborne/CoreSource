@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="GregOsborne.Developers.Controls.Watermark"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:wpfCtrls="clr-namespace:GregOsborne.WPFControls;assembly=GregOsborne.WPFControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GregOsborne.Developers.Controls"
+             mc:Ignorable="d" x:Name="theControl" Opacity=".25"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Grid.Row="0" Grid.RowSpan="99" Grid.Column="0" Grid.ColumnSpan="99" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <wpfCtrls:TextPath x:Name="theIcon" HorizontalAlignment="Center" StrokeThickness="{Binding ElementName=theControl,Path=BorderThickness,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding ElementName=theControl,Path=BorderBrush,UpdateSourceTrigger=PropertyChanged}" Fill="{Binding ElementName=theControl,Path=Foreground,UpdateSourceTrigger=PropertyChanged}" FontSize="120" FontFamily="Segoe MDL2 Assets" />
+            <wpfCtrls:TextPath x:Name="theText" HorizontalAlignment="Center" StrokeThickness="{Binding ElementName=theControl,Path=BorderThickness,UpdateSourceTrigger=PropertyChanged}" Stroke="{Binding ElementName=theControl,Path=BorderBrush,UpdateSourceTrigger=PropertyChanged}" Fill="{Binding ElementName=theControl,Path=Foreground,UpdateSourceTrigger=PropertyChanged}" Text="Watermark" FontSize="60" FontFamily="{Binding ElementName=theControl,Path=FontFamily,UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

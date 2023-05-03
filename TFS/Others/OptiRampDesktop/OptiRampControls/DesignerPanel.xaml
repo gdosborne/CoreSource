@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="OptiRampControls.DesignerPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="/OptiRampControls;component/Primary.xaml" />
+    </UserControl.Resources>
+    <ScrollViewer Name="AnalyticsScrollViewer" Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Background="LightGray" SizeChanged="AnalyticsScrollViewer_SizeChanged">
+        <Canvas Name="AnalyticsCanvas" Width="{Binding ViewportWidth, ElementName=AnalyticsScrollViewer, Mode=OneWay}" Height="{Binding ViewportHeight, ElementName=AnalyticsScrollViewer, Mode=OneWay}" MouseMove="DesignerPanel_MouseMove" MouseLeftButtonDown="DesignerPanel_MouseLeftButtonDown" />
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<roles>
+  <role id="1">
+    <name>Administrator</name>
+    <code>NJSBVT</code>
+  </role>
+  <role id="2">
+    <name>Congregation Coordinator</name>
+    <code>IRBNKE</code>
+  </role>
+  <role id="3">
+    <name>Congregation Administrator</name>
+    <code>AAODY</code>
+  </role>
+  <role id="4">
+    <name>User</name>
+    <code>PLTTC</code>
+  </role>
+</roles>

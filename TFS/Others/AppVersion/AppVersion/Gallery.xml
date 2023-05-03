@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">SNC Gallery</title>
+  <id>7F60726C-D67A-424C-84D2-B078CB153D43</id>
+  <updated>2016-03-23T17:00:00Z</updated>
+  <entry>
+    <id>05951645-5750-45e4-a017-c4144ea5d0d0d</id>
+    <title type="text">Application Version Updater</title>
+    <summary type="text">Aids developer in controlling the assembly and file versions of their application</summary>
+    <published>2016-03-23T17:00:00Z</published>
+    <updated>2016-03-23T17:00:00Z</updated>
+    <author>
+      <name>Greg Osborne</name>
+    </author>
+    <link rel="alternate" type="text/html" href="http://codeproject.com"/>
+    <link rel="releasenotes" type="text/html" href="http://codeproject.com"/>
+    <link rel="icon" type="text" href="icon.png"/>
+    <link rel="previewimage" type="text" href="preview.png"/>
+    <category term="Tools" />
+    <content type="application/octet-stream" src="C:\Users\greg\Source\Workspaces\Domaination2\AppVersion\AppVersion\bin\Release\AppVersion.vsix" />
+    <Vsix xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://schemas.microsoft.com/developer/vsx-syndication-schema/2010">
+      <Id>05951645-5750-45e4-a017-c4144ea5d0d0d</Id>
+      <Version>16.3.23</Version>
+    </Vsix>
+  </entry>
+</feed>

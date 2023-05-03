@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updateversion.projects version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program%20Files/UpdateVersion/UpdateVersion.Projects.xsd">
+	<schemas>
+		<schema name="default">
+			<detail>
+				<level name="major" method="ignore"/>
+				<level name="minor" method="ignore"/>
+				<level name="build" method="ignore"/>
+				<level name="revision" method="ignore"/>
+			</detail>
+		</schema>
+		<schema name="increment_revision">
+			<detail>
+				<level name="major" method="ignore"/>
+				<level name="minor" method="ignore"/>
+				<level name="build" method="ignore"/>
+				<level name="revision" method="increment"/>
+			</detail>
+		</schema>
+		<schema name="increment_revision_by_day">
+			<detail>
+				<level name="major" method="ignore"/>
+				<level name="minor" method="ignore"/>
+				<level name="build" method="dayvalue"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+		<schema name="daily">
+			<detail>
+				<level name="major" method="year"/>
+				<level name="minor" method="month"/>
+				<level name="build" method="day"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+		<schema name="fixed_increment">
+			<detail>
+				<level name="major" method="fixed"/>
+				<level name="minor" method="fixed"/>
+				<level name="build" method="fixed"/>
+				<level name="revision" method="increment"/>
+			</detail>
+		</schema>
+		<schema name="fixed_increment_mini">
+			<detail>
+				<level name="major" method="fixed"/>
+				<level name="minor" method="fixed"/>
+				<level name="build" method="increment"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+		<schema name="static_increment_daily">
+			<detail>
+				<level name="major" method="year"/>
+				<level name="minor" method="month"/>
+				<level name="build" method="incrementeachday"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+		<schema name="increment_daily">
+			<detail>
+				<level name="major" method="ignore"/>
+				<level name="minor" method="ignore"/>
+				<level name="build" method="incrementeachday"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+		<schema name="standard">
+			<detail>
+				<level name="major" method="ignore"/>
+				<level name="minor" method="ignore"/>
+				<level name="build" method="increment"/>
+				<level name="revision" method="incrementreseteachday"/>
+			</detail>
+		</schema>
+	</schemas>
+	<methods>
+		<method name="ignore"/>
+		<method name="increment"/>
+		<method name="incrementeachday"/>
+		<method name="incrementreseteachday"/>
+		<method name="random"/>
+		<method name="dayvalue"/>
+		<method name="dayvaluefrom"/>
+		<method name="secondvalue"/>
+		<method name="secondvaluefrom"/>
+		<method name="fixed"/>
+		<method name="year"/>
+		<method name="twodigityear"/>
+		<method name="month"/>
+		<method name="day"/>
+	</methods>
+	<projects>
+
+	</projects>
+</updateversion.projects>
