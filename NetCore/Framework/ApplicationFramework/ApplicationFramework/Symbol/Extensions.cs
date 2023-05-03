@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.OzApplication.Symbol {
+namespace Common.AppFramework.Symbol {
     public enum ValueTypes {
         Symbol,
         Code,

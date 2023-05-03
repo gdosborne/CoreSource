@@ -1,4 +1,4 @@
-﻿namespace Common.OzApplication.OSSystem {
+﻿namespace Common.AppFramework.OSSystem {
     using System.Collections.Generic;
     using System;
 

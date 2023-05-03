@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Common.OzApplication.RecentItems {
+namespace Common.AppFramework.RecentItems {
     /// <summary>
     /// The recent item.
     /// </summary>

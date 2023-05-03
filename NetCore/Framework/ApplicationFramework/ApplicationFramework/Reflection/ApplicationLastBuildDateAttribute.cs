@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.OzApplication.Reflection {
+namespace Common.AppFramework.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly)]
     public class ApplicationLastBuildDateAttribute : Attribute {
         public ApplicationLastBuildDateAttribute(string buildDate) {

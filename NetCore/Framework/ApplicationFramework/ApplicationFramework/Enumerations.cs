@@ -1,4 +1,4 @@
-﻿namespace Common.OzApplication {
+﻿namespace Common.AppFramework {
     public enum ApplicationStatus {
         WatchDogIdle = -2,
         Starting,

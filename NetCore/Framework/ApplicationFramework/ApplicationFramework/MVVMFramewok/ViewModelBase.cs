@@ -67,16 +67,5 @@ namespace Common.MVVMFramework {
             }
         }
         #endregion
-
-        public enum Actions {
-            NewItemAction,
-            ShowXaml,
-            SelectColor,
-            Save,
-            SaveAs,
-            Open,
-            Exit,
-            Close
-        }
     }
 }

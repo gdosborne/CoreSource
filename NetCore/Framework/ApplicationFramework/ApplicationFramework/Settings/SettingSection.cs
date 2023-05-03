@@ -1,9 +1,9 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Common.OzApplication.Settings {
+namespace Common.AppFramework.Settings {
     public class SettingSection : INotifyPropertyChanged {
         public SettingSection(string name) {
             Name = name;

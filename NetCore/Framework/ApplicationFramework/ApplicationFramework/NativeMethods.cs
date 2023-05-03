@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public class NativeMethods {
         internal const int GwlStyle = -16;
         internal const int WsMaximizebox = 0x10000;

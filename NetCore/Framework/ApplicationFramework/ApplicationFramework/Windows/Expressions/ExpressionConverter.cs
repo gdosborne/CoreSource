@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.OzApplication.Windows.Expressions {
+namespace Common.AppFramework.Windows.Expressions {
     public class ExpressionConverter : DoubleConverter {
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
             var doubleValue = (double)base.ConvertFrom(context, culture, value);

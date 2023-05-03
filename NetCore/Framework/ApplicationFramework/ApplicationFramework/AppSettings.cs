@@ -1,5 +1,5 @@
-﻿using Common.OzApplication.Media;
-using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Media;
+using Common.AppFramework.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     /// <summary>
     /// The settings.
     /// </summary>

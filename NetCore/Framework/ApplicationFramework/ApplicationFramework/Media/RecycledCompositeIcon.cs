@@ -1,8 +1,8 @@
-﻿using Common.OzApplication.Primitives;
+﻿using Common.AppFramework.Primitives;
 using System.IO;
 using System.Windows;
 
-namespace Common.OzApplication.Media {
+namespace Common.AppFramework.Media {
     public class RecycledCompositeIcon : CompositeIcon {
         public static RecycledCompositeIcon FromFileAsRecycled(string filename, double scaleValue) {
             var res = default(RecycledCompositeIcon);

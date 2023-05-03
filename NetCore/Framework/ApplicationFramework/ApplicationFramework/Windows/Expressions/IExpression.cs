@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Common.OzApplication.Windows.Expressions {
+namespace Common.AppFramework.Windows.Expressions {
     [TypeConverter(typeof(ExpressionConverter))]
     public interface IExpression {
         double CalculateValue();

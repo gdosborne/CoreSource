@@ -1,8 +1,8 @@
-﻿using Common.OzApplication.Logging;
+﻿using Common.AppFramework.Logging;
 using System;
 using System.IO;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public sealed class Session {
         private WriteStatusHandler handler = default;
 

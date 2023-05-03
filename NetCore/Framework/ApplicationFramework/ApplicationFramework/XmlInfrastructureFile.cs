@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public abstract class XmlInfrastructureFile {
         public enum FileTypes {
             Settings,

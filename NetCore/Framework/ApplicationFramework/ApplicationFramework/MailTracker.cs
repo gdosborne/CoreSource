@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using static Common.OzApplication.Session;
+using static Common.AppFramework.Session;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public class MailTracker : IDisposable {
 
         [Flags]

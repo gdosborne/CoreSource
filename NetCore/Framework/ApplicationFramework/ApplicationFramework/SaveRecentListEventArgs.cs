@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.OzApplication {
+namespace Common.AppFramework {
     public delegate void SavedRecentListHandler(object sender, SaveRecentListEventArgs e);
     public class SaveRecentListEventArgs {
         public SaveRecentListEventArgs(string[] orderedList) {

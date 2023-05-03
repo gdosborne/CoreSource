@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Printing;
 
-namespace Common.OzApplication.Printing {
+namespace Common.AppFramework.Printing {
     public static class Extensions {
         public static PageSettings GetPrinterPageInfo(string printerName, bool isLandscape) {
             PrinterSettings settings;
