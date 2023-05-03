@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Dependency Property</Title>
+      <Shortcut>propdpx</Shortcut>
+      <Description>Create a Dependency Property</Description>
+      <Author>Greg</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <References>
+        <Reference>
+          <Assembly>System.dll</Assembly>
+        </Reference>
+      </References>
+      <Imports>
+        <Import>
+          <Namespace>System.Windows</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Windows.Data</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Name of the property</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Type of the value</ToolTip>
+          <Default>string</Default>
+        </Literal>
+        <Literal>
+          <ID>objtype</ID>
+          <ToolTip>Type of the instance</ToolTip>
+          <Default>object</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[
+            public static readonly DependencyProperty $name$Property = DependencyProperty.Register("$name$", typeof($type$), typeof($objtype$), new FrameworkPropertyMetadata(default($type$), On$name$PropertyChanged));
+            public $type$ $name$ {
+              get => ($type$)GetValue($name$Property);
+              set => SetValue($name$Property, value); 
+            }
+            private static void On$name$PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+              var obj = ($objtype$) d;
+              var val = ($type$) e.NewValue;
+              //modify the value here, i.e., obj.ctrl.Value = val
+            }
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

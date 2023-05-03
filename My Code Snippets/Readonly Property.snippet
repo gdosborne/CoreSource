@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Read-only Property</Title>
+      <Shortcut>propro</Shortcut>
+      <Description>Create a read-only property</Description>
+      <Author>Greg</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Name of the property</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Type of the value</ToolTip>
+          <Default>string</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[
+        public $type$ $name${ get; private set; }
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
