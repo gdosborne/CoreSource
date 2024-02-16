@@ -2,7 +2,8 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
-	using ConsoleUtilities;
+    using System.Linq;
+    using ConsoleUtilities;
 	using GregOsborne.Application.Text;
 
 	public static class Enumerations {
@@ -14,7 +15,15 @@
 		}
 
 		public enum ProjectTypes {
-			CSProject
+			CSProject,
+			VBProject
+		}
+
+		public enum PartTypes {
+			Major,
+			Minor,
+			Build,
+			Revision
 		}
 
 		public enum TransformTypes {
@@ -33,6 +42,14 @@
 			Month,
 			Day,
 			Second
+		}
+
+		public static IEnumerable<TransformTypes> GetTransformTypes() {
+			var result = new List<TransformTypes>();
+			Enum.GetNames(typeof(TransformTypes)).ToList().ForEach(t => {
+				result.Add((TransformTypes)Enum.Parse(typeof(TransformTypes), t));
+			});
+			return result;
 		}
 
 		public static int ProcessMethod(this TransformTypes transformType, object[] paramValues, Dictionary<TransformTypes, Delegate> delegates) {

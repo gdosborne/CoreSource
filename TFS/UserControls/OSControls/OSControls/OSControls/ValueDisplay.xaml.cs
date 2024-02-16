@@ -4,6 +4,7 @@
 	using System.Windows.Controls;
 	using System.Windows.Media;
 	using System.Windows.Shapes;
+
 	using GregOsborne.Application.Windows;
 
 	public partial class ValueDisplay : UserControl {

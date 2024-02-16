@@ -1,4 +1,4 @@
-#define SrcApp "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\bin\x64\Release\UpdateVersionSharp.exe"
+#define SrcApp "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\bin\x64\Release\UpdateVersionSharp.exe"
 #define VerString GetFileVersion(SrcApp)
 
 #define MyAppName "Update Version Sharp"
@@ -60,15 +60,15 @@ Source: "..\bin\x64\Release\VersionMaster.pdb"; DestDir: "{app}"; Flags: ignorev
 Source: "..\bin\x64\Release\UpdateVersion.Projects.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\bin\x64\Release\UpdateVersion.Projects.xsd"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\GregOsborne.MVVMFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\GregOsborne.MVVMFramework.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Ookii.Dialogs.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\gosborn\Documents\Visual Studio 2017\Code\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Ookii.Dialogs.Wpf.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\EnableVersioning.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\GregOsborne.MVVMFramework.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\GregOsborne.MVVMFramework.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Ookii.Dialogs.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Git\CoreSource\TFS\Tools\Console\UpdateVersionSharp\EnableVersioning\bin\x64\Release\Ookii.Dialogs.Wpf.pdb"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

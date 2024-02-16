@@ -177,20 +177,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Application\Application_4.8.csproj">
-      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
-      <Name>Application_4.8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ConsoleUtilities\ConsoleUtilities_4.8.csproj">
-      <Project>{69C8A040-E62F-47D3-9C3B-35D3F30FC2F4}</Project>
-      <Name>ConsoleUtilities_4.8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VersionMaster\VersionMaster_4.8.csproj">
-      <Project>{4a47ab8c-face-4373-a080-8cc52586df00}</Project>
-      <Name>VersionMaster_4.8</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

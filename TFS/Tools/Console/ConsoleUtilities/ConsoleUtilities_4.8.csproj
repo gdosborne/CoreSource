@@ -104,12 +104,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\Application\Application_4.8.csproj">
-      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
-      <Name>Application_4.8</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if $(ConfigurationName) == Release "C:\Program Files\UpdateVersion\UpdateVersionSharp.exe" -p="$(ProjectPath)"</PreBuildEvent>

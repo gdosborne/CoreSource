@@ -1,7 +1,8 @@
 ﻿namespace GregOsborne.Application.Linq {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
+    using System.Collections.ObjectModel;
+    using System.Linq;
 
 	public static class Extensions {
 		public static IList<T> Randomize<T>(this IList<T> value, Random r = null) {
@@ -28,5 +29,13 @@
 			}
 			return new List<string>(Enum.GetNames(enumType));
 		}
+
+		public static void AddRange<T>(this IList<T> list, IList<T> newValues) =>
+			newValues.ToList().ForEach(x => list.Add(x));
+
+		public static ObservableCollection<T> ReplaceWith<T>(this ObservableCollection<T> original, IEnumerable<T> newList) =>
+			new(newList);
+
+		
 	}
 }

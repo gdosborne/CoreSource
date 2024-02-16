@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="ButtonBackgroundColor">#FFE8E8EA</Color>
+    <Color x:Key="StandardButtonDefaultBackgroundColor">#88BFBFDE</Color>
+    <Color x:Key="ButtonForegroundColor">#FF131313</Color>
+    <Color x:Key="ButtonMouseOverColor">#FF95C5FB</Color>
+    <Color x:Key="ButtonDisabledColor">#FFD0D0D0</Color>
+    <Color x:Key="ButtonDisabledForegroundColor">#88131313</Color>
+    <Color x:Key="WindowBackgroundColor">#FFFCFCFC</Color>
+    <Color x:Key="WindowTextColor">#FF131313</Color>
+    <Color x:Key="MenuItemBackgroundColor">#00000000</Color>
+    <Color x:Key="ControlBorderColor">#FF717171</Color>
+    <Color x:Key="ToolbarBackgroundColor">#FFF4F9FF</Color>
+    <Color x:Key="InvertedBackgroundColor">#FF05094C</Color>
+    <Color x:Key="InvertedForegroundColor">#FFC9D1FD</Color>
+    <Color x:Key="DeletedForegroundColor">#FFFF1010</Color>
+    <Color x:Key="InsertedForegroundColor">#FF1010FF</Color>
+
+    <Color x:Key="ToggleForegroundColor">#FF000000</Color>
+    <Color x:Key="ToggleForegroundOffColor">#FF555555</Color>
+    <Color x:Key="ToggleBackgroundColor">#00000000</Color>
+    <Color x:Key="ToggleBackgroundOffColor">#FFD9D9EF</Color>
+
+    <Color x:Key="ConsoleBackgroundColor">#FF131313</Color>
+    <Color x:Key="ConsoleForegroundColor">#FFFCFCFC</Color>
+
+</ResourceDictionary>

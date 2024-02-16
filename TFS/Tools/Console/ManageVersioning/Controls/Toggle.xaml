@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="ManageVersioning.Controls.Toggle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ManageVersioning.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="100">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="bg">
+            <Setter Property="FontFamily" Value="{DynamicResource IconFont}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Foreground" Value="Transparent" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="fg">
+            <Setter Property="FontFamily" Value="{DynamicResource IconFont}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="theGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="backgroundCharacter" Style="{DynamicResource bg}" Text="&#xEC11;" />
+        <TextBlock x:Name="foregroundCharacter" Style="{DynamicResource fg}" Text="&#xF19E;" PreviewMouseLeftButtonDown="toggleForeground_PreviewMouseLeftButtonDown"/>
+        <TextBlock x:Name="toggleText" Grid.Column="1" VerticalAlignment="Center" Style="{DynamicResource BaseTextBlock}" HorizontalAlignment="Left" Margin="5,0" Text="Yes" />
+    </Grid>
+</UserControl>

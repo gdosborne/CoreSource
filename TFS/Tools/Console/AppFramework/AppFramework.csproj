@@ -1,0 +1,156 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<SignAssembly>false</SignAssembly>
+		<EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+		<OutputType>Library</OutputType>
+		<LangVersion>10.0</LangVersion>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Include="ByteSize.cs" />
+	  <Compile Include="Clipboard\ClipboardHelper.cs" />
+	  <Compile Include="Dialogs\DialogHelpers.cs" />
+	  <Compile Include="EMailer.cs" />
+	  <Compile Include="Enumerations.cs" />
+	  <Compile Include="Exception\Extensions.cs" />
+	  <Compile Include="Exception\IgnoredException.cs" />
+	  <Compile Include="Install\UpdateChecker.cs" />
+	  <Compile Include="IO\Directory.cs" />
+	  <Compile Include="IO\File.cs" />
+	  <Compile Include="IO\OneDrive.cs" />
+	  <Compile Include="IO\Path.cs" />
+	  <Compile Include="Linq\Extensions.cs" />
+	  <Compile Include="Logging\ApplicationLogger.cs" />
+	  <Compile Include="Logging\LogDirectoryMissingException.cs" />
+	  <Compile Include="Logging\Logger.cs" />
+	  <Compile Include="Logging\Loggers.cs" />
+	  <Compile Include="MailTracker.cs" />
+	  <Compile Include="Media\Extensions.cs" />
+	  <Compile Include="Media\MultiIcon.cs" />
+	  <Compile Include="Media\XamlToPngConverter.cs" />
+	  <Compile Include="Memory.cs" />
+	  <Compile Include="MVVMFramework\CheckAccess.cs" />
+	  <Compile Include="MVVMFramework\DelegateCommand.cs" />
+	  <Compile Include="MVVMFramework\ExecuteUIAction.cs" />
+	  <Compile Include="MVVMFramework\Extensions.cs" />
+	  <Compile Include="MVVMFramework\IViewModelBase.cs" />
+	  <Compile Include="MVVMFramework\IViewWindow.cs" />
+	  <Compile Include="MVVMFramework\NotifyClassBase.cs" />
+	  <Compile Include="MVVMFramework\RelayCommand.cs" />
+	  <Compile Include="MVVMFramework\UiActionParameters.cs" />
+	  <Compile Include="MVVMFramework\ViewModelBase.cs" />
+	  <Compile Include="NativeMethods.cs" />
+	  <Compile Include="Net\Utilities.cs" />
+	  <Compile Include="Primitives\DateTime.cs" />
+	  <Compile Include="Primitives\Extension.cs" />
+	  <Compile Include="Primitives\Math.cs" />
+	  <Compile Include="Process\Extensions.cs" />
+	  <Compile Include="Reflection.cs" />
+	  <Compile Include="Registry\Extensions.cs" />
+	  <Compile Include="Registry\RegistrySection.cs" />
+	  <Compile Include="Security\UserAccess.cs" />
+	  <Compile Include="Session.cs" />
+	  <Compile Include="Settings.cs" />
+	  <Compile Include="SettingsActionEventArgs.cs" />
+	  <Compile Include="SettingsData.cs" />
+	  <Compile Include="Symbol\Extensions.cs" />
+	  <Compile Include="Text\Extension.cs" />
+	  <Compile Include="Theme\ApplicationTheme.cs" />
+	  <Compile Include="Theme\Extensions.cs" />
+	  <Compile Include="Theme\IThemedView.cs" />
+	  <Compile Include="Theme\ThemeManager.cs" />
+	  <Compile Include="Theme\VisualElement.cs" />
+	  <Compile Include="ThickEnum.cs" />
+	  <Compile Include="USState.cs" />
+	  <Compile Include="Windows\Controls\Extensions.cs" />
+	  <Compile Include="Windows\Dialog\Extensions.cs" />
+	  <Compile Include="Windows\Extension.cs" />
+	  <Compile Include="Windows\Media\FontMetrics.cs" />
+	  <Compile Include="Windows\SafeNativeMethods.cs" />
+	  <Compile Include="Windows\WindowSetting.cs" />
+	  <Compile Include="WriteStatusEventArgs.cs" />
+	  <Compile Include="XmlInfrastructureFile.cs" />
+	  <Compile Include="Xml\Linq\Extension.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AWSSDK.Core" Version="3.7.302.4" />
+		<PackageReference Include="Azure.Core" Version="1.37.0" />
+		<PackageReference Include="Castle.Core" Version="5.1.1" />
+		<PackageReference Include="ID3" Version="0.6.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="Microsoft-Windows10-APICodePack-Core" Version="1.1.8" />
+		<PackageReference Include="Microsoft-Windows10-APICodePack-Shell" Version="1.1.8" />
+		<PackageReference Include="Microsoft-Windows10-APICodePack-ShellExtensions" Version="1.1.8" />
+		<PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.5" />
+		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
+		<PackageReference Include="Microsoft-WindowsAPICodePack-ShellExtensions" Version="1.1.5" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.59.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Shell.Interop" Version="17.8.37221" />
+		<PackageReference Include="Microsoft.Win32.SystemEvents" Version="8.0.0" />
+		<PackageReference Include="Moq" Version="4.20.70" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+		<PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+		<PackageReference Include="Polly" Version="8.2.1" />
+		<PackageReference Include="Serilog" Version="3.1.1" />
+		<PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+		<PackageReference Include="System.Composition" Version="8.0.0" />
+		<PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" />
+		<PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+		<PackageReference Include="System.DirectoryServices" Version="8.0.0" />
+		<PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.1" />
+		<PackageReference Include="System.Management" Version="8.0.0" />
+		<PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
+		<PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.1" />
+		<PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
+		<PackageReference Include="WindowsAPICodePack" Version="7.0.4" />
+		<PackageReference Include="WindowsAPICodePack-Core" Version="1.1.2" />
+		<PackageReference Include="WindowsAPICodePack-ShellExtensions" Version="1.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Using Include="System.IO">
+	    <Alias>SysIO</Alias>
+	  </Using>
+	</ItemGroup>
+
+</Project>

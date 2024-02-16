@@ -10,6 +10,7 @@
     using System.Reflection;
     using GregOsborne.Application.Primitives;
     using GregOsborne.Application.Text;
+
     using Microsoft.WindowsAPICodePack.Shell;
 
     public static class File {
@@ -40,7 +41,7 @@
             foreach (var item in f.Properties.DefaultPropertyCollection) {
                 name = item.CanonicalName;
                 if (string.IsNullOrEmpty(name)) {
-                    name = item.PropertyKey.FormatId.ToString();
+                    name = item.CanonicalName;
                 }
                 index = 0;
                 var theName = name;

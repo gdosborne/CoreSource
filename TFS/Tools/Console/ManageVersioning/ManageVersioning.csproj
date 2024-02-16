@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<ApplicationIcon>AppIcon.ico</ApplicationIcon>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="AppIcon.png" />
+	  <None Remove="Data\UpdateVersion.Projects.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="..\VersionMasterCore\GlobalUsings.cs" Link="GlobalUsings.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Data\UpdateVersion.Projects.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="AppIcon.ico" />
+	  <Resource Include="AppIcon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\AppFramework\AppFramework.csproj" />
+	  <ProjectReference Include="..\VersionMasterCore\VersionMasterCore.csproj" />
+	</ItemGroup>
+
+</Project>

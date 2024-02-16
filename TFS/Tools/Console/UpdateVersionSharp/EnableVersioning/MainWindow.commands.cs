@@ -1,8 +1,8 @@
-﻿namespace EnableVersioning {
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using GregOsborne.MVVMFramework;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace EnableVersioning {
 
 	public partial class MainWindowView {
 		private DelegateCommand exitAppCommand = default;

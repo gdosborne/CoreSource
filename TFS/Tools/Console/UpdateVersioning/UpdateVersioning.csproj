@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8625;8602</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NoWarn>1701;1702;8625;8602</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8625;8602</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NoWarn>1701;1702;8625;8602</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\UpdateVersion.Projects.xml" />
+    <None Remove="Fonts\Segoe Fluent Icons.ttf" />
+    <None Remove="Images\AppIcon.ico" />
+    <None Remove="Images\AppIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\UpdateVersion.Projects.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Segoe Fluent Icons.ttf" />
+    <Resource Include="Images\AppIcon.ico" />
+    <Resource Include="Images\AppIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
+</Project>

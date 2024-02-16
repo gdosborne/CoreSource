@@ -52,7 +52,9 @@
 			var minorParameter = minorElement.Attribute(parameterAttribValue) == null ? string.Empty : minorElement.Attribute(parameterAttribValue).Value;
 			var buildParameter = buildElement.Attribute(parameterAttribValue) == null ? string.Empty : buildElement.Attribute(parameterAttribValue).Value;
 			var revisionParameter = revisionElement.Attribute(parameterAttribValue) == null ? string.Empty : revisionElement.Attribute(parameterAttribValue).Value;
-			return Create(name, methods, majorMethod, majorParameter, minorMethod, minorParameter, buildMethod, buildParameter, revisionMethod, revisionParameter);
+			var val = Create(name, methods, majorMethod, majorParameter, minorMethod, minorParameter, buildMethod, buildParameter, revisionMethod, revisionParameter);
+
+            return val;
 		}
 
 		public const string dateFormatValue = "yyyy-MM-dd";
@@ -77,7 +79,7 @@
 		public const string projectsElementName = "projects";
 
 		private ObservableCollection<TransformTypes> transformMethods = default;
-		private string name = default;
+        private string name = default;
 		private TransformTypes majorPart = default;
 		private TransformTypes minorPart = default;
 		private TransformTypes buildPart = default;
@@ -87,7 +89,7 @@
 		private string buildParameter = default;
 		private string revisionParameter = default;
 
-		public ObservableCollection<TransformTypes> TransformMethods {
+        public ObservableCollection<TransformTypes> TransformMethods {
 			get => transformMethods;
 			set {
 				transformMethods = value;

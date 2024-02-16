@@ -1,0 +1,186 @@
+﻿<Window x:Class="UpdateVersioning.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UpdateVersioning"
+        mc:Ignorable="d" Style="{StaticResource SizeableWindow}"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+        Height="450" Width="800" Icon="/Images/AppIcon.ico">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource ToolbarBorder}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Style="{StaticResource ToolbarPanel}">
+                <Button Style="{StaticResource ToolbarButton}" Content="" Command="{Binding NewProjectCommand}" />
+                <Button Style="{StaticResource ToolbarButton}" Content="" Command="{Binding OpenProjectCommand}" />
+                <Button Style="{StaticResource ToolbarButtonWithSeparator}" Content="" Command="{Binding SaveProjectsCommand}" />
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxBorder}">
+            <ListBox ItemsSource="{Binding Projects}" 
+                     SelectedItem="{Binding SelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Style="{DynamicResource StandardText}" Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <GridSplitter Grid.Column="0" Grid.Row="1"  Width="4" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource ValuesBorder}" IsEnabled="{Binding HasSelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <ScrollViewer Style="{StaticResource ValuesScroller}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource HeaderBorder}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                        <TextBlock Style="{StaticResource Header1}" Text="{Binding SelectedProject.Name}" />
+                    </Border>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource Micro}" 
+                               Text="{Binding SelectedProject.FullPath}" Margin="0,0,0,10" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Schema Type" Style="{StaticResource StandardLabel}" />
+                    <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource StandardCombo}"
+                              ItemsSource="{Binding Schemas}" 
+                              SelectedItem="{Binding SelectedProject.SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Style="{DynamicResource StandardText}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource ListBoxBorder}" Margin="0,10,0,0"
+                            CornerRadius="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="col1" Width="0.2*" />
+                                <ColumnDefinition x:Name="col2"  Width="0.3*" />
+                                <ColumnDefinition x:Name="col3" Width="0.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Column="0" Grid.Row="0" Style="{DynamicResource ColumnHeaderBorderLeft}">
+                                <TextBlock Text="Part" Foreground="{DynamicResource WindowBackground}" Margin="5,0,0,0"/>
+                            </Border>
+                            <Border Grid.Column="1" Grid.Row="0" Style="{DynamicResource ColumnHeaderBorderMiddle}">
+                                <TextBlock Text="Type" Foreground="{DynamicResource WindowBackground}" Margin="5,0,0,0"/>
+                            </Border>
+                            <Border Grid.Column="2" Grid.Row="0" Style="{DynamicResource ColumnHeaderBorderRight}">
+                                <TextBlock Text="Parameter" Foreground="{DynamicResource WindowBackground}" Margin="5,0,0,0"/>
+                            </Border>
+
+                            <Border Grid.Column="0" Grid.Row="1" Width="auto" Style="{DynamicResource ValuesBorder}" CornerRadius="0">
+                                <TextBlock Text="Major" Style="{DynamicResource SchemaPartNameText}" />
+                            </Border>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Width="auto" Style="{DynamicResource SchemaCombo}" 
+                                      ItemsSource="{Binding SelectedProject.AllTransformTypes}" SelectedItem="{Binding SelectedProject.SelectedSchema.MajorPart}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Grid.Column="2" Grid.Row="1" Width="auto" Style="{DynamicResource SchemaParameterValue}" 
+                                     Text="{Binding SelectedProject.SelectedSchema.MajorParameter}"/>
+
+                            <Border Grid.Column="0" Grid.Row="2" Width="auto" Style="{DynamicResource ValuesBorder}" CornerRadius="0">
+                                <TextBlock Text="Minor" Style="{DynamicResource SchemaPartNameText}" />
+                            </Border>
+                            <ComboBox Grid.Column="1" Grid.Row="2" Width="auto" Style="{DynamicResource SchemaCombo}" 
+                                      ItemsSource="{Binding SelectedProject.AllTransformTypes}" SelectedItem="{Binding SelectedProject.SelectedSchema.MinorPart}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Grid.Column="2" Grid.Row="2" Width="auto" Style="{DynamicResource SchemaParameterValue}" 
+                                     Text="{Binding SelectedProject.SelectedSchema.MinorParameter}"/>
+
+                            <Border Grid.Column="0" Grid.Row="3" Width="auto" Style="{DynamicResource ValuesBorder}" CornerRadius="0">
+                                <TextBlock Text="Build" Style="{DynamicResource SchemaPartNameText}" />
+                            </Border>
+                            <ComboBox Grid.Column="1" Grid.Row="3" Width="auto" Style="{DynamicResource SchemaCombo}"
+                                      ItemsSource="{Binding SelectedProject.AllTransformTypes}" SelectedItem="{Binding SelectedProject.SelectedSchema.BuildPart}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Grid.Column="2" Grid.Row="3" Width="auto" Style="{DynamicResource SchemaParameterValue}" 
+                                     Text="{Binding SelectedProject.SelectedSchema.BuildParameter}"/>
+
+                            <Border Grid.Column="0" Grid.Row="4" Width="auto" Style="{DynamicResource ValuesBorder}" CornerRadius="0">
+                                <TextBlock Text="Revision" Style="{DynamicResource SchemaPartNameText}" />
+                            </Border>
+                            <ComboBox Grid.Column="1" Grid.Row="4" Width="auto" Style="{DynamicResource SchemaCombo}"
+                                      ItemsSource="{Binding SelectedProject.AllTransformTypes}" SelectedItem="{Binding SelectedProject.SelectedSchema.RevisionPart}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Grid.Column="2" Grid.Row="4" Width="auto" Style="{DynamicResource SchemaParameterValue}" 
+                                     Text="{Binding SelectedProject.SelectedSchema.RevisionParameter}"/>
+
+                            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="99" BorderBrush="{DynamicResource ControlBorder}"
+                                    BorderThickness="{DynamicResource LeftRightOnyBorder}" Margin="-1,0,0,0"/>
+
+
+                            <!--<StackPanel Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="99" Grid.Row="1">
+                                <ItemsControl ItemsSource="{Binding SelectedProject.SelectedSchema.Methods}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding methodName}" Width="{Binding ElementName=col1,Path=ActualalWidth}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>-->
+                        </Grid>
+                    </Border>
+                </Grid>
+            </ScrollViewer>
+        </Border>
+
+        <StatusBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding Project.Type}" />
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding Project.Filename}" />
+            </StatusBarItem>
+
+        </StatusBar>
+    </Grid>
+</Window>

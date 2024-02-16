@@ -303,20 +303,20 @@
 
 		public static void SavePosition(this Window win, string applicationName) {
 			var settings = new Settings(applicationName);
-			settings.AddOrUpdateSetting("WindowsPositions", $"{win.GetType().Name}.Left", win.Left);
-			settings.AddOrUpdateSetting("WindowsPositions", $"{win.GetType().Name}.Top", win.Top);
-			settings.AddOrUpdateSetting("WindowsPositions", $"{win.GetType().Name}.Width", win.Width);
-			settings.AddOrUpdateSetting("WindowsPositions", $"{win.GetType().Name}.Height", win.Height);
-			settings.AddOrUpdateSetting("WindowsPositions", $"{win.GetType().Name}.WindowState", win.WindowState);
+			settings.AddOrUpdateSetting($"{win.GetType().Name}.WindowsPositions", "Left", win.Left);
+			settings.AddOrUpdateSetting($"{win.GetType().Name}.WindowsPositions", "Top", win.Top);
+			settings.AddOrUpdateSetting($"{win.GetType().Name}.WindowsPositions", "Width", win.Width);
+			settings.AddOrUpdateSetting($"{win.GetType().Name}.WindowsPositions", "Height", win.Height);
+			settings.AddOrUpdateSetting($"{win.GetType().Name}.WindowsPositions", "WindowState", win.WindowState);
 		}
 
 		public static void SetPosition(this Window win, string applicationName) {
 			var settings = new Settings(applicationName);
-			win.Left = settings.GetValue("WindowsPositions", $"{win.GetType().Name}.Left", win.Left);
-			win.Top = settings.GetValue("WindowsPositions", $"{win.GetType().Name}.Top", win.Top);
-			win.Width = settings.GetValue("WindowsPositions", $"{win.GetType().Name}.Width", win.Width);
-			win.Height = settings.GetValue("WindowsPositions", $"{win.GetType().Name}.Height", win.Height);
-			win.WindowState = settings.GetValue("WindowsPositions", $"{win.GetType().Name}.WindowState", win.WindowState);
+			win.Left = settings.GetValue($"{win.GetType().Name}.WindowsPositions", "Left", win.Left);
+			win.Top = settings.GetValue($"{win.GetType().Name}.WindowsPositions", "Top", win.Top);
+			win.Width = settings.GetValue($"{win.GetType().Name}.WindowsPositions", "Width", win.Width);
+			win.Height = settings.GetValue($"{win.GetType().Name}.WindowsPositions", "Height", win.Height);
+			win.WindowState = settings.GetValue($"{win.GetType().Name}.WindowsPositions", "WindowState", win.WindowState);
 		}
 
 		public static void SavePosition(this Window win, Settings settings, string sectionName, string itemPrefix) {

@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+
 using GregOsborne.Application.Primitives;
 
 namespace GregOsborne.MVVMFramework {
@@ -43,8 +46,15 @@ namespace GregOsborne.MVVMFramework {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }
 
+        protected void OnPropertyChanged([CallerMemberName]string propertyName = default) =>
+            InvokePropertyChanged(propertyName);
+
 		public event ExecuteUiActionHandler ExecuteUiAction;
 
-		#endregion Protected Methods
-	}
+        public void ExecuteAction(string name, Dictionary<string, object> parameters) =>
+            ExecuteUiAction?.Invoke(this, new ExecuteUiActionEventArgs(name, parameters));
+        public void ExecuteAction(string name) => 
+            ExecuteUiAction?.Invoke(this, new ExecuteUiActionEventArgs(name));
+        #endregion Protected Methods
+    }
 }

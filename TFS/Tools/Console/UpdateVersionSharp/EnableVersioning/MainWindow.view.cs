@@ -99,7 +99,7 @@
 						return;
 					}
 					var pd = new ProjectData(this.ProjectFileName, this.ProjectName);
-					this.ProjectData = pd;
+					this.projectData = pd;
 					this.ProjectData.PropertyChanged += this.X_PropertyChanged;
 					this.Projects.Add(this.ProjectData);
 					this.originalSchemaNameForProject = default;

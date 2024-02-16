@@ -1,0 +1,72 @@
+﻿<Window x:Class="ManageVersioning.ProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageVersioning"
+        FocusManager.FocusedElement="{Binding ElementName=PathTextBox}"
+        mc:Ignorable="d" Background="{DynamicResource WindowBackground}"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        SizeToContent="Height" Width="440" Icon="/AppIcon.png" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:ProjectWindowView />
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="99" Background="{DynamicResource InvertedBackground}"
+                Margin="0,0,0,10">
+            <Grid>
+                <ContentControl Visibility="{Binding TitleControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <Hyperlink Command="{Binding EditNameCommand}" TextDecorations="None">
+                        <TextBlock Style="{DynamicResource HeaderTextBlock}" Foreground="{DynamicResource InvertedForeground}"
+                               Text="{Binding Project.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
+                    </Hyperlink>
+                </ContentControl>
+                <TextBox Name="EditNameTextBox" Visibility="{Binding EditControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                         Style="{DynamicResource BaseTextBox}" Text="{Binding Project.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            </Grid>
+        </Border>
+
+        <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource BaseLabel}" Margin="0,0,20,0" Content="Project Path" HorizontalAlignment="Right" />
+        <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource BaseLabel}" Margin="0,0,20,0" Content="Schema" HorizontalAlignment="Right" />
+
+        <TextBox Name="PathTextBox" Grid.Row="1" Grid.Column="1" Style="{DynamicResource BaseTextBox}" Margin="-20,0,5,0"
+                 Text="{Binding Project.FullPath,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" IsReadOnly="True"
+                 VerticalContentAlignment="Center" />
+        <Button Style="{DynamicResource ToolbarButton}" Grid.Row="1" Grid.Column="4" Command="{Binding ProjectPathCommand}">
+            <TextBlock Text="&#xED25;" Style="{DynamicResource TextIcon}" />
+        </Button>
+        <ComboBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource BaseComboBox}" Margin="-20,5,5,5"
+                  ItemsSource="{Binding Schemas}" SelectedItem="{Binding Project.SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{DynamicResource BaseTextBlock}" Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Style="{DynamicResource ToolbarButton}" Grid.Row="2" Grid.Column="4" Command="{Binding EditSchemaCommand}">
+            <TextBlock Text="&#xE70F;" Style="{DynamicResource TextIcon}" />
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" HorizontalAlignment="Right">
+            <Button Content="OK" IsDefault="{Binding IsOKDefault,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}" />
+            <Button Content="Cancel" IsCancel="True" Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</Window>

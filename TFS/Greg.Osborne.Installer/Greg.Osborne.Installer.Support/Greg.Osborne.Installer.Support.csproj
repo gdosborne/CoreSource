@@ -61,13 +61,13 @@
     <Compile Include="SideItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Application\Application_4.8.csproj">
+      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
+      <Name>Application_4.8</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
       <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
       <Name>MVVMFramework_4.8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Greg.Osborne\Framework\Application\Application_4.8.csproj">
-      <Project>{3D4BDB37-D97E-4CF3-B246-3A3F11AB9D44}</Project>
-      <Name>Application_4.8</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

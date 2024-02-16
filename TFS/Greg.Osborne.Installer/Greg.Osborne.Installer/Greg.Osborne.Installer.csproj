@@ -140,6 +140,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Application\Application_4.8.csproj">
+      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
+      <Name>Application_4.8</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
       <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
       <Name>MVVMFramework_4.8</Name>
@@ -147,10 +151,6 @@
     <ProjectReference Include="..\..\Framework\OkiiDialogs\Ookii.Dialogs_4.8.csproj">
       <Project>{d01b1d20-8f5b-4834-8e5c-c7ec6dd587d4}</Project>
       <Name>Ookii.Dialogs_4.8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Greg.Osborne\Framework\Application\Application_4.8.csproj">
-      <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
-      <Name>Application_4.8</Name>
     </ProjectReference>
     <ProjectReference Include="..\Greg.Osborne.Installer.Support\Greg.Osborne.Installer.Support.csproj">
       <Project>{9805a448-20ae-4b8a-8d71-5b5bbca41fcb}</Project>

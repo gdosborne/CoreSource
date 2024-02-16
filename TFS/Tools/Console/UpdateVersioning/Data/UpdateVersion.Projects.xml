@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<updateversion.projects version="2.0">
+  <schemas>
+    <schema name="default">
+      <detail>
+        <level name="major" method="Ignore" parameter="" />
+        <level name="minor" method="Ignore" parameter="" />
+        <level name="build" method="Ignore" parameter="" />
+        <level name="revision" method="Ignore" parameter="" />
+      </detail>
+    </schema>
+    <schema name="increment_revision">
+      <detail>
+        <level name="major" method="Ignore" parameter="" />
+        <level name="minor" method="Ignore" parameter="" />
+        <level name="build" method="Ignore" parameter="" />
+        <level name="revision" method="Increment" parameter="" />
+      </detail>
+    </schema>
+    <schema name="increment_revision_by_day">
+      <detail>
+        <level name="major" method="Ignore" parameter="" />
+        <level name="minor" method="Ignore" parameter="" />
+        <level name="build" method="DayValue" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+    <schema name="daily">
+      <detail>
+        <level name="major" method="Year" parameter="" />
+        <level name="minor" method="Month" parameter="" />
+        <level name="build" method="Day" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+    <schema name="fixed_increment">
+      <detail>
+        <level name="major" method="Fixed" parameter="1" />
+        <level name="minor" method="Fixed" parameter="0" />
+        <level name="build" method="Fixed" parameter="0" />
+        <level name="revision" method="Increment" parameter="" />
+      </detail>
+    </schema>
+    <schema name="fixed_increment_mini">
+      <detail>
+        <level name="major" method="Fixed" parameter="" />
+        <level name="minor" method="Fixed" parameter="" />
+        <level name="build" method="Increment" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+    <schema name="static_increment_daily">
+      <detail>
+        <level name="major" method="Year" parameter="" />
+        <level name="minor" method="Month" parameter="" />
+        <level name="build" method="IncrementEachDay" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+    <schema name="increment_daily">
+      <detail>
+        <level name="major" method="Ignore" parameter="" />
+        <level name="minor" method="Ignore" parameter="" />
+        <level name="build" method="IncrementEachDay" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+    <schema name="standard">
+      <detail>
+        <level name="major" method="Ignore" parameter="" />
+        <level name="minor" method="Ignore" parameter="" />
+        <level name="build" method="Increment" parameter="" />
+        <level name="revision" method="IncrementResetEachDay" parameter="" />
+      </detail>
+    </schema>
+  </schemas>
+  <methods>
+    <method name="Ignore" value="0" />
+    <method name="Increment" value="1" />
+    <method name="IncrementEachDay" value="2" />
+    <method name="IncrementResetEachDay" value="3" />
+    <method name="Random" value="4" />
+    <method name="DayValue" value="5" />
+    <method name="DayvalueFrom" value="6" />
+    <method name="SecondValue" value="7" />
+    <method name="SecondValueFrom" value="8" />
+    <method name="Fixed" value="9" />
+    <method name="Year" value="10" />
+    <method name="TwoDigitYear" value="10" />
+    <method name="Month" value="12" />
+    <method name="Day" value="13" />
+  </methods>
+  <projects>
+    <project name="CCC.ApplicationFramework">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.ApplicationFramework\CCC.ApplicationFramework.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.Resources">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.Internal.Resources\CCC.Internal.Resources.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.Extensibility">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.Internal.Extensibility\CCC.Internal.Extensibility.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.Database">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.Internal.Database\CCC.Internal.Database.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.Controls">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.Internal.Controls\CCC.Internal.Controls.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.DocumentationExtension">
+      <path>C:\Git\PEAT\CCC.Internal\Extensions\CCC.Internal.DocumentationExtension\CCC.Internal.DocumentationExtension.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal.AssumptionBuilderExtension">
+      <path>C:\Git\PEAT\CCC.Internal\Extensions\CCC.Internal.AssumptionBuilder\CCC.Internal.AssumptionBuilderExtension.csproj</path>
+      <schema name="daily" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+    <project name="CCC.Internal">
+      <path>C:\Git\PEAT\CCC.Internal\CCC.Internal\CCC.Internal.csproj</path>
+      <schema name="increment_revision" lastbuilddate="2024-01-31">
+        <parameters>
+          <major></major>
+          <minor></minor>
+          <build></build>
+          <revision></revision>
+        </parameters>
+      </schema>
+    </project>
+  </projects>
+</updateversion.projects>

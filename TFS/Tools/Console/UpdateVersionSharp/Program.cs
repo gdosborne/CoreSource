@@ -244,6 +244,7 @@
 				using (var sr = new StreamReader(fs)) {
 					WriteLineToConsole(sr.ReadToEnd(), projectName, true);
 				}
+				Console.ReadKey();
 			}
 			ExitApp(0, true, true, projectName);
 		}

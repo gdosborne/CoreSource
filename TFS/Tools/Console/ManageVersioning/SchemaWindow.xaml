@@ -1,0 +1,84 @@
+﻿<Window x:Class="ManageVersioning.SchemaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageVersioning"
+        mc:Ignorable="d"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        SizeToContent="Height" Width="400" Icon="/AppIcon.png" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:SchemaWindowView />
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="99" Background="{DynamicResource InvertedBackground}"
+                Margin="0,0,0,10">
+            <Grid>
+                <ContentControl Visibility="{Binding TitleControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <Hyperlink Command="{Binding EditNameCommand}" TextDecorations="None">
+                        <TextBlock Style="{DynamicResource HeaderTextBlock}" Foreground="{DynamicResource InvertedForeground}"
+                                   Text="{Binding Schema.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    </Hyperlink>
+                </ContentControl>
+                <TextBox Name="EditNameTextBox" Visibility="{Binding EditControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                         Style="{DynamicResource BaseTextBox}" Text="{Binding Schema.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                         CharacterCasing="Lower"/>
+            </Grid>
+        </Border>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Major" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Minor" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Build" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Revision" Style="{DynamicResource BaseLabel}" />
+
+        <ComboBox Grid.Row="1" Grid.Column="1" Style="{DynamicResource BaseComboBox}" Margin="5" 
+                  ItemsSource="{Binding Methods}" SelectedItem="{Binding Schema.MajorPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource BaseComboBox}" Margin="5" 
+                  ItemsSource="{Binding Methods}" SelectedItem="{Binding Schema.MinorPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <ComboBox Grid.Row="3" Grid.Column="1" Style="{DynamicResource BaseComboBox}" Margin="5" 
+                  ItemsSource="{Binding Methods}" SelectedItem="{Binding Schema.BuildPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <ComboBox Grid.Row="4" Grid.Column="1" Style="{DynamicResource BaseComboBox}" Margin="5" 
+                  ItemsSource="{Binding Methods}" SelectedItem="{Binding Schema.RevisionPart,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+        <Label Grid.Row="1" Grid.Column="2" Content="Parameter" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="2" Grid.Column="2" Content="Parameter" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="3" Grid.Column="2" Content="Parameter" Style="{DynamicResource BaseLabel}" />
+        <Label Grid.Row="4" Grid.Column="2" Content="Parameter" Style="{DynamicResource BaseLabel}" />
+
+        <TextBox Grid.Row="1" Grid.Column="3" Style="{DynamicResource BaseTextBox}" Margin="5"
+                 Text="{Binding Schema.MajorParameter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Style="{DynamicResource BaseTextBox}" Margin="5"
+                 Text="{Binding Schema.MinorParameter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <TextBox Grid.Row="3" Grid.Column="3" Style="{DynamicResource BaseTextBox}" Margin="5"
+                 Text="{Binding Schema.BuildParameter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <TextBox Grid.Row="4" Grid.Column="3" Style="{DynamicResource BaseTextBox}" Margin="5"
+                 Text="{Binding Schema.RevisionParameter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" HorizontalAlignment="Left" Margin="-5,5,0,-5">
+            <Button Content="Delete" Style="{DynamicResource StandardButton}" Command="{Binding DeleteCommand}" 
+                    Visibility="{Binding DeleteVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" HorizontalAlignment="Right"
+                    Margin="0,5,0,-5">
+            <Button Content="OK" IsDefault="{Binding IsOKDefault,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{DynamicResource StandardButton}" 
+                    Command="{Binding OKCommand}" />
+            <Button Content="Cancel" IsCancel="True" Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" />
+        </StackPanel>
+
+    </Grid>
+</Window>

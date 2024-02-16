@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OSControls</RootNamespace>
     <AssemblyName>OSControls</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -40,7 +40,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>OSSign.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +60,24 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -96,10 +115,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChildWindows\ValueEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ColorPickerAndLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,9 +167,6 @@
     </Compile>
     <Compile Include="Classes\Events\QueryAddNewItemEventArgs.cs" />
     <Compile Include="Classes\Extensions.cs" />
-    <Compile Include="ColorPickerAndLabel.xaml.cs">
-      <DependentUpon>ColorPickerAndLabel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="FontAndLabel.xaml.cs">
       <DependentUpon>FontAndLabel.xaml</DependentUpon>
@@ -194,7 +206,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="OSSign.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -260,13 +271,13 @@
     <Resource Include="Themes\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Framework\Application\Application_4.8.csproj">
+    <ProjectReference Include="..\..\..\..\Framework\Application\Application.csproj">
       <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
-      <Name>Application_4.8</Name>
+      <Name>Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
+    <ProjectReference Include="..\..\..\..\Framework\MVVMFramework\MVVMFramework.csproj">
       <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
-      <Name>MVVMFramework_4.8</Name>
+      <Name>MVVMFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
