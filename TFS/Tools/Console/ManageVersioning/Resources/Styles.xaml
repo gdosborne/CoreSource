@@ -198,6 +198,7 @@
         <Setter Property="ToggleSize" Value="{DynamicResource ToggleSize}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="70" />
+        <Setter Property="Height" Value="25" />
     </Style>
 
 </ResourceDictionary>

@@ -1,6 +1,8 @@
 ﻿using GregOsborne.Application.Linq;
 using GregOsborne.MVVMFramework;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows.Media;
 using VersionMaster;
 
@@ -15,28 +17,54 @@ namespace ManageVersioning {
         }
 
         public MainWindowView() {
-            defaultForeground = App.GetResourceItem<SolidColorBrush>(App.Current.Resources, "WindowText");
-            originalValues = ProjectData.LoadAll(App.DataFile, defaultForeground).ToList();
             Title = "Manage Versions [designer]";
-            Projects = [];
-            Schemas = [];
-            Methods = [];
         }
 
         public override void Initialize() {
             base.Initialize();
             Title = "Manage Versions";
+            defaultForeground = App.GetResourceItem<SolidColorBrush>(App.Current.Resources, "WindowText");
+            originalValues = ProjectData.LoadAll(App.DataFile, defaultForeground).ToList();
+            Projects = [];
+            Schemas = [];
+            Methods = [];
             DataFilePath = App.DataFile;
             Schemas.Clear();
+
+            var defaultImageBrush = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Images", "4pfmphjd.png");
+            if (string.IsNullOrEmpty(App.Settings.ConsoleBrushFilePath)) {
+                App.Settings.ConsoleBrushFilePath = defaultImageBrush;
+            }
+            App.Settings.IsConsoleBackgroundBrushUsed &= SysIO.File.Exists(App.Settings.ConsoleBrushFilePath);
+            ConsoleImageBrush = GregOsborne.Application.Media.Extensions.GetImageBrush(App.Settings.ConsoleBrushFilePath, App.Settings.ConsoleBrushOpacity);
+
             Projects.AddRange(ProjectData.LoadAll(App.DataFile, defaultForeground));
             Schemas.AddRange(ProjectData.LoadAllSchemas(App.DataFile));
             Methods.AddRange(ProjectData.LoadAllMethods(App.DataFile));
         }
 
+
+        #region ConsoleImageBrush Property
+        private ImageBrush _ConsoleImageBrush = default;
+        public ImageBrush ConsoleImageBrush {
+            get => _ConsoleImageBrush;
+            set {
+                _ConsoleImageBrush = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         private Brush defaultForeground = default;
         private List<ProjectData> originalValues = default;
 
-        public bool HasChanges => Projects.Any(x => x.HasChanges) || Schemas.Any(x => x.HasChanges) || HasDeletedItems;
+        public bool HasChanges {
+            get {
+                if (Projects == null) return false;
+                var result = Projects.Any(x => x.HasChanges) || Schemas.Any(x => x.HasChanges) || HasDeletedItems;
+                return result;
+            }
+        }
         internal Stack<(ProjectData Item, OriginalActions Action, string PropertyName, object OriginalValue)> UndoItems = new();
         internal Stack<(ProjectData Item, OriginalActions Action, string PropertyName, object OriginalValue)> RedoItems = new();
 

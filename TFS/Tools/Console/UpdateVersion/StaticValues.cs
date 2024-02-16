@@ -59,7 +59,7 @@ namespace UpdateVersion {
                 savedLines.Add(message);
             }
             else {
-                if (savedLines.Any()) {
+                if (savedLines.Count != 0) {
                     savedLines.ForEach(x => LogMessage(x, projectName));
                     savedLines.Clear();
                 }
@@ -74,7 +74,7 @@ namespace UpdateVersion {
                 savedLines.Add(message);
             }
             else {
-                if (savedLines.Any()) {
+                if (savedLines.Count != 0) {
                     savedLines.ForEach(x => LogMessage(x, projectName));
                 }
 

@@ -2,6 +2,7 @@
 using GregOsborne.Application.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 
 namespace ManageVersioning {
     public partial class App : System.Windows.Application {
@@ -53,6 +54,27 @@ namespace ManageVersioning {
                 get => App.Session.ApplicationSettings.GetValue("Application", nameof(IsTestConsoleEditable), false);
                 set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(IsTestConsoleEditable), value);
             }
+
+            public static bool IsConsoleBackgroundBrushUsed {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(IsConsoleBackgroundBrushUsed), false);
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(IsConsoleBackgroundBrushUsed), value);
+            }
+
+            public static string ConsoleBrushFilePath {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(ConsoleBrushFilePath), string.Empty);
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(ConsoleBrushFilePath), value);
+            }
+
+            public static double ConsoleBrushOpacity {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(ConsoleBrushOpacity), 0.4);
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(ConsoleBrushOpacity), value);
+            }
+
+            public static Color ConsoleForeground {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(ConsoleForeground), Colors.Black);
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(ConsoleForeground), value);
+            }
+
         }
 
     }

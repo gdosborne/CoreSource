@@ -8,19 +8,19 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NoWarn>1701;1702;CA1416;CA2200;0105;0168;8600;8601;8602;8603;8604;8605;8612;8618;8619;8622;8625;8767;8765;0414;SYSLIB0051;NU1701;</NoWarn>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>

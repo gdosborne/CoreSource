@@ -134,7 +134,7 @@
             </Button>
         </ToolBar>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="0,0,0,4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".75*" />
                 <ColumnDefinition Width=".25*" />
@@ -166,6 +166,8 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+
+        <GridSplitter Grid.Row="2" VerticalAlignment="Bottom" Height="4" HorizontalAlignment="Stretch" Background="{DynamicResource ButtonBackground}" />
 
         <TextBox Name="ConsoleTextBox" Grid.Row="3" Style="{DynamicResource ConsoleTextBox}" 
                  Text="{Binding ConsoleText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">

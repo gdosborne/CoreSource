@@ -21,35 +21,52 @@
             <ScrollViewer VerticalScrollBarVisibility="auto" Padding="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0,0,5,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <controls:Toggle IsChecked="{Binding AreWindowPositionsSaved,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                        <TextBlock Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                   Text="Remember Last Window Position" TextWrapping="Wrap" />
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="5,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <controls:Toggle IsChecked="{Binding IsConsoleEditable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-                        <TextBlock Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                   Text="Allow editing in Test Console" TextWrapping="Wrap" />
-                    </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <controls:Toggle Grid.Row="0" IsChecked="{Binding AreWindowPositionsSaved,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
+                                Text="Remember Last Window Position" TextWrapping="Wrap" />
+                    <controls:Toggle Grid.Row="1" IsChecked="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
+                                Text="Console Uses Background Brush" TextWrapping="Wrap" />
+
+                    <TextBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource BaseTextBox}" Margin="0,0,5,0" 
+                             Text="{Binding ConsoleBrushFilePath,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    <Button Grid.Row="2" Grid.Column="2" Style="{DynamicResource ToolbarButton}"
+                            IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <TextBlock Style="{DynamicResource TextIcon}" Text="&#xE1A5;" />
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"
+                                IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ContentControl>
+                            <Hyperlink TextDecorations="None" Command="{Binding SelectColorCommand}">
+                                <Border Width="60" Height="25" CornerRadius="3" BorderThickness="{DynamicResource FullBorder}"
+                                        HorizontalAlignment="Left" BorderBrush="{DynamicResource ControlBorder}" 
+                                        Margin="0,0,5,0" Background="{Binding ConsoleImageForegroundColor,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            </Hyperlink>
+                        </ContentControl>
+                        <TextBlock Style="{DynamicResource BaseTextBlock}" Text="Text Color with Image Brush" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <controls:Toggle Grid.Row="4" IsChecked="{Binding IsConsoleEditable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
+                                Text="Allow editing in Test Console" TextWrapping="Wrap" />
+
+
                 </Grid>
             </ScrollViewer>
         </Border>

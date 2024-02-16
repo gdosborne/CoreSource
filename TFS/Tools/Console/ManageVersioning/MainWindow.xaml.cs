@@ -21,13 +21,26 @@ namespace ManageVersioning {
             View.Initialize();
             View.ExecuteUiAction += View_ExecuteUiAction;
             TestItems = [];
+
+            SetConsoleBrush();
+        }
+
+        private void SetConsoleBrush() {
+            if (App.Settings.IsConsoleBackgroundBrushUsed && View.ConsoleImageBrush != null) {
+                ConsoleTextBox.Background = View.ConsoleImageBrush;
+                ConsoleTextBox.Foreground = new SolidColorBrush(App.Settings.ConsoleForeground);
+            }
+            else {
+                ConsoleTextBox.Background = App.GetResourceItem<Brush>(App.Current.Resources, "ConsoleBackground");
+                ConsoleTextBox.Foreground = App.GetResourceItem<Brush>(App.Current.Resources, "ConsoleForeground");
+            }
         }
 
         private void View_ExecuteUiAction(object sender, GregOsborne.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.UIActions), e.CommandToExecute, out var action)) {
                 switch (action) {
                     case MainWindowView.UIActions.Delete: {
-                            
+
                             var result = Dialogs.ShowYesNoDialog("Delete Project", $"You are about to delete the version data for the project " +
                                 $"\"{View.SelectedProject.Name}\". If you delete this version data the project version will no longer be updated." +
                                 $"\n\nDelete the project?", Ookii.Dialogs.Wpf.TaskDialogIcon.Warning);
@@ -226,13 +239,24 @@ namespace ManageVersioning {
                             };
                             win.View.AreWindowPositionsSaved = App.Settings.AreWindowPositionsSaved;
                             win.View.IsConsoleEditable = App.Settings.IsTestConsoleEditable;
+                            win.View.IsConsoleBackgroundBrushUsed = App.Settings.IsConsoleBackgroundBrushUsed;
+                            win.View.ConsoleBrushFilePath = App.Settings.ConsoleBrushFilePath;
+                            win.View.ConsoleImageForegroundColor = new SolidColorBrush(App.Settings.ConsoleForeground);
+
                             var result = win.ShowDialog();
                             if (!result.HasValue || !result.Value)
                                 return;
+
                             App.Settings.AreWindowPositionsSaved = win.View.AreWindowPositionsSaved;
                             App.Settings.IsTestConsoleEditable = win.View.IsConsoleEditable;
+                            App.Settings.IsConsoleBackgroundBrushUsed = win.View.IsConsoleBackgroundBrushUsed;
+                            App.Settings.ConsoleBrushFilePath = win.View.ConsoleBrushFilePath;
+                            App.Settings.ConsoleForeground = win.View.ConsoleImageForegroundColor.As<SolidColorBrush>().Color;
 
                             ConsoleTextBox.IsReadOnly = !App.Settings.IsTestConsoleEditable;
+
+                            SetConsoleBrush();
+
                         }
                         break;
 
