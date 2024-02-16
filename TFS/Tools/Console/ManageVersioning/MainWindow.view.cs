@@ -36,7 +36,7 @@ namespace ManageVersioning {
                 App.Settings.ConsoleBrushFilePath = defaultImageBrush;
             }
             App.Settings.IsConsoleBackgroundBrushUsed &= SysIO.File.Exists(App.Settings.ConsoleBrushFilePath);
-            ConsoleImageBrush = GregOsborne.Application.Media.Extensions.GetImageBrush(App.Settings.ConsoleBrushFilePath, App.Settings.ConsoleBrushOpacity);
+            ConsoleImageBrush = GregOsborne.Application.Media.Extensions.GetImageBrush(App.Settings.ConsoleBrushFilePath, ((double)App.Settings.ConsoleBrushOpacity) / 100.0);
 
             Projects.AddRange(ProjectData.LoadAll(App.DataFile, defaultForeground));
             Schemas.AddRange(ProjectData.LoadAllSchemas(App.DataFile));

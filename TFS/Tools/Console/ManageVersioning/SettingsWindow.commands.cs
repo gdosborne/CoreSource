@@ -8,6 +8,10 @@ using System.Windows.Media;
 
 namespace ManageVersioning {
     public partial class SettingsWindowView {
+        public enum Actions {
+            PickColor,
+            PickImage
+        }
 
         #region OK Command
         private DelegateCommand _OKCommand = default;
@@ -32,10 +36,16 @@ namespace ManageVersioning {
         public DelegateCommand SelectColorCommand => _SelectColorCommand ??= new DelegateCommand(SelectColor, ValidateSelectColorCommandState);
         private bool ValidateSelectColorCommandState(object state) => true;
         private void SelectColor(object state) {
-            var colorDialog = new ColorDialog();
-            colorDialog.SelectedColor = ((SolidColorBrush)ConsoleImageForegroundColor).Color; //In need
-            if (colorDialog.ShowDialog() == true)
-                ConsoleImageForegroundColor = new SolidColorBrush(colorDialog.SelectedColor);
+            ExecuteAction(nameof(Actions.PickColor));
+        }
+        #endregion
+
+        #region SelectImage Command
+        private DelegateCommand _SelectImageCommand = default;
+        public DelegateCommand SelectImageCommand => _SelectImageCommand ??= new DelegateCommand(SelectImage, ValidateSelectImageState);
+        private bool ValidateSelectImageState(object state) => true;
+        private void SelectImage(object state) {
+            ExecuteAction(nameof(Actions.PickImage));
         }
         #endregion
 

@@ -242,6 +242,7 @@ namespace ManageVersioning {
                             win.View.IsConsoleBackgroundBrushUsed = App.Settings.IsConsoleBackgroundBrushUsed;
                             win.View.ConsoleBrushFilePath = App.Settings.ConsoleBrushFilePath;
                             win.View.ConsoleImageForegroundColor = new SolidColorBrush(App.Settings.ConsoleForeground);
+                            win.View.ConsoleImageOpacity = App.Settings.ConsoleBrushOpacity;
 
                             var result = win.ShowDialog();
                             if (!result.HasValue || !result.Value)
@@ -251,6 +252,8 @@ namespace ManageVersioning {
                             App.Settings.IsTestConsoleEditable = win.View.IsConsoleEditable;
                             App.Settings.IsConsoleBackgroundBrushUsed = win.View.IsConsoleBackgroundBrushUsed;
                             App.Settings.ConsoleBrushFilePath = win.View.ConsoleBrushFilePath;
+                            App.Settings.ConsoleBrushOpacity = win.View.ConsoleImageOpacity;
+                            View.ConsoleImageBrush = GregOsborne.Application.Media.Extensions.GetImageBrush(App.Settings.ConsoleBrushFilePath, ((double)App.Settings.ConsoleBrushOpacity) / 100.0);
                             App.Settings.ConsoleForeground = win.View.ConsoleImageForegroundColor.As<SolidColorBrush>().Color;
 
                             ConsoleTextBox.IsReadOnly = !App.Settings.IsTestConsoleEditable;
@@ -371,7 +374,6 @@ namespace ManageVersioning {
         protected override void OnSourceInitialized(EventArgs e) {
             base.OnSourceInitialized(e);
             MainToolbar.RemoveOverflow();
-            this.HideMaximizeButton();
             if (App.Settings.AreWindowPositionsSaved) {
                 this.SetPosition(App.Session.ApplicationSettings);
             }

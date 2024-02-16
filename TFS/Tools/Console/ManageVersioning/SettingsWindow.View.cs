@@ -82,5 +82,16 @@ namespace ManageVersioning {
         }
         #endregion
 
+        #region ConsoleImageOpacity Property
+        private int _ConsoleImageOpacity = default;
+        public int ConsoleImageOpacity {
+            get => _ConsoleImageOpacity;
+            set {
+                _ConsoleImageOpacity = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
     }
 }

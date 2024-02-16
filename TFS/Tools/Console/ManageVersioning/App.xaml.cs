@@ -65,8 +65,8 @@ namespace ManageVersioning {
                 set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(ConsoleBrushFilePath), value);
             }
 
-            public static double ConsoleBrushOpacity {
-                get => App.Session.ApplicationSettings.GetValue("Application", nameof(ConsoleBrushOpacity), 0.4);
+            public static int ConsoleBrushOpacity {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(ConsoleBrushOpacity), 40);
                 set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(ConsoleBrushOpacity), value);
             }
 

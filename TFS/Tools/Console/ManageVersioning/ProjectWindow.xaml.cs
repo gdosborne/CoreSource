@@ -54,9 +54,9 @@ namespace ManageVersioning {
                                     ? System.IO.Path.GetDirectoryName(View.Project.FullPath)
                                     : App.Session.ApplicationSettings.GetValue("Application", "LastProjectDirectory", default(string));
                                 var filters = new List<(string extension, string name)> {
-                                ("*.csproj", "C# Projects")
-                            };
-                                var filename = ShowOpenFileDialog("Select project...", lastPath, [.. filters]);
+                                    ("*.csproj", "C# Projects")
+                                };
+                                var filename = ShowOpenFileDialog("Select project...", lastPath, string.Empty, [.. filters]);
                                 if (!string.IsNullOrWhiteSpace(filename) && System.IO.File.Exists(filename)) {
                                     App.Session.ApplicationSettings.AddOrUpdateSetting("Application", "LastProjectDirectory", System.IO.Path.GetDirectoryName(filename));
                                     View.Project.FullPath = filename;

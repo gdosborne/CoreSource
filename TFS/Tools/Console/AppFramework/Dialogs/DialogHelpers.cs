@@ -45,7 +45,8 @@ namespace GregOsborne.Application.Dialogs {
             dlg.ShowDialog();
         }
 
-        public static string ShowOpenFileDialog(string title, string initialDirectory, (string extension, string name)[] filters) {
+        public static string ShowOpenFileDialog(string title, string initialDirectory, string defaultFileName, 
+            params (string extension, string name)[] filters) {
             var dlg = new OpenFileDialog {
                 AddExtension = true,
                 InitialDirectory = initialDirectory,
@@ -58,6 +59,7 @@ namespace GregOsborne.Application.Dialogs {
                 RestoreDirectory = true,
                 ShowHiddenFiles = true,
                 Title = title,
+                FileName = defaultFileName,
             };
             var result = dlg.ShowDialog();
             if (result == DialogResult.Cancel) return null;
