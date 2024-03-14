@@ -29,14 +29,27 @@
                 Margin="0,0,0,10">
             <Grid>
                 <ContentControl Visibility="{Binding TitleControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                    <Hyperlink Command="{Binding EditNameCommand}" TextDecorations="None">
-                        <TextBlock Style="{DynamicResource HeaderTextBlock}" Foreground="{DynamicResource InvertedForeground}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Style="{DynamicResource HeaderTextBlock}" Foreground="{DynamicResource InvertedForeground}"
                                    Text="{Binding Schema.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                    </Hyperlink>
+                        <ContentControl Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"
+                                        ToolTip="Click to rename">
+                            <Hyperlink Command="{Binding EditNameCommand}" TextDecorations="None">
+                                <TextBlock Text="&#xE13E;" FontFamily="Segoe Fluent Icons"
+                                           Foreground="{DynamicResource WindowBackground}"
+                                           FontSize="10" />
+                            </Hyperlink>
+                        </ContentControl>
+                    </Grid>
                 </ContentControl>
                 <TextBox Name="EditNameTextBox" Visibility="{Binding EditControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                          Style="{DynamicResource BaseTextBox}" Text="{Binding Schema.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                         CharacterCasing="Lower"/>
+                         CharacterCasing="Lower" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
 

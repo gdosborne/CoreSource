@@ -40,7 +40,7 @@
                                 Text="Remember Last Window Position" TextWrapping="Wrap" />
                     <controls:Toggle Grid.Row="1" IsChecked="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                Text="Console Uses Background Brush" TextWrapping="Wrap" />
+                                Text="Use Console Image" TextWrapping="Wrap" />
 
                     <TextBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource BaseTextBox}" Margin="0,0,5,0" 
                              Text="{Binding ConsoleBrushFilePath,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
@@ -59,7 +59,7 @@
                                         Margin="0,0,5,0" Background="{Binding ConsoleImageForegroundColor,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                             </Hyperlink>
                         </ContentControl>
-                        <TextBlock Style="{DynamicResource BaseTextBlock}" Text="Text Color with Image Brush" VerticalAlignment="Center" />
+                        <TextBlock Style="{DynamicResource BaseTextBlock}" Text="Console Text Color" VerticalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"

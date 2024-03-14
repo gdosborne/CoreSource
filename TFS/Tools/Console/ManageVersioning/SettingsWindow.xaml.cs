@@ -14,7 +14,7 @@ namespace ManageVersioning {
                 View.PropertyChanged += (s, e) => {
                     if (e.PropertyName.EqualsIgnoreCase("DialogResult")) {
                         DialogResult = View.DialogResult;
-                    }
+                    } 
                 };
                 Closing += (s, e) => {
                     this.SavePosition(App.Session.ApplicationSettings);

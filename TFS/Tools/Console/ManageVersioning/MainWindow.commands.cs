@@ -14,13 +14,42 @@
             ShowSettings,
             TestVersion,
             GotoDataFileDirectory,
-            EditProject
+            EditProject,
+            Minimize,
+            Maximize
         }
 
         public override void UpdateInterface() {
             base.UpdateInterface();
             _HasUndo = UndoItems.Count > 0;
         }
+
+        #region Close Command
+        private DelegateCommand _CloseCommand = default;
+        public DelegateCommand CloseCommand => _CloseCommand ??= new DelegateCommand(Close, ValidateCloseState);
+        private bool ValidateCloseState(object state) => true;
+        private void Close(object state) {
+            ExecuteAction(nameof(UIActions.ExitApplication));
+        }
+        #endregion
+
+        #region Minimize Command
+        private DelegateCommand _MinimizeCommand = default;
+        public DelegateCommand MinimizeCommand => _MinimizeCommand ??= new DelegateCommand(Minimize, ValidateMinimizeState);
+        private bool ValidateMinimizeState(object state) => true;
+        private void Minimize(object state) {
+            ExecuteAction(nameof(UIActions.Minimize));
+        }
+        #endregion
+
+        #region Maximize Command
+        private DelegateCommand _MaximizeCommand = default;
+        public DelegateCommand MaximizeCommand => _MaximizeCommand ??= new DelegateCommand(Maximize, ValidateMaximizeState);
+        private bool ValidateMaximizeState(object state) => true;
+        private void Maximize(object state) {
+            ExecuteAction(nameof(UIActions.Maximize));
+        }
+        #endregion
 
         #region NewSchema Command
         private DelegateCommand _NewSchemaCommand = default;

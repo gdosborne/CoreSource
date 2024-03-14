@@ -1,12 +1,16 @@
-﻿namespace GregOsborne.Application.Primitives {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-    using System.Windows;
-    using System.Windows.Media;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Media;
+using FontFamily = System.Windows.Media.FontFamily;
+using Point = System.Windows.Point;
+using Size = System.Windows.Size;
+
+namespace GregOsborne.Application.Primitives {
 
     public static class Extension {
         private const double oneKb = 1024.0;

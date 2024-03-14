@@ -1,5 +1,6 @@
 ﻿using GregOsborne.Application;
 using GregOsborne.Application.IO;
+using GregOsborne.Application.Theme;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
@@ -10,6 +11,7 @@ namespace ManageVersioning {
         public static Session Session { get; private set; }
         public static string ApplicationName => "Versioning";
         public static string ApplicationDirectory { get; private set; }
+        public static ThemeManager ThemeManager { get; private set; }
 
         private static string filename = "UpdateVersion.Projects.xml";
 
@@ -24,6 +26,37 @@ namespace ManageVersioning {
             }
             Session = new Session(ApplicationDirectory, ApplicationName, GregOsborne.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
                 GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
+            ThemeManager = new ThemeManager();
+
+            var lightThemeFile = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Themes", "Light.theme");
+            var darkThemeFile = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Themes", "Dark.theme");
+            var lightTheme = default(ApplicationTheme);
+            var darkTheme = default(ApplicationTheme);
+            if (!SysIO.File.Exists(lightThemeFile)) {
+                lightTheme = new ApplicationTheme(lightThemeFile) {
+                    HasChanges = true,
+                    Name = "Light"
+                };
+                lightTheme.Save();
+            }
+            else {
+                var temp = ApplicationTheme.Create(lightThemeFile);
+                lightTheme = temp.FirstOrDefault(x => x.Name.EqualsIgnoreCase("Light"));
+            }
+            ThemeManager.Themes.Add(lightTheme);
+
+            if (!SysIO.File.Exists(darkThemeFile)) {
+                darkTheme = new ApplicationTheme(darkThemeFile) {
+                    HasChanges = true,
+                    Name = "Dark"
+                };
+                darkTheme.Save();
+            }
+            else {
+                var temp = ApplicationTheme.Create(darkThemeFile);
+                darkTheme = temp.FirstOrDefault(x => x.Name.EqualsIgnoreCase("Dark"));
+            }
+            ThemeManager.Themes.Add(darkTheme);
         }
 
         public static T GetResourceItem<T>(ResourceDictionary resourceDic, string name) {

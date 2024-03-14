@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="ManageVersioning.Controls.TitlebarButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ManageVersioning.Controls"
+             mc:Ignorable="d" Padding="2" Background="Transparent" 
+             d:DesignHeight="196.797" d:DesignWidth="220.891">
+    <Border Name="MainBorder" MouseEnter="MainBorder_MouseEnter" MouseLeave="MainBorder_MouseLeave">
+        <TextBlock Name="CharTextBlock" Text="&#xE8BB;" FontFamily="Segoe Fluent Icons" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    </Border>
+</UserControl>

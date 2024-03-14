@@ -4,13 +4,14 @@ using GregOsborne.Application.Windows.Controls;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using VersionMaster;
 using VersionMasterCore;
-using Windows.System.Update;
 using static GregOsborne.Application.Dialogs.DialogHelpers;
 using static GregOsborne.Application.IO.Directory;
 
@@ -23,6 +24,15 @@ namespace ManageVersioning {
             TestItems = [];
 
             SetConsoleBrush();
+            DragControl.MouseDown += (s, e) => {
+                this.DragMove();
+            };
+            MenuGrid.MouseDown += (s, e) => {
+                this.DragMove();
+            };
+            this.SizeChanged += (s, e) => {
+                SetConsoleHeight(LeftDataGridRow.ActualHeight, LeftDataGridColumn.ActualWidth);
+            };
         }
 
         private void SetConsoleBrush() {
@@ -39,6 +49,14 @@ namespace ManageVersioning {
         private void View_ExecuteUiAction(object sender, GregOsborne.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.UIActions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.UIActions.Minimize:
+                        WindowState = WindowState.Minimized;
+                        break;
+                    case MainWindowView.UIActions.Maximize:
+                        WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+                        TitlebarGrid.Margin = WindowState == WindowState.Maximized ? new Thickness(4, 4, 4, 0) : new Thickness(0, 0, 0, 0);
+                        BodyGrid.Margin = WindowState == WindowState.Maximized ? new Thickness(4, 0, 4, 0) : new Thickness(0, 0, 0, 0);
+                        break;
                     case MainWindowView.UIActions.Delete: {
 
                             var result = Dialogs.ShowYesNoDialog("Delete Project", $"You are about to delete the version data for the project " +
@@ -364,18 +382,37 @@ namespace ManageVersioning {
             base.OnClosing(e);
             if (View.HasChanges) {
                 if (AskSaveData()) {
-                    e.Cancel = true;
                     View.SaveCommand.Execute(null);
                 }
             }
             this.SavePosition(App.Session.ApplicationSettings);
+
+            App.Session.ApplicationSettings.AddOrUpdateSetting(this.GetType().Name, "PrimaryDataGridWidth", ProjectsDataGrid.ActualWidth);
+            App.Session.ApplicationSettings.AddOrUpdateSetting(this.GetType().Name, "PrimaryDataGridHeight",
+                ProjectsDataGrid.ActualHeight + MainToolbar.ActualHeight);
+        }
+
+        private void SetConsoleHeight(double height, double width) {
+            var desiredHeight = (BodyGrid.ActualHeight - 4 - Status.ActualHeight - MainToolbar.ActualHeight) * .65;
+            var desiredWidth = (BodyGrid.ActualWidth - 4 ) * .75;
+            width = width < 200 ? desiredWidth : width;
+            height = height < 200 ? desiredHeight : height;
+            height = height > desiredHeight ? desiredHeight : height;
+            width = width > desiredWidth ? desiredWidth : width;
+            LeftDataGridRow.Height = new GridLength(height);
+            LeftDataGridColumn.Width = new GridLength(width);
         }
 
         protected override void OnSourceInitialized(EventArgs e) {
             base.OnSourceInitialized(e);
-            MainToolbar.RemoveOverflow();
             if (App.Settings.AreWindowPositionsSaved) {
                 this.SetPosition(App.Session.ApplicationSettings);
+                TitlebarGrid.Margin = WindowState == WindowState.Maximized ? new Thickness(4, 4, 4, 0) : new Thickness(0, 0, 0, 0);
+                BodyGrid.Margin = WindowState == WindowState.Maximized ? new Thickness(4, 0, 4, 0) : new Thickness(0, 0, 0, 0);
+
+                var topHeight = App.Session.ApplicationSettings.GetValue(this.GetType().Name, "PrimaryDataGridHeight", this.ActualHeight / 2);
+                var topWidth = App.Session.ApplicationSettings.GetValue(this.GetType().Name, "PrimaryDataGridWidth", this.ActualWidth / 2);
+                SetConsoleHeight(topHeight, topWidth);
             }
             ConsoleTextBox.IsReadOnly = !App.Settings.IsTestConsoleEditable;
         }
@@ -413,5 +450,6 @@ namespace ManageVersioning {
             }
 
         }
+
     }
 }
