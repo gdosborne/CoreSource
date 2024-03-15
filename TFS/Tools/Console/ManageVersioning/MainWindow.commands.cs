@@ -16,7 +16,8 @@
             GotoDataFileDirectory,
             EditProject,
             Minimize,
-            Maximize
+            Maximize,
+            ShowAbout
         }
 
         public override void UpdateInterface() {
@@ -48,6 +49,15 @@
         private bool ValidateMaximizeState(object state) => true;
         private void Maximize(object state) {
             ExecuteAction(nameof(UIActions.Maximize));
+        }
+        #endregion
+
+        #region ShowAbout Command
+        private DelegateCommand _ShowAboutCommand = default;
+        public DelegateCommand ShowAboutCommand => _ShowAboutCommand ??= new DelegateCommand(ShowAbout, ValidateShowAboutState);
+        private bool ValidateShowAboutState(object state) => true;
+        private void ShowAbout(object state) {
+            ExecuteAction(nameof(UIActions.ShowAbout));
         }
         #endregion
 

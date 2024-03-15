@@ -7,7 +7,7 @@
         FocusManager.FocusedElement="{Binding ElementName=PathTextBox}"
         mc:Ignorable="d" Background="{DynamicResource WindowBackground}"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        SizeToContent="Height" Width="440" Icon="/AppIcon.png" ResizeMode="NoResize">
+        SizeToContent="Height" Width="440" Icon="/UpdateVersion.png" ResizeMode="NoResize">
     <Window.DataContext>
         <local:ProjectWindowView />
     </Window.DataContext>

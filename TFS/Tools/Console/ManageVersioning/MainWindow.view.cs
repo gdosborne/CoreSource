@@ -1,15 +1,17 @@
 ﻿using GregOsborne.Application.Linq;
 using GregOsborne.Application.Theme;
 using GregOsborne.MVVMFramework;
+using ManageVersioning.SharedViews;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using VersionMaster;
 
 namespace ManageVersioning {
-    public partial class MainWindowView : ViewModelBase, IThemedView {
+    public partial class MainWindowView : SharedView {
         public enum OriginalActions {
             Delete,
             Cut,
@@ -20,17 +22,15 @@ namespace ManageVersioning {
 
         public MainWindowView() {
             Title = "Manage Versions [designer]";
-            WindowTextBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-            WindowBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
-            ActiveCaptionBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 220));
-            ActiveCaptionTextBrush = new SolidColorBrush(Color.FromArgb(255, 200, 200, 200));
-            ControlBorderBrush = new SolidColorBrush(Color.FromArgb(255, 125, 125, 125));
-            FontSize = 14.0;
-            TitlebarFontSize = 18.0;
+            SetDefaults();
+            UpdateDGColumnHeaderStyle();
         }
 
-        public override void Initialize() {
+        public void Initialize(Window window) {
             base.Initialize();
+
+            this.window = window;
+
             Title = "Manage Versions";
             defaultForeground = App.GetResourceItem<SolidColorBrush>(App.Current.Resources, "WindowText");
             originalValues = ProjectData.LoadAll(App.DataFile, defaultForeground).ToList();
@@ -51,8 +51,6 @@ namespace ManageVersioning {
             Schemas.AddRange(ProjectData.LoadAllSchemas(App.DataFile));
             Methods.AddRange(ProjectData.LoadAllMethods(App.DataFile));
 
-            window = App.Current.MainWindow;
-
             themeWatcher = new ThemeWatcher();
             themeWatcher.ThemeChanged += (s, e) => {
                 DoThemeChange(e.Theme);
@@ -60,33 +58,11 @@ namespace ManageVersioning {
             themeWatcher.WatchTheme();
             //DoThemeChange(ThemeWatcher.GetWindowsTheme());
             DoThemeChange(ThemeWatcher.WindowsTheme.Light);
+
+            UpdateDGColumnHeaderStyle();
         }
 
         private ThemeWatcher themeWatcher = default;
-        private Window window = default;
-
-        private void DoThemeChange(ThemeWatcher.WindowsTheme theme) {
-            App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                if (theme == ThemeWatcher.WindowsTheme.Dark) {
-                    Theme = App.ThemeManager.ByName("Dark");
-                }
-                else {
-                    Theme = App.ThemeManager.ByName("Light");
-                }
-                Theme.Apply(window);
-            }));
-        }
-
-        #region ConsoleImageBrush Property
-        private ImageBrush _ConsoleImageBrush = default;
-        public ImageBrush ConsoleImageBrush {
-            get => _ConsoleImageBrush;
-            set {
-                _ConsoleImageBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
 
         private Brush defaultForeground = default;
         private List<ProjectData> originalValues = default;
@@ -100,6 +76,17 @@ namespace ManageVersioning {
         }
         internal Stack<(ProjectData Item, OriginalActions Action, string PropertyName, object OriginalValue)> UndoItems = new();
         internal Stack<(ProjectData Item, OriginalActions Action, string PropertyName, object OriginalValue)> RedoItems = new();
+
+        #region ConsoleImageBrush Property
+        private ImageBrush _ConsoleImageBrush = default;
+        public ImageBrush ConsoleImageBrush {
+            get => _ConsoleImageBrush;
+            set {
+                _ConsoleImageBrush = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
 
         #region SelectedSchema Property
         private SchemaItem _SelectedSchema = default;
@@ -219,115 +206,5 @@ namespace ManageVersioning {
         }
         #endregion
 
-        #region Theme Property
-        private ApplicationTheme _Theme = default;
-        public ApplicationTheme Theme {
-            get => _Theme;
-            set {
-                _Theme = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region TitlebarFontSize Property
-        private double _TitlebarFontSize = default;
-        public double TitlebarFontSize {
-            get => _TitlebarFontSize;
-            set {
-                _TitlebarFontSize = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region FontSize Property
-        private double _FontSize = default;
-        public double FontSize {
-            get => _FontSize;
-            set {
-                _FontSize = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region ActiveCaptionBrush Property
-        private SolidColorBrush _ActiveCaptionBrush = default;
-        public SolidColorBrush ActiveCaptionBrush {
-            get => _ActiveCaptionBrush;
-            set {
-                _ActiveCaptionBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region ActiveCaptionTextBrush Property
-        private SolidColorBrush _ActiveCaptionTextBrush = default;
-        public SolidColorBrush ActiveCaptionTextBrush {
-            get => _ActiveCaptionTextBrush;
-            set {
-                _ActiveCaptionTextBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region BorderBrush Property
-        private SolidColorBrush _BorderBrush = default;
-        public SolidColorBrush BorderBrush {
-            get => _BorderBrush;
-            set {
-                _BorderBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region ControlBorderBrush Property
-        private SolidColorBrush _ControlBorderBrush = default;
-        public SolidColorBrush ControlBorderBrush {
-            get => _ControlBorderBrush;
-            set {
-                _ControlBorderBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region WindowBrush Property
-        private SolidColorBrush _WindowBrush = default;
-        public SolidColorBrush WindowBrush {
-            get => _WindowBrush;
-            set {
-                _WindowBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region WindowTextBrush Property
-        private SolidColorBrush _WindowTextBrush = default;
-        public SolidColorBrush WindowTextBrush {
-            get => _WindowTextBrush;
-            set {
-                _WindowTextBrush = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        public void ApplyVisualElement<T>(VisualElement<T> element) {
-            switch (element.Name) {
-                case nameof(ActiveCaptionBrush): ActiveCaptionBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ActiveCaptionTextBrush): ActiveCaptionTextBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(BorderBrush): BorderBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ControlBorderBrush): ControlBorderBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(WindowBrush): WindowBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(WindowTextBrush): WindowTextBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(FontSize): FontSize = (double)(object)element.Value; break;
-            }
-        }
     }
 }

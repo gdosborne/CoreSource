@@ -11,7 +11,7 @@ namespace VersionMaster {
         public static int Month() => DateTime.Now.Month;
         public static int Random() => randomGen.Next();
         public static int SecondValueFrom(DateTime minDate) => Convert.ToInt32(Math.Floor(DateTime.Now.Subtract(minDate).TotalSeconds));
-		public static int Second() => DateTime.Now.Second;
+        public static int Second() => DateTime.Now.Second;
         public static int Year() => DateTime.Now.Year;
         public static int TwoDigitYear() => int.Parse(Year().ToString("yy"));
         public static int Increment(int current, bool resetEachDay, DateTime? lastDate) {
@@ -27,7 +27,7 @@ namespace VersionMaster {
             if (!lastDate.HasValue) {
                 throw new ApplicationException("Last date must be set.");
             }
-			if (lastDate.Value.Date < DateTime.Now.Date) {
+            if (lastDate.Value.Date < DateTime.Now.Date) {
                 result = 0;
             } else {
                 result = current + 1;
@@ -41,7 +41,7 @@ namespace VersionMaster {
                 throw new ApplicationException("Last date must be set.");
             }
 
-			if(current < DateTime.Now.Day || lastDate.Value.Date < DateTime.Now.Date) { 
+            if(current < DateTime.Now.Day || lastDate.Value.Date < DateTime.Now.Date) { 
             //if (lastDate.Value.Date < DateTime.Now.Date) {
                 result = current + 1;
             }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManageVersioning"
         xmlns:ctrls="clr-namespace:ManageVersioning.Controls"
         mc:Ignorable="d" Background="Transparent"
-        WindowStyle="None" Height="450" Width="800" Icon="/AppIcon.png">
+        WindowStyle="None" Height="450" Width="800" Icon="/UpdateVersion.png">
     <Window.DataContext>
         <local:MainWindowView />
     </Window.DataContext>
@@ -132,16 +132,24 @@
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Help" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                        <MenuItem Header="About" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                        <MenuItem Header="About" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                                  Command="{Binding ShowAboutCommand}"/>
                     </MenuItem>
                 </Menu>
                 </Grid>
 
-                <ctrls:TitlebarButton Grid.Column="2" ButtonType="Minimize" Command="{Binding MinimizeCommand}"/>
-                <ctrls:TitlebarButton Grid.Column="3" ButtonType="Maximize" Command="{Binding MaximizeCommand}"/>
+                <ctrls:TitlebarButton Grid.Column="2" ButtonType="Minimize" Command="{Binding MinimizeCommand}"
+                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                <ctrls:TitlebarButton Grid.Column="3" ButtonType="Maximize" Command="{Binding MaximizeCommand}"
+                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
                 <ctrls:TitlebarButton Grid.Column="4" ButtonType="Close" Command="{Binding CloseCommand}"
-                                      MouseOverBackground="{Binding Theme.CloseBackgroundBrush.Value,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding Theme.CloseForegroundBrush.Value,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverBackground="{Binding CloseBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverForeground="{Binding CloseForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
             </Grid>
         </Border>
         <Grid Name="BodyGrid" Grid.Row="1" Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
@@ -155,39 +163,59 @@
 
             <Border Name="MainToolbar" Grid.Row="0" BorderThickness="0,1" BorderBrush="{DynamicResource ControlBorder}">
                 <StackPanel Orientation="Horizontal">
+                    <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xF003;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding NewSchemaCommand}" ToolTip="Add new Schema" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8E5;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding NewProjectCommand}" ToolTip="Add new Project" />
-                    <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE74E;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding SaveCommand}" ToolTip="Save changes" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE7A7;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding UndoCommand}" ToolTip="Undo changes" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE7A6;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding RedoCommand}" ToolTip="Redo changes" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE74D;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding DeleteCommand}" ToolTip="Delete current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8C6;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding CutCommand}" ToolTip="Cut current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8C8;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding CopyCommand}" ToolTip="Copy current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE77F;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding PasteCommand}" ToolTip="Paste last copied/cut item" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE768;"
                                           Style="{DynamicResource TBarButton}"
+                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                           Command="{Binding TestVersionCommand}" ToolTip="Run version Test" />
                 </StackPanel>
             </Border>
@@ -197,13 +225,17 @@
                     <ColumnDefinition Name="LeftDataGridColumn" Width=".75*" />
                     <ColumnDefinition Width=".25*" />
                 </Grid.ColumnDefinitions>
-                <DataGrid Name="ProjectsDataGrid" Grid.Column="0" AlternatingRowBackground="{DynamicResource MenuItemBackground}" AutoGenerateColumns="False"
-                      ItemsSource="{Binding Projects}" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="{DynamicResource FullBorder}" 
-                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" 
-                      FontFamily="{DynamicResource ApplicationFont}" FontSize="{DynamicResource BaseTextSize}" Foreground="{DynamicResource WindowText}" 
-                      GridLinesVisibility="None" SelectedItem="{Binding SelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                      MouseDoubleClick="DataGrid_MouseDoubleClick" Margin="0,0,4,0"
-                          Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                <DataGrid Name="ProjectsDataGrid" Grid.Column="0" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Projects}" BorderThickness="{DynamicResource FullBorder}" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" 
+                          FontFamily="{DynamicResource ApplicationFont}" FontSize="{Binding FontSize}" 
+                          GridLinesVisibility="None" SelectedItem="{Binding SelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          MouseDoubleClick="DataGrid_MouseDoubleClick" Margin="0,0,4,0"
+                          BorderBrush="{Binding BorderBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                          Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                          AlternatingRowBackground="{Binding DataGridAlternatingRowBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          ColumnHeaderStyle="{Binding DGColumnHeaderStyle,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
                     <DataGrid.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource ButtonMouseOverColor}"/>
                     </DataGrid.Resources>
@@ -214,12 +246,17 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <GridSplitter Grid.Column="0" Width="4" HorizontalAlignment="Right" VerticalAlignment="Stretch" />
-                <DataGrid Name="SchemaDataGrid" Grid.Column="1" AlternatingRowBackground="{DynamicResource MenuItemBackground}" AutoGenerateColumns="False"
-                      ItemsSource="{Binding Schemas}" BorderBrush="{DynamicResource ControlBorder}" BorderThickness="{DynamicResource FullBorder}" 
-                      CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" 
-                      FontFamily="{DynamicResource ApplicationFont}" FontSize="{DynamicResource BaseTextSize}" Foreground="{DynamicResource WindowText}" 
-                      GridLinesVisibility="None" SelectedItem="{Binding SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                      MouseDoubleClick="DataGrid_MouseDoubleClick1">
+                <DataGrid Name="SchemaDataGrid" Grid.Column="1" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Schemas}" BorderThickness="{DynamicResource FullBorder}" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" 
+                          FontFamily="{DynamicResource ApplicationFont}" FontSize="{DynamicResource BaseTextSize}" 
+                          GridLinesVisibility="None" SelectedItem="{Binding SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          MouseDoubleClick="DataGrid_MouseDoubleClick1"
+                          BorderBrush="{Binding BorderBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                          Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                          AlternatingRowBackground="{Binding DataGridAlternatingRowBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          ColumnHeaderStyle="{Binding DGColumnHeaderStyle,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" IsReadOnly="True" Header="Name" Binding="{Binding Name}" />
                     </DataGrid.Columns>
@@ -228,8 +265,10 @@
 
             <GridSplitter Grid.Row="2" VerticalAlignment="Bottom" Height="4" HorizontalAlignment="Stretch" Background="{DynamicResource ButtonBackground}" />
 
-            <TextBox Name="ConsoleTextBox" Grid.Row="3" Style="{DynamicResource ConsoleTextBox}" 
-                 Text="{Binding ConsoleText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <TextBox Name="ConsoleTextBox" Grid.Row="3" Style="{DynamicResource ConsoleTextBox}"
+                     Foreground="{Binding ConsoleForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                     Background="{Binding ConsoleBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                     Text="{Binding ConsoleText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 <TextBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem Command="ApplicationCommands.Undo" />

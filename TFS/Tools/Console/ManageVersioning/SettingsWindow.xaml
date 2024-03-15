@@ -11,7 +11,7 @@
     <Window.DataContext>
         <local:SettingsWindowView />
     </Window.DataContext>
-    <Grid Margin="10">
+    <Grid Margin="10" Background="{Binding WindowBrush}">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="auto" />
@@ -35,16 +35,27 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     
-                    <controls:Toggle Grid.Row="0" IsChecked="{Binding AreWindowPositionsSaved,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <controls:Toggle Grid.Row="0" IsChecked="{Binding AreWindowPositionsSaved,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                     ToggleBackground="{Binding ToggleBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleForeground="{Binding ToggleForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffBackground="{Binding ToggleOffBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffForeground="{Binding ToggleOffForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleSize="35" Width="70" Height="25" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                Text="Remember Last Window Position" TextWrapping="Wrap" />
-                    <controls:Toggle Grid.Row="1" IsChecked="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                                Text="Remember Last Window Position" TextWrapping="Wrap" FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                    <controls:Toggle Grid.Row="1" IsChecked="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                     ToggleBackground="{Binding ToggleBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleForeground="{Binding ToggleForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffBackground="{Binding ToggleOffBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffForeground="{Binding ToggleOffForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleSize="35" Width="70" Height="25" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                Text="Use Console Image" TextWrapping="Wrap" />
+                                Text="Use Console Image" TextWrapping="Wrap" FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
 
                     <TextBox Grid.Row="2" Grid.Column="1" Style="{DynamicResource BaseTextBox}" Margin="0,0,5,0" 
                              Text="{Binding ConsoleBrushFilePath,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                             IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                             IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
                     <Button Grid.Row="2" Grid.Column="2" Style="{DynamicResource ToolbarButton}" Command="{Binding SelectImageCommand}"
                             IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <TextBlock Style="{DynamicResource TextIcon}" Text="&#xE1A5;" />
@@ -66,14 +77,19 @@
                                 IsEnabled="{Binding IsConsoleBackgroundBrushUsed,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <Slider Width="60" Margin="0,0,5,0" Minimum="0" Maximum="100" TickFrequency="10" TickPlacement="BottomRight" IsSnapToTickEnabled="False"
                                 Value="{Binding ConsoleImageOpacity,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                        <TextBlock Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center">
+                        <TextBlock Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
                             <Run Text="Image Brush Opacity (" /><Run Text="{Binding ConsoleImageOpacity,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" /><Run Text="%)" />
                         </TextBlock>
                     </StackPanel>
 
-                    <controls:Toggle Grid.Row="5" IsChecked="{Binding IsConsoleEditable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    <controls:Toggle Grid.Row="5" IsChecked="{Binding IsConsoleEditable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                                     ToggleBackground="{Binding ToggleBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleForeground="{Binding ToggleForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffBackground="{Binding ToggleOffBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleOffForeground="{Binding ToggleOffForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                     ToggleSize="35" Width="70" Height="25" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="5" Grid.Column="1" Style="{DynamicResource BaseTextBlock}" VerticalAlignment="Center" Margin="0,0,0,0"
-                                Text="Allow editing in Test Console" TextWrapping="Wrap" />
+                                Text="Allow editing in Test Console" TextWrapping="Wrap" FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
 
 
                 </Grid>
@@ -82,8 +98,10 @@
         
         <StackPanel Orientation="Horizontal" Grid.Row="99" Grid.Column="0" Grid.ColumnSpan="99" HorizontalAlignment="Right"
                     Margin="0,0,0,-5">
-            <Button Content="OK" IsDefault="true" Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}" />
-            <Button Content="Cancel" IsCancel="True" Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" />
+            <Button Content="OK" IsDefault="true" Style="{DynamicResource StandardButton}" Command="{Binding OKCommand}" 
+                    FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+            <Button Content="Cancel" IsCancel="True" Style="{DynamicResource StandardButton}" Command="{Binding CancelCommand}" 
+                    FontSize="{Binding FontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
         </StackPanel>
 
     </Grid>

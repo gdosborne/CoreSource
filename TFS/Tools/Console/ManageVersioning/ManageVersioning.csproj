@@ -7,7 +7,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseWPF>true</UseWPF>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<ApplicationIcon>AppIcon.ico</ApplicationIcon>
+		<ApplicationIcon>UpdateVersion.ico</ApplicationIcon>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
@@ -31,6 +31,7 @@
 	  <None Remove="AppIcon.png" />
 	  <None Remove="Data\UpdateVersion.Projects.xml" />
 	  <None Remove="Images\4pfmphjd.png" />
+	  <None Remove="UpdateVersion.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,6 +45,7 @@
 	  <Content Include="Images\4pfmphjd.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="UpdateVersion.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -53,11 +55,16 @@
 	<ItemGroup>
 	  <Resource Include="AppIcon.ico" />
 	  <Resource Include="AppIcon.png" />
+	  <Resource Include="UpdateVersion.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\AppFramework\AppFramework.csproj" />
 	  <ProjectReference Include="..\VersionMasterCore\VersionMasterCore.csproj" />
 	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;    &quot;C:\Users\h548626\AppData\Local\Programs\UpdateVersion\UpdateVersion.exe&quot; @p=&quot;$(ProjectName)&quot;&#xD;&#xA;)" />
+	</Target>
 
 </Project>

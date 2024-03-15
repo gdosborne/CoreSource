@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ManageVersioning"
         mc:Ignorable="d"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        SizeToContent="Height" Width="400" Icon="/AppIcon.png" ResizeMode="NoResize">
+        SizeToContent="Height" Width="400" Icon="/UpdateVersion.png" ResizeMode="NoResize">
     <Window.DataContext>
         <local:SchemaWindowView />
     </Window.DataContext>

@@ -1,6 +1,7 @@
 ﻿using GregOsborne.Application;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Text;
 using System.Windows.Media;
 using System.Xml.Linq;
@@ -377,6 +378,10 @@ namespace VersionMaster {
             ReportProgress?.Invoke(this, new ReportProgressEventArgs($"{("Assembly methods:").PadLeft(padSize)} " +
                 $"{SelectedSchema.MajorPart},{SelectedSchema.MinorPart},{SelectedSchema.BuildPart},{SelectedSchema.RevisionPart}"));
 
+            if(CurrentAssemblyVersion != null) {
+                var vAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>();
+                CurrentAssemblyVersion = Version.Parse(vAttr.Version);
+            }
             var major = ProcessMethod(SelectedSchema.MajorPart, new object[] {
                 CurrentAssemblyVersion.Major, LastBuildDate, SelectedSchema.MajorParameter
             });

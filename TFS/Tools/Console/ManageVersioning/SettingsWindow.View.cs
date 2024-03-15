@@ -1,19 +1,32 @@
-﻿using System;
+﻿using ManageVersioning.SharedViews;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace ManageVersioning {
-    public partial class SettingsWindowView : ViewModelBase {
+    public partial class SettingsWindowView : SharedView {
         public SettingsWindowView() {
             Title = "Settings [designer]";
+            ToggleBackgroundBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            ToggleForegroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+            ToggleOffBackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+            ToggleOffForegroundBrush = new SolidColorBrush(Color.FromArgb(255, 128, 128, 128));
+            ToggleSize = 35;
+            
+
+            UpdateToggleStyle();
         }
 
-        public override void Initialize() {
+        public void Initialize(Window window) {
             base.Initialize();
+            this.window = window;
+
             Title = "Settings";
+            UpdateToggleStyle();
         }
 
         #region DialogResult Property

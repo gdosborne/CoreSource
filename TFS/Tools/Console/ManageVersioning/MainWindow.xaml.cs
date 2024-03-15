@@ -3,6 +3,7 @@ using GregOsborne.Application.Windows;
 using GregOsborne.Application.Windows.Controls;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -19,7 +20,7 @@ namespace ManageVersioning {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            View.Initialize();
+            View.Initialize(this);
             View.ExecuteUiAction += View_ExecuteUiAction;
             TestItems = [];
 
@@ -49,6 +50,32 @@ namespace ManageVersioning {
         private void View_ExecuteUiAction(object sender, GregOsborne.MVVMFramework.ExecuteUiActionEventArgs e) {
             if (Enum.TryParse(typeof(MainWindowView.UIActions), e.CommandToExecute, out var action)) {
                 switch (action) {
+                    case MainWindowView.UIActions.ShowAbout:
+                        var tAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyTitleAttribute>();
+                        var dAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyDescriptionAttribute>();
+                        var vAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>();
+                        var cAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyCompanyAttribute>();
+                        var crAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyCopyrightAttribute>();
+                        var msg = "";
+                        var title = string.Empty;
+                        if (tAttr != null) {
+                            title=tAttr.Title;
+                            msg += $"{tAttr.Title}\n"; ;
+                        }
+                        if (dAttr != null) {
+                            msg += $"{dAttr.Description}\n";
+                        }
+                        if(vAttr != null) {
+                            msg += $"Version {vAttr.Version}\n";
+                        }
+                        if(cAttr != null) {
+                            msg += $"Company {cAttr.Company}\n";
+                        }
+                        if(crAttr != null) {
+                            msg += $"{crAttr.Copyright}\n";
+                        }
+                        Dialogs.ShowOKDialog($"About {title}", msg, Ookii.Dialogs.Wpf.TaskDialogIcon.Information, 200);
+                        break;
                     case MainWindowView.UIActions.Minimize:
                         WindowState = WindowState.Minimized;
                         break;
@@ -394,7 +421,7 @@ namespace ManageVersioning {
 
         private void SetConsoleHeight(double height, double width) {
             var desiredHeight = (BodyGrid.ActualHeight - 4 - Status.ActualHeight - MainToolbar.ActualHeight) * .65;
-            var desiredWidth = (BodyGrid.ActualWidth - 4 ) * .75;
+            var desiredWidth = (BodyGrid.ActualWidth - 4) * .75;
             width = width < 200 ? desiredWidth : width;
             height = height < 200 ? desiredHeight : height;
             height = height > desiredHeight ? desiredHeight : height;
