@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="WPFControls.ToggleSwitch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFControls"
+             mc:Ignorable="d">
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" PreviewMouseDown="Grid_PreviewMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <local:FontIcon x:Name="ToggleBackground" Icon="&#xEC11;" Grid.Column="0" Grid.ColumnSpan="2" 
+                            Foreground="Transparent" FontSize="30" VerticalAlignment="Center" 
+                            FontFamily="{DynamicResource IconFontFamily}" />
+            <local:FontIcon x:Name="ToggleLeft" Icon="&#xF19E;" Grid.Column="0" Grid.ColumnSpan="2" 
+                            FontSize="30" VerticalAlignment="Center" Visibility="Visible"
+                            FontFamily="{DynamicResource IconFontFamily}" />
+            <local:FontIcon x:Name="ToggleRight" Icon="&#xF19F;" Grid.Column="0" Grid.ColumnSpan="2" 
+                            FontSize="30" VerticalAlignment="Center" Visibility="Collapsed"
+                            FontFamily="{DynamicResource IconFontFamily}"/>
+        </Grid>
+        <TextBlock x:Name="OnOffText" Text="Off" Grid.Column="1" Margin="5,0" FontSize="12" 
+                   VerticalAlignment="Center" PreviewMouseDown="OnOffText_PreviewMouseDown" />
+    </Grid>
+</UserControl>

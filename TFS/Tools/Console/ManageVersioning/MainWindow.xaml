@@ -38,6 +38,7 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Name="DragControl" VerticalAlignment="Center" Background="Transparent">
                     <TextBlock Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" FontFamily="{DynamicResource ApplicationFont}"
@@ -45,7 +46,7 @@
                                Margin="10,5,10,8" Foreground="{Binding ActiveCaptionTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                HorizontalAlignment="Left" FontWeight="SemiBold"/>
                 </Grid>
-                <Grid Grid.Column="1" Name="MenuGrid" Background="Transparent">
+                <Grid Grid.Column="1" Name="MenuGrid" Background="Transparent" Margin="0,0,40,0">
                     <Menu Name="MainMenu" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"
                           Background="Transparent"
                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
@@ -136,17 +137,22 @@
                                   Command="{Binding ShowAboutCommand}"/>
                     </MenuItem>
                 </Menu>
-                </Grid>
 
-                <ctrls:TitlebarButton Grid.Column="2" ButtonType="Minimize" Command="{Binding MinimizeCommand}"
+                </Grid>
+                <ctrls:TitlebarButton Grid.Column="2" ButtonType="Custom" CustomCharacter="&#xE713;" Command="{Binding SettingsCommand}"
+                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+
+                <ctrls:TitlebarButton Grid.Column="3" ButtonType="Minimize" Command="{Binding MinimizeCommand}"
+                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                <ctrls:TitlebarButton Grid.Column="4" ButtonType="Maximize" Command="{Binding MaximizeCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                       MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                       MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                <ctrls:TitlebarButton Grid.Column="3" ButtonType="Maximize" Command="{Binding MaximizeCommand}"
-                                      FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                <ctrls:TitlebarButton Grid.Column="4" ButtonType="Close" Command="{Binding CloseCommand}"
+                <ctrls:TitlebarButton Grid.Column="5" ButtonType="Close" Command="{Binding CloseCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                       MouseOverBackground="{Binding CloseBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
                                       MouseOverForeground="{Binding CloseForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>

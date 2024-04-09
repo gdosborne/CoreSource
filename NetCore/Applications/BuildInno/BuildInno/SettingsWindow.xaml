@@ -1,0 +1,82 @@
+﻿<Window x:Class="BuildInno.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuildInno"
+        xmlns:data="clr-namespace:InnoData;assembly=Innodata"
+        xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+        mc:Ignorable="d" Style="{DynamicResource DialogWindow}"
+        AllowsTransparency="True" WindowStyle="None"
+        Title="SettingsWindow" Height="275" Width="500" MinHeight="275" MinWidth="500">
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="8" CaptionHeight="0" />
+    </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <local:SettingsWindowView />
+    </Window.DataContext>
+    <Grid Name="MainGrid" Margin="15" Effect="{DynamicResource WindowDropShadow}">        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Style="{DynamicResource CaptionBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" Grid.Column="0" Style="{DynamicResource CaptionText}"/>
+                <controls:TitlebarButton Style="{DynamicResource CloseTitlebarButton}" Grid.Column="5" ButtonType="Close" 
+                                         Command="{Binding CancelCommand}" />
+
+                <Grid Name="TitlebarBorder" Grid.Column="1" Background="Transparent" />
+
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Name="InnerGrid" Style="{DynamicResource BodyBorder}">
+            <Grid Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Theme" Grid.Row="0" Grid.Column="0">
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton Content="Light (Default)" Style="{DynamicResource StandardRadioButton}"
+                                         IsChecked="{Binding IsLightThemeChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                            <RadioButton Content="Dark" Style="{DynamicResource StandardRadioButton}"
+                                         IsChecked="{Binding IsDarkThemeChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Save Window Size/Position" Grid.Row="0" Grid.Column="1">
+                        <StackPanel Orientation="Vertical">
+                            <controls:ToggleSwitch IsChecked="{Binding IsWindowPositionSaved,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                   Margin="10,0,0,0" />
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,0,10">
+                    <Button Style="{DynamicResource StandardButton}" Content="OK" IsDefault="True" Command="{Binding OKCommand}" />
+                    <Button Style="{DynamicResource StandardButton}" Content="Cancel" IsCancel="True" Command="{Binding CancelCommand}" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -199,6 +199,9 @@ namespace GregOsborne.Application.Media {
             return result;
         }
 
+        public static System.Windows.Media.SolidColorBrush ToMediaBrush(this System.Drawing.SolidBrush solidBrush) =>
+            new SolidColorBrush(Color.FromArgb(solidBrush.Color.A, solidBrush.Color.R, solidBrush.Color.G, solidBrush.Color.B));
+
         public static Color ReduceAlpha(this Color original, byte alpha) => Color.FromArgb(alpha, original.R, original.G, original.B);
 
         public static Color ToColor(this string value) {

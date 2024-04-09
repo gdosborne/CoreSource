@@ -67,7 +67,6 @@
 
     <Style TargetType="controls:TitlebarButton" x:Key="TBarButton" BasedOn="{x:Null}">
         <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
-        <!--<Setter Property="Background" Value="{DynamicResource WindowBackground}" />-->
         <Setter Property="Width" Value="{DynamicResource ToolbarButtonSize}" />
         <Setter Property="Height" Value="{DynamicResource ToolbarButtonSize}" />
         <Setter Property="FontSize" Value="{DynamicResource ToolbarIconSize}" />
@@ -77,6 +76,21 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
         <Setter Property="BorderThickness" Value="{DynamicResource DefaultButtonBorder}" />
         <Setter Property="IsBorderShownOnlyOnMouseOver" Value="False" />
+        <Setter Property="MouseOverBackground" Value="{DynamicResource CloseBackground}" />
+        <Setter Property="MouseOverForeground" Value="{DynamicResource CloseForeground}" />
+    </Style>
+
+    <Style TargetType="controls:TitlebarButton" x:Key="TBarExtraButton" BasedOn="{x:Null}">
+        <Setter Property="Foreground" Value="{DynamicResource WindowText}" />
+        <Setter Property="Width" Value="{DynamicResource ToolbarButtonSize}" />
+        <Setter Property="Height" Value="{DynamicResource ToolbarButtonSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource ToolbarIconSize}" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlBorder}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource FullBorder}" />
+        <Setter Property="IsBorderShownOnlyOnMouseOver" Value="True" />
         <Setter Property="MouseOverBackground" Value="{DynamicResource CloseBackground}" />
         <Setter Property="MouseOverForeground" Value="{DynamicResource CloseForeground}" />
     </Style>

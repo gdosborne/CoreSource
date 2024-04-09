@@ -39,6 +39,7 @@ namespace GregOsborne.Application.Theme {
                 watcher.EventArrived += (sender, args) => {
                     var newWindowsTheme = GetWindowsTheme();
                     var e = new ThemeChangedEventArgs(newWindowsTheme);
+                    
                     ThemeChanged?.Invoke(this, e);
                 };
 
@@ -63,7 +64,7 @@ namespace GregOsborne.Application.Theme {
         }
 
         public static void SetWindowsTheme(WindowsTheme theme) {
-            using (w32.RegistryKey key = w32.Registry.CurrentUser.OpenSubKey(RegistryKeyPath)) {
+            using (w32.RegistryKey key = w32.Registry.CurrentUser.OpenSubKey(RegistryKeyPath, true)) {
                 if (theme == WindowsTheme.Default) {
                     key?.DeleteValue(RegistryValueName);
                 } else {

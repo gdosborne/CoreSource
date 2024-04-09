@@ -366,8 +366,8 @@ namespace VersionMaster {
 
         public void ModifyVersion() {
             const int padSize = 28;
-            var mjVal = SelectedSchema.MajorPart;
-            var mjPar = SelectedSchema.MajorParameter;
+            //var mjVal = SelectedSchema.MajorPart;
+            //var mjPar = SelectedSchema.MajorParameter;
             //LoadSchemaData(SchemaItem.majorValue, SelectedSchema.MajorPart, SelectedSchema.MajorParameter);
             //LoadSchemaData(SchemaItem.minorValue, SelectedSchema.MinorPart, SelectedSchema.MinorParameter);
             //LoadSchemaData(SchemaItem.buildValue, SelectedSchema.BuildPart, SelectedSchema.BuildParameter);
@@ -378,7 +378,7 @@ namespace VersionMaster {
             ReportProgress?.Invoke(this, new ReportProgressEventArgs($"{("Assembly methods:").PadLeft(padSize)} " +
                 $"{SelectedSchema.MajorPart},{SelectedSchema.MinorPart},{SelectedSchema.BuildPart},{SelectedSchema.RevisionPart}"));
 
-            if(CurrentAssemblyVersion != null) {
+            if(CurrentAssemblyVersion == null) {
                 var vAttr = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>();
                 CurrentAssemblyVersion = Version.Parse(vAttr.Version);
             }

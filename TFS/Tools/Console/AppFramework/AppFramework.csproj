@@ -78,14 +78,11 @@
 	  <Compile Include="SettingsData.cs" />
 	  <Compile Include="Symbol\Extensions.cs" />
 	  <Compile Include="Text\Extension.cs" />
-	  <Compile Include="Theme\ApplicationTheme.cs" />
-	  <Compile Include="Theme\Extensions.cs" />
-	  <Compile Include="Theme\IThemedView.cs" />
+	  <Compile Include="Theme\ApplyPropertyEventArgs.cs" />
 	  <Compile Include="Theme\ThemeChangedEventArgs.cs" />
-	  <Compile Include="Theme\ThemeManager.cs" />
 	  <Compile Include="Theme\ThemeWatcher.cs" />
-	  <Compile Include="Theme\VisualElement.cs" />
 	  <Compile Include="ThickEnum.cs" />
+	  <Compile Include="Timers\Extensions.cs" />
 	  <Compile Include="USState.cs" />
 	  <Compile Include="Windows\Controls\Extensions.cs" />
 	  <Compile Include="Windows\Dialog\Extensions.cs" />
