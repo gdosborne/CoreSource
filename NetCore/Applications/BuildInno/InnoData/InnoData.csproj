@@ -6,8 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8602;8625</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8602;8625</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="FrameworkExtensions.PresentationCore" Version="1.0.0.23" />
     <PackageReference Include="PresentationFramework" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\TFS\Tools\Console\AppFramework\AppFramework.csproj" />
   </ItemGroup>
 
 </Project>

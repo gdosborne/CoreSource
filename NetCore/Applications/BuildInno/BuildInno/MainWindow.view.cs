@@ -11,6 +11,7 @@ using GregOsborne.Application.Theme;
 using AppFramework.Theme;
 using Castle.Core.Smtp;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace BuildInno {
     public partial class MainWindowView : ViewModelBase {
@@ -57,8 +58,14 @@ namespace BuildInno {
         public BuildInnoProject SelectedProject {
             get => _SelectedProject;
             set {
+                if (SelectedProject != null) {
+                    SelectedProject.PropertyChanged -= (s, e) => { };
+                }
                 _SelectedProject = value;
                 if (SelectedProject != null) {
+                    SelectedProject.PropertyChanged += (s, e) => {
+                        UpdateInterface();
+                    };
                     Title = $"{App.ApplicationName} - {SelectedProject.Filename}";
                     if (!OpenedProjects.Contains(SelectedProject)) {
                         OpenedProjects.Add(SelectedProject);
@@ -69,17 +76,25 @@ namespace BuildInno {
         }
         #endregion
 
-        #region EditorData Property
-        private string _EditorData = default;
-        public string EditorData {
-            get => _EditorData;
+        #region RichDocument Property
+        private FlowDocument _RichDocument = default;
+        public FlowDocument RichDocument {
+            get => _RichDocument;
             set {
-                _EditorData = value;
+                _RichDocument = value;
                 OnPropertyChanged();
             }
         }
         #endregion
 
-
+        public bool IsTextSelected {
+            get {
+                var p = new Dictionary<string, object> {
+                    { "IsSelected", false }
+                };
+                ExecuteAction(nameof(Actions.IsTextSelected), p);
+                return p["IsSelected"].CastTo<bool>();
+            }
+        }
     }
 }

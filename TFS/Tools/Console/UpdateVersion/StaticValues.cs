@@ -11,6 +11,9 @@ namespace UpdateVersion {
         public static string projectName = string.Empty;
         public static AppSingleton appSingleton = default;
 
+        internal static string ApplicationName => "Versioning";
+        internal static string ApplicationDirectory { get; set; }
+
         internal static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
             LogMessage(e.ExceptionObject.ToString(), "Unknown project");
         }

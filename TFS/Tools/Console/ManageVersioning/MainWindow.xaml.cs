@@ -20,7 +20,7 @@ namespace ManageVersioning {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            View.Initialize(this);
+            View.Initialize();
             View.ExecuteUiAction += View_ExecuteUiAction;
             TestItems = [];
 
@@ -283,6 +283,8 @@ namespace ManageVersioning {
                                 WindowStartupLocation = WindowStartupLocation.Manual,
                             };
                             win.View.AreWindowPositionsSaved = App.Settings.AreWindowPositionsSaved;
+                            win.View.UseSharedVersionFile = App.Settings.UseSharedVersionFile;
+                            win.View.SharedVersionFilePath = App.Settings.SharedVersionFilePath;
                             win.View.IsConsoleEditable = App.Settings.IsTestConsoleEditable;
                             win.View.IsConsoleBackgroundBrushUsed = App.Settings.IsConsoleBackgroundBrushUsed;
                             win.View.ConsoleBrushFilePath = App.Settings.ConsoleBrushFilePath;
@@ -294,6 +296,8 @@ namespace ManageVersioning {
                                 return;
 
                             App.Settings.AreWindowPositionsSaved = win.View.AreWindowPositionsSaved;
+                            App.Settings.UseSharedVersionFile = win.View.UseSharedVersionFile;
+                            App.Settings.SharedVersionFilePath = win.View.SharedVersionFilePath;
                             App.Settings.IsTestConsoleEditable = win.View.IsConsoleEditable;
                             App.Settings.IsConsoleBackgroundBrushUsed = win.View.IsConsoleBackgroundBrushUsed;
                             App.Settings.ConsoleBrushFilePath = win.View.ConsoleBrushFilePath;

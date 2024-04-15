@@ -8,25 +8,14 @@ using System.Windows;
 using System.Windows.Media;
 
 namespace ManageVersioning {
-    public partial class SettingsWindowView : SharedView {
+    public partial class SettingsWindowView : ViewModelBase {
         public SettingsWindowView() {
             Title = "Settings [designer]";
-            ToggleBackgroundBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-            ToggleForegroundBrush = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
-            ToggleOffBackgroundBrush = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
-            ToggleOffForegroundBrush = new SolidColorBrush(Color.FromArgb(255, 128, 128, 128));
-            ToggleSize = 35;
-            
-
-            UpdateToggleStyle();
         }
 
-        public void Initialize(Window window) {
+        public void Initialize() {
             base.Initialize();
-            this.window = window;
-
             Title = "Settings";
-            UpdateToggleStyle();
         }
 
         #region DialogResult Property
@@ -101,6 +90,28 @@ namespace ManageVersioning {
             get => _ConsoleImageOpacity;
             set {
                 _ConsoleImageOpacity = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region UseSharedVersionFile Property
+        private bool _UseSharedVersionFile = default;
+        public bool UseSharedVersionFile {
+            get => _UseSharedVersionFile;
+            set {
+                _UseSharedVersionFile = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SharedVersionFilePath Property
+        private string _SharedVersionFilePath = default;
+        public string SharedVersionFilePath {
+            get => _SharedVersionFilePath;
+            set {
+                _SharedVersionFilePath = value;
                 OnPropertyChanged();
             }
         }

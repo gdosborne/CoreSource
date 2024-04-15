@@ -5,8 +5,10 @@ using GregOsborne.Application.Primitives;
 using GregOsborne.Application.Theme;
 using InnoData;
 using SharpDX;
+using System.Drawing;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BuildInno {
@@ -15,6 +17,7 @@ namespace BuildInno {
             InitializeComponent();
             View.Initialize(this);
             View.ExecuteUiAction += View_ExecuteUiAction;
+            View.PropertyChanged += View_PropertyChanged;
             SourceInitialized += (s, e) => {
                 var isWindowPositionSaved = App.Session.ApplicationSettings.GetValue("Application", nameof(App.SettingsWindow.View.IsWindowPositionSaved), false);
                 if (isWindowPositionSaved) {
@@ -41,6 +44,17 @@ namespace BuildInno {
             LoadPrevious(null);
         }
 
+        private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
+            if (e.PropertyName.Equals(nameof(View.SelectedProject))) {
+                if (View.SelectedProject != null) {
+                    ConsoleTextBox.Document = View.SelectedProject.Document;
+                }
+                else {
+                    ConsoleTextBox.Document = null;
+                }
+            }
+        }
+
         private void LoadPrevious(string newFile) {
             var temp = new Dictionary<int, string>();
             if (!string.IsNullOrEmpty(newFile) && File.Exists(newFile)) {
@@ -64,7 +78,9 @@ namespace BuildInno {
             temp.OrderBy(x => x.Key).ToList().ForEach(item => {
                 index++;
                 App.Session.ApplicationSettings.AddOrUpdateSetting("PreviouslyOpened", index.ToString(), item.Value);
-                View.BuildInnoProjects.Add(new BuildInnoProject(item.Value));
+                var fontFamily = App.FindResource<System.Windows.Media.FontFamily>(App.Current.Resources, "ConsoleFontFamily");
+                var fontSize = App.FindResource<double>(App.Current.Resources, "FontSize");
+                View.BuildInnoProjects.Add(new BuildInnoProject(item.Value, fontFamily, fontSize));
             });
             if (!string.IsNullOrEmpty(newFile) && File.Exists(newFile)) {
                 View.SelectedProject = View.BuildInnoProjects.FirstOrDefault(x => x.Filename.EqualsIgnoreCase(newFile));
@@ -136,6 +152,22 @@ namespace BuildInno {
 
                     }
                     break;
+                case MainWindowView.Actions.CutText: {
+                        ConsoleTextBox.Cut();
+                    }
+                    break;
+                case MainWindowView.Actions.CopyText: {
+                        ConsoleTextBox.Copy();
+                    }
+                    break;
+                case MainWindowView.Actions.PasteText: {
+                        ConsoleTextBox.Paste();
+                    }
+                    break;
+                case MainWindowView.Actions.IsTextSelected: {
+                        //e.Parameters["IsSelected"] = ConsoleTextBox.SelectedText.Length > 0;
+                    }
+                    break;
             }
         }
 
@@ -143,13 +175,17 @@ namespace BuildInno {
 
         private void treeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
             if (e.NewValue.Is<BuildInnoProject>()) {
-                View.EditorData = e.NewValue.As<BuildInnoProject>().Data;
+                //View.EditorData = e.NewValue.As<BuildInnoProject>().Data;
                 View.Title = $"{App.ApplicationName} = {e.NewValue.As<BuildInnoProject>().Filename}";
             }
             else {
-                View.EditorData = string.Join('\n', e.NewValue.As<BuildInnoSection>().Lines);
+                //View.EditorData = string.Join('\n', e.NewValue.As<BuildInnoSection>().Lines);
                 View.Title = $"{App.ApplicationName} = {e.NewValue.As<BuildInnoSection>().Project.Filename}";
             }
+        }
+
+        private void ConsoleTextBox_SelectionChanged(object sender, RoutedEventArgs e) {
+            View.UpdateInterface();
         }
     }
 }

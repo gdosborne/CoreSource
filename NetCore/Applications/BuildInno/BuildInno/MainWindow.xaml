@@ -76,25 +76,15 @@
                                                  ToolTip="Save setup" Command="{Binding SaveFileCommand}"/>
 
                         <controls:VerticalSeparator />
-
+                        <controls:TitlebarButton Style="{DynamicResource ToolbarButton}" ButtonType="Custom" CustomCharacter="&#xE8C6;" 
+                                                 ToolTip="Cut" Command="{Binding CutTextCommand}"/>
+                        <controls:TitlebarButton Style="{DynamicResource ToolbarButton}" ButtonType="Custom" CustomCharacter="&#xE8C8;" 
+                                                 ToolTip="Copy" Command="{Binding CopyTextCommand}"/>
+                        <controls:TitlebarButton Style="{DynamicResource ToolbarButton}" ButtonType="Custom" CustomCharacter="&#xE77F;" 
+                                                 ToolTip="Paste" Command="{Binding PasteTextCommand}"/>
+                        <controls:VerticalSeparator />
                         <controls:TitlebarButton Style="{DynamicResource ToolbarButton}" ButtonType="Custom" CustomCharacter="&#xE74C;" 
                                                  ToolTip="Build setup" Command="{Binding BuildCommand}"/>
-
-                        <controls:VerticalSeparator />
-
-                        <!--<controls:TitlebarButton x:Name="ToolButton" Style="{DynamicResource ToolbarButton}" ButtonType="Custom" CustomCharacter="&#xEC7A;" 
-                                                 ToolTip="Tools" Command="{Binding ShowToolsContentMenuCommand}">
-                            <controls:TitlebarButton.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Copy New Guid" Command="{Binding CopyGuidCommand}">
-                                        <MenuItem.Icon>
-                                            <controls:FontIcon Icon="&#xE735;" />
-                                        </MenuItem.Icon>
-                                    </MenuItem>
-                                </ContextMenu>
-                            </controls:TitlebarButton.ContextMenu>
-                        </controls:TitlebarButton>-->
-                        
 
                     </StackPanel>
                 </Border>
@@ -141,8 +131,8 @@
 
                 </TreeView>
                 <GridSplitter Grid.Column="0" Grid.Row="1" Style="{DynamicResource VerticalSplitter}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Style="{DynamicResource ConsoleTextBox}"
-                         Text="{Binding EditorData,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                <RichTextBox Name="ConsoleTextBox" Grid.Column="1" Grid.Row="1" Style="{DynamicResource ConsoleTextBox}"                         
+                         SelectionChanged="ConsoleTextBox_SelectionChanged" />
             </Grid>
         </Border>
     </Grid>

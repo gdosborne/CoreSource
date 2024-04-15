@@ -29,7 +29,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{Binding ActiveCaptionBrush,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+        <Border Grid.Row="0" Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}"
                 CornerRadius="8,8,0,0">
             <Grid Name="TitlebarGrid">
                 <Grid.ColumnDefinitions>
@@ -43,97 +43,97 @@
                 <Grid Grid.Column="0" Name="DragControl" VerticalAlignment="Center" Background="Transparent">
                     <TextBlock Text="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" FontFamily="{DynamicResource ApplicationFont}"
                                FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                               Margin="10,5,10,8" Foreground="{Binding ActiveCaptionTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                               Margin="10,5,10,8" Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"
                                HorizontalAlignment="Left" FontWeight="SemiBold"/>
                 </Grid>
                 <Grid Grid.Column="1" Name="MenuGrid" Background="Transparent" Margin="0,0,40,0">
                     <Menu Name="MainMenu" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"
                           Background="Transparent"
-                          Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                    <MenuItem Header="File" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                          Foreground="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}">
+                        <MenuItem Header="File" Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <MenuItem Header="New Schema..." InputGestureText="Alt-S" Command="{Binding NewSchemaCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xF003;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}" />
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="New Project..." InputGestureText="Alt-P" Command="{Binding NewProjectCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE8E5;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Save" InputGestureText="Ctrl-S" Command="{Binding SaveCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE74E;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Exit" Command="{Binding ExitCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                     </MenuItem>
-                    <MenuItem Header="Edit" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                        <MenuItem Header="Edit" Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <MenuItem Header="Undo" InputGestureText="Ctrl-Z" Command="{Binding UndoCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE7A7;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Redo" InputGestureText="Ctrl-Y" Command="{Binding RedoCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE7A6;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Cut" InputGestureText="Ctrl-X" Command="{Binding CutCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE8C6;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Copy" InputGestureText="Ctrl-C" Command="{Binding CopyCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE8C8;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Paste" InputGestureText="Ctrl-V" Command="{Binding PasteCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE77F;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="Settings" Command="{Binding SettingsCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE115;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Tools" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <MenuItem Header="Tools" Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                         <MenuItem Header="Test Version Number" InputGestureText="Ctrl-T" Command="{Binding TestVersionCommand}"
-                                  Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                                  Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
                             <MenuItem.Icon>
                                 <TextBlock Text="&#xE768;" Style="{DynamicResource TextIcon}" 
-                                           Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                           Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Help" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                        <MenuItem Header="About" Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+                        <MenuItem Header="Help" Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}">
+                            <MenuItem Header="About" Foreground="{StaticResource {x:Static SystemColors.MenuTextBrushKey}}" 
                                   Command="{Binding ShowAboutCommand}"/>
                     </MenuItem>
                 </Menu>
@@ -141,24 +141,24 @@
                 </Grid>
                 <ctrls:TitlebarButton Grid.Column="2" ButtonType="Custom" CustomCharacter="&#xE713;" Command="{Binding SettingsCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                      MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                      MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"/>
 
                 <ctrls:TitlebarButton Grid.Column="3" ButtonType="Minimize" Command="{Binding MinimizeCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" />
+                                      MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                      MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}" />
                 <ctrls:TitlebarButton Grid.Column="4" ButtonType="Maximize" Command="{Binding MaximizeCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                      MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                      MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}" />
                 <ctrls:TitlebarButton Grid.Column="5" ButtonType="Close" Command="{Binding CloseCommand}"
                                       FontSize="{Binding TitlebarFontSize,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverBackground="{Binding CloseBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                      MouseOverForeground="{Binding CloseForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                      MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                      MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}" />
             </Grid>
         </Border>
-        <Grid Name="BodyGrid" Grid.Row="1" Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+        <Grid Name="BodyGrid" Grid.Row="1" Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -167,66 +167,66 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Border Name="MainToolbar" Grid.Row="0" BorderThickness="0,1" BorderBrush="{DynamicResource ControlBorder}">
+            <Border Name="MainToolbar" Grid.Row="0" BorderThickness="0,1" BorderBrush="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}">
                 <StackPanel Orientation="Horizontal">
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xF003;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding NewSchemaCommand}" ToolTip="Add new Schema" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8E5;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding NewProjectCommand}" ToolTip="Add new Project" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE74E;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding SaveCommand}" ToolTip="Save changes" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE7A7;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding UndoCommand}" ToolTip="Undo changes" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE7A6;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding RedoCommand}" ToolTip="Redo changes" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE74D;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding DeleteCommand}" ToolTip="Delete current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8C6;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding CutCommand}" ToolTip="Cut current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE8C8;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding CopyCommand}" ToolTip="Copy current item" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE77F;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding PasteCommand}" ToolTip="Paste last copied/cut item" />
                     <ContentControl Width="4" />
                     <ctrls:TitlebarButton ButtonType="Custom" CustomCharacter="&#xE768;"
                                           Style="{DynamicResource TBarButton}"
-                                          MouseOverForeground="{Binding HighlightTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                                          MouseOverBackground="{Binding HighlightBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                                          MouseOverForeground="{StaticResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                          MouseOverBackground="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"
                                           Command="{Binding TestVersionCommand}" ToolTip="Run version Test" />
                 </StackPanel>
             </Border>
 
-            <Grid Name="UpperGrid" Grid.Row="2" Margin="0,0,0,4" Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            <Grid Name="UpperGrid" Grid.Row="2" Margin="0,0,0,4" Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Name="LeftDataGridColumn" Width=".75*" />
                     <ColumnDefinition Width=".25*" />
@@ -237,14 +237,11 @@
                           FontFamily="{DynamicResource ApplicationFont}" FontSize="{Binding FontSize}" 
                           GridLinesVisibility="None" SelectedItem="{Binding SelectedProject,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           MouseDoubleClick="DataGrid_MouseDoubleClick" Margin="0,0,4,0"
-                          BorderBrush="{Binding BorderBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                          Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                          Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                          AlternatingRowBackground="{Binding DataGridAlternatingRowBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          BorderBrush="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                          Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                          Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}" 
+                          AlternatingRowBackground="{DynamicResource ButtonMouseOverBackground}"
                           ColumnHeaderStyle="{Binding DGColumnHeaderStyle,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
-                    <DataGrid.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource ButtonMouseOverColor}"/>
-                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="0.2*" IsReadOnly="True" Header="Name" Binding="{Binding Name}" />
                         <DataGridTextColumn Width="0.5*" IsReadOnly="True" Header="Path" Binding="{Binding FullPath}" />
@@ -258,10 +255,10 @@
                           FontFamily="{DynamicResource ApplicationFont}" FontSize="{DynamicResource BaseTextSize}" 
                           GridLinesVisibility="None" SelectedItem="{Binding SelectedSchema,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                           MouseDoubleClick="DataGrid_MouseDoubleClick1"
-                          BorderBrush="{Binding BorderBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                          Foreground="{Binding WindowTextBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                          Background="{Binding WindowBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-                          AlternatingRowBackground="{Binding DataGridAlternatingRowBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                          BorderBrush="{StaticResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                          Foreground="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}" 
+                          Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}" 
+                          AlternatingRowBackground="{DynamicResource ButtonMouseOverBackground}"
                           ColumnHeaderStyle="{Binding DGColumnHeaderStyle,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="*" IsReadOnly="True" Header="Name" Binding="{Binding Name}" />
@@ -269,11 +266,12 @@
                 </DataGrid>
             </Grid>
 
-            <GridSplitter Grid.Row="2" VerticalAlignment="Bottom" Height="4" HorizontalAlignment="Stretch" Background="{DynamicResource ButtonBackground}" />
+            <GridSplitter Grid.Row="2" VerticalAlignment="Bottom" Height="4" HorizontalAlignment="Stretch" 
+                          Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}" />
 
             <TextBox Name="ConsoleTextBox" Grid.Row="3" Style="{DynamicResource ConsoleTextBox}"
-                     Foreground="{Binding ConsoleForegroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
-                     Background="{Binding ConsoleBackgroundBrush,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"
+                     Foreground="{StaticResource {x:Static SystemColors.WindowBrushKey}}"
+                     Background="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"
                      Text="{Binding ConsoleText,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                 <TextBox.ContextMenu>
                     <ContextMenu>

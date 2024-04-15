@@ -28,4 +28,8 @@
 		</None>
 	</ItemGroup>
 
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;    &quot;$(LOCALAPPDATA)\Programs\UpdateVersion\UpdateVersion.exe&quot; @p=&quot;$(ProjectName)&quot;&#xD;&#xA;)" />
+	</Target>
+
 </Project>

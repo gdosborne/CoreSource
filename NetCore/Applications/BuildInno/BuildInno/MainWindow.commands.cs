@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BuildInno {
     public partial class MainWindowView {
@@ -15,7 +16,12 @@ namespace BuildInno {
             SaveFile,
             ShowSettings,
             CopyGuid,
-            ShowToolsContentMenu
+            ShowToolsContentMenu,
+            Build,
+            CutText,
+            CopyText,
+            PasteText,
+            IsTextSelected
         }
 
         #region Close Command
@@ -57,7 +63,7 @@ namespace BuildInno {
         #region SaveFile Command
         private DelegateCommand _SaveFileCommand = default;
         public DelegateCommand SaveFileCommand => _SaveFileCommand ??= new DelegateCommand(SaveFile, ValidateSaveFileState);
-        private bool ValidateSaveFileState(object state) => true;
+        private bool ValidateSaveFileState(object state) => SelectedProject != null;// && SelectedProject.Data != SelectedProject.OriginalData;
         private void SaveFile(object state) {
             ExecuteAction(nameof(Actions.SaveFile));
         }
@@ -87,6 +93,43 @@ namespace BuildInno {
         private bool ValidateShowToolsContentMenuState(object state) => true;
         private void ShowToolsContentMenu(object state) {
             ExecuteAction(nameof(Actions.ShowToolsContentMenu));
+        }
+        #endregion
+
+        #region Build Command
+        private DelegateCommand _BuildCommand = default;
+        public DelegateCommand BuildCommand => _BuildCommand ??= new DelegateCommand(Build, ValidateBuildState);
+        private bool ValidateBuildState(object state) => SelectedProject != null;
+        private void Build(object state) {
+            ExecuteAction(nameof(Actions.Build));
+        }
+        #endregion
+
+        #region CutText Command
+        private DelegateCommand _CutTextCommand = default;
+        public DelegateCommand CutTextCommand => _CutTextCommand ??= new DelegateCommand(CutText, ValidateCutTextState);
+        private bool ValidateCutTextState(object state) => SelectedProject != null && IsTextSelected;
+        private void CutText(object state) {
+            ExecuteAction(nameof(Actions.CutText));
+        }
+        #endregion
+
+        #region CopyText Command
+        private DelegateCommand _CopyTextCommand = default;
+        public DelegateCommand CopyTextCommand => _CopyTextCommand ??= new DelegateCommand(CopyText, ValidateCopyTextState);
+        private bool ValidateCopyTextState(object state) => SelectedProject != null && IsTextSelected;
+        private void CopyText(object state) {
+            ExecuteAction(nameof(Actions.CopyText));
+        }
+        #endregion
+
+        #region PasteText Command
+        private DelegateCommand _PasteTextCommand = default;
+        public DelegateCommand PasteTextCommand => _PasteTextCommand ??= new DelegateCommand(PasteText, ValidatePasteTextState);
+        private bool ValidatePasteTextState(object state) => SelectedProject != null && 
+            Clipboard.GetText(TextDataFormat.Text).Length > 0;
+        private void PasteText(object state) {
+            ExecuteAction(nameof(Actions.PasteText));
         }
         #endregion
 

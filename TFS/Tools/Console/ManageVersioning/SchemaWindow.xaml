@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ManageVersioning"
         mc:Ignorable="d"
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Background="{StaticResource {x:Static SystemColors.WindowBrushKey}}"
         SizeToContent="Height" Width="400" Icon="/UpdateVersion.png" ResizeMode="NoResize">
     <Window.DataContext>
         <local:SchemaWindowView />
@@ -25,7 +26,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="99" Background="{DynamicResource InvertedBackground}"
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="99" Background="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"
                 Margin="0,0,0,10">
             <Grid>
                 <ContentControl Visibility="{Binding TitleControlVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
@@ -35,13 +36,13 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Style="{DynamicResource HeaderTextBlock}" Foreground="{DynamicResource InvertedForeground}"
+                        <TextBlock Grid.Column="0" Style="{DynamicResource HeaderTextBlock}" Foreground="{StaticResource {x:Static SystemColors.WindowBrushKey}}"
                                    Text="{Binding Schema.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                         <ContentControl Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"
                                         ToolTip="Click to rename">
                             <Hyperlink Command="{Binding EditNameCommand}" TextDecorations="None">
                                 <TextBlock Text="&#xE13E;" FontFamily="Segoe Fluent Icons"
-                                           Foreground="{DynamicResource WindowBackground}"
+                                           Foreground="{StaticResource {x:Static SystemColors.WindowBrushKey}}"
                                            FontSize="10" />
                             </Hyperlink>
                         </ContentControl>

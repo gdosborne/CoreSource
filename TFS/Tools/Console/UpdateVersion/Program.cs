@@ -1,6 +1,8 @@
 ﻿using ConsoleUtilities;
+using GregOsborne.Application;
 using GregOsborne.Application.IO;
 using System.Reflection;
+using System.Security.Policy;
 using UpdateVersion;
 using VersionMaster;
 using static VersionMaster.Enumerations;
@@ -32,6 +34,14 @@ try {
         StaticValues.WriteLineToConsole($"{("Argument:").PadLeft(StaticValues.padSize)} {arguments["p"]}", StaticValues.projectName);
 #endif
 
+    StaticValues.ApplicationDirectory = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), StaticValues.ApplicationName);
+
+    var session = new Session(StaticValues.ApplicationDirectory, StaticValues.ApplicationName,
+        GregOsborne.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
+        GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
+
+    var useSharedVersionFile = session.ApplicationSettings.GetValue("Application", "UseSharedVersionFile", false);
+
     var dataDir = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Versioning");
     if (!SysIO.Directory.Exists(dataDir)) {
         SysIO.Directory.CreateDirectory(dataDir);
@@ -54,7 +64,20 @@ try {
         }
     });
 
-    var projectsFileName = SysIO.Path.Combine(dataDir, "UpdateVersion.Projects.xml");
+    var projectsFileName = default(string);
+    if (useSharedVersionFile) {
+        var sharedVersionFilePath = session.ApplicationSettings.GetValue("Application", "SharedVersionFilePath", default(string));
+        if (string.IsNullOrWhiteSpace(sharedVersionFilePath)) {
+            StaticValues.WriteLineToConsole("Use of shared project file is selected, but no path to the shared file exists. Run " +
+                "ManageVersions to set the path to the shared project file.");
+            StaticValues.ExitApp(-100, true, true, StaticValues.projectName);
+            return;
+        }
+        projectsFileName = sharedVersionFilePath;
+    }
+    else {
+        projectsFileName = SysIO.Path.Combine(dataDir, "UpdateVersion.Projects.xml");
+    }
 
     if (!SysIO.File.Exists(projectsFileName)) {
         var source = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "UpdateVersion.Projects.xml");

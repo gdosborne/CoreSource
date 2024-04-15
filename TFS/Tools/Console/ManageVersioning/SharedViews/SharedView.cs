@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Media;
 
 namespace ManageVersioning.SharedViews {
-    public class SharedView : ViewModelBase, IThemedView {
+    public class SharedView : ViewModelBase {
         #region TitlebarFontSize Property
         private double _TitlebarFontSize = default;
         public double TitlebarFontSize {
@@ -292,18 +292,6 @@ namespace ManageVersioning.SharedViews {
         #endregion
 
         protected Window window = default;
-        protected void DoThemeChange(ThemeWatcher.WindowsTheme theme) {
-            App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                if (theme == ThemeWatcher.WindowsTheme.Dark) {
-                    Theme = App.ThemeManager.ByName("Dark");
-                }
-                else {
-                    Theme = App.ThemeManager.ByName("Light");
-                }
-                Theme.Apply(window);
-            }));
-        }
-
         protected void UpdateDGColumnHeaderStyle() {
             var result = new Style(typeof(DataGridColumnHeader));
             result.Setters.Add(new Setter(DataGridColumnHeader.BackgroundProperty, WindowTextBrush));
@@ -327,40 +315,6 @@ namespace ManageVersioning.SharedViews {
             result.Setters.Add(new Setter(Controls.Toggle.VerticalAlignmentProperty, VerticalAlignment.Center));
             result.Setters.Add(new Setter(Controls.Toggle.MarginProperty, new Thickness(0, 0, 5, 0)));
             DGColumnHeaderStyle = result;
-        }
-
-        #region Theme Property
-        private ApplicationTheme _Theme = default;
-        public ApplicationTheme Theme {
-            get => _Theme;
-            set {
-                _Theme = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        public void ApplyVisualElement<T>(VisualElement<T> element) {
-            switch (element.Name) {
-                case nameof(ActiveCaptionBrush): ActiveCaptionBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ActiveCaptionTextBrush): ActiveCaptionTextBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(BorderBrush): BorderBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ControlBorderBrush): ControlBorderBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(WindowBrush): WindowBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(WindowTextBrush): WindowTextBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(FontSize): FontSize = (double)(object)element.Value; break;
-                case nameof(TitlebarFontSize): TitlebarFontSize = (double)(object)element.Value; break;
-                case nameof(CloseBackgroundBrush): CloseBackgroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(CloseForegroundBrush): CloseForegroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(HighlightBrush): HighlightBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(HighlightTextBrush): HighlightTextBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ConsoleBackgroundBrush): ConsoleBackgroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(ConsoleForegroundBrush): ConsoleForegroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(DataGridAlternatingRowBackgroundBrush): DataGridAlternatingRowBackgroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(DataGridHeaderForegroundBrush): DataGridHeaderForegroundBrush = element.Value.As<SolidColorBrush>(); break;
-                case nameof(DataGridHeaderBackgroundBrush): DataGridHeaderBackgroundBrush = element.Value.As<SolidColorBrush>(); break;
-            }
-
         }
 
         protected void SetDefaults() {

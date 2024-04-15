@@ -10,7 +10,8 @@ namespace ManageVersioning {
     public partial class SettingsWindowView {
         public enum Actions {
             PickColor,
-            PickImage
+            PickImage,
+            SelectSharedFile
         }
 
         #region OK Command
@@ -46,6 +47,15 @@ namespace ManageVersioning {
         private bool ValidateSelectImageState(object state) => true;
         private void SelectImage(object state) {
             ExecuteAction(nameof(Actions.PickImage));
+        }
+        #endregion
+        
+        #region SelectSharedFile Command
+        private DelegateCommand _SelectSharedFileCommand = default;
+        public DelegateCommand SelectSharedFileCommand => _SelectSharedFileCommand ??= new DelegateCommand(SelectSharedFile, ValidateSelectSharedFileState);
+        private bool ValidateSelectSharedFileState(object state) => true;
+        private void SelectSharedFile(object state) {
+            ExecuteAction(nameof(Actions.SelectSharedFile));
         }
         #endregion
 

@@ -22,6 +22,16 @@ namespace ManageVersioning {
                 View.ExecuteUiAction += (s, e) => {
                     if (Enum.TryParse(typeof(SettingsWindowView.Actions), e.CommandToExecute, out var action)) {
                         switch (action) {
+                            case SettingsWindowView.Actions.SelectSharedFile: {
+                                    var fname = SysIO.Path.GetFileName("UpdateVersion.Projects.xml");
+                                    var result = Dialogs.ShowOpenFileDialog("Select shared project version file", App.ApplicationDirectory, 
+                                        fname, ("*.xml", "XML File"));
+                                    if (string.IsNullOrEmpty(result)) {
+                                        return;
+                                    }
+                                    View.SharedVersionFilePath = result;
+                                }
+                                break;
                             case SettingsWindowView.Actions.PickColor: {
                                     var colorDialog = new ColorDialog();
                                     colorDialog.SelectedColor = View.ConsoleImageForegroundColor.As<SolidColorBrush>().Color; //In need

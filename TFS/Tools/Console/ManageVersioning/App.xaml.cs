@@ -11,52 +11,31 @@ namespace ManageVersioning {
         public static Session Session { get; private set; }
         public static string ApplicationName => "Versioning";
         public static string ApplicationDirectory { get; private set; }
-        public static ThemeManager ThemeManager { get; private set; }
 
         private static string filename = "UpdateVersion.Projects.xml";
 
         protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
+
             ApplicationDirectory = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
             new SysIO.DirectoryInfo(ApplicationDirectory).CreateIfNotExist();
-            DataFile = SysIO.Path.Combine(ApplicationDirectory, filename);
+            Session = new Session(ApplicationDirectory, ApplicationName, GregOsborne.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
+                GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
+
+            if (Settings.UseSharedVersionFile && !string.IsNullOrWhiteSpace(Settings.SharedVersionFilePath)) {
+                DataFile = Settings.SharedVersionFilePath;
+            }
+            else {
+                DataFile = SysIO.Path.Combine(ApplicationDirectory, filename);
+            }
+
+            
             if (!SysIO.File.Exists(DataFile)) {
                 var sourceDir = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Data", filename);
                 SysIO.File.Copy(sourceDir, DataFile);
             }
-            Session = new Session(ApplicationDirectory, ApplicationName, GregOsborne.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
-                GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
-            ThemeManager = new ThemeManager();
 
-            var lightThemeFile = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Themes", "Light.theme");
-            var darkThemeFile = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Themes", "Dark.theme");
-            var lightTheme = default(ApplicationTheme);
-            var darkTheme = default(ApplicationTheme);
-            if (!SysIO.File.Exists(lightThemeFile)) {
-                lightTheme = new ApplicationTheme(lightThemeFile) {
-                    HasChanges = true,
-                    Name = "Light"
-                };
-                lightTheme.Save();
-            }
-            else {
-                var temp = ApplicationTheme.Create(lightThemeFile);
-                lightTheme = temp.FirstOrDefault(x => x.Name.EqualsIgnoreCase("Light"));
-            }
-            ThemeManager.Themes.Add(lightTheme);
 
-            if (!SysIO.File.Exists(darkThemeFile)) {
-                darkTheme = new ApplicationTheme(darkThemeFile) {
-                    HasChanges = true,
-                    Name = "Dark"
-                };
-                darkTheme.Save();
-            }
-            else {
-                var temp = ApplicationTheme.Create(darkThemeFile);
-                darkTheme = temp.FirstOrDefault(x => x.Name.EqualsIgnoreCase("Dark"));
-            }
-            ThemeManager.Themes.Add(darkTheme);
         }
 
         public static T GetResourceItem<T>(ResourceDictionary resourceDic, string name) {
@@ -78,6 +57,16 @@ namespace ManageVersioning {
         }
 
         public static class Settings {
+            public static string SharedVersionFilePath {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(SharedVersionFilePath), default(string));
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(SharedVersionFilePath), value);
+            }
+
+            public static bool UseSharedVersionFile {
+                get => App.Session.ApplicationSettings.GetValue("Application", nameof(UseSharedVersionFile), false);
+                set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(UseSharedVersionFile), value);
+            }
+
             public static bool AreWindowPositionsSaved {
                 get => App.Session.ApplicationSettings.GetValue("Application", nameof(AreWindowPositionsSaved), false);
                 set => App.Session.ApplicationSettings.AddOrUpdateSetting("Application", nameof(AreWindowPositionsSaved), value);

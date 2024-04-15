@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildInno", "BuildInno\BuildInno.csproj", "{CBD13FF1-D5A4-47E6-B30D-9C90152714A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildInno", "BuildInno\BuildInno.csproj", "{CBD13FF1-D5A4-47E6-B30D-9C90152714A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnoData", "InnoData\InnoData.csproj", "{7A506AFF-9F00-4125-896E-C0284CEED8FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InnoData", "InnoData\InnoData.csproj", "{7A506AFF-9F00-4125-896E-C0284CEED8FE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppFramework", "..\..\..\TFS\Tools\Console\AppFramework\AppFramework.csproj", "{D17B35D2-4E5A-4512-9143-B587DB084F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFControls", "WPFControls\WPFControls.csproj", "{62014D20-0884-4261-A7EE-6039FA0406D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFControls", "WPFControls\WPFControls.csproj", "{62014D20-0884-4261-A7EE-6039FA0406D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4353EDF0-19A2-45CA-BC38-2F7269BCCC2D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

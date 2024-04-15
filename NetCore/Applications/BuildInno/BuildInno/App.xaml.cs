@@ -39,7 +39,7 @@ namespace BuildInno {
             watcher.WatchTheme();
         }
 
-        private static void SetTheme(ThemeWatcher.WindowsTheme value) {
+        public static void SetTheme(ThemeWatcher.WindowsTheme value) {
             var app = App.Current.As<App>();
             app.Resources.MergedDictionaries.Clear();
             var res = new ResourceDictionary();
@@ -52,6 +52,24 @@ namespace BuildInno {
                 App.SettingsWindow.View.IsDarkThemeChecked = value == ThemeWatcher.WindowsTheme.Dark;
                 App.SettingsWindow.View.IsLightThemeChecked = value != ThemeWatcher.WindowsTheme.Dark;
             }
+        }
+
+        public static T FindResource<T>(ResourceDictionary resourceDic, string name, T defaultValue = default) {
+            try {
+                T result = defaultValue;
+                var item = resourceDic[name];
+                if (item != null && item is T tValue) {
+                    result = tValue;
+                    return result;
+                }
+                resourceDic.MergedDictionaries.ToList().ForEach(res => {
+                    if (result != null)
+                        return;
+                    result = FindResource<T>(res, name, defaultValue);
+                });
+                return result;
+            }
+            catch { return defaultValue; }
         }
     }
 }

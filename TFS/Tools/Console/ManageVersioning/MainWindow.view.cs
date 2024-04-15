@@ -11,7 +11,7 @@ using System.Windows.Media;
 using VersionMaster;
 
 namespace ManageVersioning {
-    public partial class MainWindowView : SharedView {
+    public partial class MainWindowView : ViewModelBase {
         public enum OriginalActions {
             Delete,
             Cut,
@@ -22,14 +22,10 @@ namespace ManageVersioning {
 
         public MainWindowView() {
             Title = "Manage Versions [designer]";
-            SetDefaults();
-            UpdateDGColumnHeaderStyle();
         }
 
-        public void Initialize(Window window) {
+        public void Initialize() {
             base.Initialize();
-
-            this.window = window;
 
             Title = "Manage Versions";
             defaultForeground = App.GetResourceItem<SolidColorBrush>(App.Current.Resources, "WindowText");
@@ -53,13 +49,9 @@ namespace ManageVersioning {
 
             themeWatcher = new ThemeWatcher();
             themeWatcher.ThemeChanged += (s, e) => {
-                DoThemeChange(e.Theme);
+                //DoThemeChange(e.Theme);
             };
             themeWatcher.WatchTheme();
-            //DoThemeChange(ThemeWatcher.GetWindowsTheme());
-            DoThemeChange(ThemeWatcher.WindowsTheme.Light);
-
-            UpdateDGColumnHeaderStyle();
         }
 
         private ThemeWatcher themeWatcher = default;
