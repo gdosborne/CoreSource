@@ -102,6 +102,10 @@
         public static List<string> ReadAllLines(string fileName, FileShare share) => ReadAllLines(fileName, share, true);
         public static long? Size(string fileName) => string.IsNullOrEmpty(fileName) && IsLegalFileName(fileName) || !System.IO.File.Exists(fileName) ? null : (fileName != null ? (long?)new FileInfo(fileName).Length : null);
 
+        public static bool IsBefore(this FileInfo file, DateTime beforeDate) => file.CreationTimeUtc < beforeDate.ToUniversalTime();
+        public static bool IsAfter(this FileInfo file, DateTime beforeDate) => file.CreationTimeUtc > beforeDate.ToUniversalTime();
+        public static bool IsBeforeToday(this FileInfo file) => file.CreationTimeUtc < new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).ToUniversalTime();
+
         public static bool IsBinary(string fileName) {
             //this test is not conclusive but it's the best that can be done at present
             if (!System.IO.File.Exists(fileName)) {

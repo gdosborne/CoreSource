@@ -41,14 +41,37 @@ namespace GregOsborne.Application.IO {
             return value;
         }
 
-		public static void CleanupDirectory(this DirectoryInfo dirInfo, params string[] excludeExtensions) {
-			if (dirInfo.Exists) {
-				var files = dirInfo.GetFiles().Where(x => !excludeExtensions.ContainsIgnoreCase(x.Extension)).ToList();
-				files.ForEach(x => x.Delete());
-			}
-		}
+        public static void CleanupDirectory(this DirectoryInfo dirInfo, params string[] excludeExtensions) {
+            if (dirInfo.Exists) {
+                var files = dirInfo.GetFiles().Where(x => !excludeExtensions.ContainsIgnoreCase(x.Extension)).ToList();
+                files.ForEach(x => x.Delete());
+            }
+        }
 
-		public static long Size(this DirectoryInfo value, string filter = "*.*", bool isRecursive = true) {
+        public static void CleanupDirectory(this DirectoryInfo dirInfo, TimeSpan? keepValue, string extension = "*.tmp", bool IsClearAllEnabled = false) {
+            if (dirInfo.Exists) {
+                //if IsClearAllEnabled is true, all tmp files will be removed
+                //if file is in use (another user or another instance), it will be ignored by the try...finally below
+                var f = dirInfo.GetFiles(extension);
+                //remove any files older than keepValue if IsClearAllEnabled is false (default is 24 hours)
+                var dt = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+                if (keepValue.HasValue)
+                    dt = DateTime.Now.Subtract(keepValue.Value);
+                var files = f
+                    .Where(x => IsClearAllEnabled ? x.IsBefore(DateTime.Now) : x.IsBefore(dt))
+                    .ToList();
+                if (files.Any()) {
+                    foreach (var file in files) {
+                        try {
+                            file.Delete();
+                        }
+                        finally { }
+                    }
+                }
+            }
+        }
+
+        public static long Size(this DirectoryInfo value, string filter = "*.*", bool isRecursive = true) {
             if (value == null || !value.Exists)
                 return 0;
             var result = value.GetFiles(filter).ToList().Sum(x => x.Length);
@@ -65,42 +88,42 @@ namespace GregOsborne.Application.IO {
             return System.IO.Path.Combine(dirInfo.FullName, fileName);
         }
 
-		public static DirectoryInfo[] FindAllByName(this DirectoryInfo parent, string directoryName, bool isRecursive = true) {
-			var result = default(DirectoryInfo[]);
+        public static DirectoryInfo[] FindAllByName(this DirectoryInfo parent, string directoryName, bool isRecursive = true) {
+            var result = default(DirectoryInfo[]);
 
-			result = SearchDirectory(parent, directoryName, isRecursive);
+            result = SearchDirectory(parent, directoryName, isRecursive);
 
-			if (result == null) {
-				result = new DirectoryInfo[0];
-			}
-			return result;
-		}
+            if (result == null) {
+                result = new DirectoryInfo[0];
+            }
+            return result;
+        }
 
-		private static DirectoryInfo[] SearchDirectory(DirectoryInfo dir, string directoryName, bool isRecursive) {
-			var result = new List<DirectoryInfo>();
+        private static DirectoryInfo[] SearchDirectory(DirectoryInfo dir, string directoryName, bool isRecursive) {
+            var result = new List<DirectoryInfo>();
 
-			if (dir.Name.Equals(directoryName, StringComparison.OrdinalIgnoreCase)) {
-				result.Add(dir);
-			}
-			//this is necessary for unc (network) paths because they can timeout or not be available
-			var dirs = default(DirectoryInfo[]);
-			var st = Task.Factory.StartNew(() => {
-				try {
-					dirs = dir.GetDirectories();
-				}
-				catch { }
-			});
-			st.Wait(TimeSpan.FromSeconds(5));
-			if (dirs == null) {
-				return result.ToArray();
-			}
+            if (dir.Name.Equals(directoryName, StringComparison.OrdinalIgnoreCase)) {
+                result.Add(dir);
+            }
+            //this is necessary for unc (network) paths because they can timeout or not be available
+            var dirs = default(DirectoryInfo[]);
+            var st = Task.Factory.StartNew(() => {
+                try {
+                    dirs = dir.GetDirectories();
+                }
+                catch { }
+            });
+            st.Wait(TimeSpan.FromSeconds(5));
+            if (dirs == null) {
+                return result.ToArray();
+            }
 
-			if (isRecursive) {
-				foreach (var sub in dirs) {
-					result.AddRange(SearchDirectory(sub, directoryName, isRecursive));
-				}
-			}
-			return result.ToArray();
-		}
-	}
+            if (isRecursive) {
+                foreach (var sub in dirs) {
+                    result.AddRange(SearchDirectory(sub, directoryName, isRecursive));
+                }
+            }
+            return result.ToArray();
+        }
+    }
 }

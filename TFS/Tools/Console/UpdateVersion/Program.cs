@@ -1,6 +1,8 @@
 ﻿using ConsoleUtilities;
 using GregOsborne.Application;
 using GregOsborne.Application.IO;
+using AppFile = GregOsborne.Application.IO.File;
+using System.Drawing.Text;
 using System.Reflection;
 using System.Security.Policy;
 using UpdateVersion;
@@ -24,6 +26,8 @@ StaticValues.appSingleton = new AppSingleton();
 StaticValues.appSingleton.WaitForPreviousTermination();
 
 var reader = default(ProjectConfigurationReader);
+var projectsFileName = default(string);
+
 try {
 
     var executablePath = string.Empty;
@@ -41,12 +45,17 @@ try {
         GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
 
     var useSharedVersionFile = session.ApplicationSettings.GetValue("Application", "UseSharedVersionFile", false);
+    var sharedVersionFilePath = session.ApplicationSettings.GetValue("Application", "SharedVersionFilePath", default(string));
 
     var dataDir = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Versioning");
+    if (useSharedVersionFile) {
+        dataDir = SysIO.Path.GetDirectoryName(sharedVersionFilePath);
+    }
     if (!SysIO.Directory.Exists(dataDir)) {
         SysIO.Directory.CreateDirectory(dataDir);
     }
-    new DirectoryInfo(dataDir).CleanupDirectory(".xml");
+    //Get rid of any tmp file older than 2 minutes
+    new DirectoryInfo(dataDir).CleanupDirectory(TimeSpan.FromMinutes(2));
 
     arguments.Select(x => x.Key).ToList().ForEach(x => {
         if (arguments.Any(y => y.Key == x)) {
@@ -64,9 +73,7 @@ try {
         }
     });
 
-    var projectsFileName = default(string);
     if (useSharedVersionFile) {
-        var sharedVersionFilePath = session.ApplicationSettings.GetValue("Application", "SharedVersionFilePath", default(string));
         if (string.IsNullOrWhiteSpace(sharedVersionFilePath)) {
             StaticValues.WriteLineToConsole("Use of shared project file is selected, but no path to the shared file exists. Run " +
                 "ManageVersions to set the path to the shared project file.");
@@ -138,7 +145,11 @@ catch (Exception ex) {
     StaticValues.ShowError(ErrorValues.UnKnown, ex.Message, StaticValues.projectName);
 }
 finally {
-    StaticValues.appSingleton.RemoveTriggerFile();
+    try {
+        StaticValues.appSingleton.RemoveTriggerFile();
+        CleanupTempFiles(SysIO.Path.GetDirectoryName(projectsFileName), TimeSpan.FromMinutes(5));
+    }
+    catch { }
     if (reader != null) {
         reader.Dispose();
     }
@@ -148,4 +159,29 @@ var pause = false;
 pause = true;
 #endif
 StaticValues.ExitApp(0, pause, true, StaticValues.projectName);
+
+static void CleanupTempFiles(string dir, TimeSpan? keepValue, bool IsClearAllEnabled = false) {
+    if (SysIO.Directory.Exists(dir)) {
+        //if IsClearAllEnabled is true, all tmp files will be removed
+        //if file is in use (another user or another instance), it will be ignored by the try...finally below
+        var d = new DirectoryInfo(dir);
+        var f = d.GetFiles("*.tmp");
+        //remove any files older than keepValue if IsClearAllEnabled is false (default is 24 hours)
+        var dt = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+        if (keepValue.HasValue)
+            dt = DateTime.Now.Subtract(keepValue.Value);
+        var files = f
+            .Where(x => IsClearAllEnabled ? x.IsBefore(DateTime.Now) : x.IsBefore(dt))
+            .ToList();
+        if (files.Any()) {
+            foreach (var file in files) {
+                try {
+                    file.Delete();
+                }
+                finally { }
+            }
+        }
+    }
+}
+
 
