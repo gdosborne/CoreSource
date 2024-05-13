@@ -1,6 +1,8 @@
 ﻿using GregOsborne.Application;
 using GregOsborne.Application.IO;
 using GregOsborne.Application.Theme;
+
+using System.Diagnostics.Eventing.Reader;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
@@ -23,13 +25,21 @@ namespace ManageVersioning {
                 GregOsborne.Application.Logging.ApplicationLogger.StorageOptions.NewestFirstLogEntry);
 
             if (Settings.UseSharedVersionFile && !string.IsNullOrWhiteSpace(Settings.SharedVersionFilePath)) {
-                DataFile = Settings.SharedVersionFilePath;
-            }
-            else {
+                var hasSharedFile = true;
+                try {
+                    hasSharedFile = SysIO.File.Exists(Settings.SharedVersionFilePath);
+                }
+                finally { }
+                if (hasSharedFile) {
+                    DataFile = Settings.SharedVersionFilePath;
+                } else {
+                    DataFile = SysIO.Path.Combine(ApplicationDirectory, filename);
+                }
+            } else {
                 DataFile = SysIO.Path.Combine(ApplicationDirectory, filename);
             }
 
-            
+
             if (!SysIO.File.Exists(DataFile)) {
                 var sourceDir = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Data", filename);
                 SysIO.File.Copy(sourceDir, DataFile);

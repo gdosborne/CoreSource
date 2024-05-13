@@ -47,10 +47,16 @@ try {
     var useSharedVersionFile = session.ApplicationSettings.GetValue("Application", "UseSharedVersionFile", false);
     var sharedVersionFilePath = session.ApplicationSettings.GetValue("Application", "SharedVersionFilePath", default(string));
 
+    try {
+        if (useSharedVersionFile && !string.IsNullOrWhiteSpace(sharedVersionFilePath)) {
+            useSharedVersionFile = SysIO.File.Exists(sharedVersionFilePath);
+        }
+    }
+    finally { }
     var dataDir = SysIO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Versioning");
     if (useSharedVersionFile) {
         dataDir = SysIO.Path.GetDirectoryName(sharedVersionFilePath);
-    }
+    } 
     if (!SysIO.Directory.Exists(dataDir)) {
         SysIO.Directory.CreateDirectory(dataDir);
     }
@@ -83,11 +89,11 @@ try {
         projectsFileName = sharedVersionFilePath;
     }
     else {
-        projectsFileName = SysIO.Path.Combine(dataDir, "UpdateVersion.Projects.xml");
+        projectsFileName = SysIO.Path.Combine(dataDir, StaticValues.VersionFileName);
     }
 
     if (!SysIO.File.Exists(projectsFileName)) {
-        var source = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "UpdateVersion.Projects.xml");
+        var source = SysIO.Path.Combine(SysIO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), StaticValues.VersionFileName);
         SysIO.File.Copy(source, projectsFileName);
     }
 

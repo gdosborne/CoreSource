@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OkiiDialogs\Ookii.Dialogs_4.8.csproj">
-      <Project>{D01B1D20-8F5B-4834-8E5C-C7EC6DD587D4}</Project>
+      <Project>{d01b1d20-8f5b-4834-8e5c-c7ec6dd587d4}</Project>
       <Name>Ookii.Dialogs_4.8</Name>
     </ProjectReference>
   </ItemGroup>

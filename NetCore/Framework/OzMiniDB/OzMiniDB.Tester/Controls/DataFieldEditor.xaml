@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="OzMiniDB.Builder.Controls.DataFieldEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OzMiniDB.Builder.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="52.191" d:DesignWidth="800">
+    <Border x:Name="BackBorder" CornerRadius="2">
+        <Grid Margin="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="NameLabel" Grid.Row="0" Grid.Column="0" Content="Name" />
+            <Label x:Name="DataTypeLabel" Grid.Row="0" Grid.Column="1" Content="Data Type" />
+            <Label x:Name="LengthLabel" Grid.Row="0" Grid.Column="2" Content="Length" />
+            <Label x:Name="IsRequiredLabel" Grid.Row="0" Grid.Column="3" Content="Required" />
+            <Label x:Name="IsIdentityLabel" Grid.Row="0" Grid.Column="4" Content="Identity" />
+
+            <TextBox x:Name="NameTextBox" Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" />
+            <ComboBox x:Name="DataTypeComboBox" Grid.Row="1" Grid.Column="1" />
+            <local:NumericOnlyTextBox x:Name="LengthTextBox" Grid.Row="1" Grid.Column="2" IsDecimalAllowed="False" 
+                                  Minimum="0" Maximum="32000" VerticalContentAlignment="Center"
+                                  TextAlignment="Right" />
+            <CheckBox x:Name="IsRequiredCheckBox" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" 
+                  HorizontalAlignment="Center" />
+            <CheckBox x:Name="IsIdentityCheckBox" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" 
+                  HorizontalAlignment="Center" />
+        </Grid>
+    </Border>
+</UserControl>

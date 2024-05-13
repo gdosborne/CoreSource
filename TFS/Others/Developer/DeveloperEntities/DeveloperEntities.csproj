@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SNC.OptiRamp.Application.DeveloperEntities</RootNamespace>
     <AssemblyName>DeveloperEntities</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -111,13 +111,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Application\Application\Application\Application.csproj">
+    <ProjectReference Include="..\..\..\Framework\Application\Application_4.8.csproj">
       <Project>{3d4bdb37-d97e-4cf3-b246-3a3f11ab9d44}</Project>
-      <Name>Application</Name>
+      <Name>Application_4.8</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MVVMFramework\MVVMFramework.csproj">
+    <ProjectReference Include="..\..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj">
       <Project>{da87e838-fb93-441a-a6e2-444764fa284e}</Project>
-      <Name>MVVMFramework</Name>
+      <Name>MVVMFramework_4.8</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

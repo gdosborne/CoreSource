@@ -1,4 +1,4 @@
-﻿using Common.Application.Reflection;
+﻿//using Common.Application.Reflection;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -13,6 +13,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("2023.3.29.0")]
 [assembly: AssemblyInformationalVersion("2023.3.29.0")]
 
-[assembly: ApplicationType(ApplicationTypeAttribute.ApplicationTypes.ClassLibrary)]
-[assembly: ApplicationLastBuildDate("03/29/2023")]
-[assembly: VersionSchemaName("daily")]
+//[assembly: ApplicationType(ApplicationTypeAttribute.ApplicationTypes.ClassLibrary)]
+//[assembly: ApplicationLastBuildDate("03/29/2023")]
+//[assembly: VersionSchemaName("daily")]

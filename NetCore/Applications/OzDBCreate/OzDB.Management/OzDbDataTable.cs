@@ -1,4 +1,5 @@
-﻿using Common.Application.Linq;
+﻿//using Common.Application.Linq;
+
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ namespace OzDB.Management {
                 Fields = new ObservableCollection<OzDBDataField>()
             };
             if(fields != null ) {
-                result.Fields.AddRange(fields);
+                //result.Fields.AddRange(fields);
             }
             return result;
         }

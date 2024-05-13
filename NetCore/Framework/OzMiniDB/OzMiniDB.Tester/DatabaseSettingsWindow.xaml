@@ -1,0 +1,67 @@
+﻿<Window x:Class="OzMiniDB.Builder.DatabaseSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OzMiniDB.Builder"
+        xmlns:helper="clr-namespace:OzMiniDB.Builder.Helper;assembly=OzMiniDB.Builder.Helper"
+        mc:Ignorable="d" Style="{DynamicResource ApplicationWindow}"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Height="325" Width="625" MinWidth="625" MinHeight="325">
+    <Window.DataContext>
+        <local:DatabaseSettingsWindowView />
+    </Window.DataContext>
+    <Grid Style="{DynamicResource WindowMainGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MinWidth="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TreeView Name="SettingGroupsTreeView" Grid.Column="0" ItemsSource="{Binding Groups}" PreviewMouseDown="TreeView_PreviewMouseDown"
+                      SelectedItemChanged="TreeView_SelectedItemChanged">
+                <TreeView.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource HighlightBackgroundColor}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Red" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="{DynamicResource WindowBackgroundColor}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{DynamicResource WindowBackgroundColor}" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{DynamicResource InactiveForegroundColor}" />
+
+                    <HierarchicalDataTemplate DataType="{x:Type helper:SettingGroup}" ItemsSource="{Binding Groups}">
+                        <TextBlock Text="{Binding Name}" Margin="3" />
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" Margin="3" />
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                    <Style x:Key="LibraryTreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.Resources>
+            </TreeView>
+            <Grid Name="SettingsGrid" Grid.Column="1" Margin="10,0,10,0">
+
+            </Grid>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="OK" Style="{DynamicResource StandardButton}" IsDefault="True" 
+                    Command="{Binding OKCommand}" />
+            <Button Content="Cancel" Style="{DynamicResource StandardButton}" IsCancel="True" 
+                    Command="{Binding CancelCommand}" />
+        </StackPanel>
+
+    </Grid>
+</Window>

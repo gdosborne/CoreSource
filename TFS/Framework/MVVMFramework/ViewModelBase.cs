@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GregOsborne.Application.Primitives;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
-using GregOsborne.Application.Primitives;
 
 namespace GregOsborne.MVVMFramework {
     public class ViewModelBase : INotifyPropertyChanged, IViewModelBase {
@@ -49,7 +48,7 @@ namespace GregOsborne.MVVMFramework {
         protected void OnPropertyChanged([CallerMemberName]string propertyName = default) =>
             InvokePropertyChanged(propertyName);
 
-		public event ExecuteUiActionHandler ExecuteUiAction;
+        public event ExecuteUiActionHandler ExecuteUiAction;
 
         public void ExecuteAction(string name, Dictionary<string, object> parameters) =>
             ExecuteUiAction?.Invoke(this, new ExecuteUiActionEventArgs(name, parameters));

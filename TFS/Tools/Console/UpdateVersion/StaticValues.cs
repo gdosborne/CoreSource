@@ -11,6 +11,7 @@ namespace UpdateVersion {
         public static string projectName = string.Empty;
         public static AppSingleton appSingleton = default;
 
+        internal const string VersionFileName = "UpdateVersion.Projects.xml";
         internal static string ApplicationName => "Versioning";
         internal static string ApplicationDirectory { get; set; }
 

@@ -1,0 +1,175 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:controls="clr-namespace:OzMiniDB.Builder.Controls">
+
+    <sys:Double x:Key="DefaultFontSize">11.0</sys:Double>
+    <sys:Double x:Key="IconFontSize">14.0</sys:Double>
+    <sys:Double x:Key="HeaderTextSize">14.0</sys:Double>
+    <sys:Double x:Key="SubHeaderTextSize">12.0</sys:Double>
+    <sys:Double x:Key="InfoIconSize">10.0</sys:Double>
+
+    <FontFamily x:Key="ApplicationFont">Arial</FontFamily>
+    <FontFamily x:Key="IconFont">Segoe Fluent Icons</FontFamily>
+
+    <Color x:Key="WindowBackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="WindowForegroundColor">#FF000000</Color>
+    <Color x:Key="MessageForegroundColor">#FF000099</Color>
+    <Color x:Key="MessageBackgroundColor">#FFF0F0F0</Color>
+    <Color x:Key="BorderColor">#FF505050</Color>
+    <Color x:Key="HighlightBackgroundColor">#FFD8D8FF</Color>
+    <Color x:Key="InactiveForegroundColor">#33000000</Color>
+    <Color x:Key="DataGridAlternateColor">#FFE5E5FF</Color>
+
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="WindowForegroundBrush" Color="{DynamicResource WindowForegroundColor}" />
+    <SolidColorBrush x:Key="MessageForegroundBrush" Color="{DynamicResource MessageForegroundColor}" />
+    <SolidColorBrush x:Key="MessageBackgroundBrush" Color="{DynamicResource MessageBackgroundColor}" />
+    <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}" />
+    <SolidColorBrush x:Key="DataGridAlternateBrush" Color="{DynamicResource DataGridAlternateColor}" />
+    <SolidColorBrush x:Key="HighlightBackgroundBrush" Color="{DynamicResource HighlightBackgroundColor}" />
+    <SolidColorBrush x:Key="InactiveForegroundBrush" Color="{DynamicResource InactiveForegroundColor}" />
+
+    <sys:String x:Key="Add Table">&#xECC8;</sys:String>
+    <sys:String x:Key="Remove Table">&#xECC9;</sys:String>
+    <sys:String x:Key="New Database">&#xE8A5;</sys:String>
+    <sys:String x:Key="Open Database">&#xED25;</sys:String>
+    <sys:String x:Key="Save Database">&#xE74E;</sys:String>
+    <sys:String x:Key="Generate Classes">&#xE943;</sys:String>
+    <sys:String x:Key="Settings">&#xE713;</sys:String>
+
+    <sys:String x:Key="New DB Tooltip">New Database</sys:String>
+    <sys:String x:Key="Open DB Tooltip">Open Database</sys:String>
+    <sys:String x:Key="Save DB Tooltip">Save Database</sys:String>
+    <sys:String x:Key="New Table Tooltip">New Table</sys:String>
+    <sys:String x:Key="Remove Table Tooltip">Remove Table</sys:String>
+    <sys:String x:Key="New Field Tooltip">New Field</sys:String>
+    <sys:String x:Key="Remove Field Tooltip">Remove Field</sys:String>
+    <sys:String x:Key="Generate Classes Tooltip">Remove Field</sys:String>
+    <sys:String x:Key="Settings Tooltip">Settings</sys:String>
+
+    <Style TargetType="Window" x:Key="ApplicationWindow">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+    </Style>
+
+    <Style TargetType="GroupBox">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+    </Style>
+
+    <Style TargetType="Grid" x:Key="WindowMainGrid">
+        <Setter Property="Margin" Value="10" />
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="HeaderTextBlock" BasedOn="{x:Null}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="FontSize" Value="{DynamicResource HeaderTextSize}" />
+    </Style>
+    <Style TargetType="TextBlock" x:Key="SubHeaderTextBlock" BasedOn="{StaticResource HeaderTextBlock}">
+        <Setter Property="FontSize" Value="{DynamicResource SubHeaderTextSize}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="MessageTextBlock" BasedOn="{x:Null}">
+        <Setter Property="Foreground" Value="{DynamicResource MessageForegroundBrush}" />
+    </Style>
+
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="MessageBorder">
+        <Setter Property="Background" Value="{DynamicResource MessageBackgroundBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="ControlBorder">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="IconButton">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="BorderThickness" Value=".5" />
+        <Setter Property="Margin" Value="2,2,2,0" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="IconTextBlock" BasedOn="{x:Null}">
+        <Setter Property="FontFamily" Value="{DynamicResource IconFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource IconFontSize}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="StandardButton">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Margin" Value="5,0,0,0" />
+        <Setter Property="Width" Value="60" />
+        <Setter Property="Height" Value="26" />
+    </Style>
+
+    <Style TargetType="CheckBox" x:Key="StandardCheckBox">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="StandardTextBox">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3" />
+    </Style>
+
+    <Style TargetType="GridSplitter">
+        <Setter Property="Width" Value="4" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+
+    <Style TargetType="controls:DataFieldEditor">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ApplicationFont}" />
+        <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
+        <Setter Property="FocusedBackground" Value="{DynamicResource DataGridAlternateBrush}" />
+        <Setter Property="FocusedBorderBrush" Value="{DynamicResource BorderBrush}" />
+    </Style>
+</ResourceDictionary>
+

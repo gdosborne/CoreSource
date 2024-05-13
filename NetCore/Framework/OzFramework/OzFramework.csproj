@@ -1,0 +1,221 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Platforms>x64;AnyCPU</Platforms>
+		<SignAssembly>False</SignAssembly>
+		<EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+		<OutputType>Library</OutputType>
+		<LangVersion>10.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <WarningLevel>0</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+	  <EmbeddedResource Remove="Generation\**" />
+	  <EmbeddedResource Remove="Windows\Wizard\**" />
+	  <None Remove="Generation\**" />
+	  <None Remove="Windows\Wizard\**" />
+	  <Page Remove="Generation\**" />
+	  <Page Remove="Windows\Wizard\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="OzFramework.csproj.applog.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="AppSettings.cs" />
+		<Compile Include="Attributes\EnumMetaDataAttribute.cs" />
+		<Compile Include="ByteSize.cs" />
+		<Compile Include="Crypto.cs" />
+		<Compile Include="Dialogs\Helpers.cs" />
+		<Compile Include="EMailer.cs" />
+		<Compile Include="Enumerations.cs" />
+		<Compile Include="Events\WriteToLogEventArgs.cs" />
+		<Compile Include="Exception\ExceptionHandler.cs" />
+		<Compile Include="Exception\Extensions.cs" />
+		<Compile Include="Install\UpdateChecker.cs" />
+		<Compile Include="IO\Directory.cs" />
+		<Compile Include="IO\File.cs" />
+		<Compile Include="IO\FileSystemInfo.cs" />
+		<Compile Include="IO\OneDrive.cs" />
+		<Compile Include="IO\Path.cs" />
+		<Compile Include="IO\Shell32Wrapper.cs" />
+		<Compile Include="IO\WrapperProperty.cs" />
+		<Compile Include="Linq\Extensions.cs" />
+		<Compile Include="Logging\ApplicationLogger.cs" />
+		<Compile Include="Logging\LogDirectoryMissingException.cs" />
+		<Compile Include="Logging\Logger.cs" />
+		<Compile Include="Logging\Loggers.cs" />
+		<Compile Include="MailTracker.cs" />
+		<Compile Include="Mail\HtmlBodyCreator.cs" />
+		<Compile Include="Mail\HtmlTags.cs" />
+		<Compile Include="Mail\IBodyCreator.cs" />
+		<Compile Include="Mail\IMailer.cs" />
+		<Compile Include="Mail\MailMessage.cs" />
+		<Compile Include="Mail\Outlook\Mailer.cs" />
+		<Compile Include="Manipulation.cs" />
+		<Compile Include="Media\CompositeIcon.cs" />
+		<Compile Include="Media\CompositeIconData.cs" />
+		<Compile Include="Media\Extensions.cs" />
+		<Compile Include="Media\MultiIcon.cs" />
+		<Compile Include="Media\RecycledCompositeIcon.cs" />
+		<Compile Include="Media\XamlToPngConverter.cs" />
+		<Compile Include="Memory.cs" />
+		<Compile Include="MVVMFramewok\CheckAccess.cs" />
+		<Compile Include="MVVMFramewok\DelegateCommand.cs" />
+		<Compile Include="MVVMFramewok\DomainItemBase.cs" />
+		<Compile Include="MVVMFramewok\ExecuteUIAction.cs" />
+		<Compile Include="MVVMFramewok\Extensions.cs" />
+		<Compile Include="MVVMFramewok\IViewModelBase.cs" />
+		<Compile Include="MVVMFramewok\IViewWindow.cs" />
+		<Compile Include="MVVMFramewok\NotifyClassBase.cs" />
+		<Compile Include="MVVMFramewok\RelayCommand.cs" />
+		<Compile Include="MVVMFramewok\UiActionParameters.cs" />
+		<Compile Include="MVVMFramewok\ViewModelBase.cs" />
+		<Compile Include="NativeMethods.cs" />
+		<Compile Include="Net\Extensions.cs" />
+		<Compile Include="Primitives\DataValues.cs" />
+		<Compile Include="Primitives\DateTime.cs" />
+		<Compile Include="Primitives\Extension.cs" />
+		<Compile Include="Primitives\Math.cs" />
+		<Compile Include="Printing\Extensions.cs" />
+		<Compile Include="Process\Extensions.cs" />
+		<Compile Include="Random\Helpers.cs" />
+		<Compile Include="RecentItems\RecentItem.cs" />
+		<Compile Include="RecentItems\RecentManager.cs" />
+		<Compile Include="Reflection\ApplicationLastBuildDateAttribute.cs" />
+		<Compile Include="Reflection\ApplicationTypeAttribute.cs" />
+		<Compile Include="Reflection\Extensions.cs" />
+		<Compile Include="Reflection\HeaderValueAttribute.cs" />
+		<Compile Include="Reflection\IgnoreAttribute.cs" />
+		<Compile Include="Reflection\VersionDataAttribute.cs" />
+		<Compile Include="Registry\Extensions.cs" />
+		<Compile Include="Registry\RegistrySection.cs" />
+		<Compile Include="SaveRecentListEventArgs.cs" />
+		<Compile Include="Security\ApplicationCredentials.cs" />
+		<Compile Include="Security\Extensions.cs" />
+		<Compile Include="Security\IVault.cs" />
+		<Compile Include="Security\PasswordVault.cs" />
+		<Compile Include="Security\UserAccess.cs" />
+		<Compile Include="Security\VaultCredential.cs" />
+		<Compile Include="Session.cs" />
+		<Compile Include="SettingsActionEventArgs.cs" />
+		<Compile Include="SettingsData.cs" />
+		<Compile Include="Settings\JSon\JSonSettings.cs" />
+		<Compile Include="Settings\JSon\JSonSection.cs" />
+		<Compile Include="Settings\JSon\JSonValue.cs" />
+		<Compile Include="Settings\RegistrySettings.cs" />
+		<Compile Include="Settings\SettingItem.cs" />
+		<Compile Include="Settings\SettingSection.cs" />
+		<Compile Include="SqlServer\Extensions.cs" />
+		<Compile Include="Sql\Extensions.cs" />
+		<Compile Include="Symbol\Extensions.cs" />
+		<Compile Include="Text\Extension.cs" />
+		<Compile Include="Text\TextDocument.cs" />
+		<Compile Include="Text\TextItemBase.cs" />
+		<Compile Include="Text\TextPage.cs" />
+		<Compile Include="Text\TextParagraph.cs" />
+		<Compile Include="Timers\Extensions.cs" />
+		<Compile Include="User\Identity.cs" />
+		<Compile Include="USState.cs" />
+		<Compile Include="Windows\ApplicationProcess.cs" />
+		<Compile Include="Windows\Controls\Extensions.cs" />
+		<Compile Include="Windows\Converter\MathConverter.cs" />
+		<Compile Include="Windows\Expressions\BinaryOperation.cs" />
+		<Compile Include="Windows\Expressions\Calculator.cs" />
+		<Compile Include="Windows\Expressions\ExpressionConverter.cs" />
+		<Compile Include="Windows\Expressions\IExpression.cs" />
+		<Compile Include="Windows\Expressions\Product.cs" />
+		<Compile Include="Windows\Expressions\Sum.cs" />
+		<Compile Include="Windows\Expressions\Value.cs" />
+		<Compile Include="Windows\Extension.cs" />
+		<Compile Include="Windows\Media\FontMetrics.cs" />
+		<Compile Include="Windows\SafeNativeMethods.cs" />
+		<Compile Include="Windows\Theme\ThemeChangedEventArgs.cs" />
+		<Compile Include="Windows\Theme\ThemeWatcher.cs" />
+		<Compile Include="Windows\WindowWrapper.cs" />
+		<Compile Include="WriteStatusEventArgs.cs" />
+		<Compile Include="XmlInfrastructureFile.cs" />
+		<Compile Include="Xml\Linq\Extension.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <COMReference Include="Microsoft.Office.Interop.Outlook">
+	    <WrapperTool>tlbimp</WrapperTool>
+	    <VersionMinor>6</VersionMinor>
+	    <VersionMajor>9</VersionMajor>
+	    <Guid>00062fff-0000-0000-c000-000000000046</Guid>
+	    <Lcid>0</Lcid>
+	    <Isolated>false</Isolated>
+	    <EmbedInteropTypes>true</EmbedInteropTypes>
+	  </COMReference>
+	  <COMReference Include="Shell32">
+	    <VersionMinor>0</VersionMinor>
+	    <VersionMajor>1</VersionMajor>
+	    <Guid>50a7e9b0-70ef-11d1-b75a-00a0c90564fe</Guid>
+	    <Lcid>0</Lcid>
+	    <WrapperTool>tlbimp</WrapperTool>
+	    <Isolated>false</Isolated>
+	    <EmbedInteropTypes>true</EmbedInteropTypes>
+	  </COMReference>
+	  <COMReference Include="SHDocVw">
+	    <VersionMinor>1</VersionMinor>
+	    <VersionMajor>1</VersionMajor>
+	    <Guid>eab22ac0-30c1-11cf-a7eb-0000c05bae0b</Guid>
+	    <Lcid>0</Lcid>
+	    <WrapperTool>tlbimp</WrapperTool>
+	    <Isolated>false</Isolated>
+	    <EmbedInteropTypes>true</EmbedInteropTypes>
+	  </COMReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.5" />
+		<PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
+		<PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="5.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+		<PackageReference Include="SharpDX" Version="4.2.0" />
+		<PackageReference Include="System.Composition.AttributedModel" Version="8.0.0" />
+		<PackageReference Include="System.DirectoryServices" Version="8.0.0" />
+		<PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+		<PackageReference Include="System.Management" Version="8.0.0" />
+		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+		<PackageReference Include="Universal.Common" Version="8.2.4" />
+		<PackageReference Include="Universal.Common.Formats.TrueType" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Microsoft.Office.Interop.Excel">
+	    <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="if $(ConfigurationName) == Release (&#xD;&#xA;    &quot;$(LOCALAPPDATA)\Programs\UpdateVersion\UpdateVersion.exe&quot; @p=&quot;$(ProjectName)&quot;&#xD;&#xA;)" />
+	</Target>
+
+</Project>

@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzMiniDB", "OzMiniDB\OzMiniDB.csproj", "{BC771BB3-7769-495B-8970-61D409E7DFA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzMiniDB.Builder", "OzMiniDB.Tester\OzMiniDB.Builder.csproj", "{45649824-AED7-4AFB-A5E4-D48A4908E685}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzFramework", "..\OzFramework\OzFramework.csproj", "{D50F728A-C1E1-4560-9061-DBF1DFD7E264}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzMiniDB.Builder.Helper", "OzMiniDB.Builder.Helper\OzMiniDB.Builder.Helper.csproj", "{91DA839F-DABF-49DC-9CB6-8829C9001625}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Debug|x64.Build.0 = Debug|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Release|x64.ActiveCfg = Release|Any CPU
+		{BC771BB3-7769-495B-8970-61D409E7DFA4}.Release|x64.Build.0 = Release|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Debug|x64.Build.0 = Debug|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Release|x64.ActiveCfg = Release|Any CPU
+		{45649824-AED7-4AFB-A5E4-D48A4908E685}.Release|x64.Build.0 = Release|Any CPU
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Debug|x64.ActiveCfg = Debug|x64
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Debug|x64.Build.0 = Debug|x64
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Release|Any CPU.ActiveCfg = Release|x64
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Release|Any CPU.Build.0 = Release|x64
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Release|x64.ActiveCfg = Release|x64
+		{D50F728A-C1E1-4560-9061-DBF1DFD7E264}.Release|x64.Build.0 = Release|x64
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Debug|x64.Build.0 = Debug|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Release|x64.ActiveCfg = Release|Any CPU
+		{91DA839F-DABF-49DC-9CB6-8829C9001625}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAC3AA1B-B02E-4804-8ABB-3451B7DB43CE}
+	EndGlobalSection
+EndGlobal

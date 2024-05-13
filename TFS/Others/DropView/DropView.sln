@@ -1,25 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropView", "DropView\DropView.csproj", "{CD2D4D82-BDC7-4253-BEDF-C19173A7E3FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework", "..\MVVMFramework\MVVMFramework.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMFramework_4.8", "..\..\Framework\MVVMFramework\MVVMFramework_4.8.csproj", "{DA87E838-FB93-441A-A6E2-444764FA284E}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://gdosborne.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = ..\\MVVMFramework\\MVVMFramework.csproj
-		SccProjectName0 = ../MVVMFramework
-		SccLocalPath0 = ..\\MVVMFramework
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = DropView\\DropView.csproj
-		SccProjectName2 = DropView
-		SccLocalPath2 = DropView
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64

@@ -68,7 +68,7 @@ namespace GregOsborne.MVVMFramework {
             }
         }
 
-		#endregion Public Methods
-
-	}
+        #endregion Public Methods
+        public string Name { get; set; }
+    }
 }

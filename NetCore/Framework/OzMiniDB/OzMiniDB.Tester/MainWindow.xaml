@@ -1,0 +1,182 @@
+﻿<Window x:Class="OzMiniDB.Builder.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:local="clr-namespace:OzMiniDB.Builder" 
+        xmlns:controls="clr-namespace:OzMiniDB.Builder.Controls"
+        mc:Ignorable="d" 
+        Style="{DynamicResource ApplicationWindow}" 
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        Height="450" Width="800" MinWidth="700">
+    <Window.DataContext>
+        <local:MainWindowView />
+    </Window.DataContext>
+    <Grid Style="{DynamicResource WindowMainGrid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Left">
+            <Button Style="{DynamicResource IconButton}" Command="{Binding NewDatabaseCommand}"
+                    ToolTip="{DynamicResource New DB Tooltip}">
+                <TextBlock Text="{DynamicResource New Database}" Style="{DynamicResource IconTextBlock}" />
+            </Button>
+            <Button Style="{DynamicResource IconButton}" Command="{Binding OpenDatabaseCommand}"
+                    ToolTip="{DynamicResource Open DB Tooltip}">
+                <TextBlock Text="{DynamicResource Open Database}" Style="{DynamicResource IconTextBlock}" />
+            </Button>
+            <Button Style="{DynamicResource IconButton}" Command="{Binding SaveDatabaseCommand}"
+                    ToolTip="{DynamicResource Save DB Tooltip}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource Save Database}" Style="{DynamicResource IconTextBlock}" VerticalAlignment="Center" />
+                    <TextBlock Text="Save Database" Margin="5,0,5,0" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+            <Button Style="{DynamicResource IconButton}" Command="{Binding DBSettingsCommand}"
+                    ToolTip="{DynamicResource Settings Tooltip}">
+                <TextBlock Text="{DynamicResource Settings}" Style="{DynamicResource IconTextBlock}" />
+            </Button>
+            <Line X1="0" X2="0" Y1="0" Y2="{DynamicResource HeaderTextSize}" StrokeThickness="1" 
+                  Stroke="{DynamicResource BorderBrush}" VerticalAlignment="Center" />
+            <Button Style="{DynamicResource IconButton}" Command="{Binding GenerateClassesCommand}"
+                    ToolTip="{DynamicResource Generate Classes Tooltip}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource Generate Classes}" Style="{DynamicResource IconTextBlock}" VerticalAlignment="Center" />
+                    <TextBlock Text="Generate Classes" Margin="5,0,5,0" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" 
+                    IsEnabled="{Binding IsTableDesignerEnabled,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            <Label Content="Database Name:" />
+            <TextBox Width="250" VerticalAlignment="Center" Style="{DynamicResource StandardTextBox}"
+                     Text="{Binding Database.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsTableDesignerEnabled,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            <Label Content="Table" />
+            <ComboBox MinWidth="150" ItemsSource="{Binding Database.Tables}" 
+                      SelectedItem="{Binding SelectedTable,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom" Margin="10,0,0,0">
+            <Button Style="{DynamicResource IconButton}" Command="{Binding AddTableCommand}"
+                    ToolTip="{DynamicResource New Table Tooltip}">
+                <TextBlock Text="{DynamicResource Add Table}" Style="{DynamicResource IconTextBlock}" />
+            </Button>
+            <Button Style="{DynamicResource IconButton}" Command="{Binding RemoveTableCommand}"
+                    ToolTip="{DynamicResource Remove Table Tooltip}">
+                <TextBlock Text="{DynamicResource Remove Table}" Style="{DynamicResource IconTextBlock}" />
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom"
+                    IsEnabled="{Binding IsMainGroupEnabled,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+            <Label Content="Table Name:" />
+            <TextBox Width="250" VerticalAlignment="Center"  Style="{DynamicResource StandardTextBox}"
+                     Text="{Binding SelectedTable.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        </StackPanel>
+
+        <GroupBox Header="Table Data" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10" 
+                  IsEnabled="{Binding IsMainGroupEnabled,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="520" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="99" Style="{DynamicResource MessageBorder}"
+                        Visibility="{Binding FieldsMessageVisibility,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}">
+                    <TextBlock Text="No Table Selected" Style="{DynamicResource MessageTextBlock}" />
+                </Border>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Fields" Style="{DynamicResource HeaderTextBlock}" />
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right"
+                            Margin="0,0,10,0">
+                    <Button Grid.Column="1" Style="{DynamicResource IconButton}" Command="{Binding AddFieldCommand}"
+                            ToolTip="{DynamicResource New Field Tooltip}">
+                        <TextBlock Text="{DynamicResource Add Table}" Style="{DynamicResource IconTextBlock}" />
+                    </Button>
+                    <Button Grid.Column="2" Style="{DynamicResource IconButton}" Command="{Binding RemoveFieldCommand}"
+                            ToolTip="{DynamicResource Remove Field Tooltip}">
+                        <TextBlock Text="{DynamicResource Remove Table}" Style="{DynamicResource IconTextBlock}" />
+                    </Button>
+
+                </StackPanel>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Foreign Keys" Style="{DynamicResource HeaderTextBlock}" />
+                <Border Grid.Row="2" Grid.Column="0" Margin="0,0,4,0" Style="{DynamicResource ControlBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="75" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="NameLabel" Grid.Row="0" Grid.Column="0" Text="Name" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}"/>
+                        <TextBlock x:Name="DataTypeLabel" Grid.Row="0" Grid.Column="1" Text="Data Type" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        <TextBlock x:Name="LengthLabel" Grid.Row="0" Grid.Column="2" Text="Length" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        <TextBlock x:Name="IsRequiredLabel" Grid.Row="0" Grid.Column="3" Text="Required" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        <TextBlock x:Name="IsIdentityLabel" Grid.Row="0" Grid.Column="4" Text="Identity" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="99" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ItemsControl Margin="0,0,4,0" ItemsSource="{Binding SelectedTable.Fields}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <controls:DataFieldEditor LabelsVisibility="Collapsed" MinWidth="410"                                                                      
+                                                                      DataTypeItemSource="{Binding DataTypes}"
+                                                                      FieldName="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldDataType="{Binding DataType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldLength="{Binding FieldLength,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldIsRequired="{Binding IsRequired,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldIsIdentity="{Binding IsIdentity,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+                <GridSplitter Grid.Row="2" Grid.Column="0" />
+                <DataGrid Grid.Row="2" Grid.Column="1">
+
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
