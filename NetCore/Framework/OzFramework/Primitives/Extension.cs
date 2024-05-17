@@ -349,6 +349,8 @@ namespace OzFramework.Primitives {
                         result = (T)(object)(((long?)value).HasValue ? value.ToString().ToInt64() : null);
                     } else if (typeof(T) == typeof(float?)) {
                         result = (T)(object)(((float?)value).HasValue ? value.ToString().ToFloat() : null);
+                    } else {
+                        result = (T)(object)(((float?)value)).ToString();
                     }
                 }
             }

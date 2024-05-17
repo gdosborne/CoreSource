@@ -8,7 +8,7 @@
         mc:Ignorable="d" 
         Style="{DynamicResource ApplicationWindow}" 
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
-        Height="450" Width="800" MinWidth="700">
+        Height="450" Width="800" MinWidth="700" Icon="/AppIcon.png">
     <Window.DataContext>
         <local:MainWindowView />
     </Window.DataContext>
@@ -160,6 +160,7 @@
                                         <Grid>
                                             <controls:DataFieldEditor LabelsVisibility="Collapsed" MinWidth="410"                                                                      
                                                                       DataTypeItemSource="{Binding DataTypes}"
+                                                                      IsSelected="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                                       FieldName="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                                       FieldDataType="{Binding DataType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                                       FieldLength="{Binding FieldLength,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"

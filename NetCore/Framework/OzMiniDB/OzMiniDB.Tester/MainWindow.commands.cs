@@ -14,7 +14,10 @@ namespace OzMiniDB.Builder {
             AskCreateNewDatabase,
             AskOpenDatabase,
             AddNewTable,
-            ShowSettings
+            ShowSettings,
+            SetFieldSelected,
+            RemoveField,
+            RemoveTable
         }
 
         private void ExecuteAction(ActionTypes actionType) =>
@@ -37,7 +40,7 @@ namespace OzMiniDB.Builder {
         public DelegateCommand RemoveTableCommand => _RemoveTableCommand ??= new DelegateCommand(RemoveTable, ValidateRemoveTableState);
         private bool ValidateRemoveTableState(object state) => !Database.IsNull() && !SelectedTable.IsNull();
         private void RemoveTable(object state) {
-
+            ExecuteAction(ActionTypes.RemoveTable);
         }
         #endregion
 
@@ -49,13 +52,13 @@ namespace OzMiniDB.Builder {
             if (!Database.IsNull()) {
                 if (Database.HasChanges) {
                     var p = new Dictionary<string, object> {
-                        { "filename", Database.Filename },
-                        { "cancel", false }
+                        { App.Constants.Fname, Database.Filename },
+                        { App.Constants.Cancel, false }
                     };
                     ExecuteAction(ActionTypes.AskSaveDatabase, p);
                 }
             }
-            Database = new Items.Database() { Name = "New Database" };
+            Database = new Items.Database() { Name = App.Constants.NewDatabase };
         }
         #endregion
 
@@ -69,14 +72,14 @@ namespace OzMiniDB.Builder {
             if (!Database.IsNull() && Database.HasChanges) {
                 if (string.IsNullOrEmpty(Database.Filename)) {
                     p = new Dictionary<string, object> {
-                        { "filename", string.Empty },
-                        { "cancel", false }
+                        { App.Constants.Fname, string.Empty },
+                        { App.Constants.Cancel, false }
                     };
                     ExecuteAction(ActionTypes.AskSaveDatabase, p);
-                    filename = p["filename"].CastTo<string>();
-                    if (!p["cancel"].CastTo<bool>() && !string.IsNullOrEmpty(filename)) {
+                    filename = p[App.Constants.Fname].CastTo<string>();
+                    if (!p[App.Constants.Cancel].CastTo<bool>() && !string.IsNullOrEmpty(filename)) {
                         Database.Save(filename);
-                    } else if (p["cancel"].CastTo<bool>() || string.IsNullOrEmpty(filename)) {
+                    } else if (p[App.Constants.Cancel].CastTo<bool>() || string.IsNullOrEmpty(filename)) {
                         return;
                     }
                 } else {
@@ -85,12 +88,12 @@ namespace OzMiniDB.Builder {
             }
             Database = null;
             p = new Dictionary<string, object> {
-                { "filename", string.Empty },
-                { "cancel", false }
+                { App.Constants.Fname, string.Empty },
+                { App.Constants.Cancel, false }
             };
             ExecuteAction(ActionTypes.AskOpenDatabase, p);
-            filename = p["filename"].CastTo<string>();
-            if (p["cancel"].CastTo<bool>())
+            filename = p[App.Constants.Fname].CastTo<string>();
+            if (p[App.Constants.Cancel].CastTo<bool>())
                 return;
             Database = Items.Database.Open(filename);
             UpdateInterface();
@@ -122,12 +125,12 @@ namespace OzMiniDB.Builder {
         private void SaveDatabase(object state) {
             if (!Database.IsNull() && string.IsNullOrWhiteSpace(Database.Filename)) {
                 var p = new Dictionary<string, object> {
-                    { "filename", Database.Filename },
-                    { "cancel", false }
+                    { App.Constants.Fname, Database.Filename },
+                    { App.Constants.Cancel, false }
                 };
                 ExecuteAction(ActionTypes.AskSaveDatabase, p);
-                var filename = p["filename"].CastTo<string>();
-                if (!p["cancel"].CastTo<bool>() && !string.IsNullOrEmpty(filename)) {
+                var filename = p[App.Constants.Fname].CastTo<string>();
+                if (!p[App.Constants.Cancel].CastTo<bool>() && !string.IsNullOrEmpty(filename)) {
                     Database.Save(filename);
                 }
             } else {
@@ -148,11 +151,16 @@ namespace OzMiniDB.Builder {
         public DelegateCommand AddFieldCommand => _AddFieldCommand ??= new DelegateCommand(AddField, ValidateAddFieldState);
         private bool ValidateAddFieldState(object state) => !Database.IsNull() && !SelectedTable.IsNull();
         private void AddField(object state) {
-            SelectedTable.Fields.Add(new Items.Field {
-                Name = "_NewField_",
+            var field = new Items.Field {
+                Name = App.Constants.NewField,
                 Description = string.Empty,
                 DataType = Items.Field.DBDataType.WholeNumber
-            });
+            };
+            SelectedTable.Fields.Add(field);
+            var p = new Dictionary<string, object> {
+                { "field", field }
+            };
+            ExecuteAction(ActionTypes.SetFieldSelected, p);
         }
         #endregion
 
@@ -161,7 +169,7 @@ namespace OzMiniDB.Builder {
         public DelegateCommand RemoveFieldCommand => _RemoveFieldCommand ??= new DelegateCommand(RemoveField, ValidateRemoveFieldState);
         private bool ValidateRemoveFieldState(object state) => !Database.IsNull() && !SelectedTable.IsNull() && SelectedTable.Fields.Count > 1;
         private void RemoveField(object state) {
-
+            ExecuteAction(ActionTypes.RemoveField);
         }
         #endregion
 

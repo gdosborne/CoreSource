@@ -1,4 +1,5 @@
 ﻿using OzFramework.Primitives;
+using OzFramework.Timers;
 
 using System.Windows;
 using System.Windows.Controls;
@@ -47,6 +48,7 @@ namespace OzMiniDB.Builder.Controls {
             this.GotFocus += (s, e) => {
                 BackBorder.Background = FocusedBackground;
                 BackBorder.BorderThickness = new Thickness(1);
+                IsSelected = true;
             };
 
             this.LostFocus += (s, e) => {
@@ -55,6 +57,11 @@ namespace OzMiniDB.Builder.Controls {
             };
         }
 
+        public void Select() {
+            TimeSpan.FromMilliseconds(100).GetAutoStartStopTimer().Tick += (s, e) => {
+                NameTextBox.Focus();
+            };
+        }
 
         #region Foreground Dependency Property
         public static new readonly DependencyProperty ForegroundProperty = DependencyProperty.Register("Foreground", typeof(Brush), typeof(DataFieldEditor), new PropertyMetadata(default(Brush), new PropertyChangedCallback(OnForegroundChanged)));
@@ -286,6 +293,21 @@ namespace OzMiniDB.Builder.Controls {
             var obj = (DataFieldEditor)d;
             var val = (Brush)e.NewValue;
             obj.BackBorder.BorderBrush = val;
+        }
+        #endregion
+
+        #region IsSelected Dependency Property
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(DataFieldEditor), new PropertyMetadata(default(bool), new PropertyChangedCallback(OnIsSelectedChanged)));
+        public bool IsSelected {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
+        }
+        private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+            var obj = (DataFieldEditor)d;
+            var val = (bool)e.NewValue;
+            if (val && obj.BackBorder.Background != obj.FocusedBackground) {
+                obj.Select();
+            }
         }
         #endregion
 

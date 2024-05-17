@@ -9,6 +9,7 @@ namespace OzMiniDB.Builder {
             internal static string SaveWinSizeAndLoc => "Save Window Size and Location";
             internal static string Application => "Application";
             internal static string General => "General";
+            internal static string Database => "Database";
             internal static string UserInterface => "User Interface";
             internal static string LastGrpSelected => "Last Group Selected";
             internal static string Left => "Left";
@@ -31,6 +32,8 @@ namespace OzMiniDB.Builder {
             internal static string SaveDB => "Save database...";
             internal static string Value => "Value";
             internal static string Name => "Name";
+            internal static string NewField => "_NewField_";
+            internal static string NewDatabase => "New Database";
 
             internal static string DefaultDBName => "My Personal.database";
             internal static string StdTextBoxStyleName => "StandardTextBox";
@@ -39,8 +42,10 @@ namespace OzMiniDB.Builder {
             internal static string IconFontFamilyName => "IconFont";
             internal static string IconFontSizeName => "IconFontSize";
             internal static string GenTopLevelDBEClass => "Generate Top-Level DBEngine Class";
+            internal static string ImplementPropertyChanged => "Data classes implement INotifyPropertyChanged";
 
             internal static string GenTopLevDBDClassTip => "If checked, a top-level DBEngine class will be generated to access your data";
+            internal static string ImplementPropertyChangedTip => "If checked, all data classes will implement interface INotifyPropertyChanged";
             internal static string PathToDBDefFileTip => "Path to the database definition file";
             internal static string TheDBNameTip => "This will be the database name";
         }

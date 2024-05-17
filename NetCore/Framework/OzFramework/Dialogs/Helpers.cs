@@ -287,11 +287,13 @@ namespace OzFramework.Dialogs {
             }
             return dlg.FileName;
         }
-        public static string SaveFileDialog(this Window win, string folder, string title, string initalFilename, params (string Extension, string Name)[] filters) {
+        public static string SaveFileDialog(this Window win, string folder, string title, string initalFilename, 
+            params (string Extension, string Name)[] filters) {
             if (!SysIO.Directory.Exists(folder)) {
                 throw new SysIO.DirectoryNotFoundException($"Cannot find {folder}");
             }
 
+            var defaultExt = filters.First().Extension;
             var filter = default(string);
             filters.ForEach(f => {
                 if (!string.IsNullOrWhiteSpace(filter)) filter += "|";
@@ -302,12 +304,12 @@ namespace OzFramework.Dialogs {
                 }
             });
 
-            //var filter = string.Join('|', filters.Select(x => $"{x.Name}|*.{x.Extension}"));
             var dlg = new OD.VistaSaveFileDialog {
                 Title = title,
                 InitialDirectory = folder,
                 FileName = initalFilename,
                 AddExtension = true,
+                DefaultExt = defaultExt,
                 Filter = filter,
                 CheckPathExists = true,
                 CheckFileExists = false,

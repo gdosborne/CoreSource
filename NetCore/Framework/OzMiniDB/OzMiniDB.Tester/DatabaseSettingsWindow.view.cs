@@ -1,7 +1,11 @@
 ﻿using Common.MVVMFramework;
 
+using OzFramework.Timers;
+
 using OzMiniDB.Builder.Helper;
 using OzMiniDB.Items;
+
+using System.ComponentModel;
 
 namespace OzMiniDB.Builder {
     public partial class DatabaseSettingsWindowView : ViewModelBase {
@@ -33,14 +37,9 @@ namespace OzMiniDB.Builder {
             get => _Database;
             set {
                 _Database = value;
-                var dbSettings = new SettingGroup {
-                    Name = "Database"
-                };
                 var dbGenSettings = new SettingGroup {
-                    Name = App.Constants.General,
-                    Parent = dbSettings
+                    Name = App.Constants.Database,
                 };
-                dbSettings.Groups.Add(dbGenSettings);
                 var nameValue = new SettingValue(App.Constants.Name, Database.Name,
                     App.Constants.TheDBNameTip);
                 dbGenSettings.Values.Add(nameValue);
@@ -50,19 +49,19 @@ namespace OzMiniDB.Builder {
                 var genEngineValue = new SettingValue(App.Constants.GenTopLevelDBEClass, Database.GenerateTopLevelDBEngineClass,
                     App.Constants.GenTopLevDBDClassTip);
                 dbGenSettings.Values.Add(genEngineValue);
-                Groups.Add(dbSettings);
-                var uiSettings = new SettingGroup {
-                    Name = App.Constants.UserInterface
-                };
+                var genImplementPropertyChanged = new SettingValue(App.Constants.ImplementPropertyChanged, Database.ImplementPropertyChanged,
+                    App.Constants.ImplementPropertyChangedTip);
+                dbGenSettings.Values.Add(genImplementPropertyChanged);
+                Groups.Add(dbGenSettings);
+
                 var uiGenSettings = new SettingGroup {
-                    Name = App.Constants.General,
-                    Parent = uiSettings
+                    Name = App.Constants.UserInterface,
                 };
                 var saveLocationValue = new SettingValue(App.Constants.SaveWinSizeAndLoc,
                     App.Session.ApplicationSettings.GetValue(App.Constants.Application, App.Constants.SaveWinSizeAndLoc, true));
                 uiGenSettings.Values.Add(saveLocationValue);
-                uiSettings.Groups.Add(uiGenSettings);
-                Groups.Add(uiSettings);
+                Groups.Add(uiGenSettings);
+
                 OnPropertyChanged();
             }
         }
@@ -74,6 +73,17 @@ namespace OzMiniDB.Builder {
             get => _Groups;
             set {
                 _Groups = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region SelectedGroup Property
+        private SettingGroup _SelectedGroup = default;
+        public SettingGroup SelectedGroup {
+            get => _SelectedGroup;
+            set {
+                _SelectedGroup = value;
                 OnPropertyChanged();
             }
         }

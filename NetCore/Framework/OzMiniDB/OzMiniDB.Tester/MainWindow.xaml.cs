@@ -1,5 +1,9 @@
-﻿using OzFramework.Primitives;
+﻿using Ookii.Dialogs.Wpf;
 
+using OzFramework.Primitives;
+using OzFramework.Text;
+
+using System.IO;
 using System.Windows;
 
 using static OzMiniDB.Builder.MainWindowView;
@@ -12,6 +16,31 @@ namespace OzMiniDB.Builder {
             View.ExecuteUiAction += View_ExecuteUiAction;
 
             Closing += (s, e) => {
+                if (View.Database.HasChanges) {
+                    var yesBtn = new TaskDialogButton {
+                        Text = "Yes",
+                        CommandLinkNote = "Saves the database and exits"
+                    };
+                    var noBtn = new TaskDialogButton {
+                        Text = "No",
+                        CommandLinkNote = "Exits without saving the database"
+                    };
+                    var cancelBtn = new TaskDialogButton {
+                        Text = "Cancel",
+                        CommandLinkNote = "Aborts the exit and returns to the application"
+                    };
+                    var result = Dialogs.ShowCustomDialog(this, "Database has changes", "Database has changes",
+                        "Your database schema has changes. If you exit now your changes will be lost.\n\nWould you like to save the database?",
+                        Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 220, yesBtn, noBtn, cancelBtn);
+                    if (result == cancelBtn) {
+                        e.Cancel = true;
+                        return;
+                    }
+                    if (result == yesBtn) {
+                        View.Database.Save();
+                    }
+                }
+
                 App.Session.ApplicationSettings.AddOrUpdateSetting(GetType().Name, App.Constants.Left, RestoreBounds.Left);
                 App.Session.ApplicationSettings.AddOrUpdateSetting(GetType().Name, App.Constants.Top, RestoreBounds.Top);
                 App.Session.ApplicationSettings.AddOrUpdateSetting(GetType().Name, App.Constants.Width, RestoreBounds.Width);
@@ -54,12 +83,70 @@ namespace OzMiniDB.Builder {
                         e.Parameters[App.Constants.Fname] = filename;
                     }
                     break;
+                case ActionTypes.SetFieldSelected: {
+                        var field = e.Parameters["field"].As<Items.Field>();
+                        field.IsSelected = true;
+                    }
+                    break;
                 case ActionTypes.AddNewTable:
                     AddNewTable();
                     break;
                 case ActionTypes.ShowSettings:
                     ShowSettings();
                     break;
+                case ActionTypes.RemoveField:
+                    RemoveField();
+                    break;
+                case ActionTypes.RemoveTable:
+                    RemoveTable();
+                    break;
+            }
+        }
+
+        private void RemoveTable() {
+            if (!View.SelectedTable.IsNull()) {
+                var yesBtn = new TaskDialogButton {
+                    Text = "Yes",
+                    CommandLinkNote = "Removes the database table"
+                };
+                var noBtn = new TaskDialogButton {
+                    Text = "No",
+                    CommandLinkNote = "Leaves the database unchanged"
+                };
+                var result = Dialogs.ShowCustomDialog(this, "Remove Table", "Removing database table",
+                    $"You are attempting to remove the table \"{View.SelectedTable.Name}\" from the database. " +
+                    $"If you save the database, the data and the table definition will be changed. " +
+                    $"This action is not reversible.\n\nAre you sure you want to remove the table?",
+                    TaskDialogIcon.Warning, 220, yesBtn, noBtn);
+                if (result == yesBtn) {
+                    View.Database.Tables.Remove(View.SelectedTable);
+                    if (View.Database.Tables.Count > 0) {
+                        View.SelectedTable = View.Database.Tables.First();
+                    }
+                }
+            }
+        }
+
+        private void RemoveField() {
+            if (View.SelectedTable.Fields.Any(x => x.IsSelected)) {
+                var field = View.SelectedTable.Fields.First(x => x.IsSelected);
+                var yesBtn = new TaskDialogButton {
+                    Text = "Yes",
+                    CommandLinkNote = "Removes the table field"
+                };
+                var noBtn = new TaskDialogButton {
+                    Text = "No",
+                    CommandLinkNote = "Leaves the table unchanged"
+                };
+                var result = Dialogs.ShowCustomDialog(this, "Remove Field", "Removing table field",
+                    $"You are attempting to remove the field \"{field.Name}\" from the table " +
+                    $"\"{View.SelectedTable.Name}\". If you save the database, the data and the " +
+                    $"field definition will be changed. This action is not reversible." +
+                    $"\n\nAre you sure you want to remove the field?",
+                    TaskDialogIcon.Warning, 220, yesBtn, noBtn);
+                if (result == yesBtn) {
+                    View.SelectedTable.Fields.Remove(field);
+                }
             }
         }
 
@@ -73,6 +160,20 @@ namespace OzMiniDB.Builder {
             var result = win.ShowDialog();
             if (!result.HasValue || !result.Value) return;
 
+            App.Session.ApplicationSettings.AddOrUpdateSetting(App.Constants.Application, App.Constants.SaveWinSizeAndLoc,
+                win.View.Groups.First(x => x.Name == App.Constants.UserInterface)
+                    .Values.First(x => x.Name == App.Constants.SaveWinSizeAndLoc).Value);
+
+            View.Database.GenerateTopLevelDBEngineClass = win.View.Groups.First(x => x.Name == App.Constants.Database)
+                .Values.First(x => x.Name == App.Constants.GenTopLevelDBEClass).Value.CastTo<bool>();
+            View.Database.ImplementPropertyChanged = win.View.Groups.First(x => x.Name == App.Constants.Database)
+                .Values.First(x => x.Name == App.Constants.ImplementPropertyChanged).Value.CastTo<bool>();
+            var newFilename = win.View.Groups.First(x => x.Name == App.Constants.Database)
+                .Values.First(x => x.Name == App.Constants.FileName)
+                .Value.CastTo<FileInfo>().FullName;
+            if (!View.Database.Filename.EqualsIgnoreCase(newFilename)) {
+                View.Database.Save(newFilename);
+            }
         }
 
         private void AddNewTable() {
@@ -87,10 +188,10 @@ namespace OzMiniDB.Builder {
         }
 
         private bool AskOpenDatabase(out string filename) {
-            var lastFolder = App.Session.ApplicationSettings.GetValue(App.Constants.Application, App.Constants.LastFldr, 
+            var lastFolder = App.Session.ApplicationSettings.GetValue(App.Constants.Application, App.Constants.LastFldr,
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             var result = Dialogs.SelectFileDialog(this, lastFolder, App.Constants.OpnDB,
-                (Extension: App.Constants.DbExtension, Name: App.Constants.DbExtName), (Extension: App.Constants.AllFilesExtension, 
+                (Extension: App.Constants.DbExtension, Name: App.Constants.DbExtName), (Extension: App.Constants.AllFilesExtension,
                 Name: App.Constants.AllFileExtName));
             if (!string.IsNullOrEmpty(result)) {
                 App.Session.ApplicationSettings.AddOrUpdateSetting(App.Constants.Application, App.Constants.LastFldr, SysIO.Path.GetDirectoryName(result));
@@ -108,10 +209,10 @@ namespace OzMiniDB.Builder {
                     $"The file {filename} does not exist.\n\nWould you like to create it?", Ookii.Dialogs.Wpf.TaskDialogIcon.Warning);
                 return result1.HasValue && result1.Value;
             }
-            var lastFolder = App.Session.ApplicationSettings.GetValue(App.Constants.Application, App.Constants.LastFldr, 
+            var lastFolder = App.Session.ApplicationSettings.GetValue(App.Constants.Application, App.Constants.LastFldr,
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
             var result = Dialogs.SaveFileDialog(this, lastFolder, App.Constants.SaveDB, App.Constants.DefaultDBName,
-                (Extension: App.Constants.DbExtension, Name: App.Constants.DbExtName), (Extension: App.Constants.AllFilesExtension, 
+                (Extension: App.Constants.DbExtension, Name: App.Constants.DbExtName), (Extension: App.Constants.AllFilesExtension,
                 Name: App.Constants.AllFileExtName));
             filename = result;
             if (!string.IsNullOrWhiteSpace(result)) {

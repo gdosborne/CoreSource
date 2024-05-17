@@ -2,17 +2,14 @@
 
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace OzMiniDB.Builder.Helper {
     public class SettingGroup : INotifyPropertyChanged {
         public SettingGroup() {
-            Groups = [];
             Values = [];
         }
-        public SettingGroup Parent { get; set; }
-        public List<SettingGroup> Groups { get; private set; }
         public List<SettingValue> Values { get; private set; }
-        public string Path => Parent.IsNull() ? Name : $"{Parent.Path}\\{Name}";
 
         #region IsSelected Property
         private bool _IsSelected = default;
@@ -42,6 +39,17 @@ namespace OzMiniDB.Builder.Helper {
             get => _Name;
             set {
                 _Name = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ArrowVisibility Property
+        private Visibility _ArrowVisibility = default;
+        public Visibility ArrowVisibility {
+            get => _ArrowVisibility;
+            set {
+                _ArrowVisibility = value;
                 OnPropertyChanged();
             }
         }

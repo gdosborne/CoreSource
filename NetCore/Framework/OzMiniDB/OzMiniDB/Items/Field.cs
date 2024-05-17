@@ -132,6 +132,17 @@ namespace OzMiniDB.Items {
         }
         #endregion
 
+        #region IsSelected Property
+        private bool _IsSelected = default;
+        public bool IsSelected {
+            get => _IsSelected;
+            set {
+                _IsSelected = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public static Field FromXElement(XElement element) {
             var name = element.Attribute(nameof(Name)).Value;
             var description = element.Element(nameof(Description)).Value;

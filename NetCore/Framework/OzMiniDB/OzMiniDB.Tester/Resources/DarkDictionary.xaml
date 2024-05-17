@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Color x:Key="WindowBackgroundColor">#FF000000</Color>
+    <Color x:Key="WindowForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="MessageForegroundColor">#FFFFFF99</Color>
+    <Color x:Key="MessageBackgroundColor">#FF0F0F0F</Color>
+    <Color x:Key="BorderColor">#FF505050</Color>
+    <Color x:Key="HighlightBackgroundColor">#FF0505FF</Color>
+    <Color x:Key="InactiveForegroundColor">#33000000</Color>
+    <Color x:Key="DataGridAlternateColor">#FF2121FF</Color>
+
+</ResourceDictionary>

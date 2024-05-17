@@ -44,7 +44,22 @@ namespace OzMiniDB.Items {
         public bool GenerateTopLevelDBEngineClass {
             get => _GenerateTopLevelDBEngineClass;
             set {
+                var prev = GenerateTopLevelDBEngineClass;
                 _GenerateTopLevelDBEngineClass = value;
+                HasChanges = HasChanges || prev != GenerateTopLevelDBEngineClass;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ImplementPropertyChanged Property
+        private bool _ImplementPropertyChanged = default;
+        public bool ImplementPropertyChanged {
+            get => _ImplementPropertyChanged;
+            set {
+                var prev = ImplementPropertyChanged;
+                _ImplementPropertyChanged = value;
+                HasChanges = HasChanges || prev != ImplementPropertyChanged;
                 OnPropertyChanged();
             }
         }
@@ -57,7 +72,7 @@ namespace OzMiniDB.Items {
             set {
                 var prev = Name;
                 _Name = value;
-                HasChanges = prev != Name;
+                HasChanges = HasChanges || prev != Name;
                 OnPropertyChanged();
             }
         }
@@ -70,7 +85,7 @@ namespace OzMiniDB.Items {
             set {
                 var prev = Description;
                 _Description = value;
-                HasChanges = prev != Description;
+                HasChanges = HasChanges || prev != Description;
                 OnPropertyChanged();
             }
         }
@@ -106,8 +121,9 @@ namespace OzMiniDB.Items {
                 new XAttribute(nameof(Name), Name),
                 new XElement(nameof(Description), Description));
             var settingElem = new XElement("Settings",
-                new XAttribute(nameof(GenerateTopLevelDBEngineClass), GenerateTopLevelDBEngineClass.ToString()));
-            
+                new XAttribute(nameof(GenerateTopLevelDBEngineClass), GenerateTopLevelDBEngineClass.ToString()),
+                new XAttribute(nameof(ImplementPropertyChanged), ImplementPropertyChanged.ToString()));
+
             result.Add(settingElem);
             var tablesElem = new XElement("Tables");
             foreach (var item in Tables) {
@@ -137,15 +153,23 @@ namespace OzMiniDB.Items {
                     if (!settingsElem.IsNull()) {
                         db.GenerateTopLevelDBEngineClass = settingsElem.Attribute(nameof(GenerateTopLevelDBEngineClass)).IsNull()
                             ? true : bool.Parse(settingsElem.Attribute(nameof(GenerateTopLevelDBEngineClass)).Value);
+                        db.ImplementPropertyChanged = settingsElem.Attribute(nameof(ImplementPropertyChanged)).IsNull()
+                           ? true : bool.Parse(settingsElem.Attribute(nameof(ImplementPropertyChanged)).Value);
                     } else {
                         db.GenerateTopLevelDBEngineClass = true;
+                        db.ImplementPropertyChanged = true;
                     }
+
                     var tableElem = root.Element("Tables");
+                    var temp = new List<Table>();
                     if (!tableElem.IsNull()) {
                         foreach (var t in tableElem.Elements()) {
                             var table = Table.FromXElement(t);
-                            db.Tables.Add(table);
+                            temp.Add(table);
                         }
+                    }
+                    if (temp.Count != 0) {
+                        db.Tables.AddRange(temp.OrderBy(x => x.Name));
                     }
                 }
             }
@@ -159,14 +183,15 @@ namespace OzMiniDB.Items {
                 return;
             }
             Filename = filename;
-            if (string.IsNullOrWhiteSpace(Filename) && File.Exists(Filename)) {
+            if (File.Exists(Filename)) {
                 var e = new AskReplaceDatabaseFilenameEventArgs(Filename);
                 AskReplaceDatabaseFilename?.Invoke(this, e);
                 if (e.IsReplaceSet) {
                     Filename = filename;
                     Save();
                 }
-            }
+            } else
+                Save();
         }
         public void Save() {
             if (string.IsNullOrWhiteSpace(Filename)) {
