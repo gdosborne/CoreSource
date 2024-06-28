@@ -1,0 +1,10 @@
+﻿[start]
+      private @datatype _@propertyname = default;
+      public @datatype @propertyname {
+         get => _@propertyname;
+         set {
+            _@propertyname = value;
+            OnPropertyChanged();
+         }
+      }
+[end]

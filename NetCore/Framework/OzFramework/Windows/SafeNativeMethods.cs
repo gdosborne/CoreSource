@@ -61,7 +61,7 @@ namespace OzFramework.Windows {
                 return true;
             }
 #if DEBUG
-            Console.WriteLine(buffer);
+            Debug.WriteLine(buffer);
 #endif
             if (buffer.ToString() != VistaStartMenuCaption) {
                 return true;

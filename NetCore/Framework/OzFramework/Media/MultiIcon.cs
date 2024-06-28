@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -28,14 +29,14 @@ namespace OzFramework.Media {
 
             icoHeader = new IconHeader(icoStream);
 #if DEBUG
-            Console.WriteLine($"There are {icoHeader.Count} images in this icon file");
+            Debug.WriteLine($"There are {icoHeader.Count} images in this icon file");
 #endif
 
             for (var counter = 0; counter < icoHeader.Count; counter++) {
                 var entry = new IconEntry(icoStream);
                 IconsInfo.Add(entry);
 #if DEBUG
-                Console.WriteLine($"This entry has a width of {entry.Width} and a height of {entry.Height}");
+                Debug.WriteLine($"This entry has a width of {entry.Width} and a height of {entry.Height}");
 #endif
             }
         }
@@ -117,7 +118,7 @@ namespace OzFramework.Media {
                         foundIndex = counter;
                     }
 #if DEBUG
-                    Console.Write("Search for the largest");
+                    Debug.Write("Search for the largest");
 #endif
                 }
                 else {
@@ -125,7 +126,7 @@ namespace OzFramework.Media {
                         foundIndex = counter;
                     }
 #if DEBUG
-                    Console.Write("Search for the smallest");
+                    Debug.Write("Search for the smallest");
 #endif
                 }
 

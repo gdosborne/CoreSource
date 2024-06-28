@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <None Remove="AppIcon.png" />
+    <None Remove="Templates\Domain\Class.template" />
+    <None Remove="Templates\Domain\NotificationProperty.template" />
+    <None Remove="Templates\Domain\StandardProperty.template" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +38,15 @@
   <ItemGroup>
     <Content Include="AppIcon.ico" />
     <Content Include="AssemblyInfo.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Domain\Class.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Domain\NotificationProperty.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Domain\StandardProperty.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

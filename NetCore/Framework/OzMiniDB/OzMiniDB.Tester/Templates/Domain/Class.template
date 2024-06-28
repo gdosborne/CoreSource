@@ -1,0 +1,10 @@
+﻿[start]
+@usingsarea
+
+namespace @namespace {
+   public partial class @classname @implementationname {
+@implementationarea
+@propertiesarea
+   }
+}
+[end]

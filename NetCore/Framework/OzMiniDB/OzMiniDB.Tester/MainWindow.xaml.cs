@@ -3,6 +3,10 @@
 using OzFramework.Primitives;
 using OzFramework.Text;
 
+using OzMiniDB.Builder.Helper;
+using OzMiniDB.Items;
+
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
@@ -100,7 +104,34 @@ namespace OzMiniDB.Builder {
                 case ActionTypes.RemoveTable:
                     RemoveTable();
                     break;
+                case ActionTypes.GenerateClasses:
+                    GenerateClasses();
+                    break;
             }
+        }
+
+        private void GenerateClasses() {
+            if (View.Database.ClassesPath.IsNull()) {
+                View.Database.ClassesPath = Path.Combine(Path.GetDirectoryName(View.Database.Filename), 
+                    $"{Path.GetFileNameWithoutExtension(View.Database.Filename)}.classes");
+            }
+            if(!Directory.Exists(View.Database.ClassesPath)) Directory.CreateDirectory(View.Database.ClassesPath);
+            var databaseDirectory = Dialogs.SelectFolderDialog(this,
+                View.Database.ClassesPath,
+                "Select database path...");
+            if (databaseDirectory.IsNull())
+                return;
+            View.Database.ClassesPath = databaseDirectory;
+            var dbGenerator = new DBGenerator(View.Database.Name, View.Database.Filename, databaseDirectory);
+            dbGenerator.ActionOccurred += (s, e) => {
+                var space = default(string);
+                if (e.Indent > 0) {
+                    space = new string(' ', e.Indent * 3);
+                }
+                var additional = !e.AdditionalInfo.IsNull() ? $" ({e.AdditionalInfo})" : default;
+                Debug.WriteLine($"{space}{e.Action} - {e.ItemName}{additional}");
+            };
+            dbGenerator.Run(View.Database);
         }
 
         private void RemoveTable() {
@@ -164,10 +195,17 @@ namespace OzMiniDB.Builder {
                 win.View.Groups.First(x => x.Name == App.Constants.UserInterface)
                     .Values.First(x => x.Name == App.Constants.SaveWinSizeAndLoc).Value);
 
-            View.Database.GenerateTopLevelDBEngineClass = win.View.Groups.First(x => x.Name == App.Constants.Database)
+            var genDBE = win.View.Groups.First(x => x.Name == App.Constants.Database)
                 .Values.First(x => x.Name == App.Constants.GenTopLevelDBEClass).Value.CastTo<bool>();
-            View.Database.ImplementPropertyChanged = win.View.Groups.First(x => x.Name == App.Constants.Database)
+            var impPropChanged = win.View.Groups.First(x => x.Name == App.Constants.Database)
                 .Values.First(x => x.Name == App.Constants.ImplementPropertyChanged).Value.CastTo<bool>();
+            var listType = win.View.Groups.First(x => x.Name == App.Constants.Database)
+                .Values.First(x => x.Name == App.Constants.ListType).Value.CastTo<Database.ListTypes>();
+
+            View.Database.GenerateTopLevelDBEngineClass = genDBE;
+            View.Database.ImplementPropertyChanged = impPropChanged;
+            View.Database.ListType = listType;
+
             var newFilename = win.View.Groups.First(x => x.Name == App.Constants.Database)
                 .Values.First(x => x.Name == App.Constants.FileName)
                 .Value.CastTo<FileInfo>().FullName;

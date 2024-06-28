@@ -106,8 +106,9 @@ namespace OzFramework.Text {
         public static string PrecededByDateTime(this string value, int tabIndex = 0) =>
             $"{DateTime.Now:yyyy-MM-dd hh:mm:ss.fffff tt} => {new string(' ', tabIndex * 4)}{value}";
 
-        public static StringBuilder AppendLine(this StringBuilder value, int count) {
-            for (var i = 0; i < count; i++) {
+        public static StringBuilder AppendLine(this StringBuilder value, StringBuilder adding, int count) {
+            value.AppendLine(adding.ToString());
+            for (int i = 0; i < count; i++) {
                 value.AppendLine();
             }
             return value;

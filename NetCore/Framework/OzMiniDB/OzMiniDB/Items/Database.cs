@@ -15,6 +15,20 @@ using Universal.Common;
 
 namespace OzMiniDB.Items {
     public class Database : INotifyPropertyChanged, IXElementItem {
+        public enum ListTypes {
+            IListOfType,
+            IEnumerableOfType,
+            ObservableCollectionOfType
+        }
+
+        [Flags]
+        public enum PartialMethodNames {
+            None = 0,
+            InsertItem = 1,
+            UpdateItem = 2,
+            DeleteItem = 4,
+        }
+
         public new event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -33,6 +47,10 @@ namespace OzMiniDB.Items {
                     }
                 }
             };
+            ClassesDirectory = "Domain";
+            ClassTemplateFilename = "class.template";
+            StandardPropertyTemplateFilename = "standardproperty.template";
+            NotificationPropertyTemplateFilename = "notificationproperty.template";
             HasChanges = false;
         }
         public event AskReplaceDatabaseFilenameHandler AskReplaceDatabaseFilename;
@@ -46,7 +64,7 @@ namespace OzMiniDB.Items {
             set {
                 var prev = GenerateTopLevelDBEngineClass;
                 _GenerateTopLevelDBEngineClass = value;
-                HasChanges = HasChanges || prev != GenerateTopLevelDBEngineClass;
+                HasChanges |= prev != GenerateTopLevelDBEngineClass;
                 OnPropertyChanged();
             }
         }
@@ -59,7 +77,46 @@ namespace OzMiniDB.Items {
             set {
                 var prev = ImplementPropertyChanged;
                 _ImplementPropertyChanged = value;
-                HasChanges = HasChanges || prev != ImplementPropertyChanged;
+                HasChanges |= prev != ImplementPropertyChanged;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ImplementedPartialMethods Property
+        private PartialMethodNames _ImplementedPartialMethods = default;
+        public PartialMethodNames ImplementedPartialMethods {
+            get => _ImplementedPartialMethods;
+            set {
+                var prev = ImplementedPartialMethods;
+                _ImplementedPartialMethods = value;
+                HasChanges |= prev != ImplementedPartialMethods;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ListType Property
+        private ListTypes _ListType = default;
+        public ListTypes ListType {
+            get => _ListType;
+            set {
+                var prev = ListType;
+                _ListType = value;
+                HasChanges |= prev != ListType;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region MethodNames Property
+        private PartialMethodNames _MethodNames = default;
+        public PartialMethodNames MethodNames {
+            get => _MethodNames;
+            set {
+                var prev = MethodNames;
+                _MethodNames = value;
+                HasChanges |= prev != MethodNames;
                 OnPropertyChanged();
             }
         }
@@ -72,7 +129,7 @@ namespace OzMiniDB.Items {
             set {
                 var prev = Name;
                 _Name = value;
-                HasChanges = HasChanges || prev != Name;
+                HasChanges |= prev != Name;
                 OnPropertyChanged();
             }
         }
@@ -85,7 +142,7 @@ namespace OzMiniDB.Items {
             set {
                 var prev = Description;
                 _Description = value;
-                HasChanges = HasChanges || prev != Description;
+                HasChanges |= prev != Description;
                 OnPropertyChanged();
             }
         }
@@ -116,13 +173,72 @@ namespace OzMiniDB.Items {
         }
         #endregion
 
+        #region ClassesPath Property
+        private string _ClassesPath = default;
+        public string ClassesPath {
+            get => _ClassesPath;
+            set {
+                var prev = ClassesPath;
+                _ClassesPath = value;
+                HasChanges |= prev != ClassesPath;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ClassesDirectory Property
+        private string _ClassesDirectory = default;
+        public string ClassesDirectory {
+            get => _ClassesDirectory;
+            set {
+                _ClassesDirectory = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ClassTemplateFilename Property
+        private string _ClassTemplateFilename = default;
+        public string ClassTemplateFilename {
+            get => _ClassTemplateFilename;
+            set {
+                _ClassTemplateFilename = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region StandardPropertyTemplateFilename Property
+        private string _StandardPropertyTemplateFilename = default;
+        public string StandardPropertyTemplateFilename {
+            get => _StandardPropertyTemplateFilename;
+            set {
+                _StandardPropertyTemplateFilename = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region NotificationPropertyTemplateFilename Property
+        private string _NotificationPropertyTemplateFilename = default;
+        public string NotificationPropertyTemplateFilename {
+            get => _NotificationPropertyTemplateFilename;
+            set {
+                _NotificationPropertyTemplateFilename = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         public XElement ToXElement() {
             var result = new XElement(nameof(Database),
                 new XAttribute(nameof(Name), Name),
                 new XElement(nameof(Description), Description));
             var settingElem = new XElement("Settings",
                 new XAttribute(nameof(GenerateTopLevelDBEngineClass), GenerateTopLevelDBEngineClass.ToString()),
-                new XAttribute(nameof(ImplementPropertyChanged), ImplementPropertyChanged.ToString()));
+                new XAttribute(nameof(ImplementPropertyChanged), ImplementPropertyChanged.ToString()),
+                new XAttribute(nameof(ClassesPath), ClassesPath),
+                new XAttribute(nameof(ListType), ListType.ToString()));
 
             result.Add(settingElem);
             var tablesElem = new XElement("Tables");
@@ -155,9 +271,19 @@ namespace OzMiniDB.Items {
                             ? true : bool.Parse(settingsElem.Attribute(nameof(GenerateTopLevelDBEngineClass)).Value);
                         db.ImplementPropertyChanged = settingsElem.Attribute(nameof(ImplementPropertyChanged)).IsNull()
                            ? true : bool.Parse(settingsElem.Attribute(nameof(ImplementPropertyChanged)).Value);
+                        db.ClassesPath = settingsElem.Attribute(nameof(ClassesPath)).IsNull()
+                            ? default 
+                            : settingsElem.Attribute(nameof(ClassesPath)).Value;
+                        db.ListType = settingsElem.Attribute(nameof(ListType)).IsNull()
+                            ? ListTypes.IListOfType                            
+                            : (ListTypes)Enum.Parse(typeof(ListTypes), settingsElem.Attribute(nameof(ListType)).Value);
+                        db.ImplementedPartialMethods = settingsElem.Attribute(nameof(ImplementedPartialMethods)).IsNull()
+                            ? PartialMethodNames.None
+                            : (PartialMethodNames)Enum.Parse(typeof(PartialMethodNames), settingsElem.Attribute(nameof(ImplementedPartialMethods)).Value);
                     } else {
                         db.GenerateTopLevelDBEngineClass = true;
                         db.ImplementPropertyChanged = true;
+                        db.ListType = ListTypes.IListOfType;
                     }
 
                     var tableElem = root.Element("Tables");
@@ -215,6 +341,7 @@ namespace OzMiniDB.Items {
             doc.Save(writer);
             HasChanges = false;
         }
+
         private void SaveDatabase(string filename) {
             SaveDatabase(filename);
         }

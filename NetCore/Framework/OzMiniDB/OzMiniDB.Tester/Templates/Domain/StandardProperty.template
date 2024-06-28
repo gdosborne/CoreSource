@@ -1,0 +1,3 @@
+﻿[start]
+      public @datatype @propertyname { get; set; }
+[end]

@@ -247,7 +247,7 @@ namespace OzFramework.Dialogs {
                 RootFolder = Environment.SpecialFolder.MyComputer,
                 SelectedPath = folder,
                 ShowNewFolderButton = false,
-                UseDescriptionForTitle = true
+                UseDescriptionForTitle = true,                
             };
             var result = dlg.ShowDialog(win);
             if (!result.HasValue || !result.Value) {

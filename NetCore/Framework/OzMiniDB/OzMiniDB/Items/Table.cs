@@ -1,14 +1,16 @@
 ﻿using OzFramework.Primitives;
+using static OzFramework.Text.Extension;
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Xml.Linq;
 
 using Universal.Common;
 
 namespace OzMiniDB.Items {
-    public class Table : INotifyPropertyChanged, IXElementItem {
+    public class Table : Implementable, INotifyPropertyChanged, IXElementItem {
         public new event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -145,6 +147,42 @@ namespace OzMiniDB.Items {
                 fKeysElem.Add(item.ToXElement());
             }
             result.Add(fKeysElem);
+            return result;
+        }
+
+        public override StringBuilder GetText(bool isImplementNotification, string classTemplateFilename, 
+                string standardPropertyTemplateFilename, string notificationPropertyTemplateFilename, string databaseName) {
+
+            var result = GetTemplateText(classTemplateFilename);
+
+            var usings = new List<string> { "System", "System.Linq" };
+            if (isImplementNotification) {
+                usings.Add("System.ComponentModel");
+                usings.Add("System.Runtime.CompilerServices");
+            }
+            var areaData = default(string);
+            foreach (var us in usings) {
+                areaData += $"using {us}\n";
+            }
+            areaData += "\n";
+            result.Replace(Tags.UsingsArea, areaData);
+            result.Replace(Tags.Namespace, databaseName);
+            result.Replace(Tags.Class,  Name.Replace(" ", "_"));
+            if (isImplementNotification) {
+                result.Replace(Tags.Implementation, ": INotifyPropertyChanged");
+                areaData = default;
+                areaData += $"{Tags.Tab(2)}public event PropertyChangedEventHandler PropertyChanged;\n";
+                areaData += $"{Tags.Tab(2)}private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>\n" +
+                    $"{Tags.Tab(3)}PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));\n";
+                result.Replace(Tags.ImplementationArea, areaData);
+            }
+            var propertiesData = new StringBuilder();
+            Fields.ForEach(field => {
+                var prop = field.GetText(isImplementNotification, classTemplateFilename, standardPropertyTemplateFilename, 
+                    notificationPropertyTemplateFilename, databaseName);
+                propertiesData.AppendLine(prop, 0);
+            });
+            result.Replace(Tags.PropertiesArea, propertiesData.ToString());
             return result;
         }
     }

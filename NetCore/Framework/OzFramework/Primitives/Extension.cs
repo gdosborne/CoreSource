@@ -320,6 +320,8 @@ namespace OzFramework.Primitives {
                     result = (T)Enum.Parse(typeof(T), value.ToString());
                 else if (value.GetType() == typeof(int))
                     result = (T)value;
+                else if (value.GetType().IsEnum)
+                    result = (T)value;
                 return result;
             }
             try {

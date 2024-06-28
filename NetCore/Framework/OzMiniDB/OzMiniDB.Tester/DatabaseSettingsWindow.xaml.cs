@@ -2,7 +2,6 @@
 using OzFramework.Primitives;
 using OzFramework.Timers;
 using OzFramework.Windows;
-using OzFramework.Windows.Controls;
 
 using OzMiniDB.Builder.Helper;
 using OzMiniDB.Items;
@@ -12,8 +11,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-
-using Universal.Common;
 
 namespace OzMiniDB.Builder {
     public partial class DatabaseSettingsWindow : Window {
@@ -181,10 +178,84 @@ namespace OzMiniDB.Builder {
             return result;
         }
 
+        private RadioButton GetRadioButton<T>(SettingValue settingValue, string name, bool isChecked) {
+            var style = App.FindResource<Style>(App.Current.Resources, App.Constants.StdRadioButton);
+            var result = new RadioButton {
+                Style = style,
+                Content = name,
+                Margin = new Thickness(10, 0, 0, 0),
+                Tag = settingValue,
+                IsChecked = isChecked
+            };
+            result.Checked += (s, e) => {
+                var rb = s.As<RadioButton>();
+                var type = (T)Enum.Parse(typeof(T), rb.Content.CastTo<string>());
+                rb.Tag.As<SettingValue>().Value = type;
+            };
+            return result;
+        }
+
+        private CheckBox GetCheckBox<T>(SettingValue settingValue, string name, bool isChecked) {
+            var style = App.FindResource<Style>(App.Current.Resources, App.Constants.StdCheckBoxStyleName);
+            var result = new CheckBox {
+                Style = style,
+                Content = name,
+                Margin = new Thickness(3),
+                Tag = settingValue,
+                IsChecked = isChecked
+            };
+            result.Unchecked += (s, e) => {
+                var cb = s.As<CheckBox>();
+                if (settingValue.Value is Database.PartialMethodNames) {
+                    var actValue = (Database.PartialMethodNames)Enum.Parse(typeof(Database.PartialMethodNames), cb.Content.CastTo<string>());
+                    cb.Tag.As<SettingValue>().Value = ((Database.PartialMethodNames)cb.Tag.As<SettingValue>().Value) & ~actValue;
+                }
+            };
+            result.Checked += (s, e) => {
+                var cb = s.As<CheckBox>();
+                if (settingValue.Value is Database.PartialMethodNames) {
+                    var actValue = (Database.PartialMethodNames)Enum.Parse(typeof(Database.PartialMethodNames), cb.Content.CastTo<string>());
+                    cb.Tag.As<SettingValue>().Value = ((Database.PartialMethodNames)cb.Tag.As<SettingValue>().Value) | actValue;
+                }
+            };
+            return result;
+        }
+
+        private ComboBox GetCheckedComboBox<T>(SettingValue settingValue) {
+            var style = App.FindResource<Style>(App.Current.Resources, App.Constants.StdComboBox);
+            var names = Enum.GetNames(typeof(T));
+            var result = new ComboBox {
+                Style = style,
+            };
+            foreach (var name in names) {
+                var cb = GetCheckBox<T>(settingValue, name, name.Equals(settingValue.Value.ToString()));
+                result.Items.Add(cb);
+            }
+            return result;
+        }
+
+        private StackPanel GetRadioButtons<T>(SettingValue settingValue) {
+            var result = new StackPanel {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 10, 0, 0),
+                ToolTip = settingValue.Description,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            var names = Enum.GetNames(typeof(T));
+            foreach (var name in names) {
+                var rb = GetRadioButton<T>(settingValue, name, name.Equals(settingValue.Value.ToString()));
+                result.Children.Add(rb);
+            }
+            return result;
+        }
+
         private Grid GetHolderGrid(SettingValue settingValue) {
             var result = new Grid();
 
-            if (settingValue.Value.GetType() == typeof(SysIO.FileInfo)) {
+            if (settingValue.Value.GetType() == typeof(Database.ListTypes) || settingValue.Value.GetType() == typeof(Database.PartialMethodNames)) {
+                result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0, GridUnitType.Auto) });
+                result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            } else if (settingValue.Value.GetType() == typeof(SysIO.FileInfo)) {
                 result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0, GridUnitType.Auto) });
                 result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                 result.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0, GridUnitType.Auto) });
@@ -202,7 +273,29 @@ namespace OzMiniDB.Builder {
             var result = GetHolderGrid(settingValue);
             result.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0, GridUnitType.Auto) });
             var rowNumber = result.RowDefinitions.Count - 1;
-            if (settingValue.Value.GetType() == typeof(SysIO.FileInfo)) {
+            if (settingValue.Value.GetType() == typeof(Database.ListTypes)) {
+                var label = GetLabel(settingValue.Name.As<string>());
+                label.Margin = GetMargin(10, 10, 0, 0);
+                label.SetValue(Grid.ColumnProperty, 0);
+                label.SetValue(Grid.RowProperty, rowNumber);
+                result.Children.Add(label);
+
+                var panel = GetRadioButtons<Database.ListTypes>(settingValue);
+                panel.SetValue(Grid.ColumnProperty, 1);
+                panel.SetValue(Grid.RowProperty, rowNumber);
+                result.Children.Add(panel);
+            } else if (settingValue.Value.GetType() == typeof(Database.PartialMethodNames)) {
+                var label = GetLabel(settingValue.Name.As<string>());
+                label.Margin = GetMargin(10, 10, 0, 10);
+                label.SetValue(Grid.ColumnProperty, 0);
+                label.SetValue(Grid.RowProperty, rowNumber);
+                result.Children.Add(label);
+
+                var comboBox = GetCheckedComboBox<Database.PartialMethodNames>(settingValue);
+                comboBox.SetValue(Grid.ColumnProperty, 1);
+                comboBox.SetValue(Grid.RowProperty, rowNumber);
+                result.Children.Add(comboBox);
+            } else if (settingValue.Value.GetType() == typeof(SysIO.FileInfo)) {
                 var label = GetLabel(settingValue.Name.As<string>());
                 label.SetValue(Grid.ColumnProperty, 0);
                 label.SetValue(Grid.RowProperty, rowNumber);

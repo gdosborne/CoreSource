@@ -150,6 +150,10 @@ namespace OzFramework.Media {
         }
 
         public static ImageSource GetImageSourceByName(this Assembly assy, string resourceName) {
+            //set the Build Action to Resource, not Embedded resource
+            //always include the folder name and extension in the filename
+            //if an image named "image1.png" is in a folder "resources" the resource name
+            // is "/resources/image1.png"
             var psAssemblyName = assy.GetName().Name;
             var oUri = new Uri("pack://application:,,,/" + psAssemblyName + ";component/" + resourceName, UriKind.RelativeOrAbsolute);
             return BitmapFrame.Create(oUri);

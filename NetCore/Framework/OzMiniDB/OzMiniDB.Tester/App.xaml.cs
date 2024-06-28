@@ -38,14 +38,22 @@ namespace OzMiniDB.Builder {
             internal static string DefaultDBName => "My Personal.database";
             internal static string StdTextBoxStyleName => "StandardTextBox";
             internal static string StdCheckBoxStyleName => "StandardCheckBox";
+            internal static string StdRadioButton => "StandardRadioButton";
+            internal static string StdComboBox => "StandardComboBox";
             internal static string StdHeaderStyleName => "SubHeaderTextBlock";
             internal static string IconFontFamilyName => "IconFont";
             internal static string IconFontSizeName => "IconFontSize";
             internal static string GenTopLevelDBEClass => "Generate Top-Level DBEngine Class";
             internal static string ImplementPropertyChanged => "Data classes implement INotifyPropertyChanged";
+            internal static string ListType => "List Type";
+            internal static string PartialMethods => "Partial Methods (check all that apply)";
+            internal static string ImplementPartialMethods => "Data classes implement partial Methods";
 
             internal static string GenTopLevDBDClassTip => "If checked, a top-level DBEngine class will be generated to access your data";
             internal static string ImplementPropertyChangedTip => "If checked, all data classes will implement interface INotifyPropertyChanged";
+            internal static string ImplementPartialMethodsTip => "If checked, all data classes will implement the selected partial Methods";
+            internal static string ListTypeTip => "The type of list to generate on DBEngine (if selected)";
+            internal static string PartialMethodTip => "Select all methods to be generated";
             internal static string PathToDBDefFileTip => "Path to the database definition file";
             internal static string TheDBNameTip => "This will be the database name";
         }

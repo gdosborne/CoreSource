@@ -1,10 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Xml.Linq;
 
 namespace OzMiniDB.Items {
-    public class Field : INotifyPropertyChanged, IXElementItem {
+    public class Field : Implementable, INotifyPropertyChanged, IXElementItem {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyName = default) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -174,6 +175,21 @@ namespace OzMiniDB.Items {
             result.Add(new XElement(nameof(IsRequired), IsRequired.ToString()));
             result.Add(new XElement(nameof(IsIdentity), IsIdentity.ToString()));
             return result;
+        }
+
+        public override StringBuilder GetText(bool isImplementNotification, string classTemplateFilenamestring, 
+                string standardPropertyTemplateFilename, string notificationPropertyTemplateFilename, string databaseName) {
+            var dataType = DataType(DataType, IsRequired);
+            var name = Name.Replace(" ", "_");
+            var templatePath = isImplementNotification
+                ? notificationPropertyTemplateFilename
+                : standardPropertyTemplateFilename;
+
+            var template = GetTemplateText(templatePath)
+                .Replace(Tags.DataType, dataType)
+                .Replace(Tags.PropertyName, name);
+
+            return template;
         }
     }
 }

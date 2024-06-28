@@ -8,6 +8,7 @@ using OzFramework.Primitives;
 using OzFramework.Text;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -136,7 +137,7 @@ namespace OzFramework.Xml.Linq {
                 try {
                     File.SetAttributes(fileName, File.GetAttributes(fileName) & ~FileAttributes.ReadOnly);
                     return XDocument.Load(fileName);
-                } catch (System.Exception ex) { Console.WriteLine(ex.Message); }
+                } catch (System.Exception ex) { Debug.WriteLine(ex.Message); }
             }
             return null;
         }

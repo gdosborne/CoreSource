@@ -52,6 +52,11 @@ namespace OzMiniDB.Builder {
                 var genImplementPropertyChanged = new SettingValue(App.Constants.ImplementPropertyChanged, Database.ImplementPropertyChanged,
                     App.Constants.ImplementPropertyChangedTip);
                 dbGenSettings.Values.Add(genImplementPropertyChanged);
+                var genListType = new SettingValue(App.Constants.ListType, Database.ListType, App.Constants.ListTypeTip);
+                dbGenSettings.Values.Add(genListType);
+                var genPartialMethodsType = new SettingValue(App.Constants.PartialMethods, Database.MethodNames, App.Constants.PartialMethodTip);
+                dbGenSettings.Values.Add(genPartialMethodsType);
+
                 Groups.Add(dbGenSettings);
 
                 var uiGenSettings = new SettingGroup {

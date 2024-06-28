@@ -17,7 +17,8 @@ namespace OzMiniDB.Builder {
             ShowSettings,
             SetFieldSelected,
             RemoveField,
-            RemoveTable
+            RemoveTable,
+            GenerateClasses
         }
 
         private void ExecuteAction(ActionTypes actionType) =>
@@ -178,7 +179,7 @@ namespace OzMiniDB.Builder {
         public DelegateCommand GenerateClassesCommand => _GenerateClassesCommand ??= new DelegateCommand(GenerateClasses, ValidateGenerateClassesState);
         private bool ValidateGenerateClassesState(object state) => !Database.IsNull();
         private void GenerateClasses(object state) {
-
+            ExecuteAction(ActionTypes.GenerateClasses);
         }
         #endregion
 
