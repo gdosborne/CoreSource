@@ -4,15 +4,15 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using static OzFramework.MailTracker;
+using static Common.MailTracker;
 
-namespace OzFramework {
+namespace Common {
     public class EMailer : IDisposable {
         public EMailer(string smtpServer, TimeSpan cacheExpire, MatchingFlags flags) {
             addresses = new Dictionary<string, MailAddress>();

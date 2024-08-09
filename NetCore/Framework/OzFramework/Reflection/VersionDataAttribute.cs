@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public class VersionSchemaNameAttribute : Attribute {        
         public VersionSchemaNameAttribute(string data) {

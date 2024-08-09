@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Primitives;
 using CongregationManager.Extensibility;
 using Controls.Core;
 using System.Collections.Generic;

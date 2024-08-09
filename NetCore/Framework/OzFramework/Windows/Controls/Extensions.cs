@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Media;
-using OzFramework.Primitives;
+using Common.Media;
+using Common.Primitives;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace OzFramework.Windows.Controls {
+namespace Common.Windows.Controls {
     public static class Extensions {
         private static Delegate conversionHandler;
 

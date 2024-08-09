@@ -1,5 +1,5 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Primitives;
+﻿using Common.Media;
+using Common.Primitives;
 using Common.MVVMFramework;
 using System.Collections.ObjectModel;
 using System.Linq;

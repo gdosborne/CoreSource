@@ -4,13 +4,13 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.IO;
-using OzFramework.Logging;
-using OzFramework.Primitives;
+using Common.IO;
+using Common.Logging;
+using Common.Primitives;
 using System;
 using System.IO;
 
-namespace OzFramework {
+namespace Common {
     public sealed class Session {
         private WriteStatusHandler handler = default;
 

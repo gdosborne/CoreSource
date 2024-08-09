@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     [AttributeUsage(AttributeTargets.Property)]
     public class HeaderValueAttribute : Attribute {
         internal HeaderValueAttribute() { }

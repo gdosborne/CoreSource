@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace OzFramework.Windows.Converter {
+namespace Common.Windows.Converter {
 	[ContentProperty("Expression")]
 	public class Calculation : MarkupExtension {
 		public IExpression Expression { get; set; }

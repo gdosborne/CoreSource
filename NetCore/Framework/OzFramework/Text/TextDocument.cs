@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Text {
+namespace Common.Text {
     /// <summary>
     /// The text dcument
     /// </summary>

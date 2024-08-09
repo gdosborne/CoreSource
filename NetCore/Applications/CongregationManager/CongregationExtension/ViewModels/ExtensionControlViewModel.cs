@@ -1,5 +1,5 @@
-﻿using Common.Application;
-using Common.Application.Primitives;
+﻿using Common;
+using Common.Primitives;
 using CongregationManager;
 using CongregationManager.Data;
 using System;
@@ -12,7 +12,7 @@ namespace CongregationExtension.ViewModels {
         public ExtensionControlViewModel()
             : base() { }
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             ErrorVisibility = Visibility.Collapsed;

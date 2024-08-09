@@ -1,7 +1,7 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Primitives;
-using Common.Application.Windows;
-using Common.Application.Windows.Controls;
+﻿using Common.Media;
+using Common.Primitives;
+using Common.Windows;
+using Common.Windows.Controls;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;

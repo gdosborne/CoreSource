@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     public delegate void ConversionCompleteHandler(object sender, ConversionCompleteEventArgs e);
 
     public class ConversionCompleteEventArgs : EventArgs {

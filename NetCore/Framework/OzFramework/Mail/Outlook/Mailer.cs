@@ -12,14 +12,14 @@ using System.Net.Mime;
 using System.Text;
 using System.Windows.Documents;
 
-using OzFramework.Dialogs;
+using Common.Dialogs;
 
 using Microsoft.Office.Interop.Outlook;
 using oLook = Microsoft.Office.Interop.Outlook;
 
 using Ookii.Dialogs.Wpf;
 
-namespace OzFramework.Mail.Outlook {
+namespace Common.Mail.Outlook {
     public class Mailer : IMailer {
         public void Initialize() {
             outlookApp = new oLook.Application();

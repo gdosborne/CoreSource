@@ -9,7 +9,7 @@ using System;
 using System.Data;
 using System.Xml;
 
-namespace OzFramework.SqlServer {
+namespace Common.SqlServer {
     public static class Extensions {
         public static T GetValue<T>(this SqlDataReader reader, string fieldName, T defaultValue = default) =>
             (T)(reader.IsDBNull(reader.GetOrdinal(fieldName)) ? defaultValue : reader.GetValue(reader.GetOrdinal(fieldName)));

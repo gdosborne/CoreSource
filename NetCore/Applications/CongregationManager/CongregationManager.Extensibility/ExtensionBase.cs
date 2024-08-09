@@ -1,6 +1,6 @@
-﻿using Common.Application;
-using Common.Application.Logging;
-using Common.Application.Primitives;
+﻿using Common;
+using Common.Logging;
+using Common.Primitives;
 using CongregationManager.Data;
 using Controls.Core;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace CongregationManager.Extensibility {
         /// <param name="appSettings">The application settings</param>
         /// <param name="logger">The logger</param>
         /// <param name="dataManager">The data manager</param>
-        public abstract void Initialize(string dataDirectory, string tempDirectory, Settings appSettings,
+        public abstract void Initialize(string dataDirectory, string tempDirectory, AppSettings appSettings,
             ApplicationLogger logger, DataManager dataManager);
 
         /// <summary>
@@ -243,10 +243,10 @@ namespace CongregationManager.Extensibility {
         #endregion
 
         #region Settings Property
-        private Settings _Settings = default;
+        private AppSettings _Settings = default;
         /// <summary>Gets/sets the Settings.</summary>
         /// <value>The Settings.</value>
-        public Settings Settings {
+        public AppSettings Settings {
             get => _Settings;
             set {
                 _Settings = value;

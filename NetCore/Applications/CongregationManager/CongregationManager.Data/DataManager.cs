@@ -1,5 +1,5 @@
-using Common.Application.Primitives;
-using Common.Application.Security;
+using Common.Primitives;
+using Common.Security;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

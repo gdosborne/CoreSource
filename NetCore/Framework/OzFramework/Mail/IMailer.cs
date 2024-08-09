@@ -11,7 +11,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Mail {
+namespace Common.Mail {
     public interface IMailer {
         bool SendMail(MailMessage msg, string templateFilename = default);
         void Initialize();

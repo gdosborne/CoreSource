@@ -1,6 +1,6 @@
-﻿using Common.Application;
-using Common.Application.Linq;
-using Common.Application.Logging;
+﻿using Common;
+using Common.Linq;
+using Common.Logging;
 using CongregationManager;
 using CongregationManager.Data;
 using Ookii.Dialogs.Wpf;
@@ -9,14 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using static ApplicationFramework.Dialogs.Helpers;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.Dialogs.Helpers;
+using static Common.Logging.ApplicationLogger;
 
 namespace CongregationExtension {
     public partial class App : System.Windows.Application {
         
         internal static ApplicationLogger logger { get; set; } = default;
-        internal static Settings AppSettings { get; set; } = default;
+        internal static AppSettings AppSettings { get; set; } = default;
         internal static DataManager DataManager { get; set; } = default;
 
         internal static void LogMessage(string message, EntryTypes type) {
@@ -85,7 +85,7 @@ namespace CongregationExtension {
                 $"sure want to delete the {cong.Name} Congregation?";
             var result = false;
             try {
-                if (ShowYesNoDialog("Delete Congregation", msg, TaskDialogIcon.Shield, 300)) {
+                if (Common.Dialogs.Helpers.ShowYesNoDialog(App.Current.MainWindow, "Delete Congregation", msg, TaskDialogIcon.Shield, 300)) {
                     result = DataManager.DeleteCongregation(cong);
                 }
             }
@@ -103,7 +103,7 @@ namespace CongregationExtension {
             var msg = $"You are about to delete {member.FullName}. Doing so will make any data " +
                 $"attached to this member invalid.\n\nAre you sure you want to delete {member.FullName}?";
 
-            if (ShowYesNoDialog(mainAndTitle, msg, TaskDialogIcon.Shield)) {
+            if (Common.Dialogs.Helpers.ShowYesNoDialog(App.Current.MainWindow, mainAndTitle, msg, TaskDialogIcon.Shield)) {
                 App.logger.LogMessage($"Deleting {member.FullName} from {congregation.Name}",
                     EntryTypes.Information);
                 congregation.Members.Remove(member);
@@ -138,7 +138,7 @@ namespace CongregationExtension {
                 $"will be responsible to reestablish the member priveleges.\n\nAre you sure you want to move " +
                 $"{member.FullName}?";
 
-            if (ShowYesNoDialog(mainAndTitle, msg, TaskDialogIcon.Shield)) {
+            if (Common.Dialogs.Helpers.ShowYesNoDialog(App.Current.MainWindow, mainAndTitle, msg, TaskDialogIcon.Shield)) {
 
                 App.logger.LogMessage($"Moving {member.FullName} from {congregation.Name} to " +
                     $"{win.View.SelectedCongregation.Name}", EntryTypes.Information);

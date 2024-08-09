@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
-namespace OzFramework.RecentItems {
+namespace Common.RecentItems {
     /// <summary>
     /// The recent manager.
     /// </summary>

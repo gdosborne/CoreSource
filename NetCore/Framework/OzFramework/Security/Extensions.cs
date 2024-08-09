@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     /// <summary>
     /// Extensions
     /// </summary>

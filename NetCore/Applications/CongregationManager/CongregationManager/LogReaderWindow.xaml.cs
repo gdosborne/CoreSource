@@ -1,14 +1,14 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationManager.ViewModels;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.Logging.ApplicationLogger;
 using Path = System.IO.Path;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 
 namespace CongregationManager {
     public partial class LogReaderWindow : Window {
@@ -34,7 +34,7 @@ namespace CongregationManager {
                         var title = "Clear log entries";
                         var msg = "You are preparing to remove the log entries for " +
                                 $"{View.SelectedLogDate}.\n\nAre you sure?";
-                        if (ShowYesNoDialog(title, msg, TaskDialogIcon.Warning)) {
+                        if (Common.Dialogs.Helpers.ShowYesNoDialog(this, title, msg, TaskDialogIcon.Warning)) {
                             var dir = Path.Combine(App.ApplicationFolder, "Logs", DateTime.Parse(View.SelectedLogDate).ToString("yyyy-MM-dd"));
                             var filename = Path.Combine(dir, "application.xml");
                             var logDate = View.SelectedLogDate;
@@ -51,7 +51,7 @@ namespace CongregationManager {
                         var title = "Clear log entries";
                         var msg = "You are preparing to remove all if the log " +
                             "entries.\n\nAre you sure?";
-                        if (ShowYesNoDialog(title, msg, TaskDialogIcon.Warning)) {
+                        if (Common.Dialogs.Helpers.ShowYesNoDialog(this,title, msg, TaskDialogIcon.Warning)) {
                             var dir = Path.Combine(App.ApplicationFolder, "Logs");
                             var dirs = new DirectoryInfo(dir).GetDirectories();
                             foreach (var d in dirs) {

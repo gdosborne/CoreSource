@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="OzFramework.csproj.applog.txt" />
+		<None Remove="Common.csproj.applog.txt" />
 	</ItemGroup>
 
 	<ItemGroup>

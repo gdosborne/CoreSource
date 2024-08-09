@@ -18,8 +18,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using Common.MVVMFramework;
 
 using Universal.Common;
@@ -28,7 +28,7 @@ using Color = System.Windows.Media.Color;
 using FontFamily = System.Windows.Media.FontFamily;
 using Size = System.Windows.Size;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     public static class Extensions {
         public static Icon To16BitIcon(this ImageSource src) {
             var img = src.ImageSourceToGDIImage();

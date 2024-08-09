@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Mail {
+namespace Common.Mail {
     internal static class HtmlTags {
         public static readonly string DocType = "<!DOCTYPE html>";
         public static readonly string HtmlStart = "<html>";

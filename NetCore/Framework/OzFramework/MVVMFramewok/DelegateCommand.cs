@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Windows.Input;
 
@@ -71,7 +71,7 @@ namespace Common.MVVMFramework {
                 try {
                     CanExecuteChanged?.Invoke(this, EventArgs.Empty);
                 }
-                catch (Exception ex) {
+                catch (System.Exception ex) {
                     // ignored
                 }
             }

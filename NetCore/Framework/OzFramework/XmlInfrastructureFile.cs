@@ -4,10 +4,10 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System.IO;
 
-namespace OzFramework {
+namespace Common {
     public abstract class XmlInfrastructureFile {
         public enum FileTypes {
             Settings,

@@ -1,5 +1,5 @@
-﻿using Common.Application;
-using Common.Application.Linq;
+﻿using Common;
+using Common.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
@@ -17,7 +17,7 @@ namespace CongregationExtension.ViewModels {
             Groups = new ObservableCollection<Group>();
         }
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             Title = "Congregation";

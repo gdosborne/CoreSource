@@ -4,10 +4,10 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System.Drawing.Printing;
 
-namespace OzFramework.Printing {
+namespace Common.Printing {
     public static class Extensions {
         public static PageSettings GetPrinterPageInfo(string printerName, bool isLandscape) {
             PrinterSettings settings;

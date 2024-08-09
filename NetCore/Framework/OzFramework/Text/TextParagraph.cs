@@ -6,7 +6,7 @@
 
 using System.Text;
 
-namespace OzFramework.Text {
+namespace Common.Text {
     /// <summary>
     /// The text paragraph.
     /// </summary>

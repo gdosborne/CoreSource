@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly)]
     public class ApplicationLastBuildDateAttribute : Attribute {
         public ApplicationLastBuildDateAttribute(string buildDate) {

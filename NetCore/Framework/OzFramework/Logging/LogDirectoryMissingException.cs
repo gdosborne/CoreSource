@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Logging {
+namespace Common.Logging {
     [Serializable]
     public class LogDirectoryMissingException : System.Exception {
         #region Public Constructors

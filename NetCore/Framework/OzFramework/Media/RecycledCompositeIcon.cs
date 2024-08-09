@@ -4,11 +4,11 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System.IO;
 using System.Windows;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     public class RecycledCompositeIcon : CompositeIcon {
         public static RecycledCompositeIcon FromFileAsRecycled(string filename, double scaleValue) {
             var res = default(RecycledCompositeIcon);

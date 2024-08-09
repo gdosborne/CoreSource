@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Universal.Common;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     public static class Extensions {
         public static List<TA> GetAttributes<T, TA>(this T value) where T : class where TA : Attribute {
             var result = new List<TA>();

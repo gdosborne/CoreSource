@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public class WrapperProperty {
         public short ID { get; internal set; }
         public string Name { get; internal set; }

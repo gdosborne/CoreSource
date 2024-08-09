@@ -1,7 +1,7 @@
-﻿using Common.Application;
-using Common.Application.Logging;
-using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common;
+using Common.Logging;
+using Common.Primitives;
+using Common.Windows;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
 using System.Linq;
@@ -52,7 +52,7 @@ namespace TerritoryManager.Extension {
         private ExtensionControlViewModel extControlView = default;
 
         public override void Initialize(string dataDirectory, string tempDirectory,
-                Settings appSettings, ApplicationLogger logger, DataManager dataManager) {
+                AppSettings appSettings, ApplicationLogger logger, DataManager dataManager) {
             App.logger = logger;
             App.AppSettings = appSettings;
             App.DataManager = dataManager;

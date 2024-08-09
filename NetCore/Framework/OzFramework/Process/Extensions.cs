@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-namespace OzFramework.Process {
+namespace Common.Process {
     public static class Extensions {
         public static long UsedMemory(this System.Diagnostics.Process proc) => proc.PrivateMemorySize64;
 

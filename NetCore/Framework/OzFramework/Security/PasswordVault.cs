@@ -4,17 +4,17 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Xml.Linq;
-using OzFramework;
+using Common.Xml.Linq;
+using Common;
 using System;
 using System.IO;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     /// <summary>
     /// PasswordVault
     /// </summary>

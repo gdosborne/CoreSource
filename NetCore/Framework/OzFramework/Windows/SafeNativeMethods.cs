@@ -9,7 +9,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace OzFramework.Windows {
+namespace Common.Windows {
     public static class SafeNativeMethods {
         private const int SwHide = 0;
 

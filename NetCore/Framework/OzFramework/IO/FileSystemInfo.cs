@@ -4,12 +4,12 @@
    Author="Greg Osborne"
    Date="4/25/2024" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using SysIO = System.IO;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public static class FileSystemInfo {
         public static void DeleteOrRecycle(this SysIO.FileSystemInfo item, bool toRecycleBin = false) {
             if (item.IsNull()) throw new ArgumentException(null, nameof(item));

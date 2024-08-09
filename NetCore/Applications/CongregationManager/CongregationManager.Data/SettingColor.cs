@@ -1,4 +1,4 @@
-﻿using Common.Application.Media;
+﻿using Common.Media;
 using Common.MVVMFramework;
 using System;
 using System.ComponentModel;

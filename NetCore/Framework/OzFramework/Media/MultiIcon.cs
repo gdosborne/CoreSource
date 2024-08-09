@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     public class MultiIcon : IDisposable {
         public enum DisplayType {
             Largest = 0,

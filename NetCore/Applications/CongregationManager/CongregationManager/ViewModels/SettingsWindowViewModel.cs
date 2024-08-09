@@ -1,5 +1,5 @@
-﻿using Common.Application.Media;
-using Common.Application.Primitives;
+﻿using Common.Media;
+using Common.Primitives;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace CongregationManager.ViewModels {
             Title = "Settings";
 
             
-            Fonts = new ObservableCollection<FontFamily>(Common.Application.Media.Extensions.GetAllFontFamiles().OrderBy(x => x.Source));
+            Fonts = new ObservableCollection<FontFamily>(Common.Media.Extensions.GetAllFontFamiles().OrderBy(x => x.Source));
             SelectedFontFamily = Fonts.FirstOrDefault(x => x.Source == 
                 App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));
             FontSizes = new ObservableCollection<double>();

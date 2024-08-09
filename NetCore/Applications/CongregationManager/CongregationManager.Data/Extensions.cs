@@ -1,7 +1,7 @@
-﻿using Common.Application;
-using Common.Application.Media;
-using Common.Application.Primitives;
-using Common.Application.Windows.Expressions;
+﻿using Common;
+using Common.Media;
+using Common.Primitives;
+using Common.Windows.Expressions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationExtension.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TerritoryManager.Extension.ViewModels;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 
 namespace TerritoryManager.Extension {
     public partial class BuildTerritoriesWindow : Window {

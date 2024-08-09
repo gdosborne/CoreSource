@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Primitives;
 using CongregationManager.Data;
 using System;
 using System.Windows;

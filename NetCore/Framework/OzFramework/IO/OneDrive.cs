@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Linq;
 
 using w32 = Microsoft.Win32;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public static class OneDrive {
         public static string GetOneDriveDirectory() {
             var result = default(string);

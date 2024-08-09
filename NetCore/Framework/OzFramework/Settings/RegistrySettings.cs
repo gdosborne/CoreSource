@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 using w32 = Microsoft.Win32;
 
-namespace OzFramework.Settings {
+namespace Common.Settings {
     public class RegistrySettings {
         private w32.RegistryHive Hive = w32.RegistryHive.CurrentUser;
         private w32.RegistryKey registryKey = default;

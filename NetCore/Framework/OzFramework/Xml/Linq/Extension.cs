@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace OzFramework.Xml.Linq {
+namespace Common.Xml.Linq {
     public static class Extension {
         public static void AddOrUpdateElement(this XElement parent, string name, object value, bool isCData = false) {
             if (parent.IsNull()) {

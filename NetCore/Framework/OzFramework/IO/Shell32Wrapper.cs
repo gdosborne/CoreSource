@@ -4,13 +4,13 @@
    Author="Greg Osborne"
    Date="4/25/2024" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using Shell32;
 using System.Collections.Generic;
 using System.Linq;
 using SysIO = System.IO;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public class Shell32Wrapper {
         public Shell32Wrapper(string filename) {
             Filename = filename;

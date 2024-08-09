@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Office.Interop.Outlook;
 
-namespace OzFramework.Mail {
+namespace Common.Mail {
     public interface IBodyCreator {
         string Generate(MailMessage msg, Account acct);
         string Generate(MailMessage msg, Account acct, string templateFilename);

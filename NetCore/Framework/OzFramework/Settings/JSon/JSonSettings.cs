@@ -4,15 +4,15 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace OzFramework.Settings.JSon {
+namespace Common.Settings.JSon {
     public class JSonSettings {
         private JSonSettings() {
             Sections = new List<JSonSection>();

@@ -1,4 +1,4 @@
-﻿using ApplicationFramework.Media;
+﻿using Common.Media;
 using Common.MVVMFramework;
 using System;
 using System.Collections.Generic;

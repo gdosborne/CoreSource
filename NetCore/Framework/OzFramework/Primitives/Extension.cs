@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Attributes;
-using OzFramework.Text;
+using Common.Attributes;
+using Common.Text;
 using Microsoft.IdentityModel.Tokens;
 using SharpDX;
 using System;
@@ -17,10 +17,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
-using static OzFramework.ByteSize;
-using static OzFramework.Primitives.Extension;
+using static Common.ByteSize;
+using static Common.Primitives.Extension;
 
-namespace OzFramework.Primitives {
+namespace Common.Primitives {
     public static class Extension {
         [DebuggerStepThrough]
         public static IEnumerable<T> AddRange<T>(this IEnumerable<T> value, T min, T max) {

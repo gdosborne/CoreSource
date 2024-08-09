@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace OzFramework.Windows.Expressions {
+namespace Common.Windows.Expressions {
     [TypeConverter(typeof(ExpressionConverter))]
     public interface IExpression {
         double CalculateValue();

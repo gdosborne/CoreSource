@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="4/25/2024" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace OzFramework.Timers {
+namespace Common.Timers {
     public static class Extensions {
 
         public static DispatcherTimer GetTimer(this TimeSpan value, bool isStarted, bool autostop) {

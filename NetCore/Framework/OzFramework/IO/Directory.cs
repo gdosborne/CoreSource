@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using SysIO = System.IO;
@@ -16,9 +16,9 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Shell32;
 using SHDocVw;
-using OzFramework.Text;
+using Common.Text;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public static class Directory {
         public static SysIO.FileAttributes? Attributes(string directoryName) =>
             !SysIO.Directory.Exists(directoryName) ? (SysIO.FileAttributes?)null : new SysIO.DirectoryInfo(directoryName).Attributes;

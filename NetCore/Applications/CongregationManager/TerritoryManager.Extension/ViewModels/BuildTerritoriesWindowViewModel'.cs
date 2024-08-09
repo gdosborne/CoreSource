@@ -1,4 +1,4 @@
-﻿using Common.Application;
+﻿using Common;
 using Common.MVVMFramework;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
@@ -11,7 +11,7 @@ namespace TerritoryManager.Extension.ViewModels {
         public BuildTerritoriesWindowViewModel() =>
             Title = "Territory Builder [design]";
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             FinalMessageVisibility = Visibility.Hidden;

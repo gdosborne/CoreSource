@@ -17,12 +17,12 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml.Linq;
-using OzFramework.Primitives;
+using Common.Primitives;
 using Newtonsoft.Json;
 
-using static OzFramework.Media.CompositeIconData;
+using static Common.Media.CompositeIconData;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     [JsonObject]
     public class CompositeIcon : INotifyPropertyChanged, ICloneable {
         internal CompositeIcon() {

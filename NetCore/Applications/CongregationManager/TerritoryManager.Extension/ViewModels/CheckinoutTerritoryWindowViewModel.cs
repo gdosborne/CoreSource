@@ -1,4 +1,4 @@
-﻿using Common.Application;
+﻿using Common;
 using Common.MVVMFramework;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
@@ -14,7 +14,7 @@ namespace TerritoryManager.Extension.ViewModels {
             IsMemberEnabled= true;
         }
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             Title = "Check Out Territory";

@@ -1,6 +1,6 @@
-﻿using Common.Application.Linq;
-using Common.Application.Media;
-using Common.Application.Primitives;
+﻿using Common.Linq;
+using Common.Media;
+using Common.Primitives;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using System.Collections.Generic;

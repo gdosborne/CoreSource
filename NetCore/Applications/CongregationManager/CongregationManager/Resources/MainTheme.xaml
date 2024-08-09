@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:expr="clr-namespace:Common.Application.Windows.Expressions;assembly=ApplicationFramework"
+                    xmlns:expr="clr-namespace:Common.Windows.Expressions;assembly=OzFramework"
                     xmlns:mycontrols="clr-namespace:Controls.Core;assembly=Controls.Core"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 

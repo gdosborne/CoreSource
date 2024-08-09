@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     [System.AttributeUsage(AttributeTargets.Assembly)]
     public class ApplicationTypeAttribute : Attribute {
         public enum ApplicationTypes {

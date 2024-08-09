@@ -4,11 +4,11 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System.Net;
 using System.Security;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     public class ApplicationCredentials : NetworkCredential {
         public ApplicationCredentials()
             : base() { }

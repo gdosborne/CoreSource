@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-namespace OzFramework {
+namespace Common {
     public enum ApplicationStatus {
         WatchDogIdle = -2,
         Starting,

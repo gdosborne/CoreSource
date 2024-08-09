@@ -1,4 +1,4 @@
-﻿using Common.Application.Media;
+﻿using Common.Media;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

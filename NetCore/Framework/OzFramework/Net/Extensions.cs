@@ -6,7 +6,7 @@
 
 using System.Net.NetworkInformation;
 
-namespace OzFramework.Net {
+namespace Common.Net {
     public static class Extensions {
         public static bool IsServerPortAvailable(string server, int port) {
             var ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();

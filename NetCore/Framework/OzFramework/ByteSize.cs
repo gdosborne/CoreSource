@@ -4,12 +4,12 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Globalization;
 
-namespace OzFramework {
+namespace Common {
     public enum ConversionType {
         Bytes,
         KiloBytes,

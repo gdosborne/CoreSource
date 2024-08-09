@@ -10,9 +10,9 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Management;
 using System.Security.Principal;
-using OzFramework.Primitives;
+using Common.Primitives;
 
-namespace OzFramework.Windows.Theme {
+namespace Common.Windows.Theme {
     public sealed class ThemeWatcher {
         private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string RegistryValueName = "AppsUseLightTheme";

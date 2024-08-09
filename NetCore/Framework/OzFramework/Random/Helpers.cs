@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Random {
+namespace Common.Random {
     public static class Helpers {
         private static List<string> randomUsed = new();
         private static System.Random random = new System.Random();

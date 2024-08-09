@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationExtension.ViewModels;
 using System;
 using System.Windows;

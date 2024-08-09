@@ -4,11 +4,11 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Windows.Markup;
 
-namespace OzFramework.Windows.Expressions {
+namespace Common.Windows.Expressions {
     [ContentProperty("Expression")]
     public class Calculator : MarkupExtension {
         public IExpression Expression { get; set; }

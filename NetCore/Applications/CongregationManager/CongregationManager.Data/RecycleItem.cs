@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Primitives;
 using Common.MVVMFramework;
 using System;
 using System.Linq;

@@ -4,17 +4,17 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-using static OzFramework.Text.Extension;
+using static Common.Text.Extension;
 
-namespace OzFramework.Exception {
+namespace Common.Exception {
     public static class Extensions {
         public static StringBuilder ProcessData(this System.Diagnostics.Process proc, int tabStop = 0) {
             var t1 = new string('\t', tabStop + 1);

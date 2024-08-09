@@ -1,4 +1,4 @@
-﻿using Common.Application.Primitives;
+﻿using Common.Primitives;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
 using Ookii.Dialogs.Wpf;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using TerritoryManager.Extension.ViewModels;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 
 namespace TerritoryManager.Extension {
     public partial class ExtensionControl : UserControl {
@@ -24,7 +24,7 @@ namespace TerritoryManager.Extension {
                 case LocalBase.Actions.DeleteItem: {
                         var msg = $"Deleting a territory also deletes the history for the territory." +
                             $"\n\nDelete territory {View.SelectedTerritory.Number}?";
-                        var result = ShowYesNoDialog("Delete Territory", msg, TaskDialogIcon.Warning, 200);
+                        var result = Common.Dialogs.Helpers.ShowYesNoDialog(Window.GetWindow(this), "Delete Territory", msg, TaskDialogIcon.Warning, 200);
                         if (result) {
                             View.SelectedCongregation.Territories.Remove(View.SelectedTerritory);
                             View.DataManager.SaveCongregation(View.SelectedCongregation);
@@ -85,7 +85,7 @@ namespace TerritoryManager.Extension {
                         var msg = $"Revesing a check out will remove the latest history record and make " +
                             $"the territory available for check out once again.\n\nReverse check out " +
                             $"for territory {View.SelectedTerritory.Number}?";
-                        var result = ShowYesNoDialog("Reverse Territory Check out", msg, TaskDialogIcon.Warning, 200);
+                        var result = Common.Dialogs.Helpers.ShowYesNoDialog(Window.GetWindow(this), "Reverse Territory Check out", msg, TaskDialogIcon.Warning, 200);
                         if (result) {
                             View.SelectedTerritory.History.Remove(View.SelectedTerritory.LastHistory);
                             View.DataManager.SaveCongregation(View.SelectedCongregation);

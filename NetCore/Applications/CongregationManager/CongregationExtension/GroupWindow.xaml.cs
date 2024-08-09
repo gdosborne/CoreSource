@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 
 namespace CongregationExtension {
     public partial class GroupWindow : Window {
@@ -55,7 +55,7 @@ namespace CongregationExtension {
                                     continue;
                                 var msg = $"{member.FullName} is already in {otherGroup.Name}.\n\nMove {member.FullName} " +
                                     $"to {createdGroup.Name}?";
-                                if (ShowYesNoDialog("Switch Groups", msg, TaskDialogIcon.Shield)) {
+                                if (Common.Dialogs.Helpers.ShowYesNoDialog(this, "Switch Groups", msg, TaskDialogIcon.Shield)) {
                                     otherGroup.MemberIDs.Remove(member.ID);
                                 }
                                 else {

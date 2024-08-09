@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using SysIO = System.IO;
 using System.Linq;
@@ -13,9 +13,9 @@ using System.Windows;
 using OD = Ookii.Dialogs.Wpf;
 using System.ComponentModel;
 using Universal.Common;
-using OzFramework.Text;
+using Common.Text;
 
-namespace OzFramework.Dialogs {
+namespace Common.Dialogs {
     public static class Helpers {
         public static OD.TaskDialogButton ShowTaskDialog(this Window owner, string windowTitle,
                 string headerText, string instructionText, OD.TaskDialogIcon icon, params OD.TaskDialogButton[] buttons) =>

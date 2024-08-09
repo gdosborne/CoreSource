@@ -4,12 +4,12 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace OzFramework.Settings {
+namespace Common.Settings {
     public class SettingSection : INotifyPropertyChanged {
         public SettingSection(string name) {
             Name = name;

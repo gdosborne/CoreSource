@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Logging;
+using Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Events {
+namespace Common.Events {
     public delegate void WriteToLogHandler(object sender, WriteToLogEventArgs e);
     public class WriteToLogEventArgs : EventArgs {
         public WriteToLogEventArgs(string message, ApplicationLogger.EntryTypes entryType, int tabIndent = 0) { 

@@ -1,7 +1,7 @@
-﻿using Common.Application.IO;
-using Common.Application.Media;
-using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.IO;
+using Common.Media;
+using Common.Primitives;
+using Common.Windows;
 using CongregationManager.Data;
 using CongregationManager.ViewModels;
 using System;

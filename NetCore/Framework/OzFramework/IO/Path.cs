@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public static class Path {
         public const string UncStart = @"\\";
 

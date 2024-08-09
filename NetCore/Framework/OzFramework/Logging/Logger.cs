@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace OzFramework.Logging {
+namespace Common.Logging {
     public static class Logger {
         static Logger() => SingleLogMaxSize = Convert.ToInt32(System.Math.Pow(10.24, 6));
 

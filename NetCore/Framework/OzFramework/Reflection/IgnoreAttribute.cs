@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Reflection {
+namespace Common.Reflection {
     [AttributeUsage(AttributeTargets.Property)]
     public class IgnoreAttribute : Attribute {
     }

@@ -1,17 +1,17 @@
-﻿using Common.Application;
+﻿using Common;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 
 namespace CongregationExtension.ViewModels {
     public abstract class LocalBase : ViewModelBase {
-        public virtual void Initialize(Settings appSettings, DataManager dataManager) {
+        public virtual void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize();
 
             AppSettings = appSettings;
             DataManager = dataManager;
         }
 
-        public Settings AppSettings { get; set; }
+        public AppSettings AppSettings { get; set; }
 
         public DataManager DataManager { get; set; }
 

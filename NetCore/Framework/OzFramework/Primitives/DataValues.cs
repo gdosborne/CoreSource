@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Primitives {
+namespace Common.Primitives {
     public static class DataValues {
         public static IEnumerable<TimeDisplayValue> TimeValues() => TimeValues(30);
         public static IEnumerable<TimeDisplayValue> TimeValues(int incrementMinutes) => TimeValues(incrementMinutes, new TimeSpan(0, incrementMinutes, 0), new TimeSpan(24, 0, 0));

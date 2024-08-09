@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace OzFramework.Mail {
+namespace Common.Mail {
     public sealed class MailMessage {
         public MailMessage() {
             Body = new StringBuilder();

@@ -4,13 +4,13 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Process;
+using Common.Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace OzFramework {
+namespace Common {
     public class Memory {
         public Dictionary<DateTime, long> Log { get; } = default;
 

@@ -1,5 +1,5 @@
-﻿using Common.Application;
-using Common.Application.Primitives;
+﻿using Common;
+using Common.Primitives;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using WpfDialogs = Ookii.Dialogs.Wpf;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 
 namespace CongregationExtension.ViewModels {
     public class RecycleBinWindowViewModel : LocalBase {
@@ -20,7 +20,7 @@ namespace CongregationExtension.ViewModels {
             RecycleGroups = new ObservableCollection<RecycleGroup>();
         }
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             Title = "Recycle Bin";
@@ -92,7 +92,7 @@ namespace CongregationExtension.ViewModels {
             var msg = $"This will restore the recycle bin item for {group.Name}, recyled on {SelectedItem.RecycleDateTime}." +
                 $"{existingMessage}\n\nAre you sure you want to do this?";
             var title = $"Restore recycle bin item";
-            if (ShowYesNoDialog(title, msg, WpfDialogs.TaskDialogIcon.Shield, width)) {
+            if (Common.Dialogs.Helpers.ShowYesNoDialog(null, title, msg, WpfDialogs.TaskDialogIcon.Shield, width)) {
                 var file = new FileInfo(SelectedItem.RecycleFileName);
                 if (file.Exists) {
                     var dir = file.Directory;
@@ -110,7 +110,7 @@ namespace CongregationExtension.ViewModels {
                         dir.Delete();
                     }
                     SelectedItem = null;
-                    App.logger.LogMessage(new StringBuilder($"Restored recycle bin object {group.Name}"), Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
+                    App.logger.LogMessage(new StringBuilder($"Restored recycle bin object {group.Name}"), Common.Logging.ApplicationLogger.EntryTypes.Information);
                 }
             }
         }
@@ -127,7 +127,7 @@ namespace CongregationExtension.ViewModels {
             var msg = $"This will delete the recycle bin item for {group.Name}, recyled on {SelectedItem.RecycleDateTime}." +
                 $"\n\nAre you sure you want to do this?";
             var title = $"Delete recycle bin item";
-            if (ShowYesNoDialog(title, msg, WpfDialogs.TaskDialogIcon.Shield)) {
+            if (Common.Dialogs.Helpers.ShowYesNoDialog(null, title, msg, WpfDialogs.TaskDialogIcon.Shield)) {
                 var file = new FileInfo(SelectedItem.RecycleFileName);
                 if (file.Exists) {
                     file.Delete();
@@ -137,7 +137,7 @@ namespace CongregationExtension.ViewModels {
                         RecycleGroups.Remove(group);
                         dir.Delete();
                     }
-                    App.logger.LogMessage(new StringBuilder($"Deleted recycle bin object {group.Name}"), Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
+                    App.logger.LogMessage(new StringBuilder($"Deleted recycle bin object {group.Name}"), Common.Logging.ApplicationLogger.EntryTypes.Information);
                     SelectedItem = null;
                 }
             }

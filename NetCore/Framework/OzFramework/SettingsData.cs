@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +12,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace OzFramework {
+namespace Common {
     public sealed class ObservableKeyValuePair : INotifyPropertyChanged {
         private object value;
 

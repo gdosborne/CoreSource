@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.Primitives;
+using Common.Text;
 using Microsoft.WindowsAPICodePack.Shell;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using System.Reflection;
 using Universal.Common;
 using SysIO = System.IO;
 
-namespace OzFramework.IO {
+namespace Common.IO {
     public static class File {
         private static readonly char[] illegalCharacters = { '/', '?', '<', '>', '\\', ':', '*', '|' };
 

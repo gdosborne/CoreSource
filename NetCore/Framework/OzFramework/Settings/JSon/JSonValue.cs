@@ -7,7 +7,7 @@
 using Newtonsoft.Json;
 using System.Text.Json.Nodes;
 
-namespace OzFramework.Settings.JSon {
+namespace Common.Settings.JSon {
     [JsonObject]
     public class JSonValue {
         internal JSonValue() { }

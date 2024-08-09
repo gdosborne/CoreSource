@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Windows.Theme {
+namespace Common.Windows.Theme {
     public delegate void ThemeChangedHandler(object sender, ThemeChangedEventArgs e);
 
     public class ThemeChangedEventArgs : EventArgs {

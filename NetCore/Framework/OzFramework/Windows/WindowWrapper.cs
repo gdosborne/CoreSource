@@ -7,7 +7,7 @@
 using System;
 using System.Windows.Interop;
 
-namespace OzFramework.Windows {
+namespace Common.Windows {
     public class WindowWrapper : System.Windows.Forms.IWin32Window {
         public WindowWrapper(IntPtr handle) {
             Handle = handle;

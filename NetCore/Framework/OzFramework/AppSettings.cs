@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Media;
-using OzFramework.Primitives;
+using Common.Media;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +15,7 @@ using System.Linq;
 using System.Windows;
 using System.Xml.Linq;
 
-namespace OzFramework {
+namespace Common {
     /// <summary>
     /// The settings.
     /// </summary>

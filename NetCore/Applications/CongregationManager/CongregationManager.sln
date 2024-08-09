@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongregationManager", "CongregationManager\CongregationManager.csproj", "{3E30EACA-702A-4AEB-9D4E-631F083FD644}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationFramework", "..\..\Framework\ApplicationFramework\ApplicationFramework\ApplicationFramework.csproj", "{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controls.Core", "..\..\Controls\Controls.Core.csproj", "{0756291C-3B09-4917-B252-D521A979859A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongregationManager.Data", "CongregationManager.Data\CongregationManager.Data.csproj", "{4F488CDF-AF1A-4911-96B6-F1EB5F350CAE}"
@@ -20,6 +18,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{A70ED278-1993-422E-A6F7-E9D20B0B8B5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakeCompositeIcon", "..\MakeCompositeIcon\MakeCompositeIcon\MakeCompositeIcon.csproj", "{67E7FA40-EB87-4BC6-BF0B-7463ADB152E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzFramework", "..\..\Framework\OzFramework\OzFramework.csproj", "{F65283CB-1014-41A7-A074-7CF5FE46C84F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +37,6 @@ Global
 		{3E30EACA-702A-4AEB-9D4E-631F083FD644}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E30EACA-702A-4AEB-9D4E-631F083FD644}.Release|x64.ActiveCfg = Release|x64
 		{3E30EACA-702A-4AEB-9D4E-631F083FD644}.Release|x64.Build.0 = Release|x64
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Debug|x64.ActiveCfg = Debug|x64
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Debug|x64.Build.0 = Debug|x64
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Release|x64.ActiveCfg = Release|x64
-		{2463F99D-24D6-4DD2-B5CB-AEFB789AF66E}.Release|x64.Build.0 = Release|x64
 		{0756291C-3B09-4917-B252-D521A979859A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0756291C-3B09-4917-B252-D521A979859A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0756291C-3B09-4917-B252-D521A979859A}.Debug|x64.ActiveCfg = Debug|x64
@@ -93,6 +85,14 @@ Global
 		{67E7FA40-EB87-4BC6-BF0B-7463ADB152E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{67E7FA40-EB87-4BC6-BF0B-7463ADB152E7}.Release|x64.ActiveCfg = Release|Any CPU
 		{67E7FA40-EB87-4BC6-BF0B-7463ADB152E7}.Release|x64.Build.0 = Release|Any CPU
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Debug|x64.ActiveCfg = Debug|x64
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Debug|x64.Build.0 = Debug|x64
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Release|x64.ActiveCfg = Release|x64
+		{F65283CB-1014-41A7-A074-7CF5FE46C84F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

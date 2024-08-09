@@ -4,10 +4,10 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Logging;
+using Common.Logging;
 using System;
 
-namespace OzFramework {
+namespace Common {
     public delegate void WriteStatusHandler(object sender, WriteStatusEventArgs e);
 
     public class WriteStatusEventArgs : EventArgs {

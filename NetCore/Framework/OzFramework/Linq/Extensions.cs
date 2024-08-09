@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace OzFramework.Linq {
+namespace Common.Linq {
     public static class Extensions {
         public static IList<T> Randomize<T>(this IList<T> value, System.Random r = null) {
             r ??= new System.Random();

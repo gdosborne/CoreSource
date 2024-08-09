@@ -8,12 +8,12 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using OzFramework.Primitives;
+using Common.Primitives;
 using Microsoft.Office.Interop.Outlook;
 
 using Universal.Common;
 
-namespace OzFramework.Mail {
+namespace Common.Mail {
     public class HtmlBodyCreator : IBodyCreator {
         public string PagePrefix { get; set; }
         public string PageSuffix { get; set; }

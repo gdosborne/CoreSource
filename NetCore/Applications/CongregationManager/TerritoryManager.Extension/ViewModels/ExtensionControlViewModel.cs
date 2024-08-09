@@ -1,5 +1,5 @@
-﻿using Common.Application;
-using Common.Application.Linq;
+﻿using Common;
+using Common.Linq;
 using Common.MVVMFramework;
 using CongregationExtension.ViewModels;
 using CongregationManager.Data;
@@ -16,7 +16,7 @@ namespace TerritoryManager.Extension.ViewModels {
             Territories = new ObservableCollection<Territory>();
         }
 
-        public override void Initialize(Settings appSettings, DataManager dataManager) {
+        public override void Initialize(AppSettings appSettings, DataManager dataManager) {
             base.Initialize(appSettings, dataManager);
 
             Title = "Territory Manager";

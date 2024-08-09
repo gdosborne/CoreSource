@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using static OzFramework.Session;
+using static Common.Session;
 
-namespace OzFramework {
+namespace Common {
     public class MailTracker : IDisposable {
 
         [Flags]

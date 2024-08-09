@@ -1,4 +1,4 @@
-﻿using Common.Application.Linq;
+﻿using Common.Linq;
 using Common.MVVMFramework;
 using CongregationManager.Data;
 using System;

@@ -1,7 +1,7 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Linq;
-using Common.Application.Media;
-using Common.Application.Primitives;
+﻿using Common.Media;
+using Common.Linq;
+using Common.Media;
+using Common.Primitives;
 using Common.MVVMFramework;
 using Newtonsoft.Json;
 using System;
@@ -13,8 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using static ApplicationFramework.Media.CompositeIconData;
-using static Common.Application.Media.Extensions;
+using static Common.Media.CompositeIconData;
+using static Common.Media.Extensions;
 
 namespace MakeCompositeIcon {
     internal partial class MainWindowView : ViewModelBase {

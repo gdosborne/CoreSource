@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Windows.Expressions {
+namespace Common.Windows.Expressions {
     public abstract class BinaryOperation : IExpression {
         public IExpression Operand1 { get; set; }
         public IExpression Operand2 { get; set; }

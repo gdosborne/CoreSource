@@ -1,17 +1,17 @@
-using Common.Application.Logging;
-using Common.Application;
+using Common.Logging;
+using Common;
 using CongregationManager.Data;
 using System;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.Logging.ApplicationLogger;
 using System.Text;
-using static ApplicationFramework.Dialogs.Helpers;
+using static Common.Dialogs.Helpers;
 using System.Linq;
 
 namespace TerritoryManager.Extension {
     public partial class App : System.Windows.Application {
 
         internal static ApplicationLogger logger { get; set; } = default;
-        internal static Settings AppSettings { get; set; } = default;
+        internal static AppSettings AppSettings { get; set; } = default;
         internal static DataManager DataManager { get; set; } = default;
 
         internal static void LogMessage(string message, EntryTypes type) {

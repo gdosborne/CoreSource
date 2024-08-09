@@ -1,11 +1,13 @@
-﻿using Common.Application;
-using Common.Application.Text;
-using Common.MVVMFramework;
+﻿using Common.MVVMFramework;
+
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using static Common.Text.Extension;
+
 
 namespace CongregationManager.Data {
     /// <summary>
@@ -267,7 +269,7 @@ namespace CongregationManager.Data {
         /// <returns>Congregation if successful, null otherwise</returns>
         public static Congregation? OpenFromFile(string filename, string password) {
             var json = default(string);
-            using (var crypto = new Crypto(password)) {
+            using (var crypto = new Common.Crypto(password)) {
                 password = null;
 
                 var data = File.ReadAllText(filename);

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework.Symbol {
+namespace Common.Symbol {
     public enum ValueTypes {
         Symbol,
         Code,

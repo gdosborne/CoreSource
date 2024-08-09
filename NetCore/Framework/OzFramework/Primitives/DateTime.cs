@@ -4,11 +4,11 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-namespace OzFramework.CCCSystem {
+namespace Common.CCCSystem {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using static OzFramework.CCCSystem.DateTime;
+    using static Common.CCCSystem.DateTime;
 
     public static class DateTime {
         public enum MonthsOfTheYear {

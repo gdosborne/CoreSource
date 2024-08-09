@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Text;
+﻿using Common.Primitives;
+using Common.Text;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;

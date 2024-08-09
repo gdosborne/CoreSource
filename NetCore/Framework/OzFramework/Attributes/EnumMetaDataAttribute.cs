@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Attributes {
+namespace Common.Attributes {
     [AttributeUsage(AttributeTargets.Field)]
     public class EnumMetaDataAttribute : Attribute {
         public EnumMetaDataAttribute(string description, bool isErrorValue = false, string otherName = default) {

@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace OzFramework {
+namespace Common {
     public sealed class Crypto : IDisposable {
         #region Public Constructors
         public Crypto(string password)

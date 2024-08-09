@@ -1,5 +1,5 @@
-﻿using Common.Application;
-using Common.Application.Primitives;
+﻿using Common;
+using Common.Primitives;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using static Common.Application.Media.Extensions;
+using static Common.Media.Extensions;
 using sysio = System.IO;
-using static Common.Application.Exception.Extensions;
-using ApplicationFramework.Windows.Theme;
+using static Common.Exception.Extensions;
+using Common.Windows.Theme;
 
 namespace MakeCompositeIcon {
     /// <summary>
@@ -23,10 +23,10 @@ namespace MakeCompositeIcon {
             base.OnStartup(e);
             ApplicationDirectory = sysio.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ApplicationName);
             MySession = new Session(ApplicationDirectory, ApplicationName,
-                Common.Application.Logging.ApplicationLogger.StorageTypes.FlatFile,
-                Common.Application.Logging.ApplicationLogger.StorageOptions.CreateFolderForEachDay);
+                Common.Logging.ApplicationLogger.StorageTypes.FlatFile,
+                Common.Logging.ApplicationLogger.StorageOptions.CreateFolderForEachDay);
             App.ThisApp.MySession.Logger.LogMessage("Application starting",
-                Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
+                Common.Logging.ApplicationLogger.EntryTypes.Information);
 
             ProcessDirectories();
 
@@ -65,7 +65,7 @@ namespace MakeCompositeIcon {
 
         private void App_Exit(object sender, ExitEventArgs e) {
             App.ThisApp.MySession.Logger.LogMessage("Application exiting",
-                Common.Application.Logging.ApplicationLogger.EntryTypes.Information);
+                Common.Logging.ApplicationLogger.EntryTypes.Information);
         }
 
         private void ProcessDirectories() {
@@ -139,8 +139,8 @@ namespace MakeCompositeIcon {
         }
 
         public static async void HandleException(Exception ex) {
-            ThisApp.MySession.Logger.LogMessage(await ex.ToStringRecurseAsync(true), 
-                Common.Application.Logging.ApplicationLogger.EntryTypes.Error);
+            ThisApp.MySession.Logger.LogMessage(ex.ToStringRecurse(0), 
+                Common.Logging.ApplicationLogger.EntryTypes.Error);
         }
 
         public static void ClearRecycleBin() {

@@ -6,7 +6,7 @@
 
 using System.Windows.Input;
 
-namespace OzFramework.RecentItems {
+namespace Common.RecentItems {
     /// <summary>
     /// The recent item.
     /// </summary>

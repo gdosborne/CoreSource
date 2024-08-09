@@ -4,9 +4,9 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.IO;
-using OzFramework.Primitives;
-using OzFramework.Text;
+using Common.IO;
+using Common.Primitives;
+using Common.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,9 +15,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using fx = OzFramework.IO.File;
+using fx = Common.IO.File;
 
-namespace OzFramework.Install {
+namespace Common.Install {
     public sealed class UpdateChecker {
 
         public Version GetPreviousVersion() {

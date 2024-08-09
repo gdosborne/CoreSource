@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-namespace OzFramework {
+namespace Common {
     public static class Manipulation {
 
         public static void Swap<T>(this T value, ref T swap) {

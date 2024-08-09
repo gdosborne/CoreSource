@@ -1,13 +1,13 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationManager.ViewModels;
 using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using static ApplicationFramework.Dialogs.Helpers;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.Dialogs.Helpers;
+using static Common.Logging.ApplicationLogger;
 using Path = System.IO.Path;
 
 namespace CongregationManager {
@@ -67,7 +67,7 @@ namespace CongregationManager {
                         var msg = $"You have selected to delete the \"{View.SelectedExtension.Name}\" Extension. " +
                             $"If you continue, the extension will not be available until you add it again.\n\n" +
                             $"Are you sure you want to continue?";
-                        var result = ShowYesNoDialog(title, msg, Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 225);
+                        var result = Common.Dialogs.Helpers.ShowYesNoDialog(this, title, msg, Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 225);
                         if (result) {
                             var filename = View.SelectedExtension.Filename;
                             App.LogMessage($"Removing extension {filename}", EntryTypes.Information);

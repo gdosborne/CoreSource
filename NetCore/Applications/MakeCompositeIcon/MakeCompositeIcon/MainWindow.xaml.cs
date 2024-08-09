@@ -1,7 +1,7 @@
-﻿using ApplicationFramework.Media;
-using Common.Application.Linq;
-using Common.Application.Primitives;
-using Common.Application.Windows.Controls;
+﻿using Common.Media;
+using Common.Linq;
+using Common.Primitives;
+using Common.Windows.Controls;
 using Dsafa.WpfColorPicker;
 using Ookii.Dialogs.Wpf;
 using System;
@@ -13,7 +13,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using Universal.Common;
-using static Common.Application.Windows.Extension;
+using static Common.Windows.Extension;
 
 namespace MakeCompositeIcon {
     public partial class MainWindow : Window {

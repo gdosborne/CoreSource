@@ -1,6 +1,6 @@
-﻿using Common.Application.Media;
-using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Media;
+using Common.Primitives;
+using Common.Windows;
 using CongregationManager.ViewModels;
 using System;
 using System.Windows;

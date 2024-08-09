@@ -1,9 +1,9 @@
-﻿using ApplicationFramework.Security;
-using Common.Application;
-using Common.Application.Media;
-using Common.Application.Primitives;
-using Common.Application.Security;
-using Common.Application.Windows;
+﻿using Common.Security;
+using Common;
+using Common.Media;
+using Common.Primitives;
+using Common.Security;
+using Common.Windows;
 using CongregationManager.Data;
 using CongregationManager.Extensibility;
 using CredentialManagement;
@@ -18,9 +18,9 @@ using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using static ApplicationFramework.Dialogs.Helpers;
-using static Common.Application.Logging.ApplicationLogger;
-using static Common.Application.Security.Extensions;
+using static Common.Dialogs.Helpers;
+using static Common.Logging.ApplicationLogger;
+using static Common.Security.Extensions;
 using Credential = CredentialManagement.Credential;
 
 namespace CongregationManager {
@@ -140,7 +140,7 @@ namespace CongregationManager {
             var content = $"You have entered an invalid username or password for " +
                 $"{ApplicationName}.\n\nWould you like to try again?";
             var title = "Invalid credentials";
-            return ShowYesNoDialog(main, content, TaskDialogIcon.Warning);
+            return Common.Dialogs.Helpers.ShowYesNoDialog(MainWindow, main, content, TaskDialogIcon.Warning);
         }
 
         private bool IsLoginAccepted(string title, string content,
@@ -199,7 +199,7 @@ namespace CongregationManager {
                         $"just entered will be saved for future use.\n\nWould you like to save " +
                         $"this information?";
                     title = "Save username and password";
-                    if (!ShowYesNoDialog(title, content, TaskDialogIcon.Warning))
+                    if (!Common.Dialogs.Helpers.ShowYesNoDialog(MainWindow, title, content, TaskDialogIcon.Warning))
                         Environment.Exit(-1);
 
                     //save into CredentialManager
@@ -224,7 +224,7 @@ namespace CongregationManager {
             credItem.Target = ApplicationName;
             credItem.Load();
             var isNewLogin = true;
-            if (credItem.HasValidCredentials()) {
+            if (credItem != null) {
                 password = new NetworkCredential(string.Empty, credItem.Password).SecurePassword;
                 username = credItem.Username;
                 isNewLogin = false;
@@ -251,7 +251,7 @@ namespace CongregationManager {
                     content = $"Use this to provide the user credentials for " +
                         $"{ApplicationName},";
                     title = "Login";
-                    var result = ShowYesNoDialog(title, content, TaskDialogIcon.Warning);
+                    var result = Common.Dialogs.Helpers.ShowYesNoDialog(MainWindow, title, content, TaskDialogIcon.Warning);
                     if (!result)
                         Environment.Exit(-1);
 

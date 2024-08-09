@@ -1,6 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Common.Application.Reflection;
+using Common.Reflection;
 
 [assembly: AssemblyTitle("Properties")]
 [assembly: AssemblyDescription("Not set")]

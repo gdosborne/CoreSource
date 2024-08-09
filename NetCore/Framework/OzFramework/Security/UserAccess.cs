@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.DirectoryServices.AccountManagement;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     internal enum TOKEN_INFORMATION_CLASS {
         TokenUser = 1,
         TokenGroups,

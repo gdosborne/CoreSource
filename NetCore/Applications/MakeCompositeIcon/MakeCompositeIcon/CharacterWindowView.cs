@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using static Common.Application.Media.Extensions;
+using static Common.Media.Extensions;
 
 namespace MakeCompositeIcon {
     internal partial class CharacterWindowView : ViewModelBase {

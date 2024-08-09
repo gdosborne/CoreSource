@@ -6,7 +6,7 @@
 
 using System;
 
-namespace OzFramework {
+namespace Common {
     public delegate void SettingsActionHandler(object sender, SettingsActionEventArgs e);
 
     public enum Actions {

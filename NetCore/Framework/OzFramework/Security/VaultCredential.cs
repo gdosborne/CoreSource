@@ -6,7 +6,7 @@
 
 using System.Security;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     /// <summary>
     /// The Vault Credentials
     /// </summary>

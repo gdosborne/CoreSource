@@ -8,7 +8,7 @@ using System.DirectoryServices.AccountManagement;
 using System.Security.Principal;
 using System.Threading;
 
-namespace OzFramework.User {
+namespace Common.User {
     public static class Identity {
         public static (string FullName, string Email) GetIdentityInformation() {
             var result = (FullName: default(string), Email: default(string));

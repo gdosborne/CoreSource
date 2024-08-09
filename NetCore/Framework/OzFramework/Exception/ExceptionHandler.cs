@@ -4,18 +4,18 @@
    Author="Greg Osborne"
    Date="4/30/2024" */
 
-using OzFramework.Logging;
-using OzFramework.Primitives;
+using Common.Logging;
+using Common.Primitives;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DialogHelper = OzFramework.Dialogs.Helpers;
+using DialogHelper = Common.Dialogs.Helpers;
 using OD = Ookii.Dialogs.Wpf;
 
-namespace OzFramework.Exception {
+namespace Common.Exception {
     public class ExceptionHandler {
         public ExceptionHandler(System.Exception exception, ApplicationLogger logger, string applicationName) {
             Exception = exception;

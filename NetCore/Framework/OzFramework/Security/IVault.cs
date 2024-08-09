@@ -10,9 +10,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using static OzFramework.Security.PasswordVault;
+using static Common.Security.PasswordVault;
 
-namespace OzFramework.Security {
+namespace Common.Security {
     /// <summary>
     ///   <para>The vault interface</para>
     /// </summary>

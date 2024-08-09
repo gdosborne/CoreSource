@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace OzFramework.Settings {
+namespace Common.Settings {
     public class SettingItem : INotifyPropertyChanged {
         public SettingItem(SettingSection section, string name, Type dataType, object value) {
             Section = section;

@@ -4,14 +4,14 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace OzFramework.Windows.Media {
+namespace Common.Windows.Media {
     public class Font {
         public FontFamily FontFamily { get; set; }
 

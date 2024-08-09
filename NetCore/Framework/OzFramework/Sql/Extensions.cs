@@ -6,7 +6,7 @@
 
 using System.Data;
 
-namespace OzFramework.Sql {
+namespace Common.Sql {
     public enum DatabaseTypes {
         SQLServer
     }

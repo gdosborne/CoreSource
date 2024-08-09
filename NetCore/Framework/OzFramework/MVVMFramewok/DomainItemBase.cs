@@ -9,7 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
-namespace OzFramework.MVVMFramewok {
+namespace Common.MVVMFramewok {
     public abstract class DomainItemBase : INotifyPropertyChanged {
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = default) {

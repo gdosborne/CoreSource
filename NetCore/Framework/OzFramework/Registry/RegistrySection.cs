@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 
-namespace OzFramework.Registry {
+namespace Common.Registry {
     public class RegistrySection {
         public RegistrySection() {
             Values = new Dictionary<string, object>();

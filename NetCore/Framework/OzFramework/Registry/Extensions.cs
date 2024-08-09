@@ -4,7 +4,7 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Windows;
+using Common.Windows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Linq;
 
 using w32 = Microsoft.Win32;
 
-namespace OzFramework.Registry {
+namespace Common.Registry {
     public static class Extensions {
         public static RegistryKey SettingsKey { get; } = null;
 

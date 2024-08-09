@@ -4,8 +4,8 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework;
-using OzFramework.IO;
+using Common;
+using Common.IO;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,10 +13,10 @@ using sysio = System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static OzFramework.Logging.ApplicationLogger;
+using static Common.Logging.ApplicationLogger;
 using System.IO;
 using System.Text;
-using OzFramework.Primitives;
+using Common.Primitives;
 
 namespace Application {
     public struct StackEntry {

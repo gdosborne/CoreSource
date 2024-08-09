@@ -4,10 +4,10 @@
    Author="Greg Osborne"
    Date="12/5/2023" */
 
-using OzFramework.Primitives;
+using Common.Primitives;
 using System.Linq;
 
-namespace OzFramework.Windows {
+namespace Common.Windows {
     public class ApplicationProcess {
         public ApplicationProcess() { }
 

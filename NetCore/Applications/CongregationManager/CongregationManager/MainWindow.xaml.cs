@@ -1,5 +1,5 @@
-﻿using Common.Application.Primitives;
-using Common.Application.Windows;
+﻿using Common.Primitives;
+using Common.Windows;
 using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using Controls.Core;
@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static Common.Application.Logging.ApplicationLogger;
+using static Common.Logging.ApplicationLogger;
 
 namespace CongregationManager {
     public partial class MainWindow : Window {

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OzFramework.Media {
+namespace Common.Media {
     public static class CompositeIconData {
         public enum IconTypes {
             FullOverlay,
