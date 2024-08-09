@@ -4,6 +4,7 @@ using CongregationManager.Extensibility;
 using CongregationManager.ViewModels;
 using Controls.Core;
 using System;
+using System.Drawing.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -28,8 +29,16 @@ namespace CongregationManager {
             var fontFamily = new FontFamily(App.ApplicationSession.ApplicationSettings.GetValue("Application", "FontFamilyName", "Calibri"));
             App.Current.Resources["StandardFont"] = fontFamily;
 
+            this.SizeChanged += (s, e) => {
+                if (WindowState == WindowState.Maximized) {
+                    oldMargin = WindowGrid.Margin;
+                    WindowGrid.Margin = new Thickness(Padding.Left, 5, Padding.Right, Padding.Bottom);
+                } else {
+                    WindowGrid.Margin = oldMargin;
+                }
+            };
         }
-
+        private Thickness oldMargin = default;
         private void View_ExecuteUiAction(object sender, Common.MVVMFramework.ExecuteUiActionEventArgs e) {
             var action = (MainWindowViewModel.Actions)Enum.Parse(typeof(MainWindowViewModel.Actions), e.CommandToExecute);
             switch (action) {

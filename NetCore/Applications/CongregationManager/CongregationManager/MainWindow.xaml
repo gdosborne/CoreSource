@@ -13,7 +13,7 @@
     <Window.DataContext>
         <views:MainWindowViewModel />
     </Window.DataContext>
-    <Grid>
+    <Grid Name="WindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -34,12 +34,11 @@
                 </Border>
 
                 <mycontrols:ControlButton Grid.Column="1" Glyph="&#xE921;" Command="{Binding MinimizeCommand}"
-                                        Margin="0,-1,0,0" CornerRadius="0,0,0,5" BorderThickness="1,0,1,1"
-                                        Padding="0,5,0,0" Height="21"/>
+                                          CornerRadius="0,0,3,5" BorderThickness="1,0,1,1"/>
                 <mycontrols:ControlButton Grid.Column="2" Glyph="&#xE922;" Command="{Binding MaximizeCommand}"
-                                        Margin="0,-1,0,0" CornerRadius="0,0,0,0" BorderThickness="0,0,0,1"/>
+                                          CornerRadius="0,0,3,3" BorderThickness="0,0,0,1"/>
                 <mycontrols:ControlButton Grid.Column="3" Glyph="&#xE8BB;" Command="{Binding CloseWindowCommand}"
-                                        Margin="0,-1,10,0" CornerRadius="0,0,5,0" BorderThickness="1,0,1,1"/>
+                                          CornerRadius="0,0,5,3" BorderThickness="1,0,1,1" Margin="0,0,5,0"/>
 
             </Grid>
         </Border>
