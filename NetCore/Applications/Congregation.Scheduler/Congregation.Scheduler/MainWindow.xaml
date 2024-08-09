@@ -1,0 +1,120 @@
+﻿<Window x:Class="Congregation.Scheduler.MainWindow" 
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Congregation.Scheduler"
+        xmlns:views="clr-namespace:Congregation.Scheduler.Views"
+        xmlns:controls="clr-namespace:CongregationControls;assembly=CongregationControls"
+        mc:Ignorable="d"
+        Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
+        FontSize="14"
+        Height="450" Width="800">
+    <Window.DataContext>
+        <views:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Style="{DynamicResource VerticalToolbarScrollerBorder}">
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
+                      Padding="4">
+                <ToolBarTray Orientation="Vertical" Background="Transparent">
+                    <ToolBar Name="VerticalToolbar">
+                        <Button ToolTip="Settings">
+                            <controls:Glyph FontFamily="Segoe Fluent Icons" FontSize="28" Character="&#xE713;" />
+                        </Button>
+                        <Separator Margin="0,5" />
+                    </ToolBar>
+                </ToolBarTray>
+            </ScrollViewer>
+        </Border>
+
+        <Border Grid.Column="1" Padding="4">
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Margin="0,5,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE13D;"
+                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Public Talks" Grid.Column="1" VerticalAlignment="Center" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE13D;"
+                                        VerticalAlignment="Top" Margin="10"/>
+                        <TextBlock Text="Public Talks Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
+
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Margin="0,5,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE156;"
+                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Life and Ministry Meeting" Grid.Column="1" VerticalAlignment="Center" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE156;"
+                                        VerticalAlignment="Top" Margin="10"/>
+                        <TextBlock Text="Life and Ministry Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
+
+                    </Grid>
+
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Margin="0,5,5,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE822;"
+                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Responsibilities" Grid.Column="1" VerticalAlignment="Center" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE822;"
+                                        VerticalAlignment="Top" Margin="10"/>
+                        <TextBlock Text="Responsibilities Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
+    </Grid>
+</Window>

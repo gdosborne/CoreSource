@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Congregation.Scheduler", "Congregation.Scheduler\Congregation.Scheduler.csproj", "{A5B3DC04-9FFA-427E-806D-7F284AEDD409}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzFramework", "..\..\Framework\OzFramework\OzFramework.csproj", "{D1854A42-1827-43B6-A83C-85232CA4BA51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongregationControls", "CongregationControls\CongregationControls.csproj", "{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Debug|x64.Build.0 = Debug|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Release|x64.ActiveCfg = Release|Any CPU
+		{A5B3DC04-9FFA-427E-806D-7F284AEDD409}.Release|x64.Build.0 = Release|Any CPU
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Debug|x64.ActiveCfg = Debug|x64
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Debug|x64.Build.0 = Debug|x64
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Release|x64.ActiveCfg = Release|x64
+		{D1854A42-1827-43B6-A83C-85232CA4BA51}.Release|x64.Build.0 = Release|x64
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6694CA60-0EC2-48CD-A2BC-11012E996E69}
+	EndGlobalSection
+EndGlobal
