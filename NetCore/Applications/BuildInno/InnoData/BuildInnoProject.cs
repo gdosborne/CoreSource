@@ -54,7 +54,7 @@ namespace InnoData {
         public List<BuildInnoSection> Sections { get; private set; }
         private void OpenSetupSourceFile(FontFamily fontFamily, double fontSize) {
             if (!File.Exists(Filename)) {
-                throw new FileNotFoundException(Filename);
+                return;// throw new FileNotFoundException(Filename);
             }
             try {
                 using (var fs = new FileStream(Filename, FileMode.Open, FileAccess.Read, FileShare.None)) {

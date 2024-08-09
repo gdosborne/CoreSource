@@ -182,13 +182,13 @@ namespace OzFramework.Dialogs {
         }
 
         public static OD.TaskDialogButton ShowCustomDialog(this Window window, string title, string main, string content,
-                OD.TaskDialogIcon icon, int width, params OD.TaskDialogButton[] buttons) {
+                OD.TaskDialogIcon icon, int width, OD.TaskDialogButtonStyle buttonStyle, params OD.TaskDialogButton[] buttons) {
             var td = new OD.TaskDialog {
                 MainIcon = icon,
                 MainInstruction = main,
                 Content = content,
                 AllowDialogCancellation = true,
-                ButtonStyle = OD.TaskDialogButtonStyle.CommandLinks,
+                ButtonStyle = buttonStyle,
                 WindowTitle = title,
                 Width = width < 200 ? 200 : width,
                 CenterParent = true

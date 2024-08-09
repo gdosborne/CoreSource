@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:OzMiniDB.Builder" 
         xmlns:controls="clr-namespace:OzMiniDB.Builder.Controls"
         mc:Ignorable="d" 
+        d:DesignWidth="1000"
         Style="{DynamicResource ApplicationWindow}" 
         Title="{Binding Title,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}" 
         Height="450" Width="800" MinWidth="700" Icon="/AppIcon.png">
@@ -173,10 +174,55 @@
                         </ScrollViewer>
                     </Grid>
                 </Border>
+                
                 <GridSplitter Grid.Row="2" Grid.Column="0" />
-                <DataGrid Grid.Row="2" Grid.Column="1">
+                
+                <Border Grid.Row="2" Grid.Column="1" Margin="0,0,4,0" Style="{DynamicResource ControlBorder}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="FKNameLabel" Grid.Row="0" Grid.Column="0" Text="Name" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}"/>
+                        <TextBlock x:Name="FKColNameLabel" Grid.Row="0" Grid.Column="1" Text="Column Name" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        <TextBlock x:Name="FKTableNameLabel" Grid.Row="0" Grid.Column="2" Text="Reference Table Name" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        <TextBlock x:Name="FKForeignColNameLabel" Grid.Row="0" Grid.Column="3" Text="Reference Column Name" 
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Style="{DynamicResource SubHeaderTextBlock}" />
+                        
 
-                </DataGrid>
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="99" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ItemsControl Margin="0,0,4,0" ItemsSource="{Binding SelectedTable.Fields}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <!--<controls:DataFieldEditor LabelsVisibility="Collapsed" MinWidth="410"                                                                      
+                                                                      DataTypeItemSource="{Binding DataTypes}"
+                                                                      IsSelected="{Binding IsSelected,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldName="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldDataType="{Binding DataType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldLength="{Binding FieldLength,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldIsRequired="{Binding IsRequired,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                                      FieldIsIdentity="{Binding IsIdentity,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>-->
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
             </Grid>
         </GroupBox>
     </Grid>

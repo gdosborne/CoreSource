@@ -35,7 +35,7 @@ namespace OzMiniDB.Builder {
                     };
                     var result = Dialogs.ShowCustomDialog(this, "Database has changes", "Database has changes",
                         "Your database schema has changes. If you exit now your changes will be lost.\n\nWould you like to save the database?",
-                        Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 220, yesBtn, noBtn, cancelBtn);
+                        Ookii.Dialogs.Wpf.TaskDialogIcon.Warning, 220, TaskDialogButtonStyle.Standard, yesBtn, noBtn, cancelBtn);
                     if (result == cancelBtn) {
                         e.Cancel = true;
                         return;
@@ -148,7 +148,7 @@ namespace OzMiniDB.Builder {
                     $"You are attempting to remove the table \"{View.SelectedTable.Name}\" from the database. " +
                     $"If you save the database, the data and the table definition will be changed. " +
                     $"This action is not reversible.\n\nAre you sure you want to remove the table?",
-                    TaskDialogIcon.Warning, 220, yesBtn, noBtn);
+                    TaskDialogIcon.Warning, 220, TaskDialogButtonStyle.Standard, yesBtn, noBtn);
                 if (result == yesBtn) {
                     View.Database.Tables.Remove(View.SelectedTable);
                     if (View.Database.Tables.Count > 0) {
@@ -171,10 +171,11 @@ namespace OzMiniDB.Builder {
                 };
                 var result = Dialogs.ShowCustomDialog(this, "Remove Field", "Removing table field",
                     $"You are attempting to remove the field \"{field.Name}\" from the table " +
-                    $"\"{View.SelectedTable.Name}\". If you save the database, the data and the " +
-                    $"field definition will be changed. This action is not reversible." +
-                    $"\n\nAre you sure you want to remove the field?",
-                    TaskDialogIcon.Warning, 220, yesBtn, noBtn);
+                    $"\"{View.SelectedTable.Name}\". If you remove it and then save the database, " +
+                    $"the table definition will be changed and any data you have for that field " +
+                    $"will be removed. This action is not reversible.\n\nAre you sure you want to " +
+                    $"remove the field?",
+                    TaskDialogIcon.Warning, 220, TaskDialogButtonStyle.Standard, yesBtn, noBtn);
                 if (result == yesBtn) {
                     View.SelectedTable.Fields.Remove(field);
                 }
