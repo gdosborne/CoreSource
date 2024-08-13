@@ -1,5 +1,6 @@
 ﻿using Common.Primitives;
 using Common.Windows.Controls;
+
 using Congregation.Scheduler.Views;
 
 using System.Text;
@@ -36,8 +37,30 @@ namespace Congregation.Scheduler {
                 App.Session.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), nameof(Height), RestoreBounds.Height);
                 App.Session.ApplicationSettings.AddOrUpdateSetting(nameof(MainWindow), nameof(WindowState), WindowState);
             };
+
+            View.ExecuteUiAction += (s, e) => {
+                if (Enum.TryParse(typeof(MainWindowViewModel.Actions), e.CommandToExecute, out var action)) {
+                    switch (action) {
+                        case MainWindowViewModel.Actions.ShowPersonWindow:
+                            ShowPersonsWindow();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
         }
 
         internal MainWindowViewModel View => DataContext.As<MainWindowViewModel>();
+
+        private void ShowPersonsWindow () {
+            var win = new PersonsWindow {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            var result = win.ShowDialog();
+            if (!result.HasValue || !result.Value) return;
+
+        }
     }
 }

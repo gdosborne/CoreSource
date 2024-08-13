@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Congregation.Scheduler.Views {
     internal class MainWindowViewModel : ViewModelBase {
-        public MainWindowViewModel () {
+        internal MainWindowViewModel () {
             Title = $"{App.ApplicationName} [Designer]";
         }
 
@@ -16,5 +16,20 @@ namespace Congregation.Scheduler.Views {
             base.Initialize();
             Title = $"{App.ApplicationName}";
         }
+
+        public enum Actions {
+            ShowPersonWindow
+        }
+
+        #region Persons Command
+        private DelegateCommand _PersonsCommand = default;
+        public DelegateCommand PersonsCommand => _PersonsCommand ??= new DelegateCommand(Persons, ValidatePersonsState);
+        private bool ValidatePersonsState (object state) => true;
+        private void Persons (object state) {
+            ExecuteAction(nameof(Actions.ShowPersonWindow));
+        }
+        #endregion
+
+
     }
 }

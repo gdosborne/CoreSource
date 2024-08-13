@@ -21,19 +21,25 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Style="{DynamicResource VerticalToolbarScrollerBorder}">
             <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto"
-                      Padding="4">
+                      Padding="0">
                 <ToolBarTray Orientation="Vertical" Background="Transparent">
-                    <ToolBar Name="VerticalToolbar">
-                        <Button ToolTip="Settings">
-                            <controls:Glyph FontFamily="Segoe Fluent Icons" FontSize="28" Character="&#xE713;" />
+                    <ToolBar Name="VerticalToolbar" Background="Transparent">
+                        <Button ToolTip="Members" Style="{DynamicResource ToolbarButton}" Command="{Binding PersonsCommand}">
+                            <controls:Glyph Character="{DynamicResource Person}" Style="{DynamicResource LeftToolbarGlyph}" />
                         </Button>
-                        <Separator Margin="0,5" />
+                        <Button ToolTip="Groups" Style="{DynamicResource ToolbarButton}">
+                            <controls:Glyph Character="{DynamicResource People}" Style="{DynamicResource LeftToolbarGlyph}" />
+                        </Button>
+                        <Separator Style="{DynamicResource ToolbarSeparator}" />
+                        <Button ToolTip="Settings" Style="{DynamicResource ToolbarButton}">
+                            <controls:Glyph Character="{DynamicResource Application Settings}" Style="{DynamicResource LeftToolbarGlyph}" />
+                        </Button>
                     </ToolBar>
                 </ToolBarTray>
             </ScrollViewer>
         </Border>
 
-        <Border Grid.Column="1" Padding="4">
+        <Border Grid.Column="1" Style="{DynamicResource PageDataBorder}">
             <TabControl>
                 <TabItem>
                     <TabItem.Header>
@@ -42,12 +48,11 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE13D;"
-                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <TextBlock Text="Public Talks" Grid.Column="1" VerticalAlignment="Center" />
+                            <controls:Glyph Grid.Column="0" Character="{DynamicResource Public Talk}" Style="{DynamicResource TabHeaderGlyph}" />
+                            <TextBlock Text="Public Talks" Grid.Column="1" Style="{DynamicResource TabHeaderText}" />
                         </Grid>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid Style="{DynamicResource TabPageGrid}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition />
@@ -55,10 +60,12 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE13D;"
-                                        VerticalAlignment="Top" Margin="10"/>
-                        <TextBlock Text="Public Talks Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
-
+                        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource TabPageHeaderBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <controls:Glyph Character="{DynamicResource Public Talk}" Style="{DynamicResource TabPageHeaderGlyph}"/>
+                                <TextBlock Text="Public Talks Scheduler" Style="{DynamicResource TabPageHeaderText}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
                 </TabItem>
                 <TabItem>
@@ -68,12 +75,11 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE156;"
-                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <TextBlock Text="Life and Ministry Meeting" Grid.Column="1" VerticalAlignment="Center" />
+                            <controls:Glyph Grid.Column="0" Character="{DynamicResource Life and Ministry}" Style="{DynamicResource TabHeaderGlyph}"/>
+                            <TextBlock Text="Life and Ministry Meeting" Grid.Column="1" Style="{DynamicResource TabHeaderText}" />
                         </Grid>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid Style="{DynamicResource TabPageGrid}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition />
@@ -81,12 +87,13 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE156;"
-                                        VerticalAlignment="Top" Margin="10"/>
-                        <TextBlock Text="Life and Ministry Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
-
+                        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource TabPageHeaderBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <controls:Glyph Character="{DynamicResource Life and Ministry}" Style="{DynamicResource TabPageHeaderGlyph}"/>
+                                <TextBlock Text="Life and Ministry Meeting Scheduler" Style="{DynamicResource TabPageHeaderText}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
-
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
@@ -95,12 +102,11 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-                            <controls:Glyph Grid.Column="0" FontFamily="Segoe Fluent Icons" FontSize="18" Character="&#xE822;"
-                                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <TextBlock Text="Responsibilities" Grid.Column="1" VerticalAlignment="Center" />
+                            <controls:Glyph Grid.Column="0" Character="{DynamicResource Responsibilities}" Style="{DynamicResource TabHeaderGlyph}"/>
+                            <TextBlock Text="Responsibilities" Grid.Column="1" Style="{DynamicResource TabHeaderText}" />
                         </Grid>
                     </TabItem.Header>
-                    <Grid>
+                    <Grid Style="{DynamicResource TabPageGrid}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition />
@@ -108,10 +114,12 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
-                        <controls:Glyph Grid.Column="0" Grid.Row="0" FontFamily="Segoe Fluent Icons" FontSize="64" Character="&#xE822;"
-                                        VerticalAlignment="Top" Margin="10"/>
-                        <TextBlock Text="Responsibilities Scheduler" Grid.Column="1" Grid.Row="0" FontSize="40" VerticalAlignment="Center" />
-
+                        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Style="{DynamicResource TabPageHeaderBorder}">
+                            <StackPanel Orientation="Horizontal">
+                                <controls:Glyph Character="{DynamicResource Responsibilities}" Style="{DynamicResource TabPageHeaderGlyph}"/>
+                                <TextBlock Text="Responsibilities Scheduler" Style="{DynamicResource TabPageHeaderText}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
                 </TabItem>
             </TabControl>

@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;8602;8625</NoWarn>
+    <NoWarn>1701;1702;8625;8600;8603;8604</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <NoWarn>1701;1702;8602;8625</NoWarn>
+    <NoWarn>1701;1702;8625;8600;8603;8604</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,8 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\OzFramework\OzFramework.csproj" />
-    <ProjectReference Include="..\CongregationControls\CongregationControls.csproj" />
-    <ProjectReference Include="..\CongregationData\CongregationData.csproj" />
   </ItemGroup>
 
 </Project>

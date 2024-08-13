@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Congregation.Scheduler", "Congregation.Scheduler\Congregation.Scheduler.csproj", "{A5B3DC04-9FFA-427E-806D-7F284AEDD409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Congregation.Scheduler", "Congregation.Scheduler\Congregation.Scheduler.csproj", "{A5B3DC04-9FFA-427E-806D-7F284AEDD409}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzFramework", "..\..\Framework\OzFramework\OzFramework.csproj", "{D1854A42-1827-43B6-A83C-85232CA4BA51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongregationControls", "CongregationControls\CongregationControls.csproj", "{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongregationControls", "CongregationControls\CongregationControls.csproj", "{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CongregationData", "CongregationData\CongregationData.csproj", "{A523C7D4-C3DB-428A-98B9-66DD92893521}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|x64.ActiveCfg = Release|Any CPU
 		{DFDDAC52-391E-4A86-A7CE-EFCCC449681C}.Release|x64.Build.0 = Release|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Debug|x64.Build.0 = Debug|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Release|x64.ActiveCfg = Release|Any CPU
+		{A523C7D4-C3DB-428A-98B9-66DD92893521}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
